@@ -4,7 +4,6 @@
         <file>Index.qml</file>
         <file>Login/Login.qml</file>
         <file>Login/LoginCenter.qml</file>
-        <file>Login/LoginLeft.qml</file>
         <file>Login/LoginRight.qml</file>
         <file>Image/Blue_bg_all.png</file>
         <file>Image/Cancel.png</file>

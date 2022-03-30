@@ -6,7 +6,8 @@ import QtQuick.Controls.Styles 1.4
 import "../Common"
 import "../Exercise"
 
-Item {
+Item
+{
     id: scenarionew
     width: 1065 *dpx
     height: 650 *dpy
@@ -38,7 +39,8 @@ Item {
         }
     }
 
-    Rectangle {
+    Rectangle
+    {
         id: nameItem
         x: 40 *dpx
         y: 110 * dpy

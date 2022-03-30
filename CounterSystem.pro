@@ -4,7 +4,7 @@ CONFIG += c++11
 
 SDK_CONFIG *= Map Gis proto qrcode
 include($$PWD/SoftSDK.pri)
-
+DEFINES += QAPPLICATION_CLASS=QApplication
 SOURCES += \
         Src/API-CRCheck.cpp \
         Src/AppGlobal.cpp \

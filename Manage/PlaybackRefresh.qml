@@ -2,6 +2,7 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.15
 import "../Common"
+
 Rectangle
 {
     id:playbackRefresh
@@ -21,10 +22,14 @@ Rectangle
         x: 25 *dpx
         y: (playbackRefresh.height - 36 *dpy)/2
         spacing: 10 *dpx
-        Image {
-            width: 36 *dpx
-            height: 36 *dpx
-            source: "qrc:/Image/icon/chenggong.svg"
+        Text {
+            width: 34
+            height: 34
+            text: qsTr("\ue8ad")
+            color: "red"
+            font.family: "iconfont"
+            font.pixelSize: 34*dpx
+            verticalAlignment: Text.AlignVCenter
         }
         Text {
             id: wintext

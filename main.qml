@@ -1,6 +1,9 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
 import "Login"
+import "Manage"
+import "Exercise"
+import "Common"
 
 Window {
     id: mainWindow
@@ -15,13 +18,13 @@ Window {
     Index {
         id: index
         anchors.fill: parent
-        visible: false
-    }
-    LoginCenter {
-        id: loginCenter
-        anchors.fill: parent
         visible: true
     }
+//    LoginCenter {
+//        id: loginCenter
+//        anchors.fill: parent
+//        visible: true
+//    }
 
 
     PopupDef {

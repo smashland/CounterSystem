@@ -24,34 +24,17 @@ Rectangle {
             onClicked: soldier.visible = false
         }
 
-        Row {
-            x: 50 *dpx
-            y: 50 *dpx
-            spacing: 10*dpx
-            Rectangle {
-                color: "transparent"
-                width: 24*dpx
-                height: 24*dpx
-                Image {
-                    anchors.fill:parent
-                    source: "qrc:/Image/icon/shezhi.svg"
-                }
-            }
-            Rectangle {
-                width: 24*dpx
-                height: 24*dpx
-                color: "transparent"
-                Text {
-                    text: qsTr("人员信息")
-                    font.pixelSize: 24*dpx;
-                    color: "#ffffff";
-                    font.family: "MicrosoftYaHei Bold"
-                    verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: Text.AlignHCenter
-                }
-            }
+        PopupTitle {
+            id: popuptitle
+            x: 50 *dpx;
+            y: 50 *dpy
+            name: qsTr("人员信息")
+            icon: qsTr("\ue8b8")
         }
-
+        TransverseLine {
+            x: 50 *dpx
+            y: popuptitle.height + 50 *dpy
+        }
 
             Rectangle {
                 x: 50 *dpx

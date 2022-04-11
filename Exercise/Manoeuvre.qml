@@ -49,11 +49,15 @@ Item {
         y: 26 *dpy
         background: Rectangle {
             color: "transparent"
-            Image {
-                id: zantingImage
+
+            Text {
                 width: 26 *dpy
                 height: 26 *dpy
-                source: "qrc:/Image/icon/zanting.svg"
+                text: qsTr("\ue638")
+                color: "#e7f6ff"
+                font.family: "iconfont"
+                font.pixelSize: 26*dpx
+                verticalAlignment: Text.AlignVCenter
             }
             Text {
                 id: zantingText
@@ -85,9 +89,14 @@ Item {
                 color: "transparent"
                 width: 20*dpx
                 height: 20*dpx
-                Image {
-                    anchors.fill:parent
-                    source: "qrc:/Image/icon/qiehuan.svg"
+
+                Text {
+                    anchors.fill: parent
+                    text: qsTr("\ue628")
+                    color: "#e7f6ff"
+                    font.family: "iconfont"
+                    font.pixelSize: 22*dpx
+                    verticalAlignment: Text.AlignVCenter
                 }
             }
             Rectangle {

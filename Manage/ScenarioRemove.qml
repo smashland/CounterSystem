@@ -19,15 +19,26 @@ import "../Common"
             anchors.fill: parent
             source: "qrc:/Image/Popup_bg_24.png"
         }
+        PopupTitle {
+            name: ("删除")
+        }
+        TransverseLine {
+            x: 80 *dpx
+            y: 95*dpy
+        }
 
         Row {
             x: (438*dpx-shanchuText.contentWidth)/2
-            y: 106 *dpy
+            y: 126 *dpy
             spacing: 14 *dpx
-            Image {
-                width: 30
-                height: 30
-                source: "qrc:/Image/icon/tishi.svg"
+            Text {
+                width: 44
+                height: 44
+                text: qsTr("\ue65C")
+                color: "yellow"
+                font.family: "iconfont"
+                font.pixelSize: 44*dpx
+                verticalAlignment: Text.AlignVCenter
             }
             Column {
                 spacing: 5

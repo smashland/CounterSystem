@@ -4,7 +4,6 @@
         <file>Index.qml</file>
         <file>Login/Login.qml</file>
         <file>Login/LoginCenter.qml</file>
-        <file>Login/LoginRight.qml</file>
         <file>Image/Blue_bg_all.png</file>
         <file>Image/Cancel.png</file>
         <file>Image/Case_bg.png</file>
@@ -39,6 +38,7 @@
         <file>Image/Start_bg.png</file>
         <file>Image/terrorist.png</file>
         <file>Image/Text_title.png</file>
+        <file>Image/图片说明.txt</file>
         <file>Image/icon/bianji-3.svg</file>
         <file>Image/icon/bofang.svg</file>
         <file>Image/icon/caiyouduo_hemaixiangqing-fanganxiangqing.svg</file>
@@ -102,5 +102,15 @@
         <file>Manage/ScenarioRevise.qml</file>
         <file>Manage/ScenarioRemove.qml</file>
         <file>Manage/PlaybackRefresh.qml</file>
+        <file>Manage/Progressbar.qml</file>
+        <file>Exercise/CloseBar.qml</file>
+        <file>Exercise/CloseBarFull.qml</file>
+        <file>Exercise/Kill.qml</file>
+        <file>Exercise/KillExpand.qml</file>
+        <file>Exercise/ExerciseResults.qml</file>
+        <file>Common/PopupTitle.qml</file>
+        <file>font/iconfont.ttf</file>
+        <file>Common/TransverseLine.qml</file>
+        <file>Exercise/LoopChart.qml</file>
     </qresource>
 </RCC>

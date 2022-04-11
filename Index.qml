@@ -56,6 +56,12 @@ Rectangle
         x: (index.width-killSituation.width) / 2
         y: (index.height-killSituation.height) / 2
     }
+//    ExerciseResults {
+//        id: exerciseResults
+//        visible: true
+//        x: (index.width-exerciseResults.width) / 2
+//        y: (index.height-exerciseResults.height) / 2
+//    }
     SetLoader {
         id: setloader
         visible: false
@@ -112,6 +118,32 @@ Rectangle
         x: (index.width-scenarioRemove.width) / 2
         y: (index.height-scenarioRemove.height) / 2
     }
+
+//        Progressbar {
+//            id: progressbar
+//            visible: true
+//        }
+    //    CloseBar {
+    //        id: closebar
+    //        visible: true
+    //    }
+    CloseBarFull{
+        id: closebarFull
+        visible: false
+    }
+//        Kill {
+//            id: kill
+//            visible: true
+//            y: 65 *dpy
+//            x: 395 *dpx
+//        }
+//    KillExpand {
+//        id: killExpand
+//        visible: true
+//        y: 65 *dpy
+//        x: 395 *dpx
+//    }
+
 
 
 }

@@ -8,23 +8,14 @@ import Qt.labs.qmlmodels 1.0
 import "../Common"
 import "../Exercise"
 
-//Item {
-//    id: scenarioLoader
-//    width: 1126 *dpx
-//    height: 727 *dpy
-//    Image {
-//        id: loginImage
-//        anchors.fill: parent
-//        source: "qrc:/Image/Login_bg.jpg"
-//    }
 Rectangle {
     id: scenarioLoader
     anchors.fill: parent
     color: "transparent"
     Item {
         id: backgroundItem
-        width: 1126 *dpx
-        height: 727 *dpy
+        width: 1226 *dpx
+        height: 787 *dpy
         anchors.centerIn: parent
         Image {
             id: loginImage
@@ -33,43 +24,23 @@ Rectangle {
         }
         CloseButton {
             anchors.right: backgroundItem.right
-            anchors.rightMargin: 50 *dpx
+            anchors.rightMargin: 70 *dpx
             anchors.top: backgroundItem.top
-            anchors.topMargin: 50 *dpy
+            anchors.topMargin: 70 *dpy
             onClicked: scenarioLoader.visible = false
         }
-    Row {
-        id: titleRow
-        x: 24 *dpx
-        y: 24 *dpx
-        spacing: 10*dpx
-        Rectangle {
-            color: "transparent"
-            width: 16*dpx
-            height: 16*dpx
-            Image {
-                anchors.fill:parent
-                source: "file"
-            }
+        PopupTitle {
+            name: ("方案管理")
+            icon: "\ue678"
         }
-        Rectangle {
-            width: fagl.contentWidth
-            color: "transparent"
-            Text {
-                id: fagl
-                text: qsTr("方案管理")
-                font.pixelSize: 24*dpx;
-                color: "#ffffff";
-                font.family: "MicrosoftYaHei-Bold"
-                verticalAlignment: Text.AlignVCenter
-                horizontalAlignment: Text.AlignHCenter
-            }
+        TransverseLine {
+            x: 80 *dpx
+            y: 95*dpy
         }
-    }
 
     Row {
-        x: 200 *dpx
-        y: 24 *dpx
+        x: 250 *dpx
+        y: 54 *dpx
         spacing: 10*dpx
         Rectangle {
             color: "transparent"
@@ -96,13 +67,13 @@ Rectangle {
 
     Row
     {
-        x: 30 *dpx
-        y: 110 *dpy
+        x: 80 *dpx
+        y: 140 *dpy
         spacing: 15*dpx
         ViewButton {
             name: qsTr("新建")
             color: viewColor_xinjian
-            viewImage: "qrc:/Image/icon/chuangjiantianjiapiliangtianjia.svg"
+            viewImage: "\ue624"
             MouseArea{
                 anchors.fill: parent
                 onClicked: scenarioNew.visible= true
@@ -111,19 +82,19 @@ Rectangle {
         ViewButton {
             name: qsTr("导入")
             color: viewColor_daoru
-            viewImage: "qrc:/Image/icon/daoru.svg"
+            viewImage: "\ue645"
         }
         ViewButton {
             name: qsTr("全部刷新")
             color: viewColor_shuaxin
-            viewImage: "qrc:/Image/icon/shuaxin1.svg"
+            viewImage: "\ue600"
         }
     }
 
     Rectangle {
-        y: 110*dpy
+        y: 140*dpy
         anchors.right: parent.right
-        anchors.rightMargin: 30*dpx
+        anchors.rightMargin: 80*dpx
         width:  400*dpx
         height:  34*dpy
         color: "#082e5c"
@@ -146,13 +117,19 @@ Rectangle {
             id: search
             y: 2 *dpy
             anchors.right: parent.right
-            anchors.rightMargin: 20*dpx
+            anchors.rightMargin: 10*dpx
             width:   24*dpy
             height:  24*dpy
-            Image {
-                id: search1
-                anchors.fill: parent
-                source: "qrc:/Image/icon/sousuo-2.svg"
+
+            Text {
+                id: iconText
+                width: 24*dpx
+                height: 24*dpx
+                text: qsTr("\ue6f3")
+                color: "#ffffff"
+                font.family: "iconfont"
+                font.pixelSize: 22*dpx
+                verticalAlignment: Text.AlignVCenter
             }
             background: Rectangle {
                 color: "transparent"
@@ -162,7 +139,7 @@ Rectangle {
     }
 
     Rectangle {
-        x: 30
+        x: 80
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 30
         width: 1066
@@ -179,10 +156,7 @@ Rectangle {
                     color: "#2D5689"
                 }
 
-//                RowLayout {
-////                    spacing: 8
-//                    anchors.fill: parent
-//                    arrayWidthSpacing: [20, 30]
+
                     Text {
                         text: "序号"
                         width: 100 *dpx
@@ -265,7 +239,7 @@ Rectangle {
                         ViewButton {
                             name: qsTr("修改")
                             color: viewColor_shuaxin
-                            viewImage: "qrc:/Image/icon/bianji-3.svg"
+                            viewImage: "\ue6a5"
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
@@ -276,17 +250,17 @@ Rectangle {
                         ViewButton {
                             name: qsTr("加载")
                             color: viewColor_xinjian
-                            viewImage: "qrc:/Image/icon/jiazai.svg"
+                            viewImage: "\ue607"
                         }
                         ViewButton {
                             name: qsTr("刷新")
                             color: viewColor_shuaxin
-                            viewImage: "qrc:/Image/icon/shuaxin1.svg"
+                            viewImage: "\ue600"
                         }
                         ViewButton {
                             name: qsTr("删除")
                             color: viewColor_shanchu
-                            viewImage: "qrc:/Image/icon/guanbi1.svg"
+                            viewImage: "\ue61c"
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {

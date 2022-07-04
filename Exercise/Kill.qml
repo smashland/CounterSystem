@@ -19,6 +19,13 @@ Item {
         font.family: "iconfont"
         font.pixelSize: 22*dpx
         verticalAlignment: Text.AlignVCenter
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                kill.visible = false
+                killExpand.visible = true
+            }
+        }
     }
 
     Text {

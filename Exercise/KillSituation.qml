@@ -4,6 +4,7 @@ import QtQuick.Controls 2.15
 import "../Common"
 
 Item {
+    id:killSituation
     width: 930 *dpx
     height: 560 *dpy
     Image {
@@ -20,13 +21,19 @@ Item {
         x: 80 *dpx
         y: 95*dpy
     }
+    CloseButton {
+        anchors.right: killSituation.right
+        anchors.rightMargin: 60 *dpx
+        anchors.top: killSituation.top
+        anchors.topMargin: 50 *dpy
+        onClicked: killSituation.visible = false
+    }
 
     Rectangle {
-        x: 80
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 30
-        width: 770
-        height: 414 *dpy
+        x: 80 *dpx
+        y: 100 *dpy
+        width: 770 *dpx
+        height: 380 *dpy
         color: "transparent"
 
         Component {
@@ -67,9 +74,7 @@ Item {
                 ListElement{
                     name: "1sdS速度"
                 }
-                ListElement{
-                    name: "1sdS速度"
-                }
+
             }
 
         }

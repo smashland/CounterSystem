@@ -16,6 +16,12 @@ Rectangle
         x: 80 *dpx
         y: 80 *dpy
     }
+    NavImage {
+        anchors.top: parent.top
+        anchors.topMargin: 30 *dpy
+        anchors.right: parent.right
+        anchors.rightMargin: 30 *dpx
+    }
 
     RedInformation {
         anchors.right: parent.right
@@ -56,12 +62,12 @@ Rectangle
         x: (index.width-killSituation.width) / 2
         y: (index.height-killSituation.height) / 2
     }
-//    ExerciseResults {
-//        id: exerciseResults
-//        visible: true
-//        x: (index.width-exerciseResults.width) / 2
-//        y: (index.height-exerciseResults.height) / 2
-//    }
+    ExerciseResults {
+        id: exerciseResults
+        visible: false
+        x: (index.width-exerciseResults.width) / 2
+        y: (index.height-exerciseResults.height) / 2
+    }
     SetLoader {
         id: setloader
         visible: false
@@ -131,18 +137,18 @@ Rectangle
         id: closebarFull
         visible: false
     }
-//        Kill {
-//            id: kill
-//            visible: true
-//            y: 65 *dpy
-//            x: 395 *dpx
-//        }
-//    KillExpand {
-//        id: killExpand
-//        visible: true
-//        y: 65 *dpy
-//        x: 395 *dpx
-//    }
+    Kill {
+        id: kill
+        visible: false
+        y: 65 *dpy
+        x: 395 *dpx
+    }
+    KillExpand {
+        id: killExpand
+        visible: true
+        y: 65 *dpy
+        x: 395 *dpx
+    }
 
 
 

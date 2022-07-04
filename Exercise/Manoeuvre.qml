@@ -42,6 +42,11 @@ Item {
             radius: 18*dpy
             color: "#dbbb5a"
         }
+
+        onClicked: {
+            exerciseResults.visible = true
+        }
+
     }
 
     Button {

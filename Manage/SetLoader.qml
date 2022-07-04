@@ -38,9 +38,9 @@ Rectangle {
 
     Rectangle {
         x: 80*dpx
-        y: 140*dpy
+        y: 110*dpy
         width: 190*dpx
-        height: 492*dpy
+        height: 522*dpy
         color: "#0a3365"
         ButtonGroup{
             buttons: columnEditBtns.children

@@ -5,6 +5,7 @@ import Qt.labs.qmlmodels 1.0
 import "../Common"
 
 Item {
+    id: exerciseResults
     width: 1184 *dpx
     height: 760 *dpy
     Image {
@@ -20,6 +21,13 @@ Item {
     TransverseLine {
         x: 80 *dpx
         y: 95*dpy
+    }
+    CloseButton {
+        anchors.right: exerciseResults.right
+        anchors.rightMargin: 70 *dpx
+        anchors.top: exerciseResults.top
+        anchors.topMargin: 60 *dpy
+        onClicked: exerciseResults.visible = false
     }
 
     Rectangle{
@@ -79,8 +87,7 @@ Item {
                     "hurt": "5",
                     "die": "9",
                     "fraction":"99"
-                },
-
+                }
             ]
         }
 

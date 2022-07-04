@@ -4,12 +4,13 @@ import QtQuick.Controls 2.15
 Button {
     id: footerButton
     width: 405*dpx
-    height: 100*dpy
+    height: 120*dpy
     checkable:true
     background:Rectangle{
         anchors.fill: parent
         color:"transparent"
         Image {
+            anchors.fill: parent
             anchors.bottom: parent.bottom
             source: footerButton.checked ?"qrc:/Image/Nav_selected.png":""
         }

@@ -16,12 +16,6 @@ Rectangle
         x: 80 *dpx
         y: 80 *dpy
     }
-    NavImage {
-        anchors.top: parent.top
-        anchors.topMargin: 30 *dpy
-        anchors.right: parent.right
-        anchors.rightMargin: 30 *dpx
-    }
 
     RedInformation {
         anchors.right: parent.right
@@ -36,6 +30,7 @@ Rectangle
         anchors.bottomMargin: 120*dpy
     }
     Manoeuvre {
+        id:manoeuvre
         x: 0
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0
@@ -98,19 +93,17 @@ Rectangle
         x: (index.width-scenariopop.width) / 2
         y: (index.height-scenariopop.height) / 2
     }
-
-    ScenarioRevise {
-        id: scenarioRevise
-        visible: false
-        x: (index.width-scenarioRevise.width) / 2
-        y: (index.height-scenarioRevise.height) / 2
-    }
-
     PlaybackLoader {
         id: playbackLoader
         visible: false
         x: (index.width-playbackLoader.width) / 2
         y: (index.height-playbackLoader.height) / 2
+    }
+    ScenarioRevise {
+        id: scenarioRevise
+        visible: false
+        x: (index.width-scenarioRevise.width) / 2
+        y: (index.height-scenarioRevise.height) / 2
     }
     PlaybackRefresh {
         id: playbackRefresh
@@ -129,10 +122,10 @@ Rectangle
 //            id: progressbar
 //            visible: true
 //        }
-    //    CloseBar {
-    //        id: closebar
-    //        visible: true
-    //    }
+        CloseBar {
+            id: closebar
+            visible: true
+        }
     CloseBarFull{
         id: closebarFull
         visible: false

@@ -20,11 +20,11 @@ Window {
         anchors.fill: parent
         visible: true
     }
-//    LoginCenter {
-//        id: loginCenter
-//        anchors.fill: parent
-//        visible: true
-//    }
+    LoginCenter {
+        id: loginCenter
+        anchors.fill: parent
+        visible: false
+    }
 
 
     PopupDef {

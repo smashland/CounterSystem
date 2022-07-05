@@ -15,12 +15,12 @@ Window {
     Index {
         id: index
         anchors.fill: parent
-        visible: false
+        visible: true
     }
     LoginCenter {
         id: loginCenter
         anchors.fill: parent
-        visible: true
+        visible: false
     }
 
 

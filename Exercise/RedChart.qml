@@ -14,7 +14,7 @@ Canvas
             this.ctx.clearRect(0, 0, w, h);
             //获取画布的中心
             this.x0 = this.ctx.canvas.width / 2 ;
-            this.y0 = this.ctx.canvas.height / 2+40;
+            this.y0 = this.ctx.canvas.height / 2+30;
             //获取半径
             this.radius = 70;
             //标题伸出去的距离

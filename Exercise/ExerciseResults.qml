@@ -117,6 +117,18 @@ Item {
            height: 320*dpy
 //           color: "#4a78b1"
            color: Qt.rgba(74/255,120/255,177/255,0.3)
+           Text
+           {
+               x: 40 *dpx
+               y: 20 *dpy
+               text:"红方伤亡情况"
+               verticalAlignment: Text.AlignVCenter
+               horizontalAlignment: Text.AlignHCenter
+               font.pixelSize: 20*dpx
+               color: "#ffffff"
+               font.family: "MicrosoftYaHei"
+           }
+
            RedChart {
                 width :500
                 height: 320
@@ -128,7 +140,18 @@ Item {
            height: 320*dpy
 //           color: "#4a78b1"
            color: Qt.rgba(74/255,120/255,177/255,0.3)
-           BlueChart {
+           Text
+           {
+               x: 40 *dpx
+               y: 20 *dpy
+               text:"蓝方伤亡情况"
+               verticalAlignment: Text.AlignVCenter
+               horizontalAlignment: Text.AlignHCenter
+               font.pixelSize: 20*dpx
+               color: "#ffffff"
+               font.family: "MicrosoftYaHei"
+           }
+           RedChart {
                 width :500
                 height: 320
            }

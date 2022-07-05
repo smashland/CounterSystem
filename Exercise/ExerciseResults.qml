@@ -117,9 +117,9 @@ Item {
            height: 320*dpy
 //           color: "#4a78b1"
            color: Qt.rgba(74/255,120/255,177/255,0.3)
-           LoopChart {
+           RedChart {
                 width :500
-                height: 500
+                height: 320
            }
        }
 
@@ -128,6 +128,10 @@ Item {
            height: 320*dpy
 //           color: "#4a78b1"
            color: Qt.rgba(74/255,120/255,177/255,0.3)
+           BlueChart {
+                width :500
+                height: 320
+           }
        }
     }
 

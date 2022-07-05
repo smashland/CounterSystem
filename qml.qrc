@@ -111,6 +111,7 @@
         <file>Common/PopupTitle.qml</file>
         <file>font/iconfont.ttf</file>
         <file>Common/TransverseLine.qml</file>
-        <file>Exercise/LoopChart.qml</file>
+        <file>Exercise/BlueChart.qml</file>
+        <file>Exercise/RedChart.qml</file>
     </qresource>
 </RCC>

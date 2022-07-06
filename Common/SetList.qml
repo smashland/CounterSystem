@@ -4,6 +4,7 @@ import QtQuick.Controls 2.15
 Menu
 {
     id: contextMenu
+    implicitWidth: 100*dpx
     MenuItem
     {
         text: "充弹"

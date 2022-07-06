@@ -1,4 +1,4 @@
-//                                                  新建方案
+//                                                  修改方案
 import QtQuick 2.12
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
@@ -8,8 +8,8 @@ import "../Exercise"
 
 Item {
     id: scenarioRevise
-    width: 1065 *dpx
-    height: 600 *dpy
+    width: 1165 *dpx
+    height: 660 *dpy
     Image {
         id: loginImage
         anchors.fill: parent
@@ -17,31 +17,24 @@ Item {
     }
     CloseButton {
         anchors.right: scenarioRevise.right
-        anchors.rightMargin: 50 *dpx
+        anchors.rightMargin: 70 *dpx
         anchors.top: scenarioRevise.top
-        anchors.topMargin: 50 *dpy
+        anchors.topMargin: 70 *dpy
         onClicked: scenarioRevise.visible = false
     }
 
-    Rectangle {
-        x: 40 *dpx
-        y: 40 *dpx
-        color: "transparent"
-        Text {
-            text: qsTr("新建")
-            font.pixelSize: 24*dpx;
-            color: "#ffffff";
-            font.bold: true
-            font.family: "MicrosoftYaHei Bold"
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-        }
+    PopupTitle {
+        name: ("修改")
+    }
+    TransverseLine {
+        x: 80 *dpx
+        y: 95*dpy
     }
 
     Rectangle {
         id: nameItem
-        x: 40 *dpx
-        y: 110 * dpy
+        x: 90 *dpx
+        y: 140 * dpy
         Rectangle {
             color: "transparent"
             Text {
@@ -76,8 +69,8 @@ Item {
         }
     }
     Rectangle {
-        x: 40 *dpx
-        y: 130 * dpy + nameItemContent.height
+        x: 90 *dpx
+        y: 160 * dpy + nameItemContent.height
         Text {
             id: tianjiarenyuan
             width: tianjiarenyuan.contentWidth
@@ -160,8 +153,8 @@ Item {
 
     Text {
         id: weizhixinxi
-        x: 40 *dpx
-        y: 130 * dpy + nameItemContent.height + tianjiarenyuan.contentHeight + 30 *dpy
+        x: 90 *dpx
+        y: 160 * dpy + nameItemContent.height + tianjiarenyuan.contentHeight + 30 *dpy
         width: weizhixinxi.contentWidth
         height: weizhixinxi.contentHeight
         text: qsTr("人员信息表")
@@ -171,14 +164,14 @@ Item {
     }
     Rectangle {
         y: weizhixinxi.contentHeight + weizhixinxi.y + 10 *dpy
-        x: 40 *dpx
+        x: 90 *dpx
         width: 985 *dpx
         height: 2 *dpy
         color: "#3b6daa"
     }
 
     Rectangle {
-        x: 40 *dpx
+        x: 90 *dpx
         y: weizhixinxi.contentHeight + weizhixinxi.y + 10 *dpy + 10 *dpy
         width: 985
         height: 144 *dpy
@@ -379,14 +372,14 @@ Item {
                         spacing: 15 * dpx
                         ViewButton {
                             name: qsTr("修改")
-                            color: viewColor_shuaxin
-                            viewImage: "qrc:/Image/icon/bianji-3.svg"
+                            color: viewColor_xinjian
+                            viewImage: "\ue6a5"
 
                         }
                         ViewButton {
-                            name: qsTr("加载")
-                            color: viewColor_xinjian
-                            viewImage: "qrc:/Image/icon/jiazai.svg"
+                            name: qsTr("删除")
+                            color: viewColor_shanchu
+                            viewImage: "\ue61c"
                         }
                     }
                 }
@@ -415,7 +408,7 @@ Item {
         }
     }
     Item {
-        x: 40 *dpx
+        x: 90 *dpx
         y: weizhixinxi.contentHeight + weizhixinxi.y + 10 *dpy + 10 *dpy + 146*dpy + 52 *dpy
         width: 985
         height: 40 *dpy
@@ -438,7 +431,7 @@ Item {
         spacing: 15 *dpx
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 60 *dpy
-        x: 444*dpx
+        x: 494*dpx
         PopupButton {
             background: Rectangle {
                 color: "#265aef"

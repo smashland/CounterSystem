@@ -12,33 +12,42 @@ Row {
         width: 18 *dpx
         height: 18 *dpx
         color: "transparent"
-        Image {
-            id: minImage
-            width: 18 *dpx
-            height: 18 *dpx
-            source: "qrc:/Image/icon/icon_zuixiaohua.svg"
+
+        Text {
+            anchors.fill: parent
+            text: qsTr("\ue6fc")
+            color: "#e7f6ff"
+            font.family: "iconfont"
+            font.pixelSize: 22*dpx
+            verticalAlignment: Text.AlignVCenter
         }
     }
     Rectangle {
         width: 18 *dpx
         height: 18 *dpx
         color: "transparent"
-        Image {
-            id: maxImage
-            width: 18 *dpx
-            height: 18 *dpx
-            source: "qrc:/Image/icon/icon_zuidahua.svg"
+
+        Text {
+            anchors.fill: parent
+            text: qsTr("\ue702")
+            color: "#e7f6ff"
+            font.family: "iconfont"
+            font.pixelSize: 22*dpx
+            verticalAlignment: Text.AlignVCenter
         }
     }
     Rectangle {
         width: 18 *dpx
         height: 18 *dpx
         color: "transparent"
-        Image {
-            id: closeImage
-            width: 18 *dpx
-            height: 18 *dpx
-            source: "qrc:/Image/icon/guanbi1.svg"
+
+        Text {
+            anchors.fill: parent
+            text: qsTr("\ue61c")
+            color: "#e7f6ff"
+            font.family: "iconfont"
+            font.pixelSize: 22*dpx
+            verticalAlignment: Text.AlignVCenter
         }
         MouseArea {
             anchors.fill: parent

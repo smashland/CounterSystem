@@ -6,11 +6,10 @@ import QtQuick.Controls.Styles 1.4
 import "../Common"
 import "../Exercise"
 
-Item
-{
+Item {
     id: scenarionew
-    width: 1065 *dpx
-    height: 650 *dpy
+    width: 1165 *dpx
+    height: 710 *dpy
     Image {
         id: loginImage
         anchors.fill: parent
@@ -18,32 +17,24 @@ Item
     }
     CloseButton {
         anchors.right: scenarionew.right
-        anchors.rightMargin: 50 *dpx
+        anchors.rightMargin: 70 *dpx
         anchors.top: scenarionew.top
-        anchors.topMargin: 50 *dpy
+        anchors.topMargin: 70 *dpy
         onClicked: scenarionew.visible = false
     }
 
-    Rectangle {
-        x: 40 *dpx
-        y: 40 *dpx
-        color: "transparent"
-        Text {
-            text: qsTr("新建")
-            font.pixelSize: 24*dpx;
-            color: "#ffffff";
-            font.bold: true
-            font.family: "MicrosoftYaHei Bold"
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-        }
+    PopupTitle {
+        name: ("新建")
+    }
+    TransverseLine {
+        x: 80 *dpx
+        y: 95*dpy
     }
 
-    Rectangle
-    {
+    Rectangle {
         id: nameItem
-        x: 40 *dpx
-        y: 110 * dpy
+        x: 90 *dpx
+        y: 140 * dpy
         Rectangle {
             color: "transparent"
             Text {
@@ -78,8 +69,8 @@ Item
         }
     }
     Rectangle {
-        x: 40 *dpx
-        y: 130 * dpy + nameItemContent.height
+        x: 90 *dpx
+        y: 160 * dpy + nameItemContent.height
         Text {
             id: tianjiarenyuan
             width: tianjiarenyuan.contentWidth
@@ -162,8 +153,8 @@ Item
 
     Text {
         id: weizhixinxi
-        x: 40 *dpx
-        y: 130 * dpy + nameItemContent.height + tianjiarenyuan.contentHeight + 30 *dpy
+        x: 90 *dpx
+        y: 160 * dpy + nameItemContent.height + tianjiarenyuan.contentHeight + 30 *dpy
         width: weizhixinxi.contentWidth
         height: weizhixinxi.contentHeight
         text: qsTr("人员信息表")
@@ -173,14 +164,14 @@ Item
     }
     Rectangle {
         y: weizhixinxi.contentHeight + weizhixinxi.y + 10 *dpy
-        x: 40 *dpx
+        x: 90 *dpx
         width: 985 *dpx
         height: 2 *dpy
         color: "#3b6daa"
     }
 
     Rectangle {
-        x: 40 *dpx
+        x: 90 *dpx
         y: weizhixinxi.contentHeight + weizhixinxi.y + 10 *dpy + 10 *dpy
         width: 985
         height: 144 *dpy
@@ -382,13 +373,13 @@ Item
                         ViewButton {
                             name: qsTr("修改")
                             color: viewColor_shuaxin
-                            viewImage: "qrc:/Image/icon/bianji-3.svg"
+                            viewImage: "\ue6a5"
 
                         }
                         ViewButton {
                             name: qsTr("加载")
                             color: viewColor_xinjian
-                            viewImage: "qrc:/Image/icon/jiazai.svg"
+                            viewImage: "\ue607"
                         }
                     }
                 }
@@ -418,7 +409,7 @@ Item
     }
 
     Item {
-        x: 40 *dpx
+        x: 90 *dpx
         y: weizhixinxi.contentHeight + weizhixinxi.y + 10 *dpy + 10 *dpy + 146*dpy
         width: 985
         height: 50 *dpy
@@ -432,16 +423,6 @@ Item
             spacing: 28 *dpx
             x: 10 *dpx
             height: 40 *dpy
-            //            TextInput {
-            //                width: 70 *dpx
-            //                height: 50 *dpy
-            //                color: "#ffffff"
-            //                font.pixelSize: 16
-            //                font.family: "Microsoft YaHei";
-            //                font.bold: true
-            //                horizontalAlignment: Text.AlignHCenter
-            //                verticalAlignment: Text.AlignVCenter
-            //            }
             Rectangle {
                 y: 10 *dpy
                 width: 70 *dpx
@@ -641,13 +622,13 @@ Item
                 y: 10 *dpy
                 name: qsTr("确定")
                 color: viewColor_xinjian
-                viewImage: "qrc:/Image/icon/right_circle.svg"
+                viewImage: "\ue8ad"
             }
         }
 
     }
     Item {
-        x: 40 *dpx
+        x: 90 *dpx
         y: weizhixinxi.contentHeight + weizhixinxi.y + 10 *dpy + 10 *dpy + 146*dpy + 52 *dpy
         width: 985
         height: 40 *dpy

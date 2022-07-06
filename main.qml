@@ -2,6 +2,9 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 import MyItem 1.0
 import "Login"
+import "Manage"
+import "Exercise"
+import "Common"
 
 Window {
     id: mainWindow
@@ -47,18 +50,11 @@ Window {
         {
             return(false);
         }
-    }
-
-//    Index {
-//        id: index
-//        anchors.fill: parent
-//        visible: false
-//    }
 
     LoginCenter {
         id: loginCenter
         anchors.fill: parent
-        visible: true
+        visible: false
     }
 
     PopupDef {

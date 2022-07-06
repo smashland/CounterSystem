@@ -3,6 +3,7 @@
 
 #include <QLocale>
 #include <QTranslator>
+#include <QFontDatabase>
 #include <GisMath/GisMath.h>
 #include <ISceneCore.h>
 #include <Qml/QtOsgItem.h>
@@ -19,6 +20,7 @@ int main(int argc, char *argv[])
 #endif
 
     SingleApplication app(argc, argv,true);
+    QFontDatabase::addApplicationFont(":/font/iconfont.ttf");
 
     if(app.isSecondary() )
     {

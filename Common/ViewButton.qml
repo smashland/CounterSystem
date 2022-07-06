@@ -11,16 +11,19 @@ Rectangle{
         property color viewColor_shanchu : "#ba5c5c"
         property color viewColor_xuanzhongshanchu : "#a2a2a2"
         property alias name: viewText.text
-        property var viewImage : ""
+        property alias viewImage : viewIcon.text
         Row {
             anchors.centerIn: parent
             spacing: 8*dpx
-            Image {
-                y:4*dpy
-                width: 16*dpx
-                height: 16 *dpx
-                source: viewImage
+
+            Text {
+               id: viewIcon
+               color: "#ffffff"
+               font.family: "iconfont"
+               font.pixelSize: 22*dpx
+               verticalAlignment: Text.AlignVCenter
             }
+
             Text {
                 id: viewText
                 width: viewText.contentWidth

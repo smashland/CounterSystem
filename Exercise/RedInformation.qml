@@ -87,18 +87,28 @@ Item {
                         width:24*dpy
                         height: 24*dpy
                         color: "transparent"
-                        Image {
+
+                        Text {
                             anchors.fill: parent
-                            source: "qrc:/Image/icon/wuqi.svg"
+                            text: qsTr("\ue708")
+                            color: "#e7f6ff"
+                            font.family: "iconfont"
+                            font.pixelSize: 22*dpx
+                            verticalAlignment: Text.AlignVCenter
                         }
                     }
                     Rectangle {
                         width:24*dpy
                         height: 24*dpy
                         color: "transparent"
-                        Image {
+
+                        Text {
                             anchors.fill: parent
-                            source: "qrc:/Image/icon/toukui.svg"
+                            text: qsTr("\ue706")
+                            color: "#e7f6ff"
+                            font.family: "iconfont"
+                            font.pixelSize: 22*dpx
+                            verticalAlignment: Text.AlignVCenter
                         }
                     }
                     Rectangle {
@@ -122,9 +132,14 @@ Item {
                         height: 16*dpy
                         color: "transparent"
                         y: 4 *dpy
-                        Image {
+
+                        Text {
                             anchors.fill: parent
-                            source: "qrc:/Image/icon/shezhixitongshezhigongnengshezhishuxing.svg"
+                            text: qsTr("\ue8b8")
+                            color: "#e7f6ff"
+                            font.family: "iconfont"
+                            font.pixelSize: 22*dpx
+                            verticalAlignment: Text.AlignVCenter
                         }
                         MouseArea {
                             anchors.fill: parent

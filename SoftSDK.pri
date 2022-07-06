@@ -25,8 +25,8 @@ contains(SDK_CONFIG,Map){
 
 # include file
     INCLUDEPATH *=$${NEWGL3PATH}/include
-    INCLUDEPATH *= $${PWD}/../Map/Inc
-    LIBS *= -L$${PWD}/../Map/Lib
+    INCLUDEPATH *= $${PWD}/../../Gitee/Map/Inc
+    LIBS *= -L$${PWD}/../../Gitee/Map/Lib
 
    CONFIG (debug, debug|release){
        LIBS *= -lSceneCored -lExternShaped
@@ -36,9 +36,9 @@ contains(SDK_CONFIG,Map){
 }
 
 contains(SDK_CONFIG,Gis){
-   INCLUDEPATH *= $${PWD}/../VersionMath/Inc
-   INCLUDEPATH *= $${PWD}/../VersionMath/Inc/Math
-   LIBS *= -L$${PWD}/../VersionMath/Lib
+   INCLUDEPATH *= $${PWD}/../../Gitee/VersionMath/Inc
+   INCLUDEPATH *= $${PWD}/../../Gitee/VersionMath/Inc/Math
+   LIBS *= -L$${PWD}/../../Gitee/VersionMath/Lib
 
    CONFIG (debug, debug|release){
        LIBS *= -lGisMathD

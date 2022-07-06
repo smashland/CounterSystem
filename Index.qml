@@ -29,6 +29,7 @@ Rectangle
         anchors.bottomMargin: 120*dpy
     }
     Manoeuvre {
+        id:manoeuvre
         x: 0
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0
@@ -54,6 +55,12 @@ Rectangle
         visible: false
         x: (index.width-killSituation.width) / 2
         y: (index.height-killSituation.height) / 2
+    }
+    ExerciseResults {
+        id: exerciseResults
+        visible: false
+        x: (index.width-exerciseResults.width) / 2
+        y: (index.height-exerciseResults.height) / 2
     }
     SetLoader {
         id: setloader
@@ -85,19 +92,17 @@ Rectangle
         x: (index.width-scenariopop.width) / 2
         y: (index.height-scenariopop.height) / 2
     }
-
-    ScenarioRevise {
-        id: scenarioRevise
-        visible: false
-        x: (index.width-scenarioRevise.width) / 2
-        y: (index.height-scenarioRevise.height) / 2
-    }
-
     PlaybackLoader {
         id: playbackLoader
         visible: false
         x: (index.width-playbackLoader.width) / 2
         y: (index.height-playbackLoader.height) / 2
+    }
+    ScenarioRevise {
+        id: scenarioRevise
+        visible: false
+        x: (index.width-scenarioRevise.width) / 2
+        y: (index.height-scenarioRevise.height) / 2
     }
     PlaybackRefresh {
         id: playbackRefresh
@@ -111,4 +116,32 @@ Rectangle
         x: (index.width-scenarioRemove.width) / 2
         y: (index.height-scenarioRemove.height) / 2
     }
+
+//        Progressbar {
+//            id: progressbar
+//            visible: true
+//        }
+        CloseBar {
+            id: closebar
+            visible: true
+        }
+    CloseBarFull{
+        id: closebarFull
+        visible: false
+    }
+    Kill {
+        id: kill
+        visible: false
+        y: 65 *dpy
+        x: 395 *dpx
+    }
+    KillExpand {
+        id: killExpand
+        visible: true
+        y: 65 *dpy
+        x: 395 *dpx
+    }
+
+
+
 }

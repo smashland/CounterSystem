@@ -102,5 +102,6 @@
         <file>Manage/ScenarioRevise.qml</file>
         <file>Manage/ScenarioRemove.qml</file>
         <file>Manage/PlaybackRefresh.qml</file>
+        <file>OsgWindow.qml</file>
     </qresource>
 </RCC>

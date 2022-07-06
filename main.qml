@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
+import MyItem 1.0
 import "Login"
 
 Window {
@@ -12,17 +13,53 @@ Window {
     readonly property real dpx:mainWindow.width/1920.0
     readonly property real dpy:mainWindow.height/1080.0
 
-    Index {
-        id: index
-        anchors.fill: parent
-        visible: true
+    property var $app: AppGlobal{}
+    property var $appWindow: mainWindow
+    property var $cpShow:null
+    property var $obShow:null
+
+    /// 用于加载组件
+    function loadQml(qmlUrl)
+    {
+        if(null !== $obShow)
+        {
+            $obShow.visible = false;
+            $obShow.destroy();
+        }
+
+        if(null !== $cpShow)
+        {
+            $cpShow.destroy();
+        }
+
+        $cpShow= Qt.createComponent(qmlUrl)
+
+        if (Component.Ready === $cpShow.status)
+        {
+            $obShow = $cpShow.createObject(mainWindow)
+            if(null !== $obShow)
+            {
+                $obShow.forceActiveFocus();
+                return(true);
+            }
+        }
+        else
+        {
+            return(false);
+        }
     }
+
+//    Index {
+//        id: index
+//        anchors.fill: parent
+//        visible: false
+//    }
+
     LoginCenter {
         id: loginCenter
         anchors.fill: parent
-        visible: false
+        visible: true
     }
-
 
     PopupDef {
         id: popupRectDef
@@ -36,5 +73,4 @@ Window {
         x:(mainWindow.width-popupRectWin.width)/2
         y:(mainWindow.height-popupRectWin.height)/2
     }
-
 }

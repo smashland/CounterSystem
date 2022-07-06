@@ -9,8 +9,7 @@ Rectangle
 {
     id: index
     anchors.fill: parent
-    color: "black"
-
+    color: "transparent"
 
     Information {
         x: 80 *dpx
@@ -112,6 +111,4 @@ Rectangle
         x: (index.width-scenarioRemove.width) / 2
         y: (index.height-scenarioRemove.height) / 2
     }
-
-
 }

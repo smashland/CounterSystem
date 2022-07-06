@@ -46,9 +46,5 @@ Popup {
                 verticalAlignment: Text.AlignVCenter
             }
         }
-
-
     }
-
-
 }

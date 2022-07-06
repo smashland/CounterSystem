@@ -15,6 +15,12 @@ QMAKE_CXXFLAGS += /utf-8
 QMAKE_CXXFLAGS += /wd"4100"
 QMAKE_CXXFLAGS += /MP
 LIBS *= -L$$PWD -lDocxFactory
+
+win32{
+ DESTDIR = $${PWD}/../Bin
+}else{
+  VERSION = 2.0.0
+}
 contains(SDK_CONFIG,Map){
 
 # include file

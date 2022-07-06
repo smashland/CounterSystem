@@ -50,11 +50,12 @@ Window {
         {
             return(false);
         }
+    }
 
     LoginCenter {
         id: loginCenter
         anchors.fill: parent
-        visible: false
+        visible: true
     }
 
     PopupDef {

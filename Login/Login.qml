@@ -141,8 +141,7 @@ Column {
                 anchors.fill: parent
                 onClicked: {
                     //popupRectWin.visible = true
-                    loginCenter.visible = false
-                    loadQml("qrc:/OsgWindow.qml")
+                    loadQml("qrc:/OsgWindow.qml");
                 }
             }
         }

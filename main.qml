@@ -1,6 +1,6 @@
-import QtQuick 2.15
+import QtQuick 2.12
+import QtQuick.Window 2.12
 import QtQuick.Controls 2.1
-import QtQuick.Window 2.15
 import MyItem 1.0
 import "Login"
 import "Manage"
@@ -22,6 +22,23 @@ Window {
     property var $cpShow:null
     property var $obShow:null
     property string exitShowLabel: "确定要退出吗?"
+
+    screen:Qt.application.screens[0]
+
+    onVisibilityChanged:
+    {
+        switch(visibility)
+        {
+        case 2:
+            flags = Qt.FramelessWindowHint|Qt.Window
+            width= mainWindow.width + 1
+            height= mainWindow.height + 1
+            break;
+        case 3:
+            flags = Qt.Window
+            break;
+        }
+    }
 
     /// 用于加载组件
     function loadQml(qmlUrl)
@@ -92,19 +109,19 @@ Window {
     }
 
     // 许可校验
-//    LicItem
-//    {
-//        id:objCheckLic;
-//        /// 组件加载完成校验 许可
-//        Component.onCompleted:
-//        {
-//            objCheckLic.checked.connect(showMainWindow)
-//            objCheckLic.showError.connect(checkLicenseFaild);
+    //    LicItem
+    //    {
+    //        id:objCheckLic;
+    //        /// 组件加载完成校验 许可
+    //        Component.onCompleted:
+    //        {
+    //            objCheckLic.checked.connect(showMainWindow)
+    //            objCheckLic.showError.connect(checkLicenseFaild);
 
-//            objCheckLic.checkLicense()
-//        }
+    //            objCheckLic.checkLicense()
+    //        }
 
-//    }
+    //    }
 
     // 连接失败
     PopupDef {

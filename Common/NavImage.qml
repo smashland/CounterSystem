@@ -21,6 +21,12 @@ Row {
             font.pixelSize: 22*dpx
             verticalAlignment: Text.AlignVCenter
         }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                mainWindow.showMinimized()
+            }
+        }
     }
     Rectangle {
         width: 18 *dpx

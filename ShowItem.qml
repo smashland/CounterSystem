@@ -52,8 +52,8 @@ Rectangle
         id:needLic
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
-        width: parent.height/2
-        height: parent.height/2
+        width: parent.height/4
+        height: parent.height/4
         visible: true
     }
 
@@ -64,70 +64,70 @@ Rectangle
         enabled: false
         anchors.top: needLic.bottom
         anchors.horizontalCenter: parent.horizontalCenter
-        font.pixelSize: 18
+        font.pixelSize: 14
     }
 
-    RowLayout
-    {
-        id: rowLayout
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: element.bottom
-        anchors.topMargin: 10
+//    RowLayout
+//    {
+//        id: rowLayout
+//        anchors.horizontalCenter: parent.horizontalCenter
+//        anchors.top: element.bottom
+//        anchors.topMargin: 10
 
-        Text
-        {
-            id: element1
-            text: "许可码"
-            enabled: false
-            font.pixelSize: 17
-        }
+//        Text
+//        {
+//            id: element1
+//            text: "许可码"
+//            enabled: false
+//            font.pixelSize: 17
+//        }
 
-        TextField
-        {
-            id: textField
-            width: 500
-            placeholderText:element1.text
-        }
+//        TextField
+//        {
+//            id: textField
+//            width: 500
+//            placeholderText:element1.text
+//        }
 
-        Button
-        {
-            id: button
-            text:"保存"
-            font.pixelSize: 17
-            hoverEnabled: true
-            checkable:true
-            background: Rectangle
-            {
-                opacity: 0.0
-            }
+//        Button
+//        {
+//            id: button
+//            text:"保存"
+//            font.pixelSize: 17
+//            hoverEnabled: true
+//            checkable:true
+//            background: Rectangle
+//            {
+//                opacity: 0.0
+//            }
 
-            contentItem: Label
-            {
-                id:showInfo
-                text: button.text
-                font: button.font
-                verticalAlignment: Text.AlignVCenter
-                color: '#FFFF0000'
-            }
+//            contentItem: Label
+//            {
+//                id:showInfo
+//                text: button.text
+//                font: button.font
+//                verticalAlignment: Text.AlignVCenter
+//                color: '#FFFF0000'
+//            }
 
-            /// 鼠标划过的时候字体变颜色
-            onHoveredChanged:
-            {
-                if(hovered)
-                {
-                    showInfo.color = '#FFFFFF00'
-                }
-                else
-                {
-                    showInfo.color='#FFFF0000'
-                }
-            }
+//            /// 鼠标划过的时候字体变颜色
+//            onHoveredChanged:
+//            {
+//                if(hovered)
+//                {
+//                    showInfo.color = '#FFFFFF00'
+//                }
+//                else
+//                {
+//                    showInfo.color='#FFFF0000'
+//                }
+//            }
 
-            /// 将获取到的许可码，给上层界面
-            onClicked:
-            {
-                nextFrame(textField.text)
-            }
-        }
-    }
+//            /// 将获取到的许可码，给上层界面
+//            onClicked:
+//            {
+//                nextFrame(textField.text)
+//            }
+//        }
+//    }
 }

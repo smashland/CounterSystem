@@ -82,7 +82,7 @@ Window {
     {
         /// 检查许可的工作已经完成
         objCheckLic.destroy();
-        loadQml("qrc:Index.qml");
+        loadQml("qrc:/Start.qml");
     }
 
     // 保存许可文件
@@ -109,19 +109,19 @@ Window {
     }
 
     // 许可校验
-    //    LicItem
-    //    {
-    //        id:objCheckLic;
-    //        /// 组件加载完成校验 许可
-    //        Component.onCompleted:
-    //        {
-    //            objCheckLic.checked.connect(showMainWindow)
-    //            objCheckLic.showError.connect(checkLicenseFaild);
+        LicItem
+        {
+            id:objCheckLic;
+            /// 组件加载完成校验 许可
+            Component.onCompleted:
+            {
+                objCheckLic.checked.connect(showMainWindow)
+                objCheckLic.showError.connect(checkLicenseFaild);
 
-    //            objCheckLic.checkLicense()
-    //        }
+                objCheckLic.checkLicense()
+            }
 
-    //    }
+        }
 
     // 连接失败
     PopupDef {

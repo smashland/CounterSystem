@@ -2,6 +2,7 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.15
 import "../Common"
+import "../Setting" as Settings
 
 Item {
     width: 370 *dpx
@@ -204,7 +205,67 @@ Item {
         id: contextMenu
         visible: false
     }
-
+    /// 充弹窗口
+    Settings.ChongDan
+    {
+        anchors.centerIn: parent
+        id:chongdan
+        width: 500
+        height: 500
     }
+
+    Dialog
+    {
+        id:peiqiang
+        anchors.centerIn: parent
+        property var nID: 0
+        title: "给"+nID+'号配枪'
+        modal: true
+        standardButtons: Dialog.Ok | Dialog.Cancel
+
+        TextField
+        {
+            id:qianghao
+            maximumLength:4
+            placeholderText:'枪号'
+            validator: IntValidator
+            {
+                bottom:1
+                top:9999
+            }
+        }
+        onAccepted:
+        {
+            $app.settings.peiQiang(nID,qianghao.text);
+        }
+    }
+
+    Dialog
+    {
+        id:sycntime
+        property var nID: 0
+        title: "给"+nID+"同步时间";
+        modal: true
+        standardButtons: Dialog.Ok | Dialog.Cancel
+
+        TextField
+        {
+            id:setTime
+            maximumLength:4
+            placeholderText:'时间(s):'
+            validator: IntValidator
+            {
+                bottom:1
+                top:60
+            }
+        }
+        onAccepted:
+        {
+            $app.settings.sycTime(nID,setTime.text);
+        }
+    }
+
+
+}
 
 

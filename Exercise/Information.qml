@@ -41,72 +41,103 @@ Item {
         font.family: "MicrosoftYaHei-Bold";
     }
 
-    Rectangle {
-        x: 20
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 20
-        width: 300
-        height: 774 *dpy
-        color: "transparent"
+    Rectangle
+    {
+        id:rootRect
+        signal personClickd(var nId,var mX,var mY)
+        signal personDClick(var nId)
+        property string groupType:""
 
-        Component {
-            id: delegate
-            Item {
-                id: wrapper
-                width: parent.width
-                height: 36 *dpy
-                Rectangle {
-                    anchors.fill: parent
-                    opacity: 0.5
-                    color: listView.currentIndex == index ? "#4781c8" : "#121212"
-                }
-                MouseArea {
-                    anchors.fill: parent
+        function addPerson(nPerson)
+        {
+            nPerson.type=rootRect.groupType
+            listView.model.append(nPerson);
+        }
+
+        anchors.fill: parent
+
+        ScrollView
+        {
+            anchors.fill: parent;
+            clip: true;
+            ListView
+            {
+                id:listView
+                anchors.fill: parent
+                model:$app.allData.ceateType(groupType)
+                delegate:MouseArea
+                {
+                    acceptedButtons: Qt.LeftButton | Qt.RightButton
+                    id:mouseArea
+                    width: parent.width
+                    height: 50
+
                     hoverEnabled: true
-                    onClicked: {
-                        mouse.accepted = true
-                        wrapper.ListView.view.currentIndex = index
-                        soldier.visible = true
+                    drag.target: $app.settings.bIsStart ? null : forShow
+
+                    /// 鼠标释放
+                    onReleased:
+                    {
+                        if(forShow.Drag.target !== null)
+                        {
+                            listView.model.remove(index);
+                            forShow.Drag.drop();
+                        }
+                        else
+                        {
+                            forShow.Drag.cancel();
+                        }
                     }
-                }
-                Text {
-                    text: name
-                    x: 20 *dpx
-                    height: 36 *dpy
-                    color: "#ffffff"
-                    font.pixelSize: 16*dpx
-                    verticalAlignment: Text.AlignVCenter
+
+                    /// 鼠标按下
+                    onPressed:
+                    {
+                        parent.currentIndex = index;
+
+                        /// 鼠标右键弹出菜单
+                        if(Qt.RightButton === mouse.button)
+                        {
+                            personClickd(modelData.id,mouseX,index * height + mouseY);
+                        }
+                    }
+
+                    /// 双击
+                    onDoubleClicked:
+                    {
+                        personDClick(modelData.id);
+                    }
+
+
+                    /// 用户信息
+//                    PersonStatus
+//                    {
+//                        id:forShow
+//                        outData:modelData;
+//                        anchors.verticalCenter: parent.verticalCenter
+//                        anchors.horizontalCenter: parent.horizontalCenter
+//                        Drag.active: mouseArea.drag.active
+//                        Drag.hotSpot.x: width/2
+//                        Drag.hotSpot.y: height/2
+//                        states: State
+//                        {
+//                            when: mouseArea.drag.active
+//                            ParentChange
+//                            {
+//                                target: forShow;
+//                                parent:rootRect.parent
+//                            }
+
+//                            AnchorChanges
+//                            {
+//                                target: forShow;
+//                                anchors.verticalCenter: undefined;
+//                                anchors.horizontalCenter: undefined;
+//                            }
+//                        }
+//                    }
                 }
             }
         }
-
-        Component {
-            id: listModel;
-            ListModel {
-                ListElement{
-                    name: "1sdS速度"
-                }
-                ListElement{
-                    name: "1sdS速度"
-                }
-            }
-
-        }
-
-        ListView {
-            id: listView
-            anchors.fill: parent
-            delegate: delegate
-            spacing: 1*dpy
-            model: listModel.createObject(listView)
-            focus: true
-            ScrollBar.vertical: ScrollBar {
-                id: scrollBar
-            }
-
-        }
-
     }
-
 
 }

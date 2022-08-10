@@ -14,15 +14,23 @@ CGlobalSettings::CGlobalSettings(QObject *parent) : QObject(parent)
     m_qConnectColor.setRgbF(1.0,1.0,1.0);
     m_qDisConnectColor.setRgbF(0.2,0.2,0.2);
 
-    m_mapType2Color.insert(QString::fromUtf8("红方"),QColor(255,0,0));
-    m_mapType2Color.insert(QString::fromUtf8("蓝方"),QColor(0,0,255));
-    m_mapType2Color.insert(QString::fromUtf8("白方"),QColor(255,255,255));
-    m_mapType2Color.insert(QString::fromUtf8("未知"),QColor(127,127,127));
+//    m_mapType2Color.insert(QString::fromUtf8("红方"),QColor(255,0,0));
+//    m_mapType2Color.insert(QString::fromUtf8("蓝方"),QColor(0,0,255));
+//    m_mapType2Color.insert(QString::fromUtf8("白方"),QColor(255,255,255));
+//    m_mapType2Color.insert(QString::fromUtf8("未知"),QColor(127,127,127));
 
-    m_mapType2BackColor.insert(QString::fromUtf8("红方"),QColor(255,0,0,79));
-    m_mapType2BackColor.insert(QString::fromUtf8("蓝方"),QColor(0,0,255,79));
-    m_mapType2BackColor.insert(QString::fromUtf8("白方"),QColor(255,255,255,79));
-    m_mapType2BackColor.insert(QString::fromUtf8("未知"),QColor(127,127,127,79));
+//    m_mapType2BackColor.insert(QString::fromUtf8("红方"),QColor(255,0,0,79));
+//    m_mapType2BackColor.insert(QString::fromUtf8("蓝方"),QColor(0,0,255,79));
+//    m_mapType2BackColor.insert(QString::fromUtf8("白方"),QColor(255,255,255,79));
+//    m_mapType2BackColor.insert(QString::fromUtf8("未知"),QColor(127,127,127,79));
+    m_mapType2Color.insert(QString::fromUtf8("红方"),QColor(0,0,0,0));
+    m_mapType2Color.insert(QString::fromUtf8("蓝方"),QColor(0,0,255,0));
+    m_mapType2Color.insert(QString::fromUtf8("白方"),QColor(255,255,255,0));
+    m_mapType2Color.insert(QString::fromUtf8("未知"),QColor(127,127,127,0));
+    m_mapType2BackColor.insert(QString::fromUtf8("红方"),QColor(0,0,0,0));
+    m_mapType2BackColor.insert(QString::fromUtf8("蓝方"),QColor(0,0,255,0));
+    m_mapType2BackColor.insert(QString::fromUtf8("白方"),QColor(255,255,255,0));
+    m_mapType2BackColor.insert(QString::fromUtf8("未知"),QColor(127,127,127,0));
 
     QVariantMap tmpMap;
 

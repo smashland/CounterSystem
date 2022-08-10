@@ -172,7 +172,7 @@ Item
             showInfo.text = "连接成功";
             showInfo.color = "#00FF00";
 
-            if($appWindow.loadQml("qrc:/qml/OsgWindow.qml"))
+            if($appWindow.loadQml("qrc:/OsgWindow.qml"))
             {
                 $appWindow.showFullScreen();
                 //$appWindow.showMaximized();

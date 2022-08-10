@@ -1,9 +1,11 @@
 //                                               人员详细信息
 import QtQuick 2.12
 import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.3
 import "../Common"
 
 Rectangle {
+//    property var outData: null
     anchors.fill: parent
     color: "transparent"
     Item {
@@ -76,8 +78,9 @@ Rectangle {
                             id: mingzi
                             y: shibbingxinxi.contentHeight + line1.height + 20 *dpy
                             text: "名       字:"
-                            name: "越野1"
+//                            name: outData.name
                         }
+
                         SoldierItem {
                             x: line1.width/2
                             y: shibbingxinxi.contentHeight + line1.height + 20 *dpy

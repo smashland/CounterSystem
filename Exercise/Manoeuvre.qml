@@ -2,6 +2,11 @@
 
 import QtQuick 2.12
 import QtQuick.Controls 2.15
+import Qt.labs.platform 1.1
+import Qt.labs.qmlmodels 1.0
+import "../Status" as MyStatus
+import "../Result" as MyResult
+import "../RePlay" as MyRePlay
 
 Item {
     id: manoeuvre
@@ -11,6 +16,8 @@ Item {
         anchors.fill: parent
         source: "qrc:/Image/Start_bg.png"
     }
+    signal yesPutDown()
+    property var objSetting;
 
     Text {
         id: yanxiTime
@@ -44,21 +51,24 @@ Item {
         }
 
         onClicked: {
+            changeStatus()
             exerciseResults.visible = true
+//            console.log("jieshu--yanxi")
         }
-
     }
 
+
     Button {
+        id: kongzhiButton
         x: (parent.width - 26*dpy)/2
         y: 26 *dpy
+        height: zantingText.contentHeight + 62*dpy
         background: Rectangle {
             color: "transparent"
-
             Text {
                 width: 26 *dpy
                 height: 26 *dpy
-                text: qsTr("\ue638")
+                text: qsTr("\ue623")
                 color: "#e7f6ff"
                 font.family: "iconfont"
                 font.pixelSize: 26*dpx
@@ -67,7 +77,7 @@ Item {
             Text {
                 id: zantingText
                 y: 36 *dpy
-                text: qsTr("暂停")
+                text: qsTr("开始")
                 font.pixelSize: 14*dpx;
                 color: "#ffffff";
                 font.family: "MicrosoftYaHei";
@@ -75,7 +85,84 @@ Item {
                 verticalAlignment: Text.AlignVCenter
             }
         }
+        onClicked: {
+            if($app.settings.bIsStart)
+            {
+                showTest()
+            }
+
+            changeStatus()
+        }
     }
+
+    function showMainCircl()
+    {
+//        fadeOut.target=kongzhiButton;
+//        fadeIn.target=jieshuyanxi
+//        fadeOut.start()
+//        fadeIn.start()
+        if(null !== objSetting)
+        {
+            objSetting.visible = false
+        }
+    }
+    function showTest()
+    {
+//        fadeOut.target=jieshuyanxi;
+//        fadeIn.target=kongzhiButton
+//        fadeOut.start()
+//        fadeIn.start()
+        if(null !== objSetting)
+        {
+            objSetting.visible = true
+        }
+    }
+    function changeStatus()
+    {
+        if($app.settings.bIsStart)
+        {
+            /// 演习结束
+            $app.settings.setStop();
+            $app.allData.calResult();
+        }
+        else
+        {
+            /// 演习开始清空状态
+//            showMainCircl()
+            $app.allData.clearInfo();
+            $app.settings.setStart();
+        }
+    }
+//    PropertyAnimation
+//    {
+//        id: fadeOut
+//        target: kongzhiButton
+//        duration: 300
+//        property: "opacity"
+//        from: 1.0
+//        to: 0.0
+
+//        onStopped:
+//        {
+//            target.visible = false
+//        }
+//    }
+
+//    PropertyAnimation
+//    {
+//        id: fadeIn
+//        target: jieshuyanxi
+//        duration: 300
+//        property: "opacity"
+//        from: 0.0
+//        to: 1.0
+//        onStarted:
+//        {
+//            target.visible = true
+//        }
+//    }
+
+
     Rectangle {
         id: switchSet
         anchors.bottom: parent.bottom

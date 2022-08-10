@@ -116,5 +116,26 @@
         <file>ShowItem.qml</file>
         <file>SelectWifi.qml</file>
         <file>SelectComName.qml</file>
+        <file>Setting/ChongDan.qml</file>
+        <file>Setting/ConnectSetting.qml</file>
+        <file>Setting/Setting.qml</file>
+        <file>RePlay/ContrlRePlay.qml</file>
+        <file>Result/Result.qml</file>
+        <file>Result/ShowDetail.qml</file>
+        <file>Status/BoardNotice.qml</file>
+        <file>Status/EquipConnStat.qml</file>
+        <file>Status/GroupDropArea.qml</file>
+        <file>Status/GroupInfo.qml</file>
+        <file>Status/PersonAllInfo.qml</file>
+        <file>Status/PersonBackHurtInfo.qml</file>
+        <file>Status/PersonFlipable.qml</file>
+        <file>Status/PersonFontHurtInfo.qml</file>
+        <file>Status/PersonInfoLabel.qml</file>
+        <file>Status/PersonStatus.qml</file>
+        <file>Status/ShowStatus.qml</file>
+        <file>ConfirmPopUp.qml</file>
+        <file>MainCircle.qml</file>
+        <file>MainWindow.qml</file>
+        <file>Exercise/PersonStatus.qml</file>
     </qresource>
 </RCC>

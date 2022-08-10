@@ -2,10 +2,12 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.15
 import "../Common"
+import "../Setting" as Settings
 
 Item {
     width: 370 *dpx
     height: 420 *dpy
+    property var outData: null
     Image {
         anchors.fill: parent
         source: "qrc:/Image/Blue_bg_all.png"
@@ -42,6 +44,7 @@ Item {
     }
 
     Rectangle {
+        id:root
         x: 20
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 20
@@ -69,14 +72,14 @@ Item {
                     }
                 }
                 Text {
-                    text: name
+                    text: outData.name
                     x: 20 *dpx
                     height: 36 *dpy
                     color: "#ffffff"
                     font.pixelSize: 16*dpx
                     verticalAlignment: Text.AlignVCenter
                 }
-                Row {
+                Row {id:infoshow
                     spacing: 12*dpx
                     anchors.right: parent.right
                     anchors.rightMargin: 10
@@ -86,13 +89,15 @@ Item {
                         height: 24*dpy
                         color: "transparent"
 
-                        Text {
+                        EquipConnStat {
+                            id:jiqiang
                             anchors.fill: parent
                             text: qsTr("\ue708")
                             color: "#e7f6ff"
                             font.family: "iconfont"
                             font.pixelSize: 22*dpx
                             verticalAlignment: Text.AlignVCenter
+                            bConnected: outData.bRifle
                         }
                     }
                     Rectangle {
@@ -100,8 +105,10 @@ Item {
                         height: 24*dpy
                         color: "transparent"
 
-                        Text {
+                        EquipConnStat {
+                            id:toukui
                             anchors.fill: parent
+                            bConnected: outData.bTK
                             text: qsTr("\ue706")
                             color: "#e7f6ff"
                             font.family: "iconfont"
@@ -114,13 +121,26 @@ Item {
                         height: 16*dpy
                         color: "transparent"
                         y: 4 *dpy
-                        Text {
-                            text: qsTr(progressBar.value*100 + "%")
-                            verticalAlignment: Text.AlignVCenter
-                            horizontalAlignment: Text.AlignHCenter
+                        //                        Text {
+                        //                            text: qsTr(progressBar.value*100 + "%")
+                        //                            verticalAlignment: Text.AlignVCenter
+                        //                            horizontalAlignment: Text.AlignHCenter
+                        //                            anchors.fill: parent
+                        //                            font.pixelSize: 14*dpx
+                        //                            color: "#3f9c41"
+                        //                            font.family: "Microsoft YaHei"
+                        //                        }
+                        Text
+                        {
+                            //anchors.top: locate.top
+                            id:electricity
+                            text: outData.nBaty+'%'
+                            verticalAlignment: locate.verticalAlignment
+                            styleColor: color
+                            //                            style: Text.Outline
+                            color:  outData.bOnLine ? outData.nBaty > 59 ? "green" : outData.nBaty > 20 ? "yellow" : "red" : "gray"
                             anchors.fill: parent
                             font.pixelSize: 14*dpx
-                            color: "#3f9c41"
                             font.family: "Microsoft YaHei"
                         }
                     }
@@ -148,26 +168,29 @@ Item {
                 Rectangle {
                     y: 36*dpy
                     ProgressBar{
-                        id:progressBar
-                        value: 0.2
+                        id:health
+                        value: outData.nHealth
+                        from: 0
+                        to:100
                         width: 330
                         height: 10
                         background: Rectangle {
-                            implicitWidth: progressBar.width
-                            implicitHeight: progressBar.height
+                            implicitWidth: health.width
+                            implicitHeight: health.height
                             color: "#121212"
                             opacity: 0.7
                         }
 
                         contentItem: Item {
                             Rectangle {
-                                width: progressBar.visualPosition * progressBar.width
-                                height: progressBar.height
-                                color: "#3f9c41"
+                                width: health.visualPosition * health.width
+                                height: health.height
+                                color: outData.bOnLine ?  health.value > 60 ?  "green" : health.value > 20 ? "yellow" : "red" : "gray";
                             }
                         }
                     }
-                  }
+
+                }
             }
         }
 
@@ -201,6 +224,65 @@ Item {
     SetList {
         id: contextMenu
         visible: false
+    }
+    /// 充弹窗口
+    Settings.ChongDan
+    {
+        anchors.centerIn: parent
+        id:chongdan
+        width: 500
+        height: 500
+    }
+
+    Dialog
+    {
+        id:peiqiang
+        anchors.centerIn: parent
+        property var nID: 0
+        title: "给"+nID+'号配枪'
+        modal: true
+        standardButtons: Dialog.Ok | Dialog.Cancel
+
+        TextField
+        {
+            id:qianghao
+            maximumLength:4
+            placeholderText:'枪号'
+            validator: IntValidator
+            {
+                bottom:1
+                top:9999
+            }
+        }
+        onAccepted:
+        {
+            $app.settings.peiQiang(nID,qianghao.text);
+        }
+    }
+
+    Dialog
+    {
+        id:sycntime
+        property var nID: 0
+        title: "给"+nID+"同步时间";
+        modal: true
+        standardButtons: Dialog.Ok | Dialog.Cancel
+
+        TextField
+        {
+            id:setTime
+            maximumLength:4
+            placeholderText:'时间(s):'
+            validator: IntValidator
+            {
+                bottom:1
+                top:60
+            }
+        }
+        onAccepted:
+        {
+            $app.settings.sycTime(nID,setTime.text);
+        }
     }
 
 

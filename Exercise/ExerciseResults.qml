@@ -2,6 +2,7 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.15
 import Qt.labs.qmlmodels 1.0
+import Qt.labs.platform 1.1
 import "../Common"
 
 Item {
@@ -182,7 +183,22 @@ Item {
             }
 
 //            nameButton: "保存演习数据"
+            onClicked: {
+                openFile.open()
+            }
 
+        }
+        FileDialog
+        {
+            id:openFile
+            folder:$app.appPath
+            fileMode:FileDialog.SaveFile
+            title: qsTr("保存演习数据")
+            nameFilters: [qsTr("演习数据(*.szy)")]
+            onAccepted:
+            {
+                $app.allData.saveData(currentFile);
+            }
         }
         PopupButton {
 //            id: print
@@ -202,7 +218,23 @@ Item {
            }
 
 //            nameButton: "打印演习报告"
+           onClicked:
+           {
+               printWPS.open();
+           }
 
+        }
+        FileDialog
+        {
+            id:printWPS
+            folder:$app.appPath
+            fileMode:FileDialog.SaveFile
+            title: qsTr("保存演习报告")
+            nameFilters: [qsTr("演习报告(*.docx)")]
+            onAccepted:
+            {
+                $app.allData.createReport(currentFile);
+            }
         }
         PopupButton {
             background: Rectangle {

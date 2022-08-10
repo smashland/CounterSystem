@@ -4,60 +4,24 @@ import QtQuick.Controls 2.15
 Menu
 {
     id: contextMenu
-    implicitWidth: 100*dpx
+    property int userID
     MenuItem
     {
         text: "充弹"
+        onTriggered:
+        {
+            chongdan.nID=contextMenu.userID;
+            chongdan.open();
+        }
     }
-    MenuItem { text: "配枪"}
-    MenuItem { text: "闭锁"}
-    MenuItem { text: "解锁"}
-    MenuItem { text: "解除旁白"}
-    MenuItem { text: "判死"}
-    MenuItem { text: "复活"}
-    MenuItem { text: "关机"}
-    MenuItem { text: "同步时间"}
-    MenuItem { text: "定位"}
+    MenuItem { text: "配枪" ;onTriggered: { peiqiang.nID = contextMenu.userID;peiqiang.open();}}
+    MenuItem { text: "闭锁" ;onTriggered:$app.settings.setBiSuo(contextMenu.userID)}
+    MenuItem { text: "解锁" ;onTriggered:$app.settings.setJiesuoSuo(contextMenu.userID)}
+    MenuItem { text: "解除旁白";onTriggered:$app.settings.setJieChu(contextMenu.userID) }
+    MenuItem { text: "判死";onTriggered:$app.settings.setPanSi(contextMenu.userID)}
+    MenuItem { text: "复活" ;onTriggered:{$app.settings.setFuHuo(contextMenu.userID)}}
+    MenuItem { text: "关机" }
+    MenuItem { text: "同步时间";onTriggered:{sycntime.nID = contextMenu.userID;sycntime.open();}}
+    MenuItem { text: "定位";onTriggered:{$app.allData.dingWei(contextMenu.userID)}}
 }
-//Menu {
-//    id: option_menu
 
-//    MenuItem {
-
-//        implicitWidth: 120*dpx
-//        implicitHeight: 30*dpy
-//        background: Rectangle {
-//            id:building_button
-//            color:"#20252c"
-//            border.color: "#d5e2f5"
-//            Text {
-//                anchors.left: parent.left
-//                anchors.leftMargin: 34*dpx
-//                anchors.top: parent.top
-//                anchors.topMargin: 5*dpy
-//                text: qsTr("添加楼房")
-//                color: "#d5e2f5"
-//            }
-//        }
-
-//    }
-
-//    MenuItem {
-//        id:building_button2
-//        implicitWidth: 120*dpx
-//        implicitHeight: 30*dpy
-//        background: Rectangle {
-//            color: "#20252c"
-//            border.color: "#d5e2f5"
-//            Text {
-//                anchors.left: parent.left
-//                anchors.leftMargin: 34*dpx
-//                anchors.top: parent.top
-//                anchors.topMargin: 5*dpy
-//                text: qsTr("添加平房")
-//                color: "#d5e2f5"
-//            }
-//        }
-
-//    }
-//}

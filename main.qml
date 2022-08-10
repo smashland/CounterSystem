@@ -78,37 +78,54 @@ Window {
     }
 
     // 通过license校验显示主界面
-    function showMainWindow()
-    {
-        /// 检查许可的工作已经完成
-        objCheckLic.destroy();
-        loadQml("qrc:/Start.qml");
-    }
-
-    // 保存许可文件
-    function saveLicense(licInfo)
-    {
-        objCheckLic.saveLicense(licInfo);
-    }
-
-    // 没有许可或者许可失败 获取硬件信息
-    function getMachineInfo(sMachineInfo)
-    {
-        if(loadQml("qrc:/ShowItem.qml"))
+    // 通过license校验显示主界面
+        function  showMainWindow()
         {
-            $obShow.nextFrame.connect(saveLicense)
-            $obShow.recive(sMachineInfo)
+            /// 检查许可的工作已经完成
+            objCheckLic.destroy();
+            console.log( "测试"+objCheckLic.read());
+    //        if($app.initSystem()&&$app.startConnect())
+    //        {
+    //            popupRectWin.open();
+    //        }
+    //        loadQml("qrc:/Login/LoginCenter.qml");
         }
-    }
 
-    /// 检查许可失败
-    function checkLicenseFaild(errorInfo)
-    {
-        exitPopupLable.text = errorInfo + " " + exitShowLabel;
-        exitPopup.open();
-    }
 
-    // 许可校验
+        // 保存许可文件
+        function saveLicense(licInfo)
+        {
+    //        objCheckLic.saveLicense(licInfo);
+              if(objCheckLic.saveLicense(licInfo))
+              {
+
+                  if($app.initSystem()&&$app.startConnect())
+                  {
+                      popupRectWin.open();
+                  }
+              }
+        }
+
+        // 没有许可或者许可失败 获取硬件信息
+        function getMachineInfo(sMachineInfo)
+        {
+    //        if(loadQml("qrc:/ShowItem.qml"))
+            if(loadQml("qrc:/Login/LoginCenter.qml"))
+            {
+                  $obShow.nextFrame.connect(saveLicense)
+                  $obShow.recive(sMachineInfo)
+            }
+
+        }
+
+        /// 检查许可失败
+        function checkLicenseFaild(errorInfo)
+        {
+            exitPopupLable.text = errorInfo + " " + exitShowLabel;
+            exitPopup.open();
+        }
+
+    //     许可校验
         LicItem
         {
             id:objCheckLic;
@@ -117,28 +134,31 @@ Window {
             {
                 objCheckLic.checked.connect(showMainWindow)
                 objCheckLic.showError.connect(checkLicenseFaild);
-
                 objCheckLic.checkLicense()
+
+    //            console.log(licInfo);
+
+    //            $app.initSystem();
+    //            $app.startConnect();
             }
 
         }
 
-    // 连接失败
-    PopupDef {
-        id: popupRectDef
-        visible: false
-        x:(mainWindow.width-popupRectDef.width)/2
-        y:(mainWindow.height-popupRectDef.height)/2
-    }
+    //    // 连接失败
+    //    PopupDef {
+    //        id: popupRectDef
+    ////        visible: false
+    //        x:(mainWindow.width-popupRectDef.width)/2
+    //        y:(mainWindow.height-popupRectDef.height)/2
+    //    }
 
-    // 连接成功
-    PopupWin {
-        id: popupRectWin
-        visible: false
-        x:(mainWindow.width-popupRectWin.width)/2
-        y:(mainWindow.height-popupRectWin.height)/2
-    }
-
+    //    // 连接成功
+    //    PopupWin {
+    //        id: popupRectWin
+    ////        visible: false
+    //        x:(mainWindow.width-popupRectWin.width)/2
+    //        y:(mainWindow.height-popupRectWin.height)/2
+    //    }
 
     // 退出程序框上的是和否
     Component

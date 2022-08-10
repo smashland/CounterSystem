@@ -13,6 +13,7 @@ public:
     Q_INVOKABLE void checkLicense();
     Q_INVOKABLE void saveLicense(const QByteArray &sLicInfo);
     Q_INVOKABLE QString getMD5MachineInfo();
+    Q_INVOKABLE QString read();
 signals:
     void checked();
     void showError(const QString& sErrorInfo);

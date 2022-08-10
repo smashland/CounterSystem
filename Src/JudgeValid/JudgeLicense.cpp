@@ -119,6 +119,18 @@ void QJudgeLicense::getMachineInfo()
     m_sMachineInfo = tmpMD5.toString();
     m_bGet = true;
 }
+//读文件
+QString QJudgeLicense::read()
+{
+    QString content;
+    QFile file(QGuiApplication::applicationDirPath() + "/lic");
+    if ( file.open(QIODevice::ReadOnly) ) {
+        content = file.readAll();
+        file.close();
+    }
+
+    return content;
+}
 
 /// 检查许可是否有效
 bool QJudgeLicense::checkLicense(const QByteArray& sLicInfo)

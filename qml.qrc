@@ -137,5 +137,7 @@
         <file>MainCircle.qml</file>
         <file>MainWindow.qml</file>
         <file>Exercise/PersonStatus.qml</file>
+        <file>Manage/BasicGroupBox.qml</file>
+        <file>Manage/BasicSpinBox.qml</file>
     </qresource>
 </RCC>

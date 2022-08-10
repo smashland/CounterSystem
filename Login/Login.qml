@@ -1,6 +1,7 @@
 import QtQuick 2.12
 import QtGraphicalEffects 1.15
 import QtQuick.Controls 2.15
+import MyItem 1.0
 //Item {
 //    id: login
 Column {
@@ -70,7 +71,10 @@ Column {
                     anchors.fill: parent
                     color: Qt.rgba(255/255, 255/255, 255/255, 0.8);
                     font.pixelSize: 16*dpx
-                    placeholderText: "请输入授权码"
+                    placeholderText:if(objCheckLic.read())
+                                        qsTr(objCheckLic.read()) //"请输入授权码"
+                                    else
+                                        qsTr("请输入授权码")
                     font.family: "Microsoft YaHei"
                     clip: true
                     verticalAlignment: Text.AlignVCenter
@@ -102,12 +106,120 @@ Column {
                     clip: true
                     verticalAlignment: Text.AlignVCenter
                     leftPadding:  52*dpx
-                    placeholderText: "请选择相应的串口"
+                    readOnly:true
+                                        //placeholderText: "请选择相应的串口"
                     activeFocusOnPress:true
                     //        font.capitalization:Font.AllUppercase
                     background: Rectangle {
                         color: "transparent"
                     }
+                    ComboBox
+                                        {
+                                            id: control
+                                            width: parent.width
+                                            height: parent.height
+                                            anchors.right: parent.right
+                                            model: $app.settings.comNameList();
+                                            /// 弹出的combobox的选项
+                                            delegate: ItemDelegate
+                                            {
+                                                width: control.width
+                                                contentItem: Text
+                                                {
+                                                    text: modelData
+                                                    color:  Qt.rgba(255/255, 255/255, 255/255, 0.8);
+                                                    font.pixelSize: 16*dpx
+                                                    font.bold: true
+                                                    elide: Text.ElideRight
+                                                    verticalAlignment: Text.AlignVCenter
+                                                    horizontalAlignment: Text.AlignHCenter
+                                                }
+                                                background: Rectangle
+                                                {
+                                                    border.color:"#00baff"
+                                                    color: "transparent"
+                                                }
+
+                                                highlighted: control.highlightedIndex === index
+                                            }
+
+                                            /// 绘制下拉箭头
+                                            indicator: Canvas
+                                            {
+                                                id: canvas
+                                                x: control.width - width - control.rightPadding
+                                                y: control.topPadding + (control.availableHeight - height) / 2
+                                                width: 12
+                                                height: 8
+                                                contextType: "2d"
+
+                                                Connections
+                                                {
+                                                    target: control
+                                                    function onPressedChanged(){canvas.requestPaint()}
+                                                }
+
+                                                onPaint:
+                                                {
+                                                    context.reset();
+                                                    context.moveTo(0, 0);
+                                                    context.lineTo(width, 0);
+                                                    context.lineTo(width / 2, height);
+                                                    context.closePath();
+                                                    context.fillStyle = "#00baff";
+                                                    context.fill();
+                                                }
+                                            }
+
+                                            contentItem: Text
+                                            {
+                                                leftPadding: 0
+                                                rightPadding: control.indicator.width + control.spacing
+
+                                                text: control.displayText
+                                                font.bold:true
+
+                                                font.pixelSize: 16*dpx
+                                                color: Qt.rgba(255/255, 255/255, 255/255, 0.8);
+                                                horizontalAlignment: Text.AlignHCenter
+                                                verticalAlignment: Text.AlignVCenter
+                                                elide: Text.ElideRight
+                                            }
+
+                                            background: Rectangle
+                                            {
+                                                implicitWidth: 120
+                                                implicitHeight: 40
+                                                opacity:0
+                                                radius: 2
+                                            }
+
+                                            popup: Popup
+                                            {
+                                                y: control.height - 1
+                                                width: control.width
+                                                implicitHeight: contentItem.implicitHeight
+                                                padding: 1
+
+                                                contentItem: ListView
+                                                {
+                                                    clip: true
+                                                    implicitHeight: contentHeight
+                                                    model: control.popup.visible ? control.delegateModel : null
+                                                    currentIndex: control.highlightedIndex
+
+                                                    ScrollIndicator.vertical: ScrollIndicator { }
+                                                }
+
+                                                background: Rectangle
+                                                {
+                                                    border.color: "#00baff"
+                                                     color: Qt.rgba(0/255, 31/255, 94/255, 0.8);
+                    //                                opacity:0.8
+                                                    radius: 2
+                                                }
+                                            }
+                                        }//ComboBox
                 }
             }
         }
@@ -142,8 +254,71 @@ Column {
                 onClicked: {
                     //popupRectWin.visible = true
                     loadQml("qrc:/OsgWindow.qml");
+                    if(!objCheckLic.read())
+                                        {
+                                            loginCenter.nextFrame(lrText.text)
+                                        }
+                                        $app.settings.setComName(control.currentText);
+                                        $app.initSystem()
+                                        $app.startConnect()
                 }
             }
         }
     }
+    //    Connections
+    //    {
+    //        target: $app
+    //        function onConnected()
+    //        {
+    ////                        popupRectWin.visible=true
+    ////                        timer.setTimeout(function(){ popupRectWin.visible=false; }, 1000);
+    //            if($appWindow.loadQml("qrc:/OsgWindow.qml"))
+    //            {
+    //                $appWindow.showFullScreen();
+    //                //$appWindow.showMaximized();
+    //            }
+    //        }
+
+    //        /// 连接失败
+    //        function onDisConnected()
+    //        {
+    ////                        popupRectDef.visible=true
+    ////                        timer.setTimeout(function(){ popupRectDef.visible=false; }, 1000);
+    //           loadQml("qrc:/Login/LoginCenter.qml")
+    //        }
+    //    }
+        Timer
+        {
+            id:timer
+            function setTimeout(cb, delayTime) {
+                timer.interval = delayTime;
+                timer.repeat = false;
+                timer.triggered.connect(cb);
+                timer.triggered.connect(function release () {
+                    timer.triggered.disconnect(cb); // This is important
+                    timer.triggered.disconnect(release); // This is important as well
+                });
+                timer.start();
+            }
+
+        }
+        LicItem
+        {
+            id:objCheckLic;
+        }
+        // 连接失败
+        PopupDef {
+            id: popupRectDef
+            visible: false
+            x:(mainWindow.width-popupRectDef.width)/2
+            y:(mainWindow.height-popupRectDef.height)/2
+        }
+
+        // 连接成功
+        PopupWin {
+            id: popupRectWin
+            visible: false
+             x:(mainWindow.width-popupRectWin.width)/6
+             y:(mainWindow.height-popupRectWin.height)/6
+        }
 }

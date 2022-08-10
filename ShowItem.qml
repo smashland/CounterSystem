@@ -8,18 +8,20 @@ Rectangle
 {
     id: rectangle
     anchors.fill: parent
+    width: 638
+    height: 371
     color:  '#00000000'
 
-    signal nextFrame(var licInfo)
+//    signal nextFrame(var licInfo)
 
-    /// 收到机器码信息
-    function recive(str)
-    {
-        needLic.updateString(str);
-        element.text = str;
-    }
+//    /// 收到机器码信息
+//    function recive(str)
+//    {
+//        needLic.updateString(str);
+//        element.text = str;
+//    }
 
-    /// 自定义组件，获取背景图片
+    // 自定义组件，获取背景图片
     Blur
     {
         id:target
@@ -52,8 +54,8 @@ Rectangle
         id:needLic
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
-        width: parent.height/4
-        height: parent.height/4
+        width: parent.height/2
+        height: parent.height/2
         visible: true
     }
 
@@ -64,7 +66,7 @@ Rectangle
         enabled: false
         anchors.top: needLic.bottom
         anchors.horizontalCenter: parent.horizontalCenter
-        font.pixelSize: 14
+        font.pixelSize: 18
     }
 
 //    RowLayout
@@ -126,6 +128,8 @@ Rectangle
 //            /// 将获取到的许可码，给上层界面
 //            onClicked:
 //            {
+
+////                loadQml("qrc:/Login/LoginCenter.qml")
 //                nextFrame(textField.text)
 //            }
 //        }

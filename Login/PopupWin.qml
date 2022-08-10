@@ -39,7 +39,7 @@ Popup {
             Text {
                 id: wintext
                 height: 36 *dpy
-                text: qsTr("连接失败，1s后弹窗消失，进入系统页面")
+                text: qsTr("连接成功，1s后弹窗消失，进入系统页面")
                 font.pixelSize: 18*dpx;
                 color: "#e74b4b";
                 font.family: "Microsoft YaHei";

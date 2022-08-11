@@ -139,5 +139,6 @@
         <file>Exercise/PersonStatus.qml</file>
         <file>Manage/BasicGroupBox.qml</file>
         <file>Manage/BasicSpinBox.qml</file>
+        <file>Image/shuomingshu.png</file>
     </qresource>
 </RCC>

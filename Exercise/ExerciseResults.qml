@@ -1,14 +1,19 @@
 //                                        击杀情况
 import QtQuick 2.12
-import QtQuick.Controls 2.15
+//import QtQuick.Controls 2.15
 import Qt.labs.qmlmodels 1.0
 import Qt.labs.platform 1.1
+import QtQuick.Controls 1.4 as QC114
+import QtQuick.Controls.Styles 1.4
+import QtQuick.Controls 2.1
 import "../Common"
+
 
 Item {
     id: exerciseResults
     width: 1184 *dpx
     height: 760 *dpy
+
     Image {
         id: loginImage
         anchors.fill: parent
@@ -31,83 +36,87 @@ Item {
         onClicked: exerciseResults.visible = false
     }
 
-    Rectangle{
-        id:header
+    QC114.TableView
+    {
+        id:resultTable
         y: 136*dpy
         x: 80 *dpx
         width: 1024 *dpx
-        height: 40*dpy
+        height: 142*dpy
 
-        Row{
-            spacing: 0
+        style:TableViewStyle
+        {
+            id:tstyle;
+            backgroundColor:"#4671a6"; //"#4671a6" : "#2D5689"
 
-            Repeater{
-                model: ["属方","总人数","受伤人数","死亡人数","得分情况"]
-
-                Rectangle{
-                    width: header.width/5
-                    height: header.height
-                    color: "#4671a6"
-                    Text {
-                        text: modelData
-                        anchors.centerIn: parent
-                        font.pointSize: 14*dpx
-                        color: "white"
-                    }
+            //设置表头的样式
+            headerDelegate :Rectangle{
+                implicitWidth: 100
+                implicitHeight: 40
+                color: "#4671a6"
+                Text{
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: styleData.value
+                    color: "white"
+                    font.pixelSize: 20
+                    font.bold: true
                 }
             }
-        }
-    }
 
-    TableView {
-        id: tableview
-        y: 176*dpy
-        x: 80 *dpx
-        width: 1024 *dpx
-        height: 102 *dpy
-        clip: true
+            // 设置行
+            rowDelegate:Rectangle
+            {
+                height:51;
+                color:styleData.alternate ? "#4671a6":"#2D5689"
+            }
 
-        model: TableModel {
-            TableModelColumn { display: "party" }
-            TableModelColumn { display: "total" }
-            TableModelColumn { display: "hurt" }
-            TableModelColumn { display: "die" }
-            TableModelColumn { display: "fraction" }
-
-            rows: [
-                {
-                    "party": "红",
-                    "total": "199",
-                    "hurt": "5",
-                    "die": "9",
-                    "fraction":"99"
-                },
-                {
-                    "party": "蓝",
-                    "total": "199",
-                    "hurt": "5",
-                    "die": "9",
-                    "fraction":"99"
-                }
-            ]
-        }
-
-        delegate: Rectangle {
-            implicitWidth: 204.8*dpx
-            implicitHeight: 50*dpy
-            color:index%2 ? "#4671a6" : "#2D5689"
-
-            Text {
-                text: display
-                anchors.centerIn: parent
-                height: 50 *dpy
-                color: "#ffffff"
-                font.pixelSize: 18*dpx
-                font.family: "MicrosoftYaHei";
-                verticalAlignment: Text.AlignVCenter
+            // 设置单元格
+            itemDelegate: Text
+            {
+                text:styleData.value;
+                font.pointSize:18;
+                color:"#ffffff"
+                verticalAlignment:Text.AlignVCenter;
+                horizontalAlignment:Text.AlignHCenter;
             }
         }
+        QC114.TableViewColumn
+        {
+            role: "belong"
+            title: qsTr("属方")
+            width: resultTable.viewport.width/resultTable.columnCount
+        }
+        QC114.TableViewColumn
+        {
+            role: "all"
+            title: qsTr("总人数")
+            width: resultTable.viewport.width/resultTable.columnCount
+        }
+        QC114.TableViewColumn
+        {
+            role: "hurt"
+            title: qsTr("受伤人数")
+            width: resultTable.viewport.width/resultTable.columnCount
+        }
+        QC114.TableViewColumn
+        {
+            role: "dealth"
+            title: qsTr("死亡人数")
+            width: resultTable.viewport.width/resultTable.columnCount
+        }
+        QC114.TableViewColumn
+        {
+            role: "score"
+            title: qsTr("得分情况")
+            width: resultTable.viewport.width/resultTable.columnCount
+        }
+        model: $app.allData.listResult;
+
+
     }
+
+
 
     Row {
        spacing: 24 *dpx
@@ -130,9 +139,16 @@ Item {
                font.family: "MicrosoftYaHei"
            }
 
-           RedChart {
-                width :500
-                height: 320
+           Repeater
+           {
+              model: $app.allData.allResult
+              RedChart {
+                   width :500
+                   height: 320
+                   hurtData:modelData.hurt
+                   deathData:modelData.dealth
+                   okData:modelData.ok
+              }
            }
        }
 
@@ -152,10 +168,24 @@ Item {
                color: "#ffffff"
                font.family: "MicrosoftYaHei"
            }
-           RedChart {
-                width :500
-                height: 320
+           Repeater
+           {
+              model: $app.allData.allResult
+              RedChart {
+                   width :500
+                   height: 320
+                   hurtData:modelData.hurt
+                   deathData:modelData.dealth
+                   okData:modelData.ok
+
+              }
+
            }
+//           RedChart {
+//               width :500
+//               height: 320
+//           }
+
        }
     }
 
@@ -241,6 +271,7 @@ Item {
                 color: "#1d4f88"
             }
             nameButton: "取消"
+            onClicked: exerciseResults.visible = false
         }
     }
 }

@@ -76,32 +76,27 @@ Window {
         anchors.fill: parent
         visible: true
     }
-
-    // 通过license校验显示主界面
     // 通过license校验显示主界面
         function  showMainWindow()
         {
             /// 检查许可的工作已经完成
             objCheckLic.destroy();
-            console.log( "测试"+objCheckLic.read());
     //        if($app.initSystem()&&$app.startConnect())
     //        {
     //            popupRectWin.open();
     //        }
-    //        loadQml("qrc:/Login/LoginCenter.qml");
         }
 
 
         // 保存许可文件
         function saveLicense(licInfo)
         {
-    //        objCheckLic.saveLicense(licInfo);
               if(objCheckLic.saveLicense(licInfo))
               {
-
                   if($app.initSystem()&&$app.startConnect())
                   {
-                      popupRectWin.open();
+                      loadQml("qrc:/OsgWindow.qml");
+//                      popupRectWin.open();
                   }
               }
         }
@@ -109,7 +104,7 @@ Window {
         // 没有许可或者许可失败 获取硬件信息
         function getMachineInfo(sMachineInfo)
         {
-    //        if(loadQml("qrc:/ShowItem.qml"))
+            console.log("许可码"+sMachineInfo);
             if(loadQml("qrc:/Login/LoginCenter.qml"))
             {
                   $obShow.nextFrame.connect(saveLicense)

@@ -253,14 +253,20 @@ Column {
                 anchors.fill: parent
                 onClicked: {
                     //popupRectWin.visible = true
-                    loadQml("qrc:/OsgWindow.qml");
+
                     if(!objCheckLic.read())
-                                        {
-                                            loginCenter.nextFrame(lrText.text)
-                                        }
-                                        $app.settings.setComName(control.currentText);
-                                        $app.initSystem()
-                                        $app.startConnect()
+                    {
+                        loginCenter.nextFrame(lrText.text)
+                    }
+                    else
+                    {
+                        loadQml("qrc:/OsgWindow.qml");
+                        $app.settings.setComName(control.currentText);
+                        $app.initSystem()
+                        $app.startConnect()
+                    }
+
+
                 }
             }
         }

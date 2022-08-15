@@ -9,6 +9,15 @@ Item
 {
     id: loginCenter
     anchors.fill: parent
+    signal nextFrame(var licInfo)
+
+    // 收到机器码信息
+    function recive(str)
+    {
+        needLic.updateString(str);
+        element.text = str;
+    }
+
     Image {
         id: loginImage
         anchors.fill: parent

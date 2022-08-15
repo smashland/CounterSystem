@@ -18,12 +18,42 @@ Item {
     }
     signal yesPutDown()
     property var objSetting;
+    property int num: 0
+
+    Timer {
+        id:time
+        interval: 1000
+        repeat: true
+        triggeredOnStart: true
+        onTriggered: {
+            numtext.text = manoeuvre.num
+            manoeuvre.num++
+        }
+    }
 
     Text {
         id: yanxiTime
         x: 80*dpx
         y: (136 *dpy + 50 *dpy - yanxiTime.contentHeight)/2
-        text: qsTr("演习时间：")
+        text: qsTr("演习时间： ")
+        font.pixelSize: 20*dpx;
+        color: "#ffffff";
+        font.family: "MicrosoftYaHei";
+    }
+    Text {
+        id: numtext
+        text: num
+        x: 80*dpx + yanxiTime.contentWidth
+        y: (136 *dpy + 50 *dpy - yanxiTime.contentHeight)/2
+        font.pixelSize: 20*dpx;
+        color: "#ffffff";
+        font.family: "MicrosoftYaHei";
+    }
+    Text {
+        id: nums
+        text: qsTr("秒")
+        x: 80*dpx + yanxiTime.contentWidth+numtext.contentWidth
+        y: (136 *dpy + 50 *dpy - yanxiTime.contentHeight)/2
         font.pixelSize: 20*dpx;
         color: "#ffffff";
         font.family: "MicrosoftYaHei";
@@ -31,7 +61,7 @@ Item {
 
     Button {
         id: jieshuyanxi
-        x: 80*dpx + yanxiTime.contentWidth
+        x: 80*dpx + yanxiTime.contentWidth+numtext.contentWidth+20*dpx+nums.contentWidth
         y: 75 *dpy
         width: jieshuyanxiText.contentWidth + 60*dpx
         height: 36*dpy
@@ -53,7 +83,12 @@ Item {
         onClicked: {
             changeStatus()
             exerciseResults.visible = true
+            time.stop()
+            num = 0;
+
+
 //            console.log("jieshu--yanxi")
+
         }
     }
 
@@ -86,6 +121,7 @@ Item {
             }
         }
         onClicked: {
+            time.start()
             if($app.settings.bIsStart)
             {
                 showTest()

@@ -115,8 +115,22 @@ void QAppGlobal::setData(CGlobalData *pData)
     }
 }
 
+
 #include <ISceneCore.h>
 #include <SceneGraph/ISceneGraphManager.h>
+#include <QDesktopServices>
+#include <QResource>
+#include <QUrl>
+void QAppGlobal::openWord()
+{
+    QString str = GetDataPath().c_str() + QString("Config/Instructionbook.doc");
+    QDesktopServices::openUrl(QUrl::fromLocalFile(str));
+}
+void QAppGlobal::openVideo()
+{
+    QString str = GetDataPath().c_str() + QString("Config/Instructionvideo.mkv");
+    QDesktopServices::openUrl(QUrl::fromLocalFile(str));
+}
 /// 设置osgItem
 void QAppGlobal::setOsgItem(QQuickItem *pOsgItem)
 {

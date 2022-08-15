@@ -50,7 +50,7 @@ Item
                     if(bStart)
                     {
                         $app.allData.pauseReplay();
-                        bofang.text= "非主流"
+                        bofang.text= "\ue609"
                     }
                     else
                     {

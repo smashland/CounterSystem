@@ -16,6 +16,7 @@ Rectangle {
     anchors.fill: parent
     color: "transparent"
     signal openReplay()
+
     Item {
         id: backgroundItem
         width: 1226 *dpx
@@ -293,7 +294,7 @@ Rectangle {
 
 
             Component {
-                id: phoneModel;
+                id: szyModel;
                 ListModel {
                     ListElement{
                         name: "1"
@@ -307,7 +308,7 @@ Rectangle {
                 id: listView
                 anchors.fill: parent
                 delegate: delegate
-                model: phoneModel.createObject(listView)
+                model: szyModel.createObject(listView)
                 header: headerView
                 focus: true
             }

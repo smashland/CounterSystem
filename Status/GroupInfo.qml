@@ -59,6 +59,7 @@ Rectangle
             anchors.top: parent.top
             anchors.topMargin: 50
             model:$app.allData.ceateType(groupType)
+
             delegate:MouseArea
             {
                 acceptedButtons: Qt.LeftButton | Qt.RightButton
@@ -92,6 +93,7 @@ Rectangle
                     if(Qt.RightButton === mouse.button)
                     {
                         personClickd(modelData.id,mouseX,index * height + mouseY);
+                        console.log("youjian-----------")
                     }
                 }
 

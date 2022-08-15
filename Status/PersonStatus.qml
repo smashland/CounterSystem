@@ -172,15 +172,17 @@ Rectangle
             font.family: "iconfont"
             font.pixelSize: 22*dpx
             verticalAlignment: Text.AlignVCenter
-            MouseArea{
-                anchors.fill: parent
-                onClicked: {
-                    contextMenu.x = root.x + mX
-                    contextMenu.y = root.y + mY
-                    contextMenu.userID = nId;
-                    contextMenu.open();
-                }
-            }
+//            GroupInfo
+//            {
+//                onPersonClickd:
+//                {
+//                    contextMenu.x = root.x + mX
+//                    contextMenu.y = root.y + mY
+//                    contextMenu.userID = nId;
+//                    contextMenu.open();
+//                }
+//            }
+
         }
 
     }
@@ -211,15 +213,15 @@ Rectangle
     ProgressBar{
         id:health
         from: 0
-        to: 1
-        value: outData.nBaty *0.01
+        to: 100
+        value: outData.nHealth
         width: parent.width
         height: 10
         anchors.top:infoshow.bottom
         background: Rectangle {
             implicitWidth: health.width
             implicitHeight: health.height
-            color: "#121212"
+            color: "#00000000"
             opacity: 0.7
         }
 
@@ -227,7 +229,7 @@ Rectangle
             Rectangle {
                 width: health.visualPosition * health.width
                 height: health.height
-                color:  outData.bOnLine ? outData.nBaty > 59 ? "green" : outData.nBaty > 20 ? "yellow" : "red" : "gray"
+                color: outData.bOnLine ?  health.value > 60 ?  "green" : health.value > 20 ? "yellow" : "red" : "gray";
             }
         }
     }

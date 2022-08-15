@@ -1,5 +1,6 @@
 #include <QGuiApplication>
 #include <QFontDatabase>
+
 #include "AppGlobal.h"
 #include "TimeServer/TimeServer.h"
 #include "ParseData/DealDataManager.h"
@@ -121,6 +122,8 @@ void QAppGlobal::setData(CGlobalData *pData)
 #include <QDesktopServices>
 #include <QResource>
 #include <QUrl>
+#include <QDir>
+#include <QList>
 void QAppGlobal::openWord()
 {
     QString str = GetDataPath().c_str() + QString("Config/Instructionbook.doc");
@@ -130,6 +133,23 @@ void QAppGlobal::openVideo()
 {
     QString str = GetDataPath().c_str() + QString("Config/Instructionvideo.mkv");
     QDesktopServices::openUrl(QUrl::fromLocalFile(str));
+}
+
+QStringList QAppGlobal::openPath()
+{
+    QDir *dir=new QDir(QString("%1/%2").arg(GetDataPath().c_str()).arg("Szy")); //文件夹
+    QStringList filter; //过滤
+    filter<<"*.szy";
+    dir->setNameFilters(filter);
+    QFileInfoList fileInfoList = dir->entryInfoList(filter);
+    delete dir;
+    QStringList string_list;
+
+    for(int i=0; i < fileInfoList.count(); i++)
+    {
+        string_list.append(fileInfoList.at(i).absoluteFilePath());
+    }
+    return(string_list);
 }
 /// 设置osgItem
 void QAppGlobal::setOsgItem(QQuickItem *pOsgItem)

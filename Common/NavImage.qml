@@ -77,6 +77,7 @@ Row {
         MouseArea {
             anchors.fill: parent
             onClicked: {
+                $app.exitApp();
                 Qt.quit()
             }
         }

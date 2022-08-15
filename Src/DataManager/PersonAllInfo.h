@@ -31,17 +31,17 @@ public:
     Q_PROPERTY(bool bAbdomen MEMBER m_bAbdomen NOTIFY abdomenChanged)
 
     /**
-     * @brief ¸üĞÂÏÔÊ¾ĞÅÏ¢
+     * @brief æ›´æ–°æ˜¾ç¤ºä¿¡æ¯
      */
     void Update(quint16);
 
     /**
-     * @brief ¶¨Ê±¸üĞÂÏÔÊ¾
+     * @brief å®šæ—¶æ›´æ–°æ˜¾ç¤º
      */
     void Update();
 
     /**
-     * @brief ¸üĞÂÃû³ÆºÍ·Ö×é
+     * @brief æ›´æ–°åç§°å’Œåˆ†ç»„
      * @param sName
      * @param sType
      */
@@ -75,18 +75,18 @@ private:
 
     bool m_bPistol=false;
     bool m_bRifle=false;
-    bool m_bSatand=false; /// ÊÇ·ñÕ¾Á¢
-    bool m_bHead=false;   ///Í·²¿ÊÇ·ñÊÜÉË
-    bool m_bCenter=false; ///±³²¿ÊÇ·ñÊÜÉË
-    bool m_bLeftArm=false;///×ó±ÛÊÇ·ñÊÜÉË
-    bool m_bLeftLeg=false;///×óÍÈÊÇ·ñÊÜÉË
-    bool m_bRightLeg=false;///ÓÒÍÈÊÇ·ñÊÜÉË
-    bool m_bRightArm=false;///ÓÒ±ÛÊÇ·ñÊÜÉË
-    bool m_bBreast=false;  /// ĞØ²¿ÊÇ·ñÊÜÉË
-    bool m_bAbdomen=false; /// ¸¹²¿ÊÇ·ñÊÜÉË
+    bool m_bSatand=false; /// æ˜¯å¦ç«™ç«‹
+    bool m_bHead=false;   ///å¤´éƒ¨æ˜¯å¦å—ä¼¤
+    bool m_bCenter=false; ///èƒŒéƒ¨æ˜¯å¦å—ä¼¤
+    bool m_bLeftArm=false;///å·¦è‡‚æ˜¯å¦å—ä¼¤
+    bool m_bLeftLeg=false;///å·¦è…¿æ˜¯å¦å—ä¼¤
+    bool m_bRightLeg=false;///å³è…¿æ˜¯å¦å—ä¼¤
+    bool m_bRightArm=false;///å³è‡‚æ˜¯å¦å—ä¼¤
+    bool m_bBreast=false;  /// èƒ¸éƒ¨æ˜¯å¦å—ä¼¤
+    bool m_bAbdomen=false; /// è…¹éƒ¨æ˜¯å¦å—ä¼¤
     int  m_nID=0;
-    QString m_sName;  /// Ãû×Ö
-    QString m_sType;  /// ·ÖÀà
+    QString m_sName;  /// åå­—
+    QString m_sType;  /// åˆ†ç±»
     QStringList m_listHitInfo;
 };
 

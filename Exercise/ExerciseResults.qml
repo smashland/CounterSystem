@@ -6,7 +6,9 @@ import Qt.labs.platform 1.1
 import QtQuick.Controls 1.4 as QC114
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Controls 2.1
+import QtQuick.Layouts 1.14
 import "../Common"
+import "../Result"
 
 
 Item {
@@ -115,6 +117,25 @@ Item {
 
 
     }
+    RowLayout
+    {
+        Repeater
+        {
+           model: $app.allData.allResult
+           RedChart {
+                width :500
+                height: 320
+                title: modelData.belong
+                hurtData:modelData.hurt
+                deathData:modelData.dealth
+                okData:modelData.ok
+
+           }
+
+        }
+    }
+
+
 
 
 
@@ -150,6 +171,7 @@ Item {
                    okData:modelData.ok
               }
            }
+
        }
 
        Rectangle {

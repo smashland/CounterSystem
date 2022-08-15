@@ -10,53 +10,53 @@ class CTimeServer:public QObject
     Q_OBJECT
 public:
     /**
-     * @brief »ñÈ¡Ê±¼ä·şÎñµÄµ¥Àı
+     * @brief è·å–æ—¶é—´æœåŠ¡çš„å•ä¾‹
      * @return
      */
     static CTimeServer* GetInstance();
 
     /**
-     * @brief ÉèÖÃ¶¨Ê±Æ÷µÄÊ±¼ä¼ä¸ô
+     * @brief è®¾ç½®å®šæ—¶å™¨çš„æ—¶é—´é—´éš”
      * @param nMiSceond
      */
     void SetInterval(int nMiSceond);
     int  GetInterval(){return(m_nInterval);}
 
     /**
-     * @brief ¶©ÔÄÏûÏ¢
+     * @brief è®¢é˜…æ¶ˆæ¯
      * @param pObserver
      */
     void SubTime(ITimeObserver* pObserver);
 
     /**
-     * @brief È¡Ïû¶©ÔÄ
+     * @brief å–æ¶ˆè®¢é˜…
      * @param pObserver
      */
     void UnSubTime(ITimeObserver* pObserver);
 
     /**
-     * @brief ¿ªÊ¼·¢²¼Ê±¼ä
+     * @brief å¼€å§‹å‘å¸ƒæ—¶é—´
      */
     void Start();
 
     /**
-     * @brief Í£Ö¹·¢²¼Ê±¼ä
+     * @brief åœæ­¢å‘å¸ƒæ—¶é—´
      */
     void Stop();
 
     /**
-     * @brief »ñÈ¡¶¨Ê±Æ÷ÊÇ·ñ¿ªÆô
+     * @brief è·å–å®šæ—¶å™¨æ˜¯å¦å¼€å¯
      * @return
      */
     bool IsStart();
 
     /**
-     * @brief ÖØÖÃ·ÂÕæÊ±¼ä
+     * @brief é‡ç½®ä»¿çœŸæ—¶é—´
      */
     void ResetSimTime();
 
     /**
-     * @brief ÑİÏ°¿ªÊ¼
+     * @brief æ¼”ä¹ å¼€å§‹
      */
     void SimuStart();
     void SimuPause();
@@ -72,13 +72,13 @@ private:
     ~CTimeServer();
 
 private:
-    QSet<ITimeObserver*> m_setObserver; /// ¶©ÔÄµ½Ê±¼äµÄ·şÎñÆ÷
+    QSet<ITimeObserver*> m_setObserver; /// è®¢é˜…åˆ°æ—¶é—´çš„æœåŠ¡å™¨
 
-    int                  m_nTimerID;    /// ¶¨Ê±Æ÷ID
-    int                  m_nInterval;   /// ¶¨Ê±Æ÷¼ä¸ô
-    quint16              m_unSimuSecond;/// ·ÂÕæÊ±¼ä
-    quint16              m_unSimuEnd;   /// ·ÂÕæ½áÊøÊ±¼ä
-    bool                 m_bSimStart;   /// ·ÂÕæ¿ªÊ¼Ê±¼ä
+    int                  m_nTimerID;    /// å®šæ—¶å™¨ID
+    int                  m_nInterval;   /// å®šæ—¶å™¨é—´éš”
+    quint16              m_unSimuSecond;/// ä»¿çœŸæ—¶é—´
+    quint16              m_unSimuEnd;   /// ä»¿çœŸç»“æŸæ—¶é—´
+    bool                 m_bSimStart;   /// ä»¿çœŸå¼€å§‹æ—¶é—´
 };
 
 #endif // TIMESERVER_H

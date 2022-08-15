@@ -36,13 +36,6 @@ Rectangle
         radius: 20
     }
 
-
-    Keys.enabled: true
-    Keys.onEscapePressed:
-    {
-        $app.exitApp();
-    }
-
     Component.onCompleted:
     {
         rectangle.forceActiveFocus();

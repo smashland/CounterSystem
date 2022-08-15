@@ -5,14 +5,14 @@
 
 static QElapsedTimer s_ElapsedTimer;
 
-/// »ñÈ¡µ¥Àı
+/// è·å–å•ä¾‹
 CTimeServer *CTimeServer::GetInstance()
 {
     static CTimeServer s_TimeServer;
     return(&s_TimeServer);
 }
 
-/// ÉèÖÃ¶¨Ê±Æ÷
+/// è®¾ç½®å®šæ—¶å™¨
 void CTimeServer::SetInterval(int nMiSceond)
 {
     if(nMiSceond != m_nInterval)
@@ -27,19 +27,19 @@ void CTimeServer::SetInterval(int nMiSceond)
     }
 }
 
-/// ¶©ÔÄÊ±¼ä
+/// è®¢é˜…æ—¶é—´
 void CTimeServer::SubTime(ITimeObserver *pObserver)
 {
     m_setObserver.insert(pObserver);
 }
 
-/// ÒÆ³ıÊ±¼ä
+/// ç§»é™¤æ—¶é—´
 void CTimeServer::UnSubTime(ITimeObserver *pObserver)
 {
     m_setObserver.remove(pObserver);
 }
 
-/// ¿ªÆô¶¨Ê±Æ÷
+/// å¼€å¯å®šæ—¶å™¨
 void CTimeServer::Start()
 {
     if(0 == m_nTimerID)
@@ -49,7 +49,7 @@ void CTimeServer::Start()
     }
 }
 
-/// ¹Ø±Õ¶¨Ê±Æ÷
+/// å…³é—­å®šæ—¶å™¨
 void CTimeServer::Stop()
 {
     if(0 != m_nTimerID)
@@ -60,7 +60,7 @@ void CTimeServer::Stop()
     }
 }
 
-/// ÅĞ¶ÏÊÇ·ñ¿ªÆô¶¨Ê±Æ÷
+/// åˆ¤æ–­æ˜¯å¦å¼€å¯å®šæ—¶å™¨
 bool CTimeServer::IsStart()
 {
     return(0 != m_nTimerID);
@@ -71,7 +71,7 @@ void CTimeServer::ResetSimTime()
     s_ElapsedTimer.restart();
 }
 
-/// ¿ªÊ¼·ÂÕæ
+/// å¼€å§‹ä»¿çœŸ
 void CTimeServer::SimuStart()
 {
     m_unSimuSecond = 0;
@@ -93,7 +93,7 @@ void CTimeServer::SetSimuEndTime(quint16 uEndTime)
     m_unSimuEnd = uEndTime;
 }
 
-/// ÉèÖÃ·ÂÕæÊ±¼ä
+/// è®¾ç½®ä»¿çœŸæ—¶é—´
 void CTimeServer::SetSimuTime(quint16 uSimuTime)
 {
     if(uSimuTime < m_unSimuEnd)
@@ -102,10 +102,10 @@ void CTimeServer::SetSimuTime(quint16 uSimuTime)
     }
 }
 
-/// ÏìÓ¦¶¨Ê±Æ÷ÏûÏ¢
+/// å“åº”å®šæ—¶å™¨æ¶ˆæ¯
 void CTimeServer::timerEvent(QTimerEvent* event)
 {
-    /// ¶¨Ê±·¢²¼Ê±¼äĞÅÏ¢
+    /// å®šæ—¶å‘å¸ƒæ—¶é—´ä¿¡æ¯
     static QDateTime s_tmpDateTime;
     static quint16 s_tmpSeconds1(0),s_tmpSeconds2(0);
 
@@ -144,7 +144,7 @@ void CTimeServer::timerEvent(QTimerEvent* event)
     }
 }
 
-/// ³õÊ¼»¯¶¨Ê±Æ÷ÏûÏ¢
+/// åˆå§‹åŒ–å®šæ—¶å™¨æ¶ˆæ¯
 CTimeServer::CTimeServer()
     : m_nTimerID(0)
     , m_nInterval(10)

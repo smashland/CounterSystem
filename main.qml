@@ -255,7 +255,8 @@ Window {
         target: yesLoader.item
         function onClicked()
         {
-            Qt.quit()
+            $app.exitApp();
+            Qt.quit();
         }
     }
 

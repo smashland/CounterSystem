@@ -112,7 +112,6 @@
         <file>font/iconfont.ttf</file>
         <file>Common/TransverseLine.qml</file>
         <file>Exercise/RedChart.qml</file>
-        <file>Start.qml</file>
         <file>ShowItem.qml</file>
         <file>SelectWifi.qml</file>
         <file>SelectComName.qml</file>

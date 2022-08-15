@@ -82,7 +82,10 @@ Rectangle {
                 viewImage: "\ue600"
                 MouseArea{
                     anchors.fill: parent
-                    onClicked: playbackRefresh.visible= true
+//                    onClicked: playbackRefresh.visible= true
+                    onClicked: {
+                        listView.model = $app.openPath();
+                    }
                 }
             }
             ViewButton {
@@ -214,7 +217,7 @@ Rectangle {
 
                     Text {
                         id: col1
-                        text: name
+                        text: index + 1
                         width: 100 *dpx
                         height: 50 *dpy
                         color: "#ffffff"
@@ -225,7 +228,7 @@ Rectangle {
                     Text {
                         id: col2
                         x: 170 *dpx
-                        text: cost
+                        text: modelData
                         width: 200 *dpx
                         height: 50 *dpy
                         color: "#ffffff"
@@ -235,16 +238,12 @@ Rectangle {
                         verticalAlignment: Text.AlignVCenter
                     }
                     Row {
-                        x: 572 *dpx
+                        x: 622 *dpx
                         y: 10 *dpy
                         width: 370 *dpx
                         height: 30 *dpy
                         spacing: 15 * dpx
-                        ViewButton {
-                            name: qsTr("修改")
-                            color: viewColor_shuaxin
-                            viewImage: "\ue6a5"
-                        }
+
                         ViewButton {
                             name: qsTr("加载")
                             color: viewColor_xinjian

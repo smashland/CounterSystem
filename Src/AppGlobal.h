@@ -34,6 +34,7 @@ public:
     Q_INVOKABLE void setOsgItem(QQuickItem* pOsgItem);
     Q_INVOKABLE void openWord();
     Q_INVOKABLE void openVideo();
+    Q_INVOKABLE QStringList openPath();
 
 
 signals:

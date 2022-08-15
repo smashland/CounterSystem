@@ -22,11 +22,6 @@ Item
         id: renderer
         anchors.fill: parent
         focus: true
-        Keys.enabled: true;
-        Keys.onEscapePressed:
-        {
-            $app.exitApp();
-        }
 
         MouseArea
         {

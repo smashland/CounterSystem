@@ -56,20 +56,7 @@ QC14.Dialog
             model: $app.allData.listResult;
         }
 
-        RowLayout
-        {
-            Repeater
-            {
-                model: $app.allData.allResult
-                ShowDetail
-                {
-                    title: modelData.belong
-                    hurtData:modelData.hurt
-                    deathData:modelData.dealth
-                    okData:modelData.ok
-                }
-            }
-        }
+
 
         RowLayout
         {

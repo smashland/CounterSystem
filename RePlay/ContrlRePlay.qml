@@ -1,4 +1,4 @@
-import QtQuick 2.0
+ import QtQuick 2.0
 import QtQuick.Controls 2.2
 import ".."
 Item
@@ -31,9 +31,9 @@ Item
                 width: bofang.contentWidth
                 height: bofang.contentHeight
                 property bool bStart: false
-                contentItem:             Text {
+                contentItem: Text {
                     id: bofang
-                    //                x: 36 *dpx
+                    //  x: 36 *dpx
                     z: 2
                     color: "green"
                     text: "\ue609"
@@ -64,7 +64,7 @@ Item
                             $app.allData.pauseReplay();
                         }
 
-                        bofang.text= "\ue609"
+                        bofang.text= "\ue626"
                     }
                     bStart = !bStart
                 }

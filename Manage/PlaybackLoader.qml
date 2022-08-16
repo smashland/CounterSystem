@@ -32,7 +32,7 @@ Rectangle {
             anchors.rightMargin: 70 *dpx
             anchors.top: backgroundItem.top
             anchors.topMargin: 70 *dpy
-            onClicked: playbackLoader.visible = false
+            onClicked: footerBar.btnPlayback.checked = false
         }
         PopupTitle {
             name: ("回放管理")

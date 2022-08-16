@@ -6,6 +6,7 @@ import "../Exercise"
 
 Popup
 {
+    id: personPopup
     width: 1002*dpx
     height: 680*dpy
     anchors.centerIn: parent
@@ -13,6 +14,8 @@ Popup
 
     property var outData
     property var rowNum;
+    property var bConnected:true
+    signal nameChanged(var personName)
     /// 背景半透明
     background:Rectangle
     {
@@ -77,7 +80,14 @@ Popup
                         id: mingzi
                         y: shibbingxinxi.contentHeight + line1.height + 20 *dpy
                         text: "名       字:"
-//                            name: outData.name
+                        name: title
+                        onTextChanged: {
+                            if(visible) {
+                                var tempText = mingzi.name;
+                                personPopup.nameChanged(tempText);
+                                title = mingzi.name;
+                            }
+                        }
                     }
 
                     SoldierItem {
@@ -87,6 +97,7 @@ Popup
                         name: outData.id
                     }
                 }
+
                 Rectangle {
                     id: colum2
                     y: shibbingxinxi.contentHeight + line1.height + 20 *dpy + 74 *dpy
@@ -135,14 +146,14 @@ Popup
                     }
                     SoldierItem {
                         y: weizhixinxi.contentHeight + line3.height + 20 *dpy
-                        text: "精       度:"
-                        name: "0.00"
+                        text: "经       度:"
+                        name:outData.dLon
                     }
                     SoldierItem {
                         x: line1.width/2
                         y: weizhixinxi.contentHeight + line3.height + 20 *dpy
                         text: "纬       度:"
-                        name: "0"
+                        name: outData.dLat
                     }
                 }
                 Rectangle {
@@ -186,6 +197,17 @@ Popup
                             height: 34 *dpy
                             color: "#52749e"
                             border.color: "#3b6daa"
+                            Text {
+                                width: beixin.contentWidth
+                                height: 34 *dpy
+                                x: 10 *dpx
+                                text: "是"
+                                color: "#ffffff"
+                                font.pixelSize: 17*dpx;
+                                font.family: "Microsoft YaHei";
+                                verticalAlignment: Text.AlignVCenter
+                                visible: bConnected
+                            }
                         }
                     }
                     Item {
@@ -210,12 +232,23 @@ Popup
                             height: 34 *dpy
                             color: "#52749e"
                             border.color: "#3b6daa"
+                            Text {
+                                width: beixin.contentWidth
+                                height: 34 *dpy
+                                x: 10 *dpx
+                                text: "是"
+                                color: "#ffffff"
+                                font.pixelSize: 17*dpx;
+                                font.family: "Microsoft YaHei";
+                                verticalAlignment: Text.AlignVCenter
+                            }
                         }
 
                     }
                 }
 
         }
+
         Row {
             spacing: 15 *dpx
             anchors.bottom: parent.bottom
@@ -227,6 +260,9 @@ Popup
                 }
 
                 nameButton: "确定"
+                onClicked: {
+
+                }
 
             }
             PopupButton {
@@ -234,6 +270,9 @@ Popup
                     color: "#1d4f88"
                 }
                 nameButton: "取消"
+                onClicked: {
+                    personPopup.visible = false
+                }
             }
         }
 

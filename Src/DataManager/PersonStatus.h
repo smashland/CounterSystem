@@ -55,6 +55,7 @@ signals:
     void batyChanged(int);
     void healthChanged(int);
 
+
 protected:
     /**
      * @brief 更新连接状态
@@ -62,16 +63,17 @@ protected:
     void UpdateStatus(const ConnectStatus&);
 
 private:
-    int  m_nID;
+    int  m_nID{};
     bool m_bGPS=false;   /// GPS是否连接
     bool m_bTK=false;    /// 头盔是否连接
     bool m_bOnLine=false;/// 是否在线
     bool m_bPistol=false;///手枪连接状态
     bool m_bRifle=false; ///步枪连接状态
 
-    int  m_nBaty=100;     /// 电池电量
-    int  m_nHealth=100;   /// 健康状况
-    int  m_unTimes=0;   /// 最后一次的time
+    int  m_nBaty{100};     /// 电池电量
+    int  m_nHealth{100};   /// 健康状况
+    int  m_unTimes{0};   /// 最后一次的time
+
     QString m_sName;    /// 名字
     QString m_sType;    /// 分组
 };

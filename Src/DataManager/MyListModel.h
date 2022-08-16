@@ -14,12 +14,12 @@ public:
     CMyListModel(const CMyListModel& other);
     ~CMyListModel();
 
-    /// ÖØĞ´QAbstractListModelº¯Êı
+    /// é‡å†™QAbstractListModelå‡½æ•°
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     QHash<int, QByteArray> roleNames() const;
     int count()const;
-    /// end ÖØĞ´QAbstractListModelº¯Êı
+    /// end é‡å†™QAbstractListModelå‡½æ•°
 
     CPersonStatus *at(int nIndex);
     Q_INVOKABLE void remove(int nIndex);
@@ -31,44 +31,44 @@ public:
     int  getScore();
 
     /**
-     * @brief ¸üĞÂ¸öÈËĞÅÏ¢
+     * @brief æ›´æ–°ä¸ªäººä¿¡æ¯
      * @param nIndex
      * @return
      */
     bool UpdatePerson(quint16 nID,CPersonStatus* pPerson);
 
     /**
-     * @brief »ñÈ¡·Ö×éĞÅÏ¢
+     * @brief è·å–åˆ†ç»„ä¿¡æ¯
      * @return
      */
     CGroupStatus* GetGroupStatus();
 
     /**
-     * @brief ÖØĞ´²»µÈ²Ù×÷·û
+     * @brief é‡å†™ä¸ç­‰æ“ä½œç¬¦
      * @param rOther
      * @return
      */
     bool operator !=(const CMyListModel& rOther);
 
     /**
-     * @brief ÖØĞ´¸³Öµ²Ù×÷·û
+     * @brief é‡å†™èµ‹å€¼æ“ä½œç¬¦
      * @param rOther
      * @return
      */
     CMyListModel& operator=(const CMyListModel& rOther);
 
     /**
-     * @brief Çå¿Õ
+     * @brief æ¸…ç©º
      */
     void Clear();
 
 protected:
-    CGroupStatus*                m_pGroupStatus;         /// ×é×´Ì¬
-    QSet<quint16>                m_setLive;              /// »î×ÅµÄÈË
-    QSet<quint16>                m_setHurt;              /// ÊÜÉË
-    QSet<quint16>                m_allPerson;            /// ËùÓĞµÄÈË
-    QList<CPersonStatus*>        m_allData;              /// ËùÓĞµÄÈËÔ±×´Ì¬
-    QHash<int, QByteArray>       m_mapRolesNames;        /// ·µ»ØÀàĞÍµÄ¶ÔÓ¦Ãû×Ö
+    CGroupStatus*                m_pGroupStatus;         /// ç»„çŠ¶æ€
+    QSet<quint16>                m_setLive;              /// æ´»ç€çš„äºº
+    QSet<quint16>                m_setHurt;              /// å—ä¼¤
+    QSet<quint16>                m_allPerson;            /// æ‰€æœ‰çš„äºº
+    QList<CPersonStatus*>        m_allData;              /// æ‰€æœ‰çš„äººå‘˜çŠ¶æ€
+    QHash<int, QByteArray>       m_mapRolesNames;        /// è¿”å›ç±»å‹çš„å¯¹åº”åå­—
 };
 
 

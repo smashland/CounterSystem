@@ -209,4 +209,28 @@ void CPersonAllInfo::UpdateBaseInfo(PersonInfo *pPersonInfo)
         m_bSatand = pPersonInfo->curtstatus().bstand();
         emit(standChanged(m_bSatand));
     }
+
+    auto &pos = pPersonInfo->curtpos();
+    if(fabs(m_dLat-pos.dlat())>DBL_EPSILON)
+    {
+        m_dLat = pos.dlat();
+        emit(latChanged(m_dLat));
+    }
+
+    if(fabs(m_dLon - pos.dlon())>DBL_EPSILON)
+    {
+        m_dLon = pos.dlon();
+        emit(lonChanged(m_dLon));
+    }
+
+//    auto &repos = pPersonInfo->reLive();
+//    if(m_uRelive - repos.uRelive())
+//    {
+//        m_uRelive = repos.uRelive();
+//        emit(reliveChanged(m_uRelive));
+//    }
+
+
+
+
 }

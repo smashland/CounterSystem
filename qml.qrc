@@ -78,9 +78,7 @@
         <file>Login/PopupWin.qml</file>
         <file>Login/Connect.qml</file>
         <file>Common/NavImage.qml</file>
-        <file>Exercise/BlueInformation.qml</file>
         <file>Exercise/Information.qml</file>
-        <file>Exercise/RedInformation.qml</file>
         <file>Exercise/Soldier.qml</file>
         <file>Exercise/SoldierItem.qml</file>
         <file>Common/PopupButton.qml</file>
@@ -131,7 +129,6 @@
         <file>Status/PersonFontHurtInfo.qml</file>
         <file>Status/PersonInfoLabel.qml</file>
         <file>Status/PersonStatus.qml</file>
-        <file>Status/ShowStatus.qml</file>
         <file>ConfirmPopUp.qml</file>
         <file>MainCircle.qml</file>
         <file>MainWindow.qml</file>

@@ -25,7 +25,7 @@ Rectangle {
             anchors.rightMargin: 60 *dpx
             anchors.top: backgroundItem.top
             anchors.topMargin: 60 *dpy
-            onClicked: setloader.visible = false
+            onClicked: footerBar.btnSet.checked = false
         }
 
         PopupTitle {

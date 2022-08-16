@@ -117,23 +117,20 @@ Item {
 
 
     }
-    RowLayout
-    {
-        Repeater
-        {
-           model: $app.allData.allResult
-           RedChart {
-                width :500
-                height: 320
-                title: modelData.belong
-                hurtData:modelData.hurt
-                deathData:modelData.dealth
-                okData:modelData.ok
-
-           }
-
-        }
-    }
+//    RowLayout
+//    {
+//        Repeater
+//        {
+//            model: $app.allData.allResult
+//            ShowDetail
+//            {
+//                title: modelData.belong
+//                hurtData:modelData.hurt
+//                deathData:modelData.dealth
+//                okData:modelData.ok
+//            }
+//        }
+//    }
 
 
 

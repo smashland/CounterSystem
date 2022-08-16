@@ -29,6 +29,10 @@ public:
     Q_PROPERTY(bool bRightLeg MEMBER m_bRightLeg NOTIFY rightLegChanged)
     Q_PROPERTY(bool bBreast MEMBER m_bBreast NOTIFY breastChanged)
     Q_PROPERTY(bool bAbdomen MEMBER m_bAbdomen NOTIFY abdomenChanged)
+    Q_PROPERTY(double  dLat MEMBER m_dLat NOTIFY latChanged)
+    Q_PROPERTY(double  dLon MEMBER m_dLon NOTIFY lonChanged)
+    Q_PROPERTY(int  uRelive MEMBER m_uRelive NOTIFY reliveChanged)
+
 
     /**
      * @brief 更新显示信息
@@ -65,6 +69,9 @@ signals:
     void nameChanged(QString);
     void typeChanged(QString);
     void hitChanged(QStringList);
+    void latChanged(double);
+    void lonChanged(double);
+    void reliveChanged(int);
 
 protected:
     void UpdateBaseInfo(PersonInfo* pPersonInfo);
@@ -85,6 +92,9 @@ private:
     bool m_bBreast=false;  /// 胸部是否受伤
     bool m_bAbdomen=false; /// 腹部是否受伤
     int  m_nID=0;
+    double m_dLon{};
+    double m_dLat{};
+    int m_uRelive=0;
     QString m_sName;  /// 名字
     QString m_sType;  /// 分类
     QStringList m_listHitInfo;

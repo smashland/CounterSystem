@@ -7,10 +7,13 @@ Rectangle
 {
     property var outData: null
     property var fontSize: 18
+
+
     id:root
     width: parent.width
     height: 40
     color: Qt.rgba(18/255, 18/255, 18/255, 0.5);
+    z:10
 
     RowLayout
     {
@@ -19,30 +22,6 @@ Rectangle
 
         id:infoshow
         anchors.fill: parent
-
-        /// 圆形ID
-//        RoundButton
-//        {
-//            id:showID
-//            background: Rectangle
-//            {
-//                radius: infoshow.showHeigt
-//                implicitWidth: infoshow.showHeigt
-//                implicitHeight: infoshow.showHeigt
-//                color:outData.bOnLine ? $app.settings.type2Color(outData.type) : "gray"
-//            }
-//            contentItem:Text
-//            {
-//                text: outData.id;
-
-//                font.pixelSize: fontSize
-//                font.bold: true
-//                horizontalAlignment: Text.AlignHCenter
-//                color:'white'
-//                style:Text.Outline
-//                styleColor:'black'
-//            }
-//        }
 
         Text
         {
@@ -64,12 +43,21 @@ Rectangle
             id:showName
 //            text: outData.name;
             verticalAlignment: Text.AlignVCenter
-            text:"人员"
+//            text:""
             font.pixelSize: fontSize
             color:  "white"
             height: infoshow.showHeigt
             anchors.left: parent.left
             anchors.leftMargin: idText.contentWidth *2.5
+
+        }
+        Connections {
+            ignoreUnknownSignals: true
+            target: personPopup
+            function onNameChanged(personName)
+            {
+                showName.text = personName;
+            }
         }
 
         Item
@@ -78,45 +66,12 @@ Rectangle
             Layout.fillHeight: true
         }
 
-
-        /// 显示手枪连接状态
-//        EquipConnStat
-//        {
-//            id: shouqiang
-//            bConnected: outData.bPistol
-//            text: '\ue034'
-//        }
-        //        /// 显示背心连接状态
-        //        EquipConnStat
-        //        {
-        //            id: beixin
-        //            text:'\ue025'
-        //        }
-        //        /// 显示手雷连接状态
-        //        EquipConnStat
-        //        {
-        //            id: shoulei
-        //            text:'\ue041'
-        //        }
-        //        /// 显示迫击炮连接状态
-        //        EquipConnStat
-        //        {
-        //            id: paijipao
-        //            text:'\ue02e'
-        //        }
-        //        /// 显示旗子连接状态
-        //        EquipConnStat
-        //        {
-        //            id: qizi
-        //            text:'\ue048'
-        //        }
-
         /// 显示步枪枪连接状态
         EquipConnStat
         {
             id: jiqiang
             bConnected: outData.bRifle
-            text: qsTr("\ue706")
+            text: qsTr("\ue708")
             color: "#e7f6ff"
             font.family: "iconfont"
         }
@@ -126,32 +81,22 @@ Rectangle
         {
             id: toukui
             bConnected: outData.bTK
-            text: qsTr("\ue708")
+            text: qsTr("\ue706")
             color: "#e7f6ff"
             font.family: "iconfont"
         }
 
         /// 显示GPS连接状态
-//        EquipConnStat
-//        {
-//            id: locate
-//            bConnected: outData.bGPS
-//            text:'\ue053'
-//        }
+        EquipConnStat
+        {
+            id: locate
+            bConnected: outData.bGPS
+            text:'\ue706'
+            color: "#e7f6ff"
+            font.family: "iconfont"
+        }
 
         /// 显示电量
-//        Text
-//        {
-//            //anchors.top: locate.top
-//            id:electricity
-//            text: outData.nBaty+'%';
-//            verticalAlignment: locate.verticalAlignment
-//            styleColor: color
-//            style: Text.Outline
-
-//            color:  outData.bOnLine ? outData.nBaty > 59 ? "green" : outData.nBaty > 20 ? "yellow" : "red" : "gray"
-//            height: 30
-//        }
         Text
         {
             //anchors.top: locate.top
@@ -167,49 +112,27 @@ Rectangle
 
         Text {
             id:setRoot
+            width: setRoot.contentWidth
+            height: setRoot.contentHeight
             text: qsTr("\ue8b8")
             color: "#e7f6ff"
             font.family: "iconfont"
             font.pixelSize: 22*dpx
             verticalAlignment: Text.AlignVCenter
-//            GroupInfo
-//            {
-//                onPersonClickd:
-//                {
-//                    contextMenu.x = root.x + mX
-//                    contextMenu.y = root.y + mY
-//                    contextMenu.userID = nId;
-//                    contextMenu.open();
-//                }
-//            }
+            MouseArea
+            {
+                anchors.fill: parent
+                onPressed:
+                {
+                    personClickd(modelData.id,setRoot.x,index * height+root.height);
+                }
 
+            }
         }
 
     }
 
     /// 健康生命条
-//    ProgressBar
-//    {
-//        from: 0
-//        to:100
-//        id:health
-////        value: outData.nHealth
-//        value: outData.nBaty *0.01
-//        anchors.top:infoshow.bottom
-//        background: Rectangle
-//        {
-//            color: "#00000000"
-//            implicitWidth: root.width
-//            implicitHeight: 10
-//        }
-//        contentItem: Rectangle
-//        {
-//            width: health.visualPosition * health.width
-//            height: health.height
-//            /// 不在线则变灰
-//            color: outData.bOnLine ?  health.value > 60 ?  "green" : health.value > 20 ? "yellow" : "red" : "gray";
-//        }
-//    }
     ProgressBar{
         id:health
         from: 0

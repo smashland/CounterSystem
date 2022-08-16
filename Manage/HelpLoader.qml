@@ -24,7 +24,7 @@ Rectangle {
             anchors.rightMargin: 60 *dpx
             anchors.top: backgroundItem.top
             anchors.topMargin: 60 *dpy
-            onClicked: helploader.visible = false
+            onClicked: footerBar.btnHelp.checked = false
         }
         PopupTitle {
             name: ("帮助")

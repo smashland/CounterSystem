@@ -30,17 +30,17 @@ Item {
             horizontalAlignment: Text.AlignHCenter
         }
     }
-    Text {
-        x: 80 *dpx
-        height: 100 *dpy
-        text: qsTr("方案名称：")
-        font.pixelSize: 24*dpx;
-        color: "#ffffff";
-        font.bold: true
-        font.family: "MicrosoftYaHei Bold"
-        verticalAlignment: Text.AlignVCenter
-        horizontalAlignment: Text.AlignHCenter
-    }
+//    Text {
+//        x: 80 *dpx
+//        height: 100 *dpy
+//        text: qsTr("方案名称：")
+//        font.pixelSize: 24*dpx;
+//        color: "#ffffff";
+//        font.bold: true
+//        font.family: "MicrosoftYaHei Bold"
+//        verticalAlignment: Text.AlignVCenter
+//        horizontalAlignment: Text.AlignHCenter
+//    }
     Column {
         x: (parent.width - playBar.width)/2
         y: (parent.height - 32*dpy - yanxiText.height)/2

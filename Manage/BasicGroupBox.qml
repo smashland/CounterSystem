@@ -28,7 +28,7 @@ GroupBox {
                     id:title
                     text: groupBoxId.title
                     font.pixelSize: 20
-                    color:"#ffffff" //修改title 颜色
+                    color:"white" //修改title 颜色
                 }
             }
         }

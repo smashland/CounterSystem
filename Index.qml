@@ -5,7 +5,6 @@ import "Common"
 import "Login"
 import "Exercise"
 import "Manage"
-//import "Status"
 import "Status"
 import "Result"
 import "RePlay" as MyRePlay
@@ -37,7 +36,6 @@ Rectangle
     {
         id:blue
         type:"蓝方"
-
         Image {
             anchors.fill: parent
             source: "qrc:/Image/Blue_bg_all.png"
@@ -218,19 +216,19 @@ Rectangle
     }
     SetLoader {
         id: setloader
-        visible: false
+        visible: footerBar.btnSet.checked
         x: (index.width-setloader.width) / 2
         y: (index.height-setloader.height) / 2
     }
     HelpLoader {
         id: helploader
-        visible: false
+        visible: footerBar.btnHelp.checked
         x: (index.width-helploader.width) / 2
         y: (index.height-helploader.height) / 2
     }
     ScenarioLoader {
         id: scenarioLoader
-        visible: false
+        visible: footerBar.btnScenario.checked
         x: (index.width-scenarioLoader.width) / 2
         y: (index.height-scenarioLoader.height) / 2
     }
@@ -248,7 +246,7 @@ Rectangle
     }
     PlaybackLoader {
         id: playbackLoader
-        visible: false
+        visible: footerBar.btnPlayback.checked
         x: (index.width-playbackLoader.width) / 2
         y: (index.height-playbackLoader.height) / 2
     }

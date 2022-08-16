@@ -130,11 +130,6 @@ Window {
                 objCheckLic.checked.connect(showMainWindow)
                 objCheckLic.showError.connect(checkLicenseFaild);
                 objCheckLic.checkLicense()
-
-    //            console.log(licInfo);
-
-    //            $app.initSystem();
-    //            $app.startConnect();
             }
 
         }

@@ -20,12 +20,11 @@ Rectangle
         id: hongfang
         x: (parent.width - hongfang.contentWidth) / 2
         y: 20 *dpy
-        text: qsTr("红方")
+        text: groupType? qsTr(groupType):qsTr("人员信息");
         font.pixelSize: 22*dpx;
         color: "#ffffff";
         font.family: "MicrosoftYaHei-Bold";
     }
-
     Text {
         id: zongrenshu
         text: qsTr("总人数：")+$app.allData.allDataNumber
@@ -87,8 +86,8 @@ Rectangle
                 /// 鼠标按下
                 onPressed:
                 {
-                    parent.currentIndex = index;
 
+                    parent.currentIndex = index;
                     /// 鼠标右键弹出菜单
                     if(Qt.RightButton === mouse.button)
                     {

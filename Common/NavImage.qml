@@ -23,7 +23,7 @@ Row {
             anchors.fill: parent
             hoverEnabled: true
             onClicked: {
-                $app.openWord();
+                $app.openVideo();
             }
         }
     }

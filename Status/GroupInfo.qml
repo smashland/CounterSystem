@@ -7,7 +7,6 @@ Rectangle
     signal personClickd(var nId,var mX,var mY)
     signal personDClick(var nId)
     property string groupType:""
-    property alias name: hongfang.text
 
     function addPerson(nPerson)
     {
@@ -21,12 +20,11 @@ Rectangle
         id: hongfang
         x: (parent.width - hongfang.contentWidth) / 2
         y: 20 *dpy
-//        text: qsTr("红方")
+        text: groupType? qsTr(groupType):qsTr("人员信息");
         font.pixelSize: 22*dpx;
         color: "#ffffff";
         font.family: "MicrosoftYaHei-Bold";
     }
-
     Text {
         id: zongrenshu
         text: qsTr("总人数：")+$app.allData.allDataNumber
@@ -60,6 +58,7 @@ Rectangle
             anchors.top: parent.top
             anchors.topMargin: 50
             model:$app.allData.ceateType(groupType)
+
             delegate:MouseArea
             {
                 acceptedButtons: Qt.LeftButton | Qt.RightButton
@@ -81,6 +80,19 @@ Rectangle
                     else
                     {
                         forShow.Drag.cancel();
+                    }
+                }
+
+                /// 鼠标按下
+                onPressed:
+                {
+
+                    parent.currentIndex = index;
+                    /// 鼠标右键弹出菜单
+                    if(Qt.RightButton === mouse.button)
+                    {
+                        personClickd(modelData.id,mouseX,index * height + mouseY);
+                        console.log("youjian-----------")
                     }
                 }
 

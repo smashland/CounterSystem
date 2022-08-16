@@ -253,12 +253,11 @@ Column {
                 anchors.fill: parent
                 onClicked: {
                     //popupRectWin.visible = true
-
                     if(!objCheckLic.read())
                     {
                         loginCenter.nextFrame(lrText.text)
                     }
-                    else
+                    else if(objCheckLic.checkLicense())
                     {
                         loadQml("qrc:/OsgWindow.qml");
                         $app.settings.setComName(control.currentText);

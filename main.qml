@@ -107,7 +107,6 @@ Window {
         // 没有许可或者许可失败 获取硬件信息
         function getMachineInfo(sMachineInfo)
         {
-            console.log("许可码"+sMachineInfo);
             if(loadQml("qrc:/Login/LoginCenter.qml"))
             {
                   $obShow.nextFrame.connect(saveLicense)

@@ -257,10 +257,6 @@ Column {
                     {
                         loginCenter.nextFrame(lrText.text)
                     }
-                    else if(objCheckLic.read()!==lrText.text)
-                    {
-                        loginCenter.nextFrame(lrText.text)
-                    }
                     else
                     {
                         $app.settings.setComName(control.currentText);
@@ -268,7 +264,6 @@ Column {
                         $app.initSystem()
                         $app.startConnect();
                     }
-
 
                 }
             }

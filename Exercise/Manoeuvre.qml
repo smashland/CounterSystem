@@ -101,7 +101,7 @@ Item {
         background: Rectangle {
             color: "transparent"
             Text {
-                width: 26 *dpy
+                width: 50 *dpy
                 height: 26 *dpy
                 text: qsTr("\ue623")
                 color: "#e7f6ff"

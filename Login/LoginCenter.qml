@@ -38,24 +38,23 @@ Item
     Rectangle
         {
             id: rectangle
-            width: 319*dpx
-            height: 181*dpy
+            width: 638*dpx
+            height: 319*dpy
             color:  '#00000000'
-            x: (mainWindow.width-rectangle.width)/2
-            y: 760 *dpy
+            x: 20*dpx/*(mainWindow.width-rectangle.width)/2*/
+            y: 430 *dpy
             Component.onCompleted:
             {
                 rectangle.forceActiveFocus();
             }
-
             /// 显示二维码
             Rect
             {
                 id:needLic
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
-                width: parent.height/2
-                height: parent.height/2
+                width:parent.height /*parent.height/2*/
+                height:parent.height /*parent.height/2*/
                 visible: true
             }
 

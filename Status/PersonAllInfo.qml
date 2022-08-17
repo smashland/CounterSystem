@@ -121,7 +121,7 @@ Popup
                     SoldierItem {
                         y: fushangxinxi.contentHeight + line2.height + 20 *dpy
                         text: "复活次数:"
-                        name: "1"
+                        name: outData.uRelive
                     }
                 }
                 Rectangle {

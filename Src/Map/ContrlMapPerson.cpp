@@ -87,6 +87,12 @@ void CContrlMapPerson::UpdatePos(quint16 unID, double dLon, double dLat)
 
     pMapPerson->GetLocationNode()->SetGeoPos(pos);
 }
+///更新复活次数
+void CContrlMapPerson::UpdateRelive(quint16 unID,const QString & sRelive)
+{
+    auto pMapPerson = GetOrCreateMapPersonInfo(unID);
+    pMapPerson->SetText(sRelive.toUtf8().data());
+}
 
 /// 更新人员名称
 void CContrlMapPerson::UpdateName(quint16 unID, const QString & sName)
@@ -94,6 +100,7 @@ void CContrlMapPerson::UpdateName(quint16 unID, const QString & sName)
     auto pMapPerson = GetOrCreateMapPersonInfo(unID);
     pMapPerson->SetText(sName.toUtf8().data());
 }
+
 
 void CContrlMapPerson::ClearMap()
 {

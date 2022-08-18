@@ -210,41 +210,41 @@ Popup
                             }
                         }
                     }
-                    Item {
-                        x: line1.width/2
-                        y: zhuangbei.contentHeight + line3.height + 20 *dpy
-                        Rectangle {
-                            color: "transparent"
-                            Text {
-                                id: beixin
-                                width: beixin.contentWidth
-                                height: 34 *dpy
-                                text: "背心连接:"
-                                color: "#ffffff"
-                                font.pixelSize: 17*dpx;
-                                font.family: "Microsoft YaHei";
-                                verticalAlignment: Text.AlignVCenter
-                            }
-                        }
-                        Rectangle {
-                            x: beixin.contentWidth + 20 *dpx
-                            width: 200*dpx
-                            height: 34 *dpy
-                            color: "#52749e"
-                            border.color: "#3b6daa"
-                            Text {
-                                width: beixin.contentWidth
-                                height: 34 *dpy
-                                x: 10 *dpx
-                                text: "是"
-                                color: "#ffffff"
-                                font.pixelSize: 17*dpx;
-                                font.family: "Microsoft YaHei";
-                                verticalAlignment: Text.AlignVCenter
-                            }
-                        }
+//                    Item {
+//                        x: line1.width/2
+//                        y: zhuangbei.contentHeight + line3.height + 20 *dpy
+//                        Rectangle {
+//                            color: "transparent"
+//                            Text {
+//                                id: beixin
+//                                width: beixin.contentWidth
+//                                height: 34 *dpy
+//                                text: "背心连接:"
+//                                color: "#ffffff"
+//                                font.pixelSize: 17*dpx;
+//                                font.family: "Microsoft YaHei";
+//                                verticalAlignment: Text.AlignVCenter
+//                            }
+//                        }
+//                        Rectangle {
+//                            x: beixin.contentWidth + 20 *dpx
+//                            width: 200*dpx
+//                            height: 34 *dpy
+//                            color: "#52749e"
+//                            border.color: "#3b6daa"
+//                            Text {
+//                                width: beixin.contentWidth
+//                                height: 34 *dpy
+//                                x: 10 *dpx
+//                                text: "是"
+//                                color: "#ffffff"
+//                                font.pixelSize: 17*dpx;
+//                                font.family: "Microsoft YaHei";
+//                                verticalAlignment: Text.AlignVCenter
+//                            }
+//                        }
 
-                    }
+//                    }
                 }
 
         }

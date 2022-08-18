@@ -124,7 +124,7 @@ Rectangle
                 anchors.fill: parent
                 onPressed:
                 {
-                    personClickd(modelData.id,setRoot.x,index * height+root.height);
+                    personClickd(modelData.id,setRoot.x,setRoot.y+setRoot.contentHeight);//root.height+(root.height-setRoot.contentHeight)
                 }
 
             }

@@ -188,8 +188,8 @@ Item {
                 }
 
                 Row {
-                    spacing: 30 *dpx
-                    x: 10 *dpx
+                    spacing: 56 *dpx
+                    x: 25 *dpx
                     height: 40 *dpy
                     Text {
                         text: "设备编号"
@@ -226,18 +226,18 @@ Item {
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                     }
-                    Text {
-                        //                        x: 572 *dpx
-                        text: "通讯装备"
-                        width: 110 *dpx
-                        height: 40 *dpy
-                        color: "#ffffff"
-                        font.pixelSize: 16
-                        font.family: "Microsoft YaHei";
-                        font.bold: true
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
-                    }
+//                    Text {
+//                        //                        x: 572 *dpx
+//                        text: "通讯装备"
+//                        width: 110 *dpx
+//                        height: 40 *dpy
+//                        color: "#ffffff"
+//                        font.pixelSize: 16
+//                        font.family: "Microsoft YaHei";
+//                        font.bold: true
+//                        horizontalAlignment: Text.AlignHCenter
+//                        verticalAlignment: Text.AlignVCenter
+//                    }
                     Text {
                         //                        x: 572 *dpx
                         text: "红蓝方"
@@ -290,8 +290,8 @@ Item {
                 }
 
                 Row {
-                    spacing: 30 *dpx
-                    x: 10*dpx
+                    spacing: 56 *dpx
+                    x: 25*dpx
                     height: 40 *dpy
                     //                    arrayWidthSpacing: [20, 30]
                     Text {
@@ -329,18 +329,18 @@ Item {
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                     }
-                    Text {
-                        //                        x: 572 *dpx
-                        text: "通讯备"
-                        width: 110 *dpx
-                        height: 50 *dpy
-                        color: "#ffffff"
-                        font.pixelSize: 16
-                        font.family: "Microsoft YaHei";
-                        font.bold: true
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
-                    }
+//                    Text {
+//                        //                        x: 572 *dpx
+//                        text: "通讯备"
+//                        width: 110 *dpx
+//                        height: 50 *dpy
+//                        color: "#ffffff"
+//                        font.pixelSize: 16
+//                        font.family: "Microsoft YaHei";
+//                        font.bold: true
+//                        horizontalAlignment: Text.AlignHCenter
+//                        verticalAlignment: Text.AlignVCenter
+//                    }
                     Text {
                         //                        x: 572 *dpx
                         text: "方"
@@ -420,8 +420,8 @@ Item {
         }
 
         Row {
-            spacing: 28 *dpx
-            x: 10 *dpx
+            spacing: 54 *dpx
+            x: 25 *dpx
             height: 40 *dpy
             Rectangle {
                 y: 10 *dpy
@@ -489,38 +489,38 @@ Item {
                     border.color: "#26abef"
                 }
             }
-            ComboBox {
-                id: combobox_tongxun
-                y: 10*dpy
-                width: 110 *dpx
-                height: 30 *dpy
-                model: ["头盔"]
-                delegate: ItemDelegate {
-                    width: 110 *dpx
-                    height: 30 *dpy
-                    contentItem: Text {
-                        text: modelData
-                        color: "black"
-                        font.pixelSize: 16
-                        font.family: "Microsoft YaHei"
-                        verticalAlignment: Text.AlignVCenter
-                    }
-                }
-                contentItem: Text {
-                    leftPadding: 10*dpx
-                    text: combobox_tongxun.displayText
-                    font.pixelSize: 16
-                    color: "#ffffff"
-                    font.family: "Microsoft YaHei"
-                    verticalAlignment: Text.AlignVCenter
-                }
-                background: Rectangle {
-                    implicitWidth: 110*dpx
-                    implicitHeight: 30 *dpy
-                    color: "#1d4f88"
-                    border.color: "#26abef"
-                }
-            }
+//            ComboBox {
+//                id: combobox_tongxun
+//                y: 10*dpy
+//                width: 110 *dpx
+//                height: 30 *dpy
+//                model: ["头盔"]
+//                delegate: ItemDelegate {
+//                    width: 110 *dpx
+//                    height: 30 *dpy
+//                    contentItem: Text {
+//                        text: modelData
+//                        color: "black"
+//                        font.pixelSize: 16
+//                        font.family: "Microsoft YaHei"
+//                        verticalAlignment: Text.AlignVCenter
+//                    }
+//                }
+//                contentItem: Text {
+//                    leftPadding: 10*dpx
+//                    text: combobox_tongxun.displayText
+//                    font.pixelSize: 16
+//                    color: "#ffffff"
+//                    font.family: "Microsoft YaHei"
+//                    verticalAlignment: Text.AlignVCenter
+//                }
+//                background: Rectangle {
+//                    implicitWidth: 110*dpx
+//                    implicitHeight: 30 *dpy
+//                    color: "#1d4f88"
+//                    border.color: "#26abef"
+//                }
+//            }
             ComboBox {
                 id: combobox_redblue
                 y: 10*dpy

@@ -88,6 +88,12 @@ Rectangle {
                 name: qsTr("全部刷新")
                 color: viewColor_shuaxin
                 viewImage: "\ue600"
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        $app.allData.clearAllInfo();
+                    }
+                }
             }
         }
 

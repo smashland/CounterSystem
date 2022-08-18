@@ -83,7 +83,6 @@
         <file>Exercise/SoldierItem.qml</file>
         <file>Common/PopupButton.qml</file>
         <file>Common/CloseButton.qml</file>
-        <file>Common/SetList.qml</file>
         <file>Exercise/Manoeuvre.qml</file>
         <file>Exercise/FooterBar.qml</file>
         <file>Common/FooterButton.qml</file>
@@ -136,5 +135,7 @@
         <file>Manage/BasicGroupBox.qml</file>
         <file>Manage/BasicSpinBox.qml</file>
         <file>Image/shuomingshu.png</file>
+        <file>ResizeItem.qml</file>
+        <file>Common/Hint.qml</file>
     </qresource>
 </RCC>

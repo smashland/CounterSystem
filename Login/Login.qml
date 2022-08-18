@@ -77,7 +77,6 @@ Column {
                                         qsTr("请输入授权码")
                     font.family: "Microsoft YaHei"
                     clip: true
-                    readOnly: false
                     verticalAlignment: Text.AlignVCenter
                     leftPadding:  52*dpx
                     activeFocusOnPress:true
@@ -264,7 +263,6 @@ Column {
                         loadQml("qrc:/OsgWindow.qml");
                         $app.initSystem()
                         $app.startConnect();
-
                     }
 
                 }

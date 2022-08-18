@@ -251,7 +251,10 @@ Rectangle {
                             MouseArea{
                                 anchors.fill: parent
                                 onClicked: {
-                                    replayFile.open();
+//                                     replayFile.open();
+                                    ctrReplay.nTimes = $app.allData.openReplayFile("file:///"+modelData);
+                                    ctrReplay.visible = true;
+                                    $app.settings.startReplay()
                                 }
                             }
                         }
@@ -283,6 +286,7 @@ Rectangle {
                 nameFilters: [qsTr("演习数据(*.szy)")]
                 onAccepted:
                 {
+                    console.log(currentFile)
                     ctrReplay.nTimes = $app.allData.openReplayFile(currentFile);
                     ctrReplay.visible = true;
                     $app.settings.startReplay()

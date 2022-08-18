@@ -2,8 +2,12 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
+import MyItem 1.0
 import "../Common"
 import "../Exercise"
+
+
+
 
 Rectangle {
     id: helploader
@@ -51,18 +55,35 @@ Rectangle {
             SwitchButton{
                 id: shouquan_text
                 text: qsTr("授权配置")
+                onClicked: {
+                    info.visible=true;
+                }
             }
             SwitchButton{
                 id: shiyong_text
                 text: qsTr("使用说明")
+                onClicked: {
+                    info.visible=false;
+                }
 
             }
 
         }
 
+        Text {
+            id: info
+            x:218*dpx
+            y:35*dpy
+            visible: false
+            font.pixelSize: 24*dpx
+            color: "#ffffff"
+            text: qsTr("机器码:"+objCheckLic.getMD5MachineInfo()) //
+        }
     }
-
 }
-
+    LicItem
+    {
+        id:objCheckLic;
+    }
 
 }

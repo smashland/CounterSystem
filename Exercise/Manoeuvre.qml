@@ -86,7 +86,6 @@ Item {
             time.stop()
             num = 0;
 
-
 //            console.log("jieshu--yanxi")
 
         }
@@ -126,8 +125,8 @@ Item {
             {
                 showTest()
             }
-
             changeStatus()
+
         }
     }
 
@@ -169,35 +168,6 @@ Item {
             $app.settings.setStart();
         }
     }
-//    PropertyAnimation
-//    {
-//        id: fadeOut
-//        target: kongzhiButton
-//        duration: 300
-//        property: "opacity"
-//        from: 1.0
-//        to: 0.0
-
-//        onStopped:
-//        {
-//            target.visible = false
-//        }
-//    }
-
-//    PropertyAnimation
-//    {
-//        id: fadeIn
-//        target: jieshuyanxi
-//        duration: 300
-//        property: "opacity"
-//        from: 0.0
-//        to: 1.0
-//        onStarted:
-//        {
-//            target.visible = true
-//        }
-//    }
-
 
     Rectangle {
         id: switchSet
@@ -210,36 +180,35 @@ Item {
         color: Qt.rgba(36/255, 41/255, 57/255, 0.6);
         radius: 20*dpy
 
+        Rectangle {
+            x: 10*dpx
+            y: 7*dpy
+            color: "transparent"
+            width: 20*dpx
+            height: 20*dpx
 
-            Rectangle {
-                x: 10*dpx
-                y: 7*dpy
-                color: "transparent"
-                width: 20*dpx
-                height: 20*dpx
-
-                Text {
-                    anchors.fill: parent
-                    text: qsTr("\ue628")
-                    color: "#e7f6ff"
-                    font.family: "iconfont"
-                    font.pixelSize: 22*dpx
-                    verticalAlignment: Text.AlignVCenter
-                }
+            Text {
+                anchors.fill: parent
+                text: qsTr("\ue628")
+                color: "#e7f6ff"
+                font.family: "iconfont"
+                font.pixelSize: 22*dpx
+                verticalAlignment: Text.AlignVCenter
             }
-            Rectangle {
-                 y: 7*dpy
-                x: 35*dpx
-                color: "transparent"
-                Text {
-                    text: qsTr("切换设置")
-                    font.pixelSize: 16*dpx;
-                    color: "#ffffff";
-                    font.family: "Microsoft YaHei"
-                    verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: Text.AlignHCenter
-                }
+        }
+        Rectangle {
+             y: 7*dpy
+            x: 35*dpx
+            color: "transparent"
+            Text {
+                text: qsTr("切换设置")
+                font.pixelSize: 16*dpx;
+                color: "#ffffff";
+                font.family: "Microsoft YaHei"
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignHCenter
             }
+        }
 
         MouseArea {
             anchors.fill: parent

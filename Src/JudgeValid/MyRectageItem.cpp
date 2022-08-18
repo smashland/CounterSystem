@@ -40,7 +40,7 @@ void QMyRectageItem::updateString(const QString &sCheckInfo)
     m_bNeedUpdate = true;
 }
 
-/// ¸üĞÂÎÆÀí
+/// æ›´æ–°çº¹ç†
 void QMyRectageItem::UpdateTexture(QSGSimpleTextureNode* pTextureNode)
 {
     QRcode* qrcode = QRcode_encodeString(m_sCheckInfo.toUtf8(), 2, QR_ECLEVEL_H, QR_MODE_8, 1);

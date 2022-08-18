@@ -121,6 +121,7 @@ Item {
         }
         onClicked: {
             time.start()
+            killExpand.visible = true
             if($app.settings.bIsStart)
             {
                 showTest()

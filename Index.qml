@@ -284,14 +284,33 @@ Rectangle
     Kill {
         id: kill
         visible: false
-        y: 65 *dpy
-        x: 395 *dpx
+        y: killExpand.y
+        x: killExpand.x
+        Drag.active: dragAreakill.drag.active
+        Drag.hotSpot.x: 10
+        Drag.hotSpot.y: 10
+        MouseArea {
+            id: dragAreakill
+            anchors.fill: parent
+            drag.target: parent
+            propagateComposedEvents: true
+        }
     }
     KillExpand {
         id: killExpand
-        visible: true
+        visible: false
         y: 65 *dpy
         x: 395 *dpx
+        Drag.active: dragAreakillExpand.drag.active
+        Drag.hotSpot.x: 10
+        Drag.hotSpot.y: 10
+
+        MouseArea {
+            id: dragAreakillExpand
+            anchors.fill: parent
+            drag.target: parent
+            propagateComposedEvents: true
+        }
     }
     MyRePlay.ContrlRePlay
     {

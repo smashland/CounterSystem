@@ -1,5 +1,6 @@
 #include <QGuiApplication>
 #include <QDate>
+#include <QFileInfo>
 #include "GetMachineInfo.h"
 #include "../md5.h"
 #include "../API-CRCheck.h"
@@ -28,7 +29,23 @@ QJudgeLicense::~QJudgeLicense()
     int n=0;
     ++n;
 }
-
+///判断文件是否存在
+bool QJudgeLicense::isFileExist()
+{
+    QFileInfo fileInfo(QGuiApplication::applicationDirPath() + "/lic");
+    if(fileInfo.isFile())
+    {
+        return true;
+    }
+    return false;
+}
+void QJudgeLicense::deleteFile()
+{
+    QFile file(QGuiApplication::applicationDirPath() + "/lic");
+    if (file.exists()) {
+        file.remove();
+    }
+}
 /// 检查是否有许可
 void QJudgeLicense::checkLicense()
 {
@@ -46,10 +63,12 @@ void QJudgeLicense::checkLicense()
     {
         if(!checkLicense(m_sLicInfo))
         {
+           qDebug()<<"测试1111111111错误";
            emit(showError(m_sErrorInfo));
         }
         else
         {
+            qDebug()<<"测试1111111111正常";
             emit(checked());
         }
     }
@@ -58,10 +77,10 @@ void QJudgeLicense::checkLicense()
 
 void QJudgeLicense::saveLicense(const QByteArray &sLicInfo)
 {
-    if(!m_bGet)
-    {
-        getMachineInfo();
-    }
+//    if(!m_bGet)
+//    {
+//        getMachineInfo();
+//    }
 
     if(!checkLicense(sLicInfo))
     {
@@ -199,4 +218,5 @@ bool QJudgeLicense::checkLicense(const QByteArray& sLicInfo)
         }
 
     }
+    return(false);
 }

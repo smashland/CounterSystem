@@ -223,7 +223,7 @@ void CPersonAllInfo::UpdateBaseInfo(PersonInfo *pPersonInfo)
         emit(lonChanged(m_dLon));
     }
 
-    qint16 repos= pPersonInfo->relive();
+    auto repos= pPersonInfo->relive();
     if(0!=repos)
     {
        m_uRelive = repos;

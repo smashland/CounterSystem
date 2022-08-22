@@ -31,6 +31,11 @@ public:
     void UpdatePos(quint16,double,double);
 
     /**
+     * @brief 更新复活次数
+     */
+    void UpdateRelive(quint16,const QString&);
+
+    /**
      * @brief 更新名称
      */
     void UpdateName(quint16,const QString&);

@@ -31,7 +31,7 @@ public:
     Q_PROPERTY(bool bAbdomen MEMBER m_bAbdomen NOTIFY abdomenChanged)
     Q_PROPERTY(double  dLat MEMBER m_dLat NOTIFY latChanged)
     Q_PROPERTY(double  dLon MEMBER m_dLon NOTIFY lonChanged)
-    Q_PROPERTY(qint16  uRelive MEMBER m_uRelive NOTIFY reliveChanged)
+    Q_PROPERTY(int uRelive MEMBER m_uRelive NOTIFY reliveChanged)
 
 
     /**
@@ -94,7 +94,7 @@ private:
     int  m_nID=0;
     double m_dLon{};
     double m_dLat{};
-    qint16 m_uRelive=0;   ///复活
+    int  m_uRelive=0;   ///复活
     QString m_sName;  /// 名字
     QString m_sType;  /// 分类
     QStringList m_listHitInfo;

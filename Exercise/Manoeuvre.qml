@@ -59,37 +59,37 @@ Item {
         font.family: "MicrosoftYaHei";
     }
 
-    Button {
-        id: jieshuyanxi
-        x: 80*dpx + yanxiTime.contentWidth+numtext.contentWidth+20*dpx+nums.contentWidth
-        y: 75 *dpy
-        width: jieshuyanxiText.contentWidth + 60*dpx
-        height: 36*dpy
-        text: qsTr("结束演习")
-        contentItem: Text {
-            id: jieshuyanxiText
-            text: jieshuyanxi.text
-            font.pixelSize: 16*dpx;
-            color: "#ffffff";
-            font.family: "MicrosoftYaHei";
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-        }
-        background: Rectangle {
-            radius: 18*dpy
-            color: "#dbbb5a"
-        }
+//    Button {
+//        id: jieshuyanxi
+//        x: 80*dpx + yanxiTime.contentWidth+numtext.contentWidth+20*dpx+nums.contentWidth
+//        y: 75 *dpy
+//        width: jieshuyanxiText.contentWidth + 60*dpx
+//        height: 36*dpy
+//        text: qsTr("结束演习")
+//        contentItem: Text {
+//            id: jieshuyanxiText
+//            text: jieshuyanxi.text
+//            font.pixelSize: 16*dpx;
+//            color: "#ffffff";
+//            font.family: "MicrosoftYaHei";
+//            horizontalAlignment: Text.AlignHCenter
+//            verticalAlignment: Text.AlignVCenter
+//        }
+//        background: Rectangle {
+//            radius: 18*dpy
+//            color: "#dbbb5a"
+//        }
 
-        onClicked: {
-            changeStatus()
-            exerciseResults.visible = true
-            time.stop()
-            num = 0;
+//        onClicked: {
+//            changeStatus()
+//            exerciseResults.visible = true
+//            time.stop()
+//            num = 0;
 
-//            console.log("jieshu--yanxi")
+////            console.log("jieshu--yanxi")
 
-        }
-    }
+//        }
+//    }
 
 
     Button {
@@ -124,10 +124,10 @@ Item {
             killExpand.visible = true
             if($app.settings.bIsStart)
             {
-                showTest()
+                showMainCircl()
             }
             changeStatus()
-
+            closebar.visible = false
         }
     }
 

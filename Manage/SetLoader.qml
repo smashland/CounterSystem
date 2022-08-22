@@ -10,11 +10,18 @@ Rectangle {
     id: setloader
     anchors.fill: parent
     color: "transparent"
+
     Item {
         id: backgroundItem
         width: 1102 *dpx
         height: 680 *dpy
         anchors.centerIn: parent
+        MouseArea {
+            anchors.fill: parent
+            onWheel: {
+                // 屏蔽滚轮事件，防止滚动方案列表时缩放地球
+            }
+        }
         Image {
             id: loginImage
             anchors.fill: parent

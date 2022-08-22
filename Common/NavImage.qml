@@ -114,7 +114,7 @@ Row {
             anchors.fill: parent
             hoverEnabled: true
             onClicked: {
-//                $app.exitApp();
+                $app.exitApp();
                 Qt.quit()
             }
             onEntered: {

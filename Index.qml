@@ -320,6 +320,20 @@ Rectangle
 //        anchors.leftMargin: (index.width-ctrReplay.width)/2
         visible: false
     }
+    GroupInfoDisplay {
+        id: groupInfoDisplay
+
+        Drag.active: dragAreagroupInfoDisplay.drag.active
+        Drag.hotSpot.x: 10
+        Drag.hotSpot.y: 10
+
+        MouseArea {
+            id: dragAreagroupInfoDisplay
+            anchors.fill: parent
+            drag.target: parent
+            propagateComposedEvents: true
+        }
+    }
 
 //    ResizeItem {
 //        enableSize: 8
@@ -337,6 +351,7 @@ Rectangle
 //    Component.onCompleted: {
 //        index.show();
 //    }
+
 
 
 }

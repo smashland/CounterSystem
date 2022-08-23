@@ -11,7 +11,7 @@ DropArea
 
     onWidthChanged:
     {
-        width=340
+        width=340 *dpx
     }
 
 

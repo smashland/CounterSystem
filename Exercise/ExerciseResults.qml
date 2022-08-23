@@ -113,99 +113,43 @@ Item {
             title: qsTr("得分情况")
             width: resultTable.viewport.width/resultTable.columnCount
         }
-        model: $app.allData.listResult;
-
-
+        model: $app.allData.listResult;        
     }
-//    RowLayout
-//    {
-//        Repeater
-//        {
-//            model: $app.allData.allResult
-//            ShowDetail
-//            {
-//                title: modelData.belong
-//                hurtData:modelData.hurt
-//                deathData:modelData.dealth
-//                okData:modelData.ok
-//            }
-//        }
-//    }
-
-
-
-
 
     Row {
-       spacing: 24 *dpx
-       y: 298 *dpy
-       x: 80 *dpx
-       Rectangle {
-           width :500*dpx
-           height: 320*dpy
-//           color: "#4a78b1"
-           color: Qt.rgba(74/255,120/255,177/255,0.3)
-           Text
-           {
-               x: 40 *dpx
-               y: 20 *dpy
-               text:"红方伤亡情况"
-               verticalAlignment: Text.AlignVCenter
-               horizontalAlignment: Text.AlignHCenter
-               font.pixelSize: 20*dpx
-               color: "#ffffff"
-               font.family: "MicrosoftYaHei"
-           }
+        spacing: 24 *dpx
+        y: 298 *dpy
+        x: 80 *dpx
+        Repeater {
+            model: $app.allData.allResult
+            Rectangle {
+                width :500*dpx
+                height: 320*dpy
+                color: Qt.rgba(74/255,120/255,177/255,0.3)
 
-           Repeater
-           {
-              model: $app.allData.allResult
-              RedChart {
-                   width :500
-                   height: 320
-                   hurtData:modelData.hurt
-                   deathData:modelData.dealth
-                   okData:modelData.ok
-              }
-           }
+                Text
+                {
+                    x: 40 *dpx
+                    y: 20 *dpy
+                    text:qsTr(modelData.belong+"伤亡情况")
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                    font.pixelSize: 20*dpx
+                    color: "#ffffff"
+                    font.family: "MicrosoftYaHei"
+                }
 
-       }
+                RedChart {
+                     width :500
+                     height: 320
+//                     title: modelData.belong
+                     hurtData:modelData.hurt
+                     deathData:modelData.dealth
+                     okData:modelData.ok
+                }
 
-       Rectangle {
-           width :500*dpx
-           height: 320*dpy
-//           color: "#4a78b1"
-           color: Qt.rgba(74/255,120/255,177/255,0.3)
-           Text
-           {
-               x: 40 *dpx
-               y: 20 *dpy
-               text:"蓝方伤亡情况"
-               verticalAlignment: Text.AlignVCenter
-               horizontalAlignment: Text.AlignHCenter
-               font.pixelSize: 20*dpx
-               color: "#ffffff"
-               font.family: "MicrosoftYaHei"
-           }
-           Repeater
-           {
-              model: $app.allData.allResult
-              RedChart {
-                   width :500
-                   height: 320
-                   hurtData:modelData.hurt
-                   deathData:modelData.dealth
-                   okData:modelData.ok
-
-              }
-
-           }
-//           RedChart {
-//               width :500
-//               height: 320
-//           }
-
-       }
+            }
+        }
     }
 
     Row {

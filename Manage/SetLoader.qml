@@ -5,6 +5,7 @@ import QtQuick.Layouts 1.15
 //import QtQuick.Controls 2.14 as QC14
 import "../Common"
 import "../Exercise"
+import QtQuick.Controls.Styles 1.2
 
 Rectangle {
     id: setloader
@@ -149,6 +150,36 @@ Rectangle {
             delegate: contactDelegate
             model:$app.settings.systemSetting
             clip: true
+        }
+        CheckBox {
+            id: voiceControl
+            x:55*dpx
+            y:150*dpy
+            text: qsTr(" 开启语音")
+            font.pixelSize: 20
+            checked:$app.setOpenSpeak
+            contentItem: Text {
+                text: voiceControl.text
+                font: voiceControl.font
+                opacity: enabled ? 1.0 : 0.3
+                color:"white"
+                verticalAlignment: Text.AlignVCenter
+                leftPadding: voiceControl.indicator.width + voiceControl.spacing
+            }
+
+            onClicked: {
+
+                if(voiceControl.checked)
+                {
+                    $app.setOpenSpeak(true);
+
+                }
+                else
+                {
+                    $app.setOpenSpeak(false);
+                }
+
+            }
         }
     }
   }

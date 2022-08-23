@@ -27,22 +27,22 @@ Rectangle
     }
     Text {
         id: zongrenshu
-        text: groupType?qsTr("总人数：")+listView.model.count:qsTr("总人数：")+$app.allData.allDataNumber
+        text: groupType?qsTr("总人数：")+listView.model.count:qsTr("在线人数：")+$app.allData.atLineNumber
         x: 20
         y: 25 *dpy
         font.pixelSize: 14*dpx;
-        color: "#ffffff";
+        color: groupType?"#ffffff":"green"
         font.family: "MicrosoftYaHei-Bold";
     }
 
     Text {
         id: zaixianrenshu
-        text: qsTr("战损人数：")
+        text: groupType?qsTr("战损人数："+$app.allData.allLiveNumber):qsTr("总人数：")+$app.allData.allDataNumber
         anchors.right: parent.right
         anchors.rightMargin: 20
         y: 25 *dpy
         font.pixelSize: 14*dpx;
-        color: "#ec4747";
+        color:groupType? "#ec4747":"#ffffff";
         font.family: "MicrosoftYaHei-Bold";
     }
 

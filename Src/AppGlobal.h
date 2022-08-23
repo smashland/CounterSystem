@@ -35,6 +35,7 @@ public:
     Q_INVOKABLE void openWord();
     Q_INVOKABLE void openVideo();
     Q_INVOKABLE QStringList openPath();
+    Q_INVOKABLE void setOpenSpeak(bool);
 
 
 signals:

@@ -7,48 +7,50 @@ Dialog{
     title: "给"+nID+'号充弹'
     modal: true
     standardButtons: Dialog.Ok | Dialog.Cancel
+//    anchors.centerIn:
 
 
-    onAccepted:
-    {
-        var allNum=[8];
-        for(var i=0; i<allInfo.count;++i)
-        {
-            allNum[i] = allInfo.itemAt(i).children[1].text;
-        }
 
-        $app.settings.chongDan(nID,allNum);
-    }
+//    onAccepted:
+//    {
+//        var allNum=[8];
+//        for(var i=0; i<allInfo.count;++i)
+//        {
+//            allNum[i] = allInfo.itemAt(i).children[1].text;
+//        }
 
-    Column
-    {
-        width: 161
-        height: 320
-        Repeater
-        {
-            id:allInfo
-            model: 5
-            Row
-            {
-                Label
-                {
-                    text: index
-                }
+//        $app.settings.chongDan(nID,allNum);
+//    }
 
-                TextField
-                {
-                    id:zdshu
-                    maximumLength:4
-                    placeholderText:'子弹数量'
-                    validator: IntValidator
-                    {
-                        bottom:1
-                        top:9999
-                    }
-                }
-            }
-        }
-    }
+//    Column
+//    {
+//        width: 161
+//        height: 320
+//        Repeater
+//        {
+//            id:allInfo
+//            model: 5
+//            Row
+//            {
+//                Label
+//                {
+//                    text: index
+//                }
+
+//                TextField
+//                {
+//                    id:zdshu
+//                    maximumLength:4
+//                    placeholderText:'子弹数量'
+//                    validator: IntValidator
+//                    {
+//                        bottom:1
+//                        top:9999
+//                    }
+//                }
+//            }
+//        }
+//    }
 
 }
 

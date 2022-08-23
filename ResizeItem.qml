@@ -13,11 +13,11 @@ Item {
         height: enableSize
         anchors.left: parent.left
         anchors.top: parent.top
-        z: 1000
+        z: 1
         MouseArea {
             anchors.fill: parent
             hoverEnabled: true
-
+            propagateComposedEvents: true
             onPressed: press(mouse)
             cursorShape: containsMouse?Qt.SizeFDiagCursor:Qt.ArrowCursor;
             onReleased: release()
@@ -36,7 +36,7 @@ Item {
         MouseArea {
             anchors.fill: parent
             hoverEnabled: true
-
+            propagateComposedEvents: true
             onPressed: press(mouse)
             cursorShape: containsMouse?Qt.SizeVerCursor:Qt.ArrowCursor;
             onReleased: release()
@@ -56,7 +56,7 @@ Item {
         MouseArea {
             anchors.fill: parent
             hoverEnabled: true
-
+            propagateComposedEvents: true
             onPressed: {
                 press(mouse);
             }
@@ -77,7 +77,7 @@ Item {
         MouseArea {
             anchors.fill: parent
             hoverEnabled: true
-
+            propagateComposedEvents: true
             onPressed: press(mouse)
             cursorShape: containsMouse?Qt.SizeHorCursor:Qt.ArrowCursor;
             onReleased: release()
@@ -95,7 +95,7 @@ Item {
         anchors.bottom: bottom.top
         MouseArea {
             anchors.fill: parent
-
+            propagateComposedEvents: true
             property point clickPos
             onPressed: clickPos = Qt.point(mouse.x,mouse.y)
             onPositionChanged: {
@@ -119,7 +119,7 @@ Item {
         MouseArea {
             anchors.fill: parent
             hoverEnabled: true
-
+            propagateComposedEvents: true
             onPressed: press(mouse)
             cursorShape: containsMouse?Qt.SizeHorCursor:Qt.ArrowCursor;
             onReleased: release()
@@ -139,7 +139,7 @@ Item {
         MouseArea {
             anchors.fill: parent
             hoverEnabled: true
-
+            propagateComposedEvents: true
             onPressed: press(mouse)
             cursorShape: containsMouse?Qt.SizeBDiagCursor:Qt.ArrowCursor;
             onReleased: release()
@@ -159,7 +159,7 @@ Item {
         MouseArea {
             anchors.fill: parent
             hoverEnabled: true
-
+            propagateComposedEvents: true
             onPressed: press(mouse)
             cursorShape: containsMouse?Qt.SizeVerCursor:Qt.ArrowCursor;
             onReleased: release()
@@ -182,7 +182,7 @@ Item {
             cursorShape: containsMouse?Qt.SizeFDiagCursor:Qt.ArrowCursor;
             onPressed: press(mouse)
             onReleased: release()
-
+            propagateComposedEvents: true
             onPositionChanged: positionChange(mouse,1,1)
         }
     }

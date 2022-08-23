@@ -6,18 +6,22 @@ import MyItem 1.0
 import "../Common"
 import "../Exercise"
 
-
-
-
 Rectangle {
     id: helploader
     anchors.fill: parent
     color: "transparent"
+
     Item {
         id: backgroundItem
         width: 830 *dpx
         height: 500 *dpy
         anchors.centerIn: parent
+        MouseArea {
+            anchors.fill: parent
+            onWheel: {
+                // 屏蔽滚轮事件，防止滚动方案列表时缩放地球
+            }
+        }
         Image {
             id: loginImage
             anchors.fill: parent

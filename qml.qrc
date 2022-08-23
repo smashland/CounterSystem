@@ -136,5 +136,15 @@
         <file>Image/shuomingshu.png</file>
         <file>ResizeItem.qml</file>
         <file>Common/Hint.qml</file>
+        <file>Exercise/GroupInfoDisplay.qml</file>
+        <file>Image/wuqi/08-bg.png</file>
+        <file>Image/wuqi/09-bg.png</file>
+        <file>Image/wuqi/baozhawu.png</file>
+        <file>Image/wuqi/buqiang.png</file>
+        <file>Image/wuqi/dingwei.png</file>
+        <file>Image/wuqi/jujibuqiang.png</file>
+        <file>Image/wuqi/shoulei.png</file>
+        <file>Image/wuqi/shouqiang.png</file>
+        <file>Image/wuqi/toukui.png</file>
     </qresource>
 </RCC>

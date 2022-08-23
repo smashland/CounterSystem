@@ -22,6 +22,13 @@ Rectangle {
         width: 1226 *dpx
         height: 787 *dpy
         anchors.centerIn: parent
+        MouseArea {
+            anchors.fill: parent
+            onWheel: {
+                // 屏蔽滚轮事件，防止滚动方案列表时缩放地球
+            }
+        }
+
         Image {
             id: loginImage
             anchors.fill: parent

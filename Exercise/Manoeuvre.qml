@@ -124,10 +124,10 @@ Item {
             killExpand.visible = true
             if($app.settings.bIsStart)
             {
-                showTest()
+                showMainCircl()
             }
             changeStatus()
-
+            closebar.visible = false
         }
     }
 

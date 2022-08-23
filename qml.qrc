@@ -129,7 +129,6 @@
         <file>Status/PersonInfoLabel.qml</file>
         <file>Status/PersonStatus.qml</file>
         <file>ConfirmPopUp.qml</file>
-        <file>MainCircle.qml</file>
         <file>MainWindow.qml</file>
         <file>Exercise/PersonStatus.qml</file>
         <file>Manage/BasicGroupBox.qml</file>

@@ -27,7 +27,7 @@ Rectangle
     }
     Text {
         id: zongrenshu
-        text: qsTr("总人数：")+$app.allData.allDataNumber
+        text: groupType?qsTr("总人数：")+listView.model.count:qsTr("总人数：")+$app.allData.allDataNumber
         x: 20
         y: 25 *dpy
         font.pixelSize: 14*dpx;
@@ -133,4 +133,15 @@ Rectangle
             }
         }
     }
+//    Component.onCompleted:{
+//        console.log("hhhhhhhh",listView.model,listView.model.count)
+//        Connections
+//        {
+//            target: listView.model
+
+//            function onCountChanged(count){
+//                zongrenshu.text = count
+//            }
+//        }
+//    }
 }

@@ -11,6 +11,8 @@ class CMyListModel : public QAbstractListModel
     Q_OBJECT
 public:
     explicit CMyListModel(QObject *parent = nullptr);
+    Q_PROPERTY(int count MEMBER m_nCount NOTIFY countChanged)
+
     CMyListModel(const CMyListModel& other);
     ~CMyListModel();
 
@@ -61,7 +63,8 @@ public:
      * @brief 清空
      */
     void Clear();
-
+signals:
+    void countChanged(int);
 protected:
     CGroupStatus*                m_pGroupStatus;         /// 组状态
     QSet<quint16>                m_setLive;              /// 活着的人
@@ -69,6 +72,7 @@ protected:
     QSet<quint16>                m_allPerson;            /// 所有的人
     QList<CPersonStatus*>        m_allData;              /// 所有的人员状态
     QHash<int, QByteArray>       m_mapRolesNames;        /// 返回类型的对应名字
+    int                          m_nCount{};
 };
 
 

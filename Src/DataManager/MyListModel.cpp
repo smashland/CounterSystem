@@ -84,6 +84,8 @@ void CMyListModel::remove(int nIndex)
     beginRemoveRows(QModelIndex(), nIndex, nIndex);
 
     m_allData.removeAt(nIndex);
+    --m_nCount;
+    emit(countChanged(m_nCount));
 
     endRemoveRows();
 }
@@ -110,6 +112,8 @@ void CMyListModel::append(CPersonStatus *pPerson)
     m_allPerson.insert(pPerson->getId());
     m_setLive.insert(pPerson->getId());
 
+    ++m_nCount;
+    emit(countChanged(m_nCount));
     endInsertRows();
 }
 

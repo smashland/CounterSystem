@@ -1,11 +1,6 @@
-import QtQuick 2.12
-import QtQuick.Controls 2.12
-import QtQuick.Controls.impl 2.12
-import QtQuick.Templates 2.12 as T
-
-//qtquickcontrols2\src\imports\controls\SpinBox.qml
-//from Customizing SpinBox
-T.SpinBox {
+import QtQuick 2.15
+import QtQuick.Controls 2.15
+SpinBox {
     id: control
 
     property bool borderVisible: true          //显示边框
@@ -34,8 +29,9 @@ T.SpinBox {
                :bgNormalColor;
 
         TextInput {
+            id:inputText
             anchors.fill: parent
-            text: control.displayText
+            text: control.value
             horizontalAlignment: Qt.AlignHCenter
             verticalAlignment: Qt.AlignVCenter
             readOnly: !control.editable
@@ -47,6 +43,28 @@ T.SpinBox {
 //            selectionColor: "black"
             font: control.font
             renderType: Text.NativeRendering
+            onTextEdited:
+            {
+                var nValue=Number.fromLocaleString(locale, inputText.text);
+                if(nValue !== control.value)
+                {
+                    if(nValue>control.to)
+                    {
+                        control.value = control.to;
+                    }
+                    else if(nValue < control.bottom || Number.isNaN(nValue))
+                    {
+                        control.value = control.from;
+                    }
+                    else
+                    {
+                        control.value = nValue;
+                    }
+
+                    inputText.text = control.value;
+                    $app.settings.changeSetting(showListItem.parent.parent.name,index,control.value);
+                }
+            }
         }
 
         Rectangle{
@@ -80,5 +98,25 @@ T.SpinBox {
     down.indicator: Rectangle
     {
         color:"#00000000"
+    }
+
+    valueFromText: function(text, locale)
+    {
+
+        var nValue=Number.fromLocaleString(locale, text);
+
+        console.log("valueFromText:",nValue);
+        if(nValue<=control.to && nValue>=control.from)
+        {
+            return(nValue);
+        }
+        else if(nValue>control.to)
+        {
+            return(control.to)
+        }
+        else
+        {
+            return(control.from)
+        }
     }
 }

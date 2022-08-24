@@ -182,7 +182,6 @@ Rectangle {
             }
         }
     }
-  }
 
     Component
     {
@@ -198,40 +197,18 @@ Rectangle {
 //                QC14.SpinBox
                 BasicSpinBox
                 {
-                    id:control
                     value:modelData.number;
                     from: 1
                     to: modelData.type === "默认子弹数:" ? 9999 : 100
                     editable: true
                     borderVisible: true
-
-
-                    valueFromText: function(text, locale)
-                    {
-                        var nValue=Number.fromLocaleString(locale, text);
-
-                        if(nValue<=control.to && nValue>=control.from)
-                        {
-                            return(nValue);
-                        }
-                        else if(nValue>control.to)
-                        {
-                            return(control.to)
-                        }
-                        else
-                        {
-                            return(control.from)
-                        }
-                    }
-
-                    /// 当值修改的时候提交更改
-                    onValueModified:
-                    {
-                        $app.settings.changeSetting(showListItem.parent.parent.name,index,value);
-                    }
                 }
             }
         }
     }
+
+  }
+
+
 
 }

@@ -77,7 +77,6 @@
         <file>Login/PopupWin.qml</file>
         <file>Login/Connect.qml</file>
         <file>Common/NavImage.qml</file>
-        <file>Exercise/Information.qml</file>
         <file>Exercise/SoldierItem.qml</file>
         <file>Common/PopupButton.qml</file>
         <file>Common/CloseButton.qml</file>
@@ -114,8 +113,6 @@
         <file>Setting/ConnectSetting.qml</file>
         <file>Setting/Setting.qml</file>
         <file>RePlay/ContrlRePlay.qml</file>
-        <file>Result/Result.qml</file>
-        <file>Result/ShowDetail.qml</file>
         <file>Status/BoardNotice.qml</file>
         <file>Status/EquipConnStat.qml</file>
         <file>Status/GroupDropArea.qml</file>
@@ -128,7 +125,6 @@
         <file>Status/PersonStatus.qml</file>
         <file>ConfirmPopUp.qml</file>
         <file>MainWindow.qml</file>
-        <file>Exercise/PersonStatus.qml</file>
         <file>Manage/BasicGroupBox.qml</file>
         <file>Manage/BasicSpinBox.qml</file>
         <file>Image/shuomingshu.png</file>

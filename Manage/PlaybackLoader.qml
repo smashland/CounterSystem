@@ -8,7 +8,6 @@ import Qt.labs.qmlmodels 1.0
 import "../Common"
 import "../Exercise"
 import "../Status" as MyStatus
-import "../Result" as MyResult
 import "../RePlay" as MyRePlay
 
 Rectangle {

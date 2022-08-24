@@ -3,7 +3,6 @@ import QtQuick 2.12
 import QtQuick.Controls 2.15
 import "../Common"
 import "../Status" as MyStatus
-import "../Result" as MyResult
 import "../RePlay" as MyRePlay
 
 Item {

@@ -5,7 +5,6 @@ import QtQuick.Controls 2.15
 import Qt.labs.platform 1.1
 import Qt.labs.qmlmodels 1.0
 import "../Status" as MyStatus
-import "../Result" as MyResult
 import "../RePlay" as MyRePlay
 
 Item {

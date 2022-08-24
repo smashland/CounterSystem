@@ -6,7 +6,6 @@ import "Login"
 import "Exercise"
 import "Manage"
 import "Status"
-import "Result"
 import "RePlay" as MyRePlay
 
 

@@ -13,7 +13,7 @@ import "../Common"
 Item {
     id: exerciseResults
     width: 1184 *dpx
-    height: 760 *dpy
+    height: 860 *dpy
 
     Image {
         id: loginImage
@@ -27,7 +27,7 @@ Item {
     }
     TransverseLine {
         x: 80 *dpx
-        y: 95*dpy
+        y: 95 *dpy
     }
     CloseButton {
         anchors.right: exerciseResults.right
@@ -37,10 +37,82 @@ Item {
         onClicked: exerciseResults.visible = false
     }
 
+    Column {
+        y: 117*dpy
+        x: 80*dpx
+        spacing: 13*dpy
+
+        ExerciseItem {
+            width: 300*dpx
+            title:"演习名称:"
+            name:"这是演习名称1"
+        }
+
+        Row {
+            id:xuxian1
+            width:1024*dpx
+            height: 1*dpy
+            spacing: 4*dpx
+            clip: true
+            Repeater {
+                anchors.fill: parent
+                model:128
+                delegate:Rectangle {
+                    width: 4*dpx
+                    height: 1*dpy
+                    color:"white"
+                }
+            }
+        }
+
+        Row {
+            spacing: 200*dpx
+            ExerciseItem {
+                width: 300*dpx
+                title:"演习开始时间:"
+                name:"这是演习名称1"
+            }
+            ExerciseItem {
+                width: 300*dpx
+                title:"演习结束时间:"
+                name:"这是演习名称1"
+            }
+        }
+        Row {
+            id:xuxian2
+            width:1024*dpx
+            height: 1*dpy
+            spacing: 4*dpx
+            clip: true
+            Repeater {
+                anchors.fill: parent
+                model:128
+                delegate:Rectangle {
+                    width: 4*dpx
+                    height: 1*dpy
+                    color:"white"
+                }
+            }
+        }
+        Row {
+            spacing: 200*dpx
+            ExerciseItem {
+                width: 300*dpx
+                title:"地图名称:"
+                name:"这是演习名称1"
+            }
+            ExerciseItem {
+                width: 300*dpx
+                title:"位置:"
+                name:"这是演习名称1"
+            }
+        }
+    }
+
     QC114.TableView
     {
         id:resultTable
-        y: 136*dpy
+        y: 256*dpy
         x: 80 *dpx
         width: 1024 *dpx
         height: 142*dpy
@@ -117,7 +189,7 @@ Item {
 
     Row {
         spacing: 24 *dpx
-        y: 298 *dpy
+        y: 410 *dpy
         x: 80 *dpx
         Repeater {
             model: $app.allData.allResult

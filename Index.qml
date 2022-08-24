@@ -95,7 +95,7 @@ Rectangle
     {
         anchors.centerIn: parent
         id:chongdan
-        width: 500
+        width: 600
         height: 500
     }
 
@@ -157,30 +157,6 @@ Rectangle
         visible: false
     }
 
-//    Information {
-//        anchors.left: parent.left
-//        anchors.top: parent.top
-//        anchors.leftMargin: 80
-//        anchors.topMargin: 80
-//        visible: !$app.settings.bIsStart&&!$app.settings.bIsReplay
-//    }
-
-//    RedInformation {
-//        anchors.right: ($app.settings.bIsStart || $app.settings.bIsReplay) ? undefined : parent.right
-//        anchors.top: ($app.settings.bIsStart || $app.settings.bIsReplay) ? parent.top : blueInformation.bottom
-//        anchors.left: ($app.settings.bIsStart || $app.settings.bIsReplay) ? parent.left : undefined
-
-//        anchors.leftMargin: 80
-//        anchors.rightMargin: 80
-//        anchors.topMargin: 20
-//    }
-//    BlueInformation {
-//        id:blueInformation
-//        anchors.right: parent.right;
-//        anchors.top: parent.top
-//        anchors.rightMargin: 80
-//        anchors.topMargin: 80
-//    }
     Manoeuvre {
         id:manoeuvre
         x: 0
@@ -195,13 +171,6 @@ Rectangle
         anchors.bottomMargin: 0
         visible: false
     }
-
-//    Soldier {
-//        id: soldier
-//        visible: false
-//        x: (index.width-soldier.width) / 2
-//        y: (index.height-soldier.height) / 2
-//    }
 
     KillSituation {
         id: killSituation
@@ -321,20 +290,20 @@ Rectangle
 //        anchors.leftMargin: (index.width-ctrReplay.width)/2
         visible: false
     }
-//    GroupInfoDisplay {
-//        id: groupInfoDisplay
+    GroupInfoDisplay {
+        id: groupInfoDisplay
 
-//        Drag.active: dragAreagroupInfoDisplay.drag.active
-//        Drag.hotSpot.x: 10
-//        Drag.hotSpot.y: 10
+        Drag.active: dragAreagroupInfoDisplay.drag.active
+        Drag.hotSpot.x: 10
+        Drag.hotSpot.y: 10
 
-//        MouseArea {
-//            id: dragAreagroupInfoDisplay
-//            anchors.fill: parent
-//            drag.target: parent
-//            propagateComposedEvents: true
-//        }
-//    }
+        MouseArea {
+            id: dragAreagroupInfoDisplay
+            anchors.fill: parent
+            drag.target: parent
+            propagateComposedEvents: true
+        }
+    }
 
 //    ResizeItem {
 //        enableSize: 8

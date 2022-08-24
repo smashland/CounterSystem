@@ -85,14 +85,12 @@ Rectangle
                 /// 鼠标按下
                 onPressed:
                 {
-
                     parent.currentIndex = index;
                     /// 鼠标右键弹出菜单
-                    if(Qt.RightButton === mouse.button)
-                    {
-                        personClickd(modelData.id,mouseX,index * height + mouseY);
-                        console.log("youjian-----------")
-                    }
+//                    if(Qt.RightButton === mouse.button)
+//                    {
+//                        personClickd(modelData.id,mouseX,index * height + mouseY);
+//                    }
                 }
 
                 /// 双击

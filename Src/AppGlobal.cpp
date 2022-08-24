@@ -159,3 +159,8 @@ void QAppGlobal::setOsgItem(QQuickItem *pOsgItem)
 
     m_pData->SetSeceneGraph(pSeneGraph);
 }
+///
+ void QAppGlobal::setOpenSpeak(bool bOpenSpeak)
+ {
+     CNoticeManager::GetInstance()->OpenSpeak(bOpenSpeak);
+ }

@@ -59,99 +59,72 @@ Item {
         font.family: "MicrosoftYaHei";
     }
 
-    Button {
-        id: jieshuyanxi
-        x: 80*dpx + yanxiTime.contentWidth+numtext.contentWidth+20*dpx+nums.contentWidth
-        y: 75 *dpy
-        width: jieshuyanxiText.contentWidth + 60*dpx
-        height: 36*dpy
-        text: qsTr("结束演习")
-        contentItem: Text {
-            id: jieshuyanxiText
-            text: jieshuyanxi.text
-            font.pixelSize: 16*dpx;
-            color: "#ffffff";
-            font.family: "MicrosoftYaHei";
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-        }
-        background: Rectangle {
-            radius: 18*dpy
-            color: "#dbbb5a"
-        }
 
-        onClicked: {
-            changeStatus()
-            exerciseResults.visible = true
-            time.stop()
-            num = 0;
-
-//            console.log("jieshu--yanxi")
-
+    BeginButton {
+        id:beginButton
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                time.start()
+                killExpand.visible = true
+                if($app.settings.bIsStart)
+                {
+                    showMainCircl()
+                }
+                changeStatus()
+                closebar.visible = false
+            }
         }
     }
-
-
-    Button {
-        id: kongzhiButton
-        x: (parent.width - 26*dpy)/2
-        y: 26 *dpy
-        height: zantingText.contentHeight + 62*dpy
-        background: Rectangle {
-            color: "transparent"
-            Text {
-                width: 50 *dpy
-                height: 26 *dpy
-                text: qsTr("\ue623")
-                color: "#e7f6ff"
-                font.family: "iconfont"
-                font.pixelSize: 26*dpx
-                verticalAlignment: Text.AlignVCenter
-            }
-            Text {
-                id: zantingText
-                y: 36 *dpy
-                text: qsTr("开始")
-                font.pixelSize: 14*dpx;
-                color: "#ffffff";
-                font.family: "MicrosoftYaHei";
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
+    FinishButton {
+        id: finishButton
+        visible: false
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                showTest()
+                changeStatus()
+                exerciseResults.visible = true
+                time.stop()
+                num = 0;
+                closebar.visible = true
+                killExpand.visible = false
             }
         }
-        onClicked: {
-            time.start()
-            killExpand.visible = true
-            if($app.settings.bIsStart)
+    }
+    Connections
+    {
+        target: $app.settings
+        function onReplayStatusChanged(bReplay)
+        {
+            if(bReplay)
             {
-                showMainCircl()
+                beginButton.visible=false;
             }
-            changeStatus()
-            closebar.visible = false
+            else
+            {
+                beginButton.visible=true;
+            }
         }
     }
 
     function showMainCircl()
     {
-//        fadeOut.target=kongzhiButton;
-//        fadeIn.target=jieshuyanxi
-//        fadeOut.start()
-//        fadeIn.start()
-        if(null !== objSetting)
-        {
-            objSetting.visible = false
-        }
+        beginButton.visible = false
+        finishButton.visible = true
+//        if(null !== objSetting)
+//        {
+//            objSetting.visible = false
+//        }
     }
     function showTest()
     {
-//        fadeOut.target=jieshuyanxi;
-//        fadeIn.target=kongzhiButton
-//        fadeOut.start()
-//        fadeIn.start()
-        if(null !== objSetting)
-        {
-            objSetting.visible = true
-        }
+        beginButton.visible = true
+        finishButton.visible = false
+//        if(null !== objSetting)
+//        {
+//            objSetting.visible = true
+//        }
     }
     function changeStatus()
     {
@@ -164,9 +137,37 @@ Item {
         else
         {
             /// 演习开始清空状态
-//            showMainCircl()
+            showMainCircl()
             $app.allData.clearInfo();
             $app.settings.setStart();
+        }
+    }
+    PropertyAnimation
+    {
+        id: fadeOut
+        target: beginButton
+        duration: 300
+        property: "opacity"
+        from: 1.0
+        to: 0.0
+
+        onStopped:
+        {
+            target.visible = false
+        }
+    }
+
+    PropertyAnimation
+    {
+        id: fadeIn
+        target: finishButton
+        duration: 300
+        property: "opacity"
+        from: 0.0
+        to: 1.0
+        onStarted:
+        {
+            target.visible = true
         }
     }
 

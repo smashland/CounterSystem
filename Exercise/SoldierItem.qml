@@ -34,6 +34,7 @@ Rectangle {
             clip: true
             font.family: "Microsoft YaHei"
             verticalAlignment: Text.AlignVCenter
+
         }
     }
 }

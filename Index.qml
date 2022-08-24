@@ -69,9 +69,11 @@ Rectangle
     {
         id: contextMenu
         property int userID
-        MenuItem
+        width: 100*dpx
+        height: 240*dpy
+        MenuBackground
         {
-            text: "充弹"
+            name: "充弹"
             onTriggered:
             {
                 chongdan.nID=contextMenu.userID;
@@ -79,14 +81,14 @@ Rectangle
             }
         }
 //        MenuItem { text: "配枪" ;onTriggered: { peiqiang.nID = contextMenu.userID;peiqiang.open();}}
-        MenuItem { text: "闭锁" ;onTriggered:$app.settings.setBiSuo(contextMenu.userID)}
-        MenuItem { text: "解锁" ;onTriggered:$app.settings.setJiesuoSuo(contextMenu.userID)}
-        MenuItem { text: "解除旁白";onTriggered:$app.settings.setJieChu(contextMenu.userID) }
-        MenuItem { text: "判死";onTriggered:$app.settings.setPanSi(contextMenu.userID)}
-        MenuItem { text: "复活" ;onTriggered:{$app.settings.setFuHuo(contextMenu.userID)}}
-        MenuItem { text: "关机" }
+        MenuBackground { name: "闭锁" ;onTriggered:$app.settings.setBiSuo(contextMenu.userID)}
+        MenuBackground { name: "解锁" ;onTriggered:$app.settings.setJiesuoSuo(contextMenu.userID)}
+        MenuBackground { name: "解除旁白";onTriggered:$app.settings.setJieChu(contextMenu.userID) }
+        MenuBackground { name: "判死";onTriggered:$app.settings.setPanSi(contextMenu.userID)}
+        MenuBackground { name: "复活" ;onTriggered:{$app.settings.setFuHuo(contextMenu.userID)}}
+        MenuBackground { name: "关机" }
 //        MenuItem { text: "同步时间";onTriggered:{sycntime.nID = contextMenu.userID;sycntime.open();}}
-        MenuItem { text: "定位";onTriggered:{$app.allData.dingWei(contextMenu.userID)}}
+        MenuBackground { name: "定位";onTriggered:{$app.allData.dingWei(contextMenu.userID)}}
     }
 
     /// 充弹窗口
@@ -195,12 +197,12 @@ Rectangle
         visible: false
     }
 
-    Soldier {
-        id: soldier
-        visible: false
-        x: (index.width-soldier.width) / 2
-        y: (index.height-soldier.height) / 2
-    }
+//    Soldier {
+//        id: soldier
+//        visible: false
+//        x: (index.width-soldier.width) / 2
+//        y: (index.height-soldier.height) / 2
+//    }
 
     KillSituation {
         id: killSituation

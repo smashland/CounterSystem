@@ -6,7 +6,7 @@ import QtQuick.Layouts 1.13
 Rectangle
 {
     property var outData: null
-    property var fontSize: 18
+    property var fontSize: 16
 
 
     id:root
@@ -15,50 +15,30 @@ Rectangle
     color: Qt.rgba(18/255, 18/255, 18/255, 0.5);
     z:10
 
+    Text
+    {
+        id:showName
+        text: outData.name;
+        verticalAlignment: Text.AlignVCenter
+        font.family: "Microsoft YaHei"
+        font.pixelSize: fontSize
+        color:  "white"
+        height: parent.height
+        anchors.left: parent.left
+        anchors.leftMargin: 10
+    }
+
     RowLayout
     {
         property var showHeigt: 30
-        layoutDirection: Qt.LeftToRight
+//        layoutDirection: Qt.LeftToRight
 
         id:infoshow
         anchors.fill: parent
-
-        Text
-        {
-            id: idText
-            anchors.left: parent.left
-            anchors.leftMargin: idText.contentWidth
-            text: outData.id;
-            font.pixelSize: fontSize
-            font.bold: true
-            horizontalAlignment: Text.AlignHCenter
-            color:'white'
-            style:Text.Outline
-            styleColor:'black'
-        }
+        anchors.right: parent.right
+        anchors.rightMargin: 10
 
         /// 人员名称
-        Text
-        {
-            id:showName
-//            text: outData.name;
-            verticalAlignment: Text.AlignVCenter
-//            text:""
-            font.pixelSize: fontSize
-            color:  "white"
-            height: infoshow.showHeigt
-            anchors.left: parent.left
-            anchors.leftMargin: idText.contentWidth *2.5
-
-        }
-        Connections {
-            ignoreUnknownSignals: true
-            target: personPopup
-            function onNameChanged(personName)
-            {
-                showName.text = personName;
-            }
-        }
 
         Item
         {
@@ -143,7 +123,7 @@ Rectangle
                 anchors.fill: parent
                 onPressed:
                 {
-                    personClickd(modelData.id,setRoot.x,setRoot.y+setRoot.contentHeight);//root.height+(root.height-setRoot.contentHeight)
+                    personClickd(modelData.id,setRoot.x,index * height+90);
                 }
 
             }

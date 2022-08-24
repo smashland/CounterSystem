@@ -5,5 +5,4 @@ Image
     id:wuqiIcon
     property var bConnected:true
     property alias wuqiImage: wuqiIcon.source
-
 }

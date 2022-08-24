@@ -53,19 +53,17 @@ Rectangle
         ListView
         {
             id:listView
-            width: parent.width - 40*dpx
+            width: parent.width
             height: parent.height - 80*dpy
             anchors.top: parent.top
             anchors.topMargin: 50
-            anchors.left: parent.left
-            anchors.leftMargin: 20
             model:$app.allData.ceateType(groupType)
 
             delegate:MouseArea
             {
                 acceptedButtons: Qt.LeftButton | Qt.RightButton
                 id:mouseArea
-                width: parent.width - 40*dpx
+                width: parent.width
                 height: 50*dpy
                 hoverEnabled: true
                 drag.target: $app.settings.bIsStart ? null : forShow

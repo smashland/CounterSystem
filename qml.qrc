@@ -35,7 +35,6 @@
         <file>Image/Red_bg_all.png</file>
         <file>Image/Set_up_bg.png</file>
         <file>Image/soldiers.png</file>
-        <file>Image/Start_bg.png</file>
         <file>Image/terrorist.png</file>
         <file>Image/Text_title.png</file>
         <file>Image/icon/bianji-3.svg</file>
@@ -79,7 +78,6 @@
         <file>Login/Connect.qml</file>
         <file>Common/NavImage.qml</file>
         <file>Exercise/Information.qml</file>
-        <file>Exercise/Soldier.qml</file>
         <file>Exercise/SoldierItem.qml</file>
         <file>Common/PopupButton.qml</file>
         <file>Common/CloseButton.qml</file>
@@ -146,5 +144,9 @@
         <file>Image/wuqi/shoulei.png</file>
         <file>Image/wuqi/shouqiang.png</file>
         <file>Image/wuqi/toukui.png</file>
+        <file>Common/MenuBackground.qml</file>
+        <file>Image/Start_bg.png</file>
+        <file>Exercise/BeginButton.qml</file>
+        <file>Exercise/FinishButton.qml</file>
     </qresource>
 </RCC>

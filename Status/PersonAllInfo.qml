@@ -76,19 +76,55 @@ Popup
                         height: 2 *dpy
                         color: "#3b6daa"
                     }
-                    SoldierItem {
-                        id: mingzi
+                    Rectangle {
+                        id: soldierItem
                         y: shibbingxinxi.contentHeight + line1.height + 20 *dpy
-                        text: "名       字:"
-                        name: title
-                        onTextChanged: {
-                            if(visible) {
-                                var tempText = mingzi.name;
-                                personPopup.nameChanged(tempText);
-                                title = mingzi.name;
+                        Rectangle {
+                            color: "transparent"
+                            Text {
+                                id: soldierItemText
+                                width: soldierItemText.contentWidth
+                                height: 34 *dpy
+                                color: "#ffffff"
+                                text: "名       字:"
+                                font.pixelSize: 17*dpx;
+                                font.family: "Microsoft YaHei";
+                                verticalAlignment: Text.AlignVCenter
+                            }
+                        }
+                        Rectangle {
+                            x: soldierItemText.contentWidth + 20 *dpx
+                            width: 200*dpx
+                            height: 34 *dpy
+                            color: "#1d4f88"
+                            border.color: "#3b6daa"
+                            TextInput {
+                                id: soldierItemContent
+                                x: 10 *dpx
+                                width: 190*dpx
+                                height: 34 *dpy
+                                font.pixelSize: 17*dpx
+                                color: "#ffffff"
+                                clip: true
+                                font.family: "Microsoft YaHei"
+                                verticalAlignment: Text.AlignVCenter
+                                onEditingFinished:
+                                {
+                                    $app.allData.setUserName(outData.id,text);
+                                }
                             }
                         }
                     }
+//                    SoldierItem {
+//                        id: mingzi
+//                        y: shibbingxinxi.contentHeight + line1.height + 20 *dpy
+//                        text: "名       字:"
+//                        name: title
+//                        onEditingFinished:
+//                        {
+//                            $app.allData.setUserName(outData.id,text);
+//                        }
+//                    }
 
                     SoldierItem {
                         x: line1.width/2

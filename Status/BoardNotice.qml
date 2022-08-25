@@ -15,12 +15,12 @@ ScrollView
     TextArea
     {
         id:showText
-        color: "#ffff00"
+        color: "white"
         font.pointSize: 16
         font.bold: true
         background: Rectangle
         {
-            color:showText%2 ? "#4671a6" : "#2D5689"
+            color:"#2D5689"
             opacity:showNotice.visible ? 0.5 : 0.0
         }
 

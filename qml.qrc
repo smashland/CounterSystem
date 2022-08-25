@@ -144,5 +144,7 @@
         <file>Image/Start_bg.png</file>
         <file>Exercise/BeginButton.qml</file>
         <file>Exercise/FinishButton.qml</file>
+        <file>Exercise/ExerciseItem.qml</file>
+        <file>Setting/ChongdanItem.qml</file>
     </qresource>
 </RCC>

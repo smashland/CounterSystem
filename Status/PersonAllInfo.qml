@@ -116,16 +116,6 @@ Popup
                             }
                         }
                     }
-//                    SoldierItem {
-//                        id: mingzi
-//                        y: shibbingxinxi.contentHeight + line1.height + 20 *dpy
-//                        text: "名       字:"
-//                        name: title
-//                        onEditingFinished:
-//                        {
-//                            $app.allData.setUserName(outData.id,text);
-//                        }
-//                    }
 
                     SoldierItem {
                         x: line1.width/2
@@ -235,7 +225,7 @@ Popup
                             color: "#52749e"
                             border.color: "#3b6daa"
                             Text {
-                                width: beixin.contentWidth
+                                width: toukui.contentWidth
                                 height: 34 *dpy
                                 x: 10 *dpx
                                 text: "是"

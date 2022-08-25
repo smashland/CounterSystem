@@ -17,7 +17,9 @@ Item {
     }
     signal yesPutDown()
     property var objSetting;
-    property int num: 0
+    property int seconds: 00
+    property int minutes: 00
+    property int hours: 00
 
     Timer {
         id:time
@@ -25,8 +27,8 @@ Item {
         repeat: true
         triggeredOnStart: true
         onTriggered: {
-            numtext.text = manoeuvre.num
-            manoeuvre.num++
+//            numtext.text = manoeuvre.num
+//            manoeuvre.num++
         }
     }
 
@@ -37,27 +39,21 @@ Item {
         text: qsTr("演习时间： ")
         font.pixelSize: 20*dpx;
         color: "#ffffff";
-        font.family: "MicrosoftYaHei";
+        font.family: "Microsoft YaHei";
     }
     Text {
         id: numtext
-        text: num
+        text: hours + ":" + minutes + ":" + seconds
         x: 80*dpx + yanxiTime.contentWidth
         y: (136 *dpy + 50 *dpy - yanxiTime.contentHeight)/2
         font.pixelSize: 20*dpx;
         color: "#ffffff";
-        font.family: "MicrosoftYaHei";
+        font.family: "Microsoft YaHei";
     }
-    Text {
-        id: nums
-        text: qsTr("秒")
-        x: 80*dpx + yanxiTime.contentWidth+numtext.contentWidth
-        y: (136 *dpy + 50 *dpy - yanxiTime.contentHeight)/2
-        font.pixelSize: 20*dpx;
-        color: "#ffffff";
-        font.family: "MicrosoftYaHei";
-    }
+    function yanxitime()
+    {
 
+    }
 
     BeginButton {
         id:beginButton
@@ -85,7 +81,7 @@ Item {
                 changeStatus()
                 exerciseResults.visible = true
                 time.stop()
-                num = 0;
+//                num = 0;
                 closebar.visible = true
                 killExpand.visible = false
             }

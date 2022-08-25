@@ -50,8 +50,13 @@ void CExportResult::CreateDocx(const QString &sFileName, const QString& sTile,co
         l_merger.setClipboardValue("_header", "PrintDate",QDate::currentDate().toString("yyyy/MM/dd").toStdString());
         l_merger.setClipboardValue("AllInfo","worldTitle",sTile.toUtf8().data());
 
+
+        l_merger.setClipboardValue("Result","nName", 12.3);
+        l_merger.paste("Result");
+
         for(auto one=rInfo.begin();one!=rInfo.end();++one)
         {
+
             /// 总结各个组的综合情况
             l_merger.setClipboardValue("Total","nTotal",one.value()->count());
             l_merger.setClipboardValue("Total","nHurt",one.value()->hurtNum());

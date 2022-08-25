@@ -108,6 +108,7 @@ Popup
                                 clip: true
                                 font.family: "Microsoft YaHei"
                                 verticalAlignment: Text.AlignVCenter
+                                text:outData.name
                                 onEditingFinished:
                                 {
                                     $app.allData.setUserName(outData.id,text);

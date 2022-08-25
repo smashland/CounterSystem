@@ -84,8 +84,12 @@ void CMyListModel::remove(int nIndex)
     beginRemoveRows(QModelIndex(), nIndex, nIndex);
 
     m_allData.removeAt(nIndex);
-    --m_nCount;
-    emit(countChanged(m_nCount));
+
+    /// 总人数更改,通知修改
+    {
+        --m_nCount;
+        emit(countChanged(m_nCount));
+    }
 
     endRemoveRows();
 }
@@ -112,8 +116,11 @@ void CMyListModel::append(CPersonStatus *pPerson)
     m_allPerson.insert(pPerson->getId());
     m_setLive.insert(pPerson->getId());
 
-    ++m_nCount;
-    emit(countChanged(m_nCount));
+    {
+        ++m_nCount;
+        emit(countChanged(m_nCount));
+    }
+
     endInsertRows();
 }
 
@@ -124,7 +131,7 @@ int CMyListModel::hurtNum()
 
 int CMyListModel::deathNum()
 {
-    return(totalNum() - liveNum());
+    return(m_nDeathNum);
 }
 
 int CMyListModel::totalNum()
@@ -180,6 +187,14 @@ bool CMyListModel::UpdatePerson(quint16 nID, CPersonStatus *pPerson)
         {
             m_setLive.insert(nID);
             m_pGroupStatus->SetLiveRatio(static_cast<double>(liveNum())/totalNum());
+        }
+
+      /// 战损人数更改,通知修改
+        int nDeathNum =totalNum() - liveNum();
+        if(m_nDeathNum != nDeathNum)
+        {
+            m_nDeathNum = nDeathNum;
+            emit(deathNumChanged(m_nDeathNum));
         }
 
         return(true);

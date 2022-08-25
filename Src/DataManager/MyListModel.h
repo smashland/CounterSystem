@@ -12,7 +12,7 @@ class CMyListModel : public QAbstractListModel
 public:
     explicit CMyListModel(QObject *parent = nullptr);
     Q_PROPERTY(int count MEMBER m_nCount NOTIFY countChanged)
-
+    Q_PROPERTY(int deathNum MEMBER m_nDeathNum NOTIFY deathNumChanged)
     CMyListModel(const CMyListModel& other);
     ~CMyListModel();
 
@@ -26,6 +26,7 @@ public:
     CPersonStatus *at(int nIndex);
     Q_INVOKABLE void remove(int nIndex);
     Q_INVOKABLE void append(CPersonStatus* pPerson);
+
     int  hurtNum();
     int  deathNum();
     int  totalNum();
@@ -65,6 +66,7 @@ public:
     void Clear();
 signals:
     void countChanged(int);
+    void deathNumChanged(int);
 protected:
     CGroupStatus*                m_pGroupStatus;         /// 组状态
     QSet<quint16>                m_setLive;              /// 活着的人
@@ -72,7 +74,8 @@ protected:
     QSet<quint16>                m_allPerson;            /// 所有的人
     QList<CPersonStatus*>        m_allData;              /// 所有的人员状态
     QHash<int, QByteArray>       m_mapRolesNames;        /// 返回类型的对应名字
-    int                          m_nCount{};
+    int                          m_nCount{};             /// 总人数
+    int                          m_nDeathNum{};          /// 战损人数
 };
 
 

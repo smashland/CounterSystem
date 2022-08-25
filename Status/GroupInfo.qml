@@ -37,7 +37,7 @@ Rectangle
 
     Text {
         id: zaixianrenshu
-        text: groupType?qsTr("战损人数："+$app.allData.allLiveNumber):qsTr("总人数：")+$app.allData.allDataNumber
+        text: groupType?qsTr("战损人数:"+listView.model.deathNum):qsTr("总人数：")+$app.allData.allDataNumber
         anchors.right: parent.right
         anchors.rightMargin: 20
         y: 25 *dpy

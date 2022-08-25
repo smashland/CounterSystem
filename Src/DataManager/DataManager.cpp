@@ -213,7 +213,7 @@ void CDataManager::UpdateSeconds(const quint16 &unSeconds)
 /// 更新仿真时间
 void CDataManager::UpdateSimulationTime(const quint16 & simTime)
 {
-    if(simTime < m_vRecordPersonInfo.size()-1)
+    if(simTime < ((int)(m_vRecordPersonInfo.size()-1)))
     {
         auto replayInfo = m_vRecordPersonInfo[simTime];
         for(auto one:replayInfo)

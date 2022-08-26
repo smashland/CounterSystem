@@ -12,7 +12,7 @@ Rectangle
     id:root
     width: parent.width
     height: 40
-    color: Qt.rgba(18/255, 18/255, 18/255, 0.5);
+    color: "black"
     z:10
 
     Text

@@ -1,10 +1,11 @@
 import QtQuick 2.0
-import QtQuick.Window 2.2
 
 Item {
     property int enableSize: 4
     property bool isPressed: false
     property point customPoint
+
+
 
     //左上角
     Item {
@@ -94,12 +95,13 @@ Item {
         anchors.top: top.bottom
         anchors.bottom: bottom.top
         MouseArea {
-            anchors.fill: parent
+            width: closebar.width
+            height: closebar.height
             propagateComposedEvents: true
             property point clickPos
             onPressed: clickPos = Qt.point(mouse.x,mouse.y)
             onPositionChanged: {
-                if(pressed && mainWindow.visibility !== Window.Maximized && mainWindow.visibility !== Window.FullScreen) {
+                if(pressed && mainWindow.visibility !== mainWindow.Maximized && mainWindow.visibility !== mainWindow.FullScreen) {
                     var delta = Qt.point(mouse.x-clickPos.x, mouse.y-clickPos.y)
                     mainWindow.x += delta.x
                     mainWindow.y += delta.y

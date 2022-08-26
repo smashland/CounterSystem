@@ -3,25 +3,25 @@ import QtGraphicalEffects 1.15
 
 Row {
     spacing: 20 *dpx
-    Rectangle {
-        width: 18 *dpx
-        height: 18 *dpx
-        color: "transparent"
+//    Rectangle {
+//        width: 18 *dpx
+//        height: 18 *dpx
+//        color: "transparent"
 
-        Image
-        {
-            anchors.fill: parent
-            source: "qrc:/Image/code_icon.png"
-        }
+//        Image
+//        {
+//            anchors.fill: parent
+//            source: "qrc:/Image/code_icon.png"
+//        }
 
-        MouseArea {
-            anchors.fill: parent
-            hoverEnabled: true
-            onClicked: {
-                $app.openVideo();
-            }
-        }
-    }
+//        MouseArea {
+//            anchors.fill: parent
+//            hoverEnabled: true
+//            onClicked: {
+//                $app.openVideo();
+//            }
+//        }
+//    }
     Rectangle {
         width: 18 *dpx
         height: 18 *dpx
@@ -79,6 +79,10 @@ Row {
                 }
                 onExited: {
                     maxHint.visible = false
+                }
+                onClicked: {
+                    resizeItem.visible = true
+
                 }
             }
         }

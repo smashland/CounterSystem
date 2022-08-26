@@ -17,50 +17,145 @@ Item {
     }
     signal yesPutDown()
     property var objSetting;
-    property int seconds: 00
-    property int minutes: 00
-    property int hours: 00
+    property string hour:("00")
+    property string minute: ("00")
+    property string second: ("00")
 
-    Timer {
-        id:time
-        interval: 1000
-        repeat: true
-        triggeredOnStart: true
-        onTriggered: {
-//            numtext.text = manoeuvre.num
-//            manoeuvre.num++
-        }
-    }
-
-    Text {
-        id: yanxiTime
+    Row {
         x: 80*dpx
         y: (136 *dpy + 50 *dpy - yanxiTime.contentHeight)/2
-        text: qsTr("演习时间： ")
-        font.pixelSize: 20*dpx;
-        color: "#ffffff";
-        font.family: "Microsoft YaHei";
+        Text {
+            id: yanxiTime
+            width:yanxiTime.contentWidth
+            height: yanxiTime.contentHeight
+            text: qsTr("演习时间： ")
+            font.pixelSize: 20*dpx;
+            color: "#ffffff";
+            font.family: "Microsoft YaHei";
+        }
+        Rectangle{
+            //shi
+            id:hour_rec
+            width:hour_text.contentWidth
+            height: hour_text.contentHeight
+            color: "transparent"
+            Label{
+                id:hour_text
+                text: manoeuvre.hour
+                anchors.centerIn: parent
+                font.bold: true
+                font.pixelSize: 20*dpx;
+                color: "#ffffff";
+                font.family: "Microsoft YaHei";
+            }
+        }
+        Rectangle{
+            //fen
+            id:dian
+            width:hour_text.contentWidth
+            height: hour_text.contentHeight
+            color: "transparent"
+            Label{
+                id:dian_text
+                text: ":"
+                anchors.centerIn: parent
+                font.bold: true
+                font.pixelSize: 20*dpx;
+                color: "#ffffff";
+                font.family: "Microsoft YaHei";
+            }
+        }
+        Rectangle{
+            //fen
+            id:minute_rec
+            width:hour_text.contentWidth
+            height: hour_text.contentHeight
+            color: "transparent"
+            Label{
+                id:minute_text
+                text: manoeuvre.minute
+                anchors.centerIn: parent
+                font.bold: true
+                font.pixelSize: 20*dpx;
+                color: "#ffffff";
+                font.family: "Microsoft YaHei";
+            }
+        }
+        Rectangle{
+            //fen
+            id:diandian
+            width:hour_text.contentWidth
+            height: hour_text.contentHeight
+            color: "transparent"
+            Label{
+                id:diandian_text
+                text: ":"
+                anchors.centerIn: parent
+                font.bold: true
+                font.pixelSize: 20*dpx;
+                color: "#ffffff";
+                font.family: "Microsoft YaHei";
+            }
+        }
+
+        Rectangle{
+            //miao
+            id:second_rec
+            width:hour_text.contentWidth
+            height: hour_text.contentHeight
+            color: "transparent"
+            Label{
+                id:second_text
+                text: manoeuvre.second
+                anchors.centerIn: parent
+                font.bold: true
+                font.pixelSize: 20*dpx;
+                color: "#ffffff";
+                font.family: "Microsoft YaHei";
+            }
+        }
     }
-    Text {
-        id: numtext
-        text: hours + ":" + minutes + ":" + seconds
-        x: 80*dpx + yanxiTime.contentWidth
-        y: (136 *dpy + 50 *dpy - yanxiTime.contentHeight)/2
-        font.pixelSize: 20*dpx;
-        color: "#ffffff";
-        font.family: "Microsoft YaHei";
-    }
-    function yanxitime()
-    {
+    Timer{
+        id:time_run
+        interval: 1000
+        repeat: true
+        running: false
+        triggeredOnStart: true
+        onTriggered: {
+            manoeuvre.second++
+            if(manoeuvre.second == 60){
+                manoeuvre.second= 0
+                manoeuvre.minute++
+                if(manoeuvre.minute == 60){
+                    manoeuvre.minute = 0
+                    manoeuvre.hour++
+                    if(manoeuvre.hour == 24)
+                        hour = 0
+                    if(manoeuvre.hour < 10)
+                        hour_text.text = "0"+manoeuvre.hour
+                    else
+                        hour_text.text = manoeuvre.hour
+                }
+                if(manoeuvre.minute < 10)
+                    minute_text.text = "0" + manoeuvre.minute
+                else
+                    minute_text.text = manoeuvre.minute
+            }
+            if(manoeuvre.second < 10)
+                second_text.text = "0" + manoeuvre.second
+            else
+                second_text.text = manoeuvre.second
+        }
 
     }
+
 
     BeginButton {
         id:beginButton
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                time.start()
+                time_run.start()
                 killExpand.visible = true
                 if($app.settings.bIsStart)
                 {
@@ -80,8 +175,10 @@ Item {
                 showTest()
                 changeStatus()
                 exerciseResults.visible = true
-                time.stop()
-//                num = 0;
+                time_run.stop()
+                manoeuvre.hour="00"
+                manoeuvre.minute="00"
+                manoeuvre.second="00"
                 closebar.visible = true
                 killExpand.visible = false
             }

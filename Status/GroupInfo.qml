@@ -58,7 +58,6 @@ Rectangle
             anchors.top: parent.top
             anchors.topMargin: 50
             model:$app.allData.ceateType(groupType)
-
             delegate:MouseArea
             {
                 acceptedButtons: Qt.LeftButton | Qt.RightButton

@@ -119,7 +119,6 @@
         <file>Status/GroupInfo.qml</file>
         <file>Status/PersonAllInfo.qml</file>
         <file>Status/PersonBackHurtInfo.qml</file>
-        <file>Status/PersonFlipable.qml</file>
         <file>Status/PersonFontHurtInfo.qml</file>
         <file>Status/PersonInfoLabel.qml</file>
         <file>Status/PersonStatus.qml</file>

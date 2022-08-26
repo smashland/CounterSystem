@@ -13,7 +13,7 @@ Window {
     height: fullScreen ? 1080 : Screen.desktopAvailableHeight
     property bool fullScreen: true
 
-    flags: fullScreen ? Qt.Window : Qt.FramelessWindowHint
+//    flags: fullScreen ? Qt.Window : Qt.FramelessWindowHint
     visible: true
     color: "transparent"
     //    flags: Qt.FramelessWindowHint|Qt.Window
@@ -216,4 +216,5 @@ Window {
             }
         }
     }
+
 }

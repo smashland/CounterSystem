@@ -305,23 +305,13 @@ Rectangle
 //        }
 //    }
 
-//    ResizeItem {
-//        enableSize: 8
-//        anchors.fill: parent
-//        focus: true
-
-//        Image {
-//            id: bgImg;
-//            z:1;
-//            anchors.fill: parent;
-//            source: "qrc:/res/bg.png";
-//        }
-
-//    }
-//    Component.onCompleted: {
-//        index.show();
-//    }
-
+    ResizeItem {
+        id: resizeItem
+        enableSize: 8
+        anchors.fill: parent
+        focus: true
+        visible: false
+    }
 
 
 }

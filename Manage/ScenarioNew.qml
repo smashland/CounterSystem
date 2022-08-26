@@ -474,7 +474,7 @@ Item {
                         verticalAlignment: Text.AlignVCenter
                     }
                 }
-                contentItem: Text {
+                contentItem: TextInput {
                     leftPadding: 10*dpx
                     text: combobox_renyuan.displayText
                     font.pixelSize: 16

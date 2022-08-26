@@ -5,6 +5,15 @@ CONFIG += c++11
 SDK_CONFIG *= Map Gis proto qrcode
 include($$PWD/SoftSDK.pri)
 DEFINES += QAPPLICATION_CLASS=QApplication
+
+win32{
+ RC_FILE = CounterSys_Version.rc
+
+ DESTDIR = $${PWD}/../Bin
+}else{
+  VERSION = 2.0.0
+}
+
 SOURCES += \
         Src/API-CRCheck.cpp \
         Src/AppGlobal.cpp \

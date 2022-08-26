@@ -71,10 +71,7 @@ Column {
                     anchors.fill: parent
                     color: Qt.rgba(255/255, 255/255, 255/255, 0.8);
                     font.pixelSize: 16*dpx
-                    placeholderText:if(objCheckLic.isFileExist())
-                                        qsTr(objCheckLic.read()) //"请输入授权码"
-                                    else
-                                        qsTr("请输入授权码")
+                    placeholderText: qsTr("请输入授权码")
                     font.family: "Microsoft YaHei"
                     clip: true
                     verticalAlignment: Text.AlignVCenter
@@ -83,6 +80,14 @@ Column {
                     //        font.capitalization:Font.AllUppercase
                     background: Rectangle {
                         color: "transparent"
+                    }
+
+                    Component.onCompleted:
+                    {
+                        if($licCheck.isFileExist())
+                        {
+                            lrText.text = qsTr($licCheck.read());
+                        }
                     }
                 }
             }
@@ -251,48 +256,10 @@ Column {
             }
             MouseArea {
                 anchors.fill: parent
-                onClicked: {
-                    //popupRectWin.visible = true                   
-                    objCheckLic.getMD5MachineInfo();
-                    if(!objCheckLic.isFileExist())
-                    {
-                        loginCenter.nextFrame(lrText.text)
-                        if(objCheckLic.checkLicense(lrText.text))
-                        {
-                            $app.settings.setComName(control.currentText);
-                            loadQml("qrc:/OsgWindow.qml");
-                            $app.initSystem()
-                            $app.startConnect();
-                        }
-                    }
-                    else
-                    {
-                        if(objCheckLic.checkLicense(objCheckLic.read()))
-                        {
-                            $app.settings.setComName(control.currentText);
-                            loadQml("qrc:/OsgWindow.qml");
-                            $app.initSystem()
-                            $app.startConnect();
-                        }
-                        else
-                        {
-                            objCheckLic.deleteFile();
-                            loginCenter.nextFrame(lrText.text)
-                            if(objCheckLic.checkLicense(lrText.text))
-                            {
-                                $app.settings.setComName(control.currentText);
-                                loadQml("qrc:/OsgWindow.qml");
-                                $app.initSystem()
-                                $app.startConnect();
-                            }
-                            else
-                            {
-                               objCheckLic.showError.connect(checkLicenseFaild);
-                            }
-                        }
-
-                    }
-
+                onClicked:
+                {
+                    $licCheck.saveLicense(lrText.text);
+                    $licCheck.checkLicense()
                 }
             }
         }
@@ -312,10 +279,6 @@ Column {
             timer.start();
         }
 
-    }
-    LicItem
-    {
-        id:objCheckLic;
     }
     // 连接失败
     PopupDef {

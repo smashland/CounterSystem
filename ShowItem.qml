@@ -12,15 +12,6 @@ Rectangle
     height: 371
     color:  '#00000000'
 
-//    signal nextFrame(var licInfo)
-
-//    /// 收到机器码信息
-//    function recive(str)
-//    {
-//        needLic.updateString(str);
-//        element.text = str;
-//    }
-
     // 自定义组件，获取背景图片
     Blur
     {

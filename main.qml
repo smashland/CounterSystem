@@ -16,11 +16,12 @@ Window {
     flags: fullScreen ? Qt.Window : Qt.FramelessWindowHint
     visible: true
     color: "transparent"
-//    flags: Qt.FramelessWindowHint|Qt.Window
+    //    flags: Qt.FramelessWindowHint|Qt.Window
     readonly property real dpx:mainWindow.width/1920.0
     readonly property real dpy:mainWindow.height/1080.0
 
     property var $app: AppGlobal{}
+    property var $licCheck:LicItem{}
     property var $appWindow: mainWindow
     property var $cpShow:null
     property var $obShow:null
@@ -74,83 +75,28 @@ Window {
         }
     }
 
-    LoginCenter {
-        id: loginCenter
-        anchors.fill: parent
-        visible: true
-    }
     // 通过license校验显示主界面
-        function  showMainWindow()
-        {
-            /// 检查许可的工作已经完成
-            objCheckLic.destroy();
-    //        if($app.initSystem()&&$app.startConnect())
-    //        {
-    //            popupRectWin.open();
-    //        }
-        }
+    function  showMainWindow()
+    {
+        $app.initSystem();
+        $app.startConnect();
+        loadQml("qrc:/OsgWindow.qml");
+    }
 
+    /// 检查许可失败
+    function checkLicenseFaild(errorInfo)
+    {
+        exitPopupLable.text = errorInfo + " " + exitShowLabel;
+        exitPopup.open();
+    }
 
-        // 保存许可文件
-        function saveLicense(licInfo)
-        {
-              if(objCheckLic.saveLicense(licInfo))
-              {
-                  if($app.initSystem()&&$app.startConnect())
-                  {
-                      loadQml("qrc:/OsgWindow.qml");
-//                      popupRectWin.open();
-                  }
-              }
-        }
-
-        // 没有许可或者许可失败 获取硬件信息
-        function getMachineInfo(sMachineInfo)
-        {
-            if(loadQml("qrc:/Login/LoginCenter.qml"))
-            {
-                  $obShow.nextFrame.connect(saveLicense)
-                  $obShow.recive(sMachineInfo)
-            }
-
-        }
-
-        /// 检查许可失败
-        function checkLicenseFaild(errorInfo)
-        {
-            exitPopupLable.text = errorInfo + " " + exitShowLabel;
-            exitPopup.open();
-        }
-
-    //     许可校验
-        LicItem
-        {
-            id:objCheckLic;
-            /// 组件加载完成校验 许可
-            Component.onCompleted:
-            {
-                objCheckLic.checked.connect(showMainWindow)
-                objCheckLic.showError.connect(checkLicenseFaild);
-                objCheckLic.checkLicense()
-            }
-
-        }
-
-    //    // 连接失败
-    //    PopupDef {
-    //        id: popupRectDef
-    ////        visible: false
-    //        x:(mainWindow.width-popupRectDef.width)/2
-    //        y:(mainWindow.height-popupRectDef.height)/2
-    //    }
-
-    //    // 连接成功
-    //    PopupWin {
-    //        id: popupRectWin
-    ////        visible: false
-    //        x:(mainWindow.width-popupRectWin.width)/2
-    //        y:(mainWindow.height-popupRectWin.height)/2
-    //    }
+    /// 组件加载完成校验 许可
+    Component.onCompleted:
+    {
+        loadQml("qrc:/Login/LoginCenter.qml");
+        $licCheck.checked.connect(showMainWindow)
+        $licCheck.showError.connect(checkLicenseFaild);
+    }
 
     // 退出程序框上的是和否
     Component
@@ -174,7 +120,7 @@ Window {
         }
     }
 
-    // 退出弹出框
+    /// 退出弹出框
     Popup
     {
         id: exitPopup
@@ -263,29 +209,10 @@ Window {
         target: noLoader.item
         function onClicked()
         {
-            console.log("on no clicked")
             exitPopup.close();
             if(exitShowLabel !== exitPopupLable.text)
             {
-                if(null === $obShow)
-                {
-                    getMachineInfo(objCheckLic.getMD5MachineInfo());
-                }
                 exitPopupLable.text = exitShowLabel;
-            }
-        }
-    }
-
-    // 退出系统弹出退出弹出框
-    Connections
-    {
-        target: $app
-        function onExitSystem()
-        {
-            exitPopup.open()
-            if(!$app.settings.bIsStart)
-            {
-                exitPopup.open()
             }
         }
     }

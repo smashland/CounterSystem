@@ -84,10 +84,6 @@ Window {
         {
             /// 检查许可的工作已经完成
             objCheckLic.destroy();
-    //        if($app.initSystem()&&$app.startConnect())
-    //        {
-    //            popupRectWin.open();
-    //        }
         }
 
 
@@ -135,22 +131,6 @@ Window {
             }
 
         }
-
-    //    // 连接失败
-    //    PopupDef {
-    //        id: popupRectDef
-    ////        visible: false
-    //        x:(mainWindow.width-popupRectDef.width)/2
-    //        y:(mainWindow.height-popupRectDef.height)/2
-    //    }
-
-    //    // 连接成功
-    //    PopupWin {
-    //        id: popupRectWin
-    ////        visible: false
-    //        x:(mainWindow.width-popupRectWin.width)/2
-    //        y:(mainWindow.height-popupRectWin.height)/2
-    //    }
 
     // 退出程序框上的是和否
     Component

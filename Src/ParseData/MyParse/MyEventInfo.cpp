@@ -229,8 +229,8 @@ void CMyEventInfo::Update(const unsigned char *pData, int nLength)
                             else
                             {
                                 /// 增加命中状态
-                                QString listInfo=QString::fromUtf8("%3 %1被%2击中").arg(m_pPerson->id())
-                                        .arg(pShotPerson->id()).arg(QTime::currentTime().toString("hh:mm:ss"));
+                                QString listInfo=QString::fromUtf8("%3 %1被%2的%4击中").arg(m_pPerson->id())
+                                        .arg(pShotPerson->id()).arg(QTime::currentTime().toString("hh:mm:ss")).arg(gunType);
                                 listInfo += CConfigInfo::GetInstance()->GetBodyName(hurtInfo->hurtpart());
 
                                 /// 发送消息

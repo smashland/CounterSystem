@@ -181,6 +181,12 @@ void CGlobalSettings::setStart()
     CTimeServer::GetInstance()->ResetSimTime();
     emit startStatusChanged(m_bIsStart);
 }
+QString CGlobalSettings::getSysTime()
+{
+    QDateTime dateTime=QDateTime::currentDateTime();
+    sBeginTime = dateTime.toString("yyyy-MM-dd HH:mm:ss");
+    return (sBeginTime);
+}
 
 /// 演习结束
 void CGlobalSettings::setStop()

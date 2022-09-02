@@ -11,6 +11,7 @@
 #include "../DataManager/DataManager.h"
 #include "../DataManager/PersonAllInfo.h"
 #include "../DataManager/PersonInfo.pb.h"
+#include "../DataManager/ini_file.h"
 
 static QString sHurt = QString::fromUtf8("被%1击中%2");
 static QString sHit = QString::fromUtf8("命中%1%2");
@@ -51,7 +52,11 @@ void CExportResult::CreateDocx(const QString &sFileName, const QString& sTile,co
         l_merger.setClipboardValue("AllInfo","worldTitle",sTile.toUtf8().data());
 
 
-        l_merger.setClipboardValue("Result","nName", 12.3);
+        l_merger.setClipboardValue("Result","nName",12.3);
+        l_merger.setClipboardValue("Result","nBeginTime",INI_File().GetBeginTime().toStdString());
+        l_merger.setClipboardValue("Result","nFinishTime",INI_File().GetEndTime().toStdString());
+        l_merger.setClipboardValue("Result","nMapName","地图名称");
+        l_merger.setClipboardValue("Result","nLocation","位置");
         l_merger.paste("Result");
 
         for(auto one=rInfo.begin();one!=rInfo.end();++one)

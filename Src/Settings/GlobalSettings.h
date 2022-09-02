@@ -35,6 +35,8 @@ public:
     Q_INVOKABLE void startReplay();
     Q_INVOKABLE void endReplay();
 
+    Q_INVOKABLE QString getSysTime();
+
 
     Q_INVOKABLE void setBiSuo(quint16 nID); /// 闭锁
     Q_INVOKABLE void setJiesuoSuo(quint16 nID); /// 解锁
@@ -74,6 +76,7 @@ private:
     QVariantList         m_scoreSetting;     /// 得分设置
     QVariantList         m_harmSetting;      /// 损伤设置
     QVariantList         m_sysSetting;       /// 系统设置
+    QString              sBeginTime;
 };
 
 #endif // GLOBALSETTINGS_H

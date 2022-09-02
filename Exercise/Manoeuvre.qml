@@ -6,6 +6,7 @@ import Qt.labs.platform 1.1
 import Qt.labs.qmlmodels 1.0
 import "../Status" as MyStatus
 import "../RePlay" as MyRePlay
+//import Qt.labs.settings 1.0
 
 Item {
     id: manoeuvre
@@ -20,6 +21,8 @@ Item {
     property string hour:("00")
     property string minute: ("00")
     property string second: ("00")
+    property string startTime;
+    property string endTime;
 
     Row {
         x: 80*dpx
@@ -225,6 +228,7 @@ Item {
             /// 演习结束
             $app.settings.setStop();
             $app.allData.calResult();
+            endTime=$app.settings.getSysTime();
         }
         else
         {
@@ -232,6 +236,8 @@ Item {
             showMainCircl()
             $app.allData.clearInfo();
             $app.settings.setStart();
+            $app.settings.getSysTime();
+            startTime=$app.settings.getSysTime();
         }
     }
     PropertyAnimation

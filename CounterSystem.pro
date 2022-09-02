@@ -22,6 +22,7 @@ SOURCES += \
         Src/DataManager/PersonInfo.pb.cc \
         Src/DataManager/PersonStatus.cpp \
         Src/DataManager/TypeDefine.pb.cc \
+        Src/DataManager/ini_file.cpp \
         Src/ErrorReport.cpp \
         Src/Export/ExportResult.cpp \
         Src/Export/WordProcessingMerger.cpp \
@@ -84,6 +85,7 @@ HEADERS += \
     Src/DataManager/PersonInfo.pb.h \
     Src/DataManager/PersonStatus.h \
     Src/DataManager/TypeDefine.pb.h \
+    Src/DataManager/ini_file.h \
     Src/ErrorReport.h \
     Src/Export/ExportResult.h \
     Src/Export/WordProcessingMerger.h \

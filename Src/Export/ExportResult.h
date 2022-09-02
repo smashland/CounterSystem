@@ -4,6 +4,7 @@
 #include <QString>
 
 class CMyListModel;
+class CGlobalSetting;
 
 class CExportResult
 {

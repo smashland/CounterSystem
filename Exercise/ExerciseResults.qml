@@ -70,12 +70,12 @@ Item {
             ExerciseItem {
                 width: 300*dpx
                 title:"演习开始时间:"
-                name:"这是演习名称1"
+                name: manoeuvre.startTime
             }
             ExerciseItem {
                 width: 300*dpx
                 title:"演习结束时间:"
-                name:"这是演习名称1"
+                name:manoeuvre.endTime
             }
         }
         Row {

@@ -145,5 +145,6 @@
         <file>Exercise/FinishButton.qml</file>
         <file>Exercise/ExerciseItem.qml</file>
         <file>Setting/ChongdanItem.qml</file>
+        <file>Manage/SetMapLoader.qml</file>
     </qresource>
 </RCC>

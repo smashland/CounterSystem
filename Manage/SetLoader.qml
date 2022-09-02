@@ -65,6 +65,7 @@ Rectangle {
                     scoreGroupBox.visible=false
                     harmGroupBox.visible=true
                     systemGroupBox.visible=true
+                    setMapLoader.visible = false
                 }
             }
             SwitchButton{
@@ -74,6 +75,7 @@ Rectangle {
                     scoreGroupBox.visible=false
                     harmGroupBox.visible=false
                     systemGroupBox.visible=false
+                    setMapLoader.visible = true
                 }
 
             }
@@ -84,6 +86,7 @@ Rectangle {
                     harmGroupBox.visible=false
                     systemGroupBox.visible=false
                     scoreGroupBox.visible=true
+                    setMapLoader.visible = false
                 }
 
             }
@@ -206,8 +209,15 @@ Rectangle {
             }
         }
     }
+    SetMapLoader {
+        id: setMapLoader
+        x: 280
+        y: 120
+        visible: false
+    }
 
   }
+
 
 
 

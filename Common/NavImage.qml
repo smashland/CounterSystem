@@ -59,6 +59,7 @@ Row {
         }
     }
     Rectangle {
+        id: zuidahua
         width: 18 *dpx
         height: 18 *dpx
         color: "transparent"
@@ -72,6 +73,7 @@ Row {
             font.pixelSize: 22*dpx
             verticalAlignment: Text.AlignVCenter
             MouseArea{
+                id: mousearea
                 anchors.fill: parent
                 hoverEnabled: true
                 onEntered: {
@@ -81,8 +83,7 @@ Row {
                     maxHint.visible = false
                 }
                 onClicked: {
-                    resizeItem.visible = true
-
+                    zuidahuaFun()
                 }
             }
         }
@@ -91,10 +92,61 @@ Row {
             id:maxHint
             hintX: maxIcon.x
             hintY: maxIcon.y+maxIcon.contentHeight+10
+            title: "还原"
+            visible: false
+        }
+    }
+    Rectangle {
+        id: huanyuan
+        width: 18 *dpx
+        height: 18 *dpx
+        color: "transparent"
+        visible: false
+        Text {
+            id:huanyuanIcon
+            anchors.fill: parent
+            text: qsTr("\ue702")
+            color: "#e7f6ff"
+            font.family: "iconfont"
+            font.pixelSize: 22*dpx
+            verticalAlignment: Text.AlignVCenter
+            MouseArea{
+                anchors.fill: parent
+                hoverEnabled: true
+                onEntered: {
+                    huanyuanHint.visible = true
+                }
+                onExited: {
+                    huanyuanHint.visible = false
+                }
+                onClicked: {
+                    huanyuanFun()
+                }
+            }
+        }
+        Hint
+        {
+            id:huanyuanHint
+            hintX: maxIcon.x
+            hintY: maxIcon.y+maxIcon.contentHeight+10
             title: "最大化"
             visible: false
         }
     }
+    function zuidahuaFun()
+    {
+        zuidahua.visible = false
+        huanyuan.visible = true
+        resizeItem.visible = true
+    }
+    function huanyuanFun()
+    {
+        zuidahua.visible = true
+        huanyuan.visible = false
+        resizeItem.visible = false
+    }
+
+
     Rectangle {
         width: 18 *dpx
         height: 18 *dpx

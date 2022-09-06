@@ -14,9 +14,7 @@ public:
     Q_INVOKABLE void saveLicense(const QByteArray &sLicInfo);
     Q_INVOKABLE QString getMD5MachineInfo();
     Q_INVOKABLE QString read();
-    Q_INVOKABLE bool checkLicense(const QByteArray &sLicInfo);
     Q_INVOKABLE bool isFileExist();
-    Q_INVOKABLE void deleteFile();
 
 
 signals:
@@ -24,7 +22,7 @@ signals:
     void showError(const QString& sErrorInfo);
 private:
     void getMachineInfo();
-//    bool checkLicense(const QByteArray &sLicInfo);
+    bool checkLicense(const QByteArray &sLicInfo);
 
 private:
     QByteArray m_sLicInfo;

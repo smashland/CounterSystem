@@ -9,7 +9,6 @@ Item
 {
     id: loginCenter
     anchors.fill: parent
-    signal nextFrame(var licInfo)
 
     // 收到机器码信息
     function recive(str)
@@ -62,7 +61,7 @@ Item
             Text
             {
                 id: element
-                enabled: false
+//                enabled: false
                 anchors.top: needLic.bottom
                 anchors.topMargin: 5
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -84,7 +83,8 @@ Item
                 }
             }
         }
-    Connect {
+    Connect
+    {
         id: connect
         y: 950 *dpy
     }

@@ -43,51 +43,46 @@ Rectangle {
             y: 95*dpy
         }
 
-    Rectangle {
-        x: 80*dpx
-        y: 110*dpy
-        width: 190*dpx
-        height: 350*dpy
-        color: "#0a3365"
-        ButtonGroup{
-            buttons: columnEditBtns.children
-        }
-        Column {
-            id:columnEditBtns
-    //        anchors.verticalCenter: parent.verticalCenter
-            spacing:  0*dpx
-            SwitchButton{
-                id: shouquan_text
-                text: qsTr("授权配置")
-                onClicked: {
-                    info.visible=true;
-                }
+        Rectangle {
+            x: 80*dpx
+            y: 110*dpy
+            width: 190*dpx
+            height: 350*dpy
+            color: "#0a3365"
+            ButtonGroup{
+                buttons: columnEditBtns.children
             }
-            SwitchButton{
-                id: shiyong_text
-                text: qsTr("使用说明")
-                onClicked: {
-                    info.visible=false;
+            Column {
+                id:columnEditBtns
+                //        anchors.verticalCenter: parent.verticalCenter
+                spacing:  0*dpx
+                SwitchButton{
+                    id: shouquan_text
+                    text: qsTr("授权配置")
+                    onClicked: {
+                        info.visible=true;
+                    }
+                }
+                SwitchButton{
+                    id: shiyong_text
+                    text: qsTr("使用说明")
+                    onClicked: {
+                        info.visible=false;
+                    }
+
                 }
 
             }
 
-        }
-
-        Text {
-            id: info
-            x:218*dpx
-            y:35*dpy
-            visible: false
-            font.pixelSize: 24*dpx
-            color: "#ffffff"
-            text: qsTr("机器码:"+objCheckLic.getMD5MachineInfo()) //
+            Text {
+                id: info
+                x:218*dpx
+                y:35*dpy
+                visible: false
+                font.pixelSize: 24*dpx
+                color: "#ffffff"
+                text: qsTr("机器码:"+$licCheck.getMD5MachineInfo()) //
+            }
         }
     }
-}
-    LicItem
-    {
-        id:objCheckLic;
-    }
-
 }

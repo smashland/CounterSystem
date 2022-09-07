@@ -12,6 +12,7 @@
 #include "Src/JudgeValid/Blur.h"
 #include "Src/AppGlobal.h"
 #include "Src/SingleApplication/SingleApplication"
+#include "Src/DataManager/ScenarioInfo.h"
 
 int main(int argc, char *argv[])
 {
@@ -42,6 +43,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<QAppGlobal>("MyItem",1,0,"AppGlobal");
     qmlRegisterType<QmlBlur>("MyItem",1,0,"Blur");
     qmlRegisterType<QtOsgItem>("SceneGraphRendering", 1, 0, "QuickOSGViewer");
+    qmlRegisterType<ScenarioInfo>("MyItem",1,0,"Scenario");
 
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();

@@ -30,6 +30,7 @@ SOURCES += \
         Src/DataManager/PersonAllInfo.cpp \
         Src/DataManager/PersonInfo.pb.cc \
         Src/DataManager/PersonStatus.cpp \
+        Src/DataManager/ScenarioInfo.cpp \
         Src/DataManager/TypeDefine.pb.cc \
         Src/DataManager/ini_file.cpp \
         Src/ErrorReport.cpp \
@@ -93,6 +94,7 @@ HEADERS += \
     Src/DataManager/PersonAllInfo.h \
     Src/DataManager/PersonInfo.pb.h \
     Src/DataManager/PersonStatus.h \
+    Src/DataManager/ScenarioInfo.h \
     Src/DataManager/TypeDefine.pb.h \
     Src/DataManager/ini_file.h \
     Src/ErrorReport.h \

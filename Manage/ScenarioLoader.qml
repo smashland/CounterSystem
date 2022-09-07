@@ -12,6 +12,7 @@ Rectangle {
     id: scenarioLoader
     anchors.fill: parent
     color: "transparent"
+    signal addScenario
 
     Item {
         id: backgroundItem
@@ -304,9 +305,19 @@ Rectangle {
                 model: phoneModel.createObject(listView)
                 header: headerView
                 focus: true
+                function addOne() {
+                            model.append(
+                                        {
+                                            "name": "方案",
+                                        }
+                            )
+                        }
+
+                Component.onCompleted: {
+                    scenarioLoader.addScenario.connect(listView.addOne)
+                }
+
             }
-
-
 
         }
     }

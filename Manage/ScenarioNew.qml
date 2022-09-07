@@ -5,6 +5,7 @@ import QtQuick.Layouts 1.15
 import QtQuick.Controls.Styles 1.4
 import "../Common"
 import "../Exercise"
+import MyItem 1.0
 
 Item {
     id: scenarionew
@@ -615,6 +616,13 @@ Item {
             }
         }
     }
+    function addPerson() {
+        model.append({
+
+
+                     })
+    }
+
     Row {
         spacing: 15 *dpx
         anchors.bottom: parent.bottom
@@ -626,7 +634,15 @@ Item {
             }
 
             nameButton: "确定"
-
+            onClicked: {
+                var test = scenario.setSceName();
+                console.log(test);
+                if(nameItemContent.text == null) {
+                    console.log("没有方案名称")
+                }else {
+                    scenarioLoader.addScenario()
+                }
+            }
         }
         PopupButton {
             background: Rectangle {
@@ -635,6 +651,10 @@ Item {
             nameButton: "取消"
         }
     }
+    Scenario {
+        id: scenario
+    }
+
 
 
 }

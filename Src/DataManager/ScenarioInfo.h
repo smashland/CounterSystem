@@ -44,7 +44,7 @@ public:
      * @brief 设置方案名称
      * @param sName
      */
-    void setSceName(const QString& sName);
+    Q_INVOKABLE void setSceName(const QString& sName);
     QString getSceName(){return(m_sSceName);}
 
     /**

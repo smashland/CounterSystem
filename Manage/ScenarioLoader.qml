@@ -46,33 +46,6 @@ Rectangle {
             y: 95*dpy
         }
 
-        Row {
-            x: 250 *dpx
-            y: 54 *dpx
-            spacing: 10*dpx
-            Rectangle {
-                color: "transparent"
-                width: 20*dpx
-                height: 20*dpx
-                Image {
-                    anchors.fill:parent
-                    source: "qrc:/Image/icon/tishi.svg"
-                }
-            }
-            Rectangle {
-
-                color: "transparent"
-                Text {
-                    text: qsTr("点击修改可跳转方案管理页面手动拖拽进行修改，也可选择修改页面进行修改")
-                    font.pixelSize: 16*dpx;
-                    color: "#faba2f";
-                    font.family: "Microsoft YaHei"
-                    verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: Text.AlignHCenter
-                }
-            }
-        }
-
         Row
         {
             x: 80 *dpx
@@ -242,7 +215,7 @@ Rectangle {
                         verticalAlignment: Text.AlignVCenter
                     }
                     Row {
-                        x: 572 *dpx
+                        x: 620 *dpx
                         y: 10 *dpy
                         width: 370 *dpx
                         height: 30 *dpy
@@ -264,18 +237,13 @@ Rectangle {
                             viewImage: "\ue607"
                         }
                         ViewButton {
-                            name: qsTr("刷新")
-                            color: viewColor_shuaxin
-                            viewImage: "\ue600"
-                        }
-                        ViewButton {
                             name: qsTr("删除")
                             color: viewColor_shanchu
                             viewImage: "\ue61c"
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
-                                    scenarioRemove.visible = true
+//                                    scenarioRemove.visible = true
                                 }
                             }
                         }
@@ -308,7 +276,7 @@ Rectangle {
                 function addOne() {
                             model.append(
                                         {
-                                            "name": "方案",
+                                            "cost":scenarioNew.title
                                         }
                             )
                         }

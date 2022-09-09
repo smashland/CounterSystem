@@ -5,6 +5,9 @@ Rectangle {
     id: soldierItem
     property alias text: soldierItemText.text
     property alias name: soldierItemContent.text
+    width: soldierItemText.contentWidth + 200*dpx
+    height: 34 *dpy
+    color: "transparent"
 
     Rectangle {
         color: "transparent"

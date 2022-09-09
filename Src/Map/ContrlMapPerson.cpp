@@ -16,6 +16,7 @@ CContrlMapPerson::CContrlMapPerson(ISceneGraph *pSceneGraph):
     m_pSceneGraph(pSceneGraph)
 {
     m_pMap = m_pSceneGraph->GetMap();
+    m_pMap->GetSpaceEnv()->ShowSpaceBackGround(false);
     m_pMap->OpenLight(false);
     m_pLayer = m_pMap->CreateLayer("Test");
 }

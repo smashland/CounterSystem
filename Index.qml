@@ -232,12 +232,12 @@ Rectangle
         x: (index.width-playbackRefresh.width) / 2
         y: (index.height-playbackRefresh.height) / 2
     }
-    ScenarioRemove {
-        id: scenarioRemove
-        visible: false
-        x: (index.width-scenarioRemove.width) / 2
-        y: (index.height-scenarioRemove.height) / 2
-    }
+//    ScenarioRemove {
+//        id: scenarioRemove
+//        visible: false
+//        x: (index.width-scenarioRemove.width) / 2
+//        y: (index.height-scenarioRemove.height) / 2
+//    }
 
 //        Progressbar {
 //            id: progressbar
@@ -310,6 +310,11 @@ Rectangle
         enableSize: 8
         anchors.fill: parent
         focus: true
+        visible: false
+    }
+    PersonAdd {
+        id: personAdd
+        anchors.centerIn: parent
         visible: false
     }
 

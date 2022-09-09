@@ -93,7 +93,6 @@
         <file>Common/ViewButton.qml</file>
         <file>Manage/ScenarioPopup.qml</file>
         <file>Manage/ScenarioRevise.qml</file>
-        <file>Manage/ScenarioRemove.qml</file>
         <file>Manage/PlaybackRefresh.qml</file>
         <file>OsgWindow.qml</file>
         <file>Manage/Progressbar.qml</file>
@@ -146,5 +145,7 @@
         <file>Exercise/ExerciseItem.qml</file>
         <file>Setting/ChongdanItem.qml</file>
         <file>Manage/SetMapLoader.qml</file>
+        <file>Common/RemoveDialog.qml</file>
+        <file>Manage/PersonAdd.qml</file>
     </qresource>
 </RCC>

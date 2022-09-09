@@ -49,33 +49,6 @@ Rectangle {
             y: 95*dpy
         }
 
-        Row {
-            x: 250 *dpx
-            y: 54 *dpx
-            spacing: 10*dpx
-            Rectangle {
-                color: "transparent"
-                width: 20*dpx
-                height: 20*dpx
-                Image {
-                    anchors.fill:parent
-                    source: "qrc:/Image/icon/tishi.svg"
-                }
-            }
-            Rectangle {
-
-                color: "transparent"
-                Text {
-                    text: qsTr("点击修改可跳转方案管理页面手动拖拽进行修改，也可选择修改页面进行修改")
-                    font.pixelSize: 16*dpx;
-                    color: "#faba2f";
-                    font.family: "Microsoft YaHei"
-                    verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: Text.AlignHCenter
-                }
-            }
-        }
-
         Row
         {
             x: 80 *dpx
@@ -94,15 +67,15 @@ Rectangle {
                     }
                 }
             }
-            ViewButton {
-                name: qsTr("选中删除")
-                color: viewColor_xuanzhongshanchu
-                viewImage: "\ue645"
-                MouseArea{
-                    anchors.fill: parent
-                    onClicked: scenarioRemove.visible= true
-                }
-            }
+//            ViewButton {
+//                name: qsTr("选中删除")
+//                color: viewColor_xuanzhongshanchu
+//                viewImage: "\ue645"
+//                MouseArea{
+//                    anchors.fill: parent
+//                    onClicked: scenarioRemove.visible= true
+//                }
+//            }
         }
 
         Rectangle {
@@ -154,8 +127,8 @@ Rectangle {
         Rectangle {
             x: 80
             anchors.bottom: parent.bottom
-            anchors.bottomMargin: 30
-            width: 1066
+            anchors.bottomMargin: 30*dpy
+            width: 1066 *dpx
             height: 550 *dpy
             color: "transparent"
 
@@ -220,7 +193,6 @@ Rectangle {
                         color: index%2 ? "#2D5689" : "#4671a6"
                     }
 
-
                     Text {
                         id: col1
                         text: index + 1
@@ -244,7 +216,7 @@ Rectangle {
                         verticalAlignment: Text.AlignVCenter
                     }
                     Row {
-                        x: 622 *dpx
+                        x: 670 *dpx
                         y: 10 *dpy
                         width: 370 *dpx
                         height: 30 *dpy
@@ -265,23 +237,25 @@ Rectangle {
                             }
                         }
                         ViewButton {
-                            name: qsTr("刷新")
-                            color: viewColor_shuaxin
-                            viewImage: "\ue600"
-                        }
-                        ViewButton {
                             name: qsTr("删除")
                             color: viewColor_shanchu
                             viewImage: "\ue61c"
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
-                                    scenarioRemove.visible = true
+                                    removeDialog.visible = true
                                 }
                             }
                         }
                     }
                 }
+            }
+            RemoveDialog {
+                id: removeDialog
+                visible: false
+                anchors.centerIn: parent
+                content1: "此操作永久删除该回放记录，"
+                content2: "确认要删除吗？"
             }
             FileDialog
             {

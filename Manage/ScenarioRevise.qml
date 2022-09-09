@@ -68,93 +68,11 @@ Item {
 
         }
     }
-    Rectangle {
-        x: 90 *dpx
-        y: 160 * dpy + nameItemContent.height
-        Text {
-            id: tianjiarenyuan
-            width: tianjiarenyuan.contentWidth
-            //            height: 40 *dpy
-            color: "#ffffff"
-            text: qsTr("添加人员:")
-            font.pixelSize: 17*dpx;
-            font.family: "Microsoft YaHei";
-            verticalAlignment: Text.AlignVCenter
-        }
-        RowLayout {
-            id: columText
-            x: tianjiarenyuan.contentWidth + 20 *dpx
-            spacing: 40 *dpx
-            RadioButton {
-                id:control
-                checked: true
-                text: qsTr("是")
-                indicator: Rectangle {
-                    implicitWidth: 18
-                    implicitHeight: 18
-                    x: control.leftPadding
-                    y: parent.height / 2 - height / 2
-                    radius: 9
-                    border.color: control.down ? "#ffffff" : "#26abef"
-
-                    Rectangle {
-                        width: 12
-                        height: 12
-                        radius: 6
-                        anchors.centerIn: parent
-                        color: control.down ? "#ffffff" : "#1d4f88"
-                        visible: control.checked
-                    }
-                }
-
-                contentItem: Text {
-                    text: control.text
-                    opacity: enabled ? 1.0 : 0.3
-                    color: "#ffffff"
-                    font.pixelSize: 17*dpx;
-                    verticalAlignment: Text.AlignVCenter
-                    leftPadding: control.indicator.width + control.spacing
-                }
-            }
-            RadioButton {
-                id: control1
-                text: qsTr("否")
-                indicator: Rectangle {
-                    implicitWidth: 18
-                    implicitHeight: 18
-                    x: control1.leftPadding
-                    y: parent.height / 2 - height / 2
-                    radius: 9
-                    border.color: control1.down ? "#ffffff" : "#26abef"
-
-                    Rectangle {
-                        width: 12
-                        height: 12
-                        radius: 6
-                        anchors.centerIn: parent
-                        color: control1.down ? "#ffffff" : "#1d4f88"
-                        visible: control1.checked
-                    }
-                }
-
-                contentItem: Text {
-                    text: control1.text
-                    opacity: enabled ? 1.0 : 0.3
-                    color: "#ffffff"
-                    font.pixelSize: 17*dpx;
-                    verticalAlignment: Text.AlignVCenter
-                    leftPadding: control1.indicator.width + control1.spacing
-                }
-            }
-
-        }
-    }
-
 
     Text {
         id: weizhixinxi
         x: 90 *dpx
-        y: 160 * dpy + nameItemContent.height + tianjiarenyuan.contentHeight + 30 *dpy
+        y: 160 * dpy + nameItemContent.height + 30 *dpy
         width: weizhixinxi.contentWidth
         height: weizhixinxi.contentHeight
         text: qsTr("人员信息表")

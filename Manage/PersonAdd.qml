@@ -82,7 +82,7 @@ Popup
             source: fileDialog.fileUrl
         }
         onRejected: {
-            console.log("Canceled")
+//            console.log("Canceled")
         }
         Component.onCompleted: visible = flase
     }
@@ -100,22 +100,167 @@ Popup
             text: "人员姓名: "
             name:""
         }
-
-        SoldierItem {
-            text: "人员职务: "
-            name: ""
+        Row {
+            spacing: 20*dpx
+            Text {
+                id: soldierItemText
+                width: soldierItemText.contentWidth
+                height: 34 *dpy
+                text: "人员姓名: "
+                color: "#ffffff"
+                font.pixelSize: 17*dpx;
+                font.family: "Microsoft YaHei";
+                verticalAlignment: Text.AlignVCenter
+            }
+            ComboBox {
+                id: combobox_renyuan
+                width: 200 *dpx
+                height: 34 *dpy
+                model: ["士兵"]
+                delegate: ItemDelegate {
+                    width: 110 *dpx
+                    height: 30 *dpy
+                    contentItem: Text {
+                        text: modelData
+                        color: "black"
+                        font.pixelSize: 16
+                        font.family: "Microsoft YaHei"
+                        verticalAlignment: Text.AlignVCenter
+                    }
+                }
+                contentItem: TextInput {
+                    leftPadding: 10*dpx
+                    text: combobox_renyuan.displayText
+                    font.pixelSize: 16
+                    color: "#ffffff"
+                    font.family: "Microsoft YaHei"
+                    verticalAlignment: Text.AlignVCenter
+                }
+                background: Rectangle {
+                    implicitWidth: 110*dpx
+                    implicitHeight: 30 *dpy
+                    color: "#1d4f88"
+                    border.color: "#26abef"
+                }
+            }
         }
-
-        SoldierItem {
-            text: "阵营选择: "
-            name: ""
+        Row {
+            spacing: 20*dpx
+            Text {
+                id: zhenyingxuanze
+                width: zhenyingxuanze.contentWidth
+                height: 34 *dpy
+                text: "阵营选择: "
+                color: "#ffffff"
+                font.pixelSize: 17*dpx;
+                font.family: "Microsoft YaHei";
+                verticalAlignment: Text.AlignVCenter
+            }
+            ComboBox {
+                id: zhenying
+                width: 200 *dpx
+                height: 34 *dpy
+                model: ["蓝","红"]
+                delegate: ItemDelegate {
+                    width: 110 *dpx
+                    height: 30 *dpy
+                    contentItem: Text {
+                        text: modelData
+                        color: "black"
+                        font.pixelSize: 16
+                        font.family: "Microsoft YaHei"
+                        verticalAlignment: Text.AlignVCenter
+                    }
+                }
+                contentItem: TextInput {
+                    leftPadding: 10*dpx
+                    text: zhenying.displayText
+                    font.pixelSize: 16
+                    color: "#ffffff"
+                    font.family: "Microsoft YaHei"
+                    verticalAlignment: Text.AlignVCenter
+                }
+                background: Rectangle {
+                    implicitWidth: 110*dpx
+                    implicitHeight: 30 *dpy
+                    color: "#1d4f88"
+                    border.color: "#26abef"
+                }
+            }
         }
-        SoldierItem {
-            text: "是否人质: "
-            name: ""
+        Row {
+            spacing: 20*dpx
+            Text {
+                id: shifourenzhi
+                width: shifourenzhi.contentWidth
+                height: 34 *dpy
+                text: "是否人质: "
+                color: "#ffffff"
+                font.pixelSize: 17*dpx;
+                font.family: "Microsoft YaHei";
+                verticalAlignment: Text.AlignVCenter
+            }
+            Row {
+                width: 120 *dpx
+                y: 3 *dpy
+                spacing: 14 *dpx
+                RadioButton {
+                    id:control3
+                    checked: true
+                    text: qsTr("是")
+                    indicator: Rectangle {
+                        implicitWidth: 18
+                        implicitHeight: 18
+                        y: parent.height / 2 - height / 2
+                        radius: 9
+                        border.color: control3.down ? "#ffffff" : "#26abef"
+                        Rectangle {
+                            width: 12
+                            height: 12
+                            radius: 6
+                            anchors.centerIn: parent
+                            color: control3.down ? "#ffffff" : "#1d4f88"
+                            visible: control3.checked
+                        }
+                    }
+                    contentItem: Text {
+                        text: control3.text
+                        opacity: enabled ? 1.0 : 0.3
+                        color: "#ffffff"
+                        font.pixelSize: 17*dpx;
+                        verticalAlignment: Text.AlignVCenter
+                        leftPadding: 20*dpx
+                    }
+                }
+                RadioButton {
+                    id: control4
+                    text: qsTr("否")
+                    indicator: Rectangle {
+                        implicitWidth: 18
+                        implicitHeight: 18
+                        y: parent.height / 2 - height / 2
+                        radius: 9
+                        border.color: control4.down ? "#ffffff" : "#26abef"
+                        Rectangle {
+                            width: 12
+                            height: 12
+                            radius: 6
+                            anchors.centerIn: parent
+                            color: control4.down ? "#ffffff" : "#1d4f88"
+                            visible: control4.checked
+                        }
+                    }
+                    contentItem: Text {
+                        text: control4.text
+                        opacity: enabled ? 1.0 : 0.3
+                        color: "#ffffff"
+                        font.pixelSize: 17*dpx;
+                        verticalAlignment: Text.AlignVCenter
+                        leftPadding: 20*dpx
+                    }
+                }
+            }
         }
-
-
 
     }
 
@@ -148,227 +293,3 @@ Popup
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Item {
-//    x: 90 *dpx
-//    y: weizhixinxi.contentHeight + weizhixinxi.y + 10 *dpy + 10 *dpy + 146*dpy
-//    width: 985
-//    height: 50 *dpy
-
-//    Rectangle {
-//        anchors.fill: parent
-//        color: "#4671a6"
-//    }
-
-//    Row {
-//        spacing: 54 *dpx
-//        x: 25 *dpx
-//        height: 40 *dpy
-//        Rectangle {
-//            y: 10 *dpy
-//            width: 70 *dpx
-//            height: 30 *dpy
-//            color: "#1d4f88"
-//            border.color: "#3b6daa"
-//            TextInput {
-//                x: 10 *dpx
-//                width: 60*dpx
-//                height: 30 *dpy
-//                font.pixelSize: 15*dpx
-//                color: "#ffffff"
-//                clip: true
-//                font.family: "Microsoft YaHei"
-//                verticalAlignment: Text.AlignVCenter
-//            }
-//        }
-//        Rectangle {
-//            y: 10 *dpy
-//            width: 80 *dpx
-//            height: 30 *dpy
-//            color: "#1d4f88"
-//            border.color: "#3b6daa"
-//            TextInput {
-//                x: 10 *dpx
-//                width: 70*dpx
-//                height: 30 *dpy
-//                font.pixelSize: 15*dpx
-//                color: "#ffffff"
-//                clip: true
-//                font.family: "Microsoft YaHei"
-//                verticalAlignment: Text.AlignVCenter
-//            }
-//        }
-//        ComboBox {
-//            id: combobox_renyuan
-//            y: 10*dpy
-//            width: 110 *dpx
-//            height: 30 *dpy
-//            model: ["士兵"]
-//            delegate: ItemDelegate {
-//                width: 110 *dpx
-//                height: 30 *dpy
-//                contentItem: Text {
-//                    text: modelData
-//                    color: "black"
-//                    font.pixelSize: 16
-//                    font.family: "Microsoft YaHei"
-//                    verticalAlignment: Text.AlignVCenter
-//                }
-//            }
-//            contentItem: TextInput {
-//                leftPadding: 10*dpx
-//                text: combobox_renyuan.displayText
-//                font.pixelSize: 16
-//                color: "#ffffff"
-//                font.family: "Microsoft YaHei"
-//                verticalAlignment: Text.AlignVCenter
-//            }
-//            background: Rectangle {
-//                implicitWidth: 110*dpx
-//                implicitHeight: 30 *dpy
-//                color: "#1d4f88"
-//                border.color: "#26abef"
-//            }
-//        }
-//        ComboBox {
-//            id: combobox_redblue
-//            y: 10*dpy
-//            width: 110 *dpx
-//            height: 30 *dpy
-//            model: ["蓝","红"]
-//            delegate: ItemDelegate {
-//                width: 80 *dpx
-//                height: 30 *dpy
-//                contentItem: Text {
-//                    text: modelData
-//                    color: "black"
-//                    font.pixelSize: 16
-//                    font.family: "Microsoft YaHei"
-//                    verticalAlignment: Text.AlignVCenter
-//                }
-//            }
-//            contentItem: Text {
-//                leftPadding: 10*dpx
-//                text: combobox_redblue.displayText
-//                font.pixelSize: 16
-//                color: "#ffffff"
-//                font.family: "Microsoft YaHei"
-//                verticalAlignment: Text.AlignVCenter
-//            }
-//            background: Rectangle {
-//                implicitWidth: 80*dpx
-//                implicitHeight: 30 *dpy
-//                color: "#1d4f88"
-//                border.color: "#26abef"
-//            }
-//        }
-//        Row {
-//            width: 120 *dpx
-//            y: 10 *dpy
-//            spacing: 14 *dpx
-//            RadioButton {
-//                id:control3
-//                checked: true
-//                text: qsTr("是")
-//                indicator: Rectangle {
-//                    implicitWidth: 18
-//                    implicitHeight: 18
-//                    y: parent.height / 2 - height / 2
-//                    radius: 9
-//                    border.color: control3.down ? "#ffffff" : "#26abef"
-
-//                    Rectangle {
-//                        width: 12
-//                        height: 12
-//                        radius: 6
-//                        anchors.centerIn: parent
-//                        color: control3.down ? "#ffffff" : "#1d4f88"
-//                        visible: control3.checked
-//                    }
-//                }
-
-//                contentItem: Text {
-//                    text: control3.text
-//                    opacity: enabled ? 1.0 : 0.3
-//                    color: "#ffffff"
-//                    font.pixelSize: 17*dpx;
-//                    verticalAlignment: Text.AlignVCenter
-//                    leftPadding: 20*dpx
-//                }
-//            }
-//            RadioButton {
-//                id: control4
-//                text: qsTr("否")
-//                indicator: Rectangle {
-//                    implicitWidth: 18
-//                    implicitHeight: 18
-//                    y: parent.height / 2 - height / 2
-//                    radius: 9
-//                    border.color: control4.down ? "#ffffff" : "#26abef"
-
-//                    Rectangle {
-//                        width: 12
-//                        height: 12
-//                        radius: 6
-//                        anchors.centerIn: parent
-//                        color: control4.down ? "#ffffff" : "#1d4f88"
-//                        visible: control4.checked
-//                    }
-//                }
-
-//                contentItem: Text {
-//                    text: control4.text
-//                    opacity: enabled ? 1.0 : 0.3
-//                    color: "#ffffff"
-//                    font.pixelSize: 17*dpx;
-//                    verticalAlignment: Text.AlignVCenter
-//                    leftPadding: 20*dpx
-//                }
-//            }
-//        }
-
-//        ViewButton {
-//            y: 10 *dpy
-//            name: qsTr("确定")
-//            color: viewColor_xinjian
-//            viewImage: "\ue8ad"
-//        }
-//    }
-
-//}

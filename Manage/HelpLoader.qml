@@ -74,15 +74,53 @@ Rectangle {
 
             }
 
-            Text {
+//            Text {
+//                id: info
+//                x:218*dpx
+//                y:35*dpy
+//                visible: false
+//                font.pixelSize: 24*dpx
+//                color: "#ffffff"
+//                text: qsTr("机器码:"+$licCheck.getMD5MachineInfo()) //
+//            }
+            Row{
                 id: info
                 x:218*dpx
                 y:35*dpy
                 visible: false
-                font.pixelSize: 24*dpx
-                color: "#ffffff"
-                text: qsTr("机器码:"+$licCheck.getMD5MachineInfo()) //
+
+                Text {
+                    id: jiqima
+                    width: jiqima.contentWidth
+                    height: 34 *dpy
+                    color: "#ffffff"
+                    text: "机器码："
+                    font.pixelSize: 17*dpx;
+                    font.family: "Microsoft YaHei";
+                    verticalAlignment: Text.AlignVCenter
+                }
+
+                Rectangle {
+                    width: 400*dpx
+                    height: 34 *dpy
+                    color: "#1d4f88"
+                    border.color: "#3b6daa"
+                    Text {
+                        x: 10 *dpx
+                        width: 380*dpx
+                        height: 34 *dpy
+                        text: $licCheck.getMD5MachineInfo()
+                        font.pixelSize: 17*dpx
+                        color: "#ffffff"
+                        clip: true
+                        font.family: "Microsoft YaHei"
+                        verticalAlignment: Text.AlignVCenter
+
+                    }
+                }
             }
+
+
         }
     }
 }

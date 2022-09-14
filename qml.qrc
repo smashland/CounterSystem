@@ -147,5 +147,7 @@
         <file>Manage/SetMapLoader.qml</file>
         <file>Common/RemoveDialog.qml</file>
         <file>Manage/PersonAdd.qml</file>
+        <file>Image/true.png</file>
+        <file>Manage/HelpAdd.qml</file>
     </qresource>
 </RCC>

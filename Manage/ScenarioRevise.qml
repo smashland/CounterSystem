@@ -57,8 +57,8 @@ Item {
             TextInput {
                 id: nameItemContent
                 x: 10 *dpx
-                width: 190*dpx
-                height: 34 *dpy
+                width: 420*dpx
+                height: 40 *dpy
                 font.pixelSize: 17*dpx
                 color: "#ffffff"
                 clip: true
@@ -292,7 +292,10 @@ Item {
                             name: qsTr("修改")
                             color: viewColor_xinjian
                             viewImage: "\ue6a5"
-
+                            MouseArea {
+                                anchors.fill: parent
+                                onClicked:personAdd.visible = true
+                            }
                         }
                         ViewButton {
                             name: qsTr("删除")
@@ -325,31 +328,38 @@ Item {
             focus: true
         }
     }
-    Item {
-        x: 90 *dpx
-        y: weizhixinxi.contentHeight + weizhixinxi.y + 10 *dpy + 10 *dpy + 146*dpy + 52 *dpy
-        width: 985
-        height: 40 *dpy
-        Rectangle {
-            anchors.fill: parent
-            color: "#2D5689"
-            Text {
-                anchors.fill: parent
-                text: qsTr("+ 添加人员")
-                font.pixelSize: 17*dpx;
-                verticalAlignment: Text.AlignVCenter
-                horizontalAlignment: Text.AlignHCenter
-                color: "#ffffff"
-                font.family: "Microsoft YaHei"
-                font.bold: true
-            }
-        }
-    }
+//    Item {
+//        x: 90 *dpx
+//        y: weizhixinxi.contentHeight + weizhixinxi.y + 10 *dpy + 10 *dpy + 146*dpy + 52 *dpy
+//        width: 985
+//        height: 40 *dpy
+//        Rectangle {
+//            anchors.fill: parent
+//            color: "#2D5689"
+//            Text {
+//                anchors.fill: parent
+//                text: qsTr("+ 添加人员")
+//                font.pixelSize: 17*dpx;
+//                verticalAlignment: Text.AlignVCenter
+//                horizontalAlignment: Text.AlignHCenter
+//                color: "#ffffff"
+//                font.family: "Microsoft YaHei"
+//                font.bold: true
+//            }
+//        }
+//    }
     Row {
         spacing: 15 *dpx
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 60 *dpy
-        x: 494*dpx
+        x: 444*dpx
+        PopupButton {
+            background: Rectangle {
+                color: "#265aef"
+            }
+            nameButton: "添加人员"
+            onClicked: personAdd.visible = true
+        }
         PopupButton {
             background: Rectangle {
                 color: "#265aef"
@@ -363,6 +373,7 @@ Item {
                 color: "#1d4f88"
             }
             nameButton: "取消"
+            onClicked: scenarioRevise.visible = false
         }
     }
 

@@ -278,7 +278,10 @@ Item {
                             name: qsTr("修改")
                             color: viewColor_shuaxin
                             viewImage: "\ue6a5"
-
+                            MouseArea {
+                                anchors.fill: parent
+                                onClicked:personAdd.visible = true
+                            }
                         }
                         ViewButton {
                             name: qsTr("加载")
@@ -368,6 +371,7 @@ Item {
                 color: "#1d4f88"
             }
             nameButton: "取消"
+            onClicked: scenarionew.visible = false
         }
     }
 

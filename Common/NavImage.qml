@@ -165,8 +165,9 @@ Row {
             anchors.fill: parent
             hoverEnabled: true
             onClicked: {
-                $app.exitApp();
-                Qt.quit()
+//                $app.exitApp();
+//                Qt.quit()
+                removeDialog_quit.visible = true
             }
             onEntered: {
                 closeHint.visible = true
@@ -184,4 +185,5 @@ Row {
             visible: false
         }
     }
+
 }

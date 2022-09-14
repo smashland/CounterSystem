@@ -154,36 +154,78 @@ Rectangle {
             model:$app.settings.systemSetting
             clip: true
         }
-        CheckBox {
-            id: voiceControl
-            x:55*dpx
+
+        Row {
+            x:60*dpx
             y:150*dpy
-            text: qsTr(" 开启语音")
-            font.pixelSize: 20
-            checked:$app.setOpenSpeak
-            contentItem: Text {
-                text: voiceControl.text
-                font: voiceControl.font
-                opacity: enabled ? 1.0 : 0.3
-                color:"white"
-                verticalAlignment: Text.AlignVCenter
-                leftPadding: voiceControl.indicator.width + voiceControl.spacing
+            spacing: 10*dpx
+            CheckBox {
+                id: voiceControl
+                y: 1*dpy
+                width: 17*dpx
+                height: 17*dpy
+                checked:$app.setOpenSpeak
+                indicator: Rectangle {
+                    width: voiceControl.width
+                    height: voiceControl.height
+                    color: "#1d4f88"
+                    border.color: "#3b6daa"
+                    Image {
+                        id: tick
+                        width: voiceControl.width
+                        height: voiceControl.height
+                        source: voiceControl.checked ? "qrc:/Image/true.png" : ""
+                    }
+                }
+                onClicked: {
+                    if(voiceControl.checked)
+                    {
+                        $app.setOpenSpeak(true);
+                    }
+                    else
+                    {
+                        $app.setOpenSpeak(false);
+                    }
+                }
             }
-
-            onClicked: {
-
-                if(voiceControl.checked)
-                {
-                    $app.setOpenSpeak(true);
-
-                }
-                else
-                {
-                    $app.setOpenSpeak(false);
-                }
-
+            Text {
+                text: qsTr("开启语音")
+                color: "#d5e2f5"
+                font.pixelSize: 14*dpx
+                font.family: "Microsoft YaHei"
             }
         }
+
+//        CheckBox {
+//            id: voiceControl
+//            x:55*dpx
+//            y:150*dpy
+//            text: qsTr(" 开启语音")
+//            font.pixelSize: 20
+//            checked:$app.setOpenSpeak
+//            contentItem: Text {
+//                text: voiceControl.text
+//                font: voiceControl.font
+//                opacity: enabled ? 1.0 : 0.3
+//                color:"white"
+//                verticalAlignment: Text.AlignVCenter
+//                leftPadding: voiceControl.indicator.width + voiceControl.spacing
+//            }
+
+//            onClicked: {
+
+//                if(voiceControl.checked)
+//                {
+//                    $app.setOpenSpeak(true);
+
+//                }
+//                else
+//                {
+//                    $app.setOpenSpeak(false);
+//                }
+
+//            }
+//        }
     }
 
     Component

@@ -30,7 +30,7 @@ Rectangle {
         TextInput {
             id: soldierItemContent
             x: 10 *dpx
-            width: 190*dpx
+            width: 180*dpx
             height: 34 *dpy
             font.pixelSize: 17*dpx
             color: "#ffffff"

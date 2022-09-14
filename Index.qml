@@ -317,6 +317,17 @@ Rectangle
         anchors.centerIn: parent
         visible: false
     }
+    RemoveDialog {
+        id: removeDialog_quit
+        visible: false
+        content1: "此操作将退出程序，"
+        content2: "确认要退出吗？"
+        onYesPutDown: {
+            $app.exitApp();
+            Qt.quit()
+        }
+    }
+
 
 
 }

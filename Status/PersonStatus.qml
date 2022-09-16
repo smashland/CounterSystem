@@ -60,24 +60,24 @@ Rectangle
             bConnected: outData.bPistol
             source: "qrc:/Image/wuqi/shouqiang.png"
         }
-        EquipConnStat
-        {
-            id: jujibuqiang
-            bConnected: outData.bRifle//狙击步枪
-            source: "qrc:/Image/wuqi/jujibuqiang.png"
-        }
-        EquipConnStat
-        {
-            id: shoulei
-            bConnected: outData.bRifle//手雷
-            source: "qrc:/Image/wuqi/shoulei.png"
-        }
-        EquipConnStat
-        {
-            id: baozhawu
-            bConnected: outData.bRifle//爆炸物
-            source: "qrc:/Image/wuqi/baozhawu.png"
-        }
+//        EquipConnStat
+//        {
+//            id: jujibuqiang
+//            bConnected: outData.bRifle//狙击步枪
+//            source: "qrc:/Image/wuqi/jujibuqiang.png"
+//        }
+//        EquipConnStat
+//        {
+//            id: shoulei
+//            bConnected: outData.bRifle//手雷
+//            source: "qrc:/Image/wuqi/shoulei.png"
+//        }
+//        EquipConnStat
+//        {
+//            id: baozhawu
+//            bConnected: outData.bRifle//爆炸物
+//            source: "qrc:/Image/wuqi/baozhawu.png"
+//        }
 
         /// 显示头盔连接状态
         EquipConnStat

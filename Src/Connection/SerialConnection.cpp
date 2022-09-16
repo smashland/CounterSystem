@@ -1,4 +1,3 @@
-#include <QSerialPort>
 #include <QSerialPortInfo>
 #include "SerialConnection.h"
 #include "../ConfigInfo.h"
@@ -9,6 +8,7 @@ CControlSerial::CControlSerial(QObject *parent)
     ,m_pSerialPort(new QSerialPort(this))
 {
     connect(m_pSerialPort,SIGNAL(readyRead()),this,SLOT(ReadComData()));
+    connect(m_pSerialPort,&QSerialPort::errorOccurred,this,&CControlSerial::ConnectError);
 }
 
 /// 析构函数
@@ -75,6 +75,23 @@ void CControlSerial::ReadComData()
 
     QByteArray temp = m_pSerialPort->readAll();
     InsertData(temp);
+}
+
+void CControlSerial::ConnectError(QSerialPort::SerialPortError errorInof)
+{
+    switch(errorInof)
+    {
+    case QSerialPort::OpenError:
+    case QSerialPort::PermissionError:
+    case QSerialPort::DeviceNotFoundError:
+        if(true == m_bConnected)
+        {
+            disConnected();
+        }
+        break;
+    default:
+        break;
+    }
 }
 
 

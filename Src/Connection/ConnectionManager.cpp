@@ -1,4 +1,5 @@
 #include <QList>
+#include <QTimerEvent>
 #include "ConnectionManager.h"
 #include "WifiConnection.h"
 #include "SerialConnection.h"
@@ -14,7 +15,7 @@ CConnectionManager *CConnectionManager::GetInstance()
 /// 连接
 void CConnectionManager::Connect()
 {
-    if(nullptr != m_pConnection)
+    if(nullptr != m_pConnection && !m_pConnection->IsConnect())
     {
         m_pConnection->Connect();
     }
@@ -58,7 +59,7 @@ bool CConnectionManager::InitConnection(CONN_TYPE emType)
     if(nullptr != m_pConnection)
     {
         connect(m_pConnection,&CConnection::connected2Center,this,&CConnectionManager::conected);
-        connect(m_pConnection,&CConnection::lostConnected2Center,this,&CConnectionManager::disConnected);
+        connect(m_pConnection,&CConnection::lostConnected2Center,this,&CConnectionManager::connectionLost);
         return(true);
     }
     else
@@ -119,6 +120,17 @@ void CConnectionManager::ClearData()
     m_pConnection->ClearData();
 }
 
+void CConnectionManager::timerEvent(QTimerEvent *event)
+{
+    Connect();
+
+    if(nullptr != m_pConnection && m_pConnection->IsConnect())
+    {
+        killTimer(m_nTimerID);
+        m_nTimerID = -1;
+    }
+}
+
 
 /// 连接管理类
 CConnectionManager::CConnectionManager():
@@ -133,5 +145,14 @@ CConnectionManager::~CConnectionManager()
     if(nullptr != m_pConnection)
      {
         delete m_pConnection;
+    }
+}
+
+void CConnectionManager::connectionLost()
+{
+    if(m_nTimerID < 1)
+    {
+        emit disConnected();
+        m_nTimerID = startTimer(1000);
     }
 }

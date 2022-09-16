@@ -1,7 +1,7 @@
 #ifndef NOTICEMANAGER_H
 #define NOTICEMANAGER_H
 /************************
- * ÊÂ¼ş¹ÜÀíÀà
+ * äº‹ä»¶ç®¡ç†ç±»
  ************************/
 
 class CSpeakText;
@@ -15,55 +15,55 @@ public:
     static CNoticeManager* GetInstance();
 
     /**
-     * @brief ÉèÖÃÍ¨ÖªĞÅÏ¢
+     * @brief è®¾ç½®é€šçŸ¥ä¿¡æ¯
      * @param sNoticeInfo
      */
     void SetNoticInfo(const QString& sNoticeInfo);
 
     /**
-     * @brief ´ò¿ªÓïÒô²¥±¨
-     * @return ·µ»ØÓïÒô²¥±¨¿ªÆô×´Ì¬
+     * @brief æ‰“å¼€è¯­éŸ³æ’­æŠ¥
+     * @return è¿”å›è¯­éŸ³æ’­æŠ¥å¼€å¯çŠ¶æ€
      */
     bool OpenSpeak(bool bOpen);
 
     /**
-     * @brief ÓïÒô²¥±¨ÊÇ·ñ¿ªÆô
+     * @brief è¯­éŸ³æ’­æŠ¥æ˜¯å¦å¼€å¯
      * @return
      */
     bool IsSpeakOpen(){return(m_bOpenSpeak);}
 
     /**
-     * @brief ÉèÖÃÉùÒô´óĞ¡
+     * @brief è®¾ç½®å£°éŸ³å¤§å°
      */
     void SetVolume(double dVolume);
 
     /**
-     * @brief ÏÔÊ¾²¼¸æ°å
+     * @brief æ˜¾ç¤ºå¸ƒå‘Šæ¿
      */
     void ShowNoticeBoard(bool bShow);
 
     /**
-     * @brief ²¼¸æ°åÊÇ·ñ¿ªÆô
+     * @brief å¸ƒå‘Šæ¿æ˜¯å¦å¼€å¯
      * @return
      */
     bool IsNoticeBoardShow(){return(m_bShowBoard);}
 
     /**
-     * @brief ÒÆ¶¯ÏÔÊ¾Î»ÖÃ
+     * @brief ç§»åŠ¨æ˜¾ç¤ºä½ç½®
      * @param nX
      * @param nY
      */
     void MoveBoardPos(int nX, int nY);
 
     /**
-     * @brief ÉèÖÃÈ«¾ÖµÄ
+     * @brief è®¾ç½®å…¨å±€çš„
      * @param pGlobal
      */
     void SetGlobal(QAppGlobal* pGlobal);
 
     /**
-     * @brief ²¥·ÅÉùÒô
-     * @param nIndex ÉùÒôË÷Òı
+     * @brief æ’­æ”¾å£°éŸ³
+     * @param nIndex å£°éŸ³ç´¢å¼•
      */
     void PlaySound(int nIndex);
 private:
@@ -71,9 +71,9 @@ private:
     ~CNoticeManager();
 
 private:
-    bool  m_bOpenSpeak=true;  /// ÊÇ·ñ¿ªÆôÓïÒô²¥±¨
-    bool  m_bShowBoard=true;   /// ÊÇ·ñÏÔÊ¾²¼¸æ°å
-    CSpeakText* m_pSpeak{}; /// ÓïÒô²¥±¨¿ØÖÆ
+    bool  m_bOpenSpeak=true;  /// æ˜¯å¦å¼€å¯è¯­éŸ³æ’­æŠ¥
+    bool  m_bShowBoard=true;   /// æ˜¯å¦æ˜¾ç¤ºå¸ƒå‘Šæ¿
+    CSpeakText* m_pSpeak{}; /// è¯­éŸ³æ’­æŠ¥æ§åˆ¶
     CPlayMp3*   m_pPlay{};
     QAppGlobal* m_pGLobal{};
 };

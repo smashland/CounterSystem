@@ -3,7 +3,7 @@
 #include "SerialConnection.h"
 #include "../ConfigInfo.h"
 
-/// ¹¹Ôìº¯Êý
+/// æž„é€ å‡½æ•°
 CControlSerial::CControlSerial(QObject *parent)
     :CConnection(parent)
     ,m_pSerialPort(new QSerialPort(this))
@@ -11,46 +11,46 @@ CControlSerial::CControlSerial(QObject *parent)
     connect(m_pSerialPort,SIGNAL(readyRead()),this,SLOT(ReadComData()));
 }
 
-/// Îö¹¹º¯Êý
+/// æžæž„å‡½æ•°
 CControlSerial::~CControlSerial()
 {
     m_pSerialPort->deleteLater();
 }
 
-/// ÖØÐÂÅäÖÃ´®¿ÚÊý¾Ý
+/// é‡æ–°é…ç½®ä¸²å£æ•°æ®
 bool CControlSerial::ReConfigSerialInfo()
 {
     CConfigInfo* pConfigInfo = CConfigInfo::GetInstance();
 
-    /// Èç¹û´®¿Ú¿ª×Å£¬Ôò¹Ø±Õ
+    /// å¦‚æžœä¸²å£å¼€ç€ï¼Œåˆ™å…³é—­
     if(m_pSerialPort->isOpen())
     {
         m_pSerialPort->close();
     }
 
-    /// ¸ù¾ÝÅäÖÃÎÄ¼þÅäÖÃ´®¿Ú
+    /// æ ¹æ®é…ç½®æ–‡ä»¶é…ç½®ä¸²å£
     if(pConfigInfo)
     {
-        /// ÉèÖÃ´®¿ÚÃû³Æ
+        /// è®¾ç½®ä¸²å£åç§°
         m_pSerialPort->setPortName(pConfigInfo->GetComName());
 
-        /// ÉèÖÃ²¨ÌØÂÊ
+        /// è®¾ç½®æ³¢ç‰¹çŽ‡
         m_pSerialPort->setBaudRate(QSerialPort::Baud115200);
 
-        /// ÉèÖÃÊý¾ÝÎ»
+        /// è®¾ç½®æ•°æ®ä½
         m_pSerialPort->setDataBits(QSerialPort::Data8);
 
-        /// ÉèÖÃÐ£ÑéÎ»
+        /// è®¾ç½®æ ¡éªŒä½
         m_pSerialPort->setParity(QSerialPort::NoParity);
 
 
-        /// Í£Ö¹Î»
+        /// åœæ­¢ä½
         m_pSerialPort->setStopBits(QSerialPort::OneStop);
 
-        /// ÉèÖÃÍ¨ÓÃÊý¾Ý
+        /// è®¾ç½®é€šç”¨æ•°æ®
         m_pSerialPort->setFlowControl(QSerialPort::NoFlowControl);
 
-        /// ´ò¿ª´®¿Ú
+        /// æ‰“å¼€ä¸²å£
         if(m_pSerialPort->open(QIODevice::ReadWrite))
         {
             return(true);
@@ -65,7 +65,7 @@ bool CControlSerial::ReConfigSerialInfo()
 
 }
 
-/// »ñÈ¡´®¿ÚÊý¾Ý
+/// èŽ·å–ä¸²å£æ•°æ®
 void CControlSerial::ReadComData()
 {
     if(m_pSerialPort->bytesAvailable() < 1)
@@ -78,12 +78,12 @@ void CControlSerial::ReadComData()
 }
 
 
-/// ·¢ËÍÃüÁî
+/// å‘é€å‘½ä»¤
 bool CControlSerial::SendCommand(const QByteArray& rByteArray)
 {
     static qint64 nSendSize;
 
-    /// Ö»ÓÐÁ¬½Óµ½´®¿ÚÊ±£¬²Å·¢ËÍÊý¾Ý
+    /// åªæœ‰è¿žæŽ¥åˆ°ä¸²å£æ—¶ï¼Œæ‰å‘é€æ•°æ®
     if(m_bConnected)
     {
         nSendSize = m_pSerialPort->write(rByteArray);
@@ -94,7 +94,7 @@ bool CControlSerial::SendCommand(const QByteArray& rByteArray)
     return(false);
 }
 
-/// Á¬½Ó
+/// è¿žæŽ¥
 void CControlSerial::Connect()
 {
     m_bConnected = ReConfigSerialInfo();
@@ -109,7 +109,7 @@ void CControlSerial::Connect()
     }
 }
 
-/// ¶Ï¿ªÁ¬½Ó
+/// æ–­å¼€è¿žæŽ¥
 void CControlSerial::DisConnect()
 {
     m_pSerialPort->close();

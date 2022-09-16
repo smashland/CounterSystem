@@ -38,14 +38,14 @@ public:
     Q_INVOKABLE QString getSysTime();
 
 
-    Q_INVOKABLE void setBiSuo(quint16 nID); /// ±ÕËø
-    Q_INVOKABLE void setJiesuoSuo(quint16 nID); /// ½âËø
-    Q_INVOKABLE void setJieChu(quint16 nID);    /// ½â³ıÅÔ°×
-    Q_INVOKABLE void setPanSi(quint16 nID);     /// ÅĞËÀ
-    Q_INVOKABLE void setFuHuo(quint16 nID);     /// ¸´»î
-    Q_INVOKABLE void chongDan(quint16 nID,const QStringList& allInfo); /// ³äµ¯
-    Q_INVOKABLE void peiQiang(quint16 nID, int nGunID);  /// ÅäÇ¹
-    Q_INVOKABLE void sycTime(quint16 nID, quint16 nTime); /// ÉèÖÃÍ¬²½Ê±¼ä
+    Q_INVOKABLE void setBiSuo(quint16 nID); /// é—­é”
+    Q_INVOKABLE void setJiesuoSuo(quint16 nID); /// è§£é”
+    Q_INVOKABLE void setJieChu(quint16 nID);    /// è§£é™¤æ—ç™½
+    Q_INVOKABLE void setPanSi(quint16 nID);     /// åˆ¤æ­»
+    Q_INVOKABLE void setFuHuo(quint16 nID);     /// å¤æ´»
+    Q_INVOKABLE void chongDan(quint16 nID,const QStringList& allInfo); /// å……å¼¹
+    Q_INVOKABLE void peiQiang(quint16 nID, int nGunID);  /// é…æª
+    Q_INVOKABLE void sycTime(quint16 nID, quint16 nTime); /// è®¾ç½®åŒæ­¥æ—¶é—´
     Q_INVOKABLE void changeSetting(const QString& sListType,const int& rIndex,const int& rInt);
 
     void setConnectColor(const QColor& qConColor);
@@ -65,17 +65,17 @@ signals:
 public slots:
     void updateConfig();
 private:
-    CGlobalData* m_pGlobalData=nullptr;      /// È«¾ÖÊı¾İ
-    int    m_nType;                          /// Í¨ĞÅÀàĞÍ
-    bool   m_bIsStart=false;                 /// ÊÇ·ñÑİÏ°¿ªÊ¼
-    bool   m_bIsReplay=false;                /// ÊÇ·ñ´¦ÓÚ»Ø·Å×´Ì¬
-    QColor m_qConnectColor;                  /// Á¬½ÓµÄÊ±ºòÑÕÉ«
-    QColor m_qDisConnectColor;               /// ¶Ï¿ªÁ¬½ÓµÄÊ±ºòµÄÑÕÉ«
-    QMap<QString,QColor> m_mapType2Color;    /// ÀàĞÍÓëÑÕÉ«µÄÓ³Éä¹ØÏµ
-    QMap<QString,QColor> m_mapType2BackColor;/// ÀàĞÍÓë±³¾°ÑÕÉ«µÄÓ³Éä¹ØÏµ
-    QVariantList         m_scoreSetting;     /// µÃ·ÖÉèÖÃ
-    QVariantList         m_harmSetting;      /// ËğÉËÉèÖÃ
-    QVariantList         m_sysSetting;       /// ÏµÍ³ÉèÖÃ
+    CGlobalData* m_pGlobalData=nullptr;      /// å…¨å±€æ•°æ®
+    int    m_nType;                          /// é€šä¿¡ç±»å‹
+    bool   m_bIsStart=false;                 /// æ˜¯å¦æ¼”ä¹ å¼€å§‹
+    bool   m_bIsReplay=false;                /// æ˜¯å¦å¤„äºå›æ”¾çŠ¶æ€
+    QColor m_qConnectColor;                  /// è¿æ¥çš„æ—¶å€™é¢œè‰²
+    QColor m_qDisConnectColor;               /// æ–­å¼€è¿æ¥çš„æ—¶å€™çš„é¢œè‰²
+    QMap<QString,QColor> m_mapType2Color;    /// ç±»å‹ä¸é¢œè‰²çš„æ˜ å°„å…³ç³»
+    QMap<QString,QColor> m_mapType2BackColor;/// ç±»å‹ä¸èƒŒæ™¯é¢œè‰²çš„æ˜ å°„å…³ç³»
+    QVariantList         m_scoreSetting;     /// å¾—åˆ†è®¾ç½®
+    QVariantList         m_harmSetting;      /// æŸä¼¤è®¾ç½®
+    QVariantList         m_sysSetting;       /// ç³»ç»Ÿè®¾ç½®
     QString              sBeginTime;
 };
 

@@ -223,7 +223,7 @@ Column {
                                 //                                opacity:0.8
                                 radius: 2
                             }
-                        }
+                        }                      
                     }//ComboBox
                 }
             }
@@ -258,8 +258,12 @@ Column {
                 anchors.fill: parent
                 onClicked:
                 {
+                    $app.settings.setComName(control.currentText);
+                    $app.startConnect();
+                    console.log("串口   "+control.currentText);
                     $licCheck.saveLicense(lrText.text);
                     $licCheck.checkLicense()
+
                 }
             }
         }

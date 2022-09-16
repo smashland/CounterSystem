@@ -96,6 +96,7 @@ Window {
         loadQml("qrc:/Login/LoginCenter.qml");
         $licCheck.checked.connect(showMainWindow)
         $licCheck.showError.connect(checkLicenseFaild);
+        $obShow.recive($licCheck.getMD5MachineInfo());
     }
 
     // 退出程序框上的是和否
@@ -214,6 +215,16 @@ Window {
             {
                 exitPopupLable.text = exitShowLabel;
             }
+        }
+    }
+    RemoveDialog {
+        id: removeDialog_quit
+        visible: false
+        content1: "此操作将退出程序，"
+        content2: "确认要退出吗？"
+        onYesPutDown: {
+            $app.exitApp();
+            Qt.quit()
         }
     }
 

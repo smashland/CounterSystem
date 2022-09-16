@@ -2,6 +2,8 @@ QT += quick texttospeech charts serialport network multimedia
 
 CONFIG += c++11
 
+TARGET = CounterSystem
+
 SDK_CONFIG *= Map Gis proto qrcode
 include($$PWD/SoftSDK.pri)
 DEFINES += QAPPLICATION_CLASS=QApplication

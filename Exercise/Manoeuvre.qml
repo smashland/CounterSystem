@@ -25,8 +25,10 @@ Item {
     property string endTime;
 
     Row {
+        id:yanxishijianItem
         x: 80*dpx
         y: (136 *dpy + 50 *dpy - yanxiTime.contentHeight)/2
+        visible: false
         Text {
             id: yanxiTime
             width:yanxiTime.contentWidth
@@ -166,6 +168,7 @@ Item {
                 }
                 changeStatus()
                 closebar.visible = false
+                yanxishijianItem.visible = true
             }
         }
     }
@@ -184,6 +187,7 @@ Item {
                 manoeuvre.second="00"
                 closebar.visible = true
                 killExpand.visible = false
+                yanxishijianItem.visible = false
             }
         }
     }

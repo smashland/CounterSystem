@@ -14,8 +14,6 @@ DropArea
         width=340 *dpx
     }
 
-
-
     GroupInfo
     {
         id:group

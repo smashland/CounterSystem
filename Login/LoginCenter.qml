@@ -35,54 +35,54 @@ Item
         y: (mainWindow.height-loginRect.height)/2
     }
     Rectangle
+    {
+        id: rectangle
+        width: 50*dpy
+        height: 50*dpy
+        color:  '#00000000'
+        x: (mainWindow.width-rectangle.width)/2
+        y: 830 *dpy
+        Component.onCompleted:
         {
-            id: rectangle
-            width: 638*dpx
-            height: 319*dpy
-            color:  '#00000000'
-            x: 20*dpx/*(mainWindow.width-rectangle.width)/2*/
-            y: 430 *dpy
-            Component.onCompleted:
-            {
-                rectangle.forceActiveFocus();
-            }
-            /// 显示二维码
-            Rect
-            {
-                id:needLic
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.horizontalCenter: parent.horizontalCenter
-                width:parent.height /*parent.height/2*/
-                height:parent.height /*parent.height/2*/
-                visible: true
-            }
+            rectangle.forceActiveFocus();
+        }
+        /// 显示二维码
+        Rect
+        {
+            id:needLic
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
+            width:parent.height /*parent.height/2*/
+            height:parent.height /*parent.height/2*/
+            visible: true
+        }
 
-            /// 显示二维码对应的文字
+        /// 显示二维码对应的文字
+        Text
+        {
+            id: element
+            //                enabled: false
+            anchors.top: needLic.bottom
+            anchors.topMargin: 5
+            anchors.horizontalCenter: parent.horizontalCenter
+            color: Qt.rgba(255/255, 255/255, 255/255, 0.8);
+        }
+
+        RowLayout
+        {
+            id: rowLayout
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: element.bottom
+            anchors.topMargin: 5
             Text
             {
-                id: element
-//                enabled: false
-                anchors.top: needLic.bottom
-                anchors.topMargin: 5
-                anchors.horizontalCenter: parent.horizontalCenter
+                id: element1
+                text: "扫一扫 获取授权码"
                 color: Qt.rgba(255/255, 255/255, 255/255, 0.8);
-            }
-
-            RowLayout
-            {
-                id: rowLayout
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.top: element.bottom
-                anchors.topMargin: 5
-                Text
-                {
-                    id: element1
-                    text: "扫一扫 获取授权码"
-                    color: Qt.rgba(255/255, 255/255, 255/255, 0.8);
-                    enabled: false
-                }
+                enabled: false
             }
         }
+    }
     Connect
     {
         id: connect

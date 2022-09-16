@@ -375,9 +375,9 @@ Item {
         }
     }
 
-    Scenario {
-        id: scenario
-    }
+//    Scenario {
+//        id: scenario
+//    }
 
 
 

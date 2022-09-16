@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.3
 import QtQuick.Dialogs 1.3
 import "../Common"
 import "../Exercise"
-
+import MyItem 1.0
 Popup
 {
     id: personAdd
@@ -106,7 +106,7 @@ Popup
                 id: soldierItemText
                 width: soldierItemText.contentWidth
                 height: 34 *dpy
-                text: "人员姓名: "
+                text: "人员职务: "
                 color: "#ffffff"
                 font.pixelSize: 17*dpx;
                 font.family: "Microsoft YaHei";
@@ -276,7 +276,7 @@ Popup
 
             nameButton: "确定"
             onClicked: {
-
+                sceManager.addPerson();
             }
 
         }
@@ -289,6 +289,12 @@ Popup
                 personAdd.visible = false
             }
         }
+    }
+    SceManager{
+        id:sceManager
+    }
+    ScePersonInfo{
+        id:scePersonInfo
     }
 
 }

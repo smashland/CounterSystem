@@ -38,6 +38,9 @@ Rectangle {
             font.family: "Microsoft YaHei"
             verticalAlignment: Text.AlignVCenter
 
+            onEditingFinished: {
+                    scePersonInfo.id=soldierItemContent.text
+            }
         }
     }
 }

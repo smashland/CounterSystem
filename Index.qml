@@ -19,10 +19,10 @@ Rectangle
     {
         id:unGroup
         type:""
-        Image {
-            anchors.fill: parent
+//        Image {
+//            anchors.fill: parent
             source: "qrc:/Image/Grey_bg_all.png"
-        }
+//        }
         height: 880 *dpy
         anchors.left: parent.left
         anchors.top: parent.top
@@ -35,10 +35,10 @@ Rectangle
     {
         id:blue
         type:"蓝方"
-        Image {
-            anchors.fill: parent
+//        Image {
+//            anchors.fill: parent
             source: "qrc:/Image/Blue_bg_all.png"
-        }
+//        }
 
         anchors.right: parent.right;
         anchors.top: parent.top
@@ -50,10 +50,10 @@ Rectangle
     {
         id:red
         type:"红方"
-        Image {
-            anchors.fill: parent
+//        Image {
+//            anchors.fill: parent
             source: "qrc:/Image/Red_bg_all.png"
-        }
+//        }
 
         anchors.right: ($app.settings.bIsStart || $app.settings.bIsReplay) ? undefined : parent.right
         anchors.top: ($app.settings.bIsStart || $app.settings.bIsReplay) ? parent.top : blue.bottom

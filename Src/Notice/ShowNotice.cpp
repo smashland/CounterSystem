@@ -14,7 +14,7 @@ CShowNotice::~CShowNotice()
     delete ui;
 }
 
-/// ÉèÖÃÏÔÊ¾ĞÅÏ¢
+/// è®¾ç½®æ˜¾ç¤ºä¿¡æ¯
 void CShowNotice::SetShowInfo(const QString &sInfo)
 {
     if(this->isHidden())

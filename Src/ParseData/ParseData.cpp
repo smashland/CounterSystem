@@ -7,25 +7,25 @@ CParseData::CParseData():
     m_pBuffer = new uchar[C_BUFFER_LENGTH]();
 }
 
-/// ÊÍ·Å¿Õ¼ä
+/// é‡Šæ”¾ç©ºé—´
 CParseData::~CParseData()
 {
     delete []m_pBuffer;
 }
 
-/// Ä¬ÈÏÊµÏÖ
+/// é»˜è®¤å®ç°
 bool CParseData::ParseData(const QByteArray &)
 {
     return(false);
 }
 
-/// ¸üĞÂÃë
+/// æ›´æ–°ç§’
 void CParseData::UpdateSeconds(const quint16 &unSeconds)
 {
     m_unSeconds = unSeconds;
 }
 
-/// ÑİÏ°¿ªÊ¼
+/// æ¼”ä¹ å¼€å§‹
 void CParseData::AllStart()
 {
     Clear();
@@ -35,7 +35,7 @@ void CParseData::AllStop()
 {
 }
 
-/// ³õÊ¼»¯×´Ì¬
+/// åˆå§‹åŒ–çŠ¶æ€
 void CParseData::InitState()
 {
     m_bBegin = true;

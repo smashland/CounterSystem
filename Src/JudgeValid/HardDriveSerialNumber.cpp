@@ -635,7 +635,7 @@ long CHardDriveSerialNumber::getHardDriveComputerID ()
    return (long) i64Id;
 }
 
-/// »ñÈ¡´ÅÅÌĞòÁĞºÅ
+/// è·å–ç£ç›˜åºåˆ—å·
 QString CHardDriveSerialNumber::GetSerialNo()
 {
     getHardDriveComputerID();
@@ -693,7 +693,7 @@ int CHardDriveSerialNumber::GetErrorMessage(TCHAR* tszErrorMessage)
 }
 
 #include<intrin.h>
-/// »ñÈ¡cpuID
+/// è·å–cpuID
 QString CHardDriveSerialNumber::GetCPUID()
 {
     QString cpu_id;
@@ -702,9 +702,9 @@ QString CHardDriveSerialNumber::GetCPUID()
     __cpuid((int*)dwBuf,1);
 
     QString str0 = QString::number(dwBuf[3], 16).toUpper();
-    QString str0_1 = str0.rightJustified(8,'0');//ÕâÒ»¾äµÄÒâË¼ÊÇÇ°Ãæ²¹0£¬µ«ÊÇÎÒÓöµ½µÄÇé¿öÊÇÕâÀï¶¼ÌîÂúÁË
+    QString str0_1 = str0.rightJustified(8,'0');//è¿™ä¸€å¥çš„æ„æ€æ˜¯å‰é¢è¡¥0ï¼Œä½†æ˜¯æˆ‘é‡åˆ°çš„æƒ…å†µæ˜¯è¿™é‡Œéƒ½å¡«æ»¡äº†
     QString str1 = QString::number(dwBuf[0], 16).toUpper();
-    QString str1_1 = str1.rightJustified(8,'0');//ÕâÀï±ØĞëÔÚÇ°Ãæ²¹0£¬·ñÔò²»»áÌîÂúÊı¾İ
+    QString str1_1 = str1.rightJustified(8,'0');//è¿™é‡Œå¿…é¡»åœ¨å‰é¢è¡¥0ï¼Œå¦åˆ™ä¸ä¼šå¡«æ»¡æ•°æ®
     cpu_id = str0_1 + str1_1;
 
     return(cpu_id);

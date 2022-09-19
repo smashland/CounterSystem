@@ -1,13 +1,13 @@
 #include <QList>
 #include "Connection.h"
 
-/// ·¢ËÍÃüÁî
+/// å‘é€å‘½ä»¤
 CConnection::CConnection(QObject *parent)
     :QObject(parent),m_bConnected(false)
 {
 }
 
-/// Îö¹¹Á¬½Ó
+/// ææ„è¿æ¥
 CConnection::~CConnection()
 {
     if(m_bConnected)
@@ -16,14 +16,14 @@ CConnection::~CConnection()
     }
 }
 
-/// »ñÈ¡Êı¾İ
+/// è·å–æ•°æ®
 const QByteArray &CConnection::GetData()
 {
     static QByteArray s_emptyArray;
 
     s_emptyArray.clear();
 
-    /// Èç¹ûÁĞ±íÖĞ²»Îª¿Õ
+    /// å¦‚æœåˆ—è¡¨ä¸­ä¸ä¸ºç©º
     if(!m_listReciveInfo.isEmpty())
     {
          s_emptyArray = m_listReciveInfo.front();
@@ -38,27 +38,27 @@ void CConnection::DisConnect()
     disConnected();
 }
 
-/// Çå¿ÕÊı¾İ
+/// æ¸…ç©ºæ•°æ®
 void CConnection::ClearData()
 {
     m_listReciveInfo.clear();
 }
 
-/// Á¬½Ó
+/// è¿æ¥
 void CConnection::connected()
 {
     m_bConnected = true;
     emit(connected2Center());
 }
 
-/// ¶Ï¿ªÁ¬½Ó
+/// æ–­å¼€è¿æ¥
 void CConnection::disConnected()
 {
     m_bConnected = false;
     emit(lostConnected2Center());
 }
 
-/// ½«Êı¾İ²åÈëµ½ÁĞ±íÀï
+/// å°†æ•°æ®æ’å…¥åˆ°åˆ—è¡¨é‡Œ
 void CConnection::InsertData(const QByteArray &rData)
 {
     m_listReciveInfo.push_back(rData);

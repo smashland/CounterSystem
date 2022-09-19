@@ -237,7 +237,7 @@ void CMyEventInfo::Update(const unsigned char *pData, int nLength)
 //                                        .arg(pShotPerson->id()).arg(QTime::currentTime().toString("hh:mm:ss")).arg(gunType);
 //                                listInfo += CConfigInfo::GetInstance()->GetBodyName(hurtInfo->hurtpart());
                                 QString listInfo=QString::fromUtf8("%3 %2使用%4击中%1的").arg(m_pPerson->id())
-                                        .arg(pShotPerson->id()).arg(QTime::currentTime().toString("hh:mm:ss")).arg(gunType);
+                                        .arg(pShotPerson->id()).arg(QTime::currentTime().toString("hh:mm:ss")).arg("步枪");
                                 listInfo += CConfigInfo::GetInstance()->GetBodyName(hurtInfo->hurtpart());
 
                                 /// 发送消息

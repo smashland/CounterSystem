@@ -2,6 +2,8 @@
 #define SCEPERSONINFO_H
 
 #include <QObject>
+#include <QJsonObject>
+
 class ScePersonInfo : public QObject
 {
     Q_OBJECT
@@ -12,8 +14,8 @@ public:
 
     Q_PROPERTY(int id READ getID WRITE setID NOTIFY IDChanged/*int id MEMBER m_ID NOTIFY IDChanged*/)
     Q_PROPERTY(QString name READ getName WRITE setName NOTIFY nameChanged/*QString name MEMBER m_Name NOTIFY nameChanged*/)
-    Q_PROPERTY(QString position READ getPosition WRITE setPosition NOTIFY positionChanged)
-    Q_PROPERTY(QString groupType READ getGroupType WRITE setGroupType NOTIFY positionChanged)
+    Q_PROPERTY(int position READ getPosition WRITE setPosition NOTIFY positionChanged)
+    Q_PROPERTY(int groupType READ getGroupType WRITE setGroupType NOTIFY positionChanged)
     Q_PROPERTY(bool hostage READ getHostage WRITE setHostage NOTIFY hostageChanged)
 
     /**
@@ -35,11 +37,11 @@ public:
       * @brief 设置人员职务
       * @param sPosition
       */
-    void setPosition(QString sPosition);
-    QString getPosition();
+    void setPosition(int sPosition);
+    int getPosition();
 
-    void setGroupType(QString groupType);
-    QString getGroupType();
+    void setGroupType(int groupType);
+    int getGroupType();
 
     /**
       * @brief 设置人质
@@ -48,18 +50,21 @@ public:
     void setHostage(bool bHostage);
     bool getHostage();
 
+    void read(const QJsonObject &json);
+    void write(QJsonObject &json) const;
+
 signals:
     void IDChanged(int);
     void nameChanged(QString);
-    void positionChanged(QString);
-    void groupTypeChanged(QString);
+    void positionChanged(int);
+    void groupTypeChanged(int);
     void hostageChanged(bool);
 
 private:
     int        m_ID;
     QString    m_Name;
-    QString    m_Positon;
-    QString    m_Group;
+    int    m_Positon;
+    int    m_Group;
     bool       m_host{true};
 
 };

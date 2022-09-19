@@ -13,7 +13,7 @@ public:
     Q_PROPERTY(int id READ getID WRITE setID NOTIFY IDChanged/*int id MEMBER m_ID NOTIFY IDChanged*/)
     Q_PROPERTY(QString name READ getName WRITE setName NOTIFY nameChanged/*QString name MEMBER m_Name NOTIFY nameChanged*/)
     Q_PROPERTY(QString position READ getPosition WRITE setPosition NOTIFY positionChanged)
-    Q_PROPERTY(QString type READ getGroupType WRITE setGroupType NOTIFY positionChanged)
+    Q_PROPERTY(QString groupType READ getGroupType WRITE setGroupType NOTIFY positionChanged)
     Q_PROPERTY(bool hostage READ getHostage WRITE setHostage NOTIFY hostageChanged)
 
     /**
@@ -45,7 +45,7 @@ public:
       * @brief 设置人质
       * @param sPosition
       */
-    void setHostage(int bHostage);
+    void setHostage(bool bHostage);
     bool getHostage();
 
 signals:
@@ -60,7 +60,7 @@ private:
     QString    m_Name;
     QString    m_Positon;
     QString    m_Group;
-    int        m_host;
+    bool       m_host{true};
 
 };
 

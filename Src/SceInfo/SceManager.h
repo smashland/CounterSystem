@@ -26,13 +26,13 @@ public:
       * @brief 添加人员
       */
     Q_INVOKABLE void addPerson();
-//    Q_INVOKABLE int addMember(ScePersonInfo *scePersonInfo);
+    Q_INVOKABLE int addPerson(ScePersonInfo *scePersonInfo);
 
 signals:
 private:
     QStringList m_fileds; //表头字段
 
-//    QList<ScesPerson*> m_scesPerson;
+    QList<ScesPerson*> m_scesPerson;
 //    ScesPerson *scesPerson;
 
 };

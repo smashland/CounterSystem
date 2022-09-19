@@ -6,9 +6,8 @@
 ///
 ///
 ///////////////////////////////////////////////////////
+#include <QSerialPort>
 #include "Connection.h"
-
-class QSerialPort;
 
 class CControlSerial:public CConnection
 {
@@ -47,6 +46,9 @@ private slots:
      * @brief 从串口读取数据
      */
     void ReadComData();
+
+
+    void ConnectError(QSerialPort::SerialPortError errorInof);
 
 private:
     QSerialPort* m_pSerialPort;  /// 串口通信

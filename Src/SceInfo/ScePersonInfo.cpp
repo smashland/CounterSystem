@@ -9,13 +9,12 @@ ScePersonInfo::ScePersonInfo(QObject *parent)
 ////设置士兵信息
 void ScePersonInfo::setID(int nID)
 {
-//    if(m_ID!=nID)
-//    {
-//        m_ID=nID;
-//        emit(IDChanged(m_ID));
-//    }
-     m_ID=nID;
-    qDebug()<<"id99999999"<<m_ID;
+    if(m_ID!=nID)
+    {
+        m_ID=nID;
+        emit IDChanged(m_ID);
+        qDebug()<<"编号————"<<m_ID;
+    }
 }
 
 int ScePersonInfo::getID() const
@@ -28,7 +27,8 @@ void ScePersonInfo::setName(QString sName)
     if(m_Name!=sName)
     {
         m_Name=sName;
-        emit(nameChanged(m_Name));
+        emit nameChanged(m_Name);
+        qDebug()<<"姓名————"<<m_Name;
     }
 }
 
@@ -39,7 +39,12 @@ QString ScePersonInfo::getName()
 
 void ScePersonInfo::setPosition(QString sPosition)
 {
-    m_Positon=sPosition;
+    if(m_Positon!=sPosition)
+    {
+        m_Positon=sPosition;
+        emit positionChanged(sPosition);
+        qDebug()<<"职务————"<<m_Positon;
+    }
 }
 
 QString ScePersonInfo::getPosition()
@@ -49,7 +54,12 @@ QString ScePersonInfo::getPosition()
 
 void ScePersonInfo::setGroupType(QString groupType)
 {
-    m_Group=groupType;
+    if(m_Group!=groupType)
+    {
+        m_Group=groupType;
+        emit groupTypeChanged(groupType);
+        qDebug()<<"类型————"<<m_Group;
+    }
 }
 
 QString ScePersonInfo::getGroupType()
@@ -57,9 +67,15 @@ QString ScePersonInfo::getGroupType()
     return m_Group;
 }
 
-void ScePersonInfo::setHostage(int bHostage)
+
+void ScePersonInfo::setHostage(bool bHostage)
 {
-    m_host=bHostage;
+    if(m_host!=bHostage)
+    {
+        m_host=bHostage;
+        emit hostageChanged(bHostage);
+        qDebug()<<"人质————"<<m_host;
+    }
 }
 
 bool ScePersonInfo::getHostage()

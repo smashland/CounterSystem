@@ -10,26 +10,26 @@ public:
     ~CSpeakText();
 
     /**
-     * @brief ³õÊ¼»¯
+     * @brief åˆå§‹åŒ–
      */
     bool Init();
 
     /**
-     * @brief ÓïÒô²¥±¨
+     * @brief è¯­éŸ³æ’­æŠ¥
      * @param sInfo
      * @return
      */
     bool SpeakText(const QString& sInfo);
 
     /**
-     * @brief ÉèÖÃÉùÒô´óĞ¡
+     * @brief è®¾ç½®å£°éŸ³å¤§å°
      * @param dVolume
      */
     void SetVolume(double dVolume);
 private:
-    QTextToSpeech *m_pSpeech; /// ´¦ÀíÉùÒô
-    bool m_bInit;            /// ÊÇ·ñ³õÊ¼»¯
-    double m_dVolume;         /// ÉùÒô´óĞ¡
+    QTextToSpeech *m_pSpeech; /// å¤„ç†å£°éŸ³
+    bool m_bInit;            /// æ˜¯å¦åˆå§‹åŒ–
+    double m_dVolume;         /// å£°éŸ³å¤§å°
 };
 
 #endif // SPEAKTEXT_H

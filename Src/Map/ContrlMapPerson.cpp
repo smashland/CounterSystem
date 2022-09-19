@@ -21,7 +21,7 @@ CContrlMapPerson::CContrlMapPerson(ISceneGraph *pSceneGraph):
     m_pLayer = m_pMap->CreateLayer("Test");
 }
 
-/// ¶¨Î»
+/// å®šä½
 void CContrlMapPerson::Locate(quint16 unID)
 {
     auto pMapPerson = GetOrCreateMapPersonInfo(unID);
@@ -38,16 +38,16 @@ void CContrlMapPerson::Locate(quint16 unID)
     m_pSceneGraph->GetMainWindow()->GetMainViewPoint()->SetViewPoint(tmpViewPoint,5);
 }
 
-/// ¸üĞÂÈËÔ±·Ö×é
+/// æ›´æ–°äººå‘˜åˆ†ç»„
 void CContrlMapPerson::UpdateGroup(quint16 unID, const QString & sGroup)
 {
     auto pMapPerson = GetOrCreateMapPersonInfo(unID);
 
-    if(sGroup == QString::fromLocal8Bit("À¶·½"))
+    if(sGroup == QString::fromLocal8Bit("è“æ–¹"))
     {
         pMapPerson->SetGroupType(BLUE_GROUP);
     }
-    else if(sGroup == QString::fromLocal8Bit("ºì·½"))
+    else if(sGroup == QString::fromLocal8Bit("çº¢æ–¹"))
     {
         pMapPerson->SetGroupType(RED_GROUP);
     }
@@ -57,7 +57,7 @@ void CContrlMapPerson::UpdateGroup(quint16 unID, const QString & sGroup)
     }
 }
 
-/// ¸üĞÂ×´Ì¬
+/// æ›´æ–°çŠ¶æ€
 void CContrlMapPerson::UpdateStatus(quint16 unID, int nHealth)
 {
     auto pMapPerson = GetOrCreateMapPersonInfo(unID);
@@ -75,12 +75,12 @@ void CContrlMapPerson::UpdateStatus(quint16 unID, int nHealth)
     pMapPerson->SetHurtType(status);
 }
 
-/// ¸üĞÂÈËÔ±Î»ÖÃ
+/// æ›´æ–°äººå‘˜ä½ç½®
 void CContrlMapPerson::UpdatePos(quint16 unID, double dLon, double dLat)
 {
     auto pMapPerson = GetOrCreateMapPersonInfo(unID);
 
-    /// ¸üĞÂÎ»ÖÃ
+    /// æ›´æ–°ä½ç½®
     static ScenePos pos;
     pos.dX = dLon;
     pos.dY = dLat;
@@ -88,14 +88,14 @@ void CContrlMapPerson::UpdatePos(quint16 unID, double dLon, double dLat)
 
     pMapPerson->GetLocationNode()->SetGeoPos(pos);
 }
-///¸üĞÂ¸´»î´ÎÊı
+///æ›´æ–°å¤æ´»æ¬¡æ•°
 void CContrlMapPerson::UpdateRelive(quint16 unID,const QString & sRelive)
 {
     auto pMapPerson = GetOrCreateMapPersonInfo(unID);
     pMapPerson->SetText(sRelive.toUtf8().data());
 }
 
-/// ¸üĞÂÈËÔ±Ãû³Æ
+/// æ›´æ–°äººå‘˜åç§°
 void CContrlMapPerson::UpdateName(quint16 unID, const QString & sName)
 {
     auto pMapPerson = GetOrCreateMapPersonInfo(unID);
@@ -109,7 +109,7 @@ void CContrlMapPerson::ClearMap()
     m_pLayer->Clear();
 }
 
-/// ¸üĞÂÉä»÷Ïß
+/// æ›´æ–°å°„å‡»çº¿
 void CContrlMapPerson::UpdateHitLine(quint16 id1, quint16 id2)
 {
     auto pMapPerson1 = GetOrCreateMapPersonInfo(id1);
@@ -136,7 +136,7 @@ void CContrlMapPerson::UpdateHitLine(quint16 id1, quint16 id2)
     m_hitLine.push_back(tmpHit);
 }
 
-/// ¸üĞÂÊ±¼ä
+/// æ›´æ–°æ—¶é—´
 void CContrlMapPerson::UpdateSeconds(const quint16 &seconds)
 {
     m_unTimes = seconds;
@@ -155,7 +155,7 @@ void CContrlMapPerson::UpdateSeconds(const quint16 &seconds)
     }
 }
 
-/// ²éÕÒÏÔÊ¾ĞÅÏ¢
+/// æŸ¥æ‰¾æ˜¾ç¤ºä¿¡æ¯
 CPlaceNodeInfo *CContrlMapPerson::GetOrCreateMapPersonInfo(quint16 unID)
 {
     CPlaceNodeInfo * pPersonInfo = nullptr;

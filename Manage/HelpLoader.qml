@@ -61,6 +61,7 @@ Rectangle {
                     text: qsTr("授权配置")
                     onClicked: {
                         info.visible=true;
+                        helpAdd.visible = false
                     }
                 }
                 SwitchButton{
@@ -68,21 +69,13 @@ Rectangle {
                     text: qsTr("使用说明")
                     onClicked: {
                         info.visible=false;
+                        helpAdd.visible = true
                     }
 
                 }
 
             }
 
-//            Text {
-//                id: info
-//                x:218*dpx
-//                y:35*dpy
-//                visible: false
-//                font.pixelSize: 24*dpx
-//                color: "#ffffff"
-//                text: qsTr("机器码:"+$licCheck.getMD5MachineInfo()) //
-//            }
             Row{
                 id: info
                 x:218*dpx
@@ -120,6 +113,12 @@ Rectangle {
                 }
             }
 
+            HelpAdd {
+                id: helpAdd
+                x:218*dpx
+//                y:35*dpy
+                visible: false
+            }
 
         }
     }

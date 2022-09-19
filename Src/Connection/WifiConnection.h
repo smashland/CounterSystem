@@ -6,7 +6,7 @@
 class QTcpSocket;
 
 /**
- * @brief ÊµÏÖÁ´½ÓµÄÏà¹Ø·½·¨
+ * @brief å®ç°é“¾æ¥çš„ç›¸å…³æ–¹æ³•
  */
 class CWifiConnection:public CConnection
 {
@@ -15,19 +15,19 @@ public:
     ~CWifiConnection();
 
     /**
-     * @brief Á¬½Ó
+     * @brief è¿æ¥
      * @return
      */
     void Connect();
 
     /**
-     * @brief ¶Ï¿ªÁ¬½Ó
+     * @brief æ–­å¼€è¿æ¥
      * @return
      */
     void DisConnect();
 
     /**
-     * @brief ·¢ËÍÃüÁî
+     * @brief å‘é€å‘½ä»¤
      * @param rByteArray
      * @return
      */
@@ -35,12 +35,12 @@ public:
 
 private slots:
     /**
-     * @brief ½ÓÊÕµ½Êı¾İ
+     * @brief æ¥æ”¶åˆ°æ•°æ®
      */
     void ReciveData();
 
 private:
-    QTcpSocket* m_pTcp;  /// wifiÍ¨¹ıtcpÁ¬½Ó
+    QTcpSocket* m_pTcp;  /// wifié€šè¿‡tcpè¿æ¥
 };
 
 #endif // WIFICONNECTION_H

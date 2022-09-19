@@ -3,7 +3,7 @@
 #include "GetMachineInfo.h"
 #include "HardDriveSerialNumber.h"
 
-/// »ñÈ¡Íø¿¨µØÖ·
+/// è·å–ç½‘å¡åœ°å€
 QStringList GetMac()
 {
     QStringList strMac;
@@ -11,7 +11,7 @@ QStringList GetMac()
     QMap<QString,QString> allMacInfo;
 
     QString sHardwareAddress;
-    /// »ñÈ¡ËùÓĞÍø¿¨ĞÅÏ¢
+    /// è·å–æ‰€æœ‰ç½‘å¡ä¿¡æ¯
     QList<QNetworkInterface> ifaces = QNetworkInterface::allInterfaces();
 
     foreach(QNetworkInterface iface, ifaces)
@@ -45,14 +45,14 @@ QStringList GetMac()
     return(strMac);
 }
 
-/// ²âÊÔ
+/// æµ‹è¯•
 union ForTest
 {
     uchar m_addr[2];
     quint16 m_short;
 };
 
-/// »ñÈ¡µ¥Àı
+/// è·å–å•ä¾‹
 CGetMachineInfo *CGetMachineInfo::GetInstance()
 {
     static CGetMachineInfo s_getMachineInfo;
@@ -65,7 +65,7 @@ CGetMachineInfo::CGetMachineInfo():
 {
 }
 
-/// ³õÊ¼»¯ĞÅÏ¢
+/// åˆå§‹åŒ–ä¿¡æ¯
 void CGetMachineInfo::Init()
 {
     if(m_bInit)
@@ -79,7 +79,7 @@ void CGetMachineInfo::Init()
     m_sCupID = tmpHardDrive.GetCPUID();
     m_sHardSN = tmpHardDrive.GetSerialNo();
 
-    /// ÅĞ¶Ï´óĞ¡¶Ë
+    /// åˆ¤æ–­å¤§å°ç«¯
     ForTest unionTest;
     unionTest.m_addr[1] = 0x01;
     if(0x01 == unionTest.m_short)

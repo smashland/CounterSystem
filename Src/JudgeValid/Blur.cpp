@@ -44,7 +44,7 @@ void QmlBlur::geometryChanged(const QRectF &newGeometry, const QRectF &oldGeomet
 {
     QQuickItem::geometryChanged(newGeometry,oldGeometry);
 
-    /// ´´½¨Ò»¸öÍ¸Ã÷µÄÍ¼Æ¬
+    /// åˆ›å»ºä¸€ä¸ªé€æ˜çš„å›¾ç‰‡
     if(nullptr != m_pImage)
     {
         delete m_pImage;

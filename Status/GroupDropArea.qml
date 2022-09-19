@@ -5,6 +5,7 @@ DropArea
 {
     id:root
     property alias type: group.groupType
+    property alias source: zhenyingtu.source
 
     width: 340 *dpx
     height: Screen.desktopAvailableHeight*0.4
@@ -12,6 +13,11 @@ DropArea
     onWidthChanged:
     {
         width=340 *dpx
+    }
+    Image {
+        id:zhenyingtu
+        anchors.fill: parent
+//        source: "qrc:/Image/Grey_bg_all.png"
     }
 
     GroupInfo

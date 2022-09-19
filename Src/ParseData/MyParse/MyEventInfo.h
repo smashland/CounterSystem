@@ -11,32 +11,32 @@ public:
     CMyEventInfo();
 
     /**
-     * @brief ÉèÖÃID
+     * @brief è®¾ç½®ID
      * @param crAddr
      */
     void SetPerson(PersonInfo* pPerson);
 
     /**
-     * @brief ¸üĞÂ×´Ì¬ĞÅÏ¢
+     * @brief æ›´æ–°çŠ¶æ€ä¿¡æ¯
      * @param pData
      * @param nLength
      */
     void Update(const unsigned char* pData, int nLength);
 
     /**
-     * @brief Çå¿ÕÊÂ¼ş×´Ì¬
+     * @brief æ¸…ç©ºäº‹ä»¶çŠ¶æ€
      */
     void ClearEventStatus();
 protected:
 
     /**
-     * @brief ·¢ËÍÊÂ¼şID»ØÖ´
+     * @brief å‘é€äº‹ä»¶IDå›æ‰§
      * @param nEventID
      */
     void SendEventBack(quint16 unID, quint16 unEventID);
 
     /**
-     * @brief ÊÇ·ñ¿ÉÒÔÉèÖÃÎ»ÖÃ
+     * @brief æ˜¯å¦å¯ä»¥è®¾ç½®ä½ç½®
      * @return
      */
     bool CanSetPos();

@@ -1,7 +1,7 @@
 #ifndef CCONTROLSERIAL_H
 #define CCONTROLSERIAL_H
 ///////////////////////////////////////////////////////
-///  ±¾Àà¸ºÔğ¶ÁÈ¡´®¿ÚÊı¾İ
+///  æœ¬ç±»è´Ÿè´£è¯»å–ä¸²å£æ•°æ®
 ///
 ///
 ///
@@ -18,38 +18,38 @@ public:
     ~CControlSerial();
 
     /**
-     * @brief ÖØĞÂÅäÖÃ´®¿ÚĞÅÏ¢
+     * @brief é‡æ–°é…ç½®ä¸²å£ä¿¡æ¯
      */
     bool ReConfigSerialInfo();
 
 
     /**
-     * @brief ·¢ËÍÊı¾İ
-     * @param pData  Êı¾İÖ¸Õë
-     * @param nLength Êı¾İ³¤¶È
+     * @brief å‘é€æ•°æ®
+     * @param pData  æ•°æ®æŒ‡é’ˆ
+     * @param nLength æ•°æ®é•¿åº¦
      * @return
      */
     bool SendCommand(const QByteArray& rByteArray);
 
     /**
-     * @brief Á¬½Ó´®¿Ú
+     * @brief è¿æ¥ä¸²å£
      */
     void Connect();
 
     /**
-     * @brief ¶Ï¿ªÁ¬½Ó
+     * @brief æ–­å¼€è¿æ¥
      * @return
      */
     void DisConnect();
 
 private slots:
     /**
-     * @brief ´Ó´®¿Ú¶ÁÈ¡Êı¾İ
+     * @brief ä»ä¸²å£è¯»å–æ•°æ®
      */
     void ReadComData();
 
 private:
-    QSerialPort* m_pSerialPort;  /// ´®¿ÚÍ¨ĞÅ
+    QSerialPort* m_pSerialPort;  /// ä¸²å£é€šä¿¡
 };
 
 #endif // CCONTROLSERIAL_H

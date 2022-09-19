@@ -8,37 +8,37 @@ public:
     static CGetMachineInfo* GetInstance();
 
     /**
-     * @brief »ñÈ¡Íø¿¨ĞÅÏ¢
+     * @brief è·å–ç½‘å¡ä¿¡æ¯
      * @return
      */
     const QStringList& GetMacInfo(){return(m_listMacInfo);}
 
     /**
-     * @brief »ñÈ¡cpuID
+     * @brief è·å–cpuID
      * @return
      */
     const QString&       GetCpuID(){return(m_sCupID);}
 
     /**
-     * @brief »ñÈ¡´ÅÅÌĞòÁĞºÅ
+     * @brief è·å–ç£ç›˜åºåˆ—å·
      * @return
      */
     const QString&       GetHDSN(){return(m_sHardSN);}
 
     /**
-     * @brief CPUÊÇ·ñÊÇ´ó¶Ë
+     * @brief CPUæ˜¯å¦æ˜¯å¤§ç«¯
      * @return
      */
     bool   IsBigEnd(){return(m_bIsBigEnd);}
 
     /**
-     * @brief ÊÇ·ñ³õÊ¼»¯
+     * @brief æ˜¯å¦åˆå§‹åŒ–
      * @return
      */
     bool   IsInit(){return(m_bInit);}
 
     /**
-     * @brief ³õÊ¼»¯ĞÅÏ¢
+     * @brief åˆå§‹åŒ–ä¿¡æ¯
      */
     void Init();
 
@@ -46,12 +46,12 @@ private:
     CGetMachineInfo();
 
 private:
-    QStringList m_listMacInfo;   /// Íø¿¨ĞÅÏ¢
-    QString       m_sCupID;        /// CPU ĞÅÏ¢
-    QString       m_sHardSN;     /// ´ÅÅÌsn
+    QStringList m_listMacInfo;   /// ç½‘å¡ä¿¡æ¯
+    QString       m_sCupID;        /// CPU ä¿¡æ¯
+    QString       m_sHardSN;     /// ç£ç›˜sn
 
-    bool             m_bInit;              /// ÊÇ·ñ³õÊ¼»¯
-    bool             m_bIsBigEnd;   /// ÊÇ·ñÊÇ´ó¶Ë
+    bool             m_bInit;              /// æ˜¯å¦åˆå§‹åŒ–
+    bool             m_bIsBigEnd;   /// æ˜¯å¦æ˜¯å¤§ç«¯
 };
 
 #endif // GETMACHINEINFO_H

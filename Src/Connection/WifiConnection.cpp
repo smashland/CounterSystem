@@ -7,7 +7,7 @@ CWifiConnection::CWifiConnection(QObject *parent)
     :CConnection (parent)
     ,m_pTcp(new QTcpSocket(this))
 {
-    /// °ó¶¨ÐÅºÅºÍ²Û
+    /// ç»‘å®šä¿¡å·å’Œæ§½
     connect(m_pTcp,&QTcpSocket::readyRead,this,&CWifiConnection::ReciveData);
     connect(m_pTcp,&QTcpSocket::disconnected,this,&CConnection::disConnected);
     connect(m_pTcp,&QTcpSocket::connected,this,&CConnection::connected);
@@ -18,25 +18,25 @@ CWifiConnection::~CWifiConnection()
     m_pTcp->deleteLater();
 }
 
-/// Á¬½Ó
+/// è¿žæŽ¥
 void CWifiConnection::Connect()
 {
     m_pTcp->connectToHost(CConfigInfo::GetInstance()->GetIP().c_str(),CConfigInfo::GetInstance()->GetPort());
 }
 
-/// ¶Ï¿ªÁ¬½Ó
+/// æ–­å¼€è¿žæŽ¥
 void CWifiConnection::DisConnect()
 {
     m_pTcp->abort();
     CConnection::DisConnect();
 }
 
-/// ·¢ËÍÊý¾Ý
+/// å‘é€æ•°æ®
 bool CWifiConnection::SendCommand(const QByteArray &rByteArray)
 {
     static qint64 nSendSize;
 
-    /// Ö»ÓÐÁ¬½Óµ½´®¿ÚÊ±£¬²Å·¢ËÍÊý¾Ý
+    /// åªæœ‰è¿žæŽ¥åˆ°ä¸²å£æ—¶ï¼Œæ‰å‘é€æ•°æ®
     if(m_bConnected)
     {
         nSendSize = m_pTcp->write(rByteArray);
@@ -47,7 +47,7 @@ bool CWifiConnection::SendCommand(const QByteArray &rByteArray)
     return(false);
 }
 
-/// ½ÓÊÕÊý¾Ý
+/// æŽ¥æ”¶æ•°æ®
 void CWifiConnection::ReciveData()
 {
     if(m_pTcp->bytesAvailable() < 1)

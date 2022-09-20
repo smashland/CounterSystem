@@ -4,6 +4,7 @@
 #include <QObject>
 #include "Settings/GlobalSettings.h"
 #include "DataManager/GlobalData.h"
+#include <QTextCodec>
 
 class QQuickItem;
 
@@ -32,8 +33,17 @@ public:
     void setSettings(CGlobalSettings* pSettings);
     void setData(CGlobalData* pData);
     Q_INVOKABLE void setOsgItem(QQuickItem* pOsgItem);
-    Q_INVOKABLE void openWord();
-    Q_INVOKABLE void openVideo();
+//    Q_INVOKABLE void openWord();
+//    Q_INVOKABLE void openVideo();
+
+    // 帮助文档
+    Q_INVOKABLE QString copyFile(const QString &strImagePath, const QString &folderName = "Help");
+    Q_INVOKABLE QStringList openHelp();
+    Q_INVOKABLE void openFile(const QUrl &rReplayFile);
+
+    // 地图设置
+
+
     Q_INVOKABLE QStringList openPath();
     Q_INVOKABLE void setOpenSpeak(bool);
 

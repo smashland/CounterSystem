@@ -124,16 +124,18 @@ void QAppGlobal::setData(CGlobalData *pData)
 #include <QUrl>
 #include <QDir>
 #include <QList>
-void QAppGlobal::openWord()
-{
-    QString str = GetDataPath().c_str() + QString("Config/Instructionbook.doc");
-    QDesktopServices::openUrl(QUrl::fromLocalFile(str));
-}
-void QAppGlobal::openVideo()
-{
-    QString str = GetDataPath().c_str() + QString("Config/Instructionvideo.mkv");
-    QDesktopServices::openUrl(QUrl::fromLocalFile(str));
-}
+#include <QTextCodec>
+#include <QDebug>
+//void QAppGlobal::openWord()
+//{
+//    QString str = GetDataPath().c_str() + QString("Config/Instructionbook.doc");
+//    QDesktopServices::openUrl(QUrl::fromLocalFile(str));
+//}
+//void QAppGlobal::openVideo()
+//{
+//    QString str = GetDataPath().c_str() + QString("Config/Instructionvideo.mkv");
+//    QDesktopServices::openUrl(QUrl::fromLocalFile(str));
+//}
 
 QStringList QAppGlobal::openPath()
 {
@@ -147,7 +149,7 @@ QStringList QAppGlobal::openPath()
 
     for(int i=0; i < fileInfoList.count(); i++)
     {
-        string_list.append(fileInfoList.at(i).absoluteFilePath());
+        string_list.append(fileInfoList.at(i).baseName());
     }
     return(string_list);
 }
@@ -158,6 +160,38 @@ void QAppGlobal::setOsgItem(QQuickItem *pOsgItem)
     auto pSeneGraph = GetSceneCore()->GetSceneGraphManager()->FindSceneGraph(pOsgItem);
 
     m_pData->SetSeceneGraph(pSeneGraph);
+}
+
+QString QAppGlobal::copyFile(const QString &strImagePath, const QString &folderName)
+{
+    QFileInfo fileInfo(strImagePath);
+    QString name = folderName + "/" + fileInfo.fileName();
+    QFile::copy(strImagePath, GetDataPath().c_str() + name);
+    return name;
+}
+
+QStringList QAppGlobal::openHelp()
+{
+    QDir *dir=new QDir(QString("%1/%2").arg(GetDataPath().c_str()).arg("Help")); //文件夹
+    QStringList filter; //过滤
+    filter<<"*.chm"<<"*.doc"<<"*.docx"<<"*.mp4"<<"*.mkv";
+    dir->setNameFilters(filter);
+    QFileInfoList fileInfoList = dir->entryInfoList(filter);
+    delete dir;
+    QStringList string_list;
+    for(int i=0; i < fileInfoList.count(); i++)
+    {
+        string_list.append(fileInfoList.at(i).absoluteFilePath());
+    }
+    return(string_list);
+}
+
+void QAppGlobal::openFile(const QUrl &rReplayFile)
+{
+//    QTextCodec *code = QTextCodec::codecForName("utf-8");
+    QString str = rReplayFile.toLocalFile().toLocal8Bit().data();/*GetDataPath().c_str() + QString("Help/")*/;
+//    QString string = code->fromUnicode(str);
+    QDesktopServices::openUrl(QUrl::fromLocalFile(str));
 }
 ///
  void QAppGlobal::setOpenSpeak(bool bOpenSpeak)

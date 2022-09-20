@@ -10,6 +10,7 @@ class SceManager : public QObject
     Q_OBJECT
 public:
     explicit SceManager(QObject *parent = nullptr);
+    ~SceManager();
     SceManager(const QString &name);
     Q_PROPERTY(QString sceName READ getSceName WRITE setSceName NOTIFY sceNameChanged)
 
@@ -39,13 +40,14 @@ public:
       */
     Q_INVOKABLE void addPerson(int nID, const QString &sName, int nLevel, int nGroup, bool bHostage);
     Q_INVOKABLE bool HavePerson(int nID);
-
-    void addPerson();
 signals:
     void sceNameChanged(QString);
 private:
+    void ClearPersonInfo();
+private:
     QString m_sSceName;
     QMap<int,ScePersonInfo*> m_mapId2Person;
+
 
 };
 

@@ -10,6 +10,11 @@ SceManager::SceManager(QObject *parent)
     //    loadData("");
 }
 
+SceManager::~SceManager()
+{
+    ClearPersonInfo();
+}
+
 QList<ScePersonInfo*> SceManager::sces() const
 {
     return(m_mapId2Person.values());
@@ -66,24 +71,18 @@ void SceManager::write() const
 
     QJsonObject jsonSce;
     jsonSce.insert("Scename",m_sSceName);
-    personArray.append(jsonSce);
-    qDebug()<<"Scename"<<m_sSceName;
 
-     qDebug()<<"999999999999999999999999"<<m_mapId2Person.count();
     foreach(auto one,m_mapId2Person)
     {
-        qDebug()<<"00000000000000000";
-        QJsonObject json;
         QJsonObject personObject;      
         personObject.insert("ID", one->getID());
         personObject.insert("Name", one->getName());
         personObject.insert("Grouptype", one->getGroupType());
         personObject.insert("Position", one->getPosition());
         personObject.insert("Host", one->getHostage());
-        json.insert("Person", QJsonValue(personObject));
-        personArray.append(json);
+        personArray.append(personObject);
     }
-
+    jsonSce.insert("PersonArray",personArray);
 
     QString filePath = QApplication::applicationDirPath() + QString("/Data/Project/%1.json").arg(m_sSceName);
     QFile saveFile(filePath);
@@ -94,11 +93,11 @@ void SceManager::write() const
 
     /// 构建 Json 文档
     QJsonDocument document;
-    document.setArray(personArray);
-    saveFile.write(document.toJson());
-
-//    document.setObject(json);
+//    document.setArray(personArray);
 //    saveFile.write(document.toJson());
+
+    document.setObject(jsonSce);
+    saveFile.write(document.toJson());
 }
 
 void SceManager::setSceName(const QString& sName)
@@ -113,7 +112,11 @@ void SceManager::setSceName(const QString& sName)
 void SceManager::addScenario(const QString &sName)
 {
     setSceName(sName);
-    write();
+    if(m_mapId2Person.size() > 0)
+    {
+        write();
+        ClearPersonInfo();
+    }
 }
 ///添加人员
 void SceManager::addPerson(int nID,const QString& sName, int nLevel, int nGroup, bool bHostage)
@@ -125,8 +128,6 @@ void SceManager::addPerson(int nID,const QString& sName, int nLevel, int nGroup,
     scePersonInfo->setGroupType(nGroup);
     scePersonInfo->setHostage(bHostage);
     m_mapId2Person.insert(nID,scePersonInfo);
-
-    write();
 
 //    for(auto one=m_mapId2Person.begin();
 //        one != m_mapId2Person.end(); ++one)
@@ -146,12 +147,13 @@ bool SceManager::HavePerson(int nID)
     return(m_mapId2Person.contains(nID));
 }
 
-
-void SceManager::addPerson()
+void SceManager::ClearPersonInfo()
 {
-    qDebug()<<"添加人员99999999999999";
-
-
+    foreach (auto one, m_mapId2Person)
+    {
+        delete one;
+    }
+    m_mapId2Person.clear();
 }
 
 

@@ -12,7 +12,7 @@ Rectangle {
     id: scenarioLoader
     anchors.fill: parent
     color: "transparent"
-    signal addScenario
+    signal addScenario(string sceName)
 
     Item {
         id: backgroundItem
@@ -194,7 +194,7 @@ Rectangle {
 
                     Text {
                         id: col1
-                        text: name
+                        text: index+1
                         width: 100 *dpx
                         height: 50 *dpy
                         color: "#ffffff"
@@ -243,7 +243,7 @@ Rectangle {
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
-//                                    scenarioRemove.visible = true
+                                    //                                    scenarioRemove.visible = true
                                 }
                             }
                         }
@@ -258,7 +258,6 @@ Rectangle {
                 id: phoneModel;
                 ListModel {
                     ListElement{
-                        name: "1"
                         cost: "轻武器激光对抗系统1"
                     }
 
@@ -273,13 +272,11 @@ Rectangle {
                 model: phoneModel.createObject(listView)
                 header: headerView
                 focus: true
-                function addOne() {
-                            model.append(
-                                        {
-                                            "cost":scenarioNew.title
-                                        }
-                            )
-                        }
+                function addOne(sceName) {
+                    model.append({
+                                    "cost":sceName
+                                })
+                }
 
                 Component.onCompleted: {
                     scenarioLoader.addScenario.connect(listView.addOne)

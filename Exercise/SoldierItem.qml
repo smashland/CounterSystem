@@ -37,11 +37,6 @@ Rectangle {
             clip: true
             font.family: "Microsoft YaHei"
             verticalAlignment: Text.AlignVCenter
-
-            onEditingFinished: {
-                    scePersonInfo.id=Number(soldierItemContent.text)
-                    scePersonInfo.name=soldierItemContent.text
-            }
         }
     }
 }

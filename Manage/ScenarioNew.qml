@@ -69,6 +69,10 @@ Item {
                 clip: true
                 font.family: "Microsoft YaHei"
                 verticalAlignment: Text.AlignVCenter
+
+                onEditingFinished: {
+                    sceManager.setSceName(nameItemContent.text)
+                }
             }
 
         }
@@ -210,7 +214,7 @@ Item {
                     height: 40 *dpy
                     //                    arrayWidthSpacing: [20, 30]
                     Text {
-                        text: "0"
+                        text: nID
                         width: 70 *dpx
                         height: 50 *dpy
                         color: "#ffffff"
@@ -222,7 +226,7 @@ Item {
                     }
                     Text {
                         //                        x: 170 *dpx
-                        text: "人姓名"
+                        text: sName
                         width: 80 *dpx
                         height: 50 *dpy
                         color: "#ffffff"
@@ -234,7 +238,7 @@ Item {
                     }
                     Text {
                         //                        x: 572 *dpx
-                        text: "职务"
+                        text: nLevel
                         width: 110 *dpx
                         height: 50 *dpy
                         color: "#ffffff"
@@ -247,7 +251,7 @@ Item {
 
                     Text {
                         //                        x: 572 *dpx
-                        text: "方"
+                        text: nGroup
                         width: 80 *dpx
                         height: 50 *dpy
                         color: "#ffffff"
@@ -259,7 +263,7 @@ Item {
                     }
                     Text {
                         //                        x: 572 *dpx
-                        text: "是人质"
+                        text: bHost ? "是人质" : "不是人质"
                         width: 138 *dpx
                         height: 50 *dpy
                         color: "#ffffff"
@@ -281,6 +285,14 @@ Item {
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked:personAdd.visible = true
+                                Connections{
+                                    function onOk(id,name,level,group,isHost)
+                                    {
+                                        phoneModel.append({"nID":id,"sName":name,"nLevel":level,"nGroup":group,"bHost":isHost})
+                                    }
+
+                                    target: personAdd
+                                }
                             }
                         }
                         ViewButton {
@@ -294,48 +306,48 @@ Item {
             }
         }
 
-        Component {
+        ListModel {
             id: phoneModel;
-            ListModel {
-                ListElement{
-                    name: "1"
-                    cost: "轻武器激光对抗系统1"
-                }
+            ListElement{
+                nID: 12
+                sName: "1"
+                nLevel: 2
+                nGroup:1
+                bHost: false
             }
-
         }
 
         ListView {
             id: listView
             anchors.fill: parent
             delegate: delegate
-            model: phoneModel.createObject(listView)
+            model: phoneModel
             header: headerView
             focus: true
         }
     }
 
 
-//    Item {
-//        x: 90 *dpx
-//        y: weizhixinxi.contentHeight + weizhixinxi.y + 10 *dpy + 10 *dpy + 146*dpy + 52 *dpy
-//        width: 985
-//        height: 40 *dpy
-//        Rectangle {
-//            anchors.fill: parent
-//            color: "#2D5689"
-//            Text {
-//                anchors.fill: parent
-//                text: qsTr("+ 添加人员")
-//                font.pixelSize: 17*dpx;
-//                verticalAlignment: Text.AlignVCenter
-//                horizontalAlignment: Text.AlignHCenter
-//                color: "#ffffff"
-//                font.family: "Microsoft YaHei"
-//                font.bold: true
-//            }
-//        }
-//    }
+    //    Item {
+    //        x: 90 *dpx
+    //        y: weizhixinxi.contentHeight + weizhixinxi.y + 10 *dpy + 10 *dpy + 146*dpy + 52 *dpy
+    //        width: 985
+    //        height: 40 *dpy
+    //        Rectangle {
+    //            anchors.fill: parent
+    //            color: "#2D5689"
+    //            Text {
+    //                anchors.fill: parent
+    //                text: qsTr("+ 添加人员")
+    //                font.pixelSize: 17*dpx;
+    //                verticalAlignment: Text.AlignVCenter
+    //                horizontalAlignment: Text.AlignHCenter
+    //                color: "#ffffff"
+    //                font.family: "Microsoft YaHei"
+    //                font.bold: true
+    //            }
+    //        }
+    //    }
 
 
     Row {
@@ -357,8 +369,9 @@ Item {
 
             nameButton: "确定"
             onClicked: {
-//                var test = scenario.setSceName();
-//                console.log(test);
+                //                var test = scenario.setSceName();
+                //                console.log(test);
+                sceManager.addScenario(nameItemContent.text)
                 if(nameItemContent.text == null) {
                     console.log("没有方案名称")
                 }else {
@@ -375,9 +388,9 @@ Item {
         }
     }
 
-//    Scenario {
-//        id: scenario
-//    }
+    SceManager {
+        id: sceManager
+    }
 
 
 

@@ -12,13 +12,13 @@ void ScePersonInfo::setID(int nID)
     if(m_ID!=nID)
     {
         m_ID=nID;
-        emit IDChanged(m_ID);
-        qDebug()<<"编号————"<<m_ID;
+        emit IDChanged(m_ID);        
     }
 }
 
 int ScePersonInfo::getID() const
 {
+    qDebug()<<"编号————"<<m_ID;
     return m_ID;
 }
 
@@ -83,9 +83,3 @@ bool ScePersonInfo::getHostage()
     return m_host;
 }
 
-void ScePersonInfo::write(QJsonObject &json) const
-{
-    json["id"] = m_ID;
-    json["name"] = m_Name;
-    json["groupType"] = m_Group;
-}

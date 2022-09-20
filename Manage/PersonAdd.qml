@@ -92,13 +92,16 @@ Popup
         spacing: 20*dpy
 
         SoldierItem {
+            id:shebeiId
             text: "设备编号: "
-            name:""
+            name:""/*scePersonInfo.id*/
         }
 
         SoldierItem {
+            id:personName
             text: "人员姓名: "
-            name:""
+            name:""/*scePersonInfo.name*/
+            //
         }
         Row {
             spacing: 20*dpx
@@ -135,6 +138,10 @@ Popup
                     color: "#ffffff"
                     font.family: "Microsoft YaHei"
                     verticalAlignment: Text.AlignVCenter
+
+                    onEditingFinished: {
+                    scePersonInfo.position=combobox_renyuan.currentText
+                    }
                 }
                 background: Rectangle {
                     implicitWidth: 110*dpx
@@ -179,6 +186,10 @@ Popup
                     color: "#ffffff"
                     font.family: "Microsoft YaHei"
                     verticalAlignment: Text.AlignVCenter
+
+                    onEditingFinished: {
+                         scePersonInfo.groupType=zhenying.displayText
+                    }
                 }
                 background: Rectangle {
                     implicitWidth: 110*dpx
@@ -231,6 +242,9 @@ Popup
                         verticalAlignment: Text.AlignVCenter
                         leftPadding: 20*dpx
                     }
+                    onClicked: {
+                        scePersonInfo.hostage=true;
+                    }
                 }
                 RadioButton {
                     id: control4
@@ -258,6 +272,10 @@ Popup
                         verticalAlignment: Text.AlignVCenter
                         leftPadding: 20*dpx
                     }
+
+                    onClicked: {
+                        scePersonInfo.hostage=false;
+                    }
                 }
             }
         }
@@ -276,7 +294,7 @@ Popup
 
             nameButton: "确定"
             onClicked: {
-                sceManager.addPerson();
+                sceManager.addPerson(36,"李大嘴", 3, 2,false)
             }
 
         }

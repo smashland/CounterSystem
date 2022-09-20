@@ -37,7 +37,7 @@ QString ScePersonInfo::getName()
     return m_Name;
 }
 
-void ScePersonInfo::setPosition(QString sPosition)
+void ScePersonInfo::setPosition(int sPosition)
 {
     if(m_Positon!=sPosition)
     {
@@ -47,12 +47,12 @@ void ScePersonInfo::setPosition(QString sPosition)
     }
 }
 
-QString ScePersonInfo::getPosition()
+int ScePersonInfo::getPosition()
 {
     return m_Positon;
 }
 
-void ScePersonInfo::setGroupType(QString groupType)
+void ScePersonInfo::setGroupType(int groupType)
 {
     if(m_Group!=groupType)
     {
@@ -62,7 +62,7 @@ void ScePersonInfo::setGroupType(QString groupType)
     }
 }
 
-QString ScePersonInfo::getGroupType()
+int ScePersonInfo::getGroupType()
 {
     return m_Group;
 }
@@ -81,4 +81,11 @@ void ScePersonInfo::setHostage(bool bHostage)
 bool ScePersonInfo::getHostage()
 {
     return m_host;
+}
+
+void ScePersonInfo::write(QJsonObject &json) const
+{
+    json["id"] = m_ID;
+    json["name"] = m_Name;
+    json["groupType"] = m_Group;
 }

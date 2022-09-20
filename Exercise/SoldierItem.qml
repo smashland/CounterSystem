@@ -39,7 +39,8 @@ Rectangle {
             verticalAlignment: Text.AlignVCenter
 
             onEditingFinished: {
-                    scePersonInfo.id=soldierItemContent.text
+                    scePersonInfo.id=Number(soldierItemContent.text)
+                    scePersonInfo.name=soldierItemContent.text
             }
         }
     }

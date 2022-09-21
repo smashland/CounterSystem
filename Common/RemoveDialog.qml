@@ -28,18 +28,12 @@ Popup
     {
         anchors.fill: parent
         color: "transparent"
-//        Image {
-//            id: name
-//            anchors.fill: parent
-//            source: "qrc:/Image/Popup_bg_24.png"
-//        }
         PopupTitle {
             name: ("删除")
+            x: 50*dpx
+            y: 45*dpy
         }
-        TransverseLine {
-            x: 80 *dpx
-            y: 95*dpy
-        }
+
     }
 
     Row {

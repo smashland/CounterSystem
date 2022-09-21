@@ -92,7 +92,6 @@
         <file>Common/SwitchButton.qml</file>
         <file>Common/ViewButton.qml</file>
         <file>Manage/ScenarioPopup.qml</file>
-        <file>Manage/ScenarioRevise.qml</file>
         <file>Manage/PlaybackRefresh.qml</file>
         <file>OsgWindow.qml</file>
         <file>Manage/Progressbar.qml</file>
@@ -103,9 +102,7 @@
         <file>Exercise/ExerciseResults.qml</file>
         <file>Common/PopupTitle.qml</file>
         <file>font/iconfont.ttf</file>
-        <file>Common/TransverseLine.qml</file>
         <file>Exercise/RedChart.qml</file>
-        <file>ShowItem.qml</file>
         <file>SelectWifi.qml</file>
         <file>SelectComName.qml</file>
         <file>Setting/ChongDan.qml</file>
@@ -119,7 +116,6 @@
         <file>Status/PersonAllInfo.qml</file>
         <file>Status/PersonBackHurtInfo.qml</file>
         <file>Status/PersonFontHurtInfo.qml</file>
-        <file>Status/PersonInfoLabel.qml</file>
         <file>Status/PersonStatus.qml</file>
         <file>ConfirmPopUp.qml</file>
         <file>MainWindow.qml</file>
@@ -149,5 +145,7 @@
         <file>Manage/PersonAdd.qml</file>
         <file>Image/true.png</file>
         <file>Manage/HelpAdd.qml</file>
+        <file>Common/TextItem.qml</file>
+        <file>Common/SearchItem.qml</file>
     </qresource>
 </RCC>

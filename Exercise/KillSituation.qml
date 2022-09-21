@@ -12,17 +12,16 @@ Item {
     Image {
         id: loginImage
         anchors.fill: parent
-        source: "qrc:/Image/Popup_bg_20.png"
+        source: "qrc:/Image/Popup_bg_13.png"
     }
 
     PopupTitle {
         name: qsTr("击杀情况")
         icon: "\ue602"
+        x: 60*dpx
+        y: 44*dpy
     }
-    TransverseLine {
-        x: 80 *dpx
-        y: 95*dpy
-    }
+
     CloseButton {
         anchors.right: killSituation.right
         anchors.rightMargin: 60 *dpx

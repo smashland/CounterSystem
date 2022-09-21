@@ -26,14 +26,10 @@ Item {
     }
 
     PopupTitle {
-        name: ("新建")
+        name: ("方案设置")
+        x: 74*dpx
+        y: 64*dpy
     }
-    TransverseLine {
-        x: 80 *dpx
-        y: 95*dpy
-    }
-
-
 
     Rectangle {
         id: nameItem
@@ -101,97 +97,55 @@ Item {
     }
 
     Rectangle {
+        id: renyuantianjia
         x: 90 *dpx
         y: weizhixinxi.contentHeight + weizhixinxi.y + 10 *dpy + 10 *dpy
         width: 985
-        height: 144 *dpy
+        height: 335 *dpy
         color: "transparent"
 
         Component {
             id: headerView
             Item {
-                width: parent.width
+                width: renyuantianjia.width
                 height: 40 *dpy
                 Rectangle {
                     anchors.fill: parent
                     color: "#2D5689"
                 }
-
                 Row {
                     spacing: 56 *dpx
                     x: 25 *dpx
                     height: 40 *dpy
-                    Text {
+                    TextItem {
                         text: "设备编号"
-                        width: 70 *dpx
-                        height: 40 *dpy
-                        color: "#ffffff"
-                        font.pixelSize: 16
-                        font.family: "Microsoft YaHei";
-                        font.bold: true
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
+                        widthTitle: 70 *dpx
+                        heightTitle: 40 *dpy
                     }
-                    Text {
-                        //                        x: 170 *dpx
+                    TextItem {
                         text: "人员姓名"
-                        width: 80 *dpx
-                        height: 40 *dpy
-                        color: "#ffffff"
-                        font.pixelSize: 16
-                        font.family: "Microsoft YaHei";
-                        font.bold: true
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
+                        widthTitle: 80 *dpx
+                        heightTitle: 40 *dpy
                     }
-                    Text {
-                        //                        x: 572 *dpx
+                    TextItem {
                         text: "人员职务"
-                        width: 110 *dpx
-                        height: 40 *dpy
-                        color: "#ffffff"
-                        font.pixelSize: 16
-                        font.family: "Microsoft YaHei";
-                        font.bold: true
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
+                        widthTitle: 110 *dpx
+                        heightTitle: 40 *dpy
                     }
-
-                    Text {
-                        //                        x: 572 *dpx
+                    TextItem {
                         text: "红蓝方"
-                        width: 80 *dpx
-                        height: 40 *dpy
-                        color: "#ffffff"
-                        font.pixelSize: 16
-                        font.family: "Microsoft YaHei";
-                        font.bold: true
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
+                        widthTitle: 80 *dpx
+                        heightTitle: 40 *dpy
                     }
-                    Text {
-                        //                        x: 572 *dpx
+                    TextItem {
                         text: "是否是人质"
-                        width: 138 *dpx
-                        height: 40 *dpy
-                        color: "#ffffff"
-                        font.pixelSize: 16
-                        font.family: "Microsoft YaHei";
-                        font.bold: true
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
+                        widthTitle: 138 *dpx
+                        heightTitle: 40 *dpy
                     }
-                    Text {
-                        //                        x: 572 *dpx
+                    TextItem {
                         text: "操作"
-                        width: 180 *dpx
-                        height: 40 *dpy
-                        color: "#ffffff"
-                        font.pixelSize: 16
-                        font.family: "Microsoft YaHei";
-                        font.bold: true
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
+                        widthTitle: 180 *dpx
+                        heightTitle: 40 *dpy
                     }
                 }
             }
@@ -201,82 +155,44 @@ Item {
             id: delegate
             Item {
                 id: wrapper
-                width: parent.width
+                width: renyuantianjia.width
                 height: 50 *dpy
                 Rectangle {
                     anchors.fill: parent
                     color: index%2 ? "#2D5689" : "#4671a6"
                 }
-
                 Row {
                     spacing: 56 *dpx
                     x: 25*dpx
                     height: 40 *dpy
-                    //                    arrayWidthSpacing: [20, 30]
-                    Text {
+                    TextItem {
                         text: nID
                         width: 70 *dpx
                         height: 50 *dpy
-                        color: "#ffffff"
-                        font.pixelSize: 16
-                        font.family: "Microsoft YaHei";
-                        font.bold: true
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
                     }
-                    Text {
-                        //                        x: 170 *dpx
+                    TextItem {
                         text: sName
                         width: 80 *dpx
                         height: 50 *dpy
-                        color: "#ffffff"
-                        font.pixelSize: 16
-                        font.family: "Microsoft YaHei";
-                        font.bold: true
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
                     }
-                    Text {
-                        //                        x: 572 *dpx
+                    TextItem {
                         text: nLevel
                         width: 110 *dpx
                         height: 50 *dpy
-                        color: "#ffffff"
-                        font.pixelSize: 16
-                        font.family: "Microsoft YaHei";
-                        font.bold: true
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
                     }
 
-                    Text {
-                        //                        x: 572 *dpx
+                    TextItem {
                         text: nGroup
                         width: 80 *dpx
                         height: 50 *dpy
-                        color: "#ffffff"
-                        font.pixelSize: 16
-                        font.family: "Microsoft YaHei";
-                        font.bold: true
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
                     }
-                    Text {
-                        //                        x: 572 *dpx
+                    TextItem {
                         text: bHost ? "是人质" : "不是人质"
                         width: 138 *dpx
                         height: 50 *dpy
-                        color: "#ffffff"
-                        font.pixelSize: 16
-                        font.family: "Microsoft YaHei";
-                        font.bold: true
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
                     }
                     Row {
                         y: 10 *dpy
-                        //                        width: 370 *dpx
-                        //                        height: 30 *dpy
                         spacing: 15 * dpx
                         ViewButton {
                             name: qsTr("修改")
@@ -296,7 +212,7 @@ Item {
                             }
                         }
                         ViewButton {
-                            name: qsTr("加载")
+                            name: qsTr("删除")
                             color: viewColor_xinjian
                             viewImage: "\ue607"
                         }
@@ -323,32 +239,14 @@ Item {
             delegate: delegate
             model: phoneModel
             header: headerView
+            clip: true
             focus: true
+            ScrollBar.vertical: ScrollBar {
+                id: scrollBar
+            }
         }
+
     }
-
-
-    //    Item {
-    //        x: 90 *dpx
-    //        y: weizhixinxi.contentHeight + weizhixinxi.y + 10 *dpy + 10 *dpy + 146*dpy + 52 *dpy
-    //        width: 985
-    //        height: 40 *dpy
-    //        Rectangle {
-    //            anchors.fill: parent
-    //            color: "#2D5689"
-    //            Text {
-    //                anchors.fill: parent
-    //                text: qsTr("+ 添加人员")
-    //                font.pixelSize: 17*dpx;
-    //                verticalAlignment: Text.AlignVCenter
-    //                horizontalAlignment: Text.AlignHCenter
-    //                color: "#ffffff"
-    //                font.family: "Microsoft YaHei"
-    //                font.bold: true
-    //            }
-    //        }
-    //    }
-
 
     Row {
         spacing: 15 *dpx

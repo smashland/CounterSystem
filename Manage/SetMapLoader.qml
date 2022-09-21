@@ -1,63 +1,100 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
+import MyItem 1.0
+import QtQuick.Dialogs 1.3
 import Qt.labs.platform 1.1
+import Qt.labs.qmlmodels 1.0
+import "../Common"
+import "../Exercise"
 
-Grid {
-    columns: 3
-    spacing: 3
-    Repeater
-    {
-        model: 9
-        Column {
-            spacing: 3
-            Rectangle {
-                width: 230
-                height: 145
-                border.color: "white"
-                color: "transparent"
-                Image {
-                    anchors.fill: parent
-                    source: fileDialog.fileUrl
-                }
-                MouseArea{
-                    anchors.fill: parent
-                    onClicked: {
-                        fileDialog.visible = true
-                    }
-                }
-            }
-            Rectangle {
-                width: 230
-                height: 20
-                border.color: "white"
-                color: "transparent"
-                TextInput {
-                    anchors.fill: parent
-                    font.pixelSize: 14*dpx
-                    color: "#d5e2f5"
-                    clip: true
-                    text: "地图" + index
-                    selectByMouse: true
-                    selectionColor: "#00aefd"
-                    font.family: "Microsoft YaHei"
-                    verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: Text.AlignHCenter
-
-                }
-            }
+Rectangle {
+    id: setMapLoade
+    width: 710 *dpx
+    height: 510 *dpy
+    color: "transparent"
+    PopupButton {
+        anchors.bottom: parent.bottom
+        x: 311*dpx
+        background: Rectangle {
+            color: "#265aef"
+        }
+        nameButton: "添加"
+        onClicked: {
+            fileDialog.open()
+//            listView.model = $app.openHelp()
         }
     }
     FileDialog {
         id: fileDialog
         folder: shortcuts.home
+        title: qsTr("请选择地图文件")
+        nameFilters: [qsTr("地图文件 (*.tiff)"), qsTr("全部文件 (*.*)")]
+        currentFile: document.source
         onAccepted: {
-            source: fileDialog.fileUrl
+//            $app.copyFile(currentFile.toString().replace("file:///", ""));
         }
-        onRejected: {
-            //                    console.log("Canceled")
+    }
+
+    Rectangle {
+
+        width: 710 *dpx
+        height: 510 *dpy
+        color: "transparent"
+
+        Component {
+            id: delegate
+            Item {
+                id: wrapper
+                width: parent.width
+                height: 38 *dpy
+                Rectangle {
+                    anchors.fill: parent
+                    color: index%2 ? "#4671a6" : "#2D5689"
+                }
+                MouseArea {
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    onClicked: {
+                        mouse.accepted = true
+                        wrapper.ListView.view.currentIndex = index
+//                        $app.openFile("file:///"+modelData)
+                    }
+                }
+                Text {
+                    id:fileName
+                    text: modelData
+                    anchors.centerIn: parent
+                    color: "#ffffff"
+                    font.pixelSize: 16*dpx
+                    font.family: "MicrosoftYaHei";
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
         }
-        Component.onCompleted: visible = flase
+
+        Component {
+            id: listModel;
+            ListModel {
+
+            }
+
+        }
+
+        ListView {
+            id: listView
+            anchors.fill: parent
+            delegate: delegate
+            spacing: 1*dpy
+//            model: $app.openHelp()
+            focus: true
+            clip: true
+            ScrollBar.vertical: ScrollBar {
+                id: scrollBar
+            }
+
+        }
+
     }
 
 }
-

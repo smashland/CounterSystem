@@ -40,10 +40,8 @@ Rectangle {
         PopupTitle {
             name: ("方案管理")
             icon: "\ue678"
-        }
-        TransverseLine {
-            x: 80 *dpx
-            y: 95*dpy
+            x: 74 *dpx
+            y: 60*dpy
         }
 
         Row
@@ -78,58 +76,15 @@ Rectangle {
             }
         }
 
-        Rectangle {
-            y: 115*dpy
-            anchors.right: parent.right
-            anchors.rightMargin: 80*dpx
-            width:  380*dpx
-            height:  34*dpy
-            color: "#082e5c"
-            radius: 2
-            border.color: "#32b8ff"
-
-            TextInput {
-                id: scenarioTextInput
-                width: 380*dpx
-                x: 20*dpx
-                height: 34*dpy
-                color: "#dcecff"
-                activeFocusOnPress: true
-                clip: true
-                verticalAlignment: Text.AlignVCenter
-                font.pixelSize: 14*dpx
-            }
-
-            Button {
-                id: search
-                y: 2 *dpy
-                anchors.right: parent.right
-                anchors.rightMargin: 10*dpx
-                width:   24*dpy
-                height:  24*dpy
-
-                Text {
-                    id: iconText
-                    width: 24*dpx
-                    height: 24*dpx
-                    text: qsTr("\ue6f3")
-                    color: "#ffffff"
-                    font.family: "iconfont"
-                    font.pixelSize: 22*dpx
-                    verticalAlignment: Text.AlignVCenter
-                }
-                background: Rectangle {
-                    color: "transparent"
-                }
-            }
+        SearchItem {
 
         }
 
         Rectangle {
-            x: 80
-            y: 170
-            width: 1066
-            height: 520 *dpy
+            x: 80*dpx
+            y: 170*dpy
+            width: 1066*dpx
+            height: 550 *dpy
             color: "transparent"
 
             Component {
@@ -141,42 +96,23 @@ Rectangle {
                         anchors.fill: parent
                         color: "#2D5689"
                     }
-                    Text {
+                    TextItem {
                         text: "序号"
                         width: 100 *dpx
                         height: 30 *dpy
-                        color: "#ffffff"
-                        font.pixelSize: 16
-                        font.family: "Microsoft YaHei";
-                        font.bold: true
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
                     }
-                    Text {
+                    TextItem {
                         x: 170 *dpx
                         text: "方案名称"
                         width: 200 *dpx
                         height: 30 *dpy
-                        color: "#ffffff"
-                        font.pixelSize: 16
-                        font.family: "Microsoft YaHei";
-                        font.bold: true
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
                     }
-                    Text {
+                    TextItem {
                         x: 572 *dpx
                         text: "操作"
                         width: 370 *dpx
                         height: 30 *dpy
-                        color: "#ffffff"
-                        font.pixelSize: 16
-                        font.family: "Microsoft YaHei";
-                        font.bold: true
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
                     }
-                    //                }
                 }
             }
 
@@ -191,28 +127,18 @@ Rectangle {
                         color: index%2 ? "#2D5689" : "#4671a6"
                     }
 
-
-                    Text {
+                    TextItem {
                         id: col1
                         text: name
                         width: 100 *dpx
                         height: 50 *dpy
-                        color: "#ffffff"
-                        font.pixelSize: 16*dpx
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
                     }
-                    Text {
+                    TextItem {
                         id: col2
                         x: 170 *dpx
                         text: cost
                         width: 200 *dpx
                         height: 50 *dpy
-                        color: "#ffffff"
-                        font.pixelSize: 16
-                        font.family: "Microsoft YaHei"
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
                     }
                     Row {
                         x: 620 *dpx
@@ -227,7 +153,7 @@ Rectangle {
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
-                                    scenarioRevise.visible = true
+                                    scenarioNew.visible = true
                                 }
                             }
                         }
@@ -273,6 +199,10 @@ Rectangle {
                 model: phoneModel.createObject(listView)
                 header: headerView
                 focus: true
+                clip: true
+                ScrollBar.vertical: ScrollBar {
+                    id: scrollBar
+                }
                 function addOne() {
                             model.append(
                                         {

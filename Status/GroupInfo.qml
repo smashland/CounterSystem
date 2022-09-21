@@ -46,98 +46,102 @@ Rectangle
         font.family: "MicrosoftYaHei-Bold";
     }
 
-    ScrollView
+    //    ScrollView
+    //    {
+    //        anchors.fill: parent;
+    //        clip: true;
+    ListView
     {
-        anchors.fill: parent;
-        clip: true;
-        ListView
+        id:listView
+        width: parent.width
+        height: parent.height - 80*dpy
+        anchors.top: parent.top
+        anchors.topMargin: 50*dpy
+        model:$app.allData.ceateType(groupType)
+        clip: true
+        ScrollBar.vertical: ScrollBar {
+            id: scrollBar
+        }
+        delegate:MouseArea
         {
-            id:listView
+            acceptedButtons: Qt.LeftButton | Qt.RightButton
+            id:mouseArea
             width: parent.width
-            height: parent.height - 80*dpy
-            anchors.top: parent.top
-            anchors.topMargin: 50
-            model:$app.allData.ceateType(groupType)
-            delegate:MouseArea
+            height: 50*dpy
+            hoverEnabled: true
+            drag.target: $app.settings.bIsStart ? null : forShow
+
+            /// 鼠标释放
+            onReleased:
             {
-                acceptedButtons: Qt.LeftButton | Qt.RightButton
-                id:mouseArea
-                width: parent.width
-                height: 50*dpy
-                hoverEnabled: true
-                drag.target: $app.settings.bIsStart ? null : forShow
-
-                /// 鼠标释放
-                onReleased:
+                if(forShow.Drag.target !== null)
                 {
-                    if(forShow.Drag.target !== null)
+                    listView.model.remove(index);
+                    forShow.Drag.drop();
+                }
+                else
+                {
+                    forShow.Drag.cancel();
+                }
+            }
+
+            /// 鼠标按下
+            onPressed:
+            {
+                parent.currentIndex = index;
+                /// 鼠标右键弹出菜单
+                if(Qt.RightButton === mouse.button)
+                {
+                    personClickd(modelData.id,mouseX,index * height + mouseY+53);
+                }
+            }
+
+            /// 双击
+            onDoubleClicked:
+            {
+                personDClick(modelData.id);
+            }
+
+
+            /// 用户信息
+            PersonStatus
+            {
+                id:forShow
+                outData:modelData;
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
+                Drag.active: mouseArea.drag.active
+                Drag.hotSpot.x: width/2
+                Drag.hotSpot.y: height/2
+                states: State
+                {
+                    when: mouseArea.drag.active
+                    ParentChange
                     {
-                        listView.model.remove(index);
-                        forShow.Drag.drop();
+                        target: forShow;
+                        parent:rootRect.parent
                     }
-                    else
+
+                    AnchorChanges
                     {
-                        forShow.Drag.cancel();
-                    }
-                }
-
-                /// 鼠标按下
-                onPressed:
-                {
-                    parent.currentIndex = index;
-                    /// 鼠标右键弹出菜单
-//                    if(Qt.RightButton === mouse.button)
-//                    {
-//                        personClickd(modelData.id,mouseX,index * height + mouseY);
-//                    }
-                }
-
-                /// 双击
-                onDoubleClicked:
-                {
-                    personDClick(modelData.id);
-                }
-
-
-                /// 用户信息
-                PersonStatus
-                {
-                    id:forShow
-                    outData:modelData;
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    Drag.active: mouseArea.drag.active
-                    Drag.hotSpot.x: width/2
-                    Drag.hotSpot.y: height/2
-                    states: State
-                    {
-                        when: mouseArea.drag.active
-                        ParentChange
-                        {
-                            target: forShow;
-                            parent:rootRect.parent
-                        }
-
-                        AnchorChanges
-                        {
-                            target: forShow;
-                            anchors.verticalCenter: undefined;
-                            anchors.horizontalCenter: undefined;
-                        }
+                        target: forShow;
+                        anchors.verticalCenter: undefined;
+                        anchors.horizontalCenter: undefined;
                     }
                 }
             }
         }
     }
-//    Component.onCompleted:{
-//        console.log("hhhhhhhh",listView.model,listView.model.count)
-//        Connections
-//        {
-//            target: listView.model
+    //    }
+    //    Component.onCompleted:{
+    //        console.log("hhhhhhhh",listView.model,listView.model.count)
+    //        Connections
+    //        {
+    //            target: listView.model
 
-//            function onCountChanged(count){
-//                zongrenshu.text = count
-//            }
-//        }
-//    }
+    //            function onCountChanged(count){
+    //                zongrenshu.text = count
+    //            }
+    //        }
+    //    }
 }

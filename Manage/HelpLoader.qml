@@ -37,17 +37,15 @@ Rectangle {
         PopupTitle {
             name: ("帮助")
             icon: "\ue619"
-        }
-        TransverseLine {
-            x: 80 *dpx
-            y: 95*dpy
+            x: 54*dpx
+            y: 40*dpy
         }
 
         Rectangle {
             x: 80*dpx
-            y: 110*dpy
+            y: 90*dpy
             width: 190*dpx
-            height: 350*dpy
+            height: 370*dpy
             color: "#0a3365"
             ButtonGroup{
                 buttons: columnEditBtns.children

@@ -220,12 +220,7 @@ Rectangle
         x: (index.width-playbackLoader.width) / 2
         y: (index.height-playbackLoader.height) / 2
     }
-    ScenarioRevise {
-        id: scenarioRevise
-        visible: false
-        x: (index.width-scenarioRevise.width) / 2
-        y: (index.height-scenarioRevise.height) / 2
-    }
+
     PlaybackRefresh {
         id: playbackRefresh
         visible: false

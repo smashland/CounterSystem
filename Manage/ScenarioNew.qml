@@ -267,13 +267,11 @@ Item {
 
             nameButton: "确定"
             onClicked: {
-                //                var test = scenario.setSceName();
-                //                console.log(test);
-                sceManager.addScenario(nameItemContent.text)
-                if(nameItemContent.text == null) {
+                if(nameItemContent.text === '') {
                     console.log("没有方案名称")
                 }else {
-                    scenarioLoader.addScenario()
+                    scenarioLoader.addScenario(nameItemContent.text);
+                    sceManager.addScenario(nameItemContent.text);
                 }
             }
         }
@@ -285,11 +283,4 @@ Item {
             onClicked: scenarionew.visible = false
         }
     }
-
-    SceManager {
-        id: sceManager
-    }
-
-
-
 }

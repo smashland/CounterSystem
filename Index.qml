@@ -7,6 +7,7 @@ import "Exercise"
 import "Manage"
 import "Status"
 import "RePlay" as MyRePlay
+import MyItem 1.0
 
 
 Rectangle
@@ -311,6 +312,9 @@ Rectangle
         id: personAdd
         anchors.centerIn: parent
         visible: false
+    }
+    SceManager{
+        id:sceManager
     }
     RemoveDialog {
         id: removeDialog_quit

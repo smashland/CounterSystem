@@ -4,7 +4,6 @@ import QtQuick.Layouts 1.3
 import QtQuick.Dialogs 1.3
 import "../Common"
 import "../Exercise"
-import MyItem 1.0
 Popup
 {
     id: personAdd
@@ -295,12 +294,5 @@ Popup
             }
         }
     }
-    SceManager{
-        id:sceManager
-    }
-    ScePersonInfo{
-        id:scePersonInfo
-    }
-
 }
 

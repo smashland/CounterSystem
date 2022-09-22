@@ -33,14 +33,10 @@ Popup
 
     PopupTitle {
         id: popuptitle
-        x: 50 *dpx;
-        y: 50 *dpy
-        name: qsTr("添加人员")
+        x: 40*dpx
+        y: 34*dpy
+        name: qsTr("人员设置")
         icon: qsTr("\ue8b8")
-    }
-    TransverseLine {
-        x: 50 *dpx
-        y: popuptitle.height + 80 *dpy
     }
 
     Rectangle {

@@ -8,12 +8,25 @@ Rectangle
     property var outData: null
     property var fontSize: 16
 
-
     id:root
-    width: parent.width
-    height: 40
+    width: (parent.width-20)*dpx
+    height: 40*dpy
     color: "black"
+    opacity: 0.7
     z:10
+
+    Text
+    {
+        id:showid
+        text: outData.id;
+        verticalAlignment: Text.AlignVCenter
+        font.family: "Microsoft YaHei"
+        font.pixelSize: fontSize
+        color:  "white"
+        height: parent.height
+        anchors.left: parent.left
+        anchors.leftMargin: 10
+    }
 
     Text
     {
@@ -25,7 +38,7 @@ Rectangle
         color:  "white"
         height: parent.height
         anchors.left: parent.left
-        anchors.leftMargin: 10
+        anchors.leftMargin: 10 + showid.contentWidth
     }
 
     RowLayout
@@ -108,27 +121,6 @@ Rectangle
             font.pixelSize: 14*dpx
             font.family: "Microsoft YaHei"
         }
-
-        Text {
-            id:setRoot
-            width: setRoot.contentWidth
-            height: setRoot.contentHeight
-            text: qsTr("\ue8b8")
-            color: "#e7f6ff"
-            font.family: "iconfont"
-            font.pixelSize: 22*dpx
-            verticalAlignment: Text.AlignVCenter
-            MouseArea
-            {
-                anchors.fill: parent
-                onPressed:
-                {
-                    personClickd(modelData.id,setRoot.x,index * height+90);
-                }
-
-            }
-        }
-
     }
 
     /// 健康生命条

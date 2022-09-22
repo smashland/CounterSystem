@@ -11,7 +11,7 @@ import "../Exercise"
 Rectangle {
     id: helpAdd
     width: 450 *dpx
-    height: 350 *dpy
+    height: 370 *dpy
     color: "transparent"
     PopupButton {
         anchors.bottom: parent.bottom
@@ -39,7 +39,7 @@ Rectangle {
     Rectangle {
 
         width: 450 *dpx
-        height: 310 *dpy
+        height: 330 *dpy
         color: "transparent"
 
         Component {
@@ -88,6 +88,7 @@ Rectangle {
             spacing: 1*dpy
             model: $app.openHelp()
             focus: true
+            clip: true
             ScrollBar.vertical: ScrollBar {
                 id: scrollBar
             }

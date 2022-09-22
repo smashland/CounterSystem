@@ -9,10 +9,8 @@ SpinBox {
     property color bgNormalColor: "#1d4f88"      //文本背景色
     property color bgFocusColor: bgNormalColor //文本背景焦点色
 
-
     implicitWidth: 120
     implicitHeight: 30
-
 
     padding: 0
     leftPadding: padding + (down.indicator ? down.indicator.width : 0)

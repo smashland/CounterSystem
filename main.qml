@@ -9,8 +9,8 @@ import "Common"
 
 Window {
     id: mainWindow
-    width: Screen.desktopAvailableWidth
-    height: Screen.desktopAvailableHeight
+    width: fullScreen ? 1920 : Screen.desktopAvailableWidth
+    height: fullScreen ? 1080 : Screen.desktopAvailableHeight
     property bool fullScreen: true
 
 //    flags: fullScreen ? Qt.Window : Qt.FramelessWindowHint

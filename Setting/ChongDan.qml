@@ -16,10 +16,8 @@ Dialog{
     PopupTitle {
         name: ("给"+nID+'号充弹')
         icon: "\ue795"
-    }
-    TransverseLine {
-        x: 80 *dpx
-        y: 95*dpy
+        x: 54 *dpx
+        y: 44*dpy
     }
 
     onAccepted:

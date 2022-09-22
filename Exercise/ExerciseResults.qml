@@ -24,11 +24,10 @@ Item {
     PopupTitle {
         name: "演习结果"
         icon:"\ue654"
+        x: 65*dpx
+        y: 64*dpy
     }
-    TransverseLine {
-        x: 80 *dpx
-        y: 95 *dpy
-    }
+
     CloseButton {
         anchors.right: exerciseResults.right
         anchors.rightMargin: 70 *dpx

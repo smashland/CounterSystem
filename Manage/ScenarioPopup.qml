@@ -22,10 +22,10 @@ Rectangle
     PopupTitle {
         name: ("删除")
     }
-    TransverseLine {
-        x: 80 *dpx
-        y: 95*dpy
-    }
+//    TransverseLine {
+//        x: 80 *dpx
+//        y: 95*dpy
+//    }
 
     Column {
         x: (458*dpx - control3.width)/2

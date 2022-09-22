@@ -43,16 +43,14 @@ Rectangle {
         PopupTitle {
             name: ("回放管理")
             icon: "\ue678"
-        }
-        TransverseLine {
-            x: 80 *dpx
-            y: 95*dpy
+            x: 74*dpx
+            y: 60*dpy
         }
 
         Row
         {
             x: 80 *dpx
-            y: 140 *dpy
+            y: 115 *dpy
             spacing: 15*dpx
 
             ViewButton {
@@ -67,67 +65,16 @@ Rectangle {
                     }
                 }
             }
-//            ViewButton {
-//                name: qsTr("选中删除")
-//                color: viewColor_xuanzhongshanchu
-//                viewImage: "\ue645"
-//                MouseArea{
-//                    anchors.fill: parent
-//                    onClicked: scenarioRemove.visible= true
-//                }
-//            }
         }
 
-        Rectangle {
-            y: 140*dpy
-            anchors.right: parent.right
-            anchors.rightMargin: 80*dpx
-            width:  400*dpx
-            height:  34*dpy
-            color: "#082e5c"
-            radius: 2
-            border.color: "#32b8ff"
-
-            TextInput {
-                id: scenarioTextInput
-                width: 380*dpx
-                x: 20*dpx
-                height: 34*dpy
-                color: "#dcecff"
-                activeFocusOnPress: true
-                clip: true
-                verticalAlignment: Text.AlignVCenter
-                font.pixelSize: 14*dpx
-            }
-
-            Button {
-                id: search
-                y: 2 *dpy
-                anchors.right: parent.right
-                anchors.rightMargin: 20*dpx
-                width:   24*dpy
-                height:  24*dpy
-                Text {
-                    id: iconText
-                    width: 24*dpx
-                    height: 24*dpx
-                    text: qsTr("\ue6f3")
-                    color: "#ffffff"
-                    font.family: "iconfont"
-                    font.pixelSize: 22*dpx
-                    verticalAlignment: Text.AlignVCenter
-                }
-                background: Rectangle {
-                    color: "transparent"
-                }
-            }
+        SearchItem {
 
         }
 
+
         Rectangle {
-            x: 80
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 30*dpy
+            x: 80*dpx
+            y: 170*dpy
             width: 1066 *dpx
             height: 550 *dpy
             color: "transparent"
@@ -141,7 +88,6 @@ Rectangle {
                         anchors.fill: parent
                         color: "#2D5689"
                     }
-
 
                     Text {
                         text: "序号"
@@ -299,6 +245,10 @@ Rectangle {
                 model: szyModel.createObject(listView)
                 header: headerView
                 focus: true
+                clip: true
+                ScrollBar.vertical: ScrollBar {
+                    id: scrollBar
+                }
             }
 
 

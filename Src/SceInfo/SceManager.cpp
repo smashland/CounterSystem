@@ -23,79 +23,6 @@ QList<ScePersonInfo*> SceManager::sces() const
     return(m_mapId2Person.values());
 }
 
-
-void SceManager::read()
-{
-    //打开文件
-    QString filePath = QApplication::applicationDirPath() + QString("/Data/Project/%1").arg("222.json"/*sSceName*/);
-    qDebug()<<"9999999999999"<<filePath;
-    QFile loadFile(filePath);
-    if(!loadFile.open(QIODevice::ReadOnly))
-    {
-        qDebug() << "could't open projects json";
-        return;
-    }
-    //读取文件内容
-    QByteArray allData = loadFile.readAll();
-    //    loadFile.close();
-
-    //以json格式读取内容到JsonDoc
-    QJsonParseError jsonError;
-    QJsonDocument jsonDoc(QJsonDocument::fromJson(allData, &jsonError));
-
-    if(jsonError.error != QJsonParseError::NoError)
-    {
-        qDebug() << "json error!" << jsonError.errorString();
-        return;
-    }
-
-    //创建jsonObject
-    QJsonObject rootObj = jsonDoc.object();
-
-    QStringList keys = rootObj.keys();
-    for(int i = 0; i < keys.size(); i++)
-    {
-        qDebug() << "key" << i << " is:" << keys.at(i);
-    }
-
-    //    //因为是预先定义好的JSON数据格式，所以这里可以这样读取
-    //    if(rootObj.contains("PersonArray"))
-    //    {
-    //        QJsonObject subObj = rootObj.value("PersonArray").toObject();
-    //        qDebug() << "id is:" << subObj["ID"].toInt();
-    //        qDebug() << "name is:" << subObj["Name"].toString();
-    //        qDebug() << "type is:" << subObj["Grouptype"].toInt();
-    //        qDebug() << "position is:" << subObj["Position"].toInt();
-    //        qDebug() << "host is:" << subObj["Host"].toBool();
-    //        qDebug() << "image is:" << subObj["ImagePath"].toString();
-    //    }
-
-    //因为是预先定义好的JSON数据格式，所以这里可以这样读取
-    if(rootObj.contains("PersonArray"))
-    {
-        QJsonArray subArray = rootObj.value("PersonArray").toArray();
-        for (int i = 0; i < subArray.size(); ++i)
-        {
-            //            ScePersonInfo *scePersonInfo=new ScePersonInfo(this);
-            //            scePersonInfo->setID(subArray.at(i).toObject().value("ID").toInt());
-            //            scePersonInfo->setName(subArray.at(i).toObject().value("Name").toString());
-            //            scePersonInfo->setPosition(subArray.at(i).toObject().value("Position").toInt());
-            //            scePersonInfo->setGroupType(subArray.at(i).toObject().value("Grouptype").toInt());
-            //            scePersonInfo->setHostage(subArray.at(i).toObject().value("Host").toBool());
-            //            scePersonInfo->setImagePath(subArray.at(i).toObject().value("ImagePath").toString());
-            //            m_mapId2Person.insert(subArray.at(i).toObject().value("ID").toInt(),scePersonInfo);
-
-            qDebug() << subArray.at(i).toObject().value("ID").toInt();
-            qDebug() << subArray.at(i).toObject().value("Name").toString();
-            qDebug() << subArray.at(i).toObject().value("Grouptype").toInt();
-            qDebug() << subArray.at(i).toObject().value("Position").toInt();
-            qDebug() << subArray.at(i).toObject().value("Host").toBool();
-            qDebug() << subArray.at(i).toObject().value("ImagePath").toString();
-        }
-    }
-    loadFile.close();
-}
-
 void SceManager::write() const
 {
     QJsonArray personArray;
@@ -131,80 +58,65 @@ void SceManager::write() const
     document.setObject(jsonSce);
     saveFile.write(document.toJson());
 }
+///加载图片信息
+void SceManager::loadImagePath(const QString &strImagePath)
+{
+    qDebug()<<"66666666666"<<GetDataPath().c_str();
+    qDebug()<<"测试路径-------"<<strImagePath;
+    QDesktopServices::openUrl(QUrl::fromLocalFile(strImagePath));
+}
 
+///查看个人信息 //未完成
 void SceManager::showPersonInfo(int nID)
 {
-    //打开文件
-    QString filePath = QApplication::applicationDirPath() + QString("/Data/Project/%1").arg(m_sSceName);
-    qDebug()<<"9999999999999"<<filePath;
-    QFile loadFile(filePath);
-    if(!loadFile.open(QIODevice::ReadOnly))
+    foreach(auto one,m_mapId2Person)
     {
-        qDebug() << "could't open projects json";
-        return;
-    }
-    //读取文件内容
-    QByteArray allData = loadFile.readAll();
-    //    loadFile.close();
-
-    //以json格式读取内容到JsonDoc
-    QJsonParseError jsonError;
-    QJsonDocument jsonDoc(QJsonDocument::fromJson(allData, &jsonError));
-
-    if(jsonError.error != QJsonParseError::NoError)
-    {
-        qDebug() << "json error!" << jsonError.errorString();
-        return;
-    }
-
-    //创建jsonObject
-    QJsonObject rootObj = jsonDoc.object();
-
-
-    //因为是预先定义好的JSON数据格式，所以这里可以这样读取
-    if(rootObj.contains("PersonArray"))
-    {
-        QJsonArray subArray = rootObj.value("PersonArray").toArray();
-        for (int i = 0; i < subArray.size(); ++i)
+        if(one->getID()==nID)
         {
-            if(subArray.at(i).toObject().value("ID").toInt()==nID)
-            {
-//                ScePersonInfo *scePersonInfo=new ScePersonInfo(this);
-//                scePersonInfo->setID(subArray.at(i).toObject().value("ID").toInt());
-//                scePersonInfo->setName(subArray.at(i).toObject().value("Name").toString());
-//                scePersonInfo->setPosition(subArray.at(i).toObject().value("Position").toInt());
-//                scePersonInfo->setGroupType(subArray.at(i).toObject().value("Grouptype").toInt());
-//                scePersonInfo->setHostage(subArray.at(i).toObject().value("Host").toBool());
-//                scePersonInfo->setImagePath(subArray.at(i).toObject().value("ImagePath").toString());
-//                m_mapId2Person.insert(subArray.at(i).toObject().value("ID").toInt(),scePersonInfo);
-
-                qDebug() << subArray.at(i).toObject().value("ID").toInt();
-                qDebug() << subArray.at(i).toObject().value("Name").toString();
-                qDebug() << subArray.at(i).toObject().value("Grouptype").toInt();
-                qDebug() << subArray.at(i).toObject().value("Position").toInt();
-                qDebug() << subArray.at(i).toObject().value("Host").toBool();
-                qDebug() << subArray.at(i).toObject().value("ImagePath").toString();
-
-            }
-
+            qDebug()<<"选中的--------id"        <<one->getID();
+            qDebug()<<"选中的--------name"      <<one->getName();
+            qDebug()<<"选中的--------group"     <<one->getGroupType();
+            qDebug()<<"选中的--------position"  <<one->getPosition();
+            qDebug()<<"选中的--------host"      <<one->getHostage();
+            qDebug()<<"选中的--------imagePath" <<one->getImagePath();
+            //            loadImagePath(one->getImagePath());
         }
     }
-    loadFile.close();
+
+}
+
+///删除选中的某人信息 //未完成
+void SceManager::removePersonInfo(int nID)
+{
+    foreach(auto one,m_mapId2Person)
+    {
+        if(one->getID()==nID)
+        {
+            qDebug()<<"选中的--------id"        <<one->getID();
+            qDebug()<<"选中的--------name"      <<one->getName();
+            qDebug()<<"选中的--------group"     <<one->getGroupType();
+            qDebug()<<"选中的--------position"  <<one->getPosition();
+            qDebug()<<"选中的--------host"      <<one->getHostage();
+            qDebug()<<"选中的--------imagePath" <<one->getImagePath();
+            //            loadImagePath(one->getImagePath());
+        }
+    }
 }
 
 ///显示选中方案
-void SceManager::SceManager::showScenfo(QString &sSceName)
+void SceManager::SceManager::showScenfo(QString sSceName)
 {
-    QString filePath = QApplication::applicationDirPath() + QString("/Data/Project/").arg(sSceName);
+    QString filePath = QApplication::applicationDirPath() + QString("/Data/Project/%1.json").arg(sSceName);
+    qDebug()<<"选中方案路径：------"<<filePath;
     QFile sceFile(filePath);
-    if (!sceFile.open(QIODevice::WriteOnly))
+    if (!sceFile.open(QIODevice::ReadOnly))
     {
         qWarning("Couldn't open save file.");
     }
 
     //读取文件内容
     QByteArray allData = sceFile.readAll();
-    //    loadFile.close();
+    sceFile.close();
 
     //以json格式读取内容到JsonDoc
     QJsonParseError jsonError;
@@ -219,10 +131,17 @@ void SceManager::SceManager::showScenfo(QString &sSceName)
     //创建jsonObject
     QJsonObject rootObj = jsonDoc.object();
 
-    QStringList keys = rootObj.keys();
-    for(int i = 0; i < keys.size(); i++)
+    //    QStringList keys = rootObj.keys();
+    //    for(int i = 0; i < keys.size(); i++)
+    //    {
+    //        qDebug() << "key" << i << " is:" << keys.at(i);
+    //    }
+
+    ///解析方案名称
+    if(rootObj.contains("Scename"))
     {
-        qDebug() << "key" << i << " is:" << keys.at(i);
+        m_sSceName=rootObj["Scename"].toString();
+        qDebug()<<"方案名称："<<rootObj["Scename"].toString();
     }
 
     //因为是预先定义好的JSON数据格式，所以这里可以这样读取
@@ -231,24 +150,45 @@ void SceManager::SceManager::showScenfo(QString &sSceName)
         QJsonArray subArray = rootObj.value("PersonArray").toArray();
         for (int i = 0; i < subArray.size(); ++i)
         {
-            //            ScePersonInfo *scePersonInfo=new ScePersonInfo(this);
-            //            scePersonInfo->setID(subArray.at(i).toObject().value("ID").toInt());
-            //            scePersonInfo->setName(subArray.at(i).toObject().value("Name").toString());
-            //            scePersonInfo->setPosition(subArray.at(i).toObject().value("Position").toInt());
-            //            scePersonInfo->setGroupType(subArray.at(i).toObject().value("Grouptype").toInt());
-            //            scePersonInfo->setHostage(subArray.at(i).toObject().value("Host").toBool());
-            //            scePersonInfo->setImagePath(subArray.at(i).toObject().value("ImagePath").toString());
-            //            m_mapId2Person.insert(subArray.at(i).toObject().value("ID").toInt(),scePersonInfo);
+            ScePersonInfo *scePersonInfo=new ScePersonInfo(this);
+            scePersonInfo->setID(subArray.at(i).toObject().value("ID").toInt());
+            scePersonInfo->setName(subArray.at(i).toObject().value("Name").toString());
+            scePersonInfo->setPosition(subArray.at(i).toObject().value("Position").toInt());
+            scePersonInfo->setGroupType(subArray.at(i).toObject().value("Grouptype").toInt());
+            scePersonInfo->setHostage(subArray.at(i).toObject().value("Host").toBool());
+            scePersonInfo->setImagePath(subArray.at(i).toObject().value("ImagePath").toString());
+            m_mapId2Person.insert(subArray.at(i).toObject().value("ID").toInt(),scePersonInfo);
 
-            qDebug() << subArray.at(i).toObject().value("ID").toInt();
-            qDebug() << subArray.at(i).toObject().value("Name").toString();
-            qDebug() << subArray.at(i).toObject().value("Grouptype").toInt();
-            qDebug() << subArray.at(i).toObject().value("Position").toInt();
-            qDebug() << subArray.at(i).toObject().value("Host").toBool();
-            qDebug() << subArray.at(i).toObject().value("ImagePath").toString();
+            //            qDebug() << subArray.at(i).toObject().value("ID").toInt();
+            //            qDebug() << subArray.at(i).toObject().value("Name").toString();
+            //            qDebug() << subArray.at(i).toObject().value("Grouptype").toInt();
+            //            qDebug() << subArray.at(i).toObject().value("Position").toInt();
+            //            qDebug() << subArray.at(i).toObject().value("Host").toBool();
+            //            qDebug() << subArray.at(i).toObject().value("ImagePath").toString();
         }
     }
-    sceFile.close();
+
+    m_listPerson.clear();
+    QVariantMap tmpMap;
+    for(auto findOne = m_mapId2Person.begin(); m_mapId2Person.end() != findOne; ++findOne)
+    {
+        auto itorSecond = findOne.value();
+        tmpMap.insert("id",itorSecond->getID());
+        tmpMap.insert("name",itorSecond->getName());
+        tmpMap.insert("group",itorSecond->getGroupType());
+        tmpMap.insert("position",itorSecond->getPosition());
+        tmpMap.insert("host",itorSecond->getHostage());
+        m_listPerson.push_back(tmpMap);
+
+        qDebug()<<"id"<<itorSecond->getID();
+        qDebug()<<"name"<<itorSecond->getName();
+        qDebug()<<"group"<<itorSecond->getGroupType();
+        qDebug()<<"position"<<itorSecond->getPosition();
+        qDebug()<<"host"<<itorSecond->getHostage();
+    }
+    /// 更新模型列表
+    emit listPersonChanged(m_listPerson);
+
 }
 
 ///显示所有方案
@@ -287,6 +227,39 @@ void SceManager::addScenario(const QString &sName)
         write();
         ClearPersonInfo();
     }
+}
+
+///修改方案 :未完成
+bool SceManager::modifyScenario(const QString &sName)
+{
+    QString filePath = QApplication::applicationDirPath() + QString("/Data/Project/%1.json").arg(sName);
+
+//    if (filePath.isEmpty() || !QDir().exists(filePath))//是否传入了空的路径||路径是否存在
+//        return false;
+//    QFile sceFile(filePath);
+//    if (!sceFile.open(QIODevice::ReadWrite))
+//    {
+//        qWarning("Couldn't open save file.");
+//    }
+//    //读取文件内容
+//    QByteArray allData = sceFile.readAll();
+
+
+    return true;
+}
+///删除所选方案
+bool SceManager::removeScenario(const QString &sName)
+{
+    QString filePath = QApplication::applicationDirPath() + QString("/Data/Project/%1.json").arg(sName);
+
+    if (filePath.isEmpty() || !QDir().exists(filePath))//是否传入了空的路径||路径是否存在
+        return false;
+
+    QFileInfo FileInfo(filePath);
+
+    if (FileInfo.isFile())//如果是文件
+        QFile::remove(filePath);
+    return true;
 }
 ///添加人员
 void SceManager::addPerson(int nID,const QString& sName, int nLevel, int nGroup, bool bHostage,const QString& sImagePath)

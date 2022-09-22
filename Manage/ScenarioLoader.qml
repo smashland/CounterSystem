@@ -62,6 +62,13 @@ Rectangle {
                 name: qsTr("导入")
                 color: viewColor_daoru
                 viewImage: "\ue645"
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+//                         sceManager.showPersonInfo(11) //测试人员信息
+                    }
+                }
             }
             ViewButton {
                 name: qsTr("全部刷新")

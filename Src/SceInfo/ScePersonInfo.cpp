@@ -100,7 +100,7 @@ QString ScePersonInfo::getImagePath()
 QString ScePersonInfo::copyFile(const QString &strImagePath, const QString &folderName)
 {
     QFileInfo fileInfo(strImagePath);
-    QString fileName = folderName + "/" + fileInfo.fileName();
+    QString fileName = folderName + "\\" + fileInfo.fileName();
     qDebug()<<"源地址————"<<strImagePath;
     qDebug()<<"目标地址————"<<GetDataPath().c_str() + fileName;
     QFile::copy(strImagePath, GetDataPath().c_str() + fileName);

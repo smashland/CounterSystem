@@ -32,7 +32,7 @@ Item {
         anchors.right: exerciseResults.right
         anchors.rightMargin: 70 *dpx
         anchors.top: exerciseResults.top
-        anchors.topMargin: 60 *dpy
+        anchors.topMargin: 70 *dpy
         onClicked: exerciseResults.visible = false
     }
 

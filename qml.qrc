@@ -147,5 +147,6 @@
         <file>Manage/HelpAdd.qml</file>
         <file>Common/TextItem.qml</file>
         <file>Common/SearchItem.qml</file>
+        <file>Manage/MapAdd.qml</file>
     </qresource>
 </RCC>

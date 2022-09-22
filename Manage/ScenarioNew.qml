@@ -8,8 +8,9 @@ import "../Exercise"
 import MyItem 1.0
 
 Item {
-    id: scenarionew
+    id: scenarioNew
     property var title: ""
+    property var scenarioNewInfo: ""
     width: 1165 *dpx
     height: 710 *dpy
     Image {
@@ -18,11 +19,11 @@ Item {
         source: "qrc:/Image/Popup_bg_21.png"
     }
     CloseButton {
-        anchors.right: scenarionew.right
+        anchors.right: scenarioNew.right
         anchors.rightMargin: 70 *dpx
-        anchors.top: scenarionew.top
+        anchors.top: scenarioNew.top
         anchors.topMargin: 70 *dpy
-        onClicked: scenarionew.visible = false
+        onClicked: scenarioNew.visible = false
     }
 
     PopupTitle {
@@ -166,33 +167,32 @@ Item {
                     x: 25*dpx
                     height: 40 *dpy
                     TextItem {
+                        id: id
                         text: nID
                         width: 70 *dpx
                         height: 50 *dpy
-                        color: "#ffffff"
-                        font.pixelSize: 16
-                        font.family: "Microsoft YaHei";
-                        font.bold: true
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
                     }
                     TextItem {
+                        id:name
                         text: sName
                         width: 80 *dpx
                         height: 50 *dpy
                     }
                     TextItem {
+                        id:level
                         text: nLevel
                         width: 110 *dpx
                         height: 50 *dpy
                     }
 
                     TextItem {
+                        id:group
                         text: nGroup
                         width: 80 *dpx
                         height: 50 *dpy
                     }
                     TextItem {
+                        id:host
                         text: bHost ? "是" : "否"
                         width: 138 *dpx
                         height: 50 *dpy
@@ -253,6 +253,15 @@ Item {
         }
 
     }
+    onScenarioNewInfoChanged: {
+        if(scenarioNewInfo === null) {
+            nameItemContent.text = ""
+            listView.model = ""
+        }else {
+            nameItemContent.text = scenarioNewInfo.Scename
+            listView.model = scenarioNewInfo.phoneModel
+        }
+    }
 
     Row {
         spacing: 15 *dpx
@@ -278,7 +287,7 @@ Item {
                 }else {
                     scenarioLoader.addScenario(nameItemContent.text);
                     sceManager.addScenario(nameItemContent.text);
-                    scenarionew.visible = false
+                    scenarioNew.visible = false
                 }
             }
         }
@@ -290,7 +299,7 @@ Item {
             onClicked:
             {
                 sceManager.read();
-                scenarionew.visible = false
+                scenarioNew.visible = false
             }
         }
     }

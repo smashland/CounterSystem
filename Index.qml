@@ -191,6 +191,13 @@ Rectangle
         x: (index.width-setloader.width) / 2
         y: (index.height-setloader.height) / 2
     }
+    MapAdd {
+        id: mapAdd
+        width: 620*dpx
+        height: 400*dpy
+        anchors.centerIn: parent
+        visible: false
+    }
     HelpLoader {
         id: helploader
         visible: footerBar.btnHelp.checked

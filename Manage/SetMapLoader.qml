@@ -13,28 +13,6 @@ Rectangle {
     width: 710 *dpx
     height: 510 *dpy
     color: "transparent"
-    PopupButton {
-        anchors.bottom: parent.bottom
-        x: 311*dpx
-        background: Rectangle {
-            color: "#265aef"
-        }
-        nameButton: "添加"
-        onClicked: {
-            fileDialog.open()
-//            listView.model = $app.openHelp()
-        }
-    }
-    FileDialog {
-        id: fileDialog
-        folder: shortcuts.home
-        title: qsTr("请选择地图文件")
-        nameFilters: [qsTr("地图文件 (*.tiff)"), qsTr("全部文件 (*.*)")]
-        currentFile: document.source
-        onAccepted: {
-//            $app.copyFile(currentFile.toString().replace("file:///", ""));
-        }
-    }
 
     Rectangle {
 
@@ -96,5 +74,18 @@ Rectangle {
         }
 
     }
+
+    PopupButton {
+        anchors.bottom: parent.bottom
+        x: 311*dpx
+        background: Rectangle {
+            color: "#265aef"
+        }
+        nameButton: "添加"
+        onClicked: {
+            mapAdd.visible = true
+        }
+    }
+
 
 }

@@ -136,7 +136,7 @@ Rectangle {
                     TextItem {
                         id: col2
                         x: 170 *dpx
-                        text: cost
+                        text: modelData
                         width: 200 *dpx
                         height: 50 *dpy
                     }
@@ -154,6 +154,9 @@ Rectangle {
                                 anchors.fill: parent
                                 onClicked: {
                                     scenarioNew.visible = true
+                                    wrapper.ListView.view.currentIndex = index
+                                    mouse.accepted = true
+                                    scenarioNew.scenarioNewInfo = wrapper.ListView.view.model.get(index)
                                 }
                             }
                         }
@@ -183,9 +186,9 @@ Rectangle {
             Component {
                 id: phoneModel;
                 ListModel {
-                    ListElement{
-                        cost: "轻武器激光对抗系统1"
-                    }
+//                    ListElement{
+//                        cost: "轻武器激光对抗系统1"
+//                    }
 
                 }
 
@@ -195,7 +198,8 @@ Rectangle {
                 id: listView
                 anchors.fill: parent
                 delegate: delegate
-                model: phoneModel.createObject(listView)
+//                model: phoneModel.createObject(listView)
+                model: sceManager.showSceList()
                 header: headerView
                 focus: true
                 clip: true
@@ -209,10 +213,12 @@ Rectangle {
                     scenarioLoader.addScenario.connect(listView.addOne)
                 }
 
+
             }
 
         }
     }
+
 }
 
 /*##^##

@@ -58,7 +58,7 @@ public:
       * @param folderName
       *
       */
-    Q_INVOKABLE QString copyFile(const QString &strImagePath, const QString &folderName="Project/Image");
+    Q_INVOKABLE QString copyFile(const QString &strImagePath, const QString &folderName="Project\\Image");
 
 signals:
     void IDChanged(int);

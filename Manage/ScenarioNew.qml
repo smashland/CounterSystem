@@ -289,7 +289,6 @@ Item {
             nameButton: "取消"
             onClicked:
             {
-                sceManager.read();
                 scenarionew.visible = false
             }
         }

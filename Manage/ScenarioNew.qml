@@ -263,7 +263,7 @@ Item {
                     }
                     Text {
                         //                        x: 572 *dpx
-                        text: bHost ? "是人质" : "不是人质"
+                        text: bHost ? "是" : "否"
                         width: 138 *dpx
                         height: 50 *dpy
                         color: "#ffffff"
@@ -374,6 +374,7 @@ Item {
                 }else {
                     scenarioLoader.addScenario(nameItemContent.text);
                     sceManager.addScenario(nameItemContent.text);
+                    scenarionew.visible = false
                 }
             }
         }
@@ -382,7 +383,11 @@ Item {
                 color: "#1d4f88"
             }
             nameButton: "取消"
-            onClicked: scenarionew.visible = false
+            onClicked:
+            {
+                sceManager.read();
+                scenarionew.visible = false
+            }
         }
     }
 }

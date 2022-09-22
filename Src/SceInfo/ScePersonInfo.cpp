@@ -1,5 +1,8 @@
 #include "ScePersonInfo.h"
 #include <QDebug>
+#include <QFileInfo>
+#include <QFile>
+#include <ISceneCore.h>
 
 ScePersonInfo::ScePersonInfo(QObject *parent)
     : QObject{parent}
@@ -12,13 +15,13 @@ void ScePersonInfo::setID(int nID)
     if(m_ID!=nID)
     {
         m_ID=nID;
-        emit IDChanged(m_ID);        
+        emit IDChanged(m_ID);
+        qDebug()<<"编号————"<<m_ID;
     }
 }
 
 int ScePersonInfo::getID() const
-{
-    qDebug()<<"编号————"<<m_ID;
+{    
     return m_ID;
 }
 
@@ -83,3 +86,25 @@ bool ScePersonInfo::getHostage()
     return m_host;
 }
 
+void ScePersonInfo::setImagePath(QString sImagePath)
+{
+    m_sImagePath=copyFile(sImagePath);
+    qDebug()<<"000000000000000path"<<m_sImagePath;
+}
+
+QString ScePersonInfo::getImagePath()
+{
+    return m_sImagePath;
+}
+
+QString ScePersonInfo::copyFile(const QString &strImagePath, const QString &folderName)
+{
+    QFileInfo fileInfo(strImagePath);
+    QString fileName = folderName + "/" + fileInfo.fileName();
+    qDebug()<<"源地址————"<<strImagePath;
+    qDebug()<<"目标地址————"<<GetDataPath().c_str() + fileName;
+    QFile::copy(strImagePath, GetDataPath().c_str() + fileName);
+    QString imagePath=GetDataPath().c_str() + fileName;
+
+    return imagePath;
+}

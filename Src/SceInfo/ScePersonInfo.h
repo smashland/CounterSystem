@@ -9,9 +9,6 @@ class ScePersonInfo : public QObject
     Q_OBJECT
 public:
     explicit ScePersonInfo(QObject *parent = nullptr);
-
-
-
     Q_PROPERTY(int id READ getID WRITE setID NOTIFY IDChanged/*int id MEMBER m_ID NOTIFY IDChanged*/)
     Q_PROPERTY(QString name READ getName WRITE setName NOTIFY nameChanged/*QString name MEMBER m_Name NOTIFY nameChanged*/)
     Q_PROPERTY(int position READ getPosition WRITE setPosition NOTIFY positionChanged)
@@ -24,8 +21,6 @@ public:
       */
     void setID(int nID);
     int  getID() const;
-
-
     /**
       * @brief 设置人员名称
       * @param sName
@@ -50,8 +45,20 @@ public:
     void setHostage(bool bHostage);
     bool getHostage();
 
-    void read(const QJsonObject &json);
-    void write(QJsonObject &json) const;
+    /**
+      * @brief 设置人员名称
+      * @param sName
+      */
+    void setImagePath(QString sImagePath);
+    QString getImagePath();
+
+    /**
+      * @brief 复制文件
+      * @param strImagePath
+      * @param folderName
+      *
+      */
+    Q_INVOKABLE QString copyFile(const QString &strImagePath, const QString &folderName="Project/Image");
 
 signals:
     void IDChanged(int);
@@ -63,9 +70,10 @@ signals:
 private:
     int        m_ID;
     QString    m_Name;
-    int    m_Positon;
-    int    m_Group;
+    int        m_Positon;
+    int        m_Group;
     bool       m_host{true};
+    QString    m_sImagePath;
 
 };
 

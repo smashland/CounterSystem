@@ -56,6 +56,7 @@ Item {
             border.color: "#26abef"
             TextInput {
                 id: nameItemContent
+                text:sceManager.sceName
                 x: 10 *dpx
                 width: 420*dpx
                 height: 40 *dpy

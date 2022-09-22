@@ -60,7 +60,6 @@ SOURCES += \
         Src/ParseData/ParseData.cpp \
         Src/SceInfo/SceManager.cpp \
         Src/SceInfo/ScePersonInfo.cpp \
-        Src/SceInfo/ScesPerson.cpp \
         Src/Settings/GlobalSettings.cpp \
         Src/TimeServer/TimeServer.cpp \
         Src/md5.cpp \
@@ -132,7 +131,6 @@ HEADERS += \
     Src/ParseData/ParseData.h \
     Src/SceInfo/SceManager.h \
     Src/SceInfo/ScePersonInfo.h \
-    Src/SceInfo/ScesPerson.h \
     Src/Settings/GlobalSettings.h \
     Src/TimeServer/ITimeObserver.h \
     Src/TimeServer/TimeServer.h \

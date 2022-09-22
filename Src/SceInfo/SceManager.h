@@ -2,7 +2,6 @@
 #define SCEMANAGER_H
 
 #include <QObject>
-#include "ScesPerson.h"
 #include "ScePersonInfo.h"
 
 class SceManager : public QObject
@@ -22,6 +21,24 @@ public:
     void write() const;
     void writeSce() const;
 
+    /**
+      * @brief 显示选中人员的信息
+      */
+    Q_INVOKABLE void showPersonInfo(int nID);
+
+//    /**
+//      * @brief 显示所有人员
+//      */
+//    Q_INVOKABLE QStringList showPersonList();
+    /**
+      * @brief 显示选中方案的信息
+      */
+    Q_INVOKABLE void showScenfo(QString &sSceName);
+
+    /**
+      * @brief 显示所有方案
+      */
+    Q_INVOKABLE QStringList showSceList();
 
     /**
       * @brief 设置方案名称
@@ -34,11 +51,10 @@ public:
       * @brief 添加方案
       */
     Q_INVOKABLE void addScenario(const QString &sName);
-
     /**
       * @brief 添加人员
       */
-    Q_INVOKABLE void addPerson(int nID, const QString &sName, int nLevel, int nGroup, bool bHostage);
+    Q_INVOKABLE void addPerson(int nID, const QString &sName, int nLevel, int nGroup, bool bHostage,const QString& sImagePath);
     Q_INVOKABLE bool HavePerson(int nID);
 signals:
     void sceNameChanged(QString);

@@ -2,6 +2,7 @@ import QtQuick 2.7
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
 import QtQuick.Dialogs 1.3
+import Qt.labs.platform 1.1
 import "../Common"
 import "../Exercise"
 Popup
@@ -11,12 +12,15 @@ Popup
     height: 510*dpy
     anchors.centerIn: parent
     modal: true
+    property string imagePath;
 
+//    signal ok(int id,string name,int level,int group,bool isHost);
     signal ok(int id,string name,int level,int group,bool isHost);
 
     property var outData
     property var rowNum;
     property var bConnected:true
+
     /// 背景半透明
     background:Rectangle
     {
@@ -79,8 +83,15 @@ Popup
     FileDialog {
         id: fileDialog
         folder: shortcuts.home
+//        onAccepted: {
+//            source: fileDialog.fileUrl
+//        }
+        title: qsTr("请选择文件")
+        nameFilters: [qsTr("(*.png)"),qsTr("(*.jpg)"),qsTr("全部文件 (*.*)")]
+        currentFile: document.source
         onAccepted: {
             source: fileDialog.fileUrl
+            imagePath=currentFile.toString().replace("file:///", "");
         }
         onRejected: {
 //            console.log("Canceled")
@@ -280,7 +291,7 @@ Popup
             nameButton: "确定"
             onClicked: {
                 sceManager.addPerson(shebeiId.name,personName.name, combobox_renyuan.currentIndex,
-                                     zhenying.currentIndex,control3.checked);
+                                     zhenying.currentIndex,control3.checked,imagePath);
                 ok(shebeiId.name,personName.name, combobox_renyuan.currentIndex,
                    zhenying.currentIndex,control3.checked);
                 personAdd.visible = false

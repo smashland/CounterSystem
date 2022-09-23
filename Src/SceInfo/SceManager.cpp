@@ -23,90 +23,9 @@ QList<ScePersonInfo*> SceManager::sces() const
     return(m_mapId2Person.values());
 }
 
-void SceManager::write() const
+void SceManager::read(QString &sname)
 {
-    QJsonArray personArray;
-
-    QJsonObject jsonSce;
-    jsonSce.insert("Scename",m_sSceName);
-
-    foreach(auto one,m_mapId2Person)
-    {
-        QJsonObject personObject;
-        personObject.insert("ID", one->getID());
-        personObject.insert("Name", one->getName());
-        personObject.insert("Grouptype", one->getGroupType());
-        personObject.insert("Position", one->getPosition());
-        personObject.insert("Host", one->getHostage());
-        personObject.insert("ImagePath",one->getImagePath());
-        personArray.append(personObject);
-    }
-    jsonSce.insert("PersonArray",personArray);
-
-    QString filePath = QApplication::applicationDirPath() + QString("/Data/Project/%1.json").arg(m_sSceName);
-    QFile saveFile(filePath);
-    if (!saveFile.open(QIODevice::WriteOnly))
-    {
-        qWarning("Couldn't open save file.");
-    }
-
-    /// 构建 Json 文档
-    QJsonDocument document;
-    //    document.setArray(personArray);
-    //    saveFile.write(document.toJson());
-
-    document.setObject(jsonSce);
-    saveFile.write(document.toJson());
-}
-///加载图片信息
-void SceManager::loadImagePath(const QString &strImagePath)
-{
-    qDebug()<<"66666666666"<<GetDataPath().c_str();
-    qDebug()<<"测试路径-------"<<strImagePath;
-    QDesktopServices::openUrl(QUrl::fromLocalFile(strImagePath));
-}
-
-///查看个人信息 //未完成
-void SceManager::showPersonInfo(int nID)
-{
-    foreach(auto one,m_mapId2Person)
-    {
-        if(one->getID()==nID)
-        {
-            qDebug()<<"选中的--------id"        <<one->getID();
-            qDebug()<<"选中的--------name"      <<one->getName();
-            qDebug()<<"选中的--------group"     <<one->getGroupType();
-            qDebug()<<"选中的--------position"  <<one->getPosition();
-            qDebug()<<"选中的--------host"      <<one->getHostage();
-            qDebug()<<"选中的--------imagePath" <<one->getImagePath();
-            //            loadImagePath(one->getImagePath());
-        }
-    }
-
-}
-
-///删除选中的某人信息 //未完成
-void SceManager::removePersonInfo(int nID)
-{
-    foreach(auto one,m_mapId2Person)
-    {
-        if(one->getID()==nID)
-        {
-            qDebug()<<"选中的--------id"        <<one->getID();
-            qDebug()<<"选中的--------name"      <<one->getName();
-            qDebug()<<"选中的--------group"     <<one->getGroupType();
-            qDebug()<<"选中的--------position"  <<one->getPosition();
-            qDebug()<<"选中的--------host"      <<one->getHostage();
-            qDebug()<<"选中的--------imagePath" <<one->getImagePath();
-            //            loadImagePath(one->getImagePath());
-        }
-    }
-}
-
-///显示选中方案
-void SceManager::SceManager::showScenfo(QString sSceName)
-{
-    QString filePath = QApplication::applicationDirPath() + QString("/Data/Project/%1.json").arg(sSceName);
+    QString filePath = QApplication::applicationDirPath() + QString("/Data/Project/%1.json").arg(sname);
     qDebug()<<"选中方案路径：------"<<filePath;
     QFile sceFile(filePath);
     if (!sceFile.open(QIODevice::ReadOnly))
@@ -167,6 +86,184 @@ void SceManager::SceManager::showScenfo(QString sSceName)
             //            qDebug() << subArray.at(i).toObject().value("ImagePath").toString();
         }
     }
+}
+
+void SceManager::write() const
+{
+    QJsonArray personArray;
+
+    QJsonObject jsonSce;
+    jsonSce.insert("Scename",m_sSceName);
+
+    foreach(auto one,m_mapId2Person)
+    {
+        QJsonObject personObject;
+        personObject.insert("ID", one->getID());
+        personObject.insert("Name", one->getName());
+        personObject.insert("Grouptype", one->getGroupType());
+        personObject.insert("Position", one->getPosition());
+        personObject.insert("Host", one->getHostage());
+        personObject.insert("ImagePath",one->getImagePath());
+        personArray.append(personObject);
+    }
+    jsonSce.insert("PersonArray",personArray);
+
+    QString filePath = QApplication::applicationDirPath() + QString("/Data/Project/%1.json").arg(m_sSceName);
+    QFile saveFile(filePath);
+    if (!saveFile.open(QIODevice::WriteOnly))
+    {
+        qWarning("Couldn't open save file.");
+    }
+
+    /// 构建 Json 文档
+    QJsonDocument document;
+    //    document.setArray(personArray);
+    //    saveFile.write(document.toJson());
+
+    document.setObject(jsonSce);
+    saveFile.write(document.toJson());
+}
+
+void SceManager::modify()
+{
+    QByteArray byte;
+    QString filePath = QApplication::applicationDirPath() + QString("/Data/Project/%1.json").arg("测试方案111");
+    QFile file(filePath);
+    if(file.exists()){
+        file.open(QIODevice::ReadOnly|QIODevice::Text);
+        byte=file.readAll();
+        file.close();
+    }
+    else
+    {
+        qDebug()<<"openFileError";
+        return;
+    }
+
+    QJsonParseError jsonError;
+    QJsonDocument jsonDoc(QJsonDocument::fromJson(byte,&jsonError));
+    if(jsonError.error!=QJsonParseError::NoError)
+    {
+        qDebug() << "json error!" << jsonError.errorString();
+        return ;
+    }
+    QJsonObject rootobj=jsonDoc.object();
+
+    ///修改方案名称
+    QJsonObject sceNameObj;
+    if(rootobj.contains("Scename"))
+    {
+        sceNameObj=rootobj.value("Scename").toObject();
+        sceNameObj["Scename"]=m_sSceName;
+    }
+
+
+    QJsonArray personArray=rootobj.value("PersonArray").toArray();
+    for (int i = 0; i < personArray.size(); ++i)
+    {
+        QJsonObject personObj;
+        personObj=personArray[i].toObject();
+        personObj["Name"]="MINGZI";
+        personObj["Grouptype"]=10;
+        personObj["Position"]=6;
+        personObj["Host"]=false;
+        personObj["ImagePath"]="路径2";
+        personArray.replace(i,personObj);
+    }
+
+    rootobj["Scename"]=sceNameObj;
+    rootobj["PersonArray"]=personArray;
+
+
+    QFile file1(filePath);
+    if(file1.exists()){
+        file1.open(QIODevice::WriteOnly|QIODevice::Text);
+        jsonDoc.setObject(rootobj);
+        file1.seek(0);
+        file1.write(jsonDoc.toJson());
+        file1.flush();
+        file1.close();
+    }
+}
+///加载图片信息
+void SceManager::loadImagePath(const QString &strImagePath)
+{
+    qDebug()<<"66666666666"<<GetDataPath().c_str();
+    qDebug()<<"测试路径-------"<<strImagePath;
+    QDesktopServices::openUrl(QUrl::fromLocalFile(strImagePath));
+}
+
+///查看个人信息 //未完成
+void SceManager::showPersonInfo(int nID)
+{
+    foreach(auto one,m_mapId2Person)
+    {
+        if(one->getID()==nID)
+        {
+            qDebug()<<"选中的--------id"        <<one->getID();
+            qDebug()<<"选中的--------name"      <<one->getName();
+            qDebug()<<"选中的--------group"     <<one->getGroupType();
+            qDebug()<<"选中的--------position"  <<one->getPosition();
+            qDebug()<<"选中的--------host"      <<one->getHostage();
+            qDebug()<<"选中的--------imagePath" <<one->getImagePath();
+            //            loadImagePath(one->getImagePath());
+        }
+    }
+
+}
+
+///删除选中的某人信息 //未完成
+void SceManager::removePersonInfo(int nID)
+{
+    foreach(auto one,m_mapId2Person)
+    {
+        if(one->getID()==nID)
+        {
+            qDebug()<<"选中的--------id"        <<one->getID();
+            qDebug()<<"选中的--------name"      <<one->getName();
+            qDebug()<<"选中的--------group"     <<one->getGroupType();
+            qDebug()<<"选中的--------position"  <<one->getPosition();
+            qDebug()<<"选中的--------host"      <<one->getHostage();
+            qDebug()<<"选中的--------imagePath" <<one->getImagePath();
+            //            loadImagePath(one->getImagePath());
+        }
+    }
+}
+///修改选中的人员信息
+bool SceManager::modifyPersonInfo(const int nID)
+{
+    foreach(auto one,m_mapId2Person)
+    {
+        if(one->getID()==nID)
+        {
+
+            qDebug()<<"选中的--------id"        <<one->getID();
+            qDebug()<<"选中的--------name"      <<one->getName();
+            qDebug()<<"选中的--------group"     <<one->getGroupType();
+            qDebug()<<"选中的--------position"  <<one->getPosition();
+            qDebug()<<"选中的--------host"      <<one->getHostage();
+            qDebug()<<"选中的--------imagePath" <<one->getImagePath();
+            //            loadImagePath(one->getImagePath());
+        }
+    }
+
+
+    //    ScePersonInfo *scePersonInfo=new ScePersonInfo(this);
+    //    scePersonInfo->setID(nID);
+    //    scePersonInfo->setName(sName);
+    //    scePersonInfo->setPosition(nLevel);
+    //    scePersonInfo->setGroupType(nGroup);
+    //    scePersonInfo->setHostage(bHostage);
+    //    scePersonInfo->setImagePath(sImagePath);
+    //    m_mapId2Person.insert(nID,scePersonInfo);
+
+    return true;
+}
+
+///显示选中方案
+void SceManager::SceManager::showScenfo(QString sSceName)
+{
+    read(sSceName);
 
     m_listPerson.clear();
     QVariantMap tmpMap;
@@ -188,7 +285,6 @@ void SceManager::SceManager::showScenfo(QString sSceName)
     }
     /// 更新模型列表
     emit listPersonChanged(m_listPerson);
-
 }
 
 ///显示所有方案
@@ -232,19 +328,6 @@ void SceManager::addScenario(const QString &sName)
 ///修改方案 :未完成
 bool SceManager::modifyScenario(const QString &sName)
 {
-    QString filePath = QApplication::applicationDirPath() + QString("/Data/Project/%1.json").arg(sName);
-
-//    if (filePath.isEmpty() || !QDir().exists(filePath))//是否传入了空的路径||路径是否存在
-//        return false;
-//    QFile sceFile(filePath);
-//    if (!sceFile.open(QIODevice::ReadWrite))
-//    {
-//        qWarning("Couldn't open save file.");
-//    }
-//    //读取文件内容
-//    QByteArray allData = sceFile.readAll();
-
-
     return true;
 }
 ///删除所选方案

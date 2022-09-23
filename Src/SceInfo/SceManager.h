@@ -20,19 +20,27 @@ public:
     void setSces(const QVector<ScePersonInfo> &sces);
 
 
-    ///写文件保存方案信息
+    ///读写文件保存方案信息
+    void read(QString &sname);
     void write() const;
+    Q_INVOKABLE void modify();
     void loadImagePath(const QString &strImagePath);
 
     /**
-      * @brief 查看选中人员的信息
+      * @brief 查看选中人员的信息（未完成）
       */
     Q_INVOKABLE void showPersonInfo(int nID);
 
     /**
-      * @brief 删除选中人员的信息
+      * @brief 删除选中人员的信息(未完成)
       */
     Q_INVOKABLE void removePersonInfo(int nID);
+
+    /**
+      * @brief 修改选中人员信息（未完成）
+      * @param nID
+      */
+    Q_INVOKABLE bool modifyPersonInfo(const int nID);
 
     /**
       * @brief 显示选中方案的信息
@@ -58,7 +66,7 @@ public:
     Q_INVOKABLE void addScenario(const QString &sName);
 
     /**
-      * @brief 修改方案
+      * @brief 修改方案（未完成）
       * @param sName
       */
     Q_INVOKABLE bool modifyScenario(const QString &sName);

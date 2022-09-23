@@ -12,14 +12,22 @@ Rectangle {
     color: "transparent"
     Image {
         anchors.fill: parent
-        source: "qrc:/Image/Popup_bg_21.png"
+        source: "qrc:/Image/wuqi/08-bg.png"
+    }
+
+    CloseButton {
+        anchors.right: mapAdd.right
+        anchors.rightMargin: 65 *dpx
+        anchors.top: mapAdd.top
+        anchors.topMargin: 55 *dpy
+        onClicked: mapAdd.visible = false
     }
 
     PopupTitle {
         name: ("添加地图")
         icon: "\ue795"
-        x: 44 *dpx
-        y: 34*dpy
+        x: 60 *dpx
+        y: 50*dpy
     }
 
     FileDialog {
@@ -33,9 +41,13 @@ Rectangle {
         }
     }
     Column {
-        x: 44 *dpx
-        y: 84*dpy
-        spacing: 15*dpy
+        x: 96 *dpx
+        y: 96*dpy
+        spacing: 12*dpy
+        SoldierItem {
+            text: "地图名称:"
+            name: ""
+        }
         Row {
             spacing: 30*dpx
             SoldierItem {
@@ -44,7 +56,7 @@ Rectangle {
             }
             Button {
                 id: xuanzelujing
-                width: 100*dpx
+                width: 90*dpx
                 height: 33 *dpy
                 background: Rectangle{
                     color: "#000080"
@@ -52,7 +64,7 @@ Rectangle {
                         id: xzlj
                         text: "选择路径"
                         color: "#ffffff"
-                        font.pixelSize: 16*dpx;
+                        font.pixelSize: 15*dpx;
                         font.family: "Microsoft YaHei";
                         anchors.centerIn: parent
                     }
@@ -93,14 +105,14 @@ Rectangle {
     }
     PopupButton {
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 35*dpy
-        x: 266*dpx
+        anchors.bottomMargin: 47*dpy
+        x: 256*dpx
         background: Rectangle {
             color: "#265aef"
         }
         nameButton: "确定"
         onClicked: {
-
+            mapAdd.visible = false
         }
     }
 

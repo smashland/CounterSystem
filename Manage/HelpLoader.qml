@@ -29,9 +29,9 @@ Rectangle {
         }
         CloseButton {
             anchors.right: backgroundItem.right
-            anchors.rightMargin: 60 *dpx
+            anchors.rightMargin: 53 *dpx
             anchors.top: backgroundItem.top
-            anchors.topMargin: 60 *dpy
+            anchors.topMargin: 45 *dpy
             onClicked: footerBar.btnHelp.checked = false
         }
         PopupTitle {

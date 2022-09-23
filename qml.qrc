@@ -91,7 +91,6 @@
         <file>Manage/SetLoader.qml</file>
         <file>Common/SwitchButton.qml</file>
         <file>Common/ViewButton.qml</file>
-        <file>Manage/ScenarioPopup.qml</file>
         <file>Manage/PlaybackRefresh.qml</file>
         <file>OsgWindow.qml</file>
         <file>Manage/Progressbar.qml</file>
@@ -117,7 +116,6 @@
         <file>Status/PersonBackHurtInfo.qml</file>
         <file>Status/PersonFontHurtInfo.qml</file>
         <file>Status/PersonStatus.qml</file>
-        <file>ConfirmPopUp.qml</file>
         <file>MainWindow.qml</file>
         <file>Manage/BasicGroupBox.qml</file>
         <file>Manage/BasicSpinBox.qml</file>

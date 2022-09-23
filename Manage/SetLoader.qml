@@ -30,9 +30,9 @@ Rectangle {
         }
         CloseButton {
             anchors.right: backgroundItem.right
-            anchors.rightMargin: 60 *dpx
+            anchors.rightMargin: 65 *dpx
             anchors.top: backgroundItem.top
-            anchors.topMargin: 60 *dpy
+            anchors.topMargin: 58 *dpy
             onClicked: footerBar.btnSet.checked = false
         }
 

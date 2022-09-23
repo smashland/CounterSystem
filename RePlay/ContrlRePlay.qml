@@ -1,6 +1,6 @@
  import QtQuick 2.0
 import QtQuick.Controls 2.2
-import ".."
+import "../Common"
 Item
 {
     id:rePlayShow
@@ -139,27 +139,29 @@ Item
 
                 onPressed:
                 {
-                    confirm.open();
+                    removeDialog_huifang.open();
                 }
             }
         }
 
-        ConfirmPopUp
-        {
-            id:confirm;
-
-            exitShowLabel:"是否退出回放"
-            onYesPutDown:
-            {
+        RemoveDialog {
+            id: removeDialog_huifang
+            visible: false
+            y: (index.height - removeDialog_huifang.height-parent.height)/2
+            title:"退出"
+            content1: "是否退出回放?"
+            content2: exitShowLabel
+            onYesPutDown: {
                 rePlayShow.visible=false
                 rePlayShow.bStart = true
                 $app.settings.endReplay()
                 $app.allData.endReplay()
             }
-            onNoPutDown:
-            {
+            onNoPutDown: {
+
             }
         }
+
 
         Text {
             x:(parent.width-width)/2

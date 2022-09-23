@@ -14,6 +14,7 @@ Popup
     focus: true
     visible: true
 
+    property alias title: topTitle.name
     property alias content1: shanchuText.text
     property alias content2: shanchubool.text
 
@@ -29,6 +30,7 @@ Popup
         anchors.fill: parent
         color: "transparent"
         PopupTitle {
+            id: topTitle
             name: ("删除")
             x: 50*dpx
             y: 45*dpy
@@ -37,8 +39,9 @@ Popup
     }
 
     Row {
-        x: (438*dpx-shanchuText.contentWidth)/2
-        y: 126 *dpy
+//        x: (438*dpx-shanchuText.contentWidth)/2
+//        y: 126 *dpy
+        anchors.centerIn: parent
         spacing: 14 *dpx
         Text {
             width: 44
@@ -55,7 +58,7 @@ Popup
                 id: shanchuText
 //                text: qsTr("此操作将永久删除该方案，")
                 color: "#ffffff"
-                font.pixelSize: 16
+                font.pixelSize: 17*dpy
                 font.family: "Microsoft YaHei"
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
@@ -64,7 +67,7 @@ Popup
                 id: shanchubool
 //                text: qsTr("确定删除吗？")
                 color: "#ffffff"
-                font.pixelSize: 14
+                font.pixelSize: 14*dpy
                 font.family: "Microsoft YaHei"
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter

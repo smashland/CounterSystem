@@ -245,7 +245,7 @@ Popup
 
             nameButton: "确定"
             onClicked: {
-
+                personPopup.close()
             }
 
         }
@@ -255,7 +255,7 @@ Popup
             }
             nameButton: "取消"
             onClicked: {
-                personPopup.visible = false
+                personPopup.close()
             }
         }
     }

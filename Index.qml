@@ -193,8 +193,8 @@ Rectangle
     }
     MapAdd {
         id: mapAdd
-        width: 620*dpx
-        height: 400*dpy
+        width: 600*dpx
+        height: 430*dpy
         anchors.centerIn: parent
         visible: false
     }
@@ -216,12 +216,7 @@ Rectangle
         x: (index.width-scenarioNew.width) / 2
         y: (index.height-scenarioNew.height) / 2
     }
-    ScenarioPopup {
-        id: scenariopop
-        visible: false
-        x: (index.width-scenariopop.width) / 2
-        y: (index.height-scenariopop.height) / 2
-    }
+
     PlaybackLoader {
         id: playbackLoader
         visible: footerBar.btnPlayback.checked
@@ -326,9 +321,11 @@ Rectangle
     ScePersonInfo{
         id:scePersonInfo
     }
+
     RemoveDialog {
         id: removeDialog_quit
         visible: false
+        title:"退出"
         content1: "此操作将退出程序，"
         content2: "确认要退出吗？"
         onYesPutDown: {

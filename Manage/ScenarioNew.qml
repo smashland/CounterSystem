@@ -20,7 +20,7 @@ Item {
     }
     CloseButton {
         anchors.right: scenarioNew.right
-        anchors.rightMargin: 70 *dpx
+        anchors.rightMargin: 73 *dpx
         anchors.top: scenarioNew.top
         anchors.topMargin: 70 *dpy
         onClicked: scenarioNew.visible = false
@@ -87,6 +87,19 @@ Item {
         text: qsTr("人员信息表")
         font.pixelSize: 18*dpx;
         color: "#ffffff";
+        font.family: "Microsoft YaHei"
+    }
+    Text {
+        id: renyuanshuliang
+        y: 160 * dpy + nameItemContent.height + 33 *dpy
+        anchors.right: parent.right
+        anchors.rightMargin: 90*dpx
+        width: renyuanshuliang.contentWidth
+        height: renyuanshuliang.contentHeight
+        text: qsTr("人员总数：") + phoneModel.count
+        font.pixelSize: 16*dpx;
+        font.bold: true
+        color: "#55e5aa";
         font.family: "Microsoft YaHei"
     }
     Rectangle {

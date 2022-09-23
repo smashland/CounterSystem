@@ -86,8 +86,8 @@ Window {
     /// 检查许可失败
     function checkLicenseFaild(errorInfo)
     {
-        exitPopupLable.text = errorInfo + " " + exitShowLabel;
-        exitPopup.open();
+        removeDialog_shouquanma.content1= errorInfo+"，"
+        removeDialog_shouquanma.open();
     }
 
     /// 组件加载完成校验 许可
@@ -121,107 +121,30 @@ Window {
         }
     }
 
-    /// 退出弹出框
-    Popup
-    {
-        id: exitPopup
-        anchors.centerIn: parent
-        width: parent.width
-        height: parent.height
-        modal: true
-        background: Rectangle
-        {
-            opacity:0.0
-        }
-
-        /// 退出警告背景
-        Rectangle
-        {
-            id:backeRect
-            width: 400
-            height: 200
-            anchors.centerIn: parent
-            color: "#88FF0000"
-            border.color: "#FFFF0000"
-        }
-
-        /// 退出警告内容
-        Label
-        {
-            id:exitPopupLable
-            anchors.top: backeRect.top
-            anchors.topMargin: 50
-            anchors.horizontalCenter: parent.horizontalCenter
-            text: exitShowLabel
-            color:"#FFFFFFFF"
-            font
-            {
-                pixelSize:22
-                bold:true
-            }
-        }
-
-        Row
-        {
-            anchors.bottom: backeRect.bottom;
-            anchors.bottomMargin: 50
-            anchors.horizontalCenter: parent.horizontalCenter;
-
-            spacing: 50;
-            /// 加载两个退出按钮
-            Loader
-            {
-                property string textForShow: '是'
-                id:yesLoader
-                sourceComponent:flatButton
-            }
-            Loader
-            {
-                property string textForShow: '否'
-                id:noLoader
-                sourceComponent:flatButton
-            }
-        }
-
-        onClosed:
-        {
-            /// 将焦点退还给当前显示的对象
-            if(null !== $obShow)
-            {
-                $obShow.forceActiveFocus()
-            }
-        }
-    }
-
-    // 连接退出框的“是”
-    Connections
-    {
-        target: yesLoader.item
-        function onClicked()
-        {
+    RemoveDialog {
+        id: removeDialog_shouquanma
+        visible: false
+        title:"退出"
+        content1: "此操作将退出程序，"
+        content2: exitShowLabel
+        onYesPutDown: {
             $app.exitApp();
             Qt.quit();
         }
-    }
-
-    // 连接退出框的“否”
-    Connections
-    {
-        target: noLoader.item
-        function onClicked()
-        {
-            exitPopup.close();
-            if(exitShowLabel !== exitPopupLable.text)
+        onNoPutDown: {
+            removeDialog_shouquanma.close()
+            if(exitShowLabel !== removeDialog_shouquanma.content1)
             {
-                exitPopupLable.text = exitShowLabel;
+                removeDialog_shouquanma.content1 = exitShowLabel;
             }
         }
     }
     RemoveDialog {
         id: removeDialog_quit
         visible: false
+        title:"退出"
         content1: "此操作将退出程序，"
-        content2: "确认要退出吗？"
+        content2: exitShowLabel
         onYesPutDown: {
             $app.exitApp();
             Qt.quit()

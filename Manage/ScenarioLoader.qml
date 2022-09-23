@@ -34,7 +34,7 @@ Rectangle {
             anchors.right: backgroundItem.right
             anchors.rightMargin: 70 *dpx
             anchors.top: backgroundItem.top
-            anchors.topMargin: 70 *dpy
+            anchors.topMargin: 65 *dpy
             onClicked: footerBar.btnScenario.checked = false
         }
         PopupTitle {

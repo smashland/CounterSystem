@@ -1,4 +1,4 @@
-//                                        击杀情况
+//                                        演习结果
 import QtQuick 2.12
 //import QtQuick.Controls 2.15
 import Qt.labs.qmlmodels 1.0

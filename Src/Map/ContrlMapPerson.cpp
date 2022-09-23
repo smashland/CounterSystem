@@ -28,14 +28,16 @@ void CContrlMapPerson::Locate(quint16 unID)
 
     SceneViewPoint tmpViewPoint;
     ScenePos pos = pMapPerson->GetPos();
-
     tmpViewPoint.stPos.dX = pos.dX;
     tmpViewPoint.stPos.dY = pos.dY;
     tmpViewPoint.stPos.dZ = pos.dZ;
     tmpViewPoint.fElev = 90.f;
     tmpViewPoint.fDistance = 1000;
-
-    m_pSceneGraph->GetMainWindow()->GetMainViewPoint()->SetViewPoint(tmpViewPoint,5);
+    if(pos.dX == NULL || pos.dY == NULL) {
+        return;
+    }else{
+        m_pSceneGraph->GetMainWindow()->GetMainViewPoint()->SetViewPoint(tmpViewPoint,5);
+    }
 }
 
 /// 更新人员分组

@@ -30,6 +30,45 @@ const ScenePos CPlaceNodeInfo::GetPos()
 void CPlaceNodeInfo::SetText(const std::string &sTextInfo)
 {
     m_pLabel->SetText(sTextInfo);
+    m_pLabel->SetFontSize(18);
+    ScenePixelOffset spOffset;
+    int nCout = sTextInfo.size();
+    double dWordCount=0;
+    const char* pChar = sTextInfo.c_str();
+    for(int i=0;i<nCout;)
+    {
+        if(!((*pChar) & 0x80))
+        {
+            ++pChar;
+            ++i;
+            dWordCount += 0.5;
+        }
+        else if((*pChar) & 0x40)
+        {
+            if((*pChar) & 0x20)
+            {
+                if((*pChar) & 0x10)
+                {
+                    pChar += 4;
+                    i+=4;
+                }
+                else
+                {
+                    pChar += 3;
+                    i+=3;
+                }
+            }
+            else
+            {
+                pChar += 2;
+                i+=2;
+            }
+            dWordCount += 1;
+        }
+    }
+    spOffset.sHeight=-26;
+    spOffset.sWidth=-(9*dWordCount);
+    m_pLabel->SetPixelOffset(spOffset);
 }
 
 /// 设置类型
@@ -74,10 +113,9 @@ void CPlaceNodeInfo::InitNode()
     m_pLocation->SetTerrainType(m_pLocation->RELATIVE_TERRAIN);
     m_pLabel->SetFont("Fonts/msyh.ttf");
 
-
     ScenePixelOffset spOffset;
-    spOffset.sHeight=0;
-    spOffset.sWidth=16;
+    spOffset.sHeight=-26;
+    spOffset.sWidth=0;
     m_pLabel->SetPixelOffset(spOffset);
 }
 

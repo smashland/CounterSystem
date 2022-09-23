@@ -179,7 +179,8 @@ Rectangle {
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
-                                    //                                    scenarioRemove.visible = true
+                                    listView.removeOne()
+                                    wrapper.ListView.view.model.remove(index)
                                 }
                             }
                         }
@@ -205,8 +206,8 @@ Rectangle {
                 id: listView
                 anchors.fill: parent
                 delegate: delegate
-//                model: phoneModel.createObject(listView)
-                model: sceManager.showSceList()
+                model: phoneModel.createObject(listView)
+//                model: sceManager.showSceList()
                 header: headerView
                 focus: true
                 clip: true
@@ -219,7 +220,14 @@ Rectangle {
                 Component.onCompleted: {
                     scenarioLoader.addScenario.connect(listView.addOne)
                 }
-
+                function removeOne() {
+                    var curIndex = listView.currentIndex;
+                    if(curIndex >= 0 )
+                    {
+                        var modelData = listView.model.get(curIndex);
+                        sceManager.removeScenario(modelData.serialNum)
+                    }
+                }
 
             }
 

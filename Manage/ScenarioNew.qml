@@ -234,6 +234,7 @@ Item {
                             name: qsTr("删除")
                             color: viewColor_xinjian
                             viewImage: "\ue607"
+
                         }
                     }
                 }
@@ -263,6 +264,8 @@ Item {
             ScrollBar.vertical: ScrollBar {
                 id: scrollBar
             }
+
+
         }
 
     }

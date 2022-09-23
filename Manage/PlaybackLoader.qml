@@ -139,27 +139,18 @@ Rectangle {
                         color: index%2 ? "#2D5689" : "#4671a6"
                     }
 
-                    Text {
+                    TextItem {
                         id: col1
                         text: index + 1
                         width: 100 *dpx
                         height: 50 *dpy
-                        color: "#ffffff"
-                        font.pixelSize: 16*dpx
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
                     }
-                    Text {
+                    TextItem {
                         id: col2
                         x: 170 *dpx
                         text: modelData
                         width: 200 *dpx
                         height: 50 *dpy
-                        color: "#ffffff"
-                        font.pixelSize: 16
-                        font.family: "Microsoft YaHei"
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
                     }
                     Row {
                         x: 670 *dpx

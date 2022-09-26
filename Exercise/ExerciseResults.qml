@@ -115,6 +115,7 @@ Item {
         x: 80 *dpx
         width: 1024 *dpx
         height: 142*dpy
+//        horizontalScrollBarPolicy: Qt.ScrollBarAlwaysOff
 
         style:TableViewStyle
         {
@@ -139,7 +140,7 @@ Item {
             // 设置行
             rowDelegate:Rectangle
             {
-                height:51;
+                height:50;
                 color:styleData.alternate ? "#4671a6":"#2D5689"
             }
 

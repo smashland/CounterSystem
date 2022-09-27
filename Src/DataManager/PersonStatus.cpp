@@ -69,6 +69,7 @@ CPersonStatus::CPersonStatus(int nID, QObject *parent)
     ,m_nBaty(100)
     ,m_nHealth(100)
     ,m_unTimes(0)
+    ,m_bRenZhi(false)
 {
 }
 
@@ -115,6 +116,13 @@ void CPersonStatus::setName(const QString &sName)
         emit(nameChanged(m_sName));
     }
 }
+
+/// 是否人质
+//bool CPersonStatus::setRenzhi()
+//{
+
+//}
+
 
 /// 更新人员在线状态
 void CPersonStatus::updateTime(quint16 unTimes)

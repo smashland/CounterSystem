@@ -12,7 +12,7 @@ Rectangle
     width: (parent.width-20)*dpx
     height: 40*dpy
     color: "black"
-    opacity: 0.7
+    opacity: 0.8
     z:10
 
     Text
@@ -143,7 +143,7 @@ Rectangle
             Rectangle {
                 width: health.visualPosition * health.width
                 height: health.height
-                color: outData.bOnLine ?  health.value > 60 ?  "green" : health.value > 20 ? "yellow" : "red" : "gray";
+                color: outData.bOnLine ?  health.value > 60 ?  "green" : health.value > 20 ? "yellow" : "yellow" : "red";
             }
         }
     }

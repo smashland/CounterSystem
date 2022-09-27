@@ -113,10 +113,10 @@ void CPlaceNodeInfo::InitNode()
     m_pLocation->SetTerrainType(m_pLocation->RELATIVE_TERRAIN);
     m_pLabel->SetFont("Fonts/msyh.ttf");
 
-    ScenePixelOffset spOffset;
-    spOffset.sHeight=-26;
-    spOffset.sWidth=0;
-    m_pLabel->SetPixelOffset(spOffset);
+//    ScenePixelOffset spOffset;
+//    spOffset.sHeight=-26;
+//    spOffset.sWidth=0;
+//    m_pLabel->SetPixelOffset(spOffset);
 }
 
 /// 样式更改
@@ -130,6 +130,9 @@ void CPlaceNodeInfo::TypeChanged()
         break;
     case RED_GROUP:
         sImagePath += "red";
+        break;
+    case GREEN_GROUP:
+        sImagePath += "green";
         break;
     default:
         sImagePath += "white";

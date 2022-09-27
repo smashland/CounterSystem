@@ -13,6 +13,7 @@ enum GroupType
 {
     BLUE_GROUP,
     RED_GROUP,
+    GREEN_GROUP,
     UN_KNOW
 };
 

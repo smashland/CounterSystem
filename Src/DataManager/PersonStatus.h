@@ -28,6 +28,7 @@ public:
     Q_PROPERTY(bool bRifle MEMBER m_bRifle NOTIFY rifleChanged)
     Q_PROPERTY(int  nBaty MEMBER m_nBaty NOTIFY batyChanged)
     Q_PROPERTY(int  nHealth MEMBER m_nHealth NOTIFY healthChanged)
+    Q_PROPERTY(bool bRenZhi MEMBER m_bRenZhi NOTIFY renZhiChanged)
 
     /**
      * @brief 更新信息
@@ -42,6 +43,7 @@ public:
     bool IsOnLine(){return(m_bOnLine);}
     Q_INVOKABLE void setType(const QString& sType);
     Q_INVOKABLE const QString& getType(){return(m_sType);}
+    bool setRenzhi();
 
 signals:
     void idChanged(int);
@@ -54,6 +56,7 @@ signals:
     void rifleChanged(bool);
     void batyChanged(int);
     void healthChanged(int);
+    void renZhiChanged(bool);
 
 
 protected:
@@ -76,5 +79,7 @@ private:
 
     QString m_sName;    /// 名字
     QString m_sType;    /// 分组
+
+    bool m_bRenZhi=false;///是否人质
 };
 #endif // PERSONSTATUS_H

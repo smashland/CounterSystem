@@ -67,7 +67,7 @@ QList<CSceInfo *> SceManager::GetSceAll()
     return(m_mapName2SceInfo.values());
 }
 
-void SceManager::Read()
+void SceManager::read()
 {
     showSceList();
 

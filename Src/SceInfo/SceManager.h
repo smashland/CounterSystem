@@ -53,7 +53,7 @@ public:
 
 
     ///读写文件保存方案信息
-    Q_INVOKABLE void Read();
+    Q_INVOKABLE void read();
     Q_INVOKABLE void write();
     Q_INVOKABLE void modify();
 

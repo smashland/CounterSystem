@@ -161,9 +161,11 @@ Rectangle {
                                 anchors.fill: parent
                                 onClicked: {
                                     scenarioNew.visible = true
+//                                    sceManager.showScenfo(col2.text)
                                     wrapper.ListView.view.currentIndex = index
                                     mouse.accepted = true
                                     scenarioNew.scenarioNewInfo = wrapper.ListView.view.model.get(index)
+
                                 }
                             }
                         }
@@ -179,8 +181,8 @@ Rectangle {
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
-                                    listView.removeOne()
                                     wrapper.ListView.view.model.remove(index)
+                                    sceManager.removeScenario(col2.text)
                                 }
                             }
                         }
@@ -194,9 +196,7 @@ Rectangle {
             Component {
                 id: phoneModel;
                 ListModel {
-//                    ListElement{
-//                        cost: "轻武器激光对抗系统1"
-//                    }
+
 
                 }
 
@@ -206,11 +206,14 @@ Rectangle {
                 id: listView
                 anchors.fill: parent
                 delegate: delegate
-                model: phoneModel.createObject(listView)
-//                model: sceManager.showSceList()
+//                model: phoneModel.createObject(listView)
+                model: sceManager.showSceList()
                 header: headerView
                 focus: true
                 clip: true
+                ScrollBar.vertical: ScrollBar {
+                    id: scrollBar
+                }
                 function addOne(sceName) {
                     model.append({
                                     "cost":sceName
@@ -220,14 +223,7 @@ Rectangle {
                 Component.onCompleted: {
                     scenarioLoader.addScenario.connect(listView.addOne)
                 }
-                function removeOne() {
-                    var curIndex = listView.currentIndex;
-                    if(curIndex >= 0 )
-                    {
-                        var modelData = listView.model.get(curIndex);
-                        sceManager.removeScenario(modelData.serialNum)
-                    }
-                }
+
 
             }
 

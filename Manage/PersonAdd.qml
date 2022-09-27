@@ -21,6 +21,8 @@ Popup
     property var rowNum;
     property var bConnected:true
 
+    property var personData: null
+
     /// 背景半透明
     background:Rectangle
     {
@@ -274,6 +276,13 @@ Popup
 
     }
 
+    function readPerson()
+    {
+        var read = scePersonInfo.readPerson();
+        console.log(read.ID);
+    }
+
+
     Row {
         spacing: 15 *dpx
         anchors.bottom: parent.bottom
@@ -292,6 +301,7 @@ Popup
                    zhenying.currentIndex,control3.checked);
                 personAdd.visible = false
                 ///// 给调用界面
+                readPerson()
             }
 
         }

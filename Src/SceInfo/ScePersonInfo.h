@@ -16,8 +16,8 @@ public:
     Q_PROPERTY(bool hostage READ getHostage WRITE setHostage NOTIFY hostageChanged)
 
 
-    void readPerson(const QJsonObject &json);
-    void writePerson(QJsonObject &json) const;
+    Q_INVOKABLE void readPerson(const QJsonObject &json);
+    Q_INVOKABLE void writePerson(QJsonObject &json) const;
 
     /**
       * @brief 设置设备编号

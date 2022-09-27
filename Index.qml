@@ -321,6 +321,9 @@ Rectangle
     ScePersonInfo{
         id:scePersonInfo
     }
+    SceInfo{
+        id:sceInfo
+    }
 
     RemoveDialog {
         id: removeDialog_quit

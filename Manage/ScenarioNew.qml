@@ -58,7 +58,7 @@ Item {
             TextInput {
                 id: nameItemContent
                 x: 10 *dpx
-                text: ""
+                text: sceManager.sceName
                 width: 420*dpx
                 height: 40 *dpy
                 font.pixelSize: 17*dpx
@@ -302,7 +302,8 @@ Item {
                     console.log("没有方案名称")
                 }else {
                     scenarioLoader.addScenario(nameItemContent.text);
-                    sceManager.addScenario(nameItemContent.text);
+                    sceManager.addScenari(nameItemContent.text);
+//                    sceManager.addScenario(nameItemContent.text);
                     scenarioNew.visible = false
                 }
             }

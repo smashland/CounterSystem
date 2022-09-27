@@ -78,6 +78,7 @@ Rectangle {
                     anchors.fill: parent
                     onClicked: {
                         $app.allData.clearAllInfo();
+                        sceManager.modify();
                     }
                 }
             }
@@ -154,7 +155,7 @@ Rectangle {
                         height: 30 *dpy
                         spacing: 15 * dpx
                         ViewButton {
-                            name: qsTr("修改")
+                            name: qsTr("修改方案")
                             color: viewColor_shuaxin
                             viewImage: "\ue6a5"
                             MouseArea {
@@ -164,6 +165,7 @@ Rectangle {
                                     wrapper.ListView.view.currentIndex = index
                                     mouse.accepted = true
                                     scenarioNew.scenarioNewInfo = wrapper.ListView.view.model.get(index)
+//                                    sceManager.showScenfo();
                                 }
                             }
                         }
@@ -206,8 +208,8 @@ Rectangle {
                 id: listView
                 anchors.fill: parent
                 delegate: delegate
-                model: phoneModel.createObject(listView)
-//                model: sceManager.showSceList()
+//                model: phoneModel.createObject(listView)
+                model: sceManager.showSceList()
                 header: headerView
                 focus: true
                 clip: true
@@ -218,16 +220,9 @@ Rectangle {
                 }
 
                 Component.onCompleted: {
+//                    sceManager.read()
                     scenarioLoader.addScenario.connect(listView.addOne)
-                }
-                function removeOne() {
-                    var curIndex = listView.currentIndex;
-                    if(curIndex >= 0 )
-                    {
-                        var modelData = listView.model.get(curIndex);
-                        sceManager.removeScenario(modelData.serialNum)
-                    }
-                }
+                }               
 
             }
 

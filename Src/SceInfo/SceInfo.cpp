@@ -8,11 +8,9 @@ CSceInfo::CSceInfo(QObject *parent)
 }
 
 /// 增加成员
-ScePersonInfo *CSceInfo::AddPerson(int nID)
+ScePersonInfo *CSceInfo::addPerson(int nID)
 {
     auto findOne = m_mapId2Person.find(nID);
-
-
     if(m_mapId2Person.end() == findOne)
     {
         ScePersonInfo* pNewOne = new ScePersonInfo;

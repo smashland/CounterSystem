@@ -20,40 +20,40 @@ public:
       * @brief 添加方案
       * @param sceName
       */
-    CSceInfo* AddScenari(const QString &sceName);
+    Q_INVOKABLE CSceInfo* addScenari(const QString &sceName);
 
     /**
      * @brief 删除方案
      * @param sceName
      * @return
      */
-    bool DeleteScenario(const QString &sceName);
+    Q_INVOKABLE bool deleteScenario(const QString &sceName);
 
     /**
      * @brief 修改方案
      * @param sceName
      * @return
      */
-    CSceInfo* ModifyScenario(const QString &sceName);
+     CSceInfo* modifyScenario(const QString &sceName);
 
     /**
      * @brief 查找方案
      * @param sceName
      * @return
      */
-    CSceInfo* FindScenario(const QString &sceName);
+   Q_INVOKABLE  CSceInfo* findScenario(const QString &sceName);
 
     /**
      * @brief 获取所有的方案信息
      * @return
      */
-    QList<CSceInfo*> GetSceAll();
+    Q_INVOKABLE QList<CSceInfo*> getSceAll();
 
 
 
 
     ///读写文件保存方案信息
-    Q_INVOKABLE void Read();
+    Q_INVOKABLE void read();
     Q_INVOKABLE void write();
     Q_INVOKABLE void modify();
 
@@ -81,12 +81,6 @@ public:
       * @param sName
       */
     Q_INVOKABLE void addScenario(const QString &sName);
-
-    /**
-      * @brief 修改方案（未完成）
-      * @param sName
-      */
-    Q_INVOKABLE bool modifyScenario(const QString &sName);
 
     /**
       * @brief 删除方案

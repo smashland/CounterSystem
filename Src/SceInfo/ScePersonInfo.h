@@ -15,6 +15,10 @@ public:
     Q_PROPERTY(int groupType READ getGroupType WRITE setGroupType NOTIFY positionChanged)
     Q_PROPERTY(bool hostage READ getHostage WRITE setHostage NOTIFY hostageChanged)
 
+
+    void readPerson(const QJsonObject &json);
+    void writePerson(QJsonObject &json) const;
+
     /**
       * @brief 设置设备编号
       * @param nID

@@ -9,6 +9,37 @@ ScePersonInfo::ScePersonInfo(QObject *parent)
 {
 
 }
+
+void ScePersonInfo::readPerson(const QJsonObject &json)
+{
+    if (json.contains("ID") && json["ID"].isDouble())
+        m_ID = json["ID"].toInt();
+
+    if (json.contains("Name") && json["Name"].isString())
+        m_Name = json["Name"].toString();
+
+    if (json.contains("Grouptype") && json["Grouptype"].isDouble())
+        m_Group = json["Grouptype"].toInt();
+
+    if (json.contains("Position") && json["Position"].isDouble())
+        m_Positon = json["Position"].toInt();
+
+    if (json.contains("Host") && json["Host"].isDouble())
+        m_host = json["Host"].toInt();
+
+    if (json.contains("ImagePath") && json["ImagePath"].isString())
+        m_sImagePath = json["ImagePath"].toString();
+}
+
+void ScePersonInfo::writePerson(QJsonObject &json) const
+{
+    json["ID"]         = m_ID;
+    json["Name"]       = m_Name;
+    json["Grouptype"]  = m_Group;
+    json["Position"]   = m_Positon;
+    json["Host"]       = m_host;
+    json["ImagePath"]  = m_sImagePath;
+}
 ////设置士兵信息
 void ScePersonInfo::setID(int nID)
 {

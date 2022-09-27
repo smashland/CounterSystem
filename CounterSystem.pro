@@ -32,10 +32,6 @@ SOURCES += \
         Src/DataManager/PersonAllInfo.cpp \
         Src/DataManager/PersonInfo.pb.cc \
         Src/DataManager/PersonStatus.cpp \
-        Src/DataManager/SceInfo.cpp \
-        Src/DataManager/SceMangar.cpp \
-        Src/DataManager/ScenarioInfo.cpp \
-        Src/DataManager/ScesPerson.cpp \
         Src/DataManager/TypeDefine.pb.cc \
         Src/DataManager/ini_file.cpp \
         Src/ErrorReport.cpp \
@@ -58,6 +54,7 @@ SOURCES += \
         Src/ParseData/MyParse/MySetQuipment.cpp \
         Src/ParseData/MyParseData.cpp \
         Src/ParseData/ParseData.cpp \
+        Src/SceInfo/SceInfo.cpp \
         Src/SceInfo/SceManager.cpp \
         Src/SceInfo/ScePersonInfo.cpp \
         Src/Settings/GlobalSettings.cpp \
@@ -101,10 +98,6 @@ HEADERS += \
     Src/DataManager/PersonAllInfo.h \
     Src/DataManager/PersonInfo.pb.h \
     Src/DataManager/PersonStatus.h \
-    Src/DataManager/SceInfo.h \
-    Src/DataManager/SceMangar.h \
-    Src/DataManager/ScenarioInfo.h \
-    Src/DataManager/ScesPerson.h \
     Src/DataManager/TypeDefine.pb.h \
     Src/DataManager/ini_file.h \
     Src/ErrorReport.h \
@@ -129,6 +122,7 @@ HEADERS += \
     Src/ParseData/MyParse/MySetQuipment.h \
     Src/ParseData/MyParseData.h \
     Src/ParseData/ParseData.h \
+    Src/SceInfo/SceInfo.h \
     Src/SceInfo/SceManager.h \
     Src/SceInfo/ScePersonInfo.h \
     Src/Settings/GlobalSettings.h \

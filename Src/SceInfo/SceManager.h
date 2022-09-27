@@ -2,7 +2,7 @@
 #define SCEMANAGER_H
 
 #include <QObject>
-#include "ScePersonInfo.h"
+#include "SceInfo.h"
 
 class SceManager : public QObject
 {
@@ -16,31 +16,48 @@ public:
     Q_PROPERTY(QVariantList listPerson MEMBER m_listPerson NOTIFY listPersonChanged)
 
 
-    QList<ScePersonInfo *> sces() const;
-    void setSces(const QVector<ScePersonInfo> &sces);
+    /**
+      * @brief 添加方案
+      * @param sceName
+      */
+    CSceInfo* AddScenari(const QString &sceName);
+
+    /**
+     * @brief 删除方案
+     * @param sceName
+     * @return
+     */
+    bool DeleteScenario(const QString &sceName);
+
+    /**
+     * @brief 修改方案
+     * @param sceName
+     * @return
+     */
+    CSceInfo* ModifyScenario(const QString &sceName);
+
+    /**
+     * @brief 查找方案
+     * @param sceName
+     * @return
+     */
+    CSceInfo* FindScenario(const QString &sceName);
+
+    /**
+     * @brief 获取所有的方案信息
+     * @return
+     */
+    QList<CSceInfo*> GetSceAll();
+
+
 
 
     ///读写文件保存方案信息
-    void read(QString &sname);
-    void write() const;
+    Q_INVOKABLE void Read();
+    Q_INVOKABLE void write();
     Q_INVOKABLE void modify();
+
     void loadImagePath(const QString &strImagePath);
-
-    /**
-      * @brief 查看选中人员的信息（未完成）
-      */
-    Q_INVOKABLE void showPersonInfo(int nID);
-
-    /**
-      * @brief 删除选中人员的信息(未完成)
-      */
-    Q_INVOKABLE void removePersonInfo(int nID);
-
-    /**
-      * @brief 修改选中人员信息（未完成）
-      * @param nID
-      */
-    Q_INVOKABLE bool modifyPersonInfo(const int nID);
 
     /**
       * @brief 显示选中方案的信息
@@ -87,19 +104,24 @@ public:
       * @param sImagePath
       */
     Q_INVOKABLE void addPerson(int nID, const QString &sName, int nLevel, int nGroup, bool bHostage,const QString& sImagePath);
-    Q_INVOKABLE bool HavePerson(int nID);
 
 signals:
     void sceNameChanged(QString);
     void listPersonChanged(const QVariantList&);
-
+protected:
+    /**
+     * @brief 读取单个文件
+     * @param sname
+     */
+    void read(const QString &sname);
 private:
-    void ClearPersonInfo();
+    void ClearSceInfo();
 
 private:
     QString m_sSceName;
-    QMap<int,ScePersonInfo*> m_mapId2Person;
+    QMap<QString,CSceInfo*> m_mapName2SceInfo; /// 名称和方案信息的配对
     QVariantList       m_listPerson;          /// 添加人员的简要信息
+    QStringList m_listSceFileName;
 
 
 };

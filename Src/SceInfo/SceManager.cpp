@@ -10,7 +10,6 @@
 SceManager::SceManager(QObject *parent)
     : QObject{parent}
 {
-    //    loadData("");
 }
 
 SceManager::~SceManager()
@@ -24,7 +23,7 @@ SceManager::~SceManager()
 //}
 
 ///添加方案
-CSceInfo *SceManager::AddScenari(const QString &sceName)
+CSceInfo *SceManager::addScenari(const QString &sceName)
 {
     auto findOne = m_mapName2SceInfo.find(sceName);
     if(m_mapName2SceInfo.end() == findOne)
@@ -40,7 +39,7 @@ CSceInfo *SceManager::AddScenari(const QString &sceName)
 }
 
 ///删除方案
-bool SceManager::DeleteScenario(const QString &sceName)
+bool SceManager::deleteScenario(const QString &sceName)
 {
     auto findOne = m_mapName2SceInfo.find(sceName);
     if(m_mapName2SceInfo.end() != findOne)
@@ -55,14 +54,14 @@ bool SceManager::DeleteScenario(const QString &sceName)
     }
 }
 ///查找方案信息
-CSceInfo *SceManager::FindScenario(const QString &sceName)
+CSceInfo *SceManager::findScenario(const QString &sceName)
 {
     auto findOne = m_mapName2SceInfo.find(sceName);
     return m_mapName2SceInfo.end() == findOne ? nullptr : findOne.value();
 }
 
 ///得到所有的方案信息
-QList<CSceInfo *> SceManager::GetSceAll()
+QList<CSceInfo *> SceManager::getSceAll()
 {
     return(m_mapName2SceInfo.values());
 }
@@ -92,7 +91,6 @@ void SceManager::read(const QString &sname)
     QByteArray allData = sceFile.readAll();
     sceFile.close();
 
-
     //以json格式读取内容到JsonDoc
     QJsonParseError jsonError;
     QJsonDocument jsonDoc(QJsonDocument::fromJson(allData, &jsonError));
@@ -105,7 +103,6 @@ void SceManager::read(const QString &sname)
 
     //创建jsonObject
     QJsonObject rootObj = jsonDoc.object();
-
     CSceInfo* pSceInfo = new CSceInfo;
     pSceInfo->Prase(rootObj["PersonArray"].toArray());
     m_mapName2SceInfo.insert(rootObj["Scename"].toObject()["Name"].toString(),pSceInfo);
@@ -114,17 +111,13 @@ void SceManager::read(const QString &sname)
 
 void SceManager::write()
 {
-    //    QJsonArray personArray;
-
     QJsonArray personArray;
     QJsonObject jsonSce;
     jsonSce.insert("Scename",m_sSceName);
-
-//    foreach(auto one,m_mapName2SceInfo)
-//    {
-//        one->Save(personArray);
-//    }
-
+    foreach(auto one,m_mapName2SceInfo)
+    {
+        one->Save(personArray);
+    }
     jsonSce.insert("PersonArray",personArray);
 
     QString filePath = QApplication::applicationDirPath() + QString("/Data/Project/%1.json").arg(m_sSceName);
@@ -136,9 +129,6 @@ void SceManager::write()
 
     /// 构建 Json 文档
     QJsonDocument document;
-    //    document.setArray(personArray);
-    //    saveFile.write(document.toJson());
-
     document.setObject(jsonSce);
     saveFile.write(document.toJson());
 }
@@ -280,11 +270,6 @@ void SceManager::addScenario(const QString &sName)
     }
 }
 
-///修改方案 :未完成
-bool SceManager::modifyScenario(const QString &sName)
-{
-    return true;
-}
 ///删除所选方案
 bool SceManager::removeScenario(const QString &sName)
 {

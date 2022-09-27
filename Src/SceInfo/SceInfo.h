@@ -16,7 +16,7 @@ public:
      * @attention 如果成员ID存在则返回空
      * @return
      */
-    ScePersonInfo* AddPerson(int nID);
+    Q_INVOKABLE ScePersonInfo* addPerson(int nID);
 
     /**
      * @brief 根据id查找人员

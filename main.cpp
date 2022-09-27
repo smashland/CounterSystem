@@ -12,10 +12,10 @@
 #include "Src/JudgeValid/Blur.h"
 #include "Src/AppGlobal.h"
 #include "Src/SingleApplication/SingleApplication"
-//#include "Src/DataManager/ScenarioInfo.h"
-//#include "Src/DataManager/SceMangar.h"
 #include "Src/SceInfo/SceManager.h"
 #include "Src/SceInfo/ScePersonInfo.h"
+#include "Src/SceInfo/SceInfo.h"
+
 int main(int argc, char *argv[])
 {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -47,23 +47,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<QtOsgItem>("SceneGraphRendering", 1, 0, "QuickOSGViewer");
     qmlRegisterType<SceManager>("MyItem",1,0,"SceManager");
     qmlRegisterType<ScePersonInfo>("MyItem",1,0,"ScePersonInfo");
-//    qmlRegisterType<ScenarioInfo>("MyItem",1,0,"Scenario"); //ScesPerson
-
-
-//    bool newGame = true;
-//    SceMangar mainw;
-//    if (newGame)
-//        mainw.newGame();
-//    else if (!mainw.loadInfo())
-//    {
-//        return 1;
-//    }
-//    QTextStream(stdout) << "Game ended in the following state:\n";
-//    mainw.print();
-//    if (!mainw.saveInfo())
-//    {
-//        return  1;
-//    }
+    qmlRegisterType<CSceInfo>("MyItem",1,0,"SceInfo");
 
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();

@@ -14,6 +14,15 @@ public:
     Q_PROPERTY(int position READ getPosition WRITE setPosition NOTIFY positionChanged)
     Q_PROPERTY(int groupType READ getGroupType WRITE setGroupType NOTIFY positionChanged)
     Q_PROPERTY(bool hostage READ getHostage WRITE setHostage NOTIFY hostageChanged)
+    Q_PROPERTY(QString imagePath READ getImagePath WRITE setImagePath NOTIFY imageChanged)
+
+
+//    Q_PROPERTY(int id MEMBER m_ID NOTIFY IDChanged)
+//    Q_PROPERTY(QString name MEMBER m_Name  NOTIFY nameChanged)
+//    Q_PROPERTY(int position MEMBER m_Positon NOTIFY positionChanged)
+//    Q_PROPERTY(int groupType MEMBER m_Group NOTIFY positionChanged)
+//    Q_PROPERTY(bool hostage MEMBER m_host NOTIFY hostageChanged)
+//    Q_PROPERTY(QString imagePath MEMBER m_sImagePath NOTIFY imageChanged)
 
 
     void readPerson(const QJsonObject &json);
@@ -70,6 +79,7 @@ signals:
     void positionChanged(int);
     void groupTypeChanged(int);
     void hostageChanged(bool);
+    void imageChanged(QString);
 
 private:
     int        m_ID;

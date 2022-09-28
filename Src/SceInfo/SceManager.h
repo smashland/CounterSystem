@@ -17,10 +17,16 @@ public:
 
 
     /**
+     * @brief 创建一个方案
+     * @return
+     */
+    Q_INVOKABLE CSceInfo* createSceneri();
+
+    /**
       * @brief 添加方案
       * @param sceName
       */
-    Q_INVOKABLE CSceInfo* addScenari(const QString &sceName);
+    Q_INVOKABLE CSceInfo* addScenari(const QString &sceName,CSceInfo* pSceInfo);
 
     /**
      * @brief 删除方案

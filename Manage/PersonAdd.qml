@@ -286,8 +286,6 @@ Popup
 
             nameButton: "确定"
             onClicked: {
-                sceManager.addPerson(shebeiId.name,personName.name, combobox_renyuan.currentIndex,
-                                     zhenying.currentIndex,control3.checked,imagePath);
                 ok(shebeiId.name,personName.name, combobox_renyuan.currentIndex,
                    zhenying.currentIndex,control3.checked);
                 personAdd.visible = false

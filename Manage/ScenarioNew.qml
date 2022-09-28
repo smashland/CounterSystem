@@ -10,9 +10,30 @@ import MyItem 1.0
 Item {
     id: scenarioNew
     property var title: ""
-    property var scenarioNewInfo: ""
+    property var scenarioNewInfo:null
+    property int nCount: 0
     width: 1165 *dpx
     height: 710 *dpy
+
+    Connections{
+        function onOk(id,name,level,group,isHost)
+        {
+            console.log("==============================================");
+            var person = scenarioNewInfo.addPerson(id);
+            person.name = name;
+            person.position = level;
+            person.groupType = group;
+            person.hostage = isHost;
+            listView.model = scenarioNewInfo.getAll();
+            nCount =  scenarioNewInfo.getCount();
+
+            console.log("-----------"+nCount)
+
+
+        }
+        target: personAdd
+    }
+
     Image {
         id: loginImage
         anchors.fill: parent
@@ -96,7 +117,7 @@ Item {
         anchors.rightMargin: 90*dpx
         width: renyuanshuliang.contentWidth
         height: renyuanshuliang.contentHeight
-        text: qsTr("人员总数：") + phoneModel.count
+        text: qsTr("人员总数：")+nCount
         font.pixelSize: 16*dpx;
         font.bold: true
         color: "#55e5aa";
@@ -181,32 +202,32 @@ Item {
                     height: 40 *dpy
                     TextItem {
                         id: id
-                        text: nID
+                        text: modelData.id
                         width: 70 *dpx
                         height: 50 *dpy
                     }
                     TextItem {
                         id:name
-                        text: sName
+                        text: modelData.name
                         width: 80 *dpx
                         height: 50 *dpy
                     }
                     TextItem {
                         id:level
-                        text: nLevel
+                        text: modelData.position
                         width: 110 *dpx
                         height: 50 *dpy
                     }
 
                     TextItem {
                         id:group
-                        text: nGroup
+                        text: modelData.groupType
                         width: 80 *dpx
                         height: 50 *dpy
                     }
                     TextItem {
                         id:host
-                        text: bHost ? "是" : "否"
+                        text: modelData.hostage ? "是" : "否"
                         width: 138 *dpx
                         height: 50 *dpy
                     }
@@ -220,14 +241,6 @@ Item {
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked:personAdd.visible = true
-                                Connections{
-                                    function onOk(id,name,level,group,isHost)
-                                    {
-                                        phoneModel.append({"nID":id,"sName":name,"nLevel":level,"nGroup":group,"bHost":isHost})
-                                    }
-
-                                    target: personAdd
-                                }
                             }
                         }
                         ViewButton {
@@ -242,41 +255,19 @@ Item {
             }
         }
 
-        ListModel {
-            id: phoneModel;
-            ListElement{
-                nID: 12
-                sName: "1"
-                nLevel: 2
-                nGroup:1
-                bHost: false
-            }
-        }
-
         ListView {
             id: listView
             anchors.fill: parent
             delegate: delegate
-            model: phoneModel
+            model: scenarioNewInfo.getAll()
             header: headerView
             clip: true
             focus: true
             ScrollBar.vertical: ScrollBar {
                 id: scrollBar
             }
-
-
         }
 
-    }
-    onScenarioNewInfoChanged: {
-        if(scenarioNewInfo === null) {
-            nameItemContent.text = ""
-            listView.model = ""
-        }else {
-            nameItemContent.text = scenarioNewInfo.Scename
-            listView.model = scenarioNewInfo.phoneModel
-        }
     }
 
     Row {
@@ -289,8 +280,11 @@ Item {
                 color: "#265aef"
             }
             nameButton: "添加人员"
-            onClicked: personAdd.visible = true
+            onClicked: {
+                personAdd.visible = true
+            }
         }
+
         PopupButton {
             background: Rectangle {
                 color: "#265aef"
@@ -302,7 +296,8 @@ Item {
                     console.log("没有方案名称")
                 }else {
                     scenarioLoader.addScenario(nameItemContent.text);
-                    sceManager.addScenari(nameItemContent.text);
+                    sceManager.addScenari(nameItemContent.text,scenarioNewInfo);
+                    sceManager.write();
 //                    sceManager.addScenario(nameItemContent.text);
                     scenarioNew.visible = false
                 }

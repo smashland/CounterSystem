@@ -149,8 +149,10 @@ QStringList QAppGlobal::openPath()
 
     for(int i=0; i < fileInfoList.count(); i++)
     {
+
         string_list.append(fileInfoList.at(i).baseName());
     }
+
     return(string_list);
 }
 /// 设置osgItem

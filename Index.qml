@@ -20,10 +20,7 @@ Rectangle
     {
         id:unGroup
         type:""
-//        Image {
-//            anchors.fill: parent
-            source: "qrc:/Image/Grey_bg_all.png"
-//        }
+        source: "qrc:/Image/Grey_bg_all.png"
         height: 880 *dpy
         anchors.left: parent.left
         anchors.top: parent.top
@@ -36,11 +33,7 @@ Rectangle
     {
         id:blue
         type:"蓝方"
-//        Image {
-//            anchors.fill: parent
-            source: "qrc:/Image/Blue_bg_all.png"
-//        }
-
+        source: "qrc:/Image/Blue_bg_all.png"
         anchors.right: parent.right;
         anchors.top: parent.top
         anchors.rightMargin: 80
@@ -51,11 +44,7 @@ Rectangle
     {
         id:red
         type:"红方"
-//        Image {
-//            anchors.fill: parent
-            source: "qrc:/Image/Red_bg_all.png"
-//        }
-
+        source: "qrc:/Image/Red_bg_all.png"
         anchors.right: ($app.settings.bIsStart || $app.settings.bIsReplay) ? undefined : parent.right
         anchors.top: ($app.settings.bIsStart || $app.settings.bIsReplay) ? parent.top : blue.bottom
         anchors.left: ($app.settings.bIsStart || $app.settings.bIsReplay) ? parent.left : undefined
@@ -80,14 +69,14 @@ Rectangle
                 chongdan.open();
             }
         }
-//        MenuItem { text: "配枪" ;onTriggered: { peiqiang.nID = contextMenu.userID;peiqiang.open();}}
+        //        MenuItem { text: "配枪" ;onTriggered: { peiqiang.nID = contextMenu.userID;peiqiang.open();}}
         MenuBackground { name: "闭锁" ;onTriggered:$app.settings.setBiSuo(contextMenu.userID)}
         MenuBackground { name: "解锁" ;onTriggered:$app.settings.setJiesuoSuo(contextMenu.userID)}
         MenuBackground { name: "解除旁白";onTriggered:$app.settings.setJieChu(contextMenu.userID) }
         MenuBackground { name: "判死";onTriggered:$app.settings.setPanSi(contextMenu.userID)}
         MenuBackground { name: "复活" ;onTriggered:{$app.settings.setFuHuo(contextMenu.userID)}}
         MenuBackground { name: "关机" }
-//        MenuItem { text: "同步时间";onTriggered:{sycntime.nID = contextMenu.userID;sycntime.open();}}
+        //        MenuItem { text: "同步时间";onTriggered:{sycntime.nID = contextMenu.userID;sycntime.open();}}
         MenuBackground { name: "定位";onTriggered:{$app.allData.dingWei(contextMenu.userID)}}
     }
 
@@ -230,21 +219,21 @@ Rectangle
         x: (index.width-playbackRefresh.width) / 2
         y: (index.height-playbackRefresh.height) / 2
     }
-//    ScenarioRemove {
-//        id: scenarioRemove
-//        visible: false
-//        x: (index.width-scenarioRemove.width) / 2
-//        y: (index.height-scenarioRemove.height) / 2
-//    }
+    //    ScenarioRemove {
+    //        id: scenarioRemove
+    //        visible: false
+    //        x: (index.width-scenarioRemove.width) / 2
+    //        y: (index.height-scenarioRemove.height) / 2
+    //    }
 
-//        Progressbar {
-//            id: progressbar
-//            visible: true
-//        }
-        CloseBar {
-            id: closebar
-            visible: true
-        }
+    //        Progressbar {
+    //            id: progressbar
+    //            visible: true
+    //        }
+    CloseBar {
+        id: closebar
+        visible: true
+    }
     CloseBarFull{
         id: closebarFull
         visible: false
@@ -284,24 +273,24 @@ Rectangle
     {
         id:ctrReplay
         anchors.top: index.top
-//        anchors.left: index.left
-//        anchors.leftMargin: (index.width-ctrReplay.width)/2
+        //        anchors.left: index.left
+        //        anchors.leftMargin: (index.width-ctrReplay.width)/2
         visible: false
     }
-//    GroupInfoDisplay {
-//        id: groupInfoDisplay
+    //    GroupInfoDisplay {
+    //        id: groupInfoDisplay
 
-//        Drag.active: dragAreagroupInfoDisplay.drag.active
-//        Drag.hotSpot.x: 10
-//        Drag.hotSpot.y: 10
+    //        Drag.active: dragAreagroupInfoDisplay.drag.active
+    //        Drag.hotSpot.x: 10
+    //        Drag.hotSpot.y: 10
 
-//        MouseArea {
-//            id: dragAreagroupInfoDisplay
-//            anchors.fill: parent
-//            drag.target: parent
-//            propagateComposedEvents: true
-//        }
-//    }
+    //        MouseArea {
+    //            id: dragAreagroupInfoDisplay
+    //            anchors.fill: parent
+    //            drag.target: parent
+    //            propagateComposedEvents: true
+    //        }
+    //    }
 
     ResizeItem {
         id: resizeItem
@@ -315,14 +304,17 @@ Rectangle
         anchors.centerIn: parent
         visible: false
     }
+    SceInfo{
+        id:sceInfo
+    }
     SceManager{
         id:sceManager
     }
     ScePersonInfo{
         id:scePersonInfo
     }
-    SceInfo{
-        id:sceInfo
+    TestXml {
+        id: testXml
     }
 
     RemoveDialog {

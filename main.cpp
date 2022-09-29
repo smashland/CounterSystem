@@ -15,6 +15,7 @@
 #include "Src/SceInfo/SceManager.h"
 #include "Src/SceInfo/ScePersonInfo.h"
 #include "Src/SceInfo/SceInfo.h"
+#include "Src/XmlNode/TestXml.h"
 
 int main(int argc, char *argv[])
 {
@@ -48,6 +49,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<SceManager>("MyItem",1,0,"SceManager");
     qmlRegisterType<ScePersonInfo>("MyItem",1,0,"ScePersonInfo");
     qmlRegisterType<CSceInfo>("MyItem",1,0,"SceInfo");
+    qmlRegisterType<TestXml>("MyItem",1,0,"TestXml");
 
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();

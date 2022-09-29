@@ -14,6 +14,7 @@ public:
 
     Q_PROPERTY(QString sceName READ getSceName WRITE setSceName NOTIFY sceNameChanged)
     Q_PROPERTY(QVariantList listPerson MEMBER m_listPerson NOTIFY listPersonChanged)
+//    Q_PROPERTY(QString m_text READ  WRITE setSceName NOTIFY sceNameChanged)
 
 
     /**
@@ -56,6 +57,7 @@ public:
     Q_INVOKABLE void read();
     Q_INVOKABLE void write();
     Q_INVOKABLE void modify();
+    Q_INVOKABLE QString text();
 
     void loadImagePath(const QString &strImagePath);
 
@@ -116,6 +118,7 @@ private:
     QMap<QString,CSceInfo*> m_mapName2SceInfo; /// 名称和方案信息的配对
     QVariantList       m_listPerson;          /// 添加人员的简要信息
     QStringList m_listSceFileName;
+    QString m_text;
 
 
 };

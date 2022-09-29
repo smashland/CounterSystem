@@ -31,7 +31,7 @@ ScePersonInfo *CSceInfo::FinPerson(int nID)
 }
 
 /// 获取所有的人员信息
-QList<ScePersonInfo *> CSceInfo::GetAll()
+QList<ScePersonInfo *> CSceInfo::getAll()
 {
     return(m_mapId2Person.values());
 }

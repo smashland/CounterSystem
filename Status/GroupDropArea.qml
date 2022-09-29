@@ -14,6 +14,12 @@ DropArea
     {
         width=340 *dpx
     }
+    MouseArea {
+        anchors.fill: parent
+        onWheel: {
+            // 屏蔽滚轮事件，防止滚动方案列表时缩放地球
+        }
+    }
     Image {
         id:zhenyingtu
         anchors.fill: parent

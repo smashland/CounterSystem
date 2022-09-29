@@ -7,6 +7,7 @@ import Qt.labs.platform 1.1
 import Qt.labs.qmlmodels 1.0
 import "../Common"
 import "../Exercise"
+import "../Status"
 
 Rectangle {
     id: scenarioLoader
@@ -82,6 +83,17 @@ Rectangle {
                     }
                 }
             }
+            ViewButton {
+                name: qsTr("保存方案")
+                color: viewColor_shuaxin
+                viewImage: "\ue600"
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+
+                    }
+                }
+            }
         }
 
         SearchItem {
@@ -144,7 +156,7 @@ Rectangle {
                     TextItem {
                         id: col2
                         x: 170 *dpx
-                        text: modelData
+                        text: sceName
                         width: 200 *dpx
                         height: 50 *dpy
                     }
@@ -162,7 +174,6 @@ Rectangle {
                                 anchors.fill: parent
                                 onClicked: {
                                     scenarioNew.visible = true
-//                                    sceManager.showScenfo(col2.text)
                                     wrapper.ListView.view.currentIndex = index
                                     mouse.accepted = true
                                     scenarioNew.scenarioNewInfo = wrapper.ListView.view.model.get(index)
@@ -182,8 +193,8 @@ Rectangle {
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
+                                    sceManager.deleteScenario(col2.text)
                                     wrapper.ListView.view.model.remove(index)
-                                    sceManager.removeScenario(col2.text)
                                 }
                             }
                         }
@@ -197,7 +208,9 @@ Rectangle {
             Component {
                 id: phoneModel;
                 ListModel {
-
+//                    ListElement{
+//                        cost: "轻武器激光对抗系统1"
+//                    }
 
                 }
 
@@ -207,8 +220,8 @@ Rectangle {
                 id: listView
                 anchors.fill: parent
                 delegate: delegate
-//                model: phoneModel.createObject(listView)
-                model: sceManager.showSceList()
+                model: phoneModel.createObject(listView)
+//                model: sceManager.getSceAll()
                 header: headerView
                 focus: true
                 clip: true
@@ -224,7 +237,7 @@ Rectangle {
                 Component.onCompleted: {
 //                    sceManager.read()
                     scenarioLoader.addScenario.connect(listView.addOne)
-                }               
+                }
 
             }
 

@@ -153,6 +153,7 @@ private:
      * @brief 解析INI文件
      */
     void PraseIni();
+    void PraseXml();
 
     /**
      * @brief 保存ini文件
@@ -176,6 +177,8 @@ private:
     bool    m_bCanHitDeath;    /// 命中死亡人是否得分
     bool    m_bReplay;         /// 是否处于数据回放状态
     std::string m_sFileName;   /// 保存文件名称
+
+    QMap<QString,QMap<quint16,QString>> m_mapAllInfo;
 
 
     QString         m_stComName;      /// 串口信息

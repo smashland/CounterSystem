@@ -14,7 +14,6 @@
 #include "PersonAllInfo.h"
 #include "../Map/ContrlMapPerson.h"
 #include "../Notice/NoticeManager.h"
-#include "ini_file.h"
 
 CGlobalData::CGlobalData(QObject *parent) : QObject(parent),
     m_sCurrentFileName(QDir::homePath())
@@ -146,7 +145,7 @@ void CGlobalData::UpdateSimulationTime(const quint16 &uSimTimes)
         {
             m_pCtrMapPerson->UpdateHitLine(pPerson->hurtinfo(pPerson->hurtinfo_size()-1).id(),one);
             /// 增加命中状态
-            QString listInfo=QString::fromUtf8("%3秒 %1被%2击中").arg(pPerson->id())
+            QString listInfo=QString::fromLocal8Bit("%3秒 %1被%2击中").arg(pPerson->id())
                     .arg(pPerson->hurtinfo(pPerson->hurtinfo_size()-1).id()).arg(uSimTimes);
             listInfo += CConfigInfo::GetInstance()->GetBodyName(pPerson->hurtinfo(pPerson->hurtinfo_size()-1).hurtpart());
 
@@ -168,12 +167,13 @@ void CGlobalData::UpdateTime(const QDateTime &dateTime)
     if(!m_outFile.is_open() && CConfigInfo::GetInstance()->GetStart())
     {
         QString sTempLocal = dateTime.toString("/yyyyMMdd_HHmmss");
+        qDebug()<<sTempLocal;
         QString sDataFile = CDataManager::GetInstance()->GetFileName(sTempLocal);
         m_sCurrentFileName = QDir::homePath() + sTempLocal;
         m_outFile.open(m_sCurrentFileName.toStdString(),std::ios::binary|std::ios::out);
 
         if(m_outFile.is_open())
-        {             
+        {
             /// 写入真正的演习数据的文件，路径长度，路径地址
             int nSize=sDataFile.toLocal8Bit().size();
             m_outFile.write(reinterpret_cast<char*>(&nSize),sizeof(nSize));
@@ -201,18 +201,15 @@ void CGlobalData::UpdateTime(const QDateTime &dateTime)
                     m_outFile.write(reinterpret_cast<char*>(&nId),sizeof(nId));
                 }
             }
-            INI_File().SetBeginTime(dateTime.toString("yyyy-MM-dd HH:mm:ss"));
         }
     }
 
     /// 演习结束，关闭文件
     if(m_outFile.is_open() && !CConfigInfo::GetInstance()->GetStart())
     {
-        INI_File().SetEndTime(dateTime.toString("yyyy-MM-dd HH:mm:ss"));
         m_outFile.close();
     }
 }
-
 
 /// 更新所有的数据
 void CGlobalData::updateAllDataSize(int nData)
@@ -292,6 +289,7 @@ QList<QString> CGlobalData::getAllType()
     }
     return(vTempList);
 }
+
 /// 统计结果
 void CGlobalData::calResult()
 {

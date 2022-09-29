@@ -29,7 +29,7 @@ public:
      * @brief 获取所有的人员信息
      * @return
      */
-    QList<ScePersonInfo*> GetAll();
+    Q_INVOKABLE QList<ScePersonInfo*> getAll();
 
     /**
      * @brief 删除人员信息

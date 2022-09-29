@@ -67,15 +67,15 @@ Item {
                 font.family: "Microsoft YaHei"
                 verticalAlignment: Text.AlignVCenter
 
-                onEditingFinished: {
-                    sceManager.setSceName(nameItemContent.text)
+//                onEditingFinished: {
+//                    sceManager.setSceName(nameItemContent.text)
+//                }
+                onTextChanged: {
+                    sceManager.sceName = text
                 }
             }
 
         }
-    }
-    onTitleChanged: {
-        nameItemContent.text = scenarionew.title
     }
 
     Text {
@@ -264,6 +264,25 @@ Item {
             ScrollBar.vertical: ScrollBar {
                 id: scrollBar
             }
+            onVisibleChanged: {
+                if(visible)
+                {
+                    var lists = sceInfo.getAll()
+                    var nSize = lists.length
+                    for(var i=0; i<nSize; i++)
+                    {
+                        var obj = lists[i]
+                        if(obj !== null)
+                        {
+
+                            model.append({
+                                             "name": obj.name
+                                        })
+                        }
+                    }
+
+                }
+            }
 
 
         }
@@ -315,7 +334,7 @@ Item {
             nameButton: "取消"
             onClicked:
             {
-                scenarionew.visible = false
+                scenarioNew.visible = false
             }
         }
     }

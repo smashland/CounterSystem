@@ -1,4 +1,4 @@
-QT += quick texttospeech charts serialport network multimedia
+QT += quick texttospeech charts serialport network multimedia core xml
 
 CONFIG += c++11
 
@@ -59,6 +59,7 @@ SOURCES += \
         Src/SceInfo/ScePersonInfo.cpp \
         Src/Settings/GlobalSettings.cpp \
         Src/TimeServer/TimeServer.cpp \
+        Src/XmlNode/TestXml.cpp \
         Src/md5.cpp \
         main.cpp
 
@@ -128,6 +129,7 @@ HEADERS += \
     Src/Settings/GlobalSettings.h \
     Src/TimeServer/ITimeObserver.h \
     Src/TimeServer/TimeServer.h \
+    Src/XmlNode/TestXml.h \
     Src/md5.h
 
 FORMS += \

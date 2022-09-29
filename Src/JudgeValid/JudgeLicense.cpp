@@ -163,13 +163,13 @@ bool QJudgeLicense::checkLicense(const QByteArray& sLicInfo)
         case 0:   /// 长期有效
             nLicDays = _I64_MAX;
             break;
-        case 1:   /// 年
+        case 3:   /// 年
             nLicDays = static_cast<int>(*reinterpret_cast<const uchar*>(pBuffer) * 365.25);
             break;
         case 2:   /// 月
             nLicDays = *reinterpret_cast<const uchar*>(pBuffer) * 30;
             break;
-        case 3:   /// 日
+        case 1:   /// 日
             nLicDays = *reinterpret_cast<const uchar*>(pBuffer);
             break;
         default:

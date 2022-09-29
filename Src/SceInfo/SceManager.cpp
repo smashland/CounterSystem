@@ -132,6 +132,13 @@ void SceManager::write()
     document.setObject(jsonSce);
     saveFile.write(document.toJson());
 }
+QString SceManager::text()
+{
+    qDebug() << "Going to read the text";
+    read();
+    return m_text;
+}
+
 
 void SceManager::modify()
 {
@@ -233,6 +240,7 @@ void SceManager::SceManager::showScenfo(QString sSceName)
 ///显示所有方案
 QStringList SceManager::showSceList()
 {
+    qDebug()<<"555555555555555555555";
     if(m_listSceFileName.size() < 1)
     {
         QDir *dir=new QDir(QString("%1/%2").arg(GetDataPath().c_str()).arg("Project")); //文件夹

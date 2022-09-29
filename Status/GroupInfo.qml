@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.3
+import "../Manage"
 
 Rectangle
 {
@@ -132,16 +133,43 @@ Rectangle
             }
         }
     }
-    //    }
-    //    Component.onCompleted:{
-    //        console.log("hhhhhhhh",listView.model,listView.model.count)
-    //        Connections
-    //        {
-    //            target: listView.model
+    function personData(model) {
+        var res = "{ \"PersonArray\": [\n";
 
-    //            function onCountChanged(count){
-    //                zongrenshu.text = count
-    //            }
-    //        }
-    //    }
+        console.log("count: " + model.count);
+
+        for(var i = 0; i < model.count; ++i) {
+            res += "\n{\t";
+            var e = model.get(i);
+            res += "\"Grouptype\": \""   +　e.Grouptype + "\",\n\t";    //阵营
+            res += "\"ID\": \"" + e.ID + "\",\n\t";                     //id
+            res += "\"ImagePath\": \"" + e.ImagePath + "\",\n\t";       //图片
+            res += "\"Name\": " + e.name + "\n\t";                      //名字
+            res += "\"Position\": " + e.Position + "\n\t";              //职位
+            res += "\"Host\": " + e.Host + "\n\t";                      //是否人质
+
+            if ( i === model.count -1)
+                res += "\n}";
+            else
+                res += "\n},";
+        }
+        res += "\"Scename\": " + model + "\n\t";
+
+        res += "\n]}";
+
+        console.log("res: " + res );
+        return res;
+    }
+
+
+//    Button {
+//        text: "按钮"
+//        onClicked: {
+//            var pData = listView.model
+//            console.log(pData)
+//            var res =personData(pData)
+//            sceManager.addScenari(res)
+//            console.log(res)
+//        }
+//    }
 }

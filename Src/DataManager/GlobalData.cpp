@@ -1,5 +1,5 @@
 #include <QUrl>
-
+#include <QApplication>
 #include "../ParseData/DealDataManager.h"
 #include "GlobalData.h"
 #include "MyListModel.h"
@@ -337,8 +337,8 @@ void CGlobalData::SetSeceneGraph(ISceneGraph *pSceneGraph)
 
 int CGlobalData::openReplayFile(const QUrl &rReplayFile)
 {
-    std::string sFileName = rReplayFile.toLocalFile().toLocal8Bit().data();
-    std::ifstream   inFile;
+    std::string sFileName =rReplayFile.toLocalFile().toLocal8Bit().data();
+    std::ifstream inFile;
     inFile.open(sFileName,std::ios::binary|std::ios::in);
     char buffer[256]="";
     int nSize,nID;
@@ -381,7 +381,6 @@ int CGlobalData::openReplayFile(const QUrl &rReplayFile)
             ++nGroupIndex;
         }
 
-
         QVector<int> vEventID;
         /// 读取仿真时间
         while(!inFile.eof())
@@ -401,6 +400,7 @@ int CGlobalData::openReplayFile(const QUrl &rReplayFile)
         CTimeServer::GetInstance()->SetSimuEndTime(unTimes);
         inFile.close();
     }
+
     return(unTimes);
 }
 

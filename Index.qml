@@ -219,21 +219,10 @@ Rectangle
         x: (index.width-playbackRefresh.width) / 2
         y: (index.height-playbackRefresh.height) / 2
     }
-    //    ScenarioRemove {
-    //        id: scenarioRemove
-    //        visible: false
-    //        x: (index.width-scenarioRemove.width) / 2
-    //        y: (index.height-scenarioRemove.height) / 2
-    //    }
-
-    //        Progressbar {
-    //            id: progressbar
-    //            visible: true
-    //        }
-    CloseBar {
-        id: closebar
-        visible: true
-    }
+        CloseBar {
+            id: closebar
+            visible: true
+        }
     CloseBarFull{
         id: closebarFull
         visible: false
@@ -277,20 +266,6 @@ Rectangle
         //        anchors.leftMargin: (index.width-ctrReplay.width)/2
         visible: false
     }
-    //    GroupInfoDisplay {
-    //        id: groupInfoDisplay
-
-    //        Drag.active: dragAreagroupInfoDisplay.drag.active
-    //        Drag.hotSpot.x: 10
-    //        Drag.hotSpot.y: 10
-
-    //        MouseArea {
-    //            id: dragAreagroupInfoDisplay
-    //            anchors.fill: parent
-    //            drag.target: parent
-    //            propagateComposedEvents: true
-    //        }
-    //    }
 
     ResizeItem {
         id: resizeItem
@@ -309,12 +284,6 @@ Rectangle
     }
     SceManager{
         id:sceManager
-    }
-    ScePersonInfo{
-        id:scePersonInfo
-    }
-    TestXml {
-        id: testXml
     }
 
     RemoveDialog {

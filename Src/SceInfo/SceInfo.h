@@ -29,7 +29,13 @@ public:
      * @brief 获取所有的人员信息
      * @return
      */
-    Q_INVOKABLE QList<ScePersonInfo*> getAll();
+    Q_INVOKABLE QList<QObject*> getAll();
+
+    /**
+     * @brief 得到人员数量
+     * @return
+     */
+    Q_INVOKABLE int getCount(){return m_mapId2Person.size();}
 
     /**
      * @brief 删除人员信息

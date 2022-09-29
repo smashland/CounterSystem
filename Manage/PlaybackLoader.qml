@@ -15,7 +15,6 @@ Rectangle {
     anchors.fill: parent
     color: "transparent"
     signal openReplay()
-
     Item {
         id: backgroundItem
         width: 1226 *dpx
@@ -166,8 +165,8 @@ Rectangle {
                             MouseArea{
                                 anchors.fill: parent
                                 onClicked: {
-//                                     replayFile.open();
-                                    ctrReplay.nTimes = $app.allData.openReplayFile("file:///"+modelData);
+//                                   replayFile.open();
+                                    ctrReplay.nTimes = $app.allData.openReplayFile("file:///"+appDir+"/Data/Szy/"+modelData+".szy");
                                     ctrReplay.visible = true;
                                     $app.settings.startReplay()
                                 }

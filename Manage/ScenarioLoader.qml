@@ -56,7 +56,10 @@ Rectangle {
                 viewImage: "\ue624"
                 MouseArea{
                     anchors.fill: parent
-                    onClicked: scenarioNew.visible= true
+                    onClicked: {
+                        scenarioNew.visible= true
+                        scenarioNew.scenarioNewInfo = sceManager.createSceneri();
+                    }
                 }
             }
             ViewButton {
@@ -221,7 +224,7 @@ Rectangle {
                 anchors.fill: parent
                 delegate: delegate
                 model: phoneModel.createObject(listView)
-//                model: sceManager.getSceAll()
+//                model: sceManager.showSceList()
                 header: headerView
                 focus: true
                 clip: true

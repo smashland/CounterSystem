@@ -13,7 +13,8 @@ ScePersonInfo *CSceInfo::addPerson(int nID)
     auto findOne = m_mapId2Person.find(nID);
     if(m_mapId2Person.end() == findOne)
     {
-        ScePersonInfo* pNewOne = new ScePersonInfo;
+        ScePersonInfo* pNewOne = new ScePersonInfo(this);
+        pNewOne->setID(nID);
         m_mapId2Person.insert(nID,pNewOne);
         return(pNewOne);
     }
@@ -31,9 +32,13 @@ ScePersonInfo *CSceInfo::FinPerson(int nID)
 }
 
 /// 获取所有的人员信息
-QList<ScePersonInfo *> CSceInfo::getAll()
+QList<QObject *> CSceInfo::getAll()
 {
-    return(m_mapId2Person.values());
+    QList<QObject*> listObjct;
+    foreach(auto one , m_mapId2Person){
+        listObjct.append(one);
+    }
+    return(listObjct);
 }
 
 /// 删除指定ID的人员

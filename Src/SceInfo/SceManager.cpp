@@ -12,6 +12,11 @@ SceManager::SceManager(QObject *parent)
 {
 }
 
+CSceInfo *SceManager::createSceneri()
+{
+    return(new CSceInfo);
+}
+
 SceManager::~SceManager()
 {
     ClearSceInfo();
@@ -23,14 +28,23 @@ SceManager::~SceManager()
 //}
 
 ///添加方案
-CSceInfo *SceManager::addScenari(const QString &sceName)
+CSceInfo *SceManager::addScenari(const QString &sceName,CSceInfo* pSceInfo)
 {
     auto findOne = m_mapName2SceInfo.find(sceName);
+    qDebug()<<"测试添加方案函数："<<sceName;
     if(m_mapName2SceInfo.end() == findOne)
     {
-        CSceInfo* pNewOne = new CSceInfo;
-        m_mapName2SceInfo.insert(sceName,pNewOne);
-        return(pNewOne);
+        if(nullptr == pSceInfo)
+        {
+            CSceInfo* pNewOne = new CSceInfo;
+            m_mapName2SceInfo.insert(sceName,pNewOne);
+            return(pNewOne);
+        }
+        else
+        {
+            m_mapName2SceInfo.insert(sceName,pSceInfo);
+            return(pSceInfo);
+        }
     }
     else
     {
@@ -110,27 +124,27 @@ void SceManager::read(const QString &sname)
 }
 
 void SceManager::write()
-{
-    QJsonArray personArray;
-    QJsonObject jsonSce;
-    jsonSce.insert("Scename",m_sSceName);
-    foreach(auto one,m_mapName2SceInfo)
+{    
+    for(auto one=m_mapName2SceInfo.begin();one != m_mapName2SceInfo.end();++one)
     {
-        one->Save(personArray);
-    }
-    jsonSce.insert("PersonArray",personArray);
+        QJsonObject jsonSce;
+        QJsonArray personArray;
+        jsonSce.insert("Scename",one.key());
 
-    QString filePath = QApplication::applicationDirPath() + QString("/Data/Project/%1.json").arg(m_sSceName);
-    QFile saveFile(filePath);
-    if (!saveFile.open(QIODevice::WriteOnly))
-    {
-        qWarning("Couldn't open save file.");
-    }
+        one.value()->Save(personArray);
+        jsonSce.insert("PersonArray",personArray);
+        QString filePath = QApplication::applicationDirPath() + QString("/Data/Project/%1.json").arg(one.key());
+        QFile saveFile(filePath);
+        if (!saveFile.open(QIODevice::WriteOnly))
+        {
+            qWarning("Couldn't open save file.");
+        }
 
-    /// 构建 Json 文档
-    QJsonDocument document;
-    document.setObject(jsonSce);
-    saveFile.write(document.toJson());
+        /// 构建 Json 文档
+        QJsonDocument document;
+        document.setObject(jsonSce);
+        saveFile.write(document.toJson());
+    }
 }
 QString SceManager::text()
 {

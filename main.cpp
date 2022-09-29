@@ -1,6 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-
+#include <QQmlContext>
 #include <QLocale>
 #include <QTranslator>
 #include <QFontDatabase>
@@ -47,9 +47,12 @@ int main(int argc, char *argv[])
     qmlRegisterType<QmlBlur>("MyItem",1,0,"Blur");
     qmlRegisterType<QtOsgItem>("SceneGraphRendering", 1, 0, "QuickOSGViewer");
     qmlRegisterType<SceManager>("MyItem",1,0,"SceManager");
-    qmlRegisterType<ScePersonInfo>("MyItem",1,0,"ScePersonInfo");
     qmlRegisterType<CSceInfo>("MyItem",1,0,"SceInfo");
     qmlRegisterType<TestXml>("MyItem",1,0,"TestXml");
+
+    qRegisterMetaType<ScePersonInfo*>("ScePersonInfo*");
+    qRegisterMetaType<CSceInfo*>("CSceInfo*");
+    qRegisterMetaType<SceManager*>("SceManager*");
 
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
@@ -64,6 +67,7 @@ int main(int argc, char *argv[])
     }
 
     QQmlApplicationEngine engine;
+    engine.rootContext()->setContextProperty("appDir",qApp->applicationDirPath());
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl)

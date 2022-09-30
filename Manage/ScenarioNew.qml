@@ -12,28 +12,52 @@ Item {
     property var title: ""
     property var scenarioNewInfo:null
     property int nCount: 0
+    signal newSce(string sceName)
+    signal findPersonSignal(int id)    //查找人员
+
     width: 1165 *dpx
     height: 710 *dpy
 
     Connections{
         function onOk(id,name,level,group,isHost)
         {
-            console.log("==============================================");
             var person = scenarioNewInfo.addPerson(id);
             person.name = name;
             person.position = level;
             person.groupType = group;
             person.hostage = isHost;
+
             listView.model = scenarioNewInfo.getAll();
             nCount =  scenarioNewInfo.getCount();
-
-            console.log("-----------"+nCount)
-
-
         }
         target: personAdd
     }
 
+
+    Connections{
+        function onSceFindSignal(sceName)
+        {
+            var sceInfo=sceManager.findScenario(sceName)
+            nameItemContent.text=sceName
+            listView.model = sceInfo;
+            console.log("修改方案")
+        }
+        target: scenarioLoader
+    }
+
+    Connections{
+
+        function onModifyPersonSignal(mid,mName,mLevel,mGroup,mIsHost)
+        {
+            var modifyPerson = scenarioNewInfo.modifyPerson(mid);
+            modifyPerson.name = mName;
+            modifyPerson.position = mLevel;
+            modifyPerson.groupType = mGroup;
+            modifyPerson.hostage = mIsHost;
+            listView.model = scenarioNewInfo.getAll();
+        }
+        target: personAdd
+    }
     Image {
         id: loginImage
         anchors.fill: parent
@@ -235,19 +259,31 @@ Item {
                         y: 10 *dpy
                         spacing: 15 * dpx
                         ViewButton {
-                            name: qsTr("修改")
+                            name: qsTr("修改人员")
                             color: viewColor_shuaxin
                             viewImage: "\ue6a5"
                             MouseArea {
                                 anchors.fill: parent
-                                onClicked:personAdd.visible = true
+                                onClicked:
+                                {
+                                    findPersonSignal(modelData.id)
+                                    personAdd.visible = true
+                                }
                             }
                         }
                         ViewButton {
                             name: qsTr("删除")
                             color: viewColor_xinjian
                             viewImage: "\ue607"
-
+                            MouseArea {
+                                anchors.fill: parent
+                                onClicked:
+                                {
+                                    scenarioNewInfo.deletePerson(modelData.id)
+                                    nCount =  scenarioNewInfo.getCount();
+                                    listView.model = scenarioNewInfo.getAll();
+                                }
+                            }
                         }
                     }
                 }
@@ -268,6 +304,16 @@ Item {
             }
         }
 
+    }
+    onScenarioNewInfoChanged: {
+        if(scenarioNewInfo === null)
+        {
+            name.text = ""
+        }else {
+            if(visible) {
+                name.text = scenarioNewInfo.name;
+            }
+        }
     }
 
     Row {
@@ -295,9 +341,10 @@ Item {
                 if(nameItemContent.text === '') {
                     console.log("没有方案名称")
                 }else {
-                    scenarioLoader.addScenario(nameItemContent.text);
+//                    scenarioLoader.addScenario(nameItemContent.text);
                     sceManager.addScenari(nameItemContent.text,scenarioNewInfo);
                     sceManager.write();
+                    newSce(nameItemContent.text)
 //                    sceManager.addScenario(nameItemContent.text);
                     scenarioNew.visible = false
                 }

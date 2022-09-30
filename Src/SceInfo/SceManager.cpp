@@ -12,6 +12,11 @@ SceManager::SceManager(QObject *parent)
 {
 }
 
+SceManager *SceManager::cSceneri()
+{
+    return(new SceManager);
+}
+
 CSceInfo *SceManager::createSceneri()
 {
     return(new CSceInfo);
@@ -70,18 +75,30 @@ bool SceManager::deleteScenario(const QString &sceName)
 ///查找方案信息
 CSceInfo *SceManager::findScenario(const QString &sceName)
 {
+    qDebug()<<("查看方案");
     auto findOne = m_mapName2SceInfo.find(sceName);
     return m_mapName2SceInfo.end() == findOne ? nullptr : findOne.value();
 }
 
-///得到所有的方案信息
-QList<CSceInfo *> SceManager::getSceAll()
+/////得到所有的方案信息
+//QList<CSceInfo *> SceManager::getSceAll()
+//{
+//    return(m_mapName2SceInfo.values());
+//}
+
+QList<QObject *> SceManager::getSceAll()
 {
-    return(m_mapName2SceInfo.values());
+    QList<QObject*> listObjct;
+    foreach(auto one , m_mapName2SceInfo){
+        listObjct.append(one);
+        qDebug()<<"测试";
+    }
+    return(listObjct);
 }
 
 void SceManager::read()
 {
+    qDebug()<<"测试读取所有文件";
     showSceList();
 
     foreach(const QString& one,m_listSceFileName)

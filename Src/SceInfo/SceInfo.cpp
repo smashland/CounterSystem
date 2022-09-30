@@ -10,7 +10,7 @@ CSceInfo::CSceInfo(QObject *parent)
 /// 增加成员
 ScePersonInfo *CSceInfo::addPerson(int nID)
 {
-    auto findOne = m_mapId2Person.find(nID);
+    auto findOne = m_mapId2Person.find(nID);    
     if(m_mapId2Person.end() == findOne)
     {
         ScePersonInfo* pNewOne = new ScePersonInfo(this);
@@ -24,9 +24,24 @@ ScePersonInfo *CSceInfo::addPerson(int nID)
     }
 }
 
-/// 根据ID查找人员信息
-ScePersonInfo *CSceInfo::FinPerson(int nID)
+ScePersonInfo *CSceInfo::modifyPerson(int nID)
 {
+    auto findOne = m_mapId2Person.find(nID);
+    if(m_mapId2Person.end() != findOne)
+    {
+        m_mapId2Person.value(nID,findOne.value());
+        return(findOne.value());
+    }
+    else
+    {
+        return(nullptr);
+    }
+
+}
+
+/// 根据ID查找人员信息
+ScePersonInfo *CSceInfo::finPerson(int nID)
+{ 
     auto findOne = m_mapId2Person.find(nID);
     return m_mapId2Person.end() == findOne ? nullptr : findOne.value();
 }
@@ -42,7 +57,7 @@ QList<QObject *> CSceInfo::getAll()
 }
 
 /// 删除指定ID的人员
-bool CSceInfo::DeletePerson(int nID)
+bool CSceInfo::deletePerson(int nID)
 {
     auto findOne = m_mapId2Person.find(nID);
     if(m_mapId2Person.end() != findOne)

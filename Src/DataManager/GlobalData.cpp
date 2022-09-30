@@ -438,6 +438,9 @@ void CGlobalData::endReplay()
 /// 保存数据文件
 void CGlobalData::saveData(const QUrl &sDataFileName)
 {
+//    QDateTime current_date_time =QDateTime::currentDateTime();
+//    QString current_date =current_date_time.toString("(yyyyMMdd_hhmmss)");
+//    QString sFilepath=sDataFileName.toLocalFile().chopped(4)+current_date+".szy";
     /// 移动文件到指定位置
     QFile::rename(m_sCurrentFileName,sDataFileName.toLocalFile());
     m_bRemoveFile = false;

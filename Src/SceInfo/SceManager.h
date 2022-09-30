@@ -18,11 +18,16 @@ public:
 
 
     /**
+     * @brief 创建
+     * @return
+     */
+    Q_INVOKABLE SceManager* cSceneri();
+
+    /**
      * @brief 创建一个方案
      * @return
      */
     Q_INVOKABLE CSceInfo* createSceneri();
-
     /**
       * @brief 添加方案
       * @param sceName
@@ -54,7 +59,8 @@ public:
      * @brief 获取所有的方案信息
      * @return
      */
-    Q_INVOKABLE QList<CSceInfo*> getSceAll();
+  //  Q_INVOKABLE QList<CSceInfo*> getSceAll();
+      Q_INVOKABLE QList<QObject*> getSceAll();
 
 
 

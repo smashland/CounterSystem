@@ -16,12 +16,24 @@ Popup
 
 //    signal ok(int id,string name,int level,int group,bool isHost);
     signal ok(int id,string name,int level,int group,bool isHost);
+    signal modifyPersonSignal(int mid,string mName,int mLevel,int mGroup,bool mIsHost)
 
     property var outData
     property var rowNum;
     property var bConnected:true
 
-    property var personData: null
+    Connections{
+        function onFindPersonSignal(id)
+        {
+            var person =  scenarioNew.scenarioNewInfo.finPerson(id);
+            shebeiId.name=id;
+            personName.name=person.name;
+            combobox_renyuan.currentIndex=person.position
+            zhenying.currentIndex=person.groupType
+            control3.checked=person.hostage
+        }
+        target: scenarioNew
+    }
 
     /// 背景半透明
     background:Rectangle
@@ -297,6 +309,8 @@ Popup
             onClicked: {
                 ok(shebeiId.name,personName.name, combobox_renyuan.currentIndex,
                    zhenying.currentIndex,control3.checked);
+                modifyPersonSignal(shebeiId.name,personName.name, combobox_renyuan.currentIndex,
+                                   zhenying.currentIndex,control3.checked);
                 personAdd.visible = false
                 ///// 给调用界面
                 readPerson()

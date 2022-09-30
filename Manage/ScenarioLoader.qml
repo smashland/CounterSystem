@@ -13,7 +13,23 @@ Rectangle {
     id: scenarioLoader
     anchors.fill: parent
     color: "transparent"
+    property var scenarioInfo: null
     signal addScenario(string sceName)
+    signal sceFindSignal(string sceName)
+
+    Connections{
+        function onNewSce(sceName)
+        {
+            var scenario=scenarioLoader.addScenario(sceName)
+            scenario.sceName=sceName
+            listView.model=scenarioInfo.getSceAll()
+
+//            var scenario=sceManager.addScenario(sceName)
+//            console.log("测试新建方案")
+//            listView.model=sceManager.getSceAll();
+        }
+        target:scenarioNew
+    }
 
     Item {
         id: backgroundItem
@@ -82,7 +98,7 @@ Rectangle {
                     anchors.fill: parent
                     onClicked: {
                         $app.allData.clearAllInfo();
-                        sceManager.modify();
+                        sceManager.read();
                     }
                 }
             }
@@ -176,6 +192,8 @@ Rectangle {
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
+                                    sceFindSignal(modelData)
+//                                    sceManager.findScenario(modelData)
                                     scenarioNew.visible = true
                                     wrapper.ListView.view.currentIndex = index
                                     mouse.accepted = true
@@ -197,6 +215,8 @@ Rectangle {
                                 anchors.fill: parent
                                 onClicked: {
                                     sceManager.deleteScenario(col2.text)
+//                                    listView.removeOne()
+                                    sceManager.removeScenario(modelData)
                                     wrapper.ListView.view.model.remove(index)
                                 }
                             }
@@ -238,7 +258,6 @@ Rectangle {
                 }
 
                 Component.onCompleted: {
-//                    sceManager.read()
                     scenarioLoader.addScenario.connect(listView.addOne)
                 }
 

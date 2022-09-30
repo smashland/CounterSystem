@@ -19,11 +19,18 @@ public:
     Q_INVOKABLE ScePersonInfo* addPerson(int nID);
 
     /**
+     * @brief 根据id修改人员信息
+     * @param nID
+     * @return
+     */
+    Q_INVOKABLE ScePersonInfo* modifyPerson(int nID);
+
+    /**
      * @brief 根据id查找人员
      * @param nID
      * @return
      */
-    ScePersonInfo* FinPerson(int nID);
+    Q_INVOKABLE ScePersonInfo* finPerson(int nID);
 
     /**
      * @brief 获取所有的人员信息
@@ -42,7 +49,7 @@ public:
      * @param nID
      * @return
      */
-    bool DeletePerson(int nID);
+    Q_INVOKABLE bool deletePerson(int nID);
 
     /**
      * @brief 通过Json解析人员信息

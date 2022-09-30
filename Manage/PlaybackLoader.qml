@@ -151,6 +151,13 @@ Rectangle {
                         width: 200 *dpx
                         height: 50 *dpy
                     }
+                    TextItem {
+                        id: col3
+                        x: 400 *dpx
+//                        text: manoeuvre.endTime
+                        width: 200 *dpx
+                        height: 50 *dpy
+                    }
                     Row {
                         x: 670 *dpx
                         y: 10 *dpy

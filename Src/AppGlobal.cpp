@@ -151,6 +151,7 @@ QStringList QAppGlobal::openPath()
     {
 
         string_list.append(fileInfoList.at(i).baseName());
+
     }
 
     return(string_list);

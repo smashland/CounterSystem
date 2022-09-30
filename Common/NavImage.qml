@@ -110,6 +110,7 @@ Row {
             font.family: "iconfont"
             font.pixelSize: 22*dpx
             verticalAlignment: Text.AlignVCenter
+
             MouseArea{
                 anchors.fill: parent
                 hoverEnabled: true
@@ -119,6 +120,7 @@ Row {
                 onExited: {
                     huanyuanHint.visible = false
                 }
+
                 onClicked: {
                     huanyuanFun()
                 }

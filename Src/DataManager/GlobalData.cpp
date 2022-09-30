@@ -352,6 +352,7 @@ int CGlobalData::openReplayFile(const QUrl &rReplayFile)
         /// 获取路径大小
         inFile.read(reinterpret_cast<char*>(&nSize),sizeof(nSize));
         inFile.read(buffer,nSize);
+        qDebug()<<"**************************"<<buffer;
         /// 读取真实的人员状态信息
         CDataManager::GetInstance()->ReadFile(buffer);
 

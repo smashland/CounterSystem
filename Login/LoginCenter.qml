@@ -37,11 +37,11 @@ Item
     Rectangle
     {
         id: rectangle
-        width: 50*dpy
-        height: 50*dpy
+        width: 80*dpy
+        height: 80*dpy
         color:  '#00000000'
         x: (mainWindow.width-rectangle.width)/2
-        y: 830 *dpy
+        y: 820 *dpy
         Component.onCompleted:
         {
             rectangle.forceActiveFocus();

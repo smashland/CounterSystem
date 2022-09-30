@@ -143,7 +143,7 @@ Rectangle
             Rectangle {
                 width: health.visualPosition * health.width
                 height: health.height
-                color: outData.bOnLine ?  health.value > 60 ?  "green" : health.value > 20 ? "yellow" : "yellow" : "red";
+                color: outData.bOnLine ?  health.value > 60 ?  "green" : health.value > 20 ? "yellow" : "red" : "gray";
             }
         }
     }

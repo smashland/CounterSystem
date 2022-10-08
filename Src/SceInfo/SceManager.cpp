@@ -163,13 +163,6 @@ void SceManager::write()
         saveFile.write(document.toJson());
     }
 }
-QString SceManager::text()
-{
-    qDebug() << "Going to read the text";
-    read();
-    return m_text;
-}
-
 
 void SceManager::modify()
 {/*

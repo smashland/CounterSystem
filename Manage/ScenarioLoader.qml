@@ -20,12 +20,7 @@ Rectangle {
     Connections{
         function onNewSce(sceName)
         {
-            var scenario=scenarioLoader.addScenario(sceName)
-//            listView.model=scenarioInfo.getSceAll()
-
-//            var scenario=sceManager.addScenario(sceName)
-//            console.log("测试新建方案")
-//            listView.model=sceManager.getSceAll();
+            listView.model=sceManager.getSceAll();
         }
         target:scenarioNew
     }
@@ -96,7 +91,7 @@ Rectangle {
                     anchors.fill: parent
                     onClicked: {
                         $app.allData.clearAllInfo();
-//                        sceManager.read();
+                        sceManager.read();
 //                        sceManager.getSceAll()
                     }
                 }

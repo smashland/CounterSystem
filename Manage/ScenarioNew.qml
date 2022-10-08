@@ -327,11 +327,11 @@ Item {
                 if(nameItemContent.text === '') {
                     console.log("没有方案名称")
                 }else {
-//                    scenarioLoader.addScenario(nameItemContent.text);
+                    scenarioLoader.addScenario(nameItemContent.text);
                     sceManager.addScenari(nameItemContent.text,scenarioNewInfo);
                     sceManager.write();
                     newSce(nameItemContent.text)
-//                    sceManager.addScenario(nameItemContent.text);
+                    //                    sceManager.addScenario(nameItemContent.text);
                     scenarioNew.visible = false
                 }
             }

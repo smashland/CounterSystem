@@ -242,8 +242,8 @@ Rectangle {
                 id: listView
                 anchors.fill: parent
                 delegate: delegate
-               // model: phoneModel.createObject(listView)
-                model:sceManager.getSceAll() //sceManager.showSceList()
+//                model: phoneModel.createObject(listView)
+//                model:sceManager.getSceAll() //sceManager.showSceList()
                 header: headerView
                 focus: true
                 clip: true

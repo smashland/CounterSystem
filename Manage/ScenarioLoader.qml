@@ -92,7 +92,7 @@ Rectangle {
                     onClicked: {
                         $app.allData.clearAllInfo();
                         sceManager.read();
-//                        sceManager.getSceAll()
+                        listView.model=sceManager.getSceAll();
                     }
                 }
             }
@@ -186,14 +186,11 @@ Rectangle {
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
-                                    console.log("测试方案名称"+modelData)
-                                    sceFindSignal(modelData)
-//                                    sceManager.findScenario(modelData)
+                                    sceFindSignal(modelData.sceName)
                                     scenarioNew.visible = true
                                     wrapper.ListView.view.currentIndex = index
                                     mouse.accepted = true
 //                                    scenarioNew.scenarioNewInfo = wrapper.ListView.view.model.get(index)
-//                                    sceManager.showScenfo();
                                 }
                             }
                         }

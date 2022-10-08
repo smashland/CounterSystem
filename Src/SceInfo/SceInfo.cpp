@@ -7,6 +7,17 @@ CSceInfo::CSceInfo(QObject *parent)
     ClearMap();
 }
 
+///设置方案名称
+void CSceInfo::setSceName(const QString &sName)
+{
+    qDebug()<<"测试方案名称"+sName;
+    if(m_sSceName != sName)
+    {
+        m_sSceName = sName;
+        emit sceNameChanged(m_sSceName);
+    }
+}
+
 /// 增加成员
 ScePersonInfo *CSceInfo::addPerson(int nID)
 {

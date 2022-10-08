@@ -305,16 +305,6 @@ Item {
         }
 
     }
-    onScenarioNewInfoChanged: {
-        if(scenarioNewInfo === null)
-        {
-            name.text = ""
-        }else {
-            if(visible) {
-                name.text = scenarioNewInfo.name;
-            }
-        }
-    }
 
     Row {
         spacing: 15 *dpx

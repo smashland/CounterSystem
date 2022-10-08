@@ -98,7 +98,8 @@ Rectangle {
                     anchors.fill: parent
                     onClicked: {
                         $app.allData.clearAllInfo();
-                        sceManager.read();
+//                        sceManager.read();
+//                        sceManager.getSceAll()
                     }
                 }
             }
@@ -175,7 +176,7 @@ Rectangle {
                     TextItem {
                         id: col2
                         x: 170 *dpx
-                        text: sceName
+                        text: modelData.sceName
                         width: 200 *dpx
                         height: 50 *dpy
                     }
@@ -197,7 +198,7 @@ Rectangle {
                                     scenarioNew.visible = true
                                     wrapper.ListView.view.currentIndex = index
                                     mouse.accepted = true
-                                    scenarioNew.scenarioNewInfo = wrapper.ListView.view.model.get(index)
+//                                    scenarioNew.scenarioNewInfo = wrapper.ListView.view.model.get(index)
 //                                    sceManager.showScenfo();
                                 }
                             }
@@ -214,9 +215,8 @@ Rectangle {
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
-                                    sceManager.deleteScenario(col2.text)
-//                                    listView.removeOne()
-                                    sceManager.removeScenario(modelData)
+//                                    sceManager.deleteScenario(col2.text)
+//                                    sceManager.removeScenario(modelData)
                                     wrapper.ListView.view.model.remove(index)
                                 }
                             }
@@ -228,23 +228,23 @@ Rectangle {
                 }
             }
 
-            Component {
-                id: phoneModel;
-                ListModel {
-//                    ListElement{
-//                        cost: "轻武器激光对抗系统1"
-//                    }
+//            Component {
+//                id: phoneModel;
+//                ListModel {
+////                    ListElement{
+////                        cost: "轻武器激光对抗系统1"
+////                    }
 
-                }
+//                }
 
-            }
+//            }
 
             ListView {
                 id: listView
                 anchors.fill: parent
                 delegate: delegate
-                model: phoneModel.createObject(listView)
-//                model: sceManager.showSceList()
+//                model: phoneModel.createObject(listView)
+                model: sceManager.getSceAll()
                 header: headerView
                 focus: true
                 clip: true

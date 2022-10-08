@@ -39,7 +39,7 @@ Item {
         {
             var sceInfo=sceManager.findScenario(sceName)
             nameItemContent.text=sceName
-            listView.model = sceInfo;
+            listView.model = sceInfo.getAll();
             console.log("修改方案")
         }
         target: scenarioLoader
@@ -103,7 +103,7 @@ Item {
             TextInput {
                 id: nameItemContent
                 x: 10 *dpx
-                text: sceManager.sceName
+                text:scenarioNewInfo.sceName
                 width: 420*dpx
                 height: 40 *dpy
                 font.pixelSize: 17*dpx
@@ -111,9 +111,8 @@ Item {
                 clip: true
                 font.family: "Microsoft YaHei"
                 verticalAlignment: Text.AlignVCenter
-
                 onEditingFinished: {
-                    sceManager.setSceName(nameItemContent.text)
+                    scenarioNewInfo.setSceName(nameItemContent.text)
                 }
             }
 
@@ -311,7 +310,7 @@ Item {
             name.text = ""
         }else {
             if(visible) {
-                name.text = scenarioNewInfo.name;
+//                name.text = scenarioNewInfo.name;
             }
         }
     }

@@ -29,6 +29,8 @@ void ScePersonInfo::readPerson(const QJsonObject &json)
 
     if (json.contains("ImagePath") && json["ImagePath"].isString())
         m_sImagePath = json["ImagePath"].toString();
+
+    qDebug()<<"id"<<m_ID<<"name"<<m_Name<<"type"<<m_Group<<"position"<<m_Positon<<"host"<<m_host;
 }
 
 void ScePersonInfo::writePerson(QJsonObject &json) const

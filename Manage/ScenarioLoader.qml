@@ -20,8 +20,7 @@ Rectangle {
         function onNewSce(sceName)
         {
             var scenario=scenarioLoader.addScenario(sceName)
-            scenario.sceName=sceName
-            listView.model=scenarioInfo.getSceAll()
+//            listView.model=scenarioInfo.getSceAll()
 
 //            var scenario=sceManager.addScenario(sceName)
 //            console.log("测试新建方案")
@@ -85,7 +84,6 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-//                         sceManager.showPersonInfo(11) //测试人员信息
                     }
                 }
             }
@@ -180,6 +178,7 @@ Rectangle {
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
+                                    console.log("测试方案名称"+modelData)
                                     sceFindSignal(modelData)
 //                                    sceManager.findScenario(modelData)
                                     scenarioNew.visible = true
@@ -230,8 +229,8 @@ Rectangle {
                 id: listView
                 anchors.fill: parent
                 delegate: delegate
-                model: phoneModel.createObject(listView)
-//                model: sceManager.showSceList()
+               // model: phoneModel.createObject(listView)
+                model:sceManager.getSceAll() //sceManager.showSceList()
                 header: headerView
                 focus: true
                 clip: true

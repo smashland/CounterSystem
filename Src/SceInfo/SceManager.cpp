@@ -12,11 +12,6 @@ SceManager::SceManager(QObject *parent)
 {
 }
 
-SceManager *SceManager::cSceneri()
-{
-    return(new SceManager);
-}
-
 CSceInfo *SceManager::createSceneri()
 {
     return(new CSceInfo);
@@ -83,6 +78,7 @@ CSceInfo *SceManager::findScenario(const QString &sceName)
 /////得到所有的方案信息
 //QList<CSceInfo *> SceManager::getSceAll()
 //{
+//    qDebug()<<"测试所有的方案信息";
 //    return(m_mapName2SceInfo.values());
 //}
 
@@ -136,7 +132,11 @@ void SceManager::read(const QString &sname)
     QJsonObject rootObj = jsonDoc.object();
     CSceInfo* pSceInfo = new CSceInfo;
     pSceInfo->Prase(rootObj["PersonArray"].toArray());
-    m_mapName2SceInfo.insert(rootObj["Scename"].toObject()["Name"].toString(),pSceInfo);
+    if (rootObj.contains("Scename") && rootObj["Scename"].isString())
+    {
+        pSceInfo->setSceName(rootObj["Scename"].toString());
+    }
+    m_mapName2SceInfo.insert(rootObj["Scename"].toString()/*rootObj["Scename"].toObject()["Scename"].toString()*/,pSceInfo);
 
 }
 
@@ -165,7 +165,7 @@ void SceManager::write()
 }
 
 void SceManager::modify()
-{
+{/*
     QByteArray byte;
     QString filePath = QApplication::applicationDirPath() + QString("/Data/Project/%1.json").arg("测试方案111");
     QFile file(filePath);
@@ -189,13 +189,13 @@ void SceManager::modify()
     }
     QJsonObject rootobj=jsonDoc.object();
 
-    ///修改方案名称
-    QJsonObject sceNameObj;
-    if(rootobj.contains("Scename"))
-    {
-        sceNameObj=rootobj.value("Scename").toObject();
-        sceNameObj["Scename"]=m_sSceName;
-    }
+//    ///修改方案名称
+//    QJsonObject sceNameObj;
+//    if(rootobj.contains("Scename"))
+//    {
+//        sceNameObj=rootobj.value("Scename").toObject();
+//        sceNameObj["Scename"]=m_sSceName;
+//    }
 
 
     QJsonArray personArray=rootobj.value("PersonArray").toArray();
@@ -223,7 +223,7 @@ void SceManager::modify()
         file1.write(jsonDoc.toJson());
         //        file1.flush();
         file1.close();
-    }
+    }*/
 }
 ///加载图片信息
 void SceManager::loadImagePath(const QString &strImagePath)
@@ -237,10 +237,10 @@ void SceManager::loadImagePath(const QString &strImagePath)
 ///显示选中方案
 void SceManager::SceManager::showScenfo(QString sSceName)
 {
-    read(sSceName);
+//    read(sSceName);
 
-    m_listPerson.clear();
-    QVariantMap tmpMap;
+//    m_listPerson.clear();
+//    QVariantMap tmpMap;
 //    for(auto findOne = m_mapId2Person.begin(); m_mapId2Person.end() != findOne; ++findOne)
 //    {
 //        auto itorSecond = findOne.value();
@@ -281,19 +281,18 @@ QStringList SceManager::showSceList()
     return(m_listSceFileName);
 }
 
-///设置方案名称
-void SceManager::setSceName(const QString& sName)
-{
-    if(m_sSceName != sName)
-    {
-        m_sSceName = sName;
-        emit sceNameChanged(m_sSceName);
-    }
-}
+/////设置方案名称
+//void SceManager::setSceName(const QString& sName)
+//{
+//    if(m_sSceName != sName)
+//    {
+//        m_sSceName = sName;
+//        emit sceNameChanged(m_sSceName);
+//    }
+//}
 /////添加方案
 void SceManager::addScenario(const QString &sName)
 {
-    setSceName(sName);
     if(m_mapName2SceInfo.size() > 0)
     {
         write();
@@ -318,13 +317,13 @@ bool SceManager::removeScenario(const QString &sName)
 ///添加人员
 void SceManager::addPerson(int nID,const QString& sName, int nLevel, int nGroup, bool bHostage,const QString& sImagePath)
 {
-    ScePersonInfo *scePersonInfo=new ScePersonInfo(this);
-    scePersonInfo->setID(nID);
-    scePersonInfo->setName(sName);
-    scePersonInfo->setPosition(nLevel);
-    scePersonInfo->setGroupType(nGroup);
-    scePersonInfo->setHostage(bHostage);
-    scePersonInfo->setImagePath(sImagePath);
+//    ScePersonInfo *scePersonInfo=new ScePersonInfo(this);
+//    scePersonInfo->setID(nID);
+//    scePersonInfo->setName(sName);
+//    scePersonInfo->setPosition(nLevel);
+//    scePersonInfo->setGroupType(nGroup);
+//    scePersonInfo->setHostage(bHostage);
+//    scePersonInfo->setImagePath(sImagePath);
 }
 
 ///清空方案信息

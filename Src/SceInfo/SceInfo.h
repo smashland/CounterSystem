@@ -9,6 +9,14 @@ class CSceInfo : public QObject
     Q_OBJECT
 public:
     explicit CSceInfo(QObject *parent = nullptr);
+    Q_PROPERTY(QString sceName READ getSceName WRITE setSceName NOTIFY sceNameChanged)
+
+    /**
+      * @brief 设置方案名称
+      * @param sName
+      */
+    Q_INVOKABLE void setSceName(const QString &sName);
+    Q_INVOKABLE QString getSceName(){ return(m_sSceName);}
 
     /**
      * @brief 增加人员
@@ -63,9 +71,11 @@ public:
      */
     void Save(QJsonArray& rArray);
 signals:
+    void sceNameChanged(QString);
 protected:
     void ClearMap();
 private:
+    QString m_sSceName;     ///方案名称
     QMap<int,ScePersonInfo*> m_mapId2Person;
 };
 

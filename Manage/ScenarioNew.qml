@@ -39,7 +39,8 @@ Item {
         {
             var sceInfo=sceManager.findScenario(sceName)
             nameItemContent.text=sceName
-            listView.model = sceInfo.getAll();
+            scenarioNewInfo.listPerson=sceInfo.listPerson
+            nCount =  sceInfo.getCount();
             console.log("修改方案")
         }
         target: scenarioLoader
@@ -103,7 +104,7 @@ Item {
             TextInput {
                 id: nameItemContent
                 x: 10 *dpx
-                text:scenarioNewInfo.sceName
+//                text:scenarioNewInfo.sceName
                 width: 420*dpx
                 height: 40 *dpy
                 font.pixelSize: 17*dpx
@@ -291,7 +292,7 @@ Item {
             id: listView
             anchors.fill: parent
             delegate: delegate
-            model: scenarioNewInfo.getAll()
+            model: scenarioNewInfo.listPerson/*scenarioNewInfo.getAll()*/
             header: headerView
             clip: true
             focus: true
@@ -330,8 +331,7 @@ Item {
 //                    scenarioLoader.addScenario(nameItemContent.text);
                     sceManager.addScenari(nameItemContent.text,scenarioNewInfo);
                     sceManager.write();
-                    newSce(nameItemContent.text)
-//                    sceManager.addScenario(nameItemContent.text);
+//                    newSce(nameItemContent.text)
                     scenarioNew.visible = false
                 }
             }

@@ -146,5 +146,10 @@
         <file>Common/TextItem.qml</file>
         <file>Common/SearchItem.qml</file>
         <file>Manage/MapAdd.qml</file>
+        <file>Manage/Plugins/ListHeader.qml</file>
+        <file>Manage/Plugins/ManageRect.qml</file>
+        <file>Manage/Plugins/ScePlayList.qml</file>
+        <file>Manage/Plugins/SceNewList.qml</file>
+        <file>Manage/Plugins/SceNewText.qml</file>
     </qresource>
 </RCC>

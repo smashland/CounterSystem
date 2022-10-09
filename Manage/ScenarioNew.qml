@@ -5,6 +5,7 @@ import QtQuick.Layouts 1.15
 import QtQuick.Controls.Styles 1.4
 import "../Common"
 import "../Exercise"
+import "Plugins"
 import MyItem 1.0
 
 Item {
@@ -84,15 +85,12 @@ Item {
         y: 140 * dpy
         Rectangle {
             color: "transparent"
-            Text {
+            SceNewText {
                 id: nameItemText
-                width: nameItemText.contentWidth
                 height: 40 *dpy
                 color: "#ffffff"
                 text: qsTr("方案名称:")
                 font.pixelSize: 17*dpx;
-                font.family: "Microsoft YaHei";
-                verticalAlignment: Text.AlignVCenter
             }
         }
         Rectangle {
@@ -116,33 +114,24 @@ Item {
                     scenarioNewInfo.setSceName(nameItemContent.text)
                 }
             }
-
         }
     }
 
-    Text {
+    SceNewText {
         id: weizhixinxi
         x: 90 *dpx
         y: 160 * dpy + nameItemContent.height + 30 *dpy
-        width: weizhixinxi.contentWidth
-        height: weizhixinxi.contentHeight
         text: qsTr("人员信息表")
-        font.pixelSize: 18*dpx;
-        color: "#ffffff";
-        font.family: "Microsoft YaHei"
+        font.pixelSize: 18*dpx
+        color: "#ffffff"
     }
-    Text {
+    SceNewText {
         id: renyuanshuliang
         y: 160 * dpy + nameItemContent.height + 33 *dpy
         anchors.right: parent.right
         anchors.rightMargin: 90*dpx
-        width: renyuanshuliang.contentWidth
-        height: renyuanshuliang.contentHeight
         text: qsTr("人员总数：")+nCount
-        font.pixelSize: 16*dpx;
-        font.bold: true
-        color: "#55e5aa";
-        font.family: "Microsoft YaHei"
+        font.pixelSize: 16*dpx
     }
     Rectangle {
         y: weizhixinxi.contentHeight + weizhixinxi.y + 10 *dpy
@@ -152,155 +141,86 @@ Item {
         color: "#3b6daa"
     }
 
-    Rectangle {
-        id: renyuantianjia
-        x: 90 *dpx
-        y: weizhixinxi.contentHeight + weizhixinxi.y + 10 *dpy + 10 *dpy
-        width: 985
-        height: 335 *dpy
-        color: "transparent"
-
-        Component {
-            id: headerView
-            Item {
-                width: renyuantianjia.width
+    SceNewList{
+        id: listView
+        y: weizhixinxi.contentHeight + weizhixinxi.y + 20 *dpy
+        model: scenarioNewInfo.getAll()
+        delegate: Rectangle {
+            id: wrapper
+            width: listView.width
+            height: 50 *dpy
+            Rectangle {
+                anchors.fill: parent
+                color: index%2 ? "#2D5689" : "#4671a6"
+            }
+            Row {
+                spacing: 56 *dpx
+                x: 25*dpx
                 height: 40 *dpy
-                Rectangle {
-                    anchors.fill: parent
-                    color: "#2D5689"
+                TextItem {
+                    id: id
+                    text: modelData.id
+                    width: 70 *dpx
+                    height: 50 *dpy
+                }
+                TextItem {
+                    id:name
+                    text: modelData.name
+                    width: 80 *dpx
+                    height: 50 *dpy
+                }
+                TextItem {
+                    id:level
+                    text: modelData.position
+                    width: 110 *dpx
+                    height: 50 *dpy
+                }
+
+                TextItem {
+                    id:group
+                    text: modelData.groupType
+                    width: 80 *dpx
+                    height: 50 *dpy
+                }
+                TextItem {
+                    id:host
+                    text: modelData.hostage ? "是" : "否"
+                    width: 138 *dpx
+                    height: 50 *dpy
                 }
                 Row {
-                    spacing: 56 *dpx
-                    x: 25 *dpx
-                    height: 40 *dpy
-                    TextItem {
-                        text: "设备编号"
-                        widthTitle: 70 *dpx
-                        heightTitle: 40 *dpy
-                    }
-                    TextItem {
-                        text: "人员姓名"
-                        widthTitle: 80 *dpx
-                        heightTitle: 40 *dpy
-                    }
-                    TextItem {
-                        text: "人员职务"
-                        widthTitle: 110 *dpx
-                        heightTitle: 40 *dpy
-                    }
-                    TextItem {
-                        text: "红蓝方"
-                        widthTitle: 80 *dpx
-                        heightTitle: 40 *dpy
-                    }
-                    TextItem {
-                        text: "是否是人质"
-                        widthTitle: 138 *dpx
-                        heightTitle: 40 *dpy
-                    }
-                    TextItem {
-                        text: "操作"
-                        widthTitle: 180 *dpx
-                        heightTitle: 40 *dpy
-                    }
-                }
-            }
-        }
-
-        Component {
-            id: delegate
-            Item {
-                id: wrapper
-                width: renyuantianjia.width
-                height: 50 *dpy
-                Rectangle {
-                    anchors.fill: parent
-                    color: index%2 ? "#2D5689" : "#4671a6"
-                }
-                Row {
-                    spacing: 56 *dpx
-                    x: 25*dpx
-                    height: 40 *dpy
-                    TextItem {
-                        id: id
-                        text: modelData.id
-                        width: 70 *dpx
-                        height: 50 *dpy
-                    }
-                    TextItem {
-                        id:name
-                        text: modelData.name
-                        width: 80 *dpx
-                        height: 50 *dpy
-                    }
-                    TextItem {
-                        id:level
-                        text: modelData.position
-                        width: 110 *dpx
-                        height: 50 *dpy
-                    }
-
-                    TextItem {
-                        id:group
-                        text: modelData.groupType
-                        width: 80 *dpx
-                        height: 50 *dpy
-                    }
-                    TextItem {
-                        id:host
-                        text: modelData.hostage ? "是" : "否"
-                        width: 138 *dpx
-                        height: 50 *dpy
-                    }
-                    Row {
-                        y: 10 *dpy
-                        spacing: 15 * dpx
-                        ViewButton {
-                            name: qsTr("修改人员")
-                            color: viewColor_shuaxin
-                            viewImage: "\ue6a5"
-                            MouseArea {
-                                anchors.fill: parent
-                                onClicked:
-                                {
-                                    findPersonSignal(modelData.id)
-                                    personAdd.visible = true
-                                }
+                    y: 10 *dpy
+                    spacing: 15 * dpx
+                    ViewButton {
+                        name: qsTr("修改人员")
+                        color: viewColor_shuaxin
+                        viewImage: "\ue6a5"
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked:
+                            {
+                                findPersonSignal(modelData.id)
+                                personAdd.visible = true
                             }
                         }
-                        ViewButton {
-                            name: qsTr("删除")
-                            color: viewColor_xinjian
-                            viewImage: "\ue607"
-                            MouseArea {
-                                anchors.fill: parent
-                                onClicked:
-                                {
-                                    scenarioNewInfo.deletePerson(modelData.id)
-                                    nCount =  scenarioNewInfo.getCount();
-                                    listView.model = scenarioNewInfo.getAll();
-                                }
+                    }
+                    ViewButton {
+                        name: qsTr("删除")
+                        color: viewColor_xinjian
+                        viewImage: "\ue607"
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked:
+                            {
+                                scenarioNewInfo.deletePerson(modelData.id)
+                                nCount =  scenarioNewInfo.getCount();
+                                listView.model = scenarioNewInfo.getAll();
                             }
                         }
                     }
                 }
-
             }
         }
-
-        ListView {
-            id: listView
-            anchors.fill: parent
-            delegate: delegate
-            model: scenarioNewInfo.listPerson/*scenarioNewInfo.getAll()*/
-            header: headerView
-            clip: true
-            focus: true
-            ScrollBar.vertical: ScrollBar {
-                id: scrollBar
-            }
-        }
-
     }
 
     Row {
@@ -328,7 +248,7 @@ Item {
                 if(nameItemContent.text === '') {
                     console.log("没有方案名称")
                 }else {
-//                    scenarioLoader.addScenario(nameItemContent.text);
+                    scenarioLoader.addScenario(nameItemContent.text);
                     sceManager.addScenari(nameItemContent.text,scenarioNewInfo);
                     sceManager.write();
 //                    newSce(nameItemContent.text)

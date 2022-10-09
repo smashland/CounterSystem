@@ -274,6 +274,7 @@ Rectangle
         focus: true
         visible: false
     }
+
     PersonAdd {
         id: personAdd
         anchors.centerIn: parent

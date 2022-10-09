@@ -22,7 +22,7 @@ ManageRect{
     Connections{
         function onNewSce(sceName)
         {
-            listView.model=sceManager.getSceAll();
+            listView.model=sceManager.listSces;
         }
         target:scenarioNew
     }
@@ -68,17 +68,15 @@ ManageRect{
                 onClicked: {
                 }
             }
-        }
-        ViewButton {
-            name: qsTr("全部刷新")
-            color: viewColor_shuaxin
-            viewImage: "\ue600"
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    $app.allData.clearAllInfo();
-                    sceManager.read();
-                    listView.model=sceManager.getSceAll();
+            ViewButton {
+                name: qsTr("全部刷新")
+                color: viewColor_shuaxin
+                viewImage: "\ue600"
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        $app.allData.clearAllInfo();
+                    }
                 }
             }
         }

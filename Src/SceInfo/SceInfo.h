@@ -10,6 +10,7 @@ class CSceInfo : public QObject
 public:
     explicit CSceInfo(QObject *parent = nullptr);
     Q_PROPERTY(QString sceName READ getSceName WRITE setSceName NOTIFY sceNameChanged)
+    Q_PROPERTY(QList<QObject*> listPerson MEMBER m_listPerson NOTIFY personChanged)
 
     /**
       * @brief 设置方案名称
@@ -38,7 +39,7 @@ public:
      * @param nID
      * @return
      */
-    Q_INVOKABLE ScePersonInfo* finPerson(int nID);
+    Q_INVOKABLE ScePersonInfo* findPerson(int nID);
 
     /**
      * @brief 获取所有的人员信息
@@ -72,10 +73,12 @@ public:
     void Save(QJsonArray& rArray);
 signals:
     void sceNameChanged(QString);
+    void personChanged();
 protected:
     void ClearMap();
 private:
     QString m_sSceName;     ///方案名称
+    QList<QObject*> m_listPerson;
     QMap<int,ScePersonInfo*> m_mapId2Person;
 };
 

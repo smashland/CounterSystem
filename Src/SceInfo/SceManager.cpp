@@ -10,6 +10,7 @@
 SceManager::SceManager(QObject *parent)
     : QObject{parent}
 {
+    read();
 }
 
 CSceInfo *SceManager::createSceneri()
@@ -38,11 +39,15 @@ CSceInfo *SceManager::addScenari(const QString &sceName,CSceInfo* pSceInfo)
         {
             CSceInfo* pNewOne = new CSceInfo;
             m_mapName2SceInfo.insert(sceName,pNewOne);
+            m_listSces.append(pNewOne);
+            emit listScesChanged();
             return(pNewOne);
         }
         else
         {
             m_mapName2SceInfo.insert(sceName,pSceInfo);
+            m_listSces.append(pSceInfo);
+            emit listScesChanged();
             return(pSceInfo);
         }
     }
@@ -51,6 +56,7 @@ CSceInfo *SceManager::addScenari(const QString &sceName,CSceInfo* pSceInfo)
         return(nullptr);
     }
 }
+
 
 ///删除方案
 bool SceManager::deleteScenario(const QString &sceName)
@@ -87,13 +93,13 @@ QList<QObject *> SceManager::getSceAll()
     QList<QObject*> listObjct;
     foreach(auto one , m_mapName2SceInfo){
         listObjct.append(one);
-        qDebug()<<"测试";
     }
     return(listObjct);
 }
 
 void SceManager::read()
 {
+    ClearSceInfo();
     qDebug()<<"测试读取所有文件";
     showSceList();
 
@@ -137,20 +143,47 @@ void SceManager::read(const QString &sname)
         pSceInfo->setSceName(rootObj["Scename"].toString());
     }
     m_mapName2SceInfo.insert(rootObj["Scename"].toString()/*rootObj["Scename"].toObject()["Scename"].toString()*/,pSceInfo);
+    m_listSces.append(pSceInfo);
 
 }
 
 void SceManager::write()
-{    
+{
     for(auto one=m_mapName2SceInfo.begin();one != m_mapName2SceInfo.end();++one)
     {
         QJsonObject jsonSce;
         QJsonArray personArray;
         jsonSce.insert("Scename",one.key());
-
         one.value()->Save(personArray);
         jsonSce.insert("PersonArray",personArray);
-        QString filePath = QApplication::applicationDirPath() + QString("/Data/Project/%1.json").arg(one.key());
+
+//        QString filePath = QApplication::applicationDirPath() + QString("/Data/Project/%1.json").arg(one.key());
+//        QFile saveFile(filePath);
+//        if (!saveFile.open(QIODevice::WriteOnly))
+//        {
+//            qWarning("Couldn't open save file.");
+//        }
+
+//        /// 构建 Json 文档
+//        QJsonDocument document;
+//        document.setObject(jsonSce);
+//        saveFile.write(document.toJson());
+    }
+
+
+    foreach(auto one , m_listSces)
+    {
+        auto oneNote = qobject_cast<CSceInfo*>(one);
+        QJsonObject jsonSce;
+        QJsonArray personArray;
+
+        if(nullptr != oneNote)
+        {
+            jsonSce.insert("Scename",oneNote->getSceName());
+            oneNote->Save(personArray);
+            jsonSce.insert("PersonArray",personArray);
+        }
+        QString filePath = QApplication::applicationDirPath() + QString("/Data/Project/%1.json").arg(oneNote->getSceName());
         QFile saveFile(filePath);
         if (!saveFile.open(QIODevice::WriteOnly))
         {
@@ -163,6 +196,7 @@ void SceManager::write()
         saveFile.write(document.toJson());
     }
 }
+
 
 void SceManager::modify()
 {/*
@@ -258,14 +292,14 @@ void SceManager::SceManager::showScenfo(QString sSceName)
 //        qDebug()<<"host"<<itorSecond->getHostage();
 //    }
 //    /// 更新模型列表
-    emit listPersonChanged(m_listPerson);
+//    emit listPersonChanged(m_listPerson);
 }
 
 ///显示所有方案
 QStringList SceManager::showSceList()
 {
-    qDebug()<<"555555555555555555555";
-    if(m_listSceFileName.size() < 1)
+    m_listSceFileName.clear();
+//    if(m_listSceFileName.size() < 1)
     {
         QDir *dir=new QDir(QString("%1/%2").arg(GetDataPath().c_str()).arg("Project")); //文件夹
         QStringList filter; //过滤
@@ -335,6 +369,8 @@ void SceManager::ClearSceInfo()
         delete one;
     }
     m_mapName2SceInfo.clear();
+
+    m_listSces.clear();
 }
 
 

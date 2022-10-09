@@ -12,7 +12,7 @@ ManageRect{
     id: setloader
     rectWidth: 1102 *dpx
     rectHeight: 680 *dpy
-    rectImage: "qrc:/Image/Popup_bg_20.png"
+    rectImage: "qrc:/Image/Popup_bg_27.png"
     CloseButton {
         anchors.right: setloader.right
         anchors.rightMargin: 65 *dpx
@@ -29,6 +29,7 @@ ManageRect{
     }
 
     Rectangle {
+        id: xuanzeButton
         x: 80*dpx
         y: 110*dpy
         width: 190*dpx
@@ -49,6 +50,8 @@ ManageRect{
                     harmGroupBox.visible=true
                     systemGroupBox.visible=true
                     setMapLoader.visible = false
+                    wifiGroupBox.visible = false
+                    chuankouGroupBox.visible = false
                 }
             }
             SwitchButton{
@@ -59,6 +62,8 @@ ManageRect{
                     harmGroupBox.visible=false
                     systemGroupBox.visible=false
                     setMapLoader.visible = true
+                    wifiGroupBox.visible = false
+                    chuankouGroupBox.visible = false
                 }
 
             }
@@ -70,6 +75,21 @@ ManageRect{
                     systemGroupBox.visible=false
                     scoreGroupBox.visible=true
                     setMapLoader.visible = false
+                    wifiGroupBox.visible = false
+                    chuankouGroupBox.visible = false
+                }
+
+            }
+            SwitchButton {
+                id: yunxing_text
+                text: qsTr("运行设置")
+                onClicked: {
+                    harmGroupBox.visible=false
+                    systemGroupBox.visible=false
+                    scoreGroupBox.visible=false
+                    setMapLoader.visible = false
+                    wifiGroupBox.visible = true
+                    chuankouGroupBox.visible = true
                 }
 
             }
@@ -77,142 +97,192 @@ ManageRect{
         }
     }
 
-
-    //    QC14.GroupBox
-    BasicGroupBox
-    {
-        id: scoreGroupBox
+    Rectangle {
+        id: set
+        x: 320*dpx
         y: 100*dpy
-        title: qsTr("命中计分:")
-        ListView
+        width:710*dpx
+        height: 530*dpy
+        color: "transparent"
+        clip: true
+        BasicGroupBox
         {
-            property var name: "score"
-            clip: true
-            id: scoreList
-            anchors.leftMargin: 60
-            anchors.topMargin: 20
-            anchors.fill: parent
-            delegate: contactDelegate
-            model:$app.settings.scoreSetting
+            id: scoreGroupBox
+            y:15*dpy
+            title: qsTr("命中计分:")
+            ListView
+            {
+                property var name: "score"
+                clip: true
+                id: scoreList
+                anchors.leftMargin: 60
+                anchors.topMargin: 20
+                anchors.fill: parent
+                delegate: contactDelegate
+                model:$app.settings.scoreSetting
+            }
+
         }
 
-    }
-
-    //    QC14.GroupBox
-    BasicGroupBox
-    {
-        id: harmGroupBox
-        y: 100*dpy
-        title: qsTr("损伤设置:")
-        ListView
+        //    QC14.GroupBox
+        BasicGroupBox
         {
-            property var name: "harm"
-            id: harmList
-            anchors.leftMargin: 60
-            anchors.topMargin: 20
-            anchors.fill: parent
-            delegate: contactDelegate
-            model:$app.settings.harmSetting
-            clip: true
+            id: harmGroupBox
+            y:15*dpy
+            title: qsTr("损伤设置:")
+            ListView
+            {
+                property var name: "harm"
+                id: harmList
+                anchors.leftMargin: 60
+                anchors.topMargin: 20
+                anchors.fill: parent
+                delegate: contactDelegate
+                model:$app.settings.harmSetting
+                clip: true
+            }
+
         }
 
-    }
-
-    //    QC14.GroupBox
-    BasicGroupBox
-    {
-        id: systemGroupBox
-        anchors.top: harmGroupBox.bottom
-        anchors.topMargin: 20
-        title: qsTr("系统设置:")
-
-        ListView
+        //    QC14.GroupBox
+        BasicGroupBox
         {
-            property var name: "sys"
-            id: systemList
-            anchors.leftMargin: 60
+            id: systemGroupBox
+            anchors.top: harmGroupBox.bottom
             anchors.topMargin: 20
-            anchors.fill: parent
-            delegate: contactDelegate
-            model:$app.settings.systemSetting
-            clip: true
-        }
+            title: qsTr("系统设置:")
 
-        Row {
-            x:60*dpx
-            y:150*dpy
-            spacing: 10*dpx
-            CheckBox {
-                id: voiceControl
-                y: 1*dpy
-                width: 17*dpx
-                height: 17*dpy
-                checked:$app.setOpenSpeak
-                indicator: Rectangle {
-                    width: voiceControl.width
-                    height: voiceControl.height
-                    color: "#1d4f88"
-                    border.color: "#3b6daa"
-                    Image {
-                        id: tick
+            ListView
+            {
+                property var name: "sys"
+                id: systemList
+                anchors.leftMargin: 60
+                anchors.topMargin: 20
+                anchors.fill: parent
+                delegate: contactDelegate
+                model:$app.settings.systemSetting
+                clip: true
+            }
+
+            Row {
+                x:60*dpx
+                y:150*dpy
+                spacing: 10*dpx
+                CheckBox {
+                    id: voiceControl
+                    y: 1*dpy
+                    width: 17*dpx
+                    height: 17*dpy
+                    checked:$app.setOpenSpeak
+                    indicator: Rectangle {
                         width: voiceControl.width
                         height: voiceControl.height
-                        source: voiceControl.checked ? "qrc:/Image/true.png" : ""
+                        color: "#1d4f88"
+                        border.color: "#3b6daa"
+                        Image {
+                            id: tick
+                            width: voiceControl.width
+                            height: voiceControl.height
+                            source: voiceControl.checked ? "qrc:/Image/true.png" : ""
+                        }
+                    }
+                    onClicked: {
+                        if(voiceControl.checked)
+                        {
+                            $app.setOpenSpeak(true);
+                        }
+                        else
+                        {
+                            $app.setOpenSpeak(false);
+                        }
                     }
                 }
-                onClicked: {
-                    if(voiceControl.checked)
-                    {
-                        $app.setOpenSpeak(true);
-                    }
-                    else
-                    {
-                        $app.setOpenSpeak(false);
-                    }
+                Text {
+                    text: qsTr("开启语音")
+                    color: "#d5e2f5"
+                    font.pixelSize: 14*dpx
+                    font.family: "Microsoft YaHei"
                 }
-            }
-            Text {
-                text: qsTr("开启语音")
-                color: "#d5e2f5"
-                font.pixelSize: 14*dpx
-                font.family: "Microsoft YaHei"
             }
         }
-    }
 
-    Component
-    {
-        id: contactDelegate
-        Item
+        Component
         {
-            id:showListItem
-            width:100 ; height: 30
-            RowLayout
+            id: contactDelegate
+            Item
             {
-                Text { Layout.preferredWidth: 120;text:modelData.type ;font.pixelSize: 20*dpx;color: "#ffffff"}
-
-                //                QC14.SpinBox
-                BasicSpinBox
+                id:showListItem
+                width:100 ; height: 30
+                RowLayout
                 {
-                    value:modelData.number;
-                    from: 1
-                    to: modelData.type === "默认子弹数:" ? 9999 : 100
-                    editable: true
-                    borderVisible: true
+                    Text { Layout.preferredWidth: 120;text:modelData.type ;font.pixelSize: 20*dpx;color: "#ffffff"}
+
+                    //                QC14.SpinBox
+                    BasicSpinBox
+                    {
+                        value:modelData.number;
+                        from: 1
+                        to: modelData.type === "默认子弹数:" ? 9999 : 100
+                        editable: true
+                        borderVisible: true
+                    }
                 }
             }
         }
+
+        BasicGroupBox
+        {
+            id: wifiGroupBox
+            y: 15*dpy
+            title: qsTr("网络设置:")
+            Row {
+                x:60*dpx
+                y:30*dpy
+                spacing: 10*dpx
+                CheckBox {
+                    id: zdcl
+                    y: 1*dpy
+                    width: 17*dpx
+                    height: 17*dpy
+                    checked:$app.setOpenSpeak
+                    indicator: Rectangle {
+                        width: zdcl.width
+                        height: zdcl.height
+                        color: "#1d4f88"
+                        border.color: "#3b6daa"
+                        Image {
+                            width: zdcl.width
+                            height: zdcl.height
+                            source: zdcl.checked ? "qrc:/Image/true.png" : ""
+                        }
+                    }
+
+                }
+                Text {
+                    text: qsTr("断开自动重连")
+                    color: "#d5e2f5"
+                    font.pixelSize: 14*dpx
+                    font.family: "Microsoft YaHei"
+                }
+            }
+
+        }
+        BasicGroupBox
+        {
+            id: chuankouGroupBox
+            anchors.top: wifiGroupBox.bottom
+            anchors.topMargin: 20
+            title: qsTr("串口设置:")
+
+
+        }
+
+
+        SetMapLoader {
+            id: setMapLoader
+            visible: false
+        }
+
     }
-    SetMapLoader {
-        id: setMapLoader
-        x: 300
-        y: 120
-        visible: false
-    }
-
-
-
-
-
 
 }

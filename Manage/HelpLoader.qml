@@ -11,7 +11,7 @@ ManageRect{
     id: helploader
     rectWidth: 830 *dpx
     rectHeight: 500 *dpy
-    rectImage: "qrc:/Image/Popup_bg_20.png"
+    rectImage: "qrc:/Image/Popup_bg_27.png"
     CloseButton {
         anchors.right: helploader.right
         anchors.rightMargin: 53 *dpx
@@ -65,17 +65,10 @@ ManageRect{
             y:35*dpy
             visible: false
 
-            Text {
+            TextItem {
                 id: jiqima
-                width: jiqima.contentWidth
-                height: 34 *dpy
-                color: "#ffffff"
                 text: "机器码："
-                font.pixelSize: 17*dpx;
-                font.family: "Microsoft YaHei";
-                verticalAlignment: Text.AlignVCenter
             }
-
             Rectangle {
                 width: 400*dpx
                 height: 34 *dpy

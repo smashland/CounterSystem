@@ -41,7 +41,7 @@ Popup
         color:"transparent"
         Image {
             anchors.fill: parent
-            source: "qrc:/Image/Popup_bg_20.png"
+            source: "qrc:/Image/Popup_bg_27.png"
         }
     }
 
@@ -288,11 +288,11 @@ Popup
 
     }
 
-    function readPerson()
-    {
-        var read = scePersonInfo.readPerson();
-        console.log(read.ID);
-    }
+//    function readPerson()
+//    {
+//        var read = sceInfo.readPerson();
+//        console.log(read.ID);
+//    }
 
 
     Row {
@@ -313,7 +313,7 @@ Popup
                                    zhenying.currentIndex,control3.checked);
                 personAdd.visible = false
                 ///// 给调用界面
-                readPerson()
+//                readPerson()
             }
 
         }

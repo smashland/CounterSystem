@@ -14,7 +14,7 @@ ManageRect{
     id: scenarioLoader
     rectWidth: 1226 *dpx
     rectHeight: 787 *dpy
-    rectImage: "qrc:/Image/Popup_bg_20.png"
+    rectImage: "qrc:/Image/Popup_bg_27.png"
 
     property var scenarioInfo: null
     signal addScenario(string sceName)

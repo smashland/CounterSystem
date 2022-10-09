@@ -18,7 +18,7 @@ Item {
     Image {
         id: loginImage
         anchors.fill: parent
-        source: "qrc:/Image/Popup_bg_20.png"
+        source: "qrc:/Image/Popup_bg_27.png"
     }
 
     PopupTitle {

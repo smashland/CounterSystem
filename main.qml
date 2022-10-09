@@ -44,6 +44,10 @@ Window {
         }
     }
 
+    function fullWindow() {
+        mainWindow.visibility = Window.FullScreen;
+    }
+
     /// 用于加载组件
     function loadQml(qmlUrl)
     {

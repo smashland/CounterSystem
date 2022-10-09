@@ -146,6 +146,7 @@ Row {
         zuidahua.visible = true
         huanyuan.visible = false
         resizeItem.visible = false
+        mainWindow.fullWindow()
     }
 
 

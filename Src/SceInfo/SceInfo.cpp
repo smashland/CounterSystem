@@ -27,6 +27,8 @@ ScePersonInfo *CSceInfo::addPerson(int nID)
         ScePersonInfo* pNewOne = new ScePersonInfo(this);
         pNewOne->setID(nID);
         m_mapId2Person.insert(nID,pNewOne);
+        m_listPerson.append(pNewOne);
+        emit personChanged();
         return(pNewOne);
     }
     else
@@ -51,7 +53,7 @@ ScePersonInfo *CSceInfo::modifyPerson(int nID)
 }
 
 /// 根据ID查找人员信息
-ScePersonInfo *CSceInfo::finPerson(int nID)
+ScePersonInfo *CSceInfo::findPerson(int nID)
 { 
     auto findOne = m_mapId2Person.find(nID);
     return m_mapId2Person.end() == findOne ? nullptr : findOne.value();
@@ -93,6 +95,7 @@ void CSceInfo::Prase(const QJsonArray &rObj)
         ScePersonInfo *scePersonInfo=new ScePersonInfo(this);
         scePersonInfo->readPerson(rObj.at(i).toObject());
         m_mapId2Person.insert(rObj.at(i).toObject().value("ID").toInt(),scePersonInfo);
+        m_listPerson.append(scePersonInfo);
     }
 }
 
@@ -105,6 +108,16 @@ void CSceInfo::Save(QJsonArray &rArray)
         one->writePerson(personObject);
         rArray.append(personObject);
     }
+    foreach(auto one , m_listPerson)
+    {
+        auto oneNote = qobject_cast<ScePersonInfo*>(one);
+        if(nullptr != oneNote)
+        {
+            QJsonObject personObject;
+            oneNote->writePerson(personObject);
+            rArray.append(personObject);
+        }
+    }
 }
 
 /// 清空人员信息
@@ -115,4 +128,5 @@ void CSceInfo::ClearMap()
         delete one;
     }
     m_mapId2Person.clear();
+    m_listPerson.clear();
 }

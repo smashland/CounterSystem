@@ -25,7 +25,7 @@ Popup
     Connections{
         function onFindPersonSignal(id)
         {
-            var person =  scenarioNew.scenarioNewInfo.finPerson(id);
+            var person =  scenarioNew.scenarioNewInfo.findPerson(id);
             shebeiId.name=id;
             personName.name=person.name;
             combobox_renyuan.currentIndex=person.position
@@ -288,11 +288,11 @@ Popup
 
     }
 
-    function readPerson()
-    {
-        var read = scePersonInfo.readPerson();
-        console.log(read.ID);
-    }
+//    function readPerson()
+//    {
+//        var read = scePersonInfo.readPerson();
+//        console.log(read.ID);
+//    }
 
 
     Row {
@@ -313,7 +313,7 @@ Popup
                                    zhenying.currentIndex,control3.checked);
                 personAdd.visible = false
                 ///// 给调用界面
-                readPerson()
+//                readPerson()
             }
 
         }

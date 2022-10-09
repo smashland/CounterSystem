@@ -20,7 +20,7 @@ Rectangle {
     Connections{
         function onNewSce(sceName)
         {
-            listView.model=sceManager.getSceAll();
+            listView.model=sceManager.listSces;
         }
         target:scenarioNew
     }
@@ -91,8 +91,6 @@ Rectangle {
                     anchors.fill: parent
                     onClicked: {
                         $app.allData.clearAllInfo();
-                        sceManager.read();
-                        listView.model=sceManager.getSceAll();
                     }
                 }
             }
@@ -188,8 +186,8 @@ Rectangle {
                                 onClicked: {
                                     sceFindSignal(modelData.sceName)
                                     scenarioNew.visible = true
-                                    wrapper.ListView.view.currentIndex = index
-                                    mouse.accepted = true
+//                                    wrapper.ListView.view.currentIndex = index
+//                                    mouse.accepted = true
 //                                    scenarioNew.scenarioNewInfo = wrapper.ListView.view.model.get(index)
                                 }
                             }
@@ -206,8 +204,6 @@ Rectangle {
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
-//                                    sceManager.deleteScenario(col2.text)
-//                                    sceManager.removeScenario(modelData)
                                     wrapper.ListView.view.model.remove(index)
                                 }
                             }
@@ -235,22 +231,22 @@ Rectangle {
                 anchors.fill: parent
                 delegate: delegate
                // model: phoneModel.createObject(listView)
-                model:sceManager.getSceAll() //sceManager.showSceList()
+                model:sceManager.listSces//sceManager.getSceAll()
                 header: headerView
                 focus: true
                 clip: true
                 ScrollBar.vertical: ScrollBar {
                     id: scrollBar
                 }
-                function addOne(sceName) {
-                    model.append({
-                                    "cost":sceName
-                                })
-                }
+//                function addOne(sceName) {
+//                    model.append({
+//                                    "cost":sceName
+//                                })
+//                }
 
-                Component.onCompleted: {
-                    scenarioLoader.addScenario.connect(listView.addOne)
-                }
+//                Component.onCompleted: {
+//                    scenarioLoader.addScenario.connect(listView.addOne)
+//                }
 
             }
 

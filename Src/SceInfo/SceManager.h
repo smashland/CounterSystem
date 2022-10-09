@@ -12,8 +12,7 @@ public:
     ~SceManager();
     SceManager(const QString &name);
 
-//    Q_PROPERTY(QString sceName READ getSceName WRITE setSceName NOTIFY sceNameChanged)
-//    Q_PROPERTY(QVariantList listPerson MEMBER m_listPerson NOTIFY listPersonChanged)
+    Q_PROPERTY(QList<QObject*> listSces MEMBER m_listSces NOTIFY listScesChanged)
 
 
     /**
@@ -106,8 +105,7 @@ public:
      void addPerson(int nID, const QString &sName, int nLevel, int nGroup, bool bHostage,const QString& sImagePath);
 
 signals:
-    void sceNameChanged(QString);
-    void listPersonChanged(const QVariantList&);
+    void listScesChanged();
 protected:
     /**
      * @brief 读取单个文件
@@ -120,9 +118,8 @@ private:
 private:
 //    QString m_sSceName;
     QMap<QString,CSceInfo*> m_mapName2SceInfo; /// 名称和方案信息的配对
-    QVariantList       m_listPerson;          /// 添加人员的简要信息
     QStringList m_listSceFileName;
-    QString m_text;
+    QList<QObject*> m_listSces;
 
 
 };

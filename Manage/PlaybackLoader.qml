@@ -64,20 +64,20 @@ ManageRect{
                 color: index%2 ? "#2D5689" : "#4671a6"
             }
 
-            TextItem {
+            TextListItem {
                 id: col1
                 text: index + 1
                 width: 100 *dpx
                 height: 50 *dpy
             }
-            TextItem {
+            TextListItem {
                 id: col2
                 x: 170 *dpx
                 text: modelData
                 width: 200 *dpx
                 height: 50 *dpy
             }
-            TextItem {
+            TextListItem {
                 id: col3
                 x: 400 *dpx
                 //                        text: manoeuvre.endTime

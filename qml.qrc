@@ -139,7 +139,7 @@
         <file>Manage/PersonAdd.qml</file>
         <file>Image/true.png</file>
         <file>Manage/HelpAdd.qml</file>
-        <file>Common/TextItem.qml</file>
+        <file>Common/TextListItem.qml</file>
         <file>Common/SearchItem.qml</file>
         <file>Manage/MapAdd.qml</file>
         <file>Manage/Plugins/ListHeader.qml</file>

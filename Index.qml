@@ -12,6 +12,7 @@ import MyItem 1.0
 
 Rectangle
 {
+    property var modifySceInfo: null
     id: index
     anchors.fill: parent
     color: "transparent"
@@ -280,9 +281,9 @@ Rectangle
         anchors.centerIn: parent
         visible: false
     }
-    SceInfo{
-        id:sceInfo
-    }
+//    SceInfo{
+//        id:sceInfo
+//    }
     SceManager{
         id:sceManager
     }

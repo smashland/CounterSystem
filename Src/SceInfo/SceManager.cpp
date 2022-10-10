@@ -20,7 +20,7 @@ CSceInfo *SceManager::createSceneri()
 
 SceManager::~SceManager()
 {
-    ClearSceInfo();
+//    ClearSceInfo();
 }
 
 //QList<ScePersonInfo*> SceManager::sces() const
@@ -37,6 +37,7 @@ CSceInfo *SceManager::addScenari(const QString &sceName,CSceInfo* pSceInfo)
     {
         if(nullptr == pSceInfo)
         {
+            qDebug()<<"测shi1";
             CSceInfo* pNewOne = new CSceInfo;
             m_mapName2SceInfo.insert(sceName,pNewOne);
             m_listSces.append(pNewOne);
@@ -45,6 +46,7 @@ CSceInfo *SceManager::addScenari(const QString &sceName,CSceInfo* pSceInfo)
         }
         else
         {
+            qDebug()<<"测shi2";
             m_mapName2SceInfo.insert(sceName,pSceInfo);
             m_listSces.append(pSceInfo);
             emit listScesChanged();
@@ -99,10 +101,10 @@ QList<QObject *> SceManager::getSceAll()
 
 void SceManager::read()
 {
-    ClearSceInfo();
+//    ClearSceInfo();
+
     qDebug()<<"测试读取所有文件";
     showSceList();
-
     foreach(const QString& one,m_listSceFileName)
     {
         read(one);
@@ -316,21 +318,13 @@ QStringList SceManager::showSceList()
     return(m_listSceFileName);
 }
 
-/////设置方案名称
-//void SceManager::setSceName(const QString& sName)
-//{
-//    if(m_sSceName != sName)
-//    {
-//        m_sSceName = sName;
-//        emit sceNameChanged(m_sSceName);
-//    }
-//}
+
 /////添加方案
 void SceManager::addScenario(const QString &sName)
 {
     if(m_mapName2SceInfo.size() > 0)
     {
-        write();
+//        write();
         ClearSceInfo();
     }
 }
@@ -352,18 +346,12 @@ bool SceManager::removeScenario(const QString &sName)
 ///添加人员
 void SceManager::addPerson(int nID,const QString& sName, int nLevel, int nGroup, bool bHostage,const QString& sImagePath)
 {
-//    ScePersonInfo *scePersonInfo=new ScePersonInfo(this);
-//    scePersonInfo->setID(nID);
-//    scePersonInfo->setName(sName);
-//    scePersonInfo->setPosition(nLevel);
-//    scePersonInfo->setGroupType(nGroup);
-//    scePersonInfo->setHostage(bHostage);
-//    scePersonInfo->setImagePath(sImagePath);
 }
 
 ///清空方案信息
 void SceManager::ClearSceInfo()
 {
+     qDebug()<<"清空方案信息";
     foreach (auto one, m_mapName2SceInfo)
     {
         delete one;

@@ -26,6 +26,7 @@ public:
      * @return
      */
     Q_INVOKABLE ScePersonInfo* addPerson(int nID);
+    Q_INVOKABLE ScePersonInfo* addPerson1(int nID,ScePersonInfo* pScePersonInfo);
 
     /**
      * @brief 根据id修改人员信息
@@ -39,7 +40,7 @@ public:
      * @param nID
      * @return
      */
-    Q_INVOKABLE ScePersonInfo* findPerson(int nID);
+    Q_INVOKABLE QObject *findPerson(int nID);
 
     /**
      * @brief 获取所有的人员信息

@@ -13,7 +13,7 @@ Item {
     property var title: ""
     property var scenarioNewInfo:null
     property int nCount: 0
-    signal newSce(string sceName)
+
     signal findPersonSignal(int id)    //查找人员
 
     width: 1165 *dpx
@@ -27,8 +27,7 @@ Item {
             person.position = level;
             person.groupType = group;
             person.hostage = isHost;
-
-            listView.model = scenarioNewInfo.getAll();
+            listView.model=scenarioNewInfo.listPerson
             nCount =  scenarioNewInfo.getCount();
         }
         target: personAdd
@@ -38,11 +37,11 @@ Item {
     Connections{
         function onSceFindSignal(sceName)
         {
-            var sceInfo=sceManager.findScenario(sceName)
+            modifySceInfo=sceManager.findScenario(sceName)
             nameItemContent.text=sceName
-            scenarioNewInfo.listPerson=sceInfo.listPerson
-            nCount =  sceInfo.getCount();
-            console.log("修改方案")
+            listView.model=modifySceInfo.listPerson
+            nCount =  modifySceInfo.getCount();
+            console.log("查看方案")
         }
         target: scenarioLoader
     }
@@ -51,12 +50,12 @@ Item {
 
         function onModifyPersonSignal(mid,mName,mLevel,mGroup,mIsHost)
         {
-            var modifyPerson = scenarioNewInfo.modifyPerson(mid);
+            var modifyPerson = modifySceInfo.modifyPerson(mid);
             modifyPerson.name = mName;
             modifyPerson.position = mLevel;
             modifyPerson.groupType = mGroup;
             modifyPerson.hostage = mIsHost;
-            listView.model = scenarioNewInfo.getAll();
+            listView.model = modifySceInfo.listPerson;
         }
         target: personAdd
     }
@@ -141,7 +140,7 @@ Item {
     SceNewList{
         id: listView
         y: weizhixinxi.contentHeight + weizhixinxi.y + 20 *dpy
-        model: scenarioNewInfo.getAll()
+        model:modifySceInfo.listPerson //scenarioNewInfo.getAll()
         delegate: Rectangle {
             id: wrapper
             width: listView.width
@@ -264,10 +263,8 @@ Item {
                 if(nameItemContent.text === '') {
                     console.log("没有方案名称")
                 }else {
-                    scenarioLoader.addScenario(nameItemContent.text);
                     sceManager.addScenari(nameItemContent.text,scenarioNewInfo);
                     sceManager.write();
-//                    newSce(nameItemContent.text)
                     scenarioNew.visible = false
                 }
             }

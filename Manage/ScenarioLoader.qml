@@ -19,13 +19,6 @@ ManageRect{
     property var scenarioInfo: null
     signal addScenario(string sceName)
     signal sceFindSignal(string sceName)
-    Connections{
-        function onNewSce(sceName)
-        {
-            listView.model=sceManager.listSces;
-        }
-        target:scenarioNew
-    }
 
     CloseButton {
         anchors.right: scenarioLoader.right
@@ -100,7 +93,7 @@ ManageRect{
 
     ScePlayList{
         id: listView
-        model:sceManager.getSceAll() //sceManager.showSceList()
+        model:sceManager.listSces
         delegate: Rectangle {
             id: wrapper
             width: listView.width
@@ -140,7 +133,7 @@ ManageRect{
                             scenarioNew.visible = true
                             wrapper.ListView.view.currentIndex = index
                             mouse.accepted = true
-                            //                                    scenarioNew.scenarioNewInfo = wrapper.ListView.view.model.get(index)
+
                         }
                     }
                 }
@@ -156,23 +149,11 @@ ManageRect{
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
-                            //                                    sceManager.deleteScenario(col2.text)
-                            //                                    sceManager.removeScenario(modelData)
                             wrapper.ListView.view.model.remove(index)
                         }
                     }
                 }
             }
-        }
-
-        function addOne(sceName) {
-            model.append({
-                             "cost":sceName
-                         })
-        }
-
-        Component.onCompleted: {
-            scenarioLoader.addScenario.connect(listView.addOne)
         }
 
     }

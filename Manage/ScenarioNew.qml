@@ -89,7 +89,8 @@ Item {
                 height: 40 *dpy
                 color: "#ffffff"
                 text: qsTr("方案名称:")
-                font.pixelSize: 17*dpx;
+                font.pixelSize: 17*dpx
+                verticalAlignment: Text.AlignVCenter
             }
         }
         Rectangle {
@@ -98,20 +99,16 @@ Item {
             height: 40 *dpy
             color: "#1d4f88"
             border.color: "#26abef"
-            TextInput {
+            InputItem {
                 id: nameItemContent
                 x: 10 *dpx
 //                text:scenarioNewInfo.sceName
                 width: 420*dpx
                 height: 40 *dpy
-                font.pixelSize: 17*dpx
-                color: "#ffffff"
-                clip: true
-                font.family: "Microsoft YaHei"
-                verticalAlignment: Text.AlignVCenter
                 onEditingFinished: {
                     scenarioNewInfo.setSceName(nameItemContent.text)
                 }
+
             }
         }
     }
@@ -219,6 +216,20 @@ Item {
                     }
                 }
             }
+        }
+    }
+    function openQml(obj,qmlUrl){
+        var component = Qt.createComponent(qmlUrl)
+        if (Component.Ready === component.status){
+            var qmlObj = component.createObject(null)//,{note:obj}
+            if(null !== qmlObj){
+//                note2Window[obj] = qmlObj;
+                return(qmlObj);
+            }
+        }else{
+            console.log(component.errorString());
+            component.destroy();
+            return(null);
         }
     }
 

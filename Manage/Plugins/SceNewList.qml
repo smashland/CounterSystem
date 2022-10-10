@@ -27,32 +27,32 @@ ListView {
                 spacing: 56 *dpx
                 x: 25 *dpx
                 height: 40 *dpy
-                TextItem {
+                TextListItem {
                     text: "设备编号"
                     widthTitle: 70 *dpx
                     heightTitle: 40 *dpy
                 }
-                TextItem {
+                TextListItem {
                     text: "人员姓名"
                     widthTitle: 80 *dpx
                     heightTitle: 40 *dpy
                 }
-                TextItem {
+                TextListItem {
                     text: "人员职务"
                     widthTitle: 110 *dpx
                     heightTitle: 40 *dpy
                 }
-                TextItem {
+                TextListItem {
                     text: "红蓝方"
                     widthTitle: 80 *dpx
                     heightTitle: 40 *dpy
                 }
-                TextItem {
+                TextListItem {
                     text: "是否是人质"
                     widthTitle: 138 *dpx
                     heightTitle: 40 *dpy
                 }
-                TextItem {
+                TextListItem {
                     text: "操作"
                     widthTitle: 180 *dpx
                     heightTitle: 40 *dpy

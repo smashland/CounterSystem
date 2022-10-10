@@ -12,18 +12,18 @@ Component {
             anchors.fill: parent
             color: "#2D5689"
         }
-        TextItem {
+        TextListItem {
             text: "序号"
             width: 100 *dpx
             height: 30 *dpy
         }
-        TextItem {
+        TextListItem {
             x: 170 *dpx
             text: "方案名称"
             width: 200 *dpx
             height: 30 *dpy
         }
-        TextItem {
+        TextListItem {
             x: 572 *dpx
             text: "操作"
             width: 370 *dpx

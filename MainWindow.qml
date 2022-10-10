@@ -115,14 +115,5 @@ RoundButton
         }
     }
 
-    CircleMenu
-    {
-        boundingItem: null
-        id:menu
-        onOpenReplay:
-        {
-            startReplay();
-        }
-    }
 }
 

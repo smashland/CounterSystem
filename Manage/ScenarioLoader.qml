@@ -14,7 +14,7 @@ ManageRect{
     id: scenarioLoader
     rectWidth: 1226 *dpx
     rectHeight: 787 *dpy
-    rectImage: "qrc:/Image/Popup_bg_20.png"
+    rectImage: "qrc:/Image/Popup_bg_27.png"
 
     property var scenarioInfo: null
     signal addScenario(string sceName)
@@ -61,18 +61,19 @@ ManageRect{
                 onClicked: {
                 }
             }
-            ViewButton {
-                name: qsTr("全部刷新")
-                color: viewColor_shuaxin
-                viewImage: "\ue600"
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        $app.allData.clearAllInfo();
-                    }
+        }
+        ViewButton {
+            name: qsTr("全部刷新")
+            color: viewColor_shuaxin
+            viewImage: "\ue600"
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    $app.allData.clearAllInfo();
                 }
             }
         }
+
         ViewButton {
             name: qsTr("保存方案")
             color: viewColor_shuaxin
@@ -102,13 +103,13 @@ ManageRect{
                 color: index%2 ? "#2D5689" : "#4671a6"
             }
 
-            TextItem {
+            TextListItem {
                 id: col1
                 text: index+1
                 width: 100 *dpx
                 height: 50 *dpy
             }
-            TextItem {
+            TextListItem {
                 id: col2
                 x: 170 *dpx
                 text: modelData.sceName

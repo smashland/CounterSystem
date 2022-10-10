@@ -6,9 +6,9 @@ import QtQuick.Controls.Private 1.0
 GroupBox {
     id: groupBoxId
     width:680*dpx
-    height:250*dpy
-    x: 320*dpx
-    y: 100*dpy
+    height:230*dpy
+//    x: 320*dpx
+//    y: 100*dpy
     visible: false
 
     flat : false

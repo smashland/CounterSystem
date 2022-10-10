@@ -197,7 +197,8 @@ Item {
                             onClicked:
                             {
                                 findPersonSignal(modelData.id)
-                                personAdd.visible = true
+//                                personAdd.visible = true
+                                openQml(modelData,"PersonAdd.qml")
                             }
                         }
                     }
@@ -222,9 +223,9 @@ Item {
     function openQml(obj,qmlUrl){
         var component = Qt.createComponent(qmlUrl)
         if (Component.Ready === component.status){
-            var qmlObj = component.createObject(null)//,{note:obj}
+            var qmlObj = component.createObject(null,{personData:obj});
             if(null !== qmlObj){
-//                note2Window[obj] = qmlObj;
+                scenarioNewInfo[obj] = qmlObj;
                 return(qmlObj);
             }
         }else{
@@ -232,6 +233,9 @@ Item {
             component.destroy();
             return(null);
         }
+    }
+    function findPerson(obj){
+        return scenarioNewInfo[obj];
     }
 
     Row {
@@ -246,6 +250,7 @@ Item {
             nameButton: "添加人员"
             onClicked: {
                 personAdd.visible = true
+
             }
         }
 

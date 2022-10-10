@@ -18,7 +18,7 @@ Popup
     signal ok(int id,string name,int level,int group,bool isHost);
     signal modifyPersonSignal(int mid,string mName,int mLevel,int mGroup,bool mIsHost)
 
-    property var outData
+    property var personData: null
     property var rowNum;
     property var bConnected:true
 

@@ -33,12 +33,14 @@ Item {
                 nCount = modifySceInfo.getCount();
             }
             else{
-                console.log("编号数值重复，请重新输入");
+                scePopup.visible = true
+                timer.start()
             }
 
         }
         target: personAdd
     }
+
 
 
     Connections{
@@ -241,11 +243,11 @@ Item {
                 if(nameItemContent.text === '') {
                     console.log("没有方案名称")
                 }else {
-                    if(null===modifySceInfo)
+                    if(null===sceManager.addScenari(nameItemContent.text,modifySceInfo))
                     {
-                        console.log("modifySceInfo函数为空")
+                        scePopup2.visible = true
+                        timer.start()
                     }
-                    sceManager.addScenari(nameItemContent.text,modifySceInfo);
                     sceManager.write();
                     scenarioNew.visible = false
                 }
@@ -260,6 +262,24 @@ Item {
             {
                 scenarioNew.visible = false
             }
+        }
+    }
+    ScePopup {
+        id: scePopup
+        visible: false
+        anchors.centerIn: parent
+        text: "人员ID重复，请重新输入！"
+    }
+
+    Timer {
+        id: timer
+        interval: 2500
+        repeat: fasle
+        running: fasle
+        triggeredOnStart: fasle
+        onTriggered: {
+            scePopup.visible = false
+            scePopup2.visible = false
         }
     }
 }

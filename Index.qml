@@ -214,11 +214,11 @@ Rectangle
         y: (index.height-playbackLoader.height) / 2
     }
 
-    PlaybackRefresh {
-        id: playbackRefresh
+    ScePopup {
+        id: scePopup2
         visible: false
-        x: (index.width-playbackRefresh.width) / 2
-        y: (index.height-playbackRefresh.height) / 2
+        anchors.centerIn: parent
+        text: "方案名称相同，请重新添加方案！"
     }
         CloseBar {
             id: closebar

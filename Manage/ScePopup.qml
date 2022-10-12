@@ -5,11 +5,10 @@ import "../Common"
 
 Rectangle
 {
-    id:playbackRefresh
+    id:scePopup
+    property alias text: wintext.text
     width: 430 *dpx
     height: 178 *dpy
-    x:(parent.width-width)/2
-    y:(parent.height-height)/2
     focus: true
     visible: true
     color: "transparent"
@@ -20,13 +19,13 @@ Rectangle
     }
     Row {
         x: 25 *dpx
-        y: (playbackRefresh.height - 36 *dpy)/2
+        y: (scePopup.height - 36 *dpy)/2
         spacing: 10 *dpx
         Text {
             width: 34
             height: 34
-            text: qsTr("\ue8ad")
-            color: "red"
+            text: qsTr("\ue65c")
+            color: "#e74b4b"
             font.family: "iconfont"
             font.pixelSize: 34*dpx
             verticalAlignment: Text.AlignVCenter
@@ -34,14 +33,14 @@ Rectangle
         Text {
             id: wintext
             height: 36 *dpy
-            text: qsTr("刷新成功，3S后弹窗自动消失")
+//            text: qsTr("刷新成功，3S后弹窗自动消失")
             font.pixelSize: 18*dpx;
-            color: "#e74b4b";
-            font.family: "Microsoft YaHei";
+            color: "red";
+            font.family: "Microsoft YaHei"
+            font.bold: true
             verticalAlignment: Text.AlignVCenter
         }
     }
-
 
 }
 

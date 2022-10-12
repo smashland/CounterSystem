@@ -164,39 +164,15 @@ Popup
                     {target:"士兵"},
                     {target:"军官"}
                 ]
+                onCurrentIndexChanged: {
+                    var type = combobox_renyuan.currentIndex;
+                    if(type === 0){
+                        combobox_renyuan.currentText = "士兵"
+                    }else if(type === 1) {
+                        combobox_renyuan.currentText = "军官"
+                    }
+                }
             }
-
-//            ComboBox {
-//                id: combobox_renyuan
-//                width: 200 *dpx
-//                height: 34 *dpy
-//                model: ["士兵"]
-//                delegate: ItemDelegate {
-//                    width: 110 *dpx
-//                    height: 30 *dpy
-//                    contentItem: Text {
-//                        text: modelData
-//                        color: "black"
-//                        font.pixelSize: 16
-//                        font.family: "Microsoft YaHei"
-//                        verticalAlignment: Text.AlignVCenter
-//                    }
-//                }
-//                contentItem: TextInput {
-//                    leftPadding: 10*dpx
-//                    text: combobox_renyuan.displayText
-//                    font.pixelSize: 16
-//                    color: "#ffffff"
-//                    font.family: "Microsoft YaHei"
-//                    verticalAlignment: Text.AlignVCenter
-//                }
-//                background: Rectangle {
-//                    implicitWidth: 110*dpx
-//                    implicitHeight: 30 *dpy
-//                    color: "#1d4f88"
-//                    border.color: "#26abef"
-//                }
-//            }
         }
         Row {
             spacing: 20*dpx
@@ -221,38 +197,15 @@ Popup
                     {target:"蓝"},
                     {target:"红"}
                 ]
+                onCurrentIndexChanged: {
+                    var type = zhenying.currentIndex;
+                    if(type === 0){
+                        zhenying.currentText = "蓝"
+                    }else if(type === 1) {
+                        zhenying.currentText = "红"
+                    }
+                }
             }
-//            ComboBox {
-//                id: zhenying
-//                width: 200 *dpx
-//                height: 34 *dpy
-//                model: ["蓝","红"]
-//                delegate: ItemDelegate {
-//                    width: 110 *dpx
-//                    height: 30 *dpy
-//                    contentItem: Text {
-//                        text: modelData
-//                        color: "black"
-//                        font.pixelSize: 16
-//                        font.family: "Microsoft YaHei"
-//                        verticalAlignment: Text.AlignVCenter
-//                    }
-//                }
-//                contentItem: TextInput {
-//                    leftPadding: 10*dpx
-//                    text: zhenying.displayText
-//                    font.pixelSize: 16
-//                    color: "#ffffff"
-//                    font.family: "Microsoft YaHei"
-//                    verticalAlignment: Text.AlignVCenter
-//                }
-//                background: Rectangle {
-//                    implicitWidth: 110*dpx
-//                    implicitHeight: 30 *dpy
-//                    color: "#1d4f88"
-//                    border.color: "#26abef"
-//                }
-//            }
         }
         Row {
             spacing: 20*dpx
@@ -359,5 +312,6 @@ Popup
             }
         }
     }
+
 }
 

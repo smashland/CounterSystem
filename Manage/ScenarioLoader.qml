@@ -34,6 +34,25 @@ ManageRect{
         y: 60*dpy
     }
 
+    property var taskMap: {0:0}
+//    property var qmlObj: null
+    function openQml(obj,qmlUrl){
+        var myComponent = Qt.createComponent(qmlUrl)
+        if (Component.Ready === myComponent.status){
+            var qmlObj = myComponent.createObject(scenarioLoader,{"anchors.centerIn":scenarioLoader,scenarioNewInfo:obj});
+            if(qmlObj === null){
+                taskMap[obj] = qmlObj;
+                return(qmlObj);
+            }
+
+        }else{
+            console.log(myComponent.errorString());
+            myComponent.destroy();
+            return(null);
+        }
+
+    }
+
     Row
     {
         x: 80 *dpx
@@ -44,10 +63,13 @@ ManageRect{
             color: viewColor_xinjian
             viewImage: "\ue624"
             MouseArea{
+                id: newSce
                 anchors.fill: parent
                 onClicked: {
-                    scenarioNew.visible= true
-                    scenarioNew.scenarioNewInfo = sceManager.createSceneri();
+//                    scenarioNew.visible = true
+//                    scenarioNew.scenarioNewInfo = sceManager.createSceneri()
+                    openQml(sceManager.createSceneri(),"ScenarioNew.qml")
+
                 }
             }
         }
@@ -131,6 +153,7 @@ ManageRect{
                         onClicked: {
                             sceFindSignal(modelData.sceName)
                             scenarioNew.visible = true
+//                            openQml(modelData,"ScenarioNew.qml")
                             wrapper.ListView.view.currentIndex = index
                             mouse.accepted = true
 

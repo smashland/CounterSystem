@@ -150,5 +150,6 @@
         <file>Manage/Plugins/NewPerson.qml</file>
         <file>Manage/Plugins/InputItem.qml</file>
         <file>Manage/Plugins/TextItem.qml</file>
+        <file>Manage/Plugins/ComboBoxItem.qml</file>
     </qresource>
 </RCC>

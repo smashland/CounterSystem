@@ -59,6 +59,22 @@ Item {
         }
         target: personAdd
     }
+
+    function openPerson(qmlUrl){
+        var myComponent = Qt.createComponent(qmlUrl)
+        if (Component.Ready === myComponent.status){
+            var qmlObj = myComponent.createObject(scenarioNew,{"anchors.centerIn":scenarioNew});
+            if(qmlObj === null){
+                return(qmlObj);
+            }
+
+        }else{
+            console.log(myComponent.errorString());
+            myComponent.destroy();
+            return(null);
+        }
+
+    }
     Image {
         id: loginImage
         anchors.fill: parent
@@ -102,7 +118,7 @@ Item {
             InputItem {
                 id: nameItemContent
                 x: 10 *dpx
-//                text:scenarioNewInfo.sceName
+                //                text:scenarioNewInfo.sceName
                 width: 420*dpx
                 height: 40 *dpy
                 onEditingFinished: {
@@ -153,32 +169,32 @@ Item {
                 spacing: 56 *dpx
                 x: 25*dpx
                 height: 40 *dpy
-                TextItem {
+                TextListItem {
                     id: id
                     text: modelData.id
                     width: 70 *dpx
                     height: 50 *dpy
                 }
-                TextItem {
+                TextListItem {
                     id:name
                     text: modelData.name
                     width: 80 *dpx
                     height: 50 *dpy
                 }
-                TextItem {
+                TextListItem {
                     id:level
                     text: modelData.position
                     width: 110 *dpx
                     height: 50 *dpy
                 }
 
-                TextItem {
+                TextListItem {
                     id:group
                     text: modelData.groupType
                     width: 80 *dpx
                     height: 50 *dpy
                 }
-                TextItem {
+                TextListItem {
                     id:host
                     text: modelData.hostage ? "是" : "否"
                     width: 138 *dpx
@@ -196,8 +212,8 @@ Item {
                             onClicked:
                             {
                                 findPersonSignal(modelData.id)
-//                                personAdd.visible = true
-                                openQml(modelData,"PersonAdd.qml")
+                                personAdd.visible = true
+//                                personAdd.personData = wrapper.ListView.view.model.get(index)
                             }
                         }
                     }
@@ -219,23 +235,6 @@ Item {
             }
         }
     }
-    function openQml(obj,qmlUrl){
-        var component = Qt.createComponent(qmlUrl)
-        if (Component.Ready === component.status){
-            var qmlObj = component.createObject(null,{personData:obj});
-            if(null !== qmlObj){
-                scenarioNewInfo[obj] = qmlObj;
-                return(qmlObj);
-            }
-        }else{
-            console.log(component.errorString());
-            component.destroy();
-            return(null);
-        }
-    }
-    function findPerson(obj){
-        return scenarioNewInfo[obj];
-    }
 
     Row {
         spacing: 15 *dpx
@@ -249,7 +248,7 @@ Item {
             nameButton: "添加人员"
             onClicked: {
                 personAdd.visible = true
-
+//                openPerson("PersonAdd.qml")
             }
         }
 
@@ -257,7 +256,6 @@ Item {
             background: Rectangle {
                 color: "#265aef"
             }
-
             nameButton: "确定"
             onClicked: {
                 if(nameItemContent.text === '') {

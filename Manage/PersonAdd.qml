@@ -5,6 +5,7 @@ import QtQuick.Dialogs 1.3
 import Qt.labs.platform 1.1
 import "../Common"
 import "../Exercise"
+import "Plugins"
 Popup
 {
     id: personAdd
@@ -20,6 +21,16 @@ Popup
     property var personData: null
     property var rowNum;
     property var bConnected:true
+
+    onPersonDataChanged: {
+        if(personData === null) {
+            shebeiId.name=""
+            personName.name=""
+        }else {
+            shebeiId.name=personData.id
+            personName.name=personData.name
+        }
+    }
 
     Connections{
         function onFindPersonSignal(id)
@@ -125,6 +136,7 @@ Popup
         }
         Row {
             spacing: 20*dpx
+            z: 999
             Text {
                 id: soldierItemText
                 width: soldierItemText.contentWidth
@@ -135,40 +147,54 @@ Popup
                 font.family: "Microsoft YaHei";
                 verticalAlignment: Text.AlignVCenter
             }
-            ComboBox {
+            ComboBoxItem{
                 id: combobox_renyuan
                 width: 200 *dpx
                 height: 34 *dpy
-                model: ["士兵"]
-                delegate: ItemDelegate {
-                    width: 110 *dpx
-                    height: 30 *dpy
-                    contentItem: Text {
-                        text: modelData
-                        color: "black"
-                        font.pixelSize: 16
-                        font.family: "Microsoft YaHei"
-                        verticalAlignment: Text.AlignVCenter
-                    }
-                }
-                contentItem: TextInput {
-                    leftPadding: 10*dpx
-                    text: combobox_renyuan.displayText
-                    font.pixelSize: 16
-                    color: "#ffffff"
-                    font.family: "Microsoft YaHei"
-                    verticalAlignment: Text.AlignVCenter
-                }
-                background: Rectangle {
-                    implicitWidth: 110*dpx
-                    implicitHeight: 30 *dpy
-                    color: "#1d4f88"
-                    border.color: "#26abef"
-                }
+                listheight: 110 *dpx
+                listelementheight: 30*dpy
+                z:99
+                items: [
+                    {target:"士兵"},
+                    {target:"军官"}
+                ]
             }
+
+//            ComboBox {
+//                id: combobox_renyuan
+//                width: 200 *dpx
+//                height: 34 *dpy
+//                model: ["士兵"]
+//                delegate: ItemDelegate {
+//                    width: 110 *dpx
+//                    height: 30 *dpy
+//                    contentItem: Text {
+//                        text: modelData
+//                        color: "black"
+//                        font.pixelSize: 16
+//                        font.family: "Microsoft YaHei"
+//                        verticalAlignment: Text.AlignVCenter
+//                    }
+//                }
+//                contentItem: TextInput {
+//                    leftPadding: 10*dpx
+//                    text: combobox_renyuan.displayText
+//                    font.pixelSize: 16
+//                    color: "#ffffff"
+//                    font.family: "Microsoft YaHei"
+//                    verticalAlignment: Text.AlignVCenter
+//                }
+//                background: Rectangle {
+//                    implicitWidth: 110*dpx
+//                    implicitHeight: 30 *dpy
+//                    color: "#1d4f88"
+//                    border.color: "#26abef"
+//                }
+//            }
         }
         Row {
             spacing: 20*dpx
+            z: 998
             Text {
                 id: zhenyingxuanze
                 width: zhenyingxuanze.contentWidth
@@ -179,37 +205,48 @@ Popup
                 font.family: "Microsoft YaHei";
                 verticalAlignment: Text.AlignVCenter
             }
-            ComboBox {
+            ComboBoxItem{
                 id: zhenying
                 width: 200 *dpx
                 height: 34 *dpy
-                model: ["蓝","红"]
-                delegate: ItemDelegate {
-                    width: 110 *dpx
-                    height: 30 *dpy
-                    contentItem: Text {
-                        text: modelData
-                        color: "black"
-                        font.pixelSize: 16
-                        font.family: "Microsoft YaHei"
-                        verticalAlignment: Text.AlignVCenter
-                    }
-                }
-                contentItem: TextInput {
-                    leftPadding: 10*dpx
-                    text: zhenying.displayText
-                    font.pixelSize: 16
-                    color: "#ffffff"
-                    font.family: "Microsoft YaHei"
-                    verticalAlignment: Text.AlignVCenter
-                }
-                background: Rectangle {
-                    implicitWidth: 110*dpx
-                    implicitHeight: 30 *dpy
-                    color: "#1d4f88"
-                    border.color: "#26abef"
-                }
+                listheight: 110 *dpx
+                listelementheight: 30*dpy
+                items: [
+                    {target:"蓝"},
+                    {target:"红"}
+                ]
             }
+//            ComboBox {
+//                id: zhenying
+//                width: 200 *dpx
+//                height: 34 *dpy
+//                model: ["蓝","红"]
+//                delegate: ItemDelegate {
+//                    width: 110 *dpx
+//                    height: 30 *dpy
+//                    contentItem: Text {
+//                        text: modelData
+//                        color: "black"
+//                        font.pixelSize: 16
+//                        font.family: "Microsoft YaHei"
+//                        verticalAlignment: Text.AlignVCenter
+//                    }
+//                }
+//                contentItem: TextInput {
+//                    leftPadding: 10*dpx
+//                    text: zhenying.displayText
+//                    font.pixelSize: 16
+//                    color: "#ffffff"
+//                    font.family: "Microsoft YaHei"
+//                    verticalAlignment: Text.AlignVCenter
+//                }
+//                background: Rectangle {
+//                    implicitWidth: 110*dpx
+//                    implicitHeight: 30 *dpy
+//                    color: "#1d4f88"
+//                    border.color: "#26abef"
+//                }
+//            }
         }
         Row {
             spacing: 20*dpx

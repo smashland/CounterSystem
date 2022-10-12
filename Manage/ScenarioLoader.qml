@@ -47,7 +47,7 @@ ManageRect{
                 anchors.fill: parent
                 onClicked: {
                     scenarioNew.visible= true
-                    scenarioNew.scenarioNewInfo = sceManager.createSceneri();
+                    modifySceInfo = sceManager.createSceneri();
                 }
             }
         }
@@ -70,6 +70,7 @@ ManageRect{
                 anchors.fill: parent
                 onClicked: {
                     $app.allData.clearAllInfo();
+                    listView.model= sceManager.listSces
                 }
             }
         }
@@ -131,9 +132,6 @@ ManageRect{
                         onClicked: {
                             sceFindSignal(modelData.sceName)
                             scenarioNew.visible = true
-                            wrapper.ListView.view.currentIndex = index
-                            mouse.accepted = true
-
                         }
                     }
                 }
@@ -143,13 +141,13 @@ ManageRect{
                     viewImage: "\ue607"
                 }
                 ViewButton {
-                    name: qsTr("删除")
+                    name: qsTr("删除方案")
                     color: viewColor_shanchu
                     viewImage: "\ue61c"
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
-                            wrapper.ListView.view.model.remove(index)
+                            sceManager.deleteScenario(modelData.sceName)
                         }
                     }
                 }

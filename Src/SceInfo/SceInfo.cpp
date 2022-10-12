@@ -4,7 +4,7 @@
 CSceInfo::CSceInfo(QObject *parent)
     : QObject{parent}
 {
-//    ClearMap();
+    //    ClearMap();
 }
 
 ///设置方案名称
@@ -20,34 +20,22 @@ void CSceInfo::setSceName(const QString &sName)
 /// 增加成员
 ScePersonInfo *CSceInfo::addPerson(int nID)
 {
-     qDebug()<<"00000000000000"<<m_mapId2Person.isEmpty();
-    auto findOne = m_mapId2Person.find(nID);    
-    if(m_mapId2Person.end() == findOne)
-    {
-        ScePersonInfo* pNewOne = new ScePersonInfo(this);
-        pNewOne->setID(nID);
-        m_mapId2Person.insert(nID,pNewOne);
-        m_listPerson.append(pNewOne);
-        emit personChanged();
-        return(pNewOne);
-    }
-    else
-    {
-        return(nullptr);
-    }
-}
-
-///添加人员
-ScePersonInfo *CSceInfo::addPerson1(int nID,ScePersonInfo* pScePersonInfo)
-{
     auto findOne = m_mapId2Person.find(nID);
-    qDebug()<<"测试添加人员函数："<<nID;
     if(m_mapId2Person.end() == findOne)
     {
-        if(nullptr == pScePersonInfo)
+        qDebug()<<"新增人员"<<m_mapId2Person.isEmpty();//没有找到
+        if(!m_mapId2Person.contains(nID))
         {
-            qDebug()<<"测shi1";
-            ScePersonInfo* pNewOne = new ScePersonInfo;
+            QHash<int, ScePersonInfo*>::iterator i;
+            for( i=m_hashId2Person.begin(); i!=m_hashId2Person.end(); ++i)
+            {
+                qDebug()<<"删除原有的人";
+                m_listPerson.removeOne(i.value());
+                m_mapId2Person.remove(i.key());
+                emit personChanged();
+            }
+            ScePersonInfo* pNewOne = new ScePersonInfo(this);
+            pNewOne->setID(nID);
             m_mapId2Person.insert(nID,pNewOne);
             m_listPerson.append(pNewOne);
             emit personChanged();
@@ -55,43 +43,61 @@ ScePersonInfo *CSceInfo::addPerson1(int nID,ScePersonInfo* pScePersonInfo)
         }
         else
         {
-            qDebug()<<"测shi2";
-            m_mapId2Person.insert(nID,pScePersonInfo);
-            m_listPerson.append(pScePersonInfo);
-            emit personChanged();
-            return(pScePersonInfo);
+            qDebug()<<"新增人员id重复";
+            return nullptr;
         }
     }
     else
     {
-        return(nullptr);
+        qDebug()<<"找到相同的数值"<<m_hashId2Person.isEmpty()<<"===="<<nID;//找到
+        QHash<int, ScePersonInfo*>::iterator i;
+        for( i=m_hashId2Person.begin(); i!=m_hashId2Person.end(); ++i)
+        {
+            qDebug()<<"删除原有的人";
+            m_listPerson.removeOne(i.value());
+            m_mapId2Person.remove(i.key());
+            emit personChanged();
+        }
+
+        if(!m_mapId2Person.contains(nID))
+        {
+            qDebug()<<"修改原有的人";
+            ScePersonInfo* pNewOne = new ScePersonInfo(this);
+            pNewOne->setID(nID);
+            m_mapId2Person.insert(nID,pNewOne);
+            m_listPerson.append(pNewOne);
+            emit personChanged();
+            return(pNewOne);
+        }
+        else
+        {
+            qDebug()<<"存在原有的人";
+            QHash<int, ScePersonInfo*>::iterator i;
+            for( i=m_hashId2Person.begin(); i!=m_hashId2Person.end(); ++i)
+            {
+                m_mapId2Person.insert(i.key(),i.value());
+                m_listPerson.append(i.value());
+                emit personChanged();
+            }
+            return(nullptr);
+        }
     }
-}
-
-
-
-
-ScePersonInfo *CSceInfo::modifyPerson(int nID)
-{
-    auto findOne = m_mapId2Person.find(nID);
-    if(m_mapId2Person.end() != findOne)
-    {
-        m_mapId2Person.value(nID,findOne.value());
-        return(findOne.value());
-    }
-    else
-    {
-        return(nullptr);
-    }
-
 }
 
 /// 根据ID查找人员信息
 QObject *CSceInfo::findPerson(int nID)
 {
+    m_hashId2Person.clear();
     auto findOne = m_mapId2Person.find(nID);
-    return m_mapId2Person.end() == findOne ? nullptr : findOne.value();
-
+    if(m_mapId2Person.end() != findOne)
+    {
+        m_hashId2Person.insert(nID,findOne.value());
+        return(findOne.value());
+    }
+    else
+    {
+        return nullptr;
+    }
 }
 
 /// 获取所有的人员信息
@@ -110,6 +116,8 @@ bool CSceInfo::deletePerson(int nID)
     auto findOne = m_mapId2Person.find(nID);
     if(m_mapId2Person.end() != findOne)
     {
+        m_listPerson.removeOne(findOne.value());
+        emit personChanged();
         delete findOne.value();
         m_mapId2Person.erase(findOne);
         return(true);
@@ -139,7 +147,7 @@ void CSceInfo::Save(QJsonArray &rArray)
     {
         QJsonObject personObject;
         one->writePerson(personObject);
-//        rArray.append(personObject);
+        //        rArray.append(personObject);
     }
     foreach(auto one , m_listPerson)
     {
@@ -162,5 +170,6 @@ void CSceInfo::ClearMap()
         delete one;
     }
     m_mapId2Person.clear();
+    m_hashId2Person.clear();
     m_listPerson.clear();
 }

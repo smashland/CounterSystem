@@ -14,6 +14,9 @@ public:
 
     Q_PROPERTY(QList<QObject*> listSces MEMBER m_listSces NOTIFY listScesChanged)
 
+    ///读写文件保存方案信息
+    Q_INVOKABLE void read();
+    Q_INVOKABLE void write();
 
     /**
      * @brief 创建一个方案
@@ -38,71 +41,37 @@ public:
      * @param sceName
      * @return
      */
-     CSceInfo* modifyScenario(const QString &sceName);
+    CSceInfo* modifyScenario(const QString &sceName);
 
     /**
      * @brief 查找方案
      * @param sceName
      * @return
      */
-   Q_INVOKABLE  CSceInfo* findScenario(const QString &sceName);
+    Q_INVOKABLE  QObject* findScenario(const QString &sceName);
 
     /**
      * @brief 获取所有的方案信息
      * @return
      */
-//    Q_INVOKABLE QList<CSceInfo*> getSceAll();
-      Q_INVOKABLE QList<QObject*> getSceAll();
-
-
-
-
-    ///读写文件保存方案信息
-    Q_INVOKABLE void read();
-    Q_INVOKABLE void write();
-    void modify();
-
-    void loadImagePath(const QString &strImagePath);
+    Q_INVOKABLE QList<QObject*> getSceAll();
 
     /**
-      * @brief 显示选中方案的信息
-      */
-    void showScenfo(QString sSceName);
+     * @brief 图片路径
+     * @param strImagePath
+     */
+    void loadImagePath(const QString &strImagePath);
 
     /**
       * @brief 显示所有方案
       */
     Q_INVOKABLE QStringList showSceList();
 
-//    /**
-//      * @brief 设置方案名称
-//      * @param sName
-//      */
-//    Q_INVOKABLE void setSceName(const QString &sName);
-//    Q_INVOKABLE QString getSceName(){ return(m_sSceName);}
-
     /**
-      * @brief 添加方案
+      * @brief 删除方案文件
       * @param sName
       */
-     void addScenario(const QString &sName);
-
-    /**
-      * @brief 删除方案
-      * @param sName
-      */
-    Q_INVOKABLE bool removeScenario(const QString &sName);
-
-    /**
-      * @brief 添加人员
-      * @param nID
-      * @param sName
-      * @param nLevel
-      * @param nGroup
-      * @param bHostage
-      * @param sImagePath
-      */
-     void addPerson(int nID, const QString &sName, int nLevel, int nGroup, bool bHostage,const QString& sImagePath);
+    bool removeSceFile(const QString &sName);
 
 signals:
     void listScesChanged();
@@ -113,13 +82,13 @@ protected:
      */
     void read(const QString &sname);
 private:
-    void ClearSceInfo();
+    void ClearSceInfo();  ///清空
 
 private:
-//    QString m_sSceName;
-    QMap<QString,CSceInfo*> m_mapName2SceInfo; /// 名称和方案信息的配对
-    QStringList m_listSceFileName;
-    QList<QObject*> m_listSces;
+    QMap<QString,CSceInfo*> m_mapName2SceInfo;   /// 名称和方案信息的配对
+    QStringList m_listSceFileName;               ///存放文件
+    QList<QObject*> m_listSces;                  ///方案信息
+    QHash<QString,CSceInfo*> m_hashName2SceInfo; ///存放查看的方案信息
 
 
 };

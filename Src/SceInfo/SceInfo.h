@@ -9,8 +9,21 @@ class CSceInfo : public QObject
     Q_OBJECT
 public:
     explicit CSceInfo(QObject *parent = nullptr);
+
     Q_PROPERTY(QString sceName READ getSceName WRITE setSceName NOTIFY sceNameChanged)
     Q_PROPERTY(QList<QObject*> listPerson MEMBER m_listPerson NOTIFY personChanged)
+
+    /**
+     * @brief 通过Json解析人员信息
+     * @param rArray
+     */
+    void Prase(const QJsonArray& rArray);
+
+    /**
+     * @brief 将人员信息保存到Json中
+     * @param rArray
+     */
+    void Save(QJsonArray& rArray);
 
     /**
       * @brief 设置方案名称
@@ -26,14 +39,6 @@ public:
      * @return
      */
     Q_INVOKABLE ScePersonInfo* addPerson(int nID);
-    Q_INVOKABLE ScePersonInfo* addPerson1(int nID,ScePersonInfo* pScePersonInfo);
-
-    /**
-     * @brief 根据id修改人员信息
-     * @param nID
-     * @return
-     */
-    Q_INVOKABLE ScePersonInfo* modifyPerson(int nID);
 
     /**
      * @brief 根据id查找人员
@@ -61,26 +66,17 @@ public:
      */
     Q_INVOKABLE bool deletePerson(int nID);
 
-    /**
-     * @brief 通过Json解析人员信息
-     * @param rArray
-     */
-    void Prase(const QJsonArray& rArray)/*(const QJsonArray& rArray)*/;
 
-    /**
-     * @brief 将人员信息保存到Json中
-     * @param rArray
-     */
-    void Save(QJsonArray& rArray);
 signals:
     void sceNameChanged(QString);
     void personChanged();
 protected:
     void ClearMap();
 private:
-    QString m_sSceName;     ///方案名称
-    QList<QObject*> m_listPerson;
-    QMap<int,ScePersonInfo*> m_mapId2Person;
+    QString m_sSceName;                              ///方案名称
+    QList<QObject*> m_listPerson;                    ///人员信息
+    QMap<int,ScePersonInfo*> m_mapId2Person;         ///id与人员信息配对
+    QHash<int,ScePersonInfo*> m_hashId2Person;       ///存放查看id人员信息配对
 };
 
 #endif // CSCEINFO_H

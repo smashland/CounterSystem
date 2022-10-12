@@ -20,54 +20,87 @@ CSceInfo *SceManager::createSceneri()
 
 SceManager::~SceManager()
 {
-//    ClearSceInfo();
+    //    ClearSceInfo();
 }
-
-//QList<ScePersonInfo*> SceManager::sces() const
-//{
-//    return(m_mapName2SceInfo.values());
-//}
 
 ///添加方案
 CSceInfo *SceManager::addScenari(const QString &sceName,CSceInfo* pSceInfo)
 {
     auto findOne = m_mapName2SceInfo.find(sceName);
-    qDebug()<<"测试添加方案函数："<<sceName;
     if(m_mapName2SceInfo.end() == findOne)
     {
-        if(nullptr == pSceInfo)
+        if(!m_mapName2SceInfo.contains(sceName))
         {
-            qDebug()<<"测shi1";
-            CSceInfo* pNewOne = new CSceInfo;
-            m_mapName2SceInfo.insert(sceName,pNewOne);
-            m_listSces.append(pNewOne);
-            emit listScesChanged();
-            return(pNewOne);
+            if(nullptr == pSceInfo)
+            {
+                qDebug()<<"测试新建方案";
+                CSceInfo* pNewOne = new CSceInfo;
+                pNewOne->setSceName(sceName);
+                m_mapName2SceInfo.insert(sceName,pNewOne);
+                m_listSces.append(pNewOne);
+                emit listScesChanged();
+                return(pNewOne);
+            }
+            else
+            {
+                qDebug()<<"测试原有的方案";
+                QHash<QString, CSceInfo*>::iterator i;
+                for( i=m_hashName2SceInfo.begin(); i!=m_hashName2SceInfo.end(); ++i)
+                {
+                    m_mapName2SceInfo.remove(i.key());
+                    m_listSces.removeOne(i.value());
+                    emit listScesChanged();
+                }
+                pSceInfo->setSceName(sceName);
+                m_mapName2SceInfo.insert(sceName, pSceInfo);
+                m_listSces.append(pSceInfo);
+                emit listScesChanged();
+                return(pSceInfo);
+            }
         }
         else
         {
-            qDebug()<<"测shi2";
-            m_mapName2SceInfo.insert(sceName,pSceInfo);
-            m_listSces.append(pSceInfo);
-            emit listScesChanged();
-            return(pSceInfo);
+            qDebug()<<"含有相同的键值"<<sceName;
+            return (nullptr);
         }
+
     }
     else
     {
-        return(nullptr);
+         if(!m_mapName2SceInfo.contains(sceName))
+         {
+             QHash<QString, CSceInfo*>::iterator i;
+             for( i=m_hashName2SceInfo.begin(); i!=m_hashName2SceInfo.end(); ++i)
+             {
+               deleteScenario(i.key());
+             }
+             qDebug()<<"存在方案中新建";
+             pSceInfo->setSceName(sceName);
+             m_mapName2SceInfo.insert(sceName, pSceInfo);
+             m_listSces.append(pSceInfo);
+             emit listScesChanged();
+             return(pSceInfo);
+         }
+         else
+         {
+             qDebug()<<"存在方案中有相同的键值";
+             return nullptr;
+         }
     }
 }
-
 
 ///删除方案
 bool SceManager::deleteScenario(const QString &sceName)
 {
+    qDebug()<<"删除方案函数测试"<<sceName;
     auto findOne = m_mapName2SceInfo.find(sceName);
     if(m_mapName2SceInfo.end() != findOne)
     {
+        m_listSces.removeOne(findOne.value());
+        emit listScesChanged();
         delete findOne.value();
         m_mapName2SceInfo.erase(findOne);
+        removeSceFile(sceName);
         return(true);
     }
     else
@@ -76,19 +109,23 @@ bool SceManager::deleteScenario(const QString &sceName)
     }
 }
 ///查找方案信息
-CSceInfo *SceManager::findScenario(const QString &sceName)
+QObject *SceManager::findScenario(const QString &sceName)
 {
     qDebug()<<("查看方案");
+    m_hashName2SceInfo.clear();
     auto findOne = m_mapName2SceInfo.find(sceName);
-    return m_mapName2SceInfo.end() == findOne ? nullptr : findOne.value();
+    if(m_mapName2SceInfo.end() != findOne)
+    {
+        m_hashName2SceInfo.insert(sceName,findOne.value());
+        return (findOne.value());
+    }
+    else
+    {
+        return nullptr;
+    }
+
 }
 
-/////得到所有的方案信息
-//QList<CSceInfo *> SceManager::getSceAll()
-//{
-//    qDebug()<<"测试所有的方案信息";
-//    return(m_mapName2SceInfo.values());
-//}
 
 QList<QObject *> SceManager::getSceAll()
 {
@@ -101,7 +138,7 @@ QList<QObject *> SceManager::getSceAll()
 
 void SceManager::read()
 {
-//    ClearSceInfo();
+    //    ClearSceInfo();
 
     qDebug()<<"测试读取所有文件";
     showSceList();
@@ -159,17 +196,17 @@ void SceManager::write()
         one.value()->Save(personArray);
         jsonSce.insert("PersonArray",personArray);
 
-//        QString filePath = QApplication::applicationDirPath() + QString("/Data/Project/%1.json").arg(one.key());
-//        QFile saveFile(filePath);
-//        if (!saveFile.open(QIODevice::WriteOnly))
-//        {
-//            qWarning("Couldn't open save file.");
-//        }
+        //        QString filePath = QApplication::applicationDirPath() + QString("/Data/Project/%1.json").arg(one.key());
+        //        QFile saveFile(filePath);
+        //        if (!saveFile.open(QIODevice::WriteOnly))
+        //        {
+        //            qWarning("Couldn't open save file.");
+        //        }
 
-//        /// 构建 Json 文档
-//        QJsonDocument document;
-//        document.setObject(jsonSce);
-//        saveFile.write(document.toJson());
+        //        /// 构建 Json 文档
+        //        QJsonDocument document;
+        //        document.setObject(jsonSce);
+        //        saveFile.write(document.toJson());
     }
 
 
@@ -199,68 +236,6 @@ void SceManager::write()
     }
 }
 
-
-void SceManager::modify()
-{/*
-    QByteArray byte;
-    QString filePath = QApplication::applicationDirPath() + QString("/Data/Project/%1.json").arg("测试方案111");
-    QFile file(filePath);
-    if(file.exists()){
-        file.open(QIODevice::ReadOnly|QIODevice::Text);
-        byte=file.readAll();
-        file.close();
-    }
-    else
-    {
-        qDebug()<<"openFileError";
-        return;
-    }
-
-    QJsonParseError jsonError;
-    QJsonDocument jsonDoc(QJsonDocument::fromJson(byte,&jsonError));
-    if(jsonError.error!=QJsonParseError::NoError)
-    {
-        qDebug() << "json error!" << jsonError.errorString();
-        return ;
-    }
-    QJsonObject rootobj=jsonDoc.object();
-
-//    ///修改方案名称
-//    QJsonObject sceNameObj;
-//    if(rootobj.contains("Scename"))
-//    {
-//        sceNameObj=rootobj.value("Scename").toObject();
-//        sceNameObj["Scename"]=m_sSceName;
-//    }
-
-
-    QJsonArray personArray=rootobj.value("PersonArray").toArray();
-    for (int i = 0; i < personArray.size(); ++i)
-    {
-        QJsonObject personObj;
-        personObj=personArray[i].toObject();
-        personObj["Name"]="MINGZI";
-        personObj["Grouptype"]=10;
-        personObj["Position"]=6;
-        personObj["Host"]=false;
-        personObj["ImagePath"]="路径2";
-        personArray.replace(i,personObj);
-    }
-
-    rootobj["Scename"]=sceNameObj;
-    rootobj["PersonArray"]=personArray;
-
-
-    QFile file1(filePath);
-    if(file1.exists()){
-        file1.open(QIODevice::WriteOnly|QIODevice::Text);
-        jsonDoc.setObject(rootobj);
-        //        file1.seek(0);
-        file1.write(jsonDoc.toJson());
-        //        file1.flush();
-        file1.close();
-    }*/
-}
 ///加载图片信息
 void SceManager::loadImagePath(const QString &strImagePath)
 {
@@ -269,39 +244,11 @@ void SceManager::loadImagePath(const QString &strImagePath)
     QDesktopServices::openUrl(QUrl::fromLocalFile(strImagePath));
 }
 
-
-///显示选中方案
-void SceManager::SceManager::showScenfo(QString sSceName)
-{
-//    read(sSceName);
-
-//    m_listPerson.clear();
-//    QVariantMap tmpMap;
-//    for(auto findOne = m_mapId2Person.begin(); m_mapId2Person.end() != findOne; ++findOne)
-//    {
-//        auto itorSecond = findOne.value();
-//        tmpMap.insert("id",itorSecond->getID());
-//        tmpMap.insert("name",itorSecond->getName());
-//        tmpMap.insert("group",itorSecond->getGroupType());
-//        tmpMap.insert("position",itorSecond->getPosition());
-//        tmpMap.insert("host",itorSecond->getHostage());
-//        m_listPerson.push_back(tmpMap);
-
-//        qDebug()<<"id"<<itorSecond->getID();
-//        qDebug()<<"name"<<itorSecond->getName();
-//        qDebug()<<"group"<<itorSecond->getGroupType();
-//        qDebug()<<"position"<<itorSecond->getPosition();
-//        qDebug()<<"host"<<itorSecond->getHostage();
-//    }
-//    /// 更新模型列表
-//    emit listPersonChanged(m_listPerson);
-}
-
 ///显示所有方案
 QStringList SceManager::showSceList()
 {
     m_listSceFileName.clear();
-//    if(m_listSceFileName.size() < 1)
+    //    if(m_listSceFileName.size() < 1)
     {
         QDir *dir=new QDir(QString("%1/%2").arg(GetDataPath().c_str()).arg("Project")); //文件夹
         QStringList filter; //过滤
@@ -318,19 +265,7 @@ QStringList SceManager::showSceList()
     return(m_listSceFileName);
 }
 
-
-/////添加方案
-void SceManager::addScenario(const QString &sName)
-{
-    if(m_mapName2SceInfo.size() > 0)
-    {
-//        write();
-        ClearSceInfo();
-    }
-}
-
-///删除所选方案
-bool SceManager::removeScenario(const QString &sName)
+bool SceManager::removeSceFile(const QString &sName)
 {
     QString filePath = QApplication::applicationDirPath() + QString("/Data/Project/%1.json").arg(sName);
 
@@ -343,21 +278,18 @@ bool SceManager::removeScenario(const QString &sName)
         QFile::remove(filePath);
     return true;
 }
-///添加人员
-void SceManager::addPerson(int nID,const QString& sName, int nLevel, int nGroup, bool bHostage,const QString& sImagePath)
-{
-}
+
 
 ///清空方案信息
 void SceManager::ClearSceInfo()
 {
-     qDebug()<<"清空方案信息";
+    qDebug()<<"清空方案信息";
     foreach (auto one, m_mapName2SceInfo)
     {
         delete one;
     }
     m_mapName2SceInfo.clear();
-
+    m_hashName2SceInfo.clear();
     m_listSces.clear();
 }
 

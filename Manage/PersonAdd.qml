@@ -16,7 +16,6 @@ Popup
     property string imagePath;
 
     signal ok(int id,string name,int level,int group,bool isHost);
-    signal modifyPersonSignal(int mid,string mName,int mLevel,int mGroup,bool mIsHost)
 
     property var personData: null
     property var rowNum;
@@ -36,11 +35,18 @@ Popup
         function onFindPersonSignal(id)
         {
             var person =  modifySceInfo.findPerson(id)
-            shebeiId.name=person.id
-            personName.name=person.name
-            combobox_renyuan.currentIndex=person.position
-            zhenying.currentIndex=person.groupType
-            control3.checked=person.hostage
+            if(null!==person)
+            {
+                shebeiId.name=person.id
+                personName.name=person.name
+                combobox_renyuan.currentIndex=person.position
+                zhenying.currentIndex=person.groupType
+                control3.checked=person.hostage
+            }
+            else{
+                console.log("不存在这样的数字据")
+            }
+
         }
         target: scenarioNew
     }
@@ -338,8 +344,6 @@ Popup
             onClicked: {
                 ok(shebeiId.name,personName.name, combobox_renyuan.currentIndex,
                    zhenying.currentIndex,control3.checked);
-                modifyPersonSignal(shebeiId.name,personName.name, combobox_renyuan.currentIndex,
-                                   zhenying.currentIndex,control3.checked);
                 personAdd.visible = false
                 ///// 给调用界面
             }

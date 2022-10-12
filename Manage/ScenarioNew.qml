@@ -22,13 +22,20 @@ Item {
     Connections{
         function onOk(id,name,level,group,isHost)
         {
-            var person = scenarioNewInfo.addPerson(id);
-            person.name = name;
-            person.position = level;
-            person.groupType = group;
-            person.hostage = isHost;
-            listView.model=scenarioNewInfo.listPerson
-            nCount =  scenarioNewInfo.getCount();
+            var person = modifySceInfo.addPerson(id);
+            if(null!==person)
+            {
+                person.name = name;
+                person.position = level;
+                person.groupType = group;
+                person.hostage = isHost;
+                listView.model=modifySceInfo.listPerson
+                nCount = modifySceInfo.getCount();
+            }
+            else{
+                console.log("编号数值重复，请重新输入");
+            }
+
         }
         target: personAdd
     }
@@ -38,42 +45,19 @@ Item {
         function onSceFindSignal(sceName)
         {
             modifySceInfo=sceManager.findScenario(sceName)
-            nameItemContent.text=sceName
-            listView.model=modifySceInfo.listPerson
-            nCount =  modifySceInfo.getCount();
-            console.log("查看方案")
+            if(null!==modifySceInfo)
+            {
+                nameItemContent.text=modifySceInfo.sceName
+                listView.model=modifySceInfo.listPerson
+                nCount =  modifySceInfo.getCount();
+                console.log("查看方案")
+            }
+            else
+            {
+                console.log("修改方案错误")
+            }
         }
         target: scenarioLoader
-    }
-
-    Connections{
-
-        function onModifyPersonSignal(mid,mName,mLevel,mGroup,mIsHost)
-        {
-            var modifyPerson = modifySceInfo.modifyPerson(mid);
-            modifyPerson.name = mName;
-            modifyPerson.position = mLevel;
-            modifyPerson.groupType = mGroup;
-            modifyPerson.hostage = mIsHost;
-            listView.model = modifySceInfo.listPerson;
-        }
-        target: personAdd
-    }
-
-    function openPerson(qmlUrl){
-        var myComponent = Qt.createComponent(qmlUrl)
-        if (Component.Ready === myComponent.status){
-            var qmlObj = myComponent.createObject(scenarioNew,{"anchors.centerIn":scenarioNew});
-            if(qmlObj === null){
-                return(qmlObj);
-            }
-
-        }else{
-            console.log(myComponent.errorString());
-            myComponent.destroy();
-            return(null);
-        }
-
     }
     Image {
         id: loginImage
@@ -118,13 +102,9 @@ Item {
             InputItem {
                 id: nameItemContent
                 x: 10 *dpx
-                //                text:scenarioNewInfo.sceName
+                text:modifySceInfo.sceName
                 width: 420*dpx
                 height: 40 *dpy
-                onEditingFinished: {
-                    scenarioNewInfo.setSceName(nameItemContent.text)
-                }
-
             }
         }
     }
@@ -156,7 +136,7 @@ Item {
     SceNewList{
         id: listView
         y: weizhixinxi.contentHeight + weizhixinxi.y + 20 *dpy
-        model:modifySceInfo.listPerson //scenarioNewInfo.getAll()
+        model:modifySceInfo.listPerson
         delegate: Rectangle {
             id: wrapper
             width: listView.width
@@ -225,9 +205,9 @@ Item {
                             anchors.fill: parent
                             onClicked:
                             {
-                                scenarioNewInfo.deletePerson(modelData.id)
-                                nCount =  scenarioNewInfo.getCount();
-                                listView.model = scenarioNewInfo.getAll();
+                                modifySceInfo.deletePerson(modelData.id)
+                                nCount =  modifySceInfo.getCount();
+                               listView.model = modifySceInfo.listPerson;
                             }
                         }
                     }
@@ -261,7 +241,11 @@ Item {
                 if(nameItemContent.text === '') {
                     console.log("没有方案名称")
                 }else {
-                    sceManager.addScenari(nameItemContent.text,scenarioNewInfo);
+                    if(null===modifySceInfo)
+                    {
+                        console.log("modifySceInfo函数为空")
+                    }
+                    sceManager.addScenari(nameItemContent.text,modifySceInfo);
                     sceManager.write();
                     scenarioNew.visible = false
                 }

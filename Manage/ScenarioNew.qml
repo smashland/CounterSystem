@@ -71,7 +71,10 @@ Item {
         anchors.rightMargin: 73 *dpx
         anchors.top: scenarioNew.top
         anchors.topMargin: 70 *dpy
-        onClicked: scenarioNew.visible = false
+        onClicked: {
+            scenarioNew.visible = false
+            qingkong()
+        }
     }
 
     PopupTitle {
@@ -250,6 +253,7 @@ Item {
                     }
                     sceManager.write();
                     scenarioNew.visible = false
+                    qingkong()
                 }
             }
         }
@@ -261,6 +265,7 @@ Item {
             onClicked:
             {
                 scenarioNew.visible = false
+                qingkong()
             }
         }
     }
@@ -281,5 +286,9 @@ Item {
             scePopup.visible = false
             scePopup2.visible = false
         }
+    }
+    function qingkong() {
+        nameItemContent.text=""
+        listView.model=""
     }
 }

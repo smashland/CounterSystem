@@ -6,13 +6,13 @@ import Qt.labs.platform 1.1
 import "../Common"
 import "../Exercise"
 import "Plugins"
-Popup
+Rectangle
 {
     id: personAdd
     width: 651*dpx
     height: 510*dpy
     anchors.centerIn: parent
-    modal: true
+//    modal: true
     property string imagePath;
 
     signal ok(int id,string name,int level,int group,bool isHost);
@@ -50,21 +50,15 @@ Popup
         }
         target: scenarioNew
     }
-
-    /// 背景半透明
-    background:Rectangle
-    {
-        color:"transparent"
-        Image {
-            anchors.fill: parent
-            source: "qrc:/Image/Popup_bg_27.png"
-        }
+    color:"transparent"
+    Image {
+        anchors.fill: parent
+        source: "qrc:/Image/Popup_bg_27.png"
     }
-
     PopupTitle {
         id: popuptitle
         x: 40*dpx
-        y: 34*dpy
+        y: 38*dpy
         name: qsTr("人员设置")
         icon: qsTr("\ue8b8")
     }
@@ -225,7 +219,6 @@ Popup
                 spacing: 14 *dpx
                 RadioButton {
                     id:control3
-                    checked: true
                     text: qsTr("是")
                     indicator: Rectangle {
                         implicitWidth: 18
@@ -292,13 +285,12 @@ Popup
             background: Rectangle {
                 color: "#265aef"
             }
-
             nameButton: "确定"
             onClicked: {
                 ok(shebeiId.name,personName.name, combobox_renyuan.currentIndex,
                    zhenying.currentIndex,control3.checked);
                 personAdd.visible = false
-                ///// 给调用界面
+                qingkong()
             }
 
         }
@@ -309,8 +301,15 @@ Popup
             nameButton: "取消"
             onClicked: {
                 personAdd.visible = false
+                qingkong()
             }
         }
+    }
+    function qingkong() {
+        shebeiId.name=""
+        personName.name=""
+        control3.checked = false
+        control4.checked = false
     }
 
 }

@@ -461,7 +461,8 @@ void CGlobalData::saveSceInfo(const QString &strImagePath)
     QString sceName = fileInfo.fileName().chopped(4);
 
     qDebug()<<"测试保存方案信息"<<sceName;
-    auto sceNewPerson=SceManager::GetInstance()->createSceneri();
+    SceManager* sceManager=new SceManager();
+    auto sceNewPerson=sceManager->createSceneri();
     for(auto one=m_mapTypeInfo.begin();one!=m_mapTypeInfo.end();++one)
     {
 
@@ -479,8 +480,8 @@ void CGlobalData::saveSceInfo(const QString &strImagePath)
 
         }
     }
-    SceManager::GetInstance()->addScenari(sceName,sceNewPerson);
-    SceManager::GetInstance()->write();
+    sceManager->addScenari(sceName,sceNewPerson);
+    sceManager->write();
 }
 
 void CGlobalData::setUpdateAllInfo(bool bUpdate)

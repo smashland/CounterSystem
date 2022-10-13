@@ -6,13 +6,13 @@ import Qt.labs.platform 1.1
 import "../Common"
 import "../Exercise"
 import "Plugins"
-Popup
+Rectangle
 {
     id: personAdd
     width: 651*dpx
     height: 510*dpy
     anchors.centerIn: parent
-    modal: true
+//    modal: true
     property string imagePath;
 
     signal ok(int id,string name,int level,int group,bool isHost);
@@ -50,21 +50,15 @@ Popup
         }
         target: scenarioNew
     }
-
-    /// 背景半透明
-    background:Rectangle
-    {
-        color:"transparent"
-        Image {
-            anchors.fill: parent
-            source: "qrc:/Image/Popup_bg_27.png"
-        }
+    color:"transparent"
+    Image {
+        anchors.fill: parent
+        source: "qrc:/Image/Popup_bg_27.png"
     }
-
     PopupTitle {
         id: popuptitle
         x: 40*dpx
-        y: 34*dpy
+        y: 38*dpy
         name: qsTr("人员设置")
         icon: qsTr("\ue8b8")
     }
@@ -164,39 +158,15 @@ Popup
                     {target:"士兵"},
                     {target:"军官"}
                 ]
+                onCurrentIndexChanged: {
+                    var type = combobox_renyuan.currentIndex;
+                    if(type === 0){
+                        combobox_renyuan.currentText = "士兵"
+                    }else if(type === 1) {
+                        combobox_renyuan.currentText = "军官"
+                    }
+                }
             }
-
-//            ComboBox {
-//                id: combobox_renyuan
-//                width: 200 *dpx
-//                height: 34 *dpy
-//                model: ["士兵"]
-//                delegate: ItemDelegate {
-//                    width: 110 *dpx
-//                    height: 30 *dpy
-//                    contentItem: Text {
-//                        text: modelData
-//                        color: "black"
-//                        font.pixelSize: 16
-//                        font.family: "Microsoft YaHei"
-//                        verticalAlignment: Text.AlignVCenter
-//                    }
-//                }
-//                contentItem: TextInput {
-//                    leftPadding: 10*dpx
-//                    text: combobox_renyuan.displayText
-//                    font.pixelSize: 16
-//                    color: "#ffffff"
-//                    font.family: "Microsoft YaHei"
-//                    verticalAlignment: Text.AlignVCenter
-//                }
-//                background: Rectangle {
-//                    implicitWidth: 110*dpx
-//                    implicitHeight: 30 *dpy
-//                    color: "#1d4f88"
-//                    border.color: "#26abef"
-//                }
-//            }
         }
         Row {
             spacing: 20*dpx
@@ -221,38 +191,15 @@ Popup
                     {target:"蓝"},
                     {target:"红"}
                 ]
+                onCurrentIndexChanged: {
+                    var type = zhenying.currentIndex;
+                    if(type === 0){
+                        zhenying.currentText = "蓝"
+                    }else if(type === 1) {
+                        zhenying.currentText = "红"
+                    }
+                }
             }
-//            ComboBox {
-//                id: zhenying
-//                width: 200 *dpx
-//                height: 34 *dpy
-//                model: ["蓝","红"]
-//                delegate: ItemDelegate {
-//                    width: 110 *dpx
-//                    height: 30 *dpy
-//                    contentItem: Text {
-//                        text: modelData
-//                        color: "black"
-//                        font.pixelSize: 16
-//                        font.family: "Microsoft YaHei"
-//                        verticalAlignment: Text.AlignVCenter
-//                    }
-//                }
-//                contentItem: TextInput {
-//                    leftPadding: 10*dpx
-//                    text: zhenying.displayText
-//                    font.pixelSize: 16
-//                    color: "#ffffff"
-//                    font.family: "Microsoft YaHei"
-//                    verticalAlignment: Text.AlignVCenter
-//                }
-//                background: Rectangle {
-//                    implicitWidth: 110*dpx
-//                    implicitHeight: 30 *dpy
-//                    color: "#1d4f88"
-//                    border.color: "#26abef"
-//                }
-//            }
         }
         Row {
             spacing: 20*dpx
@@ -272,7 +219,6 @@ Popup
                 spacing: 14 *dpx
                 RadioButton {
                     id:control3
-                    checked: true
                     text: qsTr("是")
                     indicator: Rectangle {
                         implicitWidth: 18
@@ -339,13 +285,12 @@ Popup
             background: Rectangle {
                 color: "#265aef"
             }
-
             nameButton: "确定"
             onClicked: {
                 ok(shebeiId.name,personName.name, combobox_renyuan.currentIndex,
                    zhenying.currentIndex,control3.checked);
                 personAdd.visible = false
-                ///// 给调用界面
+                qingkong()
             }
 
         }
@@ -356,8 +301,16 @@ Popup
             nameButton: "取消"
             onClicked: {
                 personAdd.visible = false
+                qingkong()
             }
         }
     }
+    function qingkong() {
+        shebeiId.name=""
+        personName.name=""
+        control3.checked = false
+        control4.checked = false
+    }
+
 }
 

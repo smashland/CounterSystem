@@ -19,6 +19,7 @@ ManageRect{
     property var scenarioInfo: null
     signal addScenario(string sceName)
     signal sceFindSignal(string sceName)
+    property string impScePath: null
 
     CloseButton {
         anchors.right: scenarioLoader.right
@@ -79,6 +80,7 @@ ManageRect{
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
+                     printSce.open()
                 }
             }
         }
@@ -90,6 +92,7 @@ ManageRect{
                 anchors.fill: parent
                 onClicked: {
                     $app.allData.clearAllInfo();
+                    sceManager.read();
                     listView.model= sceManager.listSces
                 }
             }
@@ -102,7 +105,7 @@ ManageRect{
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-
+                    saveSce.open()
                 }
             }
         }
@@ -159,9 +162,15 @@ ManageRect{
                     name: qsTr("加载")
                     color: viewColor_xinjian
                     viewImage: "\ue607"
+                    MouseArea{
+                        anchors.fill: parent
+                        onClicked: {
+
+                        }
+                    }
                 }
                 ViewButton {
-                    name: qsTr("删除方案")
+                    name: qsTr("删除")
                     color: viewColor_shanchu
                     viewImage: "\ue61c"
                     MouseArea {
@@ -174,6 +183,29 @@ ManageRect{
             }
         }
 
+    }
+
+    FileDialog {
+        id: printSce
+        title: qsTr("请选择方案")
+        nameFilters: [qsTr("(*.sce))")]
+        onAccepted: {
+            source: printSce.fileUrl
+            impScePath=currentFile.toString().replace("file:///", "")
+            sceManager.importSce(impScePath)
+        }
+    }
+    FileDialog {
+        id: saveSce
+        title: qsTr("保存方案")
+        fileMode: FileDialog.SaveFile
+        folder: shortcuts.desktop
+        nameFilters: [qsTr("(*.sce))")]
+        onAccepted: {
+            var scePath=String(saveSce.currentFile)
+            scePath=scePath.substr(8)
+            $app.allData.saveSceInfo(scePath)
+        }
     }
 }
 

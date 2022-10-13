@@ -137,6 +137,12 @@ public:
     Q_INVOKABLE void createReport(const QUrl& sReportFileName);
 
     /**
+     * @brief 保存方案
+     * @param strImagePath
+     */
+    Q_INVOKABLE void saveSceInfo(const QString &strImagePath);
+
+    /**
      * @brief 是否更新人员状态
      */
     Q_INVOKABLE void setUpdateAllInfo(bool);

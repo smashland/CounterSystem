@@ -14,9 +14,20 @@ public:
 
     Q_PROPERTY(QList<QObject*> listSces MEMBER m_listSces NOTIFY listScesChanged)
 
+
+
     ///读写文件保存方案信息
     Q_INVOKABLE void read();
+
     Q_INVOKABLE void write();
+
+    /**
+     * @brief 导入方案
+     * @param strImagePath
+     * @param folderName
+     * @return
+     */
+    Q_INVOKABLE QString importSce(const QString &strImagePath);
 
     /**
      * @brief 创建一个方案
@@ -89,7 +100,6 @@ private:
     QStringList m_listSceFileName;               ///存放文件
     QList<QObject*> m_listSces;                  ///方案信息
     QHash<QString,CSceInfo*> m_hashName2SceInfo; ///存放查看的方案信息
-
 
 };
 

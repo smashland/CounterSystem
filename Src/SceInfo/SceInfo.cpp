@@ -84,6 +84,28 @@ ScePersonInfo *CSceInfo::addPerson(int nID)
     }
 }
 
+ScePersonInfo *CSceInfo::addPerson(int nID, ScePersonInfo *pScePersonInfo)
+{
+    auto findOne = m_mapId2Person.find(nID);
+    if(m_mapId2Person.end() == findOne)
+    {
+        if(!m_mapId2Person.contains(nID))
+        {
+            pScePersonInfo->setID(nID);
+            m_mapId2Person.insert(nID, pScePersonInfo);
+            m_listPerson.append(pScePersonInfo);
+            emit personChanged();
+            return(pScePersonInfo);
+        }
+        else
+        {
+            qDebug()<<"含有相同的编号"<<nID;
+
+        }
+    }
+    return (nullptr);
+}
+
 /// 根据ID查找人员信息
 QObject *CSceInfo::findPerson(int nID)
 {

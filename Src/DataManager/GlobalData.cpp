@@ -14,6 +14,8 @@
 #include "PersonAllInfo.h"
 #include "../Map/ContrlMapPerson.h"
 #include "../Notice/NoticeManager.h"
+#include "../SceInfo/SceManager.h"
+#include "../SceInfo/ScePersonInfo.h"
 
 CGlobalData::CGlobalData(QObject *parent) : QObject(parent),
     m_sCurrentFileName(QDir::homePath())
@@ -22,6 +24,7 @@ CGlobalData::CGlobalData(QObject *parent) : QObject(parent),
     qRegisterMetaType<CPersonStatus*>("CPersonStatus*");
     qRegisterMetaType<CGroupStatus*>("CGroupStatus*");
     qRegisterMetaType<CPersonAllInfo*>("CPersonAllInfo*");
+    qRegisterMetaType<SceManager*>("SceManager");
 
     m_listStatusModel = new CMyListModel;
     m_pPersonAllInfo = new CPersonAllInfo;
@@ -352,7 +355,6 @@ int CGlobalData::openReplayFile(const QUrl &rReplayFile)
         /// 获取路径大小
         inFile.read(reinterpret_cast<char*>(&nSize),sizeof(nSize));
         inFile.read(buffer,nSize);
-        qDebug()<<"**************************"<<buffer;
         /// 读取真实的人员状态信息
         CDataManager::GetInstance()->ReadFile(buffer);
 
@@ -450,8 +452,35 @@ void CGlobalData::saveData(const QUrl &sDataFileName)
 void CGlobalData::createReport(const QUrl &sReportFileName)
 {
     StatisticResult();
-
     CExportResult::GetInstance()->CreateDocx(sReportFileName.toLocalFile(),sReportFileName.fileName().split(".")[0],m_mapTypeInfo);
+}
+
+void CGlobalData::saveSceInfo(const QString &strImagePath)
+{
+    QFileInfo fileInfo(strImagePath);
+    QString sceName = fileInfo.fileName().chopped(4);
+
+    qDebug()<<"测试保存方案信息"<<sceName;
+    auto sceNewPerson=SceManager::GetInstance()->createSceneri();
+    for(auto one=m_mapTypeInfo.begin();one!=m_mapTypeInfo.end();++one)
+    {
+
+        int nPersonNum=one.value()->count();
+        for(int i=0;i<nPersonNum;++i)
+        {
+            CPersonStatus * pStutus = one.value()->at(i);
+            ScePersonInfo* cePersonInfo=new ScePersonInfo();
+            cePersonInfo->setID(pStutus->getId());
+            cePersonInfo->setName(pStutus->getName());
+            cePersonInfo->setPosition(0);
+            cePersonInfo->setGroupType(pStutus->getType()=="蓝方"?0:1);
+            cePersonInfo->setHostage(false);
+            sceNewPerson->addPerson(pStutus->getId(),cePersonInfo);
+
+        }
+    }
+    SceManager::GetInstance()->addScenari(sceName,sceNewPerson);
+    SceManager::GetInstance()->write();
 }
 
 void CGlobalData::setUpdateAllInfo(bool bUpdate)

@@ -42,6 +42,8 @@ void ScePersonInfo::writePerson(QJsonObject &json) const
     json["Host"]       = m_host;
     json["ImagePath"]  = m_sImagePath;
 }
+
+
 ////设置士兵信息
 void ScePersonInfo::setID(int nID)
 {
@@ -49,8 +51,8 @@ void ScePersonInfo::setID(int nID)
     {
         m_ID=nID;
         emit IDChanged(m_ID);
-        qDebug()<<"编号————"<<m_ID;
     }
+    qDebug()<<"编号————"<<m_ID;
 }
 
 int ScePersonInfo::getID() const
@@ -64,8 +66,8 @@ void ScePersonInfo::setName(QString sName)
     {
         m_Name=sName;
         emit nameChanged(m_Name);
-        qDebug()<<"姓名————"<<m_Name;
     }
+    qDebug()<<"姓名————"<<m_Name;
 }
 
 QString ScePersonInfo::getName()
@@ -78,9 +80,9 @@ void ScePersonInfo::setPosition(int sPosition)
     if(m_Positon!=sPosition)
     {
         m_Positon=sPosition;
-        emit positionChanged(sPosition);
-        qDebug()<<"职务————"<<m_Positon;
+        emit positionChanged(sPosition);       
     }
+    qDebug()<<"职务————"<<m_Positon;
 }
 
 int ScePersonInfo::getPosition()
@@ -94,8 +96,8 @@ void ScePersonInfo::setGroupType(int groupType)
     {
         m_Group=groupType;
         emit groupTypeChanged(groupType);
-        qDebug()<<"类型————"<<m_Group;
     }
+    qDebug()<<"类型————"<<m_Group;
 }
 
 int ScePersonInfo::getGroupType()
@@ -109,9 +111,9 @@ void ScePersonInfo::setHostage(bool bHostage)
     if(m_host!=bHostage)
     {
         m_host=bHostage;
-        emit hostageChanged(bHostage);
-        qDebug()<<"人质————"<<m_host;
+        emit hostageChanged(bHostage);       
     }
+    qDebug()<<"人质————"<<m_host;
 }
 
 bool ScePersonInfo::getHostage()

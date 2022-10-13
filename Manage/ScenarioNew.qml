@@ -52,10 +52,6 @@ Item {
                 nCount =  modifySceInfo.getCount();
                 console.log("查看方案")
             }
-            else
-            {
-                console.log("修改方案错误")
-            }
         }
         target: scenarioLoader
     }

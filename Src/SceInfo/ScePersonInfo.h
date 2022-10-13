@@ -19,6 +19,7 @@ public:
     void readPerson(const QJsonObject &json);
     void writePerson(QJsonObject &json) const;
 
+
     /**
       * @brief 设置设备编号
       * @param nID
@@ -77,7 +78,7 @@ private:
     QString    m_Name;
     int        m_Positon;
     int        m_Group;
-    bool       m_host{true};
+    bool       m_host{false};
     QString    m_sImagePath;
 
 };

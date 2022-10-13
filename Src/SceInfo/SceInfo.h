@@ -39,6 +39,7 @@ public:
      * @return
      */
     Q_INVOKABLE ScePersonInfo* addPerson(int nID);
+    ScePersonInfo* addPerson(int nID,ScePersonInfo* pScePersonInfo);
 
     /**
      * @brief 根据id查找人员

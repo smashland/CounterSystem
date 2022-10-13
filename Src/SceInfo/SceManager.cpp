@@ -136,10 +136,9 @@ QList<QObject *> SceManager::getSceAll()
     return(listObjct);
 }
 
-void SceManager::read()
+void SceManager::  read()
 {
-    //    ClearSceInfo();
-
+    ClearSceInfo();
     qDebug()<<"测试读取所有文件";
     showSceList();
     foreach(const QString& one,m_listSceFileName)
@@ -151,7 +150,7 @@ void SceManager::read()
 
 void SceManager::read(const QString &sname)
 {
-    QString filePath = QApplication::applicationDirPath() + QString("/Data/Project/%1.json").arg(sname);
+    QString filePath = QApplication::applicationDirPath() + QString("/Data/Project/%1.sce").arg(sname);
     qDebug()<<"选中方案路径：------"<<filePath;
     QFile sceFile(filePath);
     if (!sceFile.open(QIODevice::ReadOnly))
@@ -181,7 +180,7 @@ void SceManager::read(const QString &sname)
     {
         pSceInfo->setSceName(rootObj["Scename"].toString());
     }
-    m_mapName2SceInfo.insert(rootObj["Scename"].toString()/*rootObj["Scename"].toObject()["Scename"].toString()*/,pSceInfo);
+    m_mapName2SceInfo.insert(rootObj["Scename"].toString(),pSceInfo);
     m_listSces.append(pSceInfo);
 
 }
@@ -196,7 +195,7 @@ void SceManager::write()
         one.value()->Save(personArray);
         jsonSce.insert("PersonArray",personArray);
 
-        //        QString filePath = QApplication::applicationDirPath() + QString("/Data/Project/%1.json").arg(one.key());
+        //        QString filePath = QApplication::applicationDirPath() + QString("/Data/Project/%1.sce").arg(one.key());
         //        QFile saveFile(filePath);
         //        if (!saveFile.open(QIODevice::WriteOnly))
         //        {
@@ -222,7 +221,7 @@ void SceManager::write()
             oneNote->Save(personArray);
             jsonSce.insert("PersonArray",personArray);
         }
-        QString filePath = QApplication::applicationDirPath() + QString("/Data/Project/%1.json").arg(oneNote->getSceName());
+        QString filePath = QApplication::applicationDirPath() + QString("/Data/Project/%1.sce").arg(oneNote->getSceName());
         QFile saveFile(filePath);
         if (!saveFile.open(QIODevice::WriteOnly))
         {
@@ -234,6 +233,29 @@ void SceManager::write()
         document.setObject(jsonSce);
         saveFile.write(document.toJson());
     }
+}
+
+
+
+///导入方案
+QString SceManager::importSce(const QString &strImagePath)
+{
+    QFileInfo fileInfo(strImagePath);
+    QString targetPath = QApplication::applicationDirPath() +QString("/Data/Project/%1").arg(fileInfo.fileName());
+    qDebug()<<"源地址————"<<strImagePath;
+    qDebug()<<"目标地址————"<<targetPath;
+    if(QFile::copy(strImagePath,targetPath))
+    {
+//        ClearSceInfo();
+        read();
+    }
+    else
+    {
+        qDebug()<<"复制文件路径失败";
+       return(nullptr);
+    }
+
+    return (nullptr);
 }
 
 ///加载图片信息
@@ -252,7 +274,7 @@ QStringList SceManager::showSceList()
     {
         QDir *dir=new QDir(QString("%1/%2").arg(GetDataPath().c_str()).arg("Project")); //文件夹
         QStringList filter; //过滤
-        filter<<"*.json";
+        filter<<"*.sce";
         dir->setNameFilters(filter);
         QFileInfoList fileInfoList = dir->entryInfoList(filter);
         delete dir;
@@ -267,7 +289,7 @@ QStringList SceManager::showSceList()
 
 bool SceManager::removeSceFile(const QString &sName)
 {
-    QString filePath = QApplication::applicationDirPath() + QString("/Data/Project/%1.json").arg(sName);
+    QString filePath = QApplication::applicationDirPath() + QString("/Data/Project/%1.sce").arg(sName);
 
     if (filePath.isEmpty() || !QDir().exists(filePath))//是否传入了空的路径||路径是否存在
         return false;

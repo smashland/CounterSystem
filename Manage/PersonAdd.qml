@@ -17,19 +17,8 @@ Rectangle
 
     signal ok(int id,string name,int level,int group,bool isHost);
 
-    property var personData: null
     property var rowNum;
     property var bConnected:true
-
-    onPersonDataChanged: {
-        if(personData === null) {
-            shebeiId.name=""
-            personName.name=""
-        }else {
-            shebeiId.name=personData.id
-            personName.name=personData.name
-        }
-    }
 
     Connections{
         function onFindPersonSignal(id)

@@ -194,7 +194,6 @@ Item {
                             {
                                 findPersonSignal(modelData.id)
                                 personAdd.visible = true
-//                                personAdd.personData = wrapper.ListView.view.model.get(index)
                             }
                         }
                     }

@@ -35,25 +35,6 @@ ManageRect{
         y: 60*dpy
     }
 
-    property var taskMap: {0:0}
-//    property var qmlObj: null
-    function openQml(obj,qmlUrl){
-        var myComponent = Qt.createComponent(qmlUrl)
-        if (Component.Ready === myComponent.status){
-            var qmlObj = myComponent.createObject(scenarioLoader,{"anchors.centerIn":scenarioLoader,scenarioNewInfo:obj});
-            if(qmlObj === null){
-                taskMap[obj] = qmlObj;
-                return(qmlObj);
-            }
-
-        }else{
-            console.log(myComponent.errorString());
-            myComponent.destroy();
-            return(null);
-        }
-
-    }
-
     Row
     {
         x: 80 *dpx
@@ -200,7 +181,8 @@ ManageRect{
         id: saveSce
         title: qsTr("保存方案")
         fileMode: FileDialog.SaveFile
-        folder: shortcuts.desktop
+//        folder: shortcuts.desktop
+        folder: "../../Bin/Data/Project"
         nameFilters: [qsTr("(*.sce))")]
         onAccepted: {
             var scePath=String(saveSce.currentFile)

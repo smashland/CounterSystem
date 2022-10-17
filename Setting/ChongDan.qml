@@ -36,23 +36,23 @@ Dialog{
         anchors.centerIn: parent
         ChongdanItem {
             title: "手      枪："
-            danwei: "支"
+//            danwei: "支"
         }
         ChongdanItem {
             title: "步      枪："
-            danwei: "支"
+//            danwei: "支"
         }
         ChongdanItem {
             title: "机      枪："
-            danwei: "支"
+//            danwei: "支"
         }
         ChongdanItem {
             title: "狙击步枪："
-            danwei: "支"
+//            danwei: "支"
         }
         ChongdanItem {
             title: "手      雷："
-            danwei: "个"
+//            danwei: "个"
         }
     }
 

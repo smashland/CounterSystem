@@ -15,6 +15,8 @@ Item {
     width: 1184 *dpx
     height: 860 *dpy
 
+    property string defaltFolderUrl: "../../Bin/Data/Szy/"
+
     Image {
         id: loginImage
         anchors.fill: parent
@@ -259,6 +261,7 @@ Item {
             fileMode:FileDialog.SaveFile
             title: qsTr("保存演习数据")
             nameFilters: [qsTr("演习数据(*.szy)")]
+            options: FileDialog.DontConfirmOverwrite
             onAccepted:
             {
                 $app.allData.saveData(currentFile);

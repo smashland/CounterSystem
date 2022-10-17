@@ -106,10 +106,10 @@ Popup
                         font.family: "Microsoft YaHei"
                         verticalAlignment: Text.AlignVCenter
                         text:outData.name
-                        onEditingFinished:
-                        {
-                            $app.allData.setUserName(outData.id,text);
-                        }
+//                        onEditingFinished:
+//                        {
+//                            $app.allData.setUserName(outData.id,text);
+//                        }
                     }
                 }
             }
@@ -246,6 +246,7 @@ Popup
             nameButton: "确定"
             onClicked: {
                 personPopup.close()
+                $app.allData.setUserName(outData.id,soldierItemContent.text);
             }
 
         }

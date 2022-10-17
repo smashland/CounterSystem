@@ -126,16 +126,6 @@ void QAppGlobal::setData(CGlobalData *pData)
 #include <QList>
 #include <QTextCodec>
 #include <QDebug>
-//void QAppGlobal::openWord()
-//{
-//    QString str = GetDataPath().c_str() + QString("Config/Instructionbook.doc");
-//    QDesktopServices::openUrl(QUrl::fromLocalFile(str));
-//}
-//void QAppGlobal::openVideo()
-//{
-//    QString str = GetDataPath().c_str() + QString("Config/Instructionvideo.mkv");
-//    QDesktopServices::openUrl(QUrl::fromLocalFile(str));
-//}
 
 QStringList QAppGlobal::openPath()
 {
@@ -146,16 +136,14 @@ QStringList QAppGlobal::openPath()
     QFileInfoList fileInfoList = dir->entryInfoList(filter);
     delete dir;
     QStringList string_list;
-
     for(int i=0; i < fileInfoList.count(); i++)
     {
-
         string_list.append(fileInfoList.at(i).baseName());
-
     }
 
     return(string_list);
 }
+
 /// 设置osgItem
 void QAppGlobal::setOsgItem(QQuickItem *pOsgItem)
 {

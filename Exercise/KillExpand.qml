@@ -58,15 +58,15 @@ Item {
         }
     }
 
-    ScrollView
+    Rectangle
     {
         id:showNotice
-        width: 770
+        width: 600
         height: 50
     //    y:parent.height + height
     //    anchors.right:  parent.right
         anchors.centerIn: parent
-    //    color: "transparent"
+        color: "transparent"
 
         TextArea
         {
@@ -74,11 +74,11 @@ Item {
             color: "white"
             font.pointSize: 16
             font.bold: true
-            background: Rectangle
-            {
-                color:"#2D5689"
-                opacity:showNotice.visible ? 0.5 : 0.0
-            }
+//            background: Rectangle
+//            {
+//                color:"#2D5689"
+//                opacity:showNotice.visible ? 0.5 : 0.0
+//            }
 
             Connections
             {

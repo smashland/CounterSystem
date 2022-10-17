@@ -46,7 +46,7 @@ public:
 
 signals:
     void earthNameChanged(QString);
-    void erathPathChanged(QString);
+    void earthPathChanged(QString);
     void latChanged(int);
     void lonChanged(int);
 private:

@@ -20,7 +20,7 @@ void CSetEarth::setEarthPath(const QString &sEarthPath)
     if(sEarthPath!=m_sEarthPath)
     {
         m_sEarthPath=sEarthPath;
-        emit earthNameChanged(m_sEarthName);
+        emit earthPathChanged(m_sEarthPath);
     }
 }
 

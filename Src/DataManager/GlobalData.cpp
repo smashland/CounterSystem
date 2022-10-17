@@ -16,6 +16,7 @@
 #include "../Notice/NoticeManager.h"
 #include "../SceInfo/SceManager.h"
 #include "../SceInfo/ScePersonInfo.h"
+#include "../SceInfo/SceInfo.h"
 
 CGlobalData::CGlobalData(QObject *parent) : QObject(parent),
     m_sCurrentFileName(QDir::homePath())
@@ -440,9 +441,9 @@ void CGlobalData::endReplay()
 /// 保存数据文件
 void CGlobalData::saveData(const QUrl &sDataFileName)
 {
-//    QDateTime current_date_time =QDateTime::currentDateTime();
-//    QString current_date =current_date_time.toString("(yyyyMMdd_hhmmss)");
-//    QString sFilepath=sDataFileName.toLocalFile().chopped(4)+current_date+".szy";
+    //    QDateTime current_date_time =QDateTime::currentDateTime();
+    //    QString current_date =current_date_time.toString("(yyyyMMdd_hhmmss)");
+    //    QString sFilepath=sDataFileName.toLocalFile().chopped(4)+current_date+".szy";
     /// 移动文件到指定位置
     QFile::rename(m_sCurrentFileName,sDataFileName.toLocalFile());
     m_bRemoveFile = false;
@@ -455,9 +456,10 @@ void CGlobalData::createReport(const QUrl &sReportFileName)
     CExportResult::GetInstance()->CreateDocx(sReportFileName.toLocalFile(),sReportFileName.fileName().split(".")[0],m_mapTypeInfo);
 }
 
-void CGlobalData::saveSceInfo(const QString &strImagePath)
+///保存方案信息
+void CGlobalData::saveSceInfo(const QString &strScePath)
 {
-    QFileInfo fileInfo(strImagePath);
+    QFileInfo fileInfo(strScePath);
     QString sceName = fileInfo.fileName().chopped(4);
 
     qDebug()<<"测试保存方案信息"<<sceName;
@@ -482,6 +484,41 @@ void CGlobalData::saveSceInfo(const QString &strImagePath)
     }
     sceManager->addScenari(sceName,sceNewPerson);
     sceManager->write();
+}
+
+void CGlobalData::loadSceInfo(const QString &sceName)
+{
+    clearAllInfo();
+    SceManager* sceManager=new SceManager();
+    auto sceInfo = qobject_cast<CSceInfo*>(sceManager->findScenario(sceName));
+
+    QList<int> listId=sceInfo->getAll();
+    for(int i=0;i<listId.size();i++)
+    {
+        auto cePersonInfo = qobject_cast<ScePersonInfo*>(sceInfo->findPerson(listId.at(i)));
+        CPersonStatus* personStatus=new CPersonStatus();
+        personStatus->setId(cePersonInfo->getID());
+        personStatus->setName(cePersonInfo->getName());
+        personStatus->setRenzhi(cePersonInfo->getHostage());
+        QString typeTemp;
+        if(cePersonInfo->getGroupType()==0)
+        {
+            typeTemp="蓝方";
+        }
+        else if(cePersonInfo->getGroupType()==1)
+        {
+            typeTemp=tr("红方");
+        }
+        personStatus->setType(typeTemp);
+        m_mapStatusModel.insert(cePersonInfo->getID(),personStatus);
+
+        CMyListModel* m_listTypeModel=ceateType(typeTemp);
+        m_listTypeModel->append(personStatus);
+
+        /// 更新所有的状态信息
+        updateAllDataSize(m_mapStatusModel.count());
+    }
+
 }
 
 void CGlobalData::setUpdateAllInfo(bool bUpdate)
@@ -528,7 +565,7 @@ void CGlobalData::removeSavedFile()
     m_bRemoveFile = true;
 }
 
-/// 更改分组
+   /// 更改分组
 void CGlobalData::changeGroup(quint16 unID, QString sType)
 {
     m_pCtrMapPerson->UpdateGroup(unID,sType);
@@ -551,8 +588,7 @@ void CGlobalData::StatisticResult()
 CPersonStatus *CGlobalData::GetOrCreatePersonStatus(quint16 unID)
 {
     /// 查找关联的显示
-    auto findOne =m_mapStatusModel.find(unID);
-
+    auto findOne =m_mapStatusModel.find(unID);   
     CPersonStatus* pPersonStatus=nullptr;
     if(m_mapStatusModel.end() != findOne)
     {

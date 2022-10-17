@@ -139,7 +139,6 @@ QList<QObject *> SceManager::getSceAll()
 void SceManager::  read()
 {
     ClearSceInfo();
-    qDebug()<<"测试读取所有文件";
     showSceList();
     foreach(const QString& one,m_listSceFileName)
     {
@@ -151,7 +150,6 @@ void SceManager::  read()
 void SceManager::read(const QString &sname)
 {
     QString filePath = QApplication::applicationDirPath() + QString("/Data/Project/%1.sce").arg(sname);
-    qDebug()<<"选中方案路径：------"<<filePath;
     QFile sceFile(filePath);
     if (!sceFile.open(QIODevice::ReadOnly))
     {
@@ -242,8 +240,6 @@ QString SceManager::importSce(const QString &strImagePath)
 {
     QFileInfo fileInfo(strImagePath);
     QString targetPath = QApplication::applicationDirPath() +QString("/Data/Project/%1").arg(fileInfo.fileName());
-    qDebug()<<"源地址————"<<strImagePath;
-    qDebug()<<"目标地址————"<<targetPath;
     if(QFile::copy(strImagePath,targetPath))
     {
 //        ClearSceInfo();

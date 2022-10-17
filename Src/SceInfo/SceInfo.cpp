@@ -123,12 +123,15 @@ QObject *CSceInfo::findPerson(int nID)
 }
 
 /// 获取所有的人员信息
-QList<QObject *> CSceInfo::getAll()
+//QList<QObject *> CSceInfo::getAll()
+QList<int> CSceInfo::getAll()
 {
-    QList<QObject*> listObjct;
-    foreach(auto one , m_mapId2Person){
+//    QList<QObject*> listObjct;
+    QList<int> listObjct;
+    foreach(auto one , m_mapId2Person.keys()){
         listObjct.append(one);
     }
+
     return(listObjct);
 }
 

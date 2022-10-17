@@ -138,9 +138,15 @@ public:
 
     /**
      * @brief 保存方案
-     * @param strImagePath
+     * @param strScePath
      */
-    Q_INVOKABLE void saveSceInfo(const QString &strImagePath);
+    Q_INVOKABLE void saveSceInfo(const QString &strScePath);
+
+    /**
+     * @brief 加载方案
+     * @param strScePath
+     */
+    Q_INVOKABLE void loadSceInfo(const QString &sceName);
 
     /**
      * @brief 是否更新人员状态

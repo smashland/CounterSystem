@@ -35,6 +35,7 @@ public:
      */
     void Update(quint16 uTimes);
 
+    void setId(int nId);
     int  getId(){return(m_nID);}
     void setName(const QString& sName);
     int getHealth(){return(m_nHealth);}
@@ -43,7 +44,7 @@ public:
     bool IsOnLine(){return(m_bOnLine);}
     Q_INVOKABLE void setType(const QString& sType);
     Q_INVOKABLE const QString& getType(){return(m_sType);}
-    bool setRenzhi();
+    void setRenzhi(bool bHostage);
 
 signals:
     void idChanged(int);

@@ -52,7 +52,8 @@ public:
      * @brief 获取所有的人员信息
      * @return
      */
-    Q_INVOKABLE QList<QObject*> getAll();
+//    Q_INVOKABLE QList<QObject*> getAll();
+     Q_INVOKABLE QList<int> getAll();
 
     /**
      * @brief 得到人员数量

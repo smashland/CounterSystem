@@ -281,9 +281,6 @@ Rectangle
         anchors.centerIn: parent
         visible: false
     }
-//    SceInfo{
-//        id:sceInfo
-//    }
     SceManager{
         id:sceManager
     }

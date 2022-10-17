@@ -165,6 +165,7 @@ ManageRect{
                     MouseArea{
                         anchors.fill: parent
                         onClicked: {
+                            $app.allData.loadSceInfo(modelData.sceName)
 
                         }
                     }

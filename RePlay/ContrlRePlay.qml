@@ -58,6 +58,7 @@ Item
                         {
                             $app.allData.beginReplay();
                             rePlayShow.bStart = false;
+                            time_run.start();
                         }
                         else
                         {
@@ -165,32 +166,34 @@ Item
 
         Text {
             x:(parent.width-width)/2
-            text: qsTr("演习时长")+nTimes+qsTr("秒")
+            text: formateTime(nTimes)
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             height: 30
-            font.pixelSize: 15
+            font.pixelSize: 16*dpy
             color: "white"
             style:Text.Outline;styleColor: "black"
+            font.family: "Microsoft YaHei"
         }
 
     }
+    function formateTime(time) {
+        const h = parseInt(time / 3600)
+        const minute = parseInt(time / 60 % 60)
+        const second = Math.ceil(time % 60)
+        const hours = h < 10 ? '0' + h : h
+        const formatSecond = second > 59 ? 59 : second
+        return `${hours > 0 ? `${hours}:` : ''}${minute < 10 ? '0' + minute : minute}:${formatSecond < 10 ? '0' + formatSecond : formatSecond}`
+    }
+    Timer{
+        id:time_run
+        interval: 1000
+        repeat: true
+        running: false
+        triggeredOnStart: true
+        onTriggered: {
+            nTimes--
+        }
+    }
 
-    //    Dialog
-    //    {
-    //        x: -renderer.width/2
-    //        y: -renderer.height/2
-    //        id:exitReplay
-    //        Text {
-    //            anchors.fill: parent
-    //            id: name
-    //            text: qsTr("退出回放?")
-    //        }
-    //        modal: true
-    //        standardButtons: Dialog.Ok | Dialog.Cancel
-    //        onAccepted:
-    //        {
-
-    //        }
-    //    }
 }

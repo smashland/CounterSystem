@@ -180,7 +180,8 @@ ManageRect{
         id: saveSce
         title: qsTr("保存方案")
         fileMode: FileDialog.SaveFile
-        folder: shortcuts.desktop
+//        folder: shortcuts.desktop
+        folder: "../../Bin/Data/Project"
         nameFilters: [qsTr("(*.sce))")]
         onAccepted: {
             var scePath=String(saveSce.currentFile)

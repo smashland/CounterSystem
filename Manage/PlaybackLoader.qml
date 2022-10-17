@@ -102,6 +102,7 @@ ManageRect{
                             ctrReplay.nTimes = $app.allData.openReplayFile("file:///"+appDir+"/Data/Szy/"+modelData+".szy");
                             ctrReplay.visible = true;
                             $app.settings.startReplay()
+                            footerBar.btnPlayback.checked = false
                         }
                     }
                 }

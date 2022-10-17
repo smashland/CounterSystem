@@ -29,11 +29,11 @@ Rectangle
     Text {
         id: zongrenshu
         text: groupType?qsTr("总人数：")+listView.model.count:qsTr("在线人数：")+$app.allData.atLineNumber
-        x: 20
-        y: 25 *dpy
+        x: 20 *dpx
+        y: 23 *dpy
         font.pixelSize: 14*dpx;
         color: groupType?"#ffffff":"green"
-        font.family: "MicrosoftYaHei-Bold";
+        font.family: "Microsoft YaHei";
     }
 
     Text {
@@ -41,16 +41,12 @@ Rectangle
         text: groupType?qsTr("战损人数:"+listView.model.deathNum):qsTr("总人数：")+$app.allData.allDataNumber
         anchors.right: parent.right
         anchors.rightMargin: 20
-        y: 25 *dpy
+        y: 23 *dpy
         font.pixelSize: 14*dpx;
-        color:groupType? "#ec4747":"#ffffff";
-        font.family: "MicrosoftYaHei-Bold";
+        color:groupType? "#FF8C00":"#ffffff";
+        font.family: "Microsoft YaHei";
     }
 
-    //    ScrollView
-    //    {
-    //        anchors.fill: parent;
-    //        clip: true;
     ListView
     {
         id:listView
@@ -161,15 +157,4 @@ Rectangle
         return res;
     }
 
-
-//    Button {
-//        text: "按钮"
-//        onClicked: {
-//            var pData = listView.model
-//            console.log(pData)
-//            var res =personData(pData)
-//            sceManager.addScenari(res)
-//            console.log(res)
-//        }
-//    }
 }

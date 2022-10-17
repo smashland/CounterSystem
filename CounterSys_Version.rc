@@ -21,7 +21,6 @@ VS_VERSION_INFO     VERSIONINFO
         BEGIN
             BLOCK "080404B0"
             BEGIN
-                VALUE "CompanyName","石家庄沐吉源科技有限公司"
                 VALUE "FileDescription","轻武器激光模拟对抗系统"
                 VALUE "FileVersion","1.0.0.0"
                 VALUE "InternalName","RealSoldiersTraSys"

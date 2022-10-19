@@ -58,6 +58,7 @@ SOURCES += \
         Src/SceInfo/SceManager.cpp \
         Src/SceInfo/ScePersonInfo.cpp \
         Src/Settings/CSetEarth.cpp \
+        Src/Settings/EarthManager.cpp \
         Src/Settings/GlobalSettings.cpp \
         Src/TimeServer/TimeServer.cpp \
         Src/XmlNode/TestXml.cpp \
@@ -128,6 +129,7 @@ HEADERS += \
     Src/SceInfo/SceManager.h \
     Src/SceInfo/ScePersonInfo.h \
     Src/Settings/CSetEarth.h \
+    Src/Settings/EarthManager.h \
     Src/Settings/GlobalSettings.h \
     Src/TimeServer/ITimeObserver.h \
     Src/TimeServer/TimeServer.h \

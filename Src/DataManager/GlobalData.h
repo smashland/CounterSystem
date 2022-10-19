@@ -123,6 +123,12 @@ public:
     Q_INVOKABLE void pauseReplay();
     Q_INVOKABLE void setSimuTime(quint16 uTimes);
     Q_INVOKABLE void endReplay();
+    /**
+     * @brief 删除回放文件
+     * @param sReplayame
+     * @return
+     */
+    Q_INVOKABLE bool deleteReplayFile(const QString &sReplayame);
 
     /**
      * @brief 保存数据

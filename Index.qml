@@ -13,6 +13,7 @@ import MyItem 1.0
 Rectangle
 {
     property var modifySceInfo: null
+    property var newEarthInfo: null
     id: index
     anchors.fill: parent
     color: "transparent"
@@ -283,6 +284,9 @@ Rectangle
     }
     SceManager{
         id:sceManager
+    }
+    EarthManager{
+        id:earthManager
     }
 
     RemoveDialog {

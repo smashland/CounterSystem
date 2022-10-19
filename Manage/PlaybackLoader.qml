@@ -125,7 +125,8 @@ ManageRect{
                 content1: "此操作永久删除该回放记录，"
                 content2: "确认要删除吗？"
                 onYesPutDown: {
-                    wrapper.ListView.view.model.remove(index)
+                    $app.allData.deleteReplayFile(modelData);
+                     listView.model = $app.openPath();
                 }
             }
         }

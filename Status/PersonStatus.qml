@@ -22,7 +22,7 @@ Rectangle
         verticalAlignment: Text.AlignVCenter
         font.family: "Microsoft YaHei"
         font.pixelSize: fontSize
-        color:  "white"
+        color: outData.bRenZhi ? "green" : "white"
         height: parent.height
         anchors.left: parent.left
         anchors.leftMargin: 10
@@ -35,7 +35,7 @@ Rectangle
         verticalAlignment: Text.AlignVCenter
         font.family: "Microsoft YaHei"
         font.pixelSize: fontSize
-        color:  "white"
+        color: "white"
         height: parent.height
         anchors.left: parent.left
         anchors.leftMargin: 10 + showid.contentWidth

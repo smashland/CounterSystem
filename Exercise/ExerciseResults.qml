@@ -1,6 +1,5 @@
 //                                        演习结果
 import QtQuick 2.12
-//import QtQuick.Controls 2.15
 import Qt.labs.qmlmodels 1.0
 import Qt.labs.platform 1.1
 import QtQuick.Controls 1.4 as QC114
@@ -15,7 +14,7 @@ Item {
     width: 1184 *dpx
     height: 860 *dpy
 
-    property string defaltFolderUrl: "../../Bin/Data/Szy/"
+    property string defaltFolderUrl: "file:///D:/InstallSoftWare/CounterSystem/Data/Szy/"
 
     Image {
         id: loginImage
@@ -257,7 +256,9 @@ Item {
         FileDialog
         {
             id:openFile
-            folder:$app.appPath
+            folder:defaltFolderUrl
+//            folder: StandardPaths.writableLocations(StandardPaths.DocumentsLocation)
+//            folder: StandardPaths.standardLocations(StandardPaths.SzysLocation)[0]
             fileMode:FileDialog.SaveFile
             title: qsTr("保存演习数据")
             nameFilters: [qsTr("演习数据(*.szy)")]

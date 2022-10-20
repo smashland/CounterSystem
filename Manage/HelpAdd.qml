@@ -33,7 +33,9 @@ Rectangle {
         currentFile: document.source
         onAccepted: {
             $app.copyFile(currentFile.toString().replace("file:///", ""));
+            listView.model = $app.openHelp()
         }
+
     }
 
     Rectangle {
@@ -72,15 +74,6 @@ Rectangle {
                 }
             }
         }
-
-        Component {
-            id: listModel;
-            ListModel {
-
-            }
-
-        }
-
         ListView {
             id: listView
             anchors.fill: parent

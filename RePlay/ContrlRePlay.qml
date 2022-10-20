@@ -7,17 +7,6 @@ Item
     property int nTimes:100
     property bool bStart: true
 
-    Text {
-        x: 80 *dpx
-        y: contentHeight
-        height: 100 *dpy
-        text: qsTr("方案名称：")
-        font.pixelSize: 20*dpx;
-        color: "#ffffff";
-        font.bold: true
-        font.family: "MicrosoftYaHei Bold"
-
-    }
     Column {
         x: (index.width-width)/2
         Row
@@ -64,10 +53,10 @@ Item
                         {
                             $app.allData.pauseReplay();
                         }
-
                         bofang.text= "\ue626"
                     }
                     bStart = !bStart
+
                 }
             }
 
@@ -165,6 +154,7 @@ Item
 
 
         Text {
+            id: timeText
             x:(parent.width-width)/2
             text: formateTime(nTimes)
             horizontalAlignment: Text.AlignHCenter
@@ -193,6 +183,10 @@ Item
         triggeredOnStart: true
         onTriggered: {
             nTimes--
+            if (formateTime(nTimes) <= "00:00") {
+                time_run.stop()
+                bofang.text= "\ue609"
+            }
         }
     }
 

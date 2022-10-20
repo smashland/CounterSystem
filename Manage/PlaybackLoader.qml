@@ -54,7 +54,7 @@ ManageRect{
 
     ScePlayList{
         id: listView
-        //            model: szyModel.createObject(listView)
+        model: $app.openPath()
         delegate: Rectangle {
             id: wrapper
             width: listView.width
@@ -113,21 +113,22 @@ ManageRect{
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
-                            removeDialog_shanchuhuifang.visible = true
+//                            removeDialog_shanchuhuifang.visible = true
+                            wrapper.ListView.view.model.remove(index)
                         }
                     }
                 }
             }
-            RemoveDialog {
-                id: removeDialog_shanchuhuifang
-                visible: false
-                anchors.centerIn: parent
-                content1: "此操作永久删除该回放记录，"
-                content2: "确认要删除吗？"
-                onYesPutDown: {
-                    wrapper.ListView.view.model.remove(index)
-                }
-            }
+//            RemoveDialog {
+//                id: removeDialog_shanchuhuifang
+//                visible: false
+//                anchors.centerIn: parent
+//                content1: "此操作永久删除该回放记录，"
+//                content2: "确认要删除吗？"
+//                onYesPutDown: {
+//                    wrapper.ListView.view.model.remove(index)
+//                }
+//            }
         }
     }
     FileDialog

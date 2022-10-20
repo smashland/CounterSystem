@@ -455,11 +455,11 @@ bool CGlobalData::deleteReplayFile(const QString &sReplayame)
 /// 保存数据文件
 void CGlobalData::saveData(const QUrl &sDataFileName)
 {
-    //    QDateTime current_date_time =QDateTime::currentDateTime();
-    //    QString current_date =current_date_time.toString("(yyyyMMdd_hhmmss)");
-    //    QString sFilepath=sDataFileName.toLocalFile().chopped(4)+current_date+".szy";
+    QDateTime current_date_time =QDateTime::currentDateTime();
+    QString current_date =current_date_time.toString("(yyyyMMdd_hhmmss)");
+    QString sFilepath=sDataFileName.toLocalFile().chopped(4)+current_date+".szy";
     /// 移动文件到指定位置
-    QFile::rename(m_sCurrentFileName,sDataFileName.toLocalFile());
+    QFile::rename(m_sCurrentFileName,sFilepath/*sDataFileName.toLocalFile()*/);
     m_bRemoveFile = false;
 }
 
@@ -579,7 +579,7 @@ void CGlobalData::removeSavedFile()
     m_bRemoveFile = true;
 }
 
-   /// 更改分组
+/// 更改分组
 void CGlobalData::changeGroup(quint16 unID, QString sType)
 {
     m_pCtrMapPerson->UpdateGroup(unID,sType);
@@ -602,7 +602,7 @@ void CGlobalData::StatisticResult()
 CPersonStatus *CGlobalData::GetOrCreatePersonStatus(quint16 unID)
 {
     /// 查找关联的显示
-    auto findOne =m_mapStatusModel.find(unID);   
+    auto findOne =m_mapStatusModel.find(unID);
     CPersonStatus* pPersonStatus=nullptr;
     if(m_mapStatusModel.end() != findOne)
     {

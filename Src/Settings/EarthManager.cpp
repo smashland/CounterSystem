@@ -4,6 +4,9 @@
 #include <QDir>
 #include <QJsonParseError>
 #include <QJsonArray>
+#include <QMessageBox>
+#include<QDomDocument>
+
 
 static const QString cs_FileName("earth.map");
 static const QString cs_JsonKey("earth");
@@ -105,12 +108,73 @@ void EarthManager::saveFile()
                 array.append(noteJson);
             }
         }
-
         rootObj.insert(cs_JsonKey,array);
         jsonDoc.setObject(rootObj);
 
         openFile.write(jsonDoc.toJson());
     }
+}
+
+///解析地图文件
+void EarthManager::praseEarthXml(QString sEarthPath)
+{
+    /// 获取文件地址
+    QString filePath = QApplication::applicationDirPath() + "/Data/Earth/Geocentric.earth";
+    QFile file(filePath);
+    if(!file.open(QIODevice::ReadOnly))
+    {
+        QMessageBox::information(NULL, "提示", "文件打开失败！");
+        return;
+    }
+
+    QDomDocument doc;
+    if (!doc.setContent(&file)) {
+        QMessageBox::information(NULL, "提示", "操作的文件不是XML文件！");
+        file.close();
+        return;
+    }
+    file.close();
+
+    // 获得根节点
+    QDomElement root = doc.documentElement();
+
+    // 获取所有GDALIMAGE节点
+    QDomNodeList list = root.elementsByTagName("GDALIMAGE");
+    qDebug()<<"获取所有GDALIMAGE节点"<<list.count();
+
+    /* 修改尖括号之间的值 */
+    for (int i = 0; i < list.size(); i++) {
+        QDomElement element = list.at(i).toElement();
+        // 找到等于的节点
+        if (element.attribute("name") == "tif") {
+            // 获得子节点
+            QDomNode node = element.namedItem("url");
+            qDebug()<<"测试节点信息"<<node.nodeValue();
+
+            // 尖括号之间的内容作为子节点出现(修改前)
+            QDomNode oldNode = node.firstChild();
+
+            // 修改尖括号之间的值
+            node.firstChild().setNodeValue(sEarthPath);
+
+            // 尖括号之间的内容作为子节点出现(修改后)
+            QDomNode newNode = node.firstChild();
+
+            // 将新旧内容子节点进行替换
+            node.replaceChild(newNode, oldNode);
+            break;
+        }
+    }
+
+    if (!file.open(QFileDevice::WriteOnly | QFileDevice::Truncate)) {
+        QMessageBox::information(NULL, "提示", "文件打开失败！");
+        return;
+    }
+
+    // 输出到文件
+    QTextStream stream(&file);
+    doc.save(stream, 4);	// 缩进4格
+    file.close();
 }
 
 

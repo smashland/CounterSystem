@@ -54,9 +54,8 @@ Rectangle {
                     anchors.fill: parent
                     hoverEnabled: true
                     onClicked: {
-                        mouse.accepted = true
-                        wrapper.ListView.view.currentIndex = index
-//                        $app.openFile("file:///"+modelData)
+                        earthManager.praseEarthXml(modelData.earthPath)
+                        $app.changeEarth(modelData.earthPath)
                     }
                 }
                 Text {

@@ -1,6 +1,18 @@
 #include <QGuiApplication>
 #include <QFontDatabase>
 
+#include <ISceneCore.h>
+#include <SceneGraph/ISceneGraphManager.h>
+#include <Plot/Map/IMap.h>
+#include <QDesktopServices>
+#include <QResource>
+#include <QUrl>
+#include <QDir>
+#include <QList>
+#include <QTextCodec>
+#include <QDebug>
+#include <QMap>
+
 #include "AppGlobal.h"
 #include "TimeServer/TimeServer.h"
 #include "ParseData/DealDataManager.h"
@@ -57,6 +69,12 @@ void QAppGlobal::initSystem()
 void QAppGlobal::startConnect()
 {
     CConnectionManager::GetInstance()->Connect();
+}
+
+void QAppGlobal::changeEarth()
+{
+    auto pSeneGraph = GetSceneCore()->GetSceneGraphManager()->FindSceneGraph(m_pOsgItem);
+    pSeneGraph->GetMap()->LoadUserMap(GetDataPath()+"/Earth/Geocentric.earth",false,true);
 }
 
 /// 更新信息
@@ -116,17 +134,6 @@ void QAppGlobal::setData(CGlobalData *pData)
     }
 }
 
-
-#include <ISceneCore.h>
-#include <SceneGraph/ISceneGraphManager.h>
-#include <QDesktopServices>
-#include <QResource>
-#include <QUrl>
-#include <QDir>
-#include <QList>
-#include <QTextCodec>
-#include <QDebug>
-
 QStringList QAppGlobal::openPath()
 {
     QDir *dir=new QDir(QString("%1/%2").arg(GetDataPath().c_str()).arg("Szy")); //文件夹
@@ -140,8 +147,23 @@ QStringList QAppGlobal::openPath()
     {
         string_list.append(fileInfoList.at(i).baseName());
     }
-
     return(string_list);
+//    QDir *dir=new QDir(QString("%1/%2").arg(GetDataPath().c_str()).arg("Szy")); //文件夹
+//    QStringList filter; //过滤
+//    filter<<"*.szy";
+//    dir->setNameFilters(filter);
+//    QFileInfoList fileInfoList = dir->entryInfoList(filter);
+//    delete dir;
+//    QStringList string_list;
+//     QMap<QString,QString> mapNameToTime;
+//    QString fileName,fileTime;
+//    for(int i=0; i < fileInfoList.count(); i++)
+//    {
+//        m_sReplayName=fileInfoList.at(i).baseName();
+//        m_sReplayTime=fileInfoList.at(i).created().toString("yyyy-MM-dd HH:mm:ss");
+//        string_list.append(m_sReplayName+m_sReplayTime);
+//    }
+//    return(string_list);
 }
 
 /// 设置osgItem

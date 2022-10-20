@@ -24,13 +24,11 @@ void ScePersonInfo::readPerson(const QJsonObject &json)
     if (json.contains("Position") && json["Position"].isDouble())
         m_Positon = json["Position"].toInt();
 
-    if (json.contains("Host") && json["Host"].isDouble())
-        m_host = json["Host"].toInt();
+    if (json.contains("Host") && json["Host"].isBool())
+        m_host = json["Host"].toBool();
 
     if (json.contains("ImagePath") && json["ImagePath"].isString())
         m_sImagePath = json["ImagePath"].toString();
-
-    qDebug()<<"id"<<m_ID<<"name"<<m_Name<<"type"<<m_Group<<"position"<<m_Positon<<"host"<<m_host;
 }
 
 void ScePersonInfo::writePerson(QJsonObject &json) const

@@ -10,11 +10,12 @@ import "../Exercise"
 Rectangle {
     id: mapAdd
     color: "transparent"
+    signal signalAddMap(string name,string path,int lat,int lon)    //查找人员
+
     Image {
         anchors.fill: parent
         source: "qrc:/Image/wuqi/08-bg.png"
-    }
-
+    }   
     CloseButton {
         anchors.right: mapAdd.right
         anchors.rightMargin: 65 *dpx
@@ -35,9 +36,11 @@ Rectangle {
         folder: shortcuts.home
         title: qsTr("请选择文件")
         nameFilters: [qsTr("图片 (*.tiff)"),qsTr("文件 (*.xml)"),  qsTr("全部文件 (*.*)")]
-        currentFile: document.source
         onAccepted: {
-
+            var earthPath=String(fileDialog.currentFile)
+            earthPath=earthPath.substr(8)
+            mapPath.name=earthPath
+            console.log("地图路径"+earthPath);
         }
     }
     Column {
@@ -45,12 +48,14 @@ Rectangle {
         y: 96*dpy
         spacing: 12*dpy
         SoldierItem {
+            id:mapName
             text: "地图名称:"
             name: ""
         }
         Row {
             spacing: 30*dpx
             SoldierItem {
+                id:mapPath
                 text: "地图路径:"
                 name: ""
             }
@@ -85,10 +90,12 @@ Rectangle {
             verticalAlignment: Text.AlignVCenter
         }
         SoldierItem {
+            id:mapLat
             text: "       经度:"
             name: ""
         }
         SoldierItem {
+            id:mapLon
             text: "       纬度:"
             name: ""
         }
@@ -112,6 +119,8 @@ Rectangle {
         }
         nameButton: "确定"
         onClicked: {
+            signalAddMap(mapName.name,mapPath.name,mapLat.name,mapLon.name);
+            earthManager.saveFile();
             mapAdd.visible = false
         }
     }

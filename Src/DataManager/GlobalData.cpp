@@ -438,6 +438,20 @@ void CGlobalData::endReplay()
     m_allReplayStatus.clear();
 }
 
+bool CGlobalData::deleteReplayFile(const QString &sReplayame)
+{
+    QString filePath = QApplication::applicationDirPath() + QString("/Data/Szy/%1.szy").arg(sReplayame);
+
+    if (filePath.isEmpty() || !QDir().exists(filePath))//是否传入了空的路径||路径是否存在
+        return false;
+
+    QFileInfo FileInfo(filePath);
+
+    if (FileInfo.isFile())//如果是文件
+        QFile::remove(filePath);
+    return true;
+}
+
 /// 保存数据文件
 void CGlobalData::saveData(const QUrl &sDataFileName)
 {

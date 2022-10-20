@@ -14,6 +14,26 @@ Rectangle {
     height: 510 *dpy
     color: "transparent"
 
+    Connections{
+        function onSignalAddMap(name,path,lat,lon)
+        {
+            var earth = earthManager.addMaps(name);
+            if(null!==earth)
+            {
+                earth.earthName = name;
+                earth.earthPath = path;
+                earth.nLat = lat;
+                earth.nLon = lon;
+                listView.model=earthManager.earthList
+            }
+            else{
+
+            }
+
+        }
+        target: mapAdd
+    }
+
     Rectangle {
 
         width: 710 *dpx
@@ -41,7 +61,7 @@ Rectangle {
                 }
                 Text {
                     id:fileName
-                    text: modelData
+                    text: modelData.earthName
                     anchors.centerIn: parent
                     color: "#ffffff"
                     font.pixelSize: 16*dpx
@@ -64,7 +84,7 @@ Rectangle {
             anchors.fill: parent
             delegate: delegate
             spacing: 1*dpy
-//            model: $app.openHelp()
+            model: earthManager.earthList
             focus: true
             clip: true
             ScrollBar.vertical: ScrollBar {

@@ -2,6 +2,7 @@
 #define CSETEARTH_H
 
 #include <QObject>
+#include <QJsonObject>
 
 class CSetEarth : public QObject
 {
@@ -43,6 +44,18 @@ public:
       */
     void setEarthLon(int nlon);
     const int getEarthlon(){return m_nLon;}
+
+    /**
+     * @brief 将信息保存到Json对象中
+     * @param rObj
+     */
+    void writeEarth(QJsonObject& rObj);
+
+    /**
+     * @brief 从json中读取
+     * @param rObj
+     */
+    void readEarth(const QJsonObject& rObj);
 
 signals:
     void earthNameChanged(QString);

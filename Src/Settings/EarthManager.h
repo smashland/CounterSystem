@@ -30,12 +30,15 @@ public:
 
     Q_INVOKABLE void saveFile();
 
+    /**
+     * @brief 解析地图XML文件
+     */
+    Q_INVOKABLE void praseEarthXml(QString sEarthPath);
 
 signals:
     void earthChanged();
 protected:
     void ReadFile();
-
 private:
     QList<QObject*> m_listEarth;
 

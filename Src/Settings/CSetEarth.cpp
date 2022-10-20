@@ -62,7 +62,7 @@ void CSetEarth::readEarth(const QJsonObject &rObj)
     if (rObj.contains("Name") && rObj["Name"].isString())
         m_sEarthName = rObj["Name"].toString();
 
-    if (rObj.contains("Path") && rObj["Path"].isDouble())
+    if (rObj.contains("Path") && rObj["Path"].isString())
         m_sEarthPath = rObj["Path"].toString();
 
     if (rObj.contains("Lat") && rObj["Lat"].isDouble())
@@ -70,4 +70,10 @@ void CSetEarth::readEarth(const QJsonObject &rObj)
 
     if (rObj.contains("Lon") && rObj["Lon"].isDouble())
         m_nLon = rObj["Lon"].toInt();
+
+    qDebug()<<"Name"<<m_sEarthName
+              <<"Path"<<m_sEarthPath
+                <<"Lat"<<m_nLat
+                  <<"Lon"<<m_nLon;
+
 }

@@ -7,6 +7,7 @@ import Qt.labs.platform 1.1
 import Qt.labs.qmlmodels 1.0
 import "../Common"
 import "../Exercise"
+import "Plugins"
 
 Rectangle {
     id: setMapLoade
@@ -34,62 +35,33 @@ Rectangle {
         target: mapAdd
     }
 
-    Rectangle {
-
+    MapHelpList{
+        id: listView
         width: 710 *dpx
         height: 510 *dpy
-        color: "transparent"
-
-        Component {
-            id: delegate
-            Item {
-                id: wrapper
-                width: parent.width
-                height: 38 *dpy
-                Rectangle {
-                    anchors.fill: parent
-                    color: index%2 ? "#4671a6" : "#2D5689"
-                }
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    onClicked: {
-                        earthManager.praseEarthXml(modelData.earthPath)
-                        $app.changeEarth(modelData.earthPath)
-                    }
-                }
-                Text {
-                    id:fileName
-                    text: modelData.earthName
-                    anchors.centerIn: parent
-                    color: "#ffffff"
-                    font.pixelSize: 16*dpx
-                    font.family: "MicrosoftYaHei";
-                    verticalAlignment: Text.AlignVCenter
-                }
-            }
-        }
-
-        Component {
-            id: listModel;
-            ListModel {
-
+        model:sceManager.listSces
+        delegate: Rectangle {
+            id: wrapper
+            width: listView.width
+            height: 50 *dpy
+            Rectangle {
+                anchors.fill: parent
+                color: index%2 ? "#2D5689" : "#4671a6"
             }
 
-        }
-
-        ListView {
-            id: listView
-            anchors.fill: parent
-            delegate: delegate
-            spacing: 1*dpy
-            model: earthManager.earthList
-            focus: true
-            clip: true
-            ScrollBar.vertical: ScrollBar {
-                id: scrollBar
+            TextListItem {
+                id: fileName
+                text: modelData.earthName
+                anchors.centerIn: parent
             }
-
+            MouseArea {
+                anchors.fill: parent
+                hoverEnabled: true
+                onClicked: {
+                    earthManager.praseEarthXml(modelData.earthPath)
+                    $app.changeEarth(modelData.earthPath)
+                }
+            }
         }
 
     }

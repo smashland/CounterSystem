@@ -54,35 +54,11 @@ Column {
             spacing: 20*dpy
             x: 110 *dpx
             y: 82 *dpy + shouquan.contentHeight + 40 *dpy
-            Rectangle {
-                width: 355 *dpx
-                height: 50 *dpy
-                color: Qt.rgba(0/255, 31/255, 94/255, 0.6);
-                border.color: "#00baff"
-                Image {
-                    id: lrImage
-                    y: 13*dpy
-                    x: 20*dpx
-                    width:  24*dpx
-                    height:  24*dpx
-                    source: "qrc:/Image/code_icon.png"
-                }
-                TextField {
+            LoginImage {
+                LoginTextField {
                     id: lrText
-                    anchors.fill: parent
-                    color: Qt.rgba(255/255, 255/255, 255/255, 0.8);
-                    font.pixelSize: 16*dpx
                     placeholderText: qsTr("请输入授权码")
-                    font.family: "Microsoft YaHei"
-                    clip: true
-                    verticalAlignment: Text.AlignVCenter
                     leftPadding:  52*dpx
-                    activeFocusOnPress:true
-                    //        font.capitalization:Font.AllUppercase
-                    background: Rectangle {
-                        color: "transparent"
-                    }
-
                     Component.onCompleted:
                     {
                         if($licCheck.isFileExist())
@@ -94,140 +70,14 @@ Column {
                     selectionColor: "#0187d6"
                 }
             }
-            Rectangle {
-                width: 355 *dpx
-                height: 50 *dpy
-                color: Qt.rgba(0/255, 31/255, 94/255, 0.6);
-                border.color: "#00baff"
-                Image {
-                    y: 13*dpy
-                    x: 20*dpx
-                    width:  24*dpx
-                    height:  24*dpx
-                    source: "qrc:/Image/port_icon.png"
-                }
-                TextField {
-                    anchors.fill: parent
-                    color: Qt.rgba(255/255, 255/255, 255/255, 0.8);
-                    font.pixelSize: 16*dpx
-                    font.family: "Microsoft YaHei"
-                    clip: true
-                    verticalAlignment: Text.AlignVCenter
-                    leftPadding:  52*dpx
-                    readOnly:true
-                    //placeholderText: "请选择相应的串口"
-                    activeFocusOnPress:true
-                    //        font.capitalization:Font.AllUppercase
-                    background: Rectangle {
-                        color: "transparent"
-                    }
-                    ComboBox
+            LoginImage {
+
+                LoginTextField {
+
+                    LoginComboBox
                     {
                         id: control
-                        width: parent.width
-                        height: parent.height
-                        anchors.right: parent.right
-                        model: $app.settings.comNameList();
-                        /// 弹出的combobox的选项
-                        delegate: ItemDelegate
-                        {
-                            width: control.width
-                            contentItem: Text
-                            {
-                                text: modelData
-                                color:  Qt.rgba(255/255, 255/255, 255/255, 0.8);
-                                font.pixelSize: 16*dpx
-                                font.bold: true
-                                elide: Text.ElideRight
-                                verticalAlignment: Text.AlignVCenter
-                                horizontalAlignment: Text.AlignHCenter
-                            }
-                            background: Rectangle
-                            {
-                                border.color:"#00baff"
-                                color: "transparent"
-                            }
-
-                            highlighted: control.highlightedIndex === index
-                        }
-
-                        /// 绘制下拉箭头
-                        indicator: Canvas
-                        {
-                            id: canvas
-                            x: control.width - width - control.rightPadding
-                            y: control.topPadding + (control.availableHeight - height) / 2
-                            width: 12
-                            height: 8
-                            contextType: "2d"
-
-                            Connections
-                            {
-                                target: control
-                                function onPressedChanged(){canvas.requestPaint()}
-                            }
-
-                            onPaint:
-                            {
-                                context.reset();
-                                context.moveTo(0, 0);
-                                context.lineTo(width, 0);
-                                context.lineTo(width / 2, height);
-                                context.closePath();
-                                context.fillStyle = "#00baff";
-                                context.fill();
-                            }
-                        }
-
-                        contentItem: Text
-                        {
-                            leftPadding: 0
-                            rightPadding: control.indicator.width + control.spacing
-
-                            text: control.displayText
-                            font.bold:true
-
-                            font.pixelSize: 16*dpx
-                            color: Qt.rgba(255/255, 255/255, 255/255, 0.8);
-                            horizontalAlignment: Text.AlignHCenter
-                            verticalAlignment: Text.AlignVCenter
-                            elide: Text.ElideRight
-                        }
-
-                        background: Rectangle
-                        {
-                            implicitWidth: 120
-                            implicitHeight: 40
-                            opacity:0
-                            radius: 2
-                        }
-
-                        popup: Popup
-                        {
-                            y: control.height - 1
-                            width: control.width
-                            implicitHeight: contentItem.implicitHeight
-                            padding: 1
-
-                            contentItem: ListView
-                            {
-                                clip: true
-                                implicitHeight: contentHeight
-                                model: control.popup.visible ? control.delegateModel : null
-                                currentIndex: control.highlightedIndex
-
-                                ScrollIndicator.vertical: ScrollIndicator { }
-                            }
-
-                            background: Rectangle
-                            {
-                                border.color: "#00baff"
-                                color: Qt.rgba(0/255, 31/255, 94/255, 0.8);
-                                //                                opacity:0.8
-                                radius: 2
-                            }
-                        }                      
-                    }//ComboBox
+                    }
                 }
             }
         }

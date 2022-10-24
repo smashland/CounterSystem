@@ -7,8 +7,6 @@ GroupBox {
     id: groupBoxId
     width:680*dpx
     height:230*dpy
-//    x: 320*dpx
-//    y: 100*dpy
     visible: false
 
     flat : false
@@ -22,8 +20,8 @@ GroupBox {
                 height: title.height
                 implicitHeight:title.height
                 color: "#3b6daa"
-                x:20
-                y: -10
+                x:20*dpx
+                y: -10*dpy
                 Text{
                     id:title
                     text: groupBoxId.title

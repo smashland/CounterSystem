@@ -243,8 +243,8 @@ Rectangle
                         radius: 9
                         border.color: control4.down ? "#ffffff" : "#26abef"
                         Rectangle {
-                            width: 12
-                            height: 12
+                            width: 12*dpy
+                            height: 12*dpy
                             radius: 6
                             anchors.centerIn: parent
                             color: control4.down ? "#ffffff" : "#1d4f88"

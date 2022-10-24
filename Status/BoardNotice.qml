@@ -5,8 +5,8 @@ import QtQml 2.12
 ScrollView
 {
     id:showNotice
-    width: 770
-    height: 380
+    width: 770*dpx
+    height: 380*dpy
 //    y:parent.height + height
 //    anchors.right:  parent.right
     anchors.centerIn: parent
@@ -16,7 +16,7 @@ ScrollView
     {
         id:showText
         color: "white"
-        font.pointSize: 16
+        font.pointSize: 16*dpy
         font.bold: true
         background: Rectangle
         {

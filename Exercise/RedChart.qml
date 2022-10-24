@@ -9,8 +9,8 @@ ChartView
     property var deathData
     property var okData
     property var flagData
-    width: 310
-    height: 310
+    width: 310*dpy
+    height: 310*dpy
     anchors.fill: parent
     legend.visible: false
     antialiasing: true

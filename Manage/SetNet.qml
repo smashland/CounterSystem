@@ -50,8 +50,10 @@ Rectangle {
     }
     CheckBoxItem {
         id: dkcl
-        x:60*dpx
-        y:35*dpy
+        anchors.left: parent.left
+        anchors.leftMargin: 60*dpx
+        anchors.top: parent.top
+        anchors.topMargin: 35*dpy
         name: qsTr("断开自动重连")
         boolCheck:false
         MouseArea {
@@ -282,8 +284,8 @@ Rectangle {
                         id: canvas
                         x: control.width - width - control.rightPadding
                         y: control.topPadding + (control.availableHeight - height) / 2
-                        width: 12
-                        height: 8
+                        width: 12*dpx
+                        height: 8*dpy
                         contextType: "2d"
 
                         Connections

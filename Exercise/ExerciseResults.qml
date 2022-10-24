@@ -133,7 +133,7 @@ Item {
                     anchors.verticalCenter: parent.verticalCenter
                     text: styleData.value
                     color: "white"
-                    font.pixelSize: 20
+                    font.pixelSize: 20*dpy
                     font.bold: true
                 }
             }
@@ -141,7 +141,7 @@ Item {
             // 设置行
             rowDelegate:Rectangle
             {
-                height:50;
+                height:50*dpy;
                 color:styleData.alternate ? "#4671a6":"#2D5689"
             }
 
@@ -212,8 +212,8 @@ Item {
                 }
 
                 RedChart {
-                     width :500
-                     height: 320
+                     width :500*dpx
+                     height: 320*dpy
 //                     title: modelData.belong
                      hurtData:modelData.hurt
                      deathData:modelData.dealth

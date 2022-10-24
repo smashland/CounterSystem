@@ -26,8 +26,8 @@ Rectangle
         height: 880 *dpy
         anchors.left: parent.left
         anchors.top: parent.top
-        anchors.leftMargin: 80
-        anchors.topMargin: 80
+        anchors.leftMargin: 80*dpx
+        anchors.topMargin: 80*dpy
         visible: !$app.settings.bIsStart&&!$app.settings.bIsReplay
     }
 
@@ -38,8 +38,8 @@ Rectangle
         source: "qrc:/Image/Blue_bg_all.png"
         anchors.right: parent.right;
         anchors.top: parent.top
-        anchors.rightMargin: 80
-        anchors.topMargin: 80
+        anchors.rightMargin: 80*dpx
+        anchors.topMargin: 80*dpy
     }
 
     GroupDropArea
@@ -51,9 +51,9 @@ Rectangle
         anchors.top: ($app.settings.bIsStart || $app.settings.bIsReplay) ? parent.top : blue.bottom
         anchors.left: ($app.settings.bIsStart || $app.settings.bIsReplay) ? parent.left : undefined
 
-        anchors.leftMargin: 80
-        anchors.rightMargin: 80
-        anchors.topMargin: 80
+        anchors.leftMargin: 80*dpx
+        anchors.rightMargin: 80*dpx
+        anchors.topMargin: 80*dpy
     }
 
     Menu
@@ -87,8 +87,8 @@ Rectangle
     {
         anchors.centerIn: parent
         id:chongdan
-        width: 600
-        height: 500
+        width: 600*dpx
+        height: 470*dpy
     }
 
     Dialog

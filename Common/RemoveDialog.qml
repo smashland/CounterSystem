@@ -44,8 +44,8 @@ Popup
         anchors.centerIn: parent
         spacing: 14 *dpx
         Text {
-            width: 44
-            height: 44
+            width: 44*dpx
+            height: 44*dpx
             text: qsTr("\ue65C")
             color: "yellow"
             font.family: "iconfont"
@@ -53,7 +53,7 @@ Popup
             verticalAlignment: Text.AlignVCenter
         }
         Column {
-            spacing: 5
+            spacing: 5*dpy
             Text {
                 id: shanchuText
 //                text: qsTr("此操作将永久删除该方案，")
@@ -77,7 +77,7 @@ Popup
     Row {
         spacing: 15 *dpx
         anchors.bottom: parent.bottom;
-        anchors.bottomMargin: 50
+        anchors.bottomMargin: 50*dpy
         anchors.horizontalCenter: parent.horizontalCenter;
         x: 133*dpx
         PopupButton {

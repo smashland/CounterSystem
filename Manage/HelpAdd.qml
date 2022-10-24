@@ -7,6 +7,7 @@ import Qt.labs.platform 1.1
 import Qt.labs.qmlmodels 1.0
 import "../Common"
 import "../Exercise"
+import "Plugins"
 
 Rectangle {
     id: helpAdd
@@ -38,54 +39,35 @@ Rectangle {
 
     }
 
-    Rectangle {
-
+    MapHelpList{
+        id: listView
         width: 450 *dpx
         height: 330 *dpy
-        color: "transparent"
-
-        Component {
-            id: delegate
-            Item {
-                id: wrapper
-                width: parent.width
-                height: 38 *dpy
-                Rectangle {
-                    anchors.fill: parent
-                    color: index%2 ? "#4671a6" : "#2D5689"
-                }
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    onClicked: {
-                        mouse.accepted = true
-                        wrapper.ListView.view.currentIndex = index
-                        $app.openFile("file:///"+modelData)
-                    }
-                }
-                Text {
-                    id:fileName
-                    text: modelData
-                    anchors.centerIn: parent
-                    color: "#ffffff"
-                    font.pixelSize: 16*dpx
-                    font.family: "MicrosoftYaHei";
-                    verticalAlignment: Text.AlignVCenter
-                }
-            }
-        }
-        ListView {
-            id: listView
-            anchors.fill: parent
-            delegate: delegate
-            spacing: 1*dpy
-            model: $app.openHelp()
-            focus: true
-            clip: true
-            ScrollBar.vertical: ScrollBar {
-                id: scrollBar
+        model:$app.openHelp()
+        delegate: Rectangle {
+            id: wrapper
+            width: listView.width
+            height: 38 *dpy
+            Rectangle {
+                anchors.fill: parent
+                color: index%2 ? "#2D5689" : "#4671a6"
             }
 
+            TextListItem {
+                id: fileName
+                text: modelData
+                anchors.centerIn: parent
+                font.pixelSize: 14*dpx
+            }
+            MouseArea {
+                anchors.fill: parent
+                hoverEnabled: true
+                onClicked: {
+                    mouse.accepted = true
+                    wrapper.ListView.view.currentIndex = index
+                    $app.openFile("file:///"+modelData)
+                }
+            }
         }
 
     }

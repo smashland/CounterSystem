@@ -1,13 +1,13 @@
-
+//                                        单选框
 import QtQuick 2.12
 import QtQuick.Controls 2.15
-Row {
-    spacing: 10*dpx
+Item {
+//    spacing: 10*dpx
     property alias name: checkText.text
     property bool boolCheck: check.checked
     CheckBox {
         id: check
-        y: 1*dpy
+        y: 2*dpy
         width: 17*dpx
         height: 17*dpy
 //        checked:true
@@ -26,7 +26,7 @@ Row {
     }
     Text {
         id: checkText
-//        text: qsTr("断开自动重连")
+        x: 27*dpx
         color: "#d5e2f5"
         font.pixelSize: 14*dpx
         font.family: "Microsoft YaHei"

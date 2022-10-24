@@ -18,7 +18,7 @@ SpinBox {
 
     font{
         family: "SimSun"
-        pixelSize: 20
+        pixelSize: 20*dpy
     }
     contentItem: Rectangle{
         z: 2

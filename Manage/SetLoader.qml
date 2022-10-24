@@ -114,8 +114,8 @@ ManageRect{
                 property var name: "score"
                 clip: true
                 id: scoreList
-                anchors.leftMargin: 60
-                anchors.topMargin: 20
+                anchors.leftMargin: 60*dpx
+                anchors.topMargin: 20*dpy
                 anchors.fill: parent
                 delegate: contactDelegate
                 model:$app.settings.scoreSetting
@@ -133,8 +133,8 @@ ManageRect{
             {
                 property var name: "harm"
                 id: harmList
-                anchors.leftMargin: 60
-                anchors.topMargin: 20
+                anchors.leftMargin: 60*dpx
+                anchors.topMargin: 20*dpy
                 anchors.fill: parent
                 delegate: contactDelegate
                 model:$app.settings.harmSetting
@@ -148,15 +148,15 @@ ManageRect{
         {
             id: systemGroupBox
             anchors.top: harmGroupBox.bottom
-            anchors.topMargin: 20
+            anchors.topMargin: 20*dpy
             title: qsTr("系统设置:")
 
             ListView
             {
                 property var name: "sys"
                 id: systemList
-                anchors.leftMargin: 60
-                anchors.topMargin: 20
+                anchors.leftMargin: 60*dpx
+                anchors.topMargin: 20*dpy
                 anchors.fill: parent
                 delegate: contactDelegate
                 model:$app.settings.systemSetting
@@ -165,8 +165,10 @@ ManageRect{
 
             CheckBoxItem {
                 id:voiceControl
-                x:60*dpx
-                y:150*dpy
+                anchors.left: parent.left
+                anchors.leftMargin: 60*dpx
+                anchors.top: parent.top
+                anchors.topMargin: 150*dpy
                 name: qsTr("开启语音")
                 boolCheck:true
                 MouseArea {

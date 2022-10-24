@@ -99,7 +99,6 @@
         <file>font/iconfont.ttf</file>
         <file>Exercise/RedChart.qml</file>
         <file>Setting/ChongDan.qml</file>
-        <file>Setting/Setting.qml</file>
         <file>RePlay/ContrlRePlay.qml</file>
         <file>Status/BoardNotice.qml</file>
         <file>Status/EquipConnStat.qml</file>
@@ -152,6 +151,10 @@
         <file>Exercise/Plugins/TimeText.qml</file>
         <file>Exercise/Plugins/CampHidden.qml</file>
         <file>Exercise/Plugins/ToggleSettings.qml</file>
-        <file>Login/LoginInformation.qml</file>
+        <file>Login/LoginImage.qml</file>
+        <file>Status/Plugins/PersonText.qml</file>
+        <file>Manage/Plugins/MapHelpList.qml</file>
+        <file>Login/LoginComboBox.qml</file>
+        <file>Login/LoginTextField.qml</file>
     </qresource>
 </RCC>

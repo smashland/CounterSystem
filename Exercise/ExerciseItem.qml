@@ -5,7 +5,7 @@ Row
 {
     property alias title: title.text
     property alias name: name.text
-    spacing: 10
+    spacing: 10*dpx
 
     Text {
         id: title

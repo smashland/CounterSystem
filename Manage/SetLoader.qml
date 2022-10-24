@@ -2,17 +2,20 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
-//import QtQuick.Controls 2.14 as QC14
+import QtQuick.Controls.Styles 1.2
+import QtQuick.Shapes 1.0
 import "../Common"
 import "../Exercise"
-import QtQuick.Controls.Styles 1.2
 import "Plugins"
+import "../Setting"
+import "../Login"
 
 ManageRect{
     id: setloader
     rectWidth: 1102 *dpx
     rectHeight: 680 *dpy
     rectImage: "qrc:/Image/Popup_bg_27.png"
+
     CloseButton {
         anchors.right: setloader.right
         anchors.rightMargin: 65 *dpx
@@ -50,8 +53,7 @@ ManageRect{
                     harmGroupBox.visible=true
                     systemGroupBox.visible=true
                     setMapLoader.visible = false
-                    wifiGroupBox.visible = false
-                    chuankouGroupBox.visible = false
+                    setNet.visible = false
                 }
             }
             SwitchButton{
@@ -62,8 +64,7 @@ ManageRect{
                     harmGroupBox.visible=false
                     systemGroupBox.visible=false
                     setMapLoader.visible = true
-                    wifiGroupBox.visible = false
-                    chuankouGroupBox.visible = false
+                    setNet.visible = false
                 }
 
             }
@@ -75,8 +76,7 @@ ManageRect{
                     systemGroupBox.visible=false
                     scoreGroupBox.visible=true
                     setMapLoader.visible = false
-                    wifiGroupBox.visible = false
-                    chuankouGroupBox.visible = false
+                    setNet.visible = false
                 }
 
             }
@@ -88,8 +88,7 @@ ManageRect{
                     systemGroupBox.visible=false
                     scoreGroupBox.visible=false
                     setMapLoader.visible = false
-                    wifiGroupBox.visible = true
-                    chuankouGroupBox.visible = true
+                    setNet.visible = true
                 }
 
             }
@@ -164,28 +163,14 @@ ManageRect{
                 clip: true
             }
 
-            Row {
+            CheckBoxItem {
+                id:voiceControl
                 x:60*dpx
                 y:150*dpy
-                spacing: 10*dpx
-                CheckBox {
-                    id: voiceControl
-                    y: 1*dpy
-                    width: 17*dpx
-                    height: 17*dpy
-                    checked:$app.setOpenSpeak
-                    indicator: Rectangle {
-                        width: voiceControl.width
-                        height: voiceControl.height
-                        color: "#1d4f88"
-                        border.color: "#3b6daa"
-                        Image {
-                            id: tick
-                            width: voiceControl.width
-                            height: voiceControl.height
-                            source: voiceControl.checked ? "qrc:/Image/true.png" : ""
-                        }
-                    }
+                name: qsTr("开启语音")
+                boolCheck:true
+                MouseArea {
+                    anchors.fill: parent
                     onClicked: {
                         if(voiceControl.checked)
                         {
@@ -196,12 +181,6 @@ ManageRect{
                             $app.setOpenSpeak(false);
                         }
                     }
-                }
-                Text {
-                    text: qsTr("开启语音")
-                    color: "#d5e2f5"
-                    font.pixelSize: 14*dpx
-                    font.family: "Microsoft YaHei"
                 }
             }
         }
@@ -230,53 +209,10 @@ ManageRect{
             }
         }
 
-        BasicGroupBox
-        {
-            id: wifiGroupBox
-            y: 15*dpy
-            title: qsTr("网络设置:")
-            Row {
-                x:60*dpx
-                y:30*dpy
-                spacing: 10*dpx
-                CheckBox {
-                    id: zdcl
-                    y: 1*dpy
-                    width: 17*dpx
-                    height: 17*dpy
-                    checked:$app.setOpenSpeak
-                    indicator: Rectangle {
-                        width: zdcl.width
-                        height: zdcl.height
-                        color: "#1d4f88"
-                        border.color: "#3b6daa"
-                        Image {
-                            width: zdcl.width
-                            height: zdcl.height
-                            source: zdcl.checked ? "qrc:/Image/true.png" : ""
-                        }
-                    }
-
-                }
-                Text {
-                    text: qsTr("断开自动重连")
-                    color: "#d5e2f5"
-                    font.pixelSize: 14*dpx
-                    font.family: "Microsoft YaHei"
-                }
-            }
-
+        SetNet {
+            id:setNet
+            visible: false
         }
-        BasicGroupBox
-        {
-            id: chuankouGroupBox
-            anchors.top: wifiGroupBox.bottom
-            anchors.topMargin: 20
-            title: qsTr("串口设置:")
-
-
-        }
-
 
         SetMapLoader {
             id: setMapLoader

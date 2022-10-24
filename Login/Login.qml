@@ -9,6 +9,7 @@ Column {
     //        x: (mainWindow.width-loginRect.width)/2
     //        y: (mainWindow.height-loginRect.height)/2
     spacing: 50 *dpx
+    property alias name: control.currentText
 
     Rectangle {
         id: loginText
@@ -283,19 +284,5 @@ Column {
         }
 
     }
-    // 连接失败
-    PopupDef {
-        id: popupRectDef
-        visible: false
-        x:(mainWindow.width-popupRectDef.width)/2
-        y:(mainWindow.height-popupRectDef.height)/2
-    }
 
-    // 连接成功
-    PopupWin {
-        id: popupRectWin
-        visible: false
-        x:(mainWindow.width-popupRectWin.width)/6
-        y:(mainWindow.height-popupRectWin.height)/6
-    }
 }

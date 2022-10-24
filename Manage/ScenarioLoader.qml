@@ -177,12 +177,12 @@ ManageRect{
             sceManager.importSce(impScePath)
         }
     }
+    property string defaltFolderUrl: "file:///D:/InstallSoftWare/CounterSystem/Data/Project/"
     FileDialog {
         id: saveSce
         title: qsTr("保存方案")
         fileMode: FileDialog.SaveFile
-//        folder: shortcuts.desktop
-        folder: "../../Bin/Data/Project"
+        folder: defaltFolderUrl
         nameFilters: [qsTr("(*.sce))")]
         onAccepted: {
             var scePath=String(saveSce.currentFile)

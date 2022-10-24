@@ -37,7 +37,6 @@ Item {
         font.pixelSize: 22*dpx
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
-
     }
 
     Text {
@@ -58,28 +57,20 @@ Item {
         }
     }
 
-    Rectangle
+    ScrollView
     {
         id:showNotice
         width: 600
         height: 50
-    //    y:parent.height + height
-    //    anchors.right:  parent.right
         anchors.centerIn: parent
-        color: "transparent"
-
+//        color: "transparent"
         TextArea
         {
             id:showText
             color: "white"
             font.pointSize: 16
             font.bold: true
-//            background: Rectangle
-//            {
-//                color:"#2D5689"
-//                opacity:showNotice.visible ? 0.5 : 0.0
-//            }
-
+            anchors.centerIn: parent
             Connections
             {
                 target: $app.settings

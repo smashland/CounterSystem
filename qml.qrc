@@ -73,11 +73,8 @@
         <file>Image/icon/zanting.svg</file>
         <file>Image/icon/zanting1.svg</file>
         <file>Image/icon/zhankai.svg</file>
-        <file>Login/PopupDef.qml</file>
-        <file>Login/PopupWin.qml</file>
         <file>Login/Connect.qml</file>
         <file>Common/NavImage.qml</file>
-        <file>Exercise/SoldierItem.qml</file>
         <file>Common/PopupButton.qml</file>
         <file>Common/CloseButton.qml</file>
         <file>Exercise/Manoeuvre.qml</file>
@@ -102,7 +99,6 @@
         <file>font/iconfont.ttf</file>
         <file>Exercise/RedChart.qml</file>
         <file>Setting/ChongDan.qml</file>
-        <file>Setting/ConnectSetting.qml</file>
         <file>Setting/Setting.qml</file>
         <file>RePlay/ContrlRePlay.qml</file>
         <file>Status/BoardNotice.qml</file>
@@ -129,10 +125,7 @@
         <file>Image/wuqi/toukui.png</file>
         <file>Common/MenuBackground.qml</file>
         <file>Image/Start_bg.png</file>
-        <file>Exercise/BeginButton.qml</file>
-        <file>Exercise/FinishButton.qml</file>
         <file>Exercise/ExerciseItem.qml</file>
-        <file>Setting/ChongdanItem.qml</file>
         <file>Manage/SetMapLoader.qml</file>
         <file>Common/RemoveDialog.qml</file>
         <file>Manage/PersonAdd.qml</file>
@@ -150,5 +143,15 @@
         <file>Manage/Plugins/InputItem.qml</file>
         <file>Manage/Plugins/TextItem.qml</file>
         <file>Manage/Plugins/ComboBoxItem.qml</file>
+        <file>Common/SoldierItem2.qml</file>
+        <file>Common/SoldierItem.qml</file>
+        <file>Manage/SetNet.qml</file>
+        <file>Manage/Plugins/TextFieldItem.qml</file>
+        <file>Manage/Plugins/CheckBoxItem.qml</file>
+        <file>Exercise/Plugins/ControlButtons.qml</file>
+        <file>Exercise/Plugins/TimeText.qml</file>
+        <file>Exercise/Plugins/CampHidden.qml</file>
+        <file>Exercise/Plugins/ToggleSettings.qml</file>
+        <file>Login/LoginInformation.qml</file>
     </qresource>
 </RCC>

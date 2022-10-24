@@ -1,3 +1,4 @@
+//                                  按钮提示信息
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 

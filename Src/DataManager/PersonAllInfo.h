@@ -33,6 +33,12 @@ public:
     Q_PROPERTY(double  dLon MEMBER m_dLon NOTIFY lonChanged)
     Q_PROPERTY(int uRelive MEMBER m_uRelive NOTIFY reliveChanged)
 
+    int        getId()      {return m_nID;}
+    QString    getName()    {return m_sName;}
+    int        getRelive()  {return m_uRelive;}
+    double     getLat()     {return m_dLat;}
+    double     getLon()     {return m_dLon;}
+
 
     /**
      * @brief 更新显示信息

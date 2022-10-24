@@ -115,6 +115,7 @@ Popup
             }
 
             SoldierItem {
+                id:shebeiId
                 x: line1.width/2
                 y: shibbingxinxi.contentHeight + line1.height + 20 *dpy
                 text: "装备编号:"
@@ -143,6 +144,7 @@ Popup
                 color: "#3b6daa"
             }
             SoldierItem {
+                id:reliveName
                 y: fushangxinxi.contentHeight + line2.height + 20 *dpy
                 text: "复活次数:"
                 name: outData.uRelive
@@ -169,11 +171,13 @@ Popup
                 color: "#3b6daa"
             }
             SoldierItem {
+                id:lat
                 y: weizhixinxi.contentHeight + line3.height + 20 *dpy
                 text: "经       度:"
                 name:outData.dLon
             }
             SoldierItem {
+                id:lon
                 x: line1.width/2
                 y: weizhixinxi.contentHeight + line3.height + 20 *dpy
                 text: "纬       度:"
@@ -274,4 +278,16 @@ Popup
         }
     }
 
+    Connections {
+        target: $app.allData
+        function onMapPersonInfo(id,name,relive,dLon,dLat,bTk){
+            shebeiId.name = id;
+            soldierItemContent.text = name
+            reliveName.name = relive;
+            lat.name = dLat;
+            lon.name = dLon;
+            toukuizhuangtai.bConnected = bTk;
+            personPopup.visible=true;
+        }
+    }
 }

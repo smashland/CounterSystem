@@ -19,6 +19,7 @@
 #include "Src/Settings/EarthManager.h"
 #include "Src/Settings/CSetEarth.h"
 
+
 int main(int argc, char *argv[])
 {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)

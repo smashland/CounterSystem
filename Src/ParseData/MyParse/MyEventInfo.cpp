@@ -9,6 +9,8 @@
 #include "../../Notice/NoticeManager.h"
 #include <GisMath/GisMath.h>
 #include <VersionMathCommon.h>
+#include "Src/Map/ContrlMapPerson.h"
+
 Q_DECLARE_FLAGS(Guntypes,GunType)
 
 CMyEventInfo::CMyEventInfo():m_pPerson(nullptr)
@@ -107,10 +109,10 @@ void CMyEventInfo::Update(const unsigned char *pData, int nLength)
             if(s_ucStatus & Baty_Value)
             {
                 m_pPerson->mutable_curtstatus()->set_fbatyvalue(static_cast<float>(*pData * CS_INT2FLOAT));
-//                if(m_pPerson->mutable_curtstatus()->fbatyvalue() > 8.4f)
-//                {
-//                    CDealDataManager::GetInstance()->CalibrationCharge(m_pPerson->id());
-//                }
+                //                if(m_pPerson->mutable_curtstatus()->fbatyvalue() > 8.4f)
+                //                {
+                //                    CDealDataManager::GetInstance()->CalibrationCharge(m_pPerson->id());
+                //                }
                 ++pData;
                 --nLength;
             }
@@ -140,7 +142,7 @@ void CMyEventInfo::Update(const unsigned char *pData, int nLength)
                         if(types.testFlag(static_cast<GunType>(g_nGunType<<i)))
                         {
                             if(0 != m_pPerson->mutable_curtstatus()->mutable_weapons(i)->bulletnum() &&
-                               qFromBigEndian<quint16>(pData) < m_pPerson->mutable_curtstatus()->mutable_weapons(i)->bulletnum())
+                                    qFromBigEndian<quint16>(pData) < m_pPerson->mutable_curtstatus()->mutable_weapons(i)->bulletnum())
                             {
                                 CNoticeManager::GetInstance()->PlaySound(1);
                             }
@@ -219,9 +221,9 @@ void CMyEventInfo::Update(const unsigned char *pData, int nLength)
                                     break;
                                 }
                                 /// 增加命中状态
-//                                QString listInfo=QString::fromUtf8("%3 %1被%2的%4炸死").arg(m_pPerson->id())
-//                                        .arg(pShotPerson->id()).arg(QTime::currentTime().toString("hh:mm:ss"))
-//                                        .arg(type);
+                                //                                QString listInfo=QString::fromUtf8("%3 %1被%2的%4炸死").arg(m_pPerson->id())
+                                //                                        .arg(pShotPerson->id()).arg(QTime::currentTime().toString("hh:mm:ss"))
+                                //                                        .arg(type);
                                 QString listInfo=QString::fromUtf8("%3 %2使用%4炸死%1").arg(m_pPerson->id())
                                         .arg(pShotPerson->id()).arg(QTime::currentTime().toString("hh:mm:ss"))
                                         .arg(type);
@@ -232,12 +234,32 @@ void CMyEventInfo::Update(const unsigned char *pData, int nLength)
                             }
                             else
                             {
+                                QString type;
+                                switch (nIndex)
+                                {
+                                case 0:
+                                    type = QString::fromUtf8("步枪");
+                                    break;
+                                case 1:
+                                    type = QString::fromUtf8("步枪");
+                                    break;
+                                case 2:
+                                    type = QString::fromUtf8("手枪");
+                                    break;
+                                case 5:
+                                    type = QString::fromUtf8("手枪");
+                                    break;
+                                case 7:
+                                    type = QString::fromUtf8("狙击枪");
+                                    break;
+                                default:
+                                    break;
+                                }
+
                                 /// 增加命中状态
-//                                QString listInfo=QString::fromUtf8("%3 %1被%2的%4击中").arg(m_pPerson->id())
-//                                        .arg(pShotPerson->id()).arg(QTime::currentTime().toString("hh:mm:ss")).arg(gunType);
-//                                listInfo += CConfigInfo::GetInstance()->GetBodyName(hurtInfo->hurtpart());
                                 QString listInfo=QString::fromUtf8("%3 %2使用%4击中%1").arg(m_pPerson->id())
-                                        .arg(pShotPerson->id()).arg(QTime::currentTime().toString("hh:mm:ss")).arg("步枪");
+                                        .arg(pShotPerson->id()).arg(QTime::currentTime().toString("hh:mm:ss")).arg(type);
+                                qDebug()<<"测试枪型"<<listInfo<<" "<<nIndex<<type<<"人员名称";
                                 listInfo += CConfigInfo::GetInstance()->GetBodyName(hurtInfo->hurtpart());
 
                                 /// 发送消息
@@ -258,7 +280,7 @@ void CMyEventInfo::Update(const unsigned char *pData, int nLength)
             --nLength;
             break;
         }
-    }                                                                   
+    }
 }
 
 /// 清除状态
@@ -323,7 +345,7 @@ bool CMyEventInfo::CanSetPos()
         for(int i=0; i<10;++i)
         {
             if(fabs(m_dAllLat[i]-m_dLat)<.5
-            && fabs(m_dAllLon[i]-m_dLon)<.5)
+                    && fabs(m_dAllLon[i]-m_dLon)<.5)
             {
                 ++nNear;
             }

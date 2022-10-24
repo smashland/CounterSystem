@@ -174,6 +174,12 @@ public:
      */
     Q_INVOKABLE void changeGroup(quint16,QString);
 
+    /**
+         * @brief 获取或者创建qml显示的简要信息
+         * @return
+         */
+    CPersonStatus* GetOrCreatePersonStatus(quint16);
+
 signals:
     void simTimeChanged(quint16 simTime);
     void lineSizeChanged(int);
@@ -182,17 +188,18 @@ signals:
     void updateGroup(CGroupStatus* groupStatus);
     void resultChanged(const QVariantList&);
     void allResultChanged(const QVariantList&);
+    void mapPersonInfo(int id,QString name,int relive,double dLon, double dLat,bool bTk);
 protected:
     /**
      * @brief 统计成绩
      */
     void StatisticResult();
 
-    /**
-     * @brief 获取或者创建qml显示的简要信息
-     * @return
-     */
-    CPersonStatus* GetOrCreatePersonStatus(quint16);
+    //    /**
+    //     * @brief 获取或者创建qml显示的简要信息
+    //     * @return
+    //     */
+    //    CPersonStatus* GetOrCreatePersonStatus(quint16);
 
     /**
      * @brief 将状态压栈

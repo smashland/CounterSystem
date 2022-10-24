@@ -11,10 +11,14 @@
 #include "PlaceNodeInfo.h"
 #include "ContrlMapPerson.h"
 #include "../ErrorReport.h"
+#include "Src/DataManager/GlobalData.h"
+#include "Src/DataManager/PersonAllInfo.h"
 
-CContrlMapPerson::CContrlMapPerson(ISceneGraph *pSceneGraph):
-    m_pSceneGraph(pSceneGraph)
+CContrlMapPerson::CContrlMapPerson(ISceneGraph *pSceneGraph, CGlobalData *pData):QObject(),
+    m_pSceneGraph(pSceneGraph),m_pGloablData(pData)
 {
+    m_pSceneGraph->GetTool()->SelecteTool("IPointPick");
+    m_pSceneGraph->GetTool()->SubPickMessage(this);
     m_pMap = m_pSceneGraph->GetMap();
     m_pMap->GetSpaceEnv()->ShowSpaceBackGround(false);
     m_pMap->OpenLight(false);
@@ -155,6 +159,50 @@ void CContrlMapPerson::UpdateSeconds(const quint16 &seconds)
             ++one;
         }
     }
+}
+
+void CContrlMapPerson::PickID(unsigned int nPickID, unsigned int nType)
+{
+    qDebug()<<nPickID<<' '<<nType;
+    //    if(0 != nPickID)
+    {
+        for(auto findOne = m_mapShowInfo.begin(); findOne != m_mapShowInfo.end(); ++findOne)
+        {
+            if(findOne.value()->GetLocationNode()->PickID() == nPickID)
+            {
+
+                CPersonAllInfo* cPersonAllInfo=m_pGloablData->getPersonAllInfo(findOne.key());
+                auto personOne= m_pGloablData->GetOrCreatePersonStatus(findOne.key());
+                 qDebug()<<"user id:"<<findOne.key()<<getIdName(findOne.key());
+
+//                qDebug()<<cPersonAllInfo->getId()<<cPersonAllInfo->getName()
+//                       <<cPersonAllInfo->getRelive()<<cPersonAllInfo->getLat()<<cPersonAllInfo->getLon()
+//                      <<personOne->getName()<<personOne->getBtk();
+                emit mapPersonInfo(cPersonAllInfo->getId(),cPersonAllInfo->getName(),cPersonAllInfo->getRelive(),
+                                   cPersonAllInfo->getLat(),cPersonAllInfo->getLon(),personOne->getBtk());
+                break;
+            }
+        }
+    }
+}
+
+QString CContrlMapPerson::getIdName(int id)
+{
+    auto findPerson = m_mapShowInfo.find(id);
+    if(m_mapShowInfo.end() == findPerson)
+    {
+        return nullptr;
+    }
+    else
+    {
+        CPersonAllInfo* cPersonAllInfo=m_pGloablData->getPersonAllInfo(findPerson.key());
+        qDebug()<<"user id:"<<findPerson.key()<<"name"<<cPersonAllInfo->getName();
+        return cPersonAllInfo->getName();
+    }
+
+
+    return nullptr;
+
 }
 
 /// 查找显示信息

@@ -149,7 +149,7 @@ void CGlobalData::UpdateSimulationTime(const quint16 &uSimTimes)
         {
             m_pCtrMapPerson->UpdateHitLine(pPerson->hurtinfo(pPerson->hurtinfo_size()-1).id(),one);
             /// 增加命中状态
-            QString listInfo=QString::fromLocal8Bit("%3秒 %1被%2击中").arg(pPerson->id())
+            QString listInfo=QString::fromUtf8("%3秒 %1被%2击中").arg(pPerson->id())
                     .arg(pPerson->hurtinfo(pPerson->hurtinfo_size()-1).id()).arg(uSimTimes);
             listInfo += CConfigInfo::GetInstance()->GetBodyName(pPerson->hurtinfo(pPerson->hurtinfo_size()-1).hurtpart());
 
@@ -229,7 +229,6 @@ void CGlobalData::updateAllDataSize(int nData)
 CPersonAllInfo *CGlobalData::getPersonAllInfo(quint16 unID)
 {
     auto pPersonStatus = GetOrCreatePersonStatus(unID);
-
     m_pPersonAllInfo->UpdateTypeAndName(pPersonStatus->getName(),pPersonStatus->getType());
     m_pPersonAllInfo->Update(unID);
     return(m_pPersonAllInfo);
@@ -320,7 +319,6 @@ void CGlobalData::calResult()
     /// 更新模型列表
     emit(resultChanged(m_listResult));
     emit(allResultChanged(m_listAllResult));
-
 }
 
 /// 定位人员
@@ -334,7 +332,8 @@ void CGlobalData::SetSeceneGraph(ISceneGraph *pSceneGraph)
 {
     if(nullptr == m_pCtrMapPerson)
     {
-        m_pCtrMapPerson = new CContrlMapPerson(pSceneGraph);
+        m_pCtrMapPerson = new CContrlMapPerson(pSceneGraph,this);
+        connect(m_pCtrMapPerson,&CContrlMapPerson::mapPersonInfo,this,&CGlobalData::mapPersonInfo);
         CTimeServer::GetInstance()->SubTime(m_pCtrMapPerson);
     }
 }

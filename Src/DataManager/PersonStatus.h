@@ -38,6 +38,7 @@ public:
     void setId(int nId);
     int  getId(){return(m_nID);}
     void setName(const QString& sName);
+    bool getBtk(){return m_bTK;}
     int getHealth(){return(m_nHealth);}
     const QString& getName(){return(m_sName);}
     void updateTime(quint16 unTimes);

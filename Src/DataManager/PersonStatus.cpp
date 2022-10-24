@@ -125,14 +125,8 @@ void CPersonStatus::setName(const QString &sName)
         m_sName = sName;
         emit(nameChanged(m_sName));
     }
+
 }
-
-/// 是否人质
-//bool CPersonStatus::setRenzhi()
-//{
-
-//}
-
 
 /// 更新人员在线状态
 void CPersonStatus::updateTime(quint16 unTimes)

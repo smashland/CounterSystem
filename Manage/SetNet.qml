@@ -48,6 +48,23 @@ Rectangle {
             }
         }
     }
+    CheckBoxItem {
+        id: dkcl
+        x:60*dpx
+        y:35*dpy
+        name: qsTr("断开自动重连")
+        boolCheck:false
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                if(boolCheck === true) {
+                    tryToConnect()
+                }else if(boolCheck === false) {
+                    timer.stop();
+                }
+            }
+        }
+    }
 
     BasicGroupBox
     {
@@ -58,23 +75,9 @@ Rectangle {
         visible: true
         Column {
             x:60*dpx
-            y:30*dpy
+            y:50*dpy
             spacing:15*dpy
-            CheckBoxItem {
-                id: dkcl
-                name: qsTr("断开自动重连")
-                boolCheck:false
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        if(boolCheck === true) {
-                            tryToConnect()
-                        }else if(boolCheck === false) {
-                            timer.stop();
-                        }
-                    }
-                }
-            }
+
             Row {
                 TextListItem {
                     id:chonglian

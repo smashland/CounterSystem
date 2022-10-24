@@ -14,15 +14,6 @@ TextField {
         color: "#1d4f88"
         border.color: "#3b6daa"
     }
-//    validator: RegExpValidator
-//    {
-//        regExp:0 === index ? /(?!0)(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d))/ :/(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d))/
-//    }
-//    onActiveFocusChanged:
-//    {
-//        if(!activeFocus)
-//        {
-//            ip[index] = textField.text
-//        }
-//    }
+    selectByMouse: true
+    selectionColor: "#0187d6"
 }

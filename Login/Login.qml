@@ -90,6 +90,8 @@ Column {
                             lrText.text = qsTr($licCheck.read());
                         }
                     }
+                    selectByMouse: true
+                    selectionColor: "#0187d6"
                 }
             }
             Rectangle {

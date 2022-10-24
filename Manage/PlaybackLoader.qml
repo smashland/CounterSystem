@@ -48,9 +48,9 @@ ManageRect{
         }
     }
 
-    SearchItem {
+//    SearchItem {
 
-    }
+//    }
 
     ScePlayList{
         id: listView

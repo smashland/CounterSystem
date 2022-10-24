@@ -38,7 +38,7 @@ SpinBox {
             color: control.textColor
             selectByMouse: true
             selectedTextColor: "white"
-//            selectionColor: "black"
+            selectionColor: "#0187d6"
             font: control.font
             renderType: Text.NativeRendering
             onTextEdited:

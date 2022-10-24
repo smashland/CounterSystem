@@ -60,7 +60,7 @@ Item {
     ScrollView
     {
         id:showNotice
-        width: 600
+        width: 500
         height: 50
         anchors.centerIn: parent
 //        color: "transparent"

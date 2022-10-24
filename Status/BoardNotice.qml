@@ -78,15 +78,4 @@ ScrollView
         }
     }
 
-//    Timer
-//    {
-//        id:hidTimer
-//        interval: 5000;
-//        running: true;
-//        repeat: false
-//        onTriggered:
-//        {
-//            leave.running=true;
-//        }
-//    }
 }

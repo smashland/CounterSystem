@@ -70,6 +70,7 @@ Item {
             color: "white"
             font.pointSize: 16
             font.bold: true
+            anchors.centerIn: parent
             Connections
             {
                 target: $app.settings

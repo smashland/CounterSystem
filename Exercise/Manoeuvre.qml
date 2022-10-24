@@ -6,7 +6,7 @@ import Qt.labs.platform 1.1
 import Qt.labs.qmlmodels 1.0
 import "../Status" as MyStatus
 import "../RePlay" as MyRePlay
-//import Qt.labs.settings 1.0
+import "Plugins"
 
 Item {
     id: manoeuvre
@@ -38,126 +38,34 @@ Item {
             color: "#ffffff";
             font.family: "Microsoft YaHei";
         }
-        Rectangle{
+        TimeText{
             //shi
             id:hour_rec
-            width:hour_text.contentWidth
-            height: hour_text.contentHeight
-            color: "transparent"
-            Label{
-                id:hour_text
-                text: manoeuvre.hour
-                anchors.centerIn: parent
-                font.bold: true
-                font.pixelSize: 20*dpx;
-                color: "#ffffff";
-                font.family: "Microsoft YaHei";
-            }
+            text: manoeuvre.hour
         }
-        Rectangle{
-            //fen
-            id:dian
-            width:hour_text.contentWidth
-            height: hour_text.contentHeight
-            color: "transparent"
-            Label{
-                id:dian_text
-                text: ":"
-                anchors.centerIn: parent
-                font.bold: true
-                font.pixelSize: 20*dpx;
-                color: "#ffffff";
-                font.family: "Microsoft YaHei";
-            }
+        TimeText{
+            //dian
+            id:dian_rec
+            text: ":"
         }
-        Rectangle{
+        TimeText{
             //fen
             id:minute_rec
-            width:hour_text.contentWidth
-            height: hour_text.contentHeight
-            color: "transparent"
-            Label{
-                id:minute_text
-                text: manoeuvre.minute
-                anchors.centerIn: parent
-                font.bold: true
-                font.pixelSize: 20*dpx;
-                color: "#ffffff";
-                font.family: "Microsoft YaHei";
-            }
+            text: manoeuvre.minute
         }
-        Rectangle{
-            //fen
-            id:diandian
-            width:hour_text.contentWidth
-            height: hour_text.contentHeight
-            color: "transparent"
-            Label{
-                id:diandian_text
-                text: ":"
-                anchors.centerIn: parent
-                font.bold: true
-                font.pixelSize: 20*dpx;
-                color: "#ffffff";
-                font.family: "Microsoft YaHei";
-            }
+        TimeText{
+            //dian
+            id:dian_rec2
+            text: ":"
         }
-
-        Rectangle{
-            //miao
+        TimeText{
+            //shi
             id:second_rec
-            width:hour_text.contentWidth
-            height: hour_text.contentHeight
-            color: "transparent"
-            Label{
-                id:second_text
-                text: manoeuvre.second
-                anchors.centerIn: parent
-                font.bold: true
-                font.pixelSize: 20*dpx;
-                color: "#ffffff";
-                font.family: "Microsoft YaHei";
-            }
+            text: manoeuvre.second
         }
     }
-    Button {
+    CampHidden {
         id: xianyin
-        anchors.left: yanxishijianItem.right
-        anchors.leftMargin: 30*dpx
-        anchors.top: yanxishijianItem.top
-        anchors.topMargin: -3*dpy
-        width: xianyinText.contentWidth + 30*dpx
-        height: 33*dpy
-        visible: false
-        checked:true
-        contentItem: Text {
-            id: xianyinText
-            text: qsTr("显示/隐藏")
-            font.pixelSize: 15*dpx
-            color: "#ffffff"
-            font.family: "Microsoft YaHei"
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-        }
-        background: Rectangle {
-            radius: 18*dpy
-            color: "#dbbb5a"
-        }
-        onClicked: {
-            if(xianyin.checked){
-                isXianshi()
-            }else{
-                isYincang()
-            }
-        }
-    }
-    function isXianshi() {
-        blue.visible = true
-        red.visible = true
-    }
-    function isYincang() {
-        blue.visible = false
-        red.visible = false
     }
 
     Timer{
@@ -177,26 +85,29 @@ Item {
                     if(manoeuvre.hour == 24)
                         hour = 0
                     if(manoeuvre.hour < 10)
-                        hour_text.text = "0"+manoeuvre.hour
+                        hour_rec.text = "0"+manoeuvre.hour
                     else
-                        hour_text.text = manoeuvre.hour
+                        hour_rec.text = manoeuvre.hour
                 }
                 if(manoeuvre.minute < 10)
-                    minute_text.text = "0" + manoeuvre.minute
+                    minute_rec.text = "0" + manoeuvre.minute
                 else
-                    minute_text.text = manoeuvre.minute
+                    minute_rec.text = manoeuvre.minute
             }
             if(manoeuvre.second < 10)
-                second_text.text = "0" + manoeuvre.second
+                second_rec.text = "0" + manoeuvre.second
             else
-                second_text.text = manoeuvre.second
+                second_rec.text = manoeuvre.second
         }
 
     }
 
 
-    BeginButton {
+    ControlButtons {
         id:beginButton
+        jianbianColor: "#00baff"
+        icon: qsTr("\ue623")
+        text: qsTr("开始")
         MouseArea {
             anchors.fill: parent
             onClicked: {
@@ -213,8 +124,11 @@ Item {
             }
         }
     }
-    FinishButton {
+    ControlButtons {
         id: finishButton
+        jianbianColor: "#59eba5"
+        icon: qsTr("\ue638")
+        text: qsTr("结束")
         visible: false
         MouseArea {
             anchors.fill: parent
@@ -230,7 +144,7 @@ Item {
                 killExpand.visible = false
                 yanxishijianItem.visible = false
                 xianyin.visible = false
-                isXianshi()
+                xianyin.isXianshi()
             }
         }
     }
@@ -255,19 +169,11 @@ Item {
     {
         beginButton.visible = false
         finishButton.visible = true
-//        if(null !== objSetting)
-//        {
-//            objSetting.visible = false
-//        }
     }
     function showTest()
     {
         beginButton.visible = true
         finishButton.visible = false
-//        if(null !== objSetting)
-//        {
-//            objSetting.visible = true
-//        }
     }
     function changeStatus()
     {
@@ -317,54 +223,11 @@ Item {
         }
     }
 
-    Rectangle {
-        id: switchSet
+    ToggleSettings {
         anchors.bottom: parent.bottom
         anchors.bottomMargin: -34*dpy
         anchors.right: parent.right
         anchors.rightMargin: -20 *dpx
-        width: 140*dpx
-        height: 68 *dpy
-        color: Qt.rgba(36/255, 41/255, 57/255, 0.6);
-        radius: 20*dpy
-
-        Rectangle {
-            x: 10*dpx
-            y: 7*dpy
-            color: "transparent"
-            width: 20*dpx
-            height: 20*dpx
-
-            Text {
-                anchors.fill: parent
-                text: qsTr("\ue628")
-                color: "#e7f6ff"
-                font.family: "iconfont"
-                font.pixelSize: 22*dpx
-                verticalAlignment: Text.AlignVCenter
-            }
-        }
-        Rectangle {
-             y: 7*dpy
-            x: 35*dpx
-            color: "transparent"
-            Text {
-                text: qsTr("切换设置")
-                font.pixelSize: 16*dpx;
-                color: "#ffffff";
-                font.family: "Microsoft YaHei"
-                verticalAlignment: Text.AlignVCenter
-                horizontalAlignment: Text.AlignHCenter
-            }
-        }
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                manoeuvre.visible = false
-                footerBar.visible = true
-            }
-        }
     }
 
 

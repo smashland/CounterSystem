@@ -122,9 +122,9 @@ ManageRect{
             RemoveDialog {
                 id: removeDialog_shanchuhuifang
                 visible: false
-                anchors.centerIn: parent
-                // x: (playbackLoader.width - removeDialog_shanchuhuifang.width)/2
-                // y: (playbackLoader.height - removeDialog_shanchuhuifang.height)/2
+//                anchors.centerIn: parent
+                 x: (playbackLoader.width - removeDialog_shanchuhuifang.width)/2
+                 y: (playbackLoader.height - removeDialog_shanchuhuifang.height)/2
                 content1: "此操作永久删除该回放记录，"
                 content2: "确认要删除吗？"
                 onYesPutDown: {

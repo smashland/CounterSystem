@@ -34,23 +34,23 @@ Dialog{
     Column {
         spacing: 16
         anchors.centerIn: parent
-        ChongdanItem {
+        SoldierItem2 {
             title: "手      枪："
 //            danwei: "支"
         }
-        ChongdanItem {
+        SoldierItem2 {
             title: "步      枪："
 //            danwei: "支"
         }
-        ChongdanItem {
+        SoldierItem2 {
             title: "机      枪："
 //            danwei: "支"
         }
-        ChongdanItem {
+        SoldierItem2 {
             title: "狙击步枪："
 //            danwei: "支"
         }
-        ChongdanItem {
+        SoldierItem2 {
             title: "手      雷："
 //            danwei: "个"
         }

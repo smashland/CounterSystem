@@ -222,8 +222,10 @@ void CMyEventInfo::Update(const unsigned char *pData, int nLength)
 //                                QString listInfo=QString::fromUtf8("%3 %1被%2的%4炸死").arg(m_pPerson->id())
 //                                        .arg(pShotPerson->id()).arg(QTime::currentTime().toString("hh:mm:ss"))
 //                                        .arg(type);
-                                QString listInfo=QString::fromUtf8("%3 %2使用%4炸死%1").arg(m_pPerson->id())
-                                        .arg(pShotPerson->id()).arg(QTime::currentTime().toString("hh:mm:ss"))
+                                QString listInfo=QString::fromUtf8("%3 %1被%2使用%4炸死")
+                                        .arg(m_pPerson->id())
+                                        .arg(pShotPerson->id())
+                                        .arg(QTime::currentTime().toString("hh:mm:ss"))
                                         .arg(type);
 
 
@@ -233,10 +235,17 @@ void CMyEventInfo::Update(const unsigned char *pData, int nLength)
                             else
                             {
                                 /// 增加命中状态
-//                                QString listInfo=QString::fromUtf8("%3 %1被%2的%4击中").arg(m_pPerson->id())
-//                                        .arg(pShotPerson->id()).arg(QTime::currentTime().toString("hh:mm:ss")).arg(gunType);
+                                /*QString listInfo=QString::fromUtf8("%3 %1被%2的%4击中")
+                                        .arg(m_pPerson->id())
+                                        .arg(pShotPerson->id())
+                                        .arg(QTime::currentTime()
+                                             .toString("hh:mm:ss"))
+                                        .arg(gunType);
+                                        .arg(m_pPerson->name())
+                                        .arg(pShotPerson->name())*/
 //                                listInfo += CConfigInfo::GetInstance()->GetBodyName(hurtInfo->hurtpart());
-                                QString listInfo=QString::fromUtf8("%3 %2使用%4击中%1").arg(m_pPerson->id())
+
+                                QString listInfo=QString::fromLocal8Bit("%3 %2使用%4击中%1").arg(m_pPerson->id())
                                         .arg(pShotPerson->id()).arg(QTime::currentTime().toString("hh:mm:ss")).arg("步枪");
                                 listInfo += CConfigInfo::GetInstance()->GetBodyName(hurtInfo->hurtpart());
 

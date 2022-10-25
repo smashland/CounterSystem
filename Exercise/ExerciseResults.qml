@@ -257,8 +257,6 @@ Item {
         {
             id:openFile
             folder:defaltFolderUrl
-//            folder: StandardPaths.writableLocations(StandardPaths.DocumentsLocation)
-//            folder: StandardPaths.standardLocations(StandardPaths.SzysLocation)[0]
             fileMode:FileDialog.SaveFile
             title: qsTr("保存演习数据")
             nameFilters: [qsTr("演习数据(*.szy)")]

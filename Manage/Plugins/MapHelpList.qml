@@ -5,16 +5,6 @@ import "../../Exercise"
 
 ListView {
     id: listView
-    x: 80*dpx
-    y: 170*dpy
-    width: 1066*dpx
-    height: 550 *dpy
-    //            color: "transparent"
-    //            delegate: delegate
-
-    header:ListHeader{
-        id: headerView
-    }
     focus: true
     clip: true
     ScrollBar.vertical: ScrollBar {

@@ -1,12 +1,12 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.13
+import "Plugins"
 
 /// 人员状态显示
 Rectangle
 {
     property var outData: null
-    property var fontSize: 16
 
     id:root
     width: (parent.width-20)*dpx
@@ -15,30 +15,19 @@ Rectangle
     opacity: 0.8
     z:10
 
-    Text
+    // 人员名称
+    PersonText
     {
         id:showid
-        text: outData.id;
-        verticalAlignment: Text.AlignVCenter
-        font.family: "Microsoft YaHei"
-        font.pixelSize: fontSize
-        color: outData.bRenZhi?"green":"white"
-        height: parent.height
-        anchors.left: parent.left
-        anchors.leftMargin: 10
+        text: outData.id
+        x: 10*dpx
     }
 
-    Text
+    PersonText
     {
         id:showName
-        text: outData.name;
-        verticalAlignment: Text.AlignVCenter
-        font.family: "Microsoft YaHei"
-        font.pixelSize: fontSize
-        color: "white"
-        height: parent.height
-        anchors.left: parent.left
-        anchors.leftMargin: 10 + showid.contentWidth
+        text: outData.name
+        x: 35*dpx
     }
 
     RowLayout
@@ -49,9 +38,7 @@ Rectangle
         id:infoshow
         anchors.fill: parent
         anchors.right: parent.right
-        anchors.rightMargin: 10
-
-        /// 人员名称
+        anchors.rightMargin: 10*dpx
 
         Item
         {
@@ -130,7 +117,7 @@ Rectangle
         to: 100
         value: outData.nHealth
         width: parent.width
-        height: 10
+        height: 10*dpy
         anchors.top:infoshow.bottom
         background: Rectangle {
             implicitWidth: health.width

@@ -22,8 +22,8 @@ Rectangle
         y: (scePopup.height - 36 *dpy)/2
         spacing: 10 *dpx
         Text {
-            width: 34
-            height: 34
+            width: 34*dpy
+            height: 34*dpy
             text: qsTr("\ue65c")
             color: "#e74b4b"
             font.family: "iconfont"

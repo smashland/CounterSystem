@@ -60,15 +60,15 @@ Item {
     ScrollView
     {
         id:showNotice
-        width: 600
-        height: 50
+        width: 500*dpx
+        height: 50*dpy
         anchors.centerIn: parent
 //        color: "transparent"
         TextArea
         {
             id:showText
             color: "white"
-            font.pointSize: 16
+            font.pointSize: 16*dpy
             font.bold: true
             anchors.centerIn: parent
             Connections

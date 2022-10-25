@@ -14,8 +14,7 @@ TextInput {
     clip: true
     font.family: "Microsoft YaHei"
     verticalAlignment: Text.AlignVCenter
-//    onEditingFinished: {
-//        scenarioNewInfo.setSceName(nameItemContent.text)
-//    }
+    selectByMouse: true
+    selectionColor: "#0187d6"
 
 }

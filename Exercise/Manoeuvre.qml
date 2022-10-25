@@ -102,7 +102,7 @@ Item {
 
     }
 
-
+    // 开始演习
     ControlButtons {
         id:beginButton
         jianbianColor: "#00baff"
@@ -124,6 +124,7 @@ Item {
             }
         }
     }
+    // 结束演习
     ControlButtons {
         id: finishButton
         jianbianColor: "#59eba5"

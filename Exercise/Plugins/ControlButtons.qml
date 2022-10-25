@@ -2,8 +2,8 @@ import QtQuick 2.15
 
 Rectangle
 {
-    width:100
-    height: 100
+    width:100 *dpy
+    height: 100*dpy
     radius: width/2
     x: (parent.width-width)/2
     property alias jianbianColor: color1.color
@@ -24,7 +24,7 @@ Rectangle
         }
     }
     Column{
-        spacing: 5
+        spacing: 5*dpy
         anchors.centerIn: parent
         Text {
             id: tubiao

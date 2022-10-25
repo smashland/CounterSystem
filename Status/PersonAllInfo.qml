@@ -73,45 +73,11 @@ Popup
                 height: 2 *dpy
                 color: "#3b6daa"
             }
-            Rectangle {
-                id: soldierItem
+            SoldierItem {
+                id:shebeiName
                 y: shibbingxinxi.contentHeight + line1.height + 20 *dpy
-                Rectangle {
-                    color: "transparent"
-                    Text {
-                        id: soldierItemText
-                        width: soldierItemText.contentWidth
-                        height: 34 *dpy
-                        color: "#ffffff"
-                        text: "名       字:"
-                        font.pixelSize: 17*dpx;
-                        font.family: "Microsoft YaHei";
-                        verticalAlignment: Text.AlignVCenter
-                    }
-                }
-                Rectangle {
-                    x: soldierItemText.contentWidth + 20 *dpx
-                    width: 200*dpx
-                    height: 34 *dpy
-                    color: "#1d4f88"
-                    border.color: "#3b6daa"
-                    TextInput {
-                        id: soldierItemContent
-                        x: 10 *dpx
-                        width: 190*dpx
-                        height: 34 *dpy
-                        font.pixelSize: 17*dpx
-                        color: "#ffffff"
-                        clip: true
-                        font.family: "Microsoft YaHei"
-                        verticalAlignment: Text.AlignVCenter
-                        text:outData.name
-//                        onEditingFinished:
-//                        {
-//                            $app.allData.setUserName(outData.id,text);
-//                        }
-                    }
-                }
+                text: "名       字:"
+                name: outData.name
             }
 
             SoldierItem {
@@ -250,7 +216,7 @@ Popup
             nameButton: "确定"
             onClicked: {
                 personPopup.close()
-                $app.allData.setUserName(outData.id,soldierItemContent.text);
+                $app.allData.setUserName(outData.id,shebeiName.name);
             }
 
         }

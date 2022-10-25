@@ -12,8 +12,8 @@ Rectangle {
     property var items: [                //listview的代理项目
         { target: "" }
     ]
-    width: 180;
-    height: 25;
+    width: 180*dpx;
+    height: 25*dpy;
     z: 999
     smooth:true;
     color: "transparent"
@@ -21,10 +21,6 @@ Rectangle {
     Rectangle {
         id:chosenItem
         color: "#1d4f88"
-        Image {
-            anchors.fill: parent
-            source: "qrc:/Image/Common/inputBackground.png"
-        }
         border.color: "#3b6daa"
         border.width: 1
         width:parent.width;
@@ -88,7 +84,7 @@ Rectangle {
 
         ListView{
             id:listviewer
-            height: 210;
+            height: 210*dpy;
             model: comboBox.items
             currentIndex: 0;
             delegate: Rectangle{

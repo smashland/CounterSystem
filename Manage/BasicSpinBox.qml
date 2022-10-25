@@ -18,7 +18,7 @@ SpinBox {
 
     font{
         family: "SimSun"
-        pixelSize: 20
+        pixelSize: 20*dpy
     }
     contentItem: Rectangle{
         z: 2
@@ -38,7 +38,7 @@ SpinBox {
             color: control.textColor
             selectByMouse: true
             selectedTextColor: "white"
-//            selectionColor: "black"
+            selectionColor: "#0187d6"
             font: control.font
             renderType: Text.NativeRendering
             onTextEdited:

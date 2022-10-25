@@ -12,8 +12,8 @@ RoundButton
     signal startReplay()
 
     id: roundButton
-    x: 30
-    y: Screen.height - 150
+    x: 30*dpx
+    y: Screen.height - 150*dpy
     width:120
     height:120
     contentItem: Text
@@ -24,7 +24,7 @@ RoundButton
         horizontalAlignment: Text.AlignHCenter
         style: Text.Outline
         styleColor: "#55FFFFFF"
-        font.pointSize:20
+        font.pointSize:20*dpy
         color:bottonBackground.border.color
     }
 

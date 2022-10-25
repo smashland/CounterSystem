@@ -164,7 +164,7 @@ void CContrlMapPerson::UpdateSeconds(const quint16 &seconds)
 void CContrlMapPerson::PickID(unsigned int nPickID, unsigned int nType)
 {
     qDebug()<<nPickID<<' '<<nType;
-    //    if(0 != nPickID)
+    if(0 != nPickID)
     {
         for(auto findOne = m_mapShowInfo.begin(); findOne != m_mapShowInfo.end(); ++findOne)
         {
@@ -173,7 +173,6 @@ void CContrlMapPerson::PickID(unsigned int nPickID, unsigned int nType)
 
                 CPersonAllInfo* cPersonAllInfo=m_pGloablData->getPersonAllInfo(findOne.key());
                 auto personOne= m_pGloablData->GetOrCreatePersonStatus(findOne.key());
-                 qDebug()<<"user id:"<<findOne.key()<<getIdName(findOne.key());
 
 //                qDebug()<<cPersonAllInfo->getId()<<cPersonAllInfo->getName()
 //                       <<cPersonAllInfo->getRelive()<<cPersonAllInfo->getLat()<<cPersonAllInfo->getLon()
@@ -186,24 +185,6 @@ void CContrlMapPerson::PickID(unsigned int nPickID, unsigned int nType)
     }
 }
 
-QString CContrlMapPerson::getIdName(int id)
-{
-    auto findPerson = m_mapShowInfo.find(id);
-    if(m_mapShowInfo.end() == findPerson)
-    {
-        return nullptr;
-    }
-    else
-    {
-        CPersonAllInfo* cPersonAllInfo=m_pGloablData->getPersonAllInfo(findPerson.key());
-        qDebug()<<"user id:"<<findPerson.key()<<"name"<<cPersonAllInfo->getName();
-        return cPersonAllInfo->getName();
-    }
-
-
-    return nullptr;
-
-}
 
 /// 查找显示信息
 CPlaceNodeInfo *CContrlMapPerson::GetOrCreateMapPersonInfo(quint16 unID)

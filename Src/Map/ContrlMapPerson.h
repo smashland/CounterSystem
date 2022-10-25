@@ -75,13 +75,6 @@ public:
      */
     void PickID(unsigned int nPickID, unsigned int);
 
-    /**
-      * @brief得到人员名字
-      * @param id
-      * @return
-      */
-     QString getIdName(int id);
-
 signals:
     void mapPersonInfo(int id,QString name,int relive,double dLon, double dLat,bool bTk);
 protected:

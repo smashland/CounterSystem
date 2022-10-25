@@ -111,7 +111,6 @@ bool SceManager::deleteScenario(const QString &sceName)
 ///查找方案信息
 QObject *SceManager::findScenario(const QString &sceName)
 {
-    qDebug()<<("查看方案");
     m_hashName2SceInfo.clear();
     auto findOne = m_mapName2SceInfo.find(sceName);
     if(m_mapName2SceInfo.end() != findOne)

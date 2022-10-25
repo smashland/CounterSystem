@@ -3,6 +3,7 @@
 #include <QFileInfo>
 #include <QFile>
 #include <ISceneCore.h>
+#include <QApplication>
 
 ScePersonInfo::ScePersonInfo(QObject *parent)
     : QObject{parent}
@@ -121,8 +122,8 @@ bool ScePersonInfo::getHostage()
 
 void ScePersonInfo::setImagePath(QString sImagePath)
 {
-    m_sImagePath=copyFile(sImagePath);
-    qDebug()<<"000000000000000path"<<m_sImagePath;
+    m_sImagePath=copyFile(m_ID,sImagePath);
+    emit imageChanged(m_sImagePath);
 }
 
 QString ScePersonInfo::getImagePath()
@@ -130,14 +131,24 @@ QString ScePersonInfo::getImagePath()
     return m_sImagePath;
 }
 
-QString ScePersonInfo::copyFile(const QString &strImagePath, const QString &folderName)
+QString ScePersonInfo::copyFile(int nID, const QString &strImagePath)
 {
     QFileInfo fileInfo(strImagePath);
-    QString fileName = folderName + "\\" + fileInfo.fileName();
+    QString newFilePath = QString("%1/Data/Project/Image/%2.%3").arg(QApplication::applicationDirPath()).arg(QString::number(nID)).arg(fileInfo.suffix());
+//    QString filePath = QApplication::applicationDirPath() + "/Data/Earth/Geocentric.earth";
     qDebug()<<"源地址————"<<strImagePath;
-    qDebug()<<"目标地址————"<<GetDataPath().c_str() + fileName;
-    QFile::copy(strImagePath, GetDataPath().c_str() + fileName);
-    QString imagePath=GetDataPath().c_str() + fileName;
+    qDebug()<<"目标地址————"<<newFilePath;
+    QFile file(newFilePath);
+    if (file.exists())
+    {
+        if(file.remove())
+        {
+            qDebug() << "删除成功";
+        }
+    }
+    QFile::copy(strImagePath,newFilePath);
+    QFileInfo pathInfo(newFilePath);
+    qDebug()<<"存储地址————"<<pathInfo.fileName();
 
-    return imagePath;
+    return newFilePath;
 }

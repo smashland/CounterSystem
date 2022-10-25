@@ -25,12 +25,12 @@ CSetEarth *EarthManager::createEarth()
 /// 增加成员
 CSetEarth *EarthManager::addMaps(const QString &earthName)
 {
-     auto findOne = m_mapName2EarthInfo.find(earthName);
+    auto findOne = m_mapName2EarthInfo.find(earthName);
     if(m_mapName2EarthInfo.end() == findOne)
     {
         if(!m_mapName2EarthInfo.contains(earthName))
         {
-             qDebug()<<"新增地图名称bu重复";
+            qDebug()<<"新增地图名称bu重复";
             CSetEarth* pNewOne = new CSetEarth(this);
             m_mapName2EarthInfo.insert(earthName,pNewOne);
             m_listEarth.append(pNewOne);
@@ -118,6 +118,8 @@ void EarthManager::saveFile()
 ///解析地图文件
 void EarthManager::praseEarthXml(QString sEarthPath)
 {
+    QFileInfo fileInfo(sEarthPath);
+    qDebug()<<"文件的地图名称"<<fileInfo.baseName()<<fileInfo.fileName()<<fileInfo.suffix();
     /// 获取文件地址
     QString filePath = QApplication::applicationDirPath() + "/Data/Earth/Geocentric.earth";
     QFile file(filePath);
@@ -135,18 +137,36 @@ void EarthManager::praseEarthXml(QString sEarthPath)
     }
     file.close();
 
+    QString tagName,itemName;
+    if(fileInfo.suffix()=="tif")
+    {
+        tagName="GDALIMAGE";
+        itemName="tif";
+        qDebug()<<"文件后缀名为tif";
+    }
+    else if(fileInfo.suffix()=="xml")
+    {
+        tagName="tmsimage";
+        itemName="hbs";
+        qDebug()<<"文件后缀名为xml";
+    }
+    else
+    {
+        qDebug()<<"错误的文件名称";
+        return;
+    }
+
     // 获得根节点
     QDomElement root = doc.documentElement();
-
     // 获取所有GDALIMAGE节点
-    QDomNodeList list = root.elementsByTagName("GDALIMAGE");
+    QDomNodeList list = root.elementsByTagName(tagName);
     qDebug()<<"获取所有GDALIMAGE节点"<<list.count();
 
     /* 修改尖括号之间的值 */
     for (int i = 0; i < list.size(); i++) {
         QDomElement element = list.at(i).toElement();
         // 找到等于的节点
-        if (element.attribute("name") == "tif") {
+        if (element.attribute("name") == itemName) {
             // 获得子节点
             QDomNode node = element.namedItem("url");
             qDebug()<<"测试节点信息"<<node.nodeValue();

@@ -142,8 +142,6 @@
         <file>Manage/Plugins/InputItem.qml</file>
         <file>Manage/Plugins/TextItem.qml</file>
         <file>Manage/Plugins/ComboBoxItem.qml</file>
-        <file>Common/SoldierItem2.qml</file>
-        <file>Common/SoldierItem.qml</file>
         <file>Manage/SetNet.qml</file>
         <file>Manage/Plugins/TextFieldItem.qml</file>
         <file>Manage/Plugins/CheckBoxItem.qml</file>

@@ -64,10 +64,12 @@ Rectangle
             source: "qrc:/Image/soldiers.png"
         }
         Image {
+            id: morentouxiang2
             anchors.fill: parent
-            source: fileDialog.fileUrl
+            source: fileDialog.file
         }
     }
+
     Rectangle {
         x: 50 *dpx
         y: 300*dpy
@@ -88,7 +90,9 @@ Rectangle
                 fileDialog.open()
             }
         }
+
     }
+
     FileDialog {
         id: fileDialog
         folder: shortcuts.home

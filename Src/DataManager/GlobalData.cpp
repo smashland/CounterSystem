@@ -150,7 +150,7 @@ void CGlobalData::UpdateSimulationTime(const quint16 &uSimTimes)
             m_pCtrMapPerson->UpdateHitLine(pPerson->hurtinfo(pPerson->hurtinfo_size()-1).id(),one);
             /// 增加命中状态
             QString listInfo=QString::fromUtf8("%3秒 %1被%2击中").arg(pPerson->id())
-                    .arg(pPerson->hurtinfo(pPerson->hurtinfo_size()-1).id()).arg(uSimTimes);
+                    .arg(pPerson->hurtinfo(pPerson->hurtinfo_size()-1).id()).arg(/*uSimTimes*/QTime::currentTime().toString("hh:mm:ss"));
             listInfo += CConfigInfo::GetInstance()->GetBodyName(pPerson->hurtinfo(pPerson->hurtinfo_size()-1).hurtpart());
 
             /// 发送消息

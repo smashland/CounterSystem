@@ -15,7 +15,7 @@ Rectangle {
     height: 510 *dpy
     color: "transparent"
 
-    Connections{
+    Connections{    
         function onSignalAddMap(name,path,lat,lon)
         {
             var earth = earthManager.addMaps(name);
@@ -39,7 +39,7 @@ Rectangle {
         id: listView
         width: 710 *dpx
         height: 510 *dpy
-        model:sceManager.listSces
+        model:earthManager.earthList
         delegate: DelegateRectangle {
             id: wrapper
 

@@ -15,10 +15,10 @@ Rectangle
 //    modal: true
     property string imagePath;
 
-    signal ok(int id,string name,int level,int group,bool isHost);
+    signal ok(int id,string name,int level,int group,bool isHost,string imPath);
 
     property var rowNum;
-    property var bConnected:true
+    property bool bConnected:true
 
     Connections{
         function onFindPersonSignal(id)
@@ -28,9 +28,18 @@ Rectangle
             {
                 shebeiId.name=person.id
                 personName.name=person.name
-                combobox_renyuan.currentIndex=person.position
-                zhenying.currentIndex=person.groupType
-                control3.checked=person.hostage
+                combobox_renyuan.currentText=person.position?"军官":"士兵"
+                zhenying.currentText=person.groupType?"红方":"蓝方"
+                if(person.hostage)
+                {
+                    control3.checked=true
+                }
+                else
+                {
+                    control4.checked=true
+                }
+
+                avatarImage.source="file:///"+person.imagePath
             }
             else{
                 console.log("不存在这样的数字据")
@@ -61,12 +70,12 @@ Rectangle
         Image {
             id: morentouxiang
             anchors.fill:parent
-            source: "qrc:/Image/soldiers.png"
+            source:"qrc:/Image/soldiers.png"
         }
         Image {
-            id: morentouxiang2
+            id:avatarImage
             anchors.fill: parent
-            source: fileDialog.fileUrl
+            source: fileDialog.file/*fileDialog.fileUrl*/
         }
     }
 
@@ -96,9 +105,6 @@ Rectangle
     FileDialog {
         id: fileDialog
         folder: shortcuts.home
-//        onAccepted: {
-//            source: fileDialog.fileUrl
-//        }
         title: qsTr("请选择文件")
         nameFilters: [qsTr("(*.png)"),qsTr("(*.jpg)"),qsTr("全部文件 (*.*)")]
         currentFile: document.source
@@ -281,7 +287,7 @@ Rectangle
             nameButton: "确定"
             onClicked: {
                 ok(shebeiId.name,personName.name, combobox_renyuan.currentIndex,
-                   zhenying.currentIndex,control3.checked);
+                   zhenying.currentIndex,control3.checked,imagePath);
                 personAdd.visible = false
                 qingkong()
             }
@@ -301,6 +307,9 @@ Rectangle
     function qingkong() {
         shebeiId.name=""
         personName.name=""
+        combobox_renyuan.currentText=""
+        zhenying.currentText=""
+        avatarImage.source="qrc:/Image/soldiers.png"
         control3.checked = false
         control4.checked = false
     }

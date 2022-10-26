@@ -20,7 +20,7 @@ Item {
     height: 710 *dpy
 
     Connections{
-        function onOk(id,name,level,group,isHost)
+        function onOk(id,name,level,group,isHost,imPath)
         {
             var person = modifySceInfo.addPerson(id);
             if(null!==person)
@@ -29,6 +29,7 @@ Item {
                 person.position = level;
                 person.groupType = group;
                 person.hostage = isHost;
+                person.imagePath=imPath;
                 listView.model=modifySceInfo.listPerson
                 nCount = modifySceInfo.getCount();
             }
@@ -52,7 +53,6 @@ Item {
                 nameItemContent.text=modifySceInfo.sceName
                 listView.model=modifySceInfo.listPerson
                 nCount =  modifySceInfo.getCount();
-                console.log("查看方案")
             }
         }
         target: scenarioLoader
@@ -164,14 +164,14 @@ Item {
                 }
                 TextListItem {
                     id:level
-                    text: modelData.position
+                    text: modelData.position?"军官":"士兵"
                     width: 110 *dpx
                     height: 50 *dpy
                 }
 
                 TextListItem {
                     id:group
-                    text: modelData.groupType
+                    text: modelData.groupType?"红":"蓝"
                     width: 80 *dpx
                     height: 50 *dpy
                 }

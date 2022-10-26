@@ -40,14 +40,8 @@ Rectangle {
         width: 710 *dpx
         height: 510 *dpy
         model:sceManager.listSces
-        delegate: Rectangle {
+        delegate: DelegateRectangle {
             id: wrapper
-            width: listView.width
-            height: 50 *dpy
-            Rectangle {
-                anchors.fill: parent
-                color: index%2 ? "#2D5689" : "#4671a6"
-            }
 
             TextListItem {
                 id: fileName
@@ -66,7 +60,36 @@ Rectangle {
 
     }
 
+    property var component;
+    function openQml() {
+        component = Qt.createComponent("MapAdd.qml");
+        if (component.status === Component.Ready || component.status === Component.Error) {
+            finishQml()
+        } else {
+//            component.addMap.connect(finishQml);
+        }
+    }
+
+    function finishQml() {
+        if (component.status === Component.Ready) {
+            var image = component.createObject(setMapLoade, {"anchors.centerIn":setloader});
+            if (image === null) {
+                console.log("Error creating button");
+            }
+        } else if (component.status === Component.Error) {
+            console.log("Error loading component:", component.errorString());
+        }
+    }
+
+    MapAdd {
+        id: mapAdd
+        width: 600*dpx
+        height: 430*dpy
+//        anchors.centerIn: parent
+        visible: false
+    }
     PopupButton {
+        id:addMap
         anchors.bottom: parent.bottom
         x: 311*dpx
         background: Rectangle {
@@ -74,7 +97,8 @@ Rectangle {
         }
         nameButton: "添加"
         onClicked: {
-            mapAdd.visible = true
+//            mapAdd.visible = true
+            openQml()
         }
     }
 

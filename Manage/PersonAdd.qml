@@ -66,7 +66,7 @@ Rectangle
         Image {
             id: morentouxiang2
             anchors.fill: parent
-            source: fileDialog.file
+            source: fileDialog.fileUrl
         }
     }
 

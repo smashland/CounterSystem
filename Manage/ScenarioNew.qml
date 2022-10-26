@@ -276,7 +276,7 @@ Item {
         interval: 2500
         repeat: fasle
         running: fasle
-        triggeredOnStart: fasle
+        triggeredOnStart: false
         onTriggered: {
             scePopup.visible = false
             scePopup2.visible = false

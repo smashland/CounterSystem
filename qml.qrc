@@ -154,5 +154,8 @@
         <file>Manage/Plugins/MapHelpList.qml</file>
         <file>Login/LoginComboBox.qml</file>
         <file>Login/LoginTextField.qml</file>
+        <file>Common/SoldierItem2.qml</file>
+        <file>Common/SoldierItem.qml</file>
+        <file>Manage/Plugins/DelegateRectangle.qml</file>
     </qresource>
 </RCC>

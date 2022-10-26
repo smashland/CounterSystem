@@ -44,14 +44,9 @@ Rectangle {
         width: 450 *dpx
         height: 330 *dpy
         model:$app.openHelp()
-        delegate: Rectangle {
+        delegate: DelegateRectangle {
             id: wrapper
-            width: listView.width
             height: 38 *dpy
-            Rectangle {
-                anchors.fill: parent
-                color: index%2 ? "#2D5689" : "#4671a6"
-            }
 
             TextListItem {
                 id: fileName

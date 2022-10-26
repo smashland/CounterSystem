@@ -54,14 +54,8 @@ ManageRect{
     ScePlayList{
         id: listView
         model: $app.openPath()
-        delegate: Rectangle {
+        delegate: DelegateRectangle {
             id: wrapper
-            width: listView.width
-            height: 50 *dpy
-            Rectangle {
-                anchors.fill: parent
-                color: index%2 ? "#2D5689" : "#4671a6"
-            }
 
             TextListItem {
                 id: col1

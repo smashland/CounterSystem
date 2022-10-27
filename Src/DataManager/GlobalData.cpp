@@ -194,10 +194,8 @@ void CGlobalData::UpdateSimulationTime(const quint16 &uSimTimes)
 //             QString listInfo=QString::fromUtf8("%1使用%2击中%3").arg(pPerson->hurtinfo(nHurtIndex).id()).arg(type)
 //                                                                    .arg(pPerson->id());
 
-
-
             listInfo += CConfigInfo::GetInstance()->GetBodyName(pPerson->hurtinfo(nHurtIndex).hurtpart());
-             qDebug()<<"回放管理"<<listInfo<<pPerson->hurtinfo(nHurtIndex).hurtpart();
+
             /// 发送消息
             CNoticeManager::GetInstance()->SetNoticInfo(listInfo);
         }

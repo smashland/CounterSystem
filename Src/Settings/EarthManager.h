@@ -10,10 +10,12 @@ class EarthManager : public QObject
 public:
 
     Q_PROPERTY(QList<QObject*> earthList MEMBER m_listEarth  NOTIFY earthChanged)
+    Q_PROPERTY(QString currentName MEMBER m_sCurrentName NOTIFY currentNameChanged )
+    Q_PROPERTY(int currentLat MEMBER m_nCurrentLat NOTIFY currentLatChanged)
+    Q_PROPERTY(int currentLon MEMBER m_nCurrentLon NOTIFY currentLonChanged)
 
     explicit EarthManager(QObject *parent = nullptr);
 
-    Q_INVOKABLE CSetEarth* createEarth();
 
     /**
       * @brief 添加地图
@@ -35,14 +37,38 @@ public:
      */
     Q_INVOKABLE void praseEarthXml(QString sEarthPath);
 
+    /**
+     * @brief 保存现在点击的地图信息
+     * @param earthName
+     * @param lat
+     * @param lon
+     */
+    Q_INVOKABLE void saveCurrentEarth(const QString &earthName,int lat,int lon);
+
+    /**
+     * @brief 解析当前的地图文件
+     */
+    Q_INVOKABLE void praseCurrentEarth();
+
+    QString getCurrentEarthName(){return m_sCurrentName;}
+    QString getCurrentEarthLoction();
+
+private:
+    void ClearEarthInfo();  ///清空
 signals:
     void earthChanged();
+    void currentNameChanged();
+    void currentLatChanged();
+    void currentLonChanged();
 protected:
     void ReadFile();
 private:
     QList<QObject*> m_listEarth;
-
     QMap<QString,CSetEarth*> m_mapName2EarthInfo;   /// 名称和地图信息的配对
+
+    QString m_sCurrentName;
+    int     m_nCurrentLat;
+    int     m_nCurrentLon;
 };
 
 #endif // EARTHMANAGER_H

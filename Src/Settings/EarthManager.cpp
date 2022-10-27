@@ -15,11 +15,7 @@ EarthManager::EarthManager(QObject *parent)
     : QObject{parent}
 {
     ReadFile();
-}
-
-CSetEarth *EarthManager::createEarth()
-{
-    return(new CSetEarth);
+    praseCurrentEarth();
 }
 
 /// 增加成员
@@ -64,6 +60,7 @@ bool EarthManager::deleteEarth(QObject *pEarth)
 
 void EarthManager::ReadFile()
 {
+    ClearEarthInfo();
     QString sFilePath = QApplication::applicationDirPath() + QString("/Data/Earth/%1").arg(cs_FileName);
     QFile openFile(sFilePath);
     if(openFile.open(QFile::ReadOnly))
@@ -195,6 +192,82 @@ void EarthManager::praseEarthXml(QString sEarthPath)
     QTextStream stream(&file);
     doc.save(stream, 4);	// 缩进4格
     file.close();
+}
+
+void EarthManager::saveCurrentEarth(const QString &earthName, int lat, int lon)
+{
+    QString sFilePath = QApplication::applicationDirPath() + QString("/Data/Earth/currentEarth.info");
+    QFile openFile(sFilePath);
+    if(openFile.open(QFile::WriteOnly|QFile::Truncate))
+    {
+        QJsonDocument jsonDoc;
+        QJsonObject rootObj;
+        rootObj.insert("earthName",earthName);
+        rootObj.insert("earthLat",lat);
+        rootObj.insert("earthLon",lon);
+        jsonDoc.setObject(rootObj);
+        openFile.write(jsonDoc.toJson());
+    }
+}
+
+void EarthManager::praseCurrentEarth()
+{
+    QString sFilePath = QApplication::applicationDirPath() + QString("/Data/Earth/currentEarth.info");
+    QFile openFile(sFilePath);
+    if (!openFile.open(QFile::ReadOnly))
+    {
+        return;
+        qWarning("Couldn't open save file.");
+    }
+
+    //读取文件内容
+    QByteArray allData = openFile.readAll();
+    openFile.close();
+
+    //以json格式读取内容到JsonDoc
+    QJsonParseError jsonError;
+    QJsonDocument jsonDoc(QJsonDocument::fromJson(allData, &jsonError));
+
+    if(jsonError.error != QJsonParseError::NoError)
+    {
+        qDebug() << "json error!" << jsonError.errorString();
+        return;
+    }
+
+    //创建jsonObject
+    QJsonObject rootObj = jsonDoc.object();
+    if (rootObj.contains("earthName") && rootObj["earthName"].isString())
+    {
+        m_sCurrentName=rootObj["earthName"].toString();
+        emit currentNameChanged();
+    }
+    if (rootObj.contains("earthLat") && rootObj["earthLat"].isDouble())
+    {
+        m_nCurrentLat=rootObj["earthLat"].toDouble();
+        emit currentLatChanged();
+    }
+    if (rootObj.contains("earthLon") && rootObj["earthLon"].isDouble())
+    {
+        m_nCurrentLon=rootObj["earthLon"].toDouble();
+        emit currentLonChanged();
+    }
+
+}
+
+QString EarthManager::getCurrentEarthLoction()
+{
+    QString location=QString("{%1,%2}").arg(m_nCurrentLat).arg(m_nCurrentLon);
+    return location;
+}
+
+void EarthManager::ClearEarthInfo()
+{
+    qDebug()<<"清空地图信息";
+    foreach (auto one, m_mapName2EarthInfo)
+    {
+        delete one;
+    }
+    m_mapName2EarthInfo.clear();
 }
 
 

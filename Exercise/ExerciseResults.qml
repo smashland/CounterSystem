@@ -15,6 +15,7 @@ Item {
     height: 860 *dpy
 
     property string defaltFolderUrl: "file:///D:/InstallSoftWare/CounterSystem/Data/Szy/"
+    property string loactionStr:"{"+earthManager.currentLat+","+earthManager.currentLon+"}"
 
     Image {
         id: loginImage
@@ -97,14 +98,16 @@ Item {
         Row {
             spacing: 200*dpx
             ExerciseItem {
+                id:earthName
                 width: 300*dpx
                 title:"地图名称:"
-                name:"这是演习名称1"
+                name:earthManager.currentName
             }
             ExerciseItem {
+                id:earthLoction
                 width: 300*dpx
                 title:"位置:"
-                name:"这是演习名称1"
+                name:loactionStr
             }
         }
     }

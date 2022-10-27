@@ -28,9 +28,9 @@ Rectangle {
                 listView.model=earthManager.earthList
             }
             else{
+                console.log("地图名称重复")
 
             }
-
         }
         target: mapAdd
     }
@@ -54,6 +54,8 @@ Rectangle {
                 onClicked: {
                     earthManager.praseEarthXml(modelData.earthPath)
                     $app.changeEarth(modelData.earthPath)
+                    earthManager.saveCurrentEarth(modelData.earthName,modelData.nLat,modelData.nLon);
+                    earthManager.praseCurrentEarth();
                 }
             }
         }
@@ -97,7 +99,7 @@ Rectangle {
         }
         nameButton: "添加"
         onClicked: {
-//            mapAdd.visible = true
+         //   mapAdd.visible = true
             openQml()
         }
     }

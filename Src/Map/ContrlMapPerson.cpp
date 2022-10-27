@@ -163,20 +163,15 @@ void CContrlMapPerson::UpdateSeconds(const quint16 &seconds)
 
 void CContrlMapPerson::PickID(unsigned int nPickID, unsigned int nType)
 {
-    qDebug()<<nPickID<<' '<<nType;
     if(0 != nPickID)
     {
         for(auto findOne = m_mapShowInfo.begin(); findOne != m_mapShowInfo.end(); ++findOne)
         {
             if(findOne.value()->GetLocationNode()->PickID() == nPickID)
             {
-
                 CPersonAllInfo* cPersonAllInfo=m_pGloablData->getPersonAllInfo(findOne.key());
                 auto personOne= m_pGloablData->GetOrCreatePersonStatus(findOne.key());
 
-//                qDebug()<<cPersonAllInfo->getId()<<cPersonAllInfo->getName()
-//                       <<cPersonAllInfo->getRelive()<<cPersonAllInfo->getLat()<<cPersonAllInfo->getLon()
-//                      <<personOne->getName()<<personOne->getBtk();
                 emit mapPersonInfo(cPersonAllInfo->getId(),cPersonAllInfo->getName(),cPersonAllInfo->getRelive(),
                                    cPersonAllInfo->getLat(),cPersonAllInfo->getLon(),personOne->getBtk());
                 break;

@@ -248,7 +248,7 @@ Popup
         target: $app.allData
         function onMapPersonInfo(id,name,relive,dLon,dLat,bTk){
             shebeiId.name = id;
-            soldierItemContent.text = name
+            shebeiName.name = name
             reliveName.name = relive;
             lat.name = dLat;
             lon.name = dLon;

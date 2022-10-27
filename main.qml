@@ -9,14 +9,15 @@ import "Common"
 
 Window {
     id: mainWindow
-    width: fullScreen ? 1920 : Screen.desktopAvailableWidth
-    height: fullScreen ? 1080 : Screen.desktopAvailableHeight
+    width: Screen.width
+    height: Screen.height
     property bool fullScreen: true
 
 //    flags: fullScreen ? Qt.Window : Qt.FramelessWindowHint
     visible: true
     color: "transparent"
-    //    flags: Qt.FramelessWindowHint|Qt.Window
+    modality: Qt.ApplicationModal
+    flags: Qt.FramelessWindowHint|Qt.Window
     readonly property real dpx:mainWindow.width/width
     readonly property real dpy:mainWindow.height/height
 

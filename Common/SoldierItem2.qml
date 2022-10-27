@@ -31,6 +31,8 @@ Row
             color: "#1d4f88"
             border.color: "#3b6daa"
         }
+        selectByMouse: true
+        selectionColor: "#0187d6"
     }
     Text {
         id:danwei

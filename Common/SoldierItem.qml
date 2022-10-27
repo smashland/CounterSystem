@@ -37,6 +37,8 @@ Rectangle {
             clip: true
             font.family: "Microsoft YaHei"
             verticalAlignment: Text.AlignVCenter
+            selectByMouse: true
+            selectionColor: "#0187d6"
         }
     }
 }

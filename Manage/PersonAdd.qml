@@ -78,6 +78,7 @@ Rectangle
             source: fileDialog.file/*fileDialog.fileUrl*/
         }
     }
+
     Rectangle {
         x: 50 *dpx
         y: 300*dpy
@@ -98,7 +99,9 @@ Rectangle
                 fileDialog.open()
             }
         }
+
     }
+
     FileDialog {
         id: fileDialog
         folder: shortcuts.home

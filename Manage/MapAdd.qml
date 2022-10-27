@@ -13,14 +13,14 @@ Rectangle {
     signal signalAddMap(string name,string path,int lat,int lon)    //添加地图
 
     Image {
-        anchors.fill: parent
+//        anchors.fill: parent
+        width: 600*dpx
+        height: 430*dpy
         source: "qrc:/Image/wuqi/08-bg.png"
     }   
     CloseButton {
-        anchors.right: mapAdd.right
-        anchors.rightMargin: 65 *dpx
-        anchors.top: mapAdd.top
-        anchors.topMargin: 55 *dpy
+        x: 515*dpx
+        y: 355*dpy
         onClicked: mapAdd.visible = false
     }
 
@@ -111,17 +111,16 @@ Rectangle {
         }
     }
     PopupButton {
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 47*dpy
+        y: 347*dpy
         x: 256*dpx
         background: Rectangle {
             color: "#265aef"
         }
         nameButton: "确定"
         onClicked: {
+            mapAdd.visible = false
             signalAddMap(mapName.name,mapPath.name,mapLat.name,mapLon.name);
             earthManager.saveFile();
-            mapAdd.visible = false
         }
     }
 

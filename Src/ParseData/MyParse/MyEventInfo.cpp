@@ -189,8 +189,11 @@ void CMyEventInfo::Update(const unsigned char *pData, int nLength)
 
 
                             nIndex = g_nGunType / 1000;
+
+                            int nLeftMove = nIndex - 1;
+
                             g_nGunType=1;
-                            auto gunType = static_cast<GunType>(g_nGunType << (nIndex-1));
+                            auto gunType = static_cast<GunType>(g_nGunType << (nLeftMove < 0 ? 0 : nLeftMove) );
 
 
                             /// 设置枪的类型
@@ -223,11 +226,10 @@ void CMyEventInfo::Update(const unsigned char *pData, int nLength)
                                 /// 增加命中状态
                                 //                                QString listInfo=QString::fromUtf8("%3 %1被%2的%4炸死").arg(m_pPerson->id())
                                 //                                        .arg(pShotPerson->id()).arg(QTime::currentTime().toString("hh:mm:ss"))
-                                //                                        .arg(type);
-                                QString listInfo=QString::fromUtf8("%3 %2使用%4炸死%1").arg(m_pPerson->id())
-                                        .arg(pShotPerson->id()).arg(QTime::currentTime().toString("hh:mm:ss"))
-                                        .arg(type);
+                                //                                        .arg(type); QString::fromStdString(pShotPerson->name())
 
+                                QString listInfo=QString::fromUtf8("%1%2使用%3击中%4%5").arg(pShotPerson->id()).arg(pShotPerson->name().c_str()).arg(type)
+                                                                                       .arg(m_pPerson->id()).arg(m_pPerson->name().c_str());
 
                                 /// 发送消息
                                 CNoticeManager::GetInstance()->SetNoticInfo(listInfo);
@@ -257,9 +259,10 @@ void CMyEventInfo::Update(const unsigned char *pData, int nLength)
                                 }
 
                                 /// 增加命中状态
-                                QString listInfo=QString::fromUtf8("%3 %2使用%4击中%1").arg(m_pPerson->id())
-                                        .arg(pShotPerson->id()).arg(QTime::currentTime().toString("hh:mm:ss")).arg(type);
-                                qDebug()<<"测试枪型"<<listInfo<<" "<<nIndex<<type<<"人员名称";
+//                                QString listInfo=QString::fromUtf8("%1%2使用%3击中%4%5").arg(pShotPerson->id()).arg(QString::fromStdString(pShotPerson->name())).arg(type)
+//                                                                                       .arg(m_pPerson->id()).arg(QString::fromStdString(m_pPerson->name()));
+                                QString listInfo=QString::fromUtf8("%1%2使用%3击中%4%5").arg(pShotPerson->id()).arg(pShotPerson->name().c_str()).arg(type)
+                                                                                       .arg(m_pPerson->id()).arg(m_pPerson->name().c_str());
                                 listInfo += CConfigInfo::GetInstance()->GetBodyName(hurtInfo->hurtpart());
 
                                 /// 发送消息

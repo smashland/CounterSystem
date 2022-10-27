@@ -11,6 +11,7 @@ Rectangle {
     id: mapAdd
     color: "transparent"
     signal signalAddMap(string name,string path,int lat,int lon)    //添加地图
+    property var map: null
 
     Image {
 //        anchors.fill: parent
@@ -20,7 +21,7 @@ Rectangle {
     }   
     CloseButton {
         x: 515*dpx
-        y: 355*dpy
+        y: 55*dpy
         onClicked: mapAdd.visible = false
     }
 
@@ -40,7 +41,7 @@ Rectangle {
             var earthPath=String(fileDialog.currentFile)
             earthPath=earthPath.substr(8)
             mapPath.name=earthPath
-            console.log("地图路径"+earthPath);
+//            console.log("地图路径"+earthPath);
         }
     }
     Column {
@@ -50,14 +51,14 @@ Rectangle {
         SoldierItem {
             id:mapName
             text: "地图名称:"
-            name: ""
+            name: map.earthName
         }
         Row {
             spacing: 30*dpx
             SoldierItem {
                 id:mapPath
                 text: "地图路径:"
-                name: ""
+                name: map.earthPath
             }
             Button {
                 id: xuanzelujing
@@ -92,12 +93,12 @@ Rectangle {
         SoldierItem {
             id:mapLat
             text: "       经度:"
-            name: ""
+            name: map.nLat
         }
         SoldierItem {
             id:mapLon
             text: "       纬度:"
-            name: ""
+            name: map.nLon
         }
         Text {
             id: tishi2
@@ -118,9 +119,12 @@ Rectangle {
         }
         nameButton: "确定"
         onClicked: {
-            mapAdd.visible = false
             signalAddMap(mapName.name,mapPath.name,mapLat.name,mapLon.name);
             earthManager.saveFile();
+            mapAdd.visible = false;
+            console.log("mmmmmmmmmmmmmmmmmmm"+map)
+            console.log("mmmmmmmmmmmmmmmmmmm"+map.earthName)
+            console.log("mmmmmmmmmmmmmmmmmmm"+map.nLon)
         }
     }
 

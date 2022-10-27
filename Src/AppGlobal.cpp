@@ -80,6 +80,8 @@ void QAppGlobal::changeEarth()
 /// 更新信息
 void QAppGlobal::updateNotic(const QString &rInfo)
 {
+//    QString sInfo;
+//    sInfo = QTime::currentTime().toString("hh:mm:ss ") + rInfo;
     emit(notic(rInfo));
 }
 

@@ -52,7 +52,7 @@ bool CSpeakText::SpeakText(const QString &sInfo)
     if(m_bInit)
     {
         /// 去掉声音信息
-        m_pSpeech->say(sInfo.right(sInfo.size() - 9));
+        m_pSpeech->say(sInfo);
     }
 
     return(m_bInit);

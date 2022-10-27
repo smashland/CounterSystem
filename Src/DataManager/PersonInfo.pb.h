@@ -856,6 +856,7 @@ class PersonInfo PROTOBUF_FINAL :
   enum : int {
     kHurtInfoFieldNumber = 7,
     kHitInfoFieldNumber = 8,
+    kNameFieldNumber = 9,
     kCurtStatusFieldNumber = 5,
     kCurtPosFieldNumber = 6,
     kIdFieldNumber = 1,
@@ -898,6 +899,22 @@ class PersonInfo PROTOBUF_FINAL :
   ::HurtInfo* add_hitinfo();
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::HurtInfo >&
       hitinfo() const;
+
+  // string name = 9;
+  void clear_name();
+  const std::string& name() const;
+  void set_name(const std::string& value);
+  void set_name(std::string&& value);
+  void set_name(const char* value);
+  void set_name(const char* value, size_t size);
+  std::string* mutable_name();
+  std::string* release_name();
+  void set_allocated_name(std::string* name);
+  private:
+  const std::string& _internal_name() const;
+  void _internal_set_name(const std::string& value);
+  std::string* _internal_mutable_name();
+  public:
 
   // .ConnectStatus curtStatus = 5;
   bool has_curtstatus() const;
@@ -980,6 +997,7 @@ class PersonInfo PROTOBUF_FINAL :
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::HurtInfo > hurtinfo_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::HurtInfo > hitinfo_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
   ::ConnectStatus* curtstatus_;
   ::Postion* curtpos_;
   ::PROTOBUF_NAMESPACE_ID::uint32 id_;
@@ -1637,6 +1655,67 @@ inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::HurtInfo >&
 PersonInfo::hitinfo() const {
   // @@protoc_insertion_point(field_list:PersonInfo.hitInfo)
   return hitinfo_;
+}
+
+// string name = 9;
+inline void PersonInfo::clear_name() {
+  name_.ClearToEmpty();
+}
+inline const std::string& PersonInfo::name() const {
+  // @@protoc_insertion_point(field_get:PersonInfo.name)
+  return _internal_name();
+}
+inline void PersonInfo::set_name(const std::string& value) {
+  _internal_set_name(value);
+  // @@protoc_insertion_point(field_set:PersonInfo.name)
+}
+inline std::string* PersonInfo::mutable_name() {
+  // @@protoc_insertion_point(field_mutable:PersonInfo.name)
+  return _internal_mutable_name();
+}
+inline const std::string& PersonInfo::_internal_name() const {
+  return name_.Get();
+}
+inline void PersonInfo::_internal_set_name(const std::string& value) {
+  
+  name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void PersonInfo::set_name(std::string&& value) {
+  
+  name_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:PersonInfo.name)
+}
+inline void PersonInfo::set_name(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:PersonInfo.name)
+}
+inline void PersonInfo::set_name(const char* value,
+    size_t size) {
+  
+  name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:PersonInfo.name)
+}
+inline std::string* PersonInfo::_internal_mutable_name() {
+  
+  return name_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* PersonInfo::release_name() {
+  // @@protoc_insertion_point(field_release:PersonInfo.name)
+  return name_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void PersonInfo::set_allocated_name(std::string* name) {
+  if (name != nullptr) {
+    
+  } else {
+    
+  }
+  name_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), name,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:PersonInfo.name)
 }
 
 #ifdef __GNUC__

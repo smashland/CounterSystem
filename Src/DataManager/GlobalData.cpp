@@ -145,14 +145,59 @@ void CGlobalData::UpdateSimulationTime(const quint16 &uSimTimes)
     {
         /// 交火线
         auto pPerson = CDataManager::GetInstance()->GetOrCreatePersonInfo(one);
-        if(0 < pPerson->hurtinfo_size())
+        for(int nHurtIndex = pPerson->hurtinfo_size()-1; -1 < nHurtIndex;--nHurtIndex)
         {
-            m_pCtrMapPerson->UpdateHitLine(pPerson->hurtinfo(pPerson->hurtinfo_size()-1).id(),one);
+            m_pCtrMapPerson->UpdateHitLine(pPerson->hurtinfo(nHurtIndex).id(),one);
             /// 增加命中状态
-            QString listInfo=QString::fromUtf8("%3秒 %1被%2击中").arg(pPerson->id())
-                    .arg(pPerson->hurtinfo(pPerson->hurtinfo_size()-1).id()).arg(/*uSimTimes*/QTime::currentTime().toString("hh:mm:ss"));
-            listInfo += CConfigInfo::GetInstance()->GetBodyName(pPerson->hurtinfo(pPerson->hurtinfo_size()-1).hurtpart());
+//            QString listInfo=QString::fromUtf8("%1被%2击中").arg(pPerson->id())
+//                    .arg(pPerson->hurtinfo(nHurtIndex).id());
 
+            qDebug()<<"枪型"<<pPerson->hurtinfo(nHurtIndex).type();
+
+            QString type;
+            switch (pPerson->hurtinfo(nHurtIndex).type())
+            {
+            case 0:
+                type = QString::fromUtf8("没有武器");
+                break;
+            case 1:
+                type = QString::fromUtf8("步枪");
+                break;
+            case 2:
+                type = QString::fromUtf8("步枪");
+                break;
+            case 4:
+                type = QString::fromUtf8("手枪");
+                break;
+            case 8:
+                type = QString::fromUtf8("手雷");
+                break;
+            case 16:
+                type = QString::fromUtf8("手雷");
+                break;
+            case 32:
+                type = QString::fromUtf8("手枪");
+                break;
+            case 64:
+                type = QString::fromUtf8("爆炸物");
+                break;
+            case 128:
+                type = QString::fromUtf8("狙击枪");
+                break;
+            default:
+                break;
+            }
+             auto pPerson1 = CDataManager::GetInstance()->GetOrCreatePersonInfo(pPerson->hurtinfo(nHurtIndex).id());
+
+             QString listInfo=QString::fromUtf8("%1%2使用%3击中%4%5").arg(pPerson->hurtinfo(nHurtIndex).id()).arg(pPerson1->name().c_str()).arg(type)
+                                                                    .arg(pPerson->id()).arg(pPerson->name().c_str());
+//             QString listInfo=QString::fromUtf8("%1使用%2击中%3").arg(pPerson->hurtinfo(nHurtIndex).id()).arg(type)
+//                                                                    .arg(pPerson->id());
+
+
+
+            listInfo += CConfigInfo::GetInstance()->GetBodyName(pPerson->hurtinfo(nHurtIndex).hurtpart());
+             qDebug()<<"回放管理"<<listInfo<<pPerson->hurtinfo(nHurtIndex).hurtpart();
             /// 发送消息
             CNoticeManager::GetInstance()->SetNoticInfo(listInfo);
         }
@@ -240,6 +285,9 @@ void CGlobalData::setUserName(quint16 unID, const QString &sName)
     auto pPersonStatus = GetOrCreatePersonStatus(unID);
     pPersonStatus->setName(sName);
     m_pCtrMapPerson->UpdateName(unID,sName);
+
+    auto pPersonInfo = CDataManager::GetInstance()->GetOrCreatePersonInfo(unID);
+    pPersonInfo->set_name(sName.toStdString());
 }
 
 /// 清空状态

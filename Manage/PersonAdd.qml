@@ -40,10 +40,7 @@ Rectangle
                 }
 
                 avatarImage.source="file:///"+person.imagePath
-            }
-            else{
-                console.log("不存在这样的数字据")
-            }
+            }          
 
         }
         target: scenarioNew
@@ -113,7 +110,6 @@ Rectangle
             imagePath=currentFile.toString().replace("file:///", "");
         }
         onRejected: {
-//            console.log("Canceled")
         }
         Component.onCompleted: visible = flase
     }

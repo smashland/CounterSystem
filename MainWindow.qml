@@ -58,19 +58,16 @@ RoundButton
 
             lastX = mouseX
             lastY = mouseY
-            console.log("000000000000000")
 
             switch(mouse.button)
             {
             case Qt.RightButton: /// 切换演习状态
                 rightClick()
-                console.log("1111111111111111111111")
                 break;
             case Qt.LeftButton:/// 弹出菜单
                 if($app.settings.bIsStart)
                 {
                     leftClick()
-                    console.log("22222222222222222222")
                 }
                 else
                 {

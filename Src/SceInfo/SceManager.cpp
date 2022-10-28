@@ -33,7 +33,6 @@ CSceInfo *SceManager::addScenari(const QString &sceName,CSceInfo* pSceInfo)
         {
             if(nullptr == pSceInfo)
             {
-                qDebug()<<"测试新建方案";
                 CSceInfo* pNewOne = new CSceInfo;
                 pNewOne->setSceName(sceName);
                 m_mapName2SceInfo.insert(sceName,pNewOne);
@@ -43,7 +42,6 @@ CSceInfo *SceManager::addScenari(const QString &sceName,CSceInfo* pSceInfo)
             }
             else
             {
-                qDebug()<<"测试原有的方案";
                 QHash<QString, CSceInfo*>::iterator i;
                 for( i=m_hashName2SceInfo.begin(); i!=m_hashName2SceInfo.end(); ++i)
                 {
@@ -60,7 +58,6 @@ CSceInfo *SceManager::addScenari(const QString &sceName,CSceInfo* pSceInfo)
         }
         else
         {
-            qDebug()<<"含有相同的键值"<<sceName;
             return (nullptr);
         }
 
@@ -74,7 +71,6 @@ CSceInfo *SceManager::addScenari(const QString &sceName,CSceInfo* pSceInfo)
              {
                deleteScenario(i.key());
              }
-             qDebug()<<"存在方案中新建";
              pSceInfo->setSceName(sceName);
              m_mapName2SceInfo.insert(sceName, pSceInfo);
              m_listSces.append(pSceInfo);
@@ -83,7 +79,6 @@ CSceInfo *SceManager::addScenari(const QString &sceName,CSceInfo* pSceInfo)
          }
          else
          {
-             qDebug()<<"存在方案中有相同的键值";
              return nullptr;
          }
     }
@@ -92,7 +87,6 @@ CSceInfo *SceManager::addScenari(const QString &sceName,CSceInfo* pSceInfo)
 ///删除方案
 bool SceManager::deleteScenario(const QString &sceName)
 {
-    qDebug()<<"删除方案函数测试"<<sceName;
     auto findOne = m_mapName2SceInfo.find(sceName);
     if(m_mapName2SceInfo.end() != findOne)
     {
@@ -246,19 +240,10 @@ QString SceManager::importSce(const QString &strImagePath)
     }
     else
     {
-        qDebug()<<"复制文件路径失败";
        return(nullptr);
     }
 
     return (nullptr);
-}
-
-///加载图片信息
-void SceManager::loadImagePath(const QString &strImagePath)
-{
-    qDebug()<<"66666666666"<<GetDataPath().c_str();
-    qDebug()<<"测试路径-------"<<strImagePath;
-    QDesktopServices::openUrl(QUrl::fromLocalFile(strImagePath));
 }
 
 ///显示所有方案
@@ -300,7 +285,6 @@ bool SceManager::removeSceFile(const QString &sName)
 ///清空方案信息
 void SceManager::ClearSceInfo()
 {
-    qDebug()<<"清空方案信息";
     foreach (auto one, m_mapName2SceInfo)
     {
         delete one;

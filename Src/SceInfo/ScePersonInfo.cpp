@@ -51,7 +51,6 @@ void ScePersonInfo::setID(int nID)
         m_ID=nID;
         emit IDChanged(m_ID);
     }
-    qDebug()<<"编号————"<<m_ID;
 }
 
 int ScePersonInfo::getID() const
@@ -66,7 +65,6 @@ void ScePersonInfo::setName(QString sName)
         m_Name=sName;
         emit nameChanged(m_Name);
     }
-    qDebug()<<"姓名————"<<m_Name;
 }
 
 QString ScePersonInfo::getName()
@@ -81,7 +79,6 @@ void ScePersonInfo::setPosition(int sPosition)
         m_Positon=sPosition;
         emit positionChanged(sPosition);       
     }
-    qDebug()<<"职务————"<<m_Positon;
 }
 
 int ScePersonInfo::getPosition()
@@ -96,7 +93,6 @@ void ScePersonInfo::setGroupType(int groupType)
         m_Group=groupType;
         emit groupTypeChanged(groupType);
     }
-    qDebug()<<"类型————"<<m_Group;
 }
 
 int ScePersonInfo::getGroupType()
@@ -112,7 +108,6 @@ void ScePersonInfo::setHostage(bool bHostage)
         m_host=bHostage;
         emit hostageChanged(bHostage);       
     }
-    qDebug()<<"人质————"<<m_host;
 }
 
 bool ScePersonInfo::getHostage()
@@ -135,20 +130,12 @@ QString ScePersonInfo::copyFile(int nID, const QString &strImagePath)
 {
     QFileInfo fileInfo(strImagePath);
     QString newFilePath = QString("%1/Data/Project/Image/%2.%3").arg(QApplication::applicationDirPath()).arg(QString::number(nID)).arg(fileInfo.suffix());
-//    QString filePath = QApplication::applicationDirPath() + "/Data/Earth/Geocentric.earth";
-    qDebug()<<"源地址————"<<strImagePath;
-    qDebug()<<"目标地址————"<<newFilePath;
     QFile file(newFilePath);
     if (file.exists())
     {
-        if(file.remove())
-        {
-            qDebug() << "删除成功";
-        }
+        file.remove();
     }
     QFile::copy(strImagePath,newFilePath);
     QFileInfo pathInfo(newFilePath);
-    qDebug()<<"存储地址————"<<pathInfo.fileName();
-
     return newFilePath;
 }

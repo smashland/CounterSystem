@@ -23,13 +23,11 @@ ScePersonInfo *CSceInfo::addPerson(int nID)
     auto findOne = m_mapId2Person.find(nID);
     if(m_mapId2Person.end() == findOne)
     {
-        qDebug()<<"新增人员"<<m_mapId2Person.isEmpty();//没有找到
         if(!m_mapId2Person.contains(nID))
         {
             QHash<int, ScePersonInfo*>::iterator i;
             for( i=m_hashId2Person.begin(); i!=m_hashId2Person.end(); ++i)
             {
-                qDebug()<<"删除原有的人";
                 m_listPerson.removeOne(i.value());
                 m_mapId2Person.remove(i.key());
                 emit personChanged();
@@ -43,17 +41,14 @@ ScePersonInfo *CSceInfo::addPerson(int nID)
         }
         else
         {
-            qDebug()<<"新增人员id重复";
             return nullptr;
         }
     }
     else
     {
-        qDebug()<<"找到相同的数值"<<m_hashId2Person.isEmpty()<<"===="<<nID;//找到
         QHash<int, ScePersonInfo*>::iterator i;
         for( i=m_hashId2Person.begin(); i!=m_hashId2Person.end(); ++i)
         {
-            qDebug()<<"删除原有的人";
             m_listPerson.removeOne(i.value());
             m_mapId2Person.remove(i.key());
             emit personChanged();
@@ -61,7 +56,6 @@ ScePersonInfo *CSceInfo::addPerson(int nID)
 
         if(!m_mapId2Person.contains(nID))
         {
-            qDebug()<<"修改原有的人";
             ScePersonInfo* pNewOne = new ScePersonInfo(this);
             pNewOne->setID(nID);
             m_mapId2Person.insert(nID,pNewOne);
@@ -71,7 +65,6 @@ ScePersonInfo *CSceInfo::addPerson(int nID)
         }
         else
         {
-            qDebug()<<"存在原有的人";
             QHash<int, ScePersonInfo*>::iterator i;
             for( i=m_hashId2Person.begin(); i!=m_hashId2Person.end(); ++i)
             {
@@ -99,8 +92,7 @@ ScePersonInfo *CSceInfo::addPerson(int nID, ScePersonInfo *pScePersonInfo)
         }
         else
         {
-            qDebug()<<"含有相同的编号"<<nID;
-
+            return (nullptr);
         }
     }
     return (nullptr);
@@ -189,7 +181,6 @@ void CSceInfo::Save(QJsonArray &rArray)
 /// 清空人员信息
 void CSceInfo::ClearMap()
 {
-    qDebug()<<"清空人员信息";
     foreach (auto one, m_mapId2Person)
     {
         delete one;

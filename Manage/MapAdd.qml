@@ -41,7 +41,6 @@ Rectangle {
             var earthPath=String(fileDialog.currentFile)
             earthPath=earthPath.substr(8)
             mapPath.name=earthPath
-//            console.log("地图路径"+earthPath);
         }
     }
     Column {
@@ -122,10 +121,6 @@ Rectangle {
             signalAddMap(mapName.name,mapPath.name,mapLat.name,mapLon.name);
             earthManager.saveFile();
             mapAdd.visible = false;
-            console.log("mmmmmmmmmmmmmmmmmmm"+map)
-            console.log("mmmmmmmmmmmmmmmmmmm"+map.earthName)
-            console.log("mmmmmmmmmmmmmmmmmmm"+map.nLon)
         }
     }
-
 }

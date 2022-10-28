@@ -151,9 +151,6 @@ void CGlobalData::UpdateSimulationTime(const quint16 &uSimTimes)
             /// 增加命中状态
 //            QString listInfo=QString::fromUtf8("%1被%2击中").arg(pPerson->id())
 //                    .arg(pPerson->hurtinfo(nHurtIndex).id());
-
-            qDebug()<<"枪型"<<pPerson->hurtinfo(nHurtIndex).type();
-
             QString type;
             switch (pPerson->hurtinfo(nHurtIndex).type())
             {
@@ -214,7 +211,6 @@ void CGlobalData::UpdateTime(const QDateTime &dateTime)
     if(!m_outFile.is_open() && CConfigInfo::GetInstance()->GetStart())
     {
         QString sTempLocal = dateTime.toString("/yyyyMMdd_HHmmss");
-        qDebug()<<sTempLocal;
         QString sDataFile = CDataManager::GetInstance()->GetFileName(sTempLocal);
         m_sCurrentFileName = QDir::homePath() + sTempLocal;
         m_outFile.open(m_sCurrentFileName.toStdString(),std::ios::binary|std::ios::out);
@@ -521,7 +517,6 @@ void CGlobalData::saveSceInfo(const QString &strScePath)
     QFileInfo fileInfo(strScePath);
     QString sceName = fileInfo.fileName().chopped(4);
 
-    qDebug()<<"测试保存方案信息"<<sceName;
     SceManager* sceManager=new SceManager();
     auto sceNewPerson=sceManager->createSceneri();
     for(auto one=m_mapTypeInfo.begin();one!=m_mapTypeInfo.end();++one)

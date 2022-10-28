@@ -40,7 +40,6 @@ void CSetEarth::setEarthLon(int nlon)
         m_nLon=nlon;
         emit lonChanged(m_nLon);
     }
-    qDebug()<<"纬度"<<m_nLon;
 }
 
 void CSetEarth::writeEarth(QJsonObject &rObj)
@@ -49,12 +48,6 @@ void CSetEarth::writeEarth(QJsonObject &rObj)
     rObj["Path"] = m_sEarthPath;
     rObj["Lat"]  = m_nLat;
     rObj["Lon"]  = m_nLon;
-//    rObj.insert("Name",m_sEarthName);
-
-    qDebug()<<"Name"<<m_sEarthName
-              <<"Path"<<m_sEarthPath
-                <<"Lat"<<m_nLat
-                  <<"Lon"<<m_nLon;
 }
 
 void CSetEarth::readEarth(const QJsonObject &rObj)
@@ -70,10 +63,4 @@ void CSetEarth::readEarth(const QJsonObject &rObj)
 
     if (rObj.contains("Lon") && rObj["Lon"].isDouble())
         m_nLon = rObj["Lon"].toInt();
-
-    qDebug()<<"Name"<<m_sEarthName
-              <<"Path"<<m_sEarthPath
-                <<"Lat"<<m_nLat
-                  <<"Lon"<<m_nLon;
-
 }

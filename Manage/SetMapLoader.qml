@@ -116,10 +116,9 @@ Rectangle {
         }
         nameButton: "添加"
         onClicked: {
-         //   mapAdd.visible = true
-            openQml(earthManager.addMaps(mapName),"MapAdd.qml")
+            mapAdd.visible = true
+//            openQml(earthManager.addMaps(mapName),"MapAdd.qml")
         }
     }
-
 
 }

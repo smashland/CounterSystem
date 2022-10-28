@@ -68,12 +68,6 @@ public:
     Q_INVOKABLE QList<QObject*> getSceAll();
 
     /**
-     * @brief 图片路径
-     * @param strImagePath
-     */
-    void loadImagePath(const QString &strImagePath);
-
-    /**
       * @brief 显示所有方案
       */
     Q_INVOKABLE QStringList showSceList();

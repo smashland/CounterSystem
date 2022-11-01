@@ -18,6 +18,11 @@ EarthManager::EarthManager(QObject *parent)
     praseCurrentEarth();
 }
 
+CSetEarth *EarthManager::createMap()
+{
+    return (new CSetEarth);
+}
+
 /// 增加成员
 CSetEarth *EarthManager::addMaps(const QString &earthName)
 {
@@ -26,7 +31,6 @@ CSetEarth *EarthManager::addMaps(const QString &earthName)
     {
         if(!m_mapName2EarthInfo.contains(earthName))
         {
-            qDebug()<<"新增地图名称bu重复";
             CSetEarth* pNewOne = new CSetEarth(this);
             m_mapName2EarthInfo.insert(earthName,pNewOne);
             m_listEarth.append(pNewOne);
@@ -35,13 +39,11 @@ CSetEarth *EarthManager::addMaps(const QString &earthName)
         }
         else
         {
-            qDebug()<<"新增地图名称重复";
             return nullptr;
         }
     }
     else
     {
-        qDebug()<<"新增地图名称重复";
         return nullptr;
     }
     return nullptr;
@@ -116,7 +118,7 @@ void EarthManager::saveFile()
 void EarthManager::praseEarthXml(QString sEarthPath)
 {
     QFileInfo fileInfo(sEarthPath);
-    qDebug()<<"文件的地图名称"<<fileInfo.baseName()<<fileInfo.fileName()<<fileInfo.suffix();
+
     /// 获取文件地址
     QString filePath = QApplication::applicationDirPath() + "/Data/Earth/Geocentric.earth";
     QFile file(filePath);
@@ -135,30 +137,45 @@ void EarthManager::praseEarthXml(QString sEarthPath)
     file.close();
 
     QString tagName,itemName;
+    QString tagNameM,itemNameM;
     if(fileInfo.suffix()=="tif")
     {
         tagName="GDALIMAGE";
         itemName="tif";
-        qDebug()<<"文件后缀名为tif";
+        tagNameM="tmsimage";
+        itemNameM="hbs";
     }
     else if(fileInfo.suffix()=="xml")
     {
         tagName="tmsimage";
         itemName="hbs";
-        qDebug()<<"文件后缀名为xml";
+        tagNameM="GDALIMAGE";
+        itemNameM="tif";
     }
     else
     {
-        qDebug()<<"错误的文件名称";
+        return;
+    }
+    // 获得根节点
+    QDomElement root = doc.documentElement();
+    modifyEarthXml(root,tagNameM,itemNameM,"NULL");
+    modifyEarthXml(root,tagName,itemName,sEarthPath);
+
+    if (!file.open(QFileDevice::WriteOnly | QFileDevice::Truncate)) {
+        QMessageBox::information(NULL, "提示", "文件打开失败！");
         return;
     }
 
-    // 获得根节点
-    QDomElement root = doc.documentElement();
+    // 输出到文件
+    QTextStream stream(&file);
+    doc.save(stream, 4);	// 缩进4格
+    file.close();
+}
+
+void EarthManager::modifyEarthXml(QDomElement root,QString tagName,QString itemName,QString sEarthPath)
+{
     // 获取所有GDALIMAGE节点
     QDomNodeList list = root.elementsByTagName(tagName);
-    qDebug()<<"获取所有GDALIMAGE节点"<<list.count();
-
     /* 修改尖括号之间的值 */
     for (int i = 0; i < list.size(); i++) {
         QDomElement element = list.at(i).toElement();
@@ -166,7 +183,6 @@ void EarthManager::praseEarthXml(QString sEarthPath)
         if (element.attribute("name") == itemName) {
             // 获得子节点
             QDomNode node = element.namedItem("url");
-            qDebug()<<"测试节点信息"<<node.nodeValue();
 
             // 尖括号之间的内容作为子节点出现(修改前)
             QDomNode oldNode = node.firstChild();
@@ -182,16 +198,6 @@ void EarthManager::praseEarthXml(QString sEarthPath)
             break;
         }
     }
-
-    if (!file.open(QFileDevice::WriteOnly | QFileDevice::Truncate)) {
-        QMessageBox::information(NULL, "提示", "文件打开失败！");
-        return;
-    }
-
-    // 输出到文件
-    QTextStream stream(&file);
-    doc.save(stream, 4);	// 缩进4格
-    file.close();
 }
 
 void EarthManager::saveCurrentEarth(const QString &earthName, int lat, int lon)
@@ -262,7 +268,6 @@ QString EarthManager::getCurrentEarthLoction()
 
 void EarthManager::ClearEarthInfo()
 {
-    qDebug()<<"清空地图信息";
     foreach (auto one, m_mapName2EarthInfo)
     {
         delete one;

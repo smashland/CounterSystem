@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include "CSetEarth.h"
+#include "qdom.h"
 
 class EarthManager : public QObject
 {
@@ -17,7 +18,7 @@ public:
     explicit EarthManager(QObject *parent = nullptr);
 
 
-
+    Q_INVOKABLE CSetEarth* createMap();
     /**
       * @brief 添加地图
       * @param earthName
@@ -38,6 +39,7 @@ public:
      */
     Q_INVOKABLE void praseEarthXml(QString sEarthPath);
 
+    void modifyEarthXml(QDomElement root,QString tagName,QString itemName,QString sEarthPath);
     /**
      * @brief 保存现在点击的地图信息
      * @param earthName

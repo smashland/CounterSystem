@@ -141,7 +141,7 @@ public:
      * @param sReportFileName
      */
     Q_INVOKABLE void createReport(const QUrl& sReportFileName);
-
+    Q_INVOKABLE void getSceName(const QString &sceName);
     /**
      * @brief 保存方案
      * @param strScePath
@@ -153,7 +153,6 @@ public:
      * @param strScePath
      */
     Q_INVOKABLE void loadSceInfo(const QString &sceName);
-
     /**
      * @brief 是否更新人员状态
      */

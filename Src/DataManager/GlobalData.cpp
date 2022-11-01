@@ -511,6 +511,11 @@ void CGlobalData::createReport(const QUrl &sReportFileName)
     CExportResult::GetInstance()->CreateDocx(sReportFileName.toLocalFile(),sReportFileName.fileName().split(".")[0],m_mapTypeInfo);
 }
 
+void CGlobalData::getSceName(const QString &sceName)
+{
+   CExportResult::GetInstance()->setCurrentSceName(sceName);
+}
+
 ///保存方案信息
 void CGlobalData::saveSceInfo(const QString &strScePath)
 {

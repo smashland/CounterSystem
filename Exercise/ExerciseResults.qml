@@ -44,9 +44,10 @@ Item {
         spacing: 13*dpy
 
         ExerciseItem {
+            id:sceName
             width: 300*dpx
             title:"演习名称:"
-            name:"这是演习名称1"
+            name:sceManager.currentSceName
         }
 
         Row {
@@ -302,6 +303,7 @@ Item {
             nameFilters: [qsTr("演习报告(*.docx)")]
             onAccepted:
             {
+                $app.allData.getSceName(sceName.name);
                 $app.allData.createReport(currentFile);
             }
         }

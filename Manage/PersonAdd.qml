@@ -14,6 +14,7 @@ Rectangle
     anchors.centerIn: parent
 //    modal: true
     property string imagePath;
+    property var position:{0};
 
     signal ok(int id,string name,int level,int group,bool isHost,string imPath);
 
@@ -28,7 +29,15 @@ Rectangle
             {
                 shebeiId.name=person.id
                 personName.name=person.name
-                combobox_renyuan.currentText=person.position?"军官":"士兵"
+//                combobox_renyuan.currentText=person.position?"军官":"士兵"
+                if(person.position===0)
+                {
+                    combobox_renyuan.currentText=""
+                }else if(person.position===1){
+                    combobox_renyuan.currentText="士兵"
+                }else if(person.position===2){
+                    combobox_renyuan.currentText="军官"
+                }
                 zhenying.currentText=person.groupType?"红方":"蓝方"
                 if(person.hostage)
                 {
@@ -153,12 +162,22 @@ Rectangle
                     {target:"士兵"},
                     {target:"军官"}
                 ]
-                onCurrentIndexChanged: {
-                    var type = combobox_renyuan.currentIndex;
-                    if(type === 0){
-                        combobox_renyuan.currentText = "士兵"
-                    }else if(type === 1) {
-                        combobox_renyuan.currentText = "军官"
+                onCurrentTextChanged:
+              /*  onCurrentIndexChanged:*/ {
+//                    var type = combobox_renyuan.currentIndex;
+//                    if(type === 0){
+//                        combobox_renyuan.currentText = "士兵"
+//                    }else if(type === 1) {
+//                        combobox_renyuan.currentText = "军官"
+//                    }
+
+                    var type = combobox_renyuan.currentText;
+                    if(type === "士兵"){
+                        position=1
+                    }else if(type === "军官") {
+                        position=2
+                    }else if(type === "") {
+                       position=0
                     }
                 }
             }
@@ -282,7 +301,7 @@ Rectangle
             }
             nameButton: "确定"
             onClicked: {
-                ok(shebeiId.name,personName.name, combobox_renyuan.currentIndex,
+                ok(shebeiId.name,personName.name, position/*combobox_renyuan.currentIndex*/,
                    zhenying.currentIndex,control3.checked,imagePath);
                 personAdd.visible = false
                 qingkong()
@@ -308,6 +327,7 @@ Rectangle
         avatarImage.source="qrc:/Image/soldiers.png"
         control3.checked = false
         control4.checked = false
+        position=0
     }
 
 }

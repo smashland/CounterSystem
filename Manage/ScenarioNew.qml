@@ -164,7 +164,14 @@ Item {
                 }
                 TextListItem {
                     id:level
-                    text: modelData.position?"军官":"士兵"
+                    text: if(modelData.position===0)/*?"军官":"士兵"*/
+                          {
+                              level.text=" "
+                          }else if(modelData.position===1){
+                              level.text="士兵"
+                          } else if(modelData.position===2){
+                              level.text="军官"
+                          }
                     width: 110 *dpx
                     height: 50 *dpy
                 }

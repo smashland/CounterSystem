@@ -141,6 +141,7 @@ ManageRect{
                         anchors.fill: parent
                         onClicked: {
                             $app.allData.loadSceInfo(modelData.sceName)
+                            sceManager.setCurrentSceName(modelData.sceName)
 
                         }
                     }
@@ -153,6 +154,7 @@ ManageRect{
                         anchors.fill: parent
                         onClicked: {
                             sceManager.deleteScenario(modelData.sceName)
+                            listView.model= sceManager.listSces
                         }
                     }
                 }
@@ -182,6 +184,8 @@ ManageRect{
             var scePath=String(saveSce.currentFile)
             scePath=scePath.substr(8)
             $app.allData.saveSceInfo(scePath)
+            sceManager.read();
+            listView.model= sceManager.listSces
         }
     }
 }

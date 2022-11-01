@@ -1,4 +1,5 @@
 #include "SceManager.h"
+#include "Src/Export/ExportResult.h"
 #include <QJsonDocument>
 #include <QFile>
 #include <QApplication>
@@ -279,6 +280,15 @@ bool SceManager::removeSceFile(const QString &sName)
     if (FileInfo.isFile())//如果是文件
         QFile::remove(filePath);
     return true;
+}
+
+void SceManager::setCurrentSceName(const QString &currentSceName)
+{
+    if(currentSceName!=m_sCurrentSceName)
+    {
+        m_sCurrentSceName=currentSceName;
+        emit currentSceNameChanged(m_sCurrentSceName);
+    }
 }
 
 

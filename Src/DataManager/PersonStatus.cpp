@@ -125,7 +125,6 @@ void CPersonStatus::setName(const QString &sName)
         m_sName = sName;
         emit(nameChanged(m_sName));
     }
-
 }
 
 /// 更新人员在线状态

@@ -22,7 +22,10 @@ Rectangle {
     CloseButton {
         x: 515*dpx
         y: 55*dpy
-        onClicked: mapAdd.visible = false
+        onClicked: {
+            qingkong()
+            mapAdd.visible = false
+        }
     }
 
     PopupTitle {
@@ -122,10 +125,14 @@ Rectangle {
             signalAddMap(mapName.name,mapPath.name,mapLat.name,mapLon.name);
             earthManager.saveFile();
             mapAdd.visible = false;
-            console.log("mmmmmmmmmmmmmmmmmmm"+map)
-            console.log("mmmmmmmmmmmmmmmmmmm"+map.earthName)
-            console.log("mmmmmmmmmmmmmmmmmmm"+map.nLon)
+            qingkong()
         }
+    }
+    function qingkong() {
+        mapPath.name = ""
+        mapLon.name = ""
+        mapName.name = ""
+        mapLat.name = ""
     }
 
 }

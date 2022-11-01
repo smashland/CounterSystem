@@ -217,6 +217,9 @@ Popup
             onClicked: {
                 personPopup.close()
                 $app.allData.setUserName(outData.id,shebeiName.name);
+                if(shebeiName.name ===""){
+                    $app.allData.setUserName(outData.id,shebeiName.name);
+                }
             }
 
         }

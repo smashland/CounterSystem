@@ -15,7 +15,7 @@ Rectangle {
     height: 510 *dpy
     color: "transparent"
 
-    Connections{    
+    Connections{
         function onSignalAddMap(name,path,lat,lon)
         {
             var earth = earthManager.addMaps(name);
@@ -62,49 +62,41 @@ Rectangle {
 
     }
 
-//    property var component;
-//    function openQml() {
-//        component = Qt.createComponent("MapAdd.qml");
-//        if (component.status === Component.Ready || component.status === Component.Error) {
-//            finishQml()
-//        } else {
-//            component.statusChanged.connect(finishQml);
-//        }
-//    }
-
-//    function finishQml() {
-//        if (component.status === Component.Ready) {
-//            var image = component.createObject(setMapLoade);
-//            if (image === null) {
-//                console.log("Error creating button");
-//            }
-//        } else if (component.status === Component.Error) {
-//            console.log("Error loading component:", component.errorString());
-//        }
-//    }
-
     property var mapValue:{0:0}
-    function openQml(obj,qmlUrl){
-        var component = Qt.createComponent(qmlUrl)
-        if (Component.Ready === component.status){
-            var qmlObj = component.createObject(setMapLoade,{map:obj})
-            if(null !== qmlObj){
+    property var component;
+    function openQml(obj) {
+        component = Qt.createComponent("MapAdd.qml");
+        if (component.status === Component.Ready) {
+            var qmlObj = component.createObject(setMapLoade,{map:obj});
+            if (qmlObj !== null) {
                 mapValue[obj] = qmlObj;
                 return(qmlObj);
             }
-        }else{
-            console.log(component.errorString());
+        } else {
             component.destroy();
             return(null);
         }
     }
+
+    //    function finishQml(obj) {
+    //        if (component.status === Component.Ready) {
+    //            var qmlObj = component.createObject(setMapLoade,{map:obj});
+    //            if (qmlObj !== null) {
+    //                mapValue[obj] = qmlObj;
+    //                return(qmlObj);
+    //            }
+    //        }else {
+
+    //        }
+    //    }
+
     property var mapName:fileName.text
 
     MapAdd {
         id: mapAdd
         width: 600*dpx
         height: 430*dpy
-//        anchors.centerIn: parent
+        //        anchors.centerIn: parent
         visible: false
     }
     PopupButton {
@@ -116,8 +108,8 @@ Rectangle {
         }
         nameButton: "添加"
         onClicked: {
-         //   mapAdd.visible = true
-            openQml(earthManager.addMaps(mapName),"MapAdd.qml")
+               mapAdd.visible = true
+//            openQml(earthManager.addMaps(mapName))
         }
     }
 

@@ -17,6 +17,7 @@ public:
     explicit EarthManager(QObject *parent = nullptr);
 
 
+
     /**
       * @brief 添加地图
       * @param earthName

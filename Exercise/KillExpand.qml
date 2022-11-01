@@ -57,20 +57,25 @@ Item {
         }
     }
 
-    ScrollView
+    Rectangle
     {
         id:showNotice
-        width: 500*dpx
+        width: 196*dpx
         height: 50*dpy
-        anchors.centerIn: parent
-//        color: "transparent"
+        x: 150*dpx
+        color: "transparent"
+        clip: true
+        focus: true
         TextArea
         {
             id:showText
             color: "white"
-            font.pointSize: 16*dpy
+            font.pointSize: 14*dpy
+            width: showText.contentWidth + 5*dpx
+            height: 50*dpy
+            verticalAlignment: Text.AlignVCenter
+            font.family: "Microsoft YaHei";
             font.bold: true
-            anchors.centerIn: parent
             Connections
             {
                 target: $app.settings
@@ -79,9 +84,16 @@ Item {
                     if(bIsStart)
                     {
                         showText.text=""
-                        showNotice.y=showNotice.parent.height + showNotice.height
                     }
                 }
+            }
+
+            NumberAnimation on x {
+                id: enter
+                from: 0
+                to: - (showText.width - 190* dpx)
+                duration: 1000
+                running: false
             }
         }
 
@@ -90,52 +102,15 @@ Item {
             target: $app
             function onNotic(sNoticInfo)
             {
-                showText.text += sNoticInfo
-                showText.text += '\n'
-                if(!enter.running)
-                {
-                    enter.running=true
-                    leave.stop()
+                showText.text += sNoticInfo+ " "
+//                showText.text += '\n'
+                console.log(showText.contentWidth)
+                if(showText.width > showNotice.width) {
+                    enter.running = true
                 }
-                hidTimer.restart();
             }
         }
 
-        NumberAnimation on y
-        {
-            id:enter
-            to:showNotice.parent.height - showNotice.height
-            duration: 1000
-            running:false
-            onStopped:
-            {
-                y=showNotice.parent.height - showNotice.height
-            }
-        }
-
-        NumberAnimation on y
-        {
-            id:leave
-            to:showNotice.parent.height + showNotice.height
-            duration: 1000
-            running:false
-            onStopped:
-            {
-                y=showNotice.parent.height + showNotice.height
-            }
-        }
-
-        Timer
-        {
-            id:hidTimer
-            interval: 5000;
-            running: true;
-            repeat: false
-            onTriggered:
-            {
-                leave.running=true;
-            }
-        }
     }
 
 

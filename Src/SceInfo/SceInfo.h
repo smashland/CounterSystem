@@ -3,6 +3,9 @@
 
 #include <QObject>
 #include "ScePersonInfo.h"
+#include <QXlsx/xlsxdocument.h>
+#include <QXlsx/xlsxchartsheet.h>
+#include <QXlsx/xlsxchart.h>
 
 class CSceInfo : public QObject
 {
@@ -18,6 +21,7 @@ public:
      * @param rArray
      */
     void Prase(const QJsonArray& rArray);
+    void PraseExcelInfo(QXlsx::Worksheet *workSheet,int rowCount,int columnCount);
 
     /**
      * @brief 将人员信息保存到Json中

@@ -92,10 +92,6 @@ ManageRect{
         }
     }
 
-//    SearchItem {
-
-//    }
-
     ScePlayList{
         id: listView
         model:sceManager.listSces
@@ -142,7 +138,6 @@ ManageRect{
                         onClicked: {
                             $app.allData.loadSceInfo(modelData.sceName)
                             sceManager.setCurrentSceName(modelData.sceName)
-
                         }
                     }
                 }
@@ -166,11 +161,13 @@ ManageRect{
     FileDialog {
         id: printSce
         title: qsTr("请选择方案")
-        nameFilters: [qsTr("(*.sce))")]
+        nameFilters: [qsTr("(*.xlsx))")/*qsTr("(*.sce))")*/]
         onAccepted: {
             source: printSce.fileUrl
             impScePath=currentFile.toString().replace("file:///", "")
-            sceManager.importSce(impScePath)
+            sceManager.importSceInfo(impScePath);
+            listView.model= sceManager.listSces
+//            sceManager.importSce(impScePath)
         }
     }
     property string defaltFolderUrl: "file:///D:/InstallSoftWare/CounterSystem/Data/Project/"

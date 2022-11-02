@@ -118,7 +118,7 @@ QObject *CSceInfo::findPerson(int nID)
 //QList<QObject *> CSceInfo::getAll()
 QList<int> CSceInfo::getAll()
 {
-//    QList<QObject*> listObjct;
+    //    QList<QObject*> listObjct;
     QList<int> listObjct;
     foreach(auto one , m_mapId2Person.keys()){
         listObjct.append(one);
@@ -153,6 +153,17 @@ void CSceInfo::Prase(const QJsonArray &rObj)
         ScePersonInfo *scePersonInfo=new ScePersonInfo(this);
         scePersonInfo->readPerson(rObj.at(i).toObject());
         m_mapId2Person.insert(rObj.at(i).toObject().value("ID").toInt(),scePersonInfo);
+        m_listPerson.append(scePersonInfo);
+    }
+}
+
+void CSceInfo::PraseExcelInfo(QXlsx::Worksheet *workSheet,int rowCount,int columnCount)
+{
+    for (int i = 2; i <= rowCount; i++)
+    {
+        ScePersonInfo *scePersonInfo=new ScePersonInfo(this);
+        scePersonInfo->praseExcelPerson(workSheet,i,columnCount);
+        m_mapId2Person.insert(workSheet->cellAt(i, 1)->value().toInt(),scePersonInfo);
         m_listPerson.append(scePersonInfo);
     }
 }

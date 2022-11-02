@@ -42,6 +42,59 @@ void ScePersonInfo::writePerson(QJsonObject &json) const
     json["ImagePath"]  = m_sImagePath;
 }
 
+void ScePersonInfo::praseExcelPerson(QXlsx::Worksheet *workSheet,int rowCount, int columnCount)
+{
+    for (int col = 1; col <= columnCount; col++)
+    {
+        QXlsx::Cell *cell = workSheet->cellAt(rowCount, col);
+        switch (col) {
+        case 1:
+            m_ID=cell->value().toInt();
+            break;
+        case 2:
+            m_Name=cell->value().toString();
+            break;
+        case 3:
+            if(cell->value().toString()=="士兵")
+            {
+                m_Positon=1;
+            }else if(cell->value().toString()=="军官")
+            {
+                m_Positon=2;
+            }
+            else if(cell->value().toString()=="")
+            {
+                m_Positon=0;
+            }
+            break;
+        case 4:
+            if(cell->value().toString()=="蓝")
+            {
+                m_Group=0;
+            }
+            else if(cell->value().toString()=="红")
+            {
+                m_Group=1;
+            }
+            break;
+        case 5:
+            if(cell->value().toString()=="是")
+            {
+                m_host=1;
+            }
+            else if(cell->value().toString()=="否")
+            {
+                m_host=0;
+            }
+            break;
+        default:
+            break;
+        }
+
+    }
+//    qDebug()<<m_ID<<m_Name<<m_Positon<<m_Group<<m_host;
+}
+
 
 ////设置士兵信息
 void ScePersonInfo::setID(int nID)
@@ -77,7 +130,7 @@ void ScePersonInfo::setPosition(int sPosition)
     if(m_Positon!=sPosition)
     {
         m_Positon=sPosition;
-        emit positionChanged(sPosition);       
+        emit positionChanged(sPosition);
     }
 }
 
@@ -106,7 +159,7 @@ void ScePersonInfo::setHostage(bool bHostage)
     if(m_host!=bHostage)
     {
         m_host=bHostage;
-        emit hostageChanged(bHostage);       
+        emit hostageChanged(bHostage);
     }
 }
 
@@ -136,6 +189,6 @@ QString ScePersonInfo::copyFile(int nID, const QString &strImagePath)
         file.remove();
     }
     QFile::copy(strImagePath,newFilePath);
-    QFileInfo pathInfo(newFilePath);
+//    QFileInfo pathInfo(newFilePath);
     return newFilePath;
 }

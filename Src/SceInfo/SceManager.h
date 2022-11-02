@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include "SceInfo.h"
-#include "Src/Export/ExportResult.h"
+
 
 class SceManager : public QObject
 {
@@ -87,6 +87,9 @@ public:
     Q_INVOKABLE void setCurrentSceName(const QString &currentSceName);
     Q_INVOKABLE QString getCurrentSceName(){return m_sCurrentSceName;}
 
+    Q_INVOKABLE void importSceInfo(const QString &strImagePath);
+    void parseExcel(const QString &strImagePath);
+
 signals:
     void listScesChanged();
     void currentSceNameChanged(QString);
@@ -105,6 +108,8 @@ private:
     QList<QObject*> m_listSces;                  ///方案信息
     QHash<QString,CSceInfo*> m_hashName2SceInfo; ///存放查看的方案信息
     QString m_sCurrentSceName; ///加载时的方案名称
+
+    QList<QString> m_listTitle;      ///导入excel时存放每列的标头m_listTitle
 
 };
 

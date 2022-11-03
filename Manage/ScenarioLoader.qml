@@ -21,6 +21,15 @@ ManageRect{
     signal sceFindSignal(string sceName)
     property string impScePath: null
 
+    Connections{
+        function onCancelSignal()
+        {
+            console.log("取消")
+            sceManager.read();
+            listView.model= sceManager.listSces
+        }
+        target: scenarioNew
+    }
     CloseButton {
         anchors.right: scenarioLoader.right
         anchors.rightMargin: 70 *dpx
@@ -138,6 +147,7 @@ ManageRect{
                         onClicked: {
                             $app.allData.loadSceInfo(modelData.sceName)
                             sceManager.setCurrentSceName(modelData.sceName)
+                            footerBar.btnScenario.checked = false
                         }
                     }
                 }

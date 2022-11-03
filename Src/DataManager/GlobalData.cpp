@@ -149,8 +149,8 @@ void CGlobalData::UpdateSimulationTime(const quint16 &uSimTimes)
         {
             m_pCtrMapPerson->UpdateHitLine(pPerson->hurtinfo(nHurtIndex).id(),one);
             /// 增加命中状态
-//            QString listInfo=QString::fromUtf8("%1被%2击中").arg(pPerson->id())
-//                    .arg(pPerson->hurtinfo(nHurtIndex).id());
+            //            QString listInfo=QString::fromUtf8("%1被%2击中").arg(pPerson->id())
+            //                    .arg(pPerson->hurtinfo(nHurtIndex).id());
             QString type;
             switch (pPerson->hurtinfo(nHurtIndex).type())
             {
@@ -184,13 +184,10 @@ void CGlobalData::UpdateSimulationTime(const quint16 &uSimTimes)
             default:
                 break;
             }
-             auto pPerson1 = CDataManager::GetInstance()->GetOrCreatePersonInfo(pPerson->hurtinfo(nHurtIndex).id());
 
-             QString listInfo=QString::fromUtf8("%1%2使用%3击中%4%5").arg(pPerson->hurtinfo(nHurtIndex).id()).arg(pPerson1->name().c_str()).arg(type)
-                                                                    .arg(pPerson->id()).arg(pPerson->name().c_str());
-//             QString listInfo=QString::fromUtf8("%1使用%2击中%3").arg(pPerson->hurtinfo(nHurtIndex).id()).arg(type)
-//                                                                    .arg(pPerson->id());
-
+            auto pPerson1 = CDataManager::GetInstance()->GetOrCreatePersonInfo(pPerson->hurtinfo(nHurtIndex).id());
+            QString listInfo=QString::fromUtf8("%1%2使用%3击中%4%5").arg(pPerson->hurtinfo(nHurtIndex).id()).arg(pPerson1->name().c_str()).arg(type)
+                    .arg(pPerson->id()).arg(pPerson->name().c_str());
             listInfo += CConfigInfo::GetInstance()->GetBodyName(pPerson->hurtinfo(nHurtIndex).hurtpart());
 
             /// 发送消息
@@ -513,7 +510,7 @@ void CGlobalData::createReport(const QUrl &sReportFileName)
 
 void CGlobalData::getSceName(const QString &sceName)
 {
-   CExportResult::GetInstance()->setCurrentSceName(sceName);
+    CExportResult::GetInstance()->setCurrentSceName(sceName);
 }
 
 ///保存方案信息

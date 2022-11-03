@@ -57,6 +57,7 @@ Item {
         }
     }
 
+
     Rectangle
     {
         id:showNotice
@@ -69,7 +70,7 @@ Item {
         TextArea
         {
             id:showText
-            color: "white"
+            color:$app.typeColor
             font.pointSize: 14*dpy
             width: showText.contentWidth + 5*dpx
             height: 50*dpy

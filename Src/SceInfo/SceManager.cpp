@@ -49,6 +49,7 @@ CSceInfo *SceManager::addScenari(const QString &sceName,CSceInfo* pSceInfo)
                 QHash<QString, CSceInfo*>::iterator i;
                 for( i=m_hashName2SceInfo.begin(); i!=m_hashName2SceInfo.end(); ++i)
                 {
+                    removeSceFile(i.key());
                     m_mapName2SceInfo.remove(i.key());
                     m_listSces.removeOne(i.value());
                     emit listScesChanged();
@@ -83,9 +84,31 @@ CSceInfo *SceManager::addScenari(const QString &sceName,CSceInfo* pSceInfo)
         }
         else
         {
+            QHash<QString, CSceInfo*>::iterator i;
+            for( i=m_hashName2SceInfo.begin(); i!=m_hashName2SceInfo.end(); ++i)
+            {
+                if(i.key()==sceName)
+                {
+                     removeSceFile(i.key());
+                     m_mapName2SceInfo.remove(i.key());
+                     m_listSces.removeOne(i.value());
+                     emit listScesChanged();
+                     pSceInfo->setSceName(sceName);
+                     m_mapName2SceInfo.insert(sceName, pSceInfo);
+                     m_listSces.append(pSceInfo);
+                     emit listScesChanged();
+                     return(pSceInfo);
+                }
+                else
+                {
+                    return nullptr;
+                }
+
+            }
             return nullptr;
         }
     }
+    return nullptr;
 }
 
 ///删除方案

@@ -15,6 +15,7 @@ Item {
     property int nCount: 0
 
     signal findPersonSignal(int id)    //查找人员
+    signal cancelSignal();             //取消
 
     width: 1165 *dpx
     height: 710 *dpy
@@ -268,6 +269,7 @@ Item {
             {
                 scenarioNew.visible = false
                 qingkong()
+                cancelSignal();
             }
         }
     }
@@ -292,5 +294,6 @@ Item {
     function qingkong() {
         nameItemContent.text=""
         listView.model=""
+        nCount=0
     }
 }

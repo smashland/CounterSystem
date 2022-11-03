@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.12
 import QtQml 2.12
-
+//kunag
 ScrollView
 {
     id:showNotice
@@ -15,7 +15,7 @@ ScrollView
     TextArea
     {
         id:showText
-        color: "white"
+        color: $app.typeColor
         font.pointSize: 16*dpy
         font.bold: true
         background: Rectangle

@@ -9,7 +9,6 @@
 #include "../../Notice/NoticeManager.h"
 #include <GisMath/GisMath.h>
 #include <VersionMathCommon.h>
-#include "Src/Map/ContrlMapPerson.h"
 
 Q_DECLARE_FLAGS(Guntypes,GunType)
 
@@ -229,7 +228,7 @@ void CMyEventInfo::Update(const unsigned char *pData, int nLength)
                                 //                                        .arg(type); QString::fromStdString(pShotPerson->name())
 
                                 QString listInfo=QString::fromUtf8("%1%2使用%3击中%4%5").arg(pShotPerson->id()).arg(pShotPerson->name().c_str()).arg(type)
-                                                                                       .arg(m_pPerson->id()).arg(m_pPerson->name().c_str());
+                                        .arg(m_pPerson->id()).arg(m_pPerson->name().c_str());
 
                                 /// 发送消息
                                 CNoticeManager::GetInstance()->SetNoticInfo(listInfo);
@@ -259,11 +258,13 @@ void CMyEventInfo::Update(const unsigned char *pData, int nLength)
                                 }
 
                                 /// 增加命中状态
-//                                QString listInfo=QString::fromUtf8("%1%2使用%3击中%4%5").arg(pShotPerson->id()).arg(QString::fromStdString(pShotPerson->name())).arg(type)
-//                                                                                       .arg(m_pPerson->id()).arg(QString::fromStdString(m_pPerson->name()));
+                                //                                QString listInfo=QString::fromUtf8("%1%2使用%3击中%4%5").arg(pShotPerson->id()).arg(QString::fromStdString(pShotPerson->name())).arg(type)
+                                //                                                                                       .arg(m_pPerson->id()).arg(QString::fromStdString(m_pPerson->name()));
                                 QString listInfo=QString::fromUtf8("%1%2使用%3击中%4%5").arg(pShotPerson->id()).arg(pShotPerson->name().c_str()).arg(type)
-                                                                                       .arg(m_pPerson->id()).arg(m_pPerson->name().c_str());
+                                        .arg(m_pPerson->id()).arg(m_pPerson->name().c_str());
                                 listInfo += CConfigInfo::GetInstance()->GetBodyName(hurtInfo->hurtpart());
+
+                                CNoticeManager::GetInstance()->SetGroupId(pShotPerson->id());
 
                                 /// 发送消息
                                 CNoticeManager::GetInstance()->SetNoticInfo(listInfo);

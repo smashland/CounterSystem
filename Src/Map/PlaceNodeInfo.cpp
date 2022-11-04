@@ -104,7 +104,7 @@ void CPlaceNodeInfo::InitNode()
     m_pImage->OpenCull(false);
     m_pImage->AlwasOnTop(true);
     m_pLabel->AlwasOnTop(true);
-    m_pLocation->SetCanPick(true);
+//    m_pLocation->SetCanPick(true);
     TypeChanged();
 
     pScreenGroup->AddSceneNode(m_pImage);

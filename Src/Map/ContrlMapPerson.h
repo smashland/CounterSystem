@@ -69,11 +69,11 @@ public:
      */
     void UpdateSeconds(const quint16&);
 
-    /**
-     * @brief 重写点中事件
-     * @param nPickID
-     */
-    void PickID(unsigned int nPickID, unsigned int);
+//    /**
+//     * @brief 重写点中事件
+//     * @param nPickID
+//     */
+//    void PickID(unsigned int nPickID, unsigned int);
 
 signals:
     void mapPersonInfo(int id,QString name,int relive,double dLon, double dLat,bool bTk);

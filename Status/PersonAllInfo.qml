@@ -247,16 +247,16 @@ Popup
         }
     }
 
-    Connections {
-        target: $app.allData
-        function onMapPersonInfo(id,name,relive,dLon,dLat,bTk){
-            shebeiId.name = id;
-            shebeiName.name = name
-            reliveName.name = relive;
-            lat.name = dLat;
-            lon.name = dLon;
-            toukuizhuangtai.bConnected = bTk;
-            personPopup.visible=true;
-        }
-    }
+//    Connections {
+//        target: $app.allData
+//        function onMapPersonInfo(id,name,relive,dLon,dLat,bTk){
+//            shebeiId.name = id;
+//            shebeiName.name = name
+//            reliveName.name = relive;
+//            lat.name = dLat;
+//            lon.name = dLon;
+//            toukuizhuangtai.bConnected = bTk;
+//            personPopup.visible=true;
+//        }
+//    }
 }

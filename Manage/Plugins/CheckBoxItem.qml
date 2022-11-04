@@ -10,7 +10,7 @@ Item {
         y: 2*dpy
         width: 17*dpx
         height: 17*dpy
-//        checked:true
+        checked:true
         indicator: Rectangle {
             width: check.width
             height: check.height
@@ -22,7 +22,7 @@ Item {
                 source: check.checked ? "qrc:/Image/true.png" : ""
             }
         }
-
+        onClicked: {$app.setOpenSpeak(check.checked);}
     }
     Text {
         id: checkText

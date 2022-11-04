@@ -22,6 +22,7 @@ public:
     Q_PROPERTY(QString replayName MEMBER m_sReplayName)
     Q_PROPERTY(QString replayTime MEMBER m_sReplayTime)
     Q_PROPERTY(QColor typeColor MEMBER m_typeColor NOTIFY typeColorChanged)
+    Q_PROPERTY(bool openSpeak MEMBER m_bopenSpeak NOTIFY openSpeakChanged)
 
     //    Q_PROPERTY(QList<QObject*> replay MEMBER m_listReplay  NOTIFY replayChanged)
 
@@ -71,6 +72,7 @@ signals:
     void notic(QString sNoticInfo);
     void typeColorChanged();
     void replayChanged();
+    void openSpeakChanged();
 
 public slots:
 private:
@@ -85,6 +87,7 @@ private:
     QString         m_sReplayTime;
 
     QColor          m_typeColor;       ///分组的颜色
+    bool            m_bopenSpeak;      ///开启语音
 
 };
 

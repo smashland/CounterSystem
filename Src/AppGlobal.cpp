@@ -57,7 +57,7 @@ void QAppGlobal::initSystem()
     CTimeServer::GetInstance()->Start();
 
     /// 初始化声音
-    CNoticeManager::GetInstance()->OpenSpeak(true);
+//    CNoticeManager::GetInstance()->OpenSpeak(true);
     CNoticeManager::GetInstance()->SetVolume(100);
     CNoticeManager::GetInstance()->SetGlobal(this);
 
@@ -211,7 +211,14 @@ void QAppGlobal::openFile(const QUrl &rReplayFile)
 ///
 void QAppGlobal::setOpenSpeak(bool bOpenSpeak)
 {
-    CNoticeManager::GetInstance()->OpenSpeak(bOpenSpeak);
+    if(bOpenSpeak!=m_bopenSpeak)
+    {
+        m_bopenSpeak=bOpenSpeak;
+        CNoticeManager::GetInstance()->OpenSpeak(m_bopenSpeak);
+        qDebug()<<"66666666666666666666";
+        CConfigInfo::GetInstance()->SetSpeack(m_bopenSpeak);
+        emit openSpeakChanged();
+    }
 }
 
 void QAppGlobal::setGroupId(int typeID)

@@ -60,7 +60,7 @@ void CConfigInfo::PraseIni()
         m_stComName = m_pConfig->mutable_coninfo()->scomname().c_str();
 
         m_nHitLineDelSec = m_pConfig->mutable_sysinfo()->ndelehitline();
-
+        m_nSpeak = m_pConfig->mutable_sysinfo()->nopenspeak();
         m_nSynTimes=m_pConfig->mutable_siminfo()->nsycntime();
         m_nDroppedTimes=m_pConfig->mutable_siminfo()->ntime2drop();
         m_bKillSelf=m_pConfig->mutable_siminfo()->bkillself();
@@ -89,6 +89,7 @@ void CConfigInfo::PraseIni()
     {
         m_bKillSelf = false;
         m_nHitLineDelSec = 1;
+        m_nSpeak=0;
         /// 软件开始仿真
         m_bStart = false;
         m_bCanHitDeath = false;
@@ -158,6 +159,7 @@ void CConfigInfo::SaveIni()
 
     m_pConfig->mutable_coninfo()->set_scomname(m_stComName.toUtf8().data());
     m_pConfig->mutable_sysinfo()->set_ndelehitline(m_nHitLineDelSec);
+    m_pConfig->mutable_sysinfo()->set_nopenspeak(m_nSpeak);
     m_pConfig->mutable_siminfo()->set_nsycntime(m_nSynTimes);
     m_pConfig->mutable_siminfo()->set_ntime2drop(m_nDroppedTimes);
     m_pConfig->mutable_siminfo()->set_bkillself(m_bKillSelf);
@@ -415,6 +417,25 @@ const QString &CConfigInfo::GetBodyName(int nType)
     default:
         return(S_UNKOWN);
     }
+}
+
+void CConfigInfo::SetSpeack(bool IsSpeack)
+{
+    if(IsSpeack)
+    {
+      m_pConfig->mutable_sysinfo()->set_nopenspeak(1);
+    }
+    else
+    {
+       m_pConfig->mutable_sysinfo()->set_nopenspeak(0);
+    }
+    qDebug()<<"测试语音"<<IsSpeack;
+}
+
+bool CConfigInfo::GetSpeack()
+{
+//    return m_pConfig->mutable_sysinfo()->bopenspeak();
+    return false;
 }
 
 /// 析构数据数据

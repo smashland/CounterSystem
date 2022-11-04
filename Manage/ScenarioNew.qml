@@ -15,6 +15,7 @@ Item {
     property int nCount: 0
 
     signal findPersonSignal(int id)    //查找人员
+    signal cancelSignal();             //取消
 
     width: 1165 *dpx
     height: 710 *dpy
@@ -164,7 +165,14 @@ Item {
                 }
                 TextListItem {
                     id:level
-                    text: modelData.position?"军官":"士兵"
+                    text: if(modelData.position===0)/*?"军官":"士兵"*/
+                          {
+                              level.text=" "
+                          }else if(modelData.position===1){
+                              level.text="士兵"
+                          } else if(modelData.position===2){
+                              level.text="军官"
+                          }
                     width: 110 *dpx
                     height: 50 *dpy
                 }
@@ -261,6 +269,7 @@ Item {
             {
                 scenarioNew.visible = false
                 qingkong()
+                cancelSignal();
             }
         }
     }
@@ -285,5 +294,6 @@ Item {
     function qingkong() {
         nameItemContent.text=""
         listView.model=""
+        nCount=0
     }
 }

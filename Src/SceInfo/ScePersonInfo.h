@@ -3,6 +3,9 @@
 
 #include <QObject>
 #include <QJsonObject>
+#include <QXlsx/xlsxdocument.h>
+#include <QXlsx/xlsxchartsheet.h>
+#include <QXlsx/xlsxchart.h>
 
 class ScePersonInfo : public QObject
 {
@@ -18,6 +21,8 @@ public:
 
     void readPerson(const QJsonObject &json);
     void writePerson(QJsonObject &json) const;
+
+    void praseExcelPerson(QXlsx::Worksheet *workSheet, int rowCount, int columnCount);
 
 
     /**

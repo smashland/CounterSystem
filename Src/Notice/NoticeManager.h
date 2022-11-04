@@ -3,6 +3,7 @@
 /************************
  * 事件管理类
  ************************/
+#include <QColor>
 
 class CSpeakText;
 class QString;
@@ -13,6 +14,12 @@ class CNoticeManager
 {
 public:
     static CNoticeManager* GetInstance();
+
+    /**
+     * @brief 设置阵营颜色id
+     * @param typeId
+     */
+    void SetGroupId(int typeId);
 
     /**
      * @brief 设置通知信息
@@ -76,6 +83,7 @@ private:
     CSpeakText* m_pSpeak{}; /// 语音播报控制
     CPlayMp3*   m_pPlay{};
     QAppGlobal* m_pGLobal{};
+    QColor m_stColor;
 };
 
 #endif // NOTICEMANAGER_H

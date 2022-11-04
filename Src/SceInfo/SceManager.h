@@ -4,6 +4,7 @@
 #include <QObject>
 #include "SceInfo.h"
 
+
 class SceManager : public QObject
 {
     Q_OBJECT
@@ -13,7 +14,7 @@ public:
     SceManager(const QString &name);
 
     Q_PROPERTY(QList<QObject*> listSces MEMBER m_listSces NOTIFY listScesChanged)
-
+    Q_PROPERTY(QString currentSceName MEMBER m_sCurrentSceName NOTIFY currentSceNameChanged(QString))
 
 
     ///读写文件保存方案信息
@@ -78,8 +79,20 @@ public:
       */
     bool removeSceFile(const QString &sName);
 
+    /**
+     * @brief 得到加载时候的方案名称
+     * @param sceName
+     * @return
+     */
+    Q_INVOKABLE void setCurrentSceName(const QString &currentSceName);
+    Q_INVOKABLE QString getCurrentSceName(){return m_sCurrentSceName;}
+
+    Q_INVOKABLE void importSceInfo(const QString &strImagePath);
+    void parseExcel(const QString &strImagePath);
+
 signals:
     void listScesChanged();
+    void currentSceNameChanged(QString);
 protected:
     /**
      * @brief 读取单个文件
@@ -94,6 +107,9 @@ private:
     QStringList m_listSceFileName;               ///存放文件
     QList<QObject*> m_listSces;                  ///方案信息
     QHash<QString,CSceInfo*> m_hashName2SceInfo; ///存放查看的方案信息
+    QString m_sCurrentSceName; ///加载时的方案名称
+
+    QList<QString> m_listTitle;      ///导入excel时存放每列的标头m_listTitle
 
 };
 

@@ -6,6 +6,10 @@
 #include <QDir>
 #include <ISceneCore.h>
 #include <QDesktopServices>
+#include <QAxObject>
+#include <QXlsx/xlsxdocument.h>
+#include <QXlsx/xlsxchartsheet.h>
+#include <QXlsx/xlsxchart.h>
 
 SceManager::SceManager(QObject *parent)
     : QObject{parent}
@@ -45,6 +49,7 @@ CSceInfo *SceManager::addScenari(const QString &sceName,CSceInfo* pSceInfo)
                 QHash<QString, CSceInfo*>::iterator i;
                 for( i=m_hashName2SceInfo.begin(); i!=m_hashName2SceInfo.end(); ++i)
                 {
+                    removeSceFile(i.key());
                     m_mapName2SceInfo.remove(i.key());
                     m_listSces.removeOne(i.value());
                     emit listScesChanged();
@@ -64,24 +69,46 @@ CSceInfo *SceManager::addScenari(const QString &sceName,CSceInfo* pSceInfo)
     }
     else
     {
-         if(!m_mapName2SceInfo.contains(sceName))
-         {
-             QHash<QString, CSceInfo*>::iterator i;
-             for( i=m_hashName2SceInfo.begin(); i!=m_hashName2SceInfo.end(); ++i)
-             {
-               deleteScenario(i.key());
-             }
-             pSceInfo->setSceName(sceName);
-             m_mapName2SceInfo.insert(sceName, pSceInfo);
-             m_listSces.append(pSceInfo);
-             emit listScesChanged();
-             return(pSceInfo);
-         }
-         else
-         {
-             return nullptr;
-         }
+        if(!m_mapName2SceInfo.contains(sceName))
+        {
+            QHash<QString, CSceInfo*>::iterator i;
+            for( i=m_hashName2SceInfo.begin(); i!=m_hashName2SceInfo.end(); ++i)
+            {
+                deleteScenario(i.key());
+            }
+            pSceInfo->setSceName(sceName);
+            m_mapName2SceInfo.insert(sceName, pSceInfo);
+            m_listSces.append(pSceInfo);
+            emit listScesChanged();
+            return(pSceInfo);
+        }
+        else
+        {
+            QHash<QString, CSceInfo*>::iterator i;
+            for( i=m_hashName2SceInfo.begin(); i!=m_hashName2SceInfo.end(); ++i)
+            {
+                if(i.key()==sceName)
+                {
+                     removeSceFile(i.key());
+                     m_mapName2SceInfo.remove(i.key());
+                     m_listSces.removeOne(i.value());
+                     emit listScesChanged();
+                     pSceInfo->setSceName(sceName);
+                     m_mapName2SceInfo.insert(sceName, pSceInfo);
+                     m_listSces.append(pSceInfo);
+                     emit listScesChanged();
+                     return(pSceInfo);
+                }
+                else
+                {
+                    return nullptr;
+                }
+
+            }
+            return nullptr;
+        }
     }
+    return nullptr;
 }
 
 ///删除方案
@@ -235,12 +262,12 @@ QString SceManager::importSce(const QString &strImagePath)
     QString targetPath = QApplication::applicationDirPath() +QString("/Data/Project/%1").arg(fileInfo.fileName());
     if(QFile::copy(strImagePath,targetPath))
     {
-//        ClearSceInfo();
+        //        ClearSceInfo();
         read();
     }
     else
     {
-       return(nullptr);
+        return(nullptr);
     }
 
     return (nullptr);
@@ -281,6 +308,60 @@ bool SceManager::removeSceFile(const QString &sName)
     return true;
 }
 
+void SceManager::setCurrentSceName(const QString &currentSceName)
+{
+    if(currentSceName!=m_sCurrentSceName)
+    {
+        m_sCurrentSceName=currentSceName;
+        emit currentSceNameChanged(m_sCurrentSceName);
+    }
+}
+
+void SceManager::importSceInfo(const QString &strImagePath)
+{
+    parseExcel(strImagePath);
+    read();
+}
+
+void SceManager::parseExcel(const QString &strImagePath)
+{
+    QFileInfo fileInfo(strImagePath);
+    QXlsx::Document xlsx2(strImagePath);
+    QStringList sheetnames = xlsx2.sheetNames();
+//    qDebug()<<sheetnames;
+    for(int sheetCout=0;sheetCout<sheetnames.size();sheetCout++)
+    {
+        QXlsx::Worksheet* workSheet = dynamic_cast<QXlsx::Worksheet*>(xlsx2.sheet(sheetnames[sheetCout]));
+//        qDebug()<<workSheet->sheetName()<<','<<workSheet->sheetType();
+        QStringList titles;
+        int rowCount=workSheet->dimension().rowCount();
+        int columnCount=workSheet->dimension().columnCount();
+
+
+        for (int j = 1; j <= columnCount; j++)
+        {
+            QXlsx::Cell *cell = workSheet->cellAt(1, j);
+            titles.append(cell->value().toString());
+        }
+//        qDebug()<<titles[0]<<titles[1]<<titles[2]<<titles[3]<<titles[4];
+        if(titles[0]=="设备ID"&&titles[1]=="姓名"&&titles[2]=="职务"&&titles[3]=="阵营"&&titles[4]=="人质")
+        {
+//            qDebug()<<"表头正确";
+            CSceInfo* pSceInfo = new CSceInfo;
+            pSceInfo->PraseExcelInfo(workSheet,rowCount,columnCount);
+            pSceInfo->setSceName(workSheet->sheetName());
+            m_mapName2SceInfo.insert(workSheet->sheetName(),pSceInfo);
+            m_listSces.append(pSceInfo);
+            write();
+        }
+        else
+        {
+            return ;
+        }
+    }
+
+}
+
 
 ///清空方案信息
 void SceManager::ClearSceInfo()
@@ -292,6 +373,7 @@ void SceManager::ClearSceInfo()
     m_mapName2SceInfo.clear();
     m_hashName2SceInfo.clear();
     m_listSces.clear();
+    m_listTitle.clear();
 }
 
 

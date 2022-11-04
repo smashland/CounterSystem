@@ -1,10 +1,10 @@
-QT += quick texttospeech charts serialport network multimedia core xml
+QT += quick texttospeech charts serialport network multimedia core xml axcontainer
 
 CONFIG += c++11
 
 TARGET = CounterSystem
 
-SDK_CONFIG *= Map Gis proto qrcode
+SDK_CONFIG *= Map Gis proto qrcode QXLSX
 include($$PWD/SoftSDK.pri)
 DEFINES += QAPPLICATION_CLASS=QApplication
 

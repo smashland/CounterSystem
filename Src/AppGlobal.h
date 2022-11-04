@@ -21,7 +21,9 @@ public:
 
     Q_PROPERTY(QString replayName MEMBER m_sReplayName)
     Q_PROPERTY(QString replayTime MEMBER m_sReplayTime)
-//    Q_PROPERTY(QList<QObject*> replay MEMBER m_listReplay  NOTIFY replayChanged)
+    Q_PROPERTY(QColor typeColor MEMBER m_typeColor NOTIFY typeColorChanged)
+
+    //    Q_PROPERTY(QList<QObject*> replay MEMBER m_listReplay  NOTIFY replayChanged)
 
     /**
      * @brief 退出app
@@ -38,8 +40,8 @@ public:
     void setSettings(CGlobalSettings* pSettings);
     void setData(CGlobalData* pData);
     Q_INVOKABLE void setOsgItem(QQuickItem* pOsgItem);
-//    Q_INVOKABLE void openWord();
-//    Q_INVOKABLE void openVideo();
+    //    Q_INVOKABLE void openWord();
+    //    Q_INVOKABLE void openVideo();
 
     // 帮助文档
     Q_INVOKABLE QString copyFile(const QString &strImagePath, const QString &folderName = "Help");
@@ -50,6 +52,8 @@ public:
     Q_INVOKABLE QStringList openPath();
     /// 是否开启语音
     Q_INVOKABLE void setOpenSpeak(bool);
+
+    void setGroupId(int typeID);
 
 
 signals:
@@ -65,7 +69,7 @@ signals:
     void connected();
     void disConnected();
     void notic(QString sNoticInfo);
-
+    void typeColorChanged();
     void replayChanged();
 
 public slots:
@@ -79,6 +83,8 @@ private:
 
     QString         m_sReplayName;
     QString         m_sReplayTime;
+
+    QColor          m_typeColor;       ///分组的颜色
 
 };
 

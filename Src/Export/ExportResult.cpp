@@ -52,7 +52,7 @@ void CExportResult::CreateDocx(const QString &sFileName, const QString& sTile,co
         l_merger.setClipboardValue("AllInfo","worldTitle",sTile.toUtf8().data());
 
 
-        l_merger.setClipboardValue("Result","nName",12.3);
+        l_merger.setClipboardValue("Result","nName",m_currentSceName.toStdString()/*currentSceName.toStdString()*/);
         l_merger.setClipboardValue("Result","nBeginTime",INI_File().GetBeginTime().toStdString());
         l_merger.setClipboardValue("Result","nFinishTime",INI_File().GetEndTime().toStdString());
         l_merger.setClipboardValue("Result","nMapName",EarthManager().getCurrentEarthName().toStdString());
@@ -257,4 +257,12 @@ void CExportResult::CreateDocx(const QString &sFileName, const QString& sTile,co
 const QString &CExportResult::GetPath()
 {
     return(m_sReportPath);
+}
+
+void CExportResult::setCurrentSceName(const QString &sSceName)
+{
+    if(sSceName!=m_currentSceName)
+    {
+        m_currentSceName=sSceName;
+    }
 }

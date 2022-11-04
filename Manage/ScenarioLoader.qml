@@ -21,6 +21,15 @@ ManageRect{
     signal sceFindSignal(string sceName)
     property string impScePath: null
 
+    Connections{
+        function onCancelSignal()
+        {
+            console.log("取消")
+            sceManager.read();
+            listView.model= sceManager.listSces
+        }
+        target: scenarioNew
+    }
     CloseButton {
         anchors.right: scenarioLoader.right
         anchors.rightMargin: 70 *dpx
@@ -92,10 +101,6 @@ ManageRect{
         }
     }
 
-//    SearchItem {
-
-//    }
-
     ScePlayList{
         id: listView
         model:sceManager.listSces
@@ -141,7 +146,8 @@ ManageRect{
                         anchors.fill: parent
                         onClicked: {
                             $app.allData.loadSceInfo(modelData.sceName)
-
+                            sceManager.setCurrentSceName(modelData.sceName)
+                            footerBar.btnScenario.checked = false
                         }
                     }
                 }
@@ -153,6 +159,7 @@ ManageRect{
                         anchors.fill: parent
                         onClicked: {
                             sceManager.deleteScenario(modelData.sceName)
+                            listView.model= sceManager.listSces
                         }
                     }
                 }
@@ -164,11 +171,13 @@ ManageRect{
     FileDialog {
         id: printSce
         title: qsTr("请选择方案")
-        nameFilters: [qsTr("(*.sce))")]
+        nameFilters: [qsTr("(*.xlsx))")/*qsTr("(*.sce))")*/]
         onAccepted: {
             source: printSce.fileUrl
             impScePath=currentFile.toString().replace("file:///", "")
-            sceManager.importSce(impScePath)
+            sceManager.importSceInfo(impScePath);
+            listView.model= sceManager.listSces
+//            sceManager.importSce(impScePath)
         }
     }
     property string defaltFolderUrl: "file:///D:/InstallSoftWare/CounterSystem/Data/Project/"
@@ -182,6 +191,8 @@ ManageRect{
             var scePath=String(saveSce.currentFile)
             scePath=scePath.substr(8)
             $app.allData.saveSceInfo(scePath)
+            sceManager.read();
+            listView.model= sceManager.listSces
         }
     }
 }

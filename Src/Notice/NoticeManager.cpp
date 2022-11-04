@@ -10,6 +10,11 @@ CNoticeManager *CNoticeManager::GetInstance()
     return(&s_NoticeManager);
 }
 
+void CNoticeManager::SetGroupId(int typeId)
+{
+    m_pGLobal->setGroupId(typeId);
+}
+
 /// 设置通信信息
 void CNoticeManager::SetNoticInfo(const QString &sNoticeInfo)
 {

@@ -12,7 +12,6 @@
 #include "ContrlMapPerson.h"
 #include "../ErrorReport.h"
 #include "Src/DataManager/GlobalData.h"
-#include "Src/DataManager/PersonAllInfo.h"
 
 CContrlMapPerson::CContrlMapPerson(ISceneGraph *pSceneGraph, CGlobalData *pData):QObject(),
     m_pSceneGraph(pSceneGraph),m_pGloablData(pData)
@@ -161,24 +160,24 @@ void CContrlMapPerson::UpdateSeconds(const quint16 &seconds)
     }
 }
 
-void CContrlMapPerson::PickID(unsigned int nPickID, unsigned int nType)
-{
-    if(0 != nPickID)
-    {
-        for(auto findOne = m_mapShowInfo.begin(); findOne != m_mapShowInfo.end(); ++findOne)
-        {
-            if(findOne.value()->GetLocationNode()->PickID() == nPickID)
-            {
-                CPersonAllInfo* cPersonAllInfo=m_pGloablData->getPersonAllInfo(findOne.key());
-                auto personOne= m_pGloablData->GetOrCreatePersonStatus(findOne.key());
+//void CContrlMapPerson::PickID(unsigned int nPickID, unsigned int nType)
+//{
+//    if(0 != nPickID)
+//    {
+//        for(auto findOne = m_mapShowInfo.begin(); findOne != m_mapShowInfo.end(); ++findOne)
+//        {
+//            if(findOne.value()->GetLocationNode()->PickID() == nPickID)
+//            {
+//                CPersonAllInfo* cPersonAllInfo=m_pGloablData->getPersonAllInfo(findOne.key());
+//                auto personOne= m_pGloablData->GetOrCreatePersonStatus(findOne.key());
 
-                emit mapPersonInfo(cPersonAllInfo->getId(),cPersonAllInfo->getName(),cPersonAllInfo->getRelive(),
-                                   cPersonAllInfo->getLat(),cPersonAllInfo->getLon(),personOne->getBtk());
-                break;
-            }
-        }
-    }
-}
+//                emit mapPersonInfo(cPersonAllInfo->getId(),cPersonAllInfo->getName(),cPersonAllInfo->getRelive(),
+//                                   cPersonAllInfo->getLat(),cPersonAllInfo->getLon(),personOne->getBtk());
+//                break;
+//            }
+//        }
+//    }
+//}
 
 
 /// 查找显示信息

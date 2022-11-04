@@ -141,16 +141,16 @@ void EarthManager::praseEarthXml(QString sEarthPath)
     if(fileInfo.suffix()=="tif")
     {
         tagName="GDALIMAGE";
-        itemName="tif";
+        itemName="tifMap";
         tagNameM="tmsimage";
-        itemNameM="hbs";
+        itemNameM="xmlMap";
     }
     else if(fileInfo.suffix()=="xml")
     {
         tagName="tmsimage";
-        itemName="hbs";
+        itemName="xmlMap";
         tagNameM="GDALIMAGE";
-        itemNameM="tif";
+        itemNameM="tifMap";
     }
     else
     {

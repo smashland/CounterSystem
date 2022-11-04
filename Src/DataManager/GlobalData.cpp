@@ -372,7 +372,7 @@ void CGlobalData::SetSeceneGraph(ISceneGraph *pSceneGraph)
     if(nullptr == m_pCtrMapPerson)
     {
         m_pCtrMapPerson = new CContrlMapPerson(pSceneGraph,this);
-        connect(m_pCtrMapPerson,&CContrlMapPerson::mapPersonInfo,this,&CGlobalData::mapPersonInfo);
+//        connect(m_pCtrMapPerson,&CContrlMapPerson::mapPersonInfo,this,&CGlobalData::mapPersonInfo);
         CTimeServer::GetInstance()->SubTime(m_pCtrMapPerson);
     }
 }

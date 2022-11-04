@@ -20,6 +20,7 @@ Rectangle
     {
         id:showid
         text: outData.id
+        font.pixelSize: 24*dpx
         x: 10*dpx
     }
 
@@ -27,7 +28,7 @@ Rectangle
     {
         id:showName
         text: outData.name
-        x: 35*dpx
+        x: showid.x+showid.contentWidth+5*dpx
     }
 
     RowLayout

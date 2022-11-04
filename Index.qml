@@ -4,6 +4,7 @@ import "Setting" as Settings
 import "Common"
 import "Login"
 import "Exercise"
+import "Exercise/Plugins"
 import "Manage"
 import "Status"
 import "RePlay" as MyRePlay

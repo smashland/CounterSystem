@@ -278,7 +278,7 @@ void CGlobalData::setUserName(quint16 unID, const QString &sName)
 {
     auto pPersonStatus = GetOrCreatePersonStatus(unID);
     pPersonStatus->setName(sName);
-    m_pCtrMapPerson->UpdateName(unID,sName);
+    m_pCtrMapPerson->UpdateName(unID,unID + sName);
 
     auto pPersonInfo = CDataManager::GetInstance()->GetOrCreatePersonInfo(unID);
     pPersonInfo->set_name(sName.toStdString());

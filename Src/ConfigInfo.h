@@ -148,6 +148,7 @@ public:
      * @return
      */
     bool &GetIsReplay();
+
 private:
     /**
      * @brief 解析INI文件

@@ -12,9 +12,16 @@ Item {
     id: manoeuvre
     width: mainWindow.width
     height: 136 *dpy
+    property var imgSource: "qrc:/Image/Start_bg.png"
     Image {
         anchors.fill: parent
-        source: "qrc:/Image/Start_bg.png"
+        source: imgSource
+    }
+    MouseArea {
+        anchors.fill: parent
+        onWheel: {
+            // 屏蔽滚轮事件，防止滚动方案列表时缩放地球
+        }
     }
     signal yesPutDown()
     property var objSetting;
@@ -121,6 +128,7 @@ Item {
                 closebar.visible = false
                 yanxishijianItem.visible = true
                 xianyin.visible = true
+                toggleSettings.visible = false
             }
         }
     }
@@ -146,6 +154,7 @@ Item {
                 yanxishijianItem.visible = false
                 xianyin.visible = false
                 xianyin.isXianshi()
+                toggleSettings.visible = true
             }
         }
     }
@@ -225,6 +234,7 @@ Item {
     }
 
     ToggleSettings {
+        id: toggleSettings
         anchors.bottom: parent.bottom
         anchors.bottomMargin: -34*dpy
         anchors.right: parent.right

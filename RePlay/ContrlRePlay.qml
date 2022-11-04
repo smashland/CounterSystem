@@ -1,6 +1,8 @@
- import QtQuick 2.0
+import QtQuick 2.0
 import QtQuick.Controls 2.2
 import "../Common"
+import "../Exercise/Plugins"
+
 Item
 {
     id:rePlayShow
@@ -129,8 +131,14 @@ Item
 
                 onPressed:
                 {
-                    removeDialog_huifang.open();
+                    removeDialog_huifang.open()
                 }
+            }
+
+            CampHidden {
+                id: xianyin
+                y: 5*dpy
+                visible: true
             }
         }
 
@@ -146,6 +154,9 @@ Item
                 rePlayShow.bStart = true
                 $app.settings.endReplay()
                 $app.allData.endReplay()
+                manoeuvre.imgSource = "qrc:/Image/Start_bg.png"
+                manoeuvre.height = 136*dpx
+                xianyin.isXianshi()
             }
             onNoPutDown: {
 

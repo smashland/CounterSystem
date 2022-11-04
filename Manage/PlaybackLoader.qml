@@ -96,6 +96,8 @@ ManageRect{
                             ctrReplay.visible = true;
                             $app.settings.startReplay()
                             footerBar.btnPlayback.checked = false
+                            manoeuvre.imgSource = "qrc:/Image/Set_up_bg.png"
+                            manoeuvre.height = 100*dpx
                         }
                     }
                 }

@@ -48,6 +48,7 @@ public:
 
     ///回放文件
     Q_INVOKABLE QStringList openPath();
+    /// 是否开启语音
     Q_INVOKABLE void setOpenSpeak(bool);
 
 

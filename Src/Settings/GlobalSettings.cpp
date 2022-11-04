@@ -78,12 +78,15 @@ CGlobalSettings::CGlobalSettings(QObject *parent) : QObject(parent)
     tmpMap["type"]=QString::fromUtf8("同步时间:");
     tmpMap["number"]=CConfigInfo::GetInstance()->GetSynTimes();
     m_sysSetting.push_back(tmpMap);
+
     tmpMap["type"]=QString::fromUtf8("重发次数:");
     tmpMap["number"]=CConfigInfo::GetInstance()->GetResendTimes();
     m_sysSetting.push_back(tmpMap);
+
     tmpMap["type"]=QString::fromUtf8("掉线判别:");
     tmpMap["number"]=CConfigInfo::GetInstance()->GetDroppedTimes();
     m_sysSetting.push_back(tmpMap);
+
     tmpMap["type"]=QString::fromUtf8("默认子弹数:");
     tmpMap["number"]=CConfigInfo::GetInstance()->GetDefaultBullets();
     m_sysSetting.push_back(tmpMap);

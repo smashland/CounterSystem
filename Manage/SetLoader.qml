@@ -82,7 +82,7 @@ ManageRect{
             }
             SwitchButton {
                 id: yunxing_text
-                text: qsTr("运行设置")
+                text: qsTr("连接设置")
                 onClicked: {
                     harmGroupBox.visible=false
                     systemGroupBox.visible=false

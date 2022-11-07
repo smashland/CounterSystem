@@ -154,7 +154,7 @@ public:
      * @return
      */
     void SetSpeack(bool IsSpeack);
-    bool GetSpeack();
+    int GetSpeack();
 
 private:
     /**

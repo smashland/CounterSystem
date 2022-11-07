@@ -38,6 +38,7 @@ QAppGlobal::QAppGlobal(QObject *parent) : QObject(parent)
     m_pSettings = new CGlobalSettings(this);
     m_pData = new CGlobalData(this);
     m_pSettings->SetGlobalData(m_pData);
+    getOpenSpeak();
 }
 
 /// 退出程序
@@ -215,10 +216,23 @@ void QAppGlobal::setOpenSpeak(bool bOpenSpeak)
     {
         m_bopenSpeak=bOpenSpeak;
         CNoticeManager::GetInstance()->OpenSpeak(m_bopenSpeak);
-        qDebug()<<"66666666666666666666";
         CConfigInfo::GetInstance()->SetSpeack(m_bopenSpeak);
         emit openSpeakChanged();
     }
+}
+bool QAppGlobal::getOpenSpeak()
+{
+    int speak=CConfigInfo::GetInstance()->GetSpeack();
+    if(speak==1)
+    {
+        m_bopenSpeak=true;
+    }
+    if(speak==2)
+    {
+        m_bopenSpeak=false;
+    }
+     CNoticeManager::GetInstance()->OpenSpeak(m_bopenSpeak);
+    return m_bopenSpeak;
 }
 
 void QAppGlobal::setGroupId(int typeID)

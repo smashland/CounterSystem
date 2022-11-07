@@ -252,7 +252,6 @@ QStringList CConfigInfo::GetComNameList()
             s_listCom.push_back(portInfo.portName());
         }
     }
-
     /// 返回串口名称
     return(s_listCom);
 }
@@ -423,19 +422,18 @@ void CConfigInfo::SetSpeack(bool IsSpeack)
 {
     if(IsSpeack)
     {
-      m_pConfig->mutable_sysinfo()->set_nopenspeak(1);
+      m_nSpeak=1;
     }
     else
     {
-       m_pConfig->mutable_sysinfo()->set_nopenspeak(0);
+       m_nSpeak=2;
     }
-    qDebug()<<"测试语音"<<IsSpeack;
+    m_pConfig->mutable_sysinfo()->set_nopenspeak(m_nSpeak);
 }
 
-bool CConfigInfo::GetSpeack()
+int CConfigInfo::GetSpeack()
 {
-//    return m_pConfig->mutable_sysinfo()->bopenspeak();
-    return false;
+    return m_pConfig->mutable_sysinfo()->nopenspeak();
 }
 
 /// 析构数据数据

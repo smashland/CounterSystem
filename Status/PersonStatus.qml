@@ -1,31 +1,34 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.13
+import "Plugins"
 
 /// 人员状态显示
 Rectangle
 {
     property var outData: null
-    property var fontSize: 16
-
 
     id:root
-    width: parent.width
-    height: 40
+    width: (parent.width-20)*dpx
+    height: 40*dpy
     color: "black"
+    opacity: 0.8
     z:10
 
-    Text
+    // 人员名称
+    PersonText
+    {
+        id:showid
+        text: outData.id
+        font.pixelSize: 24*dpx
+        x: 10*dpx
+    }
+
+    PersonText
     {
         id:showName
-        text: outData.name;
-        verticalAlignment: Text.AlignVCenter
-        font.family: "Microsoft YaHei"
-        font.pixelSize: fontSize
-        color:  "white"
-        height: parent.height
-        anchors.left: parent.left
-        anchors.leftMargin: 10
+        text: outData.name
+        x: showid.x+showid.contentWidth+5*dpx
     }
 
     RowLayout
@@ -36,9 +39,7 @@ Rectangle
         id:infoshow
         anchors.fill: parent
         anchors.right: parent.right
-        anchors.rightMargin: 10
-
-        /// 人员名称
+        anchors.rightMargin: 10*dpx
 
         Item
         {
@@ -60,24 +61,24 @@ Rectangle
             bConnected: outData.bPistol
             source: "qrc:/Image/wuqi/shouqiang.png"
         }
-        EquipConnStat
-        {
-            id: jujibuqiang
-            bConnected: outData.bRifle//狙击步枪
-            source: "qrc:/Image/wuqi/jujibuqiang.png"
-        }
-        EquipConnStat
-        {
-            id: shoulei
-            bConnected: outData.bRifle//手雷
-            source: "qrc:/Image/wuqi/shoulei.png"
-        }
-        EquipConnStat
-        {
-            id: baozhawu
-            bConnected: outData.bRifle//爆炸物
-            source: "qrc:/Image/wuqi/baozhawu.png"
-        }
+//        EquipConnStat
+//        {
+//            id: jujibuqiang
+//            bConnected: outData.bRifle//狙击步枪
+//            source: "qrc:/Image/wuqi/jujibuqiang.png"
+//        }
+//        EquipConnStat
+//        {
+//            id: shoulei
+//            bConnected: outData.bRifle//手雷
+//            source: "qrc:/Image/wuqi/shoulei.png"
+//        }
+//        EquipConnStat
+//        {
+//            id: baozhawu
+//            bConnected: outData.bRifle//爆炸物
+//            source: "qrc:/Image/wuqi/baozhawu.png"
+//        }
 
         /// 显示头盔连接状态
         EquipConnStat
@@ -108,27 +109,6 @@ Rectangle
             font.pixelSize: 14*dpx
             font.family: "Microsoft YaHei"
         }
-
-        Text {
-            id:setRoot
-            width: setRoot.contentWidth
-            height: setRoot.contentHeight
-            text: qsTr("\ue8b8")
-            color: "#e7f6ff"
-            font.family: "iconfont"
-            font.pixelSize: 22*dpx
-            verticalAlignment: Text.AlignVCenter
-            MouseArea
-            {
-                anchors.fill: parent
-                onPressed:
-                {
-                    personClickd(modelData.id,setRoot.x,index * height+90);
-                }
-
-            }
-        }
-
     }
 
     /// 健康生命条
@@ -138,7 +118,7 @@ Rectangle
         to: 100
         value: outData.nHealth
         width: parent.width
-        height: 10
+        height: 10*dpy
         anchors.top:infoshow.bottom
         background: Rectangle {
             implicitWidth: health.width
@@ -151,7 +131,7 @@ Rectangle
             Rectangle {
                 width: health.visualPosition * health.width
                 height: health.height
-                color: outData.bOnLine ?  health.value > 60 ?  "green" : health.value > 20 ? "yellow" : "red" : "gray";
+                color: outData.bOnLine ?  health.value > 60 ?  "green" : health.value > 0 ? "yellow" : "red" : "#8B8989";
             }
         }
     }

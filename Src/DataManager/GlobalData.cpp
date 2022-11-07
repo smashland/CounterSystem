@@ -1,5 +1,5 @@
 #include <QUrl>
-
+#include <QApplication>
 #include "../ParseData/DealDataManager.h"
 #include "GlobalData.h"
 #include "MyListModel.h"
@@ -14,7 +14,9 @@
 #include "PersonAllInfo.h"
 #include "../Map/ContrlMapPerson.h"
 #include "../Notice/NoticeManager.h"
-#include "ini_file.h"
+#include "../SceInfo/SceManager.h"
+#include "../SceInfo/ScePersonInfo.h"
+#include "../SceInfo/SceInfo.h"
 
 CGlobalData::CGlobalData(QObject *parent) : QObject(parent),
     m_sCurrentFileName(QDir::homePath())
@@ -23,6 +25,7 @@ CGlobalData::CGlobalData(QObject *parent) : QObject(parent),
     qRegisterMetaType<CPersonStatus*>("CPersonStatus*");
     qRegisterMetaType<CGroupStatus*>("CGroupStatus*");
     qRegisterMetaType<CPersonAllInfo*>("CPersonAllInfo*");
+    qRegisterMetaType<SceManager*>("SceManager");
 
     m_listStatusModel = new CMyListModel;
     m_pPersonAllInfo = new CPersonAllInfo;
@@ -142,13 +145,50 @@ void CGlobalData::UpdateSimulationTime(const quint16 &uSimTimes)
     {
         /// 交火线
         auto pPerson = CDataManager::GetInstance()->GetOrCreatePersonInfo(one);
-        if(0 < pPerson->hurtinfo_size())
+        for(int nHurtIndex = pPerson->hurtinfo_size()-1; -1 < nHurtIndex;--nHurtIndex)
         {
-            m_pCtrMapPerson->UpdateHitLine(pPerson->hurtinfo(pPerson->hurtinfo_size()-1).id(),one);
+            m_pCtrMapPerson->UpdateHitLine(pPerson->hurtinfo(nHurtIndex).id(),one);
             /// 增加命中状态
-            QString listInfo=QString::fromUtf8("%3秒 %1被%2击中").arg(pPerson->id())
-                    .arg(pPerson->hurtinfo(pPerson->hurtinfo_size()-1).id()).arg(uSimTimes);
-            listInfo += CConfigInfo::GetInstance()->GetBodyName(pPerson->hurtinfo(pPerson->hurtinfo_size()-1).hurtpart());
+            //            QString listInfo=QString::fromUtf8("%1被%2击中").arg(pPerson->id())
+            //                    .arg(pPerson->hurtinfo(nHurtIndex).id());
+            QString type;
+            switch (pPerson->hurtinfo(nHurtIndex).type())
+            {
+            case 0:
+                type = QString::fromUtf8("没有武器");
+                break;
+            case 1:
+                type = QString::fromUtf8("步枪");
+                break;
+            case 2:
+                type = QString::fromUtf8("步枪");
+                break;
+            case 4:
+                type = QString::fromUtf8("手枪");
+                break;
+            case 8:
+                type = QString::fromUtf8("手雷");
+                break;
+            case 16:
+                type = QString::fromUtf8("手雷");
+                break;
+            case 32:
+                type = QString::fromUtf8("手枪");
+                break;
+            case 64:
+                type = QString::fromUtf8("爆炸物");
+                break;
+            case 128:
+                type = QString::fromUtf8("狙击枪");
+                break;
+            default:
+                break;
+            }
+
+            auto pPerson1 = CDataManager::GetInstance()->GetOrCreatePersonInfo(pPerson->hurtinfo(nHurtIndex).id());
+            QString listInfo=QString::fromUtf8("%1%2使用%3击中%4%5").arg(pPerson->hurtinfo(nHurtIndex).id()).arg(pPerson1->name().c_str()).arg(type)
+                    .arg(pPerson->id()).arg(pPerson->name().c_str());
+            listInfo += CConfigInfo::GetInstance()->GetBodyName(pPerson->hurtinfo(nHurtIndex).hurtpart());
 
             /// 发送消息
             CNoticeManager::GetInstance()->SetNoticInfo(listInfo);
@@ -173,7 +213,7 @@ void CGlobalData::UpdateTime(const QDateTime &dateTime)
         m_outFile.open(m_sCurrentFileName.toStdString(),std::ios::binary|std::ios::out);
 
         if(m_outFile.is_open())
-        {             
+        {
             /// 写入真正的演习数据的文件，路径长度，路径地址
             int nSize=sDataFile.toLocal8Bit().size();
             m_outFile.write(reinterpret_cast<char*>(&nSize),sizeof(nSize));
@@ -201,18 +241,15 @@ void CGlobalData::UpdateTime(const QDateTime &dateTime)
                     m_outFile.write(reinterpret_cast<char*>(&nId),sizeof(nId));
                 }
             }
-            INI_File().SetBeginTime(dateTime.toString("yyyy-MM-dd HH:mm:ss"));
         }
     }
 
     /// 演习结束，关闭文件
     if(m_outFile.is_open() && !CConfigInfo::GetInstance()->GetStart())
     {
-        INI_File().SetEndTime(dateTime.toString("yyyy-MM-dd HH:mm:ss"));
         m_outFile.close();
     }
 }
-
 
 /// 更新所有的数据
 void CGlobalData::updateAllDataSize(int nData)
@@ -228,7 +265,6 @@ void CGlobalData::updateAllDataSize(int nData)
 CPersonAllInfo *CGlobalData::getPersonAllInfo(quint16 unID)
 {
     auto pPersonStatus = GetOrCreatePersonStatus(unID);
-
     m_pPersonAllInfo->UpdateTypeAndName(pPersonStatus->getName(),pPersonStatus->getType());
     m_pPersonAllInfo->Update(unID);
     return(m_pPersonAllInfo);
@@ -239,7 +275,10 @@ void CGlobalData::setUserName(quint16 unID, const QString &sName)
 {
     auto pPersonStatus = GetOrCreatePersonStatus(unID);
     pPersonStatus->setName(sName);
-    m_pCtrMapPerson->UpdateName(unID,sName);
+    m_pCtrMapPerson->UpdateName(unID,unID + sName);
+
+    auto pPersonInfo = CDataManager::GetInstance()->GetOrCreatePersonInfo(unID);
+    pPersonInfo->set_name(sName.toStdString());
 }
 
 /// 清空状态
@@ -292,6 +331,7 @@ QList<QString> CGlobalData::getAllType()
     }
     return(vTempList);
 }
+
 /// 统计结果
 void CGlobalData::calResult()
 {
@@ -318,7 +358,6 @@ void CGlobalData::calResult()
     /// 更新模型列表
     emit(resultChanged(m_listResult));
     emit(allResultChanged(m_listAllResult));
-
 }
 
 /// 定位人员
@@ -332,15 +371,16 @@ void CGlobalData::SetSeceneGraph(ISceneGraph *pSceneGraph)
 {
     if(nullptr == m_pCtrMapPerson)
     {
-        m_pCtrMapPerson = new CContrlMapPerson(pSceneGraph);
+        m_pCtrMapPerson = new CContrlMapPerson(pSceneGraph,this);
+//        connect(m_pCtrMapPerson,&CContrlMapPerson::mapPersonInfo,this,&CGlobalData::mapPersonInfo);
         CTimeServer::GetInstance()->SubTime(m_pCtrMapPerson);
     }
 }
 
 int CGlobalData::openReplayFile(const QUrl &rReplayFile)
 {
-    std::string sFileName = rReplayFile.toLocalFile().toLocal8Bit().data();
-    std::ifstream   inFile;
+    std::string sFileName =rReplayFile.toLocalFile().toLocal8Bit().data();
+    std::ifstream inFile;
     inFile.open(sFileName,std::ios::binary|std::ios::in);
     char buffer[256]="";
     int nSize,nID;
@@ -383,7 +423,6 @@ int CGlobalData::openReplayFile(const QUrl &rReplayFile)
             ++nGroupIndex;
         }
 
-
         QVector<int> vEventID;
         /// 读取仿真时间
         while(!inFile.eof())
@@ -403,6 +442,7 @@ int CGlobalData::openReplayFile(const QUrl &rReplayFile)
         CTimeServer::GetInstance()->SetSimuEndTime(unTimes);
         inFile.close();
     }
+
     return(unTimes);
 }
 
@@ -436,11 +476,28 @@ void CGlobalData::endReplay()
     m_allReplayStatus.clear();
 }
 
+bool CGlobalData::deleteReplayFile(const QString &sReplayame)
+{
+    QString filePath = QApplication::applicationDirPath() + QString("/Data/Szy/%1.szy").arg(sReplayame);
+
+    if (filePath.isEmpty() || !QDir().exists(filePath))//是否传入了空的路径||路径是否存在
+        return false;
+
+    QFileInfo FileInfo(filePath);
+
+    if (FileInfo.isFile())//如果是文件
+        QFile::remove(filePath);
+    return true;
+}
+
 /// 保存数据文件
 void CGlobalData::saveData(const QUrl &sDataFileName)
 {
+    QDateTime current_date_time =QDateTime::currentDateTime();
+    QString current_date =current_date_time.toString("(yyyyMMdd_hhmmss)");
+    QString sFilepath=sDataFileName.toLocalFile().chopped(4)+current_date+".szy";
     /// 移动文件到指定位置
-    QFile::rename(m_sCurrentFileName,sDataFileName.toLocalFile());
+    QFile::rename(m_sCurrentFileName,sFilepath/*sDataFileName.toLocalFile()*/);
     m_bRemoveFile = false;
 }
 
@@ -448,8 +505,76 @@ void CGlobalData::saveData(const QUrl &sDataFileName)
 void CGlobalData::createReport(const QUrl &sReportFileName)
 {
     StatisticResult();
-
     CExportResult::GetInstance()->CreateDocx(sReportFileName.toLocalFile(),sReportFileName.fileName().split(".")[0],m_mapTypeInfo);
+}
+
+void CGlobalData::getSceName(const QString &sceName)
+{
+    CExportResult::GetInstance()->setCurrentSceName(sceName);
+}
+
+///保存方案信息
+void CGlobalData::saveSceInfo(const QString &strScePath)
+{
+    QFileInfo fileInfo(strScePath);
+    QString sceName = fileInfo.fileName().chopped(4);
+
+    SceManager* sceManager=new SceManager();
+    auto sceNewPerson=sceManager->createSceneri();
+    for(auto one=m_mapTypeInfo.begin();one!=m_mapTypeInfo.end();++one)
+    {
+
+        int nPersonNum=one.value()->count();
+        for(int i=0;i<nPersonNum;++i)
+        {
+            CPersonStatus * pStutus = one.value()->at(i);
+            ScePersonInfo* cePersonInfo=new ScePersonInfo();
+            cePersonInfo->setID(pStutus->getId());
+            cePersonInfo->setName(pStutus->getName());
+            cePersonInfo->setPosition(0);
+            cePersonInfo->setGroupType(pStutus->getType()=="蓝方"?0:1);
+            cePersonInfo->setHostage(false);
+            sceNewPerson->addPerson(pStutus->getId(),cePersonInfo);
+
+        }
+    }
+    sceManager->addScenari(sceName,sceNewPerson);
+    sceManager->write();
+}
+
+void CGlobalData::loadSceInfo(const QString &sceName)
+{
+    clearAllInfo();
+    SceManager* sceManager=new SceManager();
+    auto sceInfo = qobject_cast<CSceInfo*>(sceManager->findScenario(sceName));
+
+    QList<int> listId=sceInfo->getAll();
+    for(int i=0;i<listId.size();i++)
+    {
+        auto cePersonInfo = qobject_cast<ScePersonInfo*>(sceInfo->findPerson(listId.at(i)));
+        CPersonStatus* personStatus=new CPersonStatus();
+        personStatus->setId(cePersonInfo->getID());
+        personStatus->setName(cePersonInfo->getName());
+        personStatus->setRenzhi(cePersonInfo->getHostage());
+        QString typeTemp;
+        if(cePersonInfo->getGroupType()==0)
+        {
+            typeTemp="蓝方";
+        }
+        else if(cePersonInfo->getGroupType()==1)
+        {
+            typeTemp=tr("红方");
+        }
+        personStatus->setType(typeTemp);
+        m_mapStatusModel.insert(cePersonInfo->getID(),personStatus);
+
+        CMyListModel* m_listTypeModel=ceateType(typeTemp);
+        m_listTypeModel->append(personStatus);
+
+        /// 更新所有的状态信息
+        updateAllDataSize(m_mapStatusModel.count());
+    }
+
 }
 
 void CGlobalData::setUpdateAllInfo(bool bUpdate)
@@ -520,7 +645,6 @@ CPersonStatus *CGlobalData::GetOrCreatePersonStatus(quint16 unID)
 {
     /// 查找关联的显示
     auto findOne =m_mapStatusModel.find(unID);
-
     CPersonStatus* pPersonStatus=nullptr;
     if(m_mapStatusModel.end() != findOne)
     {

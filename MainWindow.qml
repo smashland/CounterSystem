@@ -12,8 +12,8 @@ RoundButton
     signal startReplay()
 
     id: roundButton
-    x: 30
-    y: Screen.height - 150
+    x: 30*dpx
+    y: Screen.height - 150*dpy
     width:120
     height:120
     contentItem: Text
@@ -24,7 +24,7 @@ RoundButton
         horizontalAlignment: Text.AlignHCenter
         style: Text.Outline
         styleColor: "#55FFFFFF"
-        font.pointSize:20
+        font.pointSize:20*dpy
         color:bottonBackground.border.color
     }
 
@@ -58,19 +58,16 @@ RoundButton
 
             lastX = mouseX
             lastY = mouseY
-            console.log("000000000000000")
 
             switch(mouse.button)
             {
             case Qt.RightButton: /// 切换演习状态
                 rightClick()
-                console.log("1111111111111111111111")
                 break;
             case Qt.LeftButton:/// 弹出菜单
                 if($app.settings.bIsStart)
                 {
                     leftClick()
-                    console.log("22222222222222222222")
                 }
                 else
                 {
@@ -115,14 +112,5 @@ RoundButton
         }
     }
 
-    CircleMenu
-    {
-        boundingItem: null
-        id:menu
-        onOpenReplay:
-        {
-            startReplay();
-        }
-    }
 }
 

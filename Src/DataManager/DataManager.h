@@ -5,6 +5,7 @@
 #include <QSet>
 #include <fstream>
 #include "../TimeServer/ITimeObserver.h"
+#include "Src/DataManager/PersonStatus.h"
 class IDataManagerObserver;
 
 class PersonInfo;

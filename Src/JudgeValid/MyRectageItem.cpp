@@ -53,11 +53,12 @@ void QMyRectageItem::UpdateTexture(QSGSimpleTextureNode* pTextureNode)
         qreal scaleX = qrWidth / width ;
         qreal scaleY = qrWidth / height ;
 
-        QImage image(width,height,QImage::Format_RGB888);
+        int nWidth = width,nHeight=height;
+        QImage image(nWidth,nHeight,QImage::Format_RGB888);
         image.fill(Qt::white);
-        for(int y = 0; y < width; ++y)
+        for(int y = 0; y < nWidth; ++y)
         {
-            for(int x = 0; x < height; ++x)
+            for(int x = 0; x < nHeight; ++x)
             {
                 uchar node = qrcode->data[int(int(y*scaleX)*qrWidth) + int(x*scaleY)];
                 if(node & 0x01)

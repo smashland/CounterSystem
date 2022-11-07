@@ -123,6 +123,12 @@ public:
     Q_INVOKABLE void pauseReplay();
     Q_INVOKABLE void setSimuTime(quint16 uTimes);
     Q_INVOKABLE void endReplay();
+    /**
+     * @brief 删除回放文件
+     * @param sReplayame
+     * @return
+     */
+    Q_INVOKABLE bool deleteReplayFile(const QString &sReplayame);
 
     /**
      * @brief 保存数据
@@ -135,7 +141,18 @@ public:
      * @param sReportFileName
      */
     Q_INVOKABLE void createReport(const QUrl& sReportFileName);
+    Q_INVOKABLE void getSceName(const QString &sceName);
+    /**
+     * @brief 保存方案
+     * @param strScePath
+     */
+    Q_INVOKABLE void saveSceInfo(const QString &strScePath);
 
+    /**
+     * @brief 加载方案
+     * @param strScePath
+     */
+    Q_INVOKABLE void loadSceInfo(const QString &sceName);
     /**
      * @brief 是否更新人员状态
      */
@@ -156,6 +173,12 @@ public:
      */
     Q_INVOKABLE void changeGroup(quint16,QString);
 
+    /**
+         * @brief 获取或者创建qml显示的简要信息
+         * @return
+         */
+    CPersonStatus* GetOrCreatePersonStatus(quint16);
+
 signals:
     void simTimeChanged(quint16 simTime);
     void lineSizeChanged(int);
@@ -164,17 +187,18 @@ signals:
     void updateGroup(CGroupStatus* groupStatus);
     void resultChanged(const QVariantList&);
     void allResultChanged(const QVariantList&);
+    void mapPersonInfo(int id,QString name,int relive,double dLon, double dLat,bool bTk);
 protected:
     /**
      * @brief 统计成绩
      */
     void StatisticResult();
 
-    /**
-     * @brief 获取或者创建qml显示的简要信息
-     * @return
-     */
-    CPersonStatus* GetOrCreatePersonStatus(quint16);
+    //    /**
+    //     * @brief 获取或者创建qml显示的简要信息
+    //     * @return
+    //     */
+    //    CPersonStatus* GetOrCreatePersonStatus(quint16);
 
     /**
      * @brief 将状态压栈

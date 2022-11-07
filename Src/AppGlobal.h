@@ -4,6 +4,7 @@
 #include <QObject>
 #include "Settings/GlobalSettings.h"
 #include "DataManager/GlobalData.h"
+#include <QTextCodec>
 
 class QQuickItem;
 
@@ -18,12 +19,19 @@ public:
     Q_PROPERTY(CGlobalSettings* settings MEMBER m_pSettings NOTIFY settingsChanged)
     Q_PROPERTY(CGlobalData* allData MEMBER m_pData NOTIFY dataChanged)
 
+    Q_PROPERTY(QString replayName MEMBER m_sReplayName)
+    Q_PROPERTY(QString replayTime MEMBER m_sReplayTime)
+    Q_PROPERTY(QColor typeColor MEMBER m_typeColor NOTIFY typeColorChanged)
+
+    //    Q_PROPERTY(QList<QObject*> replay MEMBER m_listReplay  NOTIFY replayChanged)
+
     /**
      * @brief 退出app
      */
     Q_INVOKABLE void exitApp();
     Q_INVOKABLE void initSystem();
     Q_INVOKABLE void startConnect();
+    Q_INVOKABLE void changeEarth();
 
     void updateNotic(const QString & rInfo);
     void setAppPath(QString sAppPath);
@@ -32,10 +40,20 @@ public:
     void setSettings(CGlobalSettings* pSettings);
     void setData(CGlobalData* pData);
     Q_INVOKABLE void setOsgItem(QQuickItem* pOsgItem);
-    Q_INVOKABLE void openWord();
-    Q_INVOKABLE void openVideo();
+    //    Q_INVOKABLE void openWord();
+    //    Q_INVOKABLE void openVideo();
+
+    // 帮助文档
+    Q_INVOKABLE QString copyFile(const QString &strImagePath, const QString &folderName = "Help");
+    Q_INVOKABLE QStringList openHelp();
+    Q_INVOKABLE void openFile(const QUrl &rReplayFile);
+
+    ///回放文件
     Q_INVOKABLE QStringList openPath();
+    /// 是否开启语音
     Q_INVOKABLE void setOpenSpeak(bool);
+
+    void setGroupId(int typeID);
 
 
 signals:
@@ -51,6 +69,8 @@ signals:
     void connected();
     void disConnected();
     void notic(QString sNoticInfo);
+    void typeColorChanged();
+    void replayChanged();
 
 public slots:
 private:
@@ -60,6 +80,12 @@ private:
     CGlobalSettings* m_pSettings; /// 设置对象
     CGlobalData*     m_pData;    /// 数据对象
     QQuickItem*      m_pOsgItem=nullptr; /// 设置绑定的osg显示
+
+    QString         m_sReplayName;
+    QString         m_sReplayTime;
+
+    QColor          m_typeColor;       ///分组的颜色
+
 };
 
 Q_DECLARE_METATYPE(CGlobalSettings*)

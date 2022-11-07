@@ -7,7 +7,7 @@
 
 class PersonInfo;
 /**
- * @brief ¶ÔÉè±¸½øĞĞÉèÖÃ
+ * @brief å¯¹è®¾å¤‡è¿›è¡Œè®¾ç½®
  */
 class CMySetQuipment
 {
@@ -15,32 +15,32 @@ public:
     CMySetQuipment();
 
     /**
-     * @brief ÉèÖÃID
+     * @brief è®¾ç½®ID
      * @param crAddr
      */
     void SetPerson(PersonInfo* pPerson);
 
     /**
-     * @brief ÉèÖÃÃüÁî
+     * @brief è®¾ç½®å‘½ä»¤
      */
     void SendCommand(quint16 unID, SET_CMD typeCommand, const QVariant &allInfo);
 
     /**
-     * @brief ¸üĞÂ×´Ì¬ĞÅÏ¢
+     * @brief æ›´æ–°çŠ¶æ€ä¿¡æ¯
      * @param pData
      * @param nLength
      */
     void Update(const uchar *pData, int nLength);
 
     /**
-     * @brief ¸üĞÂ
+     * @brief æ›´æ–°
      * @param nSeconds
      */
     void UpdateSeconds(const quint16 &nSeconds);
 
 protected:
     /**
-     * @brief ´¦ÀíĞÅÏ¢
+     * @brief å¤„ç†ä¿¡æ¯
      * @param unID
      * @param typeCommand
      * @param allInfo
@@ -50,14 +50,14 @@ protected:
 private:
     struct CMD_INFO
     {
-        SET_CMD  cmdType;/// ÃüÁîÀàĞÍ
-        QVariant info;   /// ÃüÁî¾ßÌåÄÚÈİ
-        qint16   nTime=0;  /// ÃüÁîÏÂ·¢µÄÊ±¼ä
+        SET_CMD  cmdType;/// å‘½ä»¤ç±»å‹
+        QVariant info;   /// å‘½ä»¤å…·ä½“å†…å®¹
+        qint16   nTime=0;  /// å‘½ä»¤ä¸‹å‘çš„æ—¶é—´
     };
 
     typedef QMap<quint16,CMD_INFO> ID2CMD;
     ID2CMD  m_mapSendInfo;
-    PersonInfo* m_pCurrentPerson;/// ÓÃ»§µÄID
+    PersonInfo* m_pCurrentPerson;/// ç”¨æˆ·çš„ID
 };
 
 #endif // MYSETQUIPMENT_H

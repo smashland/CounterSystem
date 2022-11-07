@@ -7,9 +7,6 @@
 INI_File::INI_File()
 {
     m_qstrFileName = QCoreApplication::applicationDirPath() + "/Data/Config/Config.txt";
-
-    qDebug()<<"m_qstrFileName: "<<m_qstrFileName;
-
     //"Config.ini"配置文件，文件存在则打开，不存在则创建
     m_psetting = new QSettings(m_qstrFileName,QSettings::IniFormat);
 }

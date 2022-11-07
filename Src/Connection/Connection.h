@@ -6,7 +6,7 @@
 #include <QByteArray>
 
 /**
- * @brief ÓëÍâ²¿Á¬½ÓµÄÍ¨ĞÅ»ùÀà
+ * @brief ä¸å¤–éƒ¨è¿æ¥çš„é€šä¿¡åŸºç±»
  */
 class CConnection:public QObject
 {
@@ -16,38 +16,38 @@ public:
     virtual ~CConnection();
 
     /**
-     * @brief ·¢ËÍĞÅÏ¢
-     * @param rByteArray ĞÅÏ¢×Ö·û´®
-     * @return ÃüÁî·¢ËÍ³É¹¦Ôò ·µ»Ø true Ê§°Ü Ôò·µ»Ø false
+     * @brief å‘é€ä¿¡æ¯
+     * @param rByteArray ä¿¡æ¯å­—ç¬¦ä¸²
+     * @return å‘½ä»¤å‘é€æˆåŠŸåˆ™ è¿”å› true å¤±è´¥ åˆ™è¿”å› false
      */
     virtual bool SendCommand(const QByteArray&){return(false);}
 
     /**
-     * @brief »ñÈ¡Ò»ÌõÊı¾İ
+     * @brief è·å–ä¸€æ¡æ•°æ®
      * @return
      */
      const QByteArray& GetData();
 
      /**
-      * @brief µ±Ç°ÊÇ·ñ´¦ÓÚÁ¬½Ó×´Ì¬
+      * @brief å½“å‰æ˜¯å¦å¤„äºè¿æ¥çŠ¶æ€
       * @return
       */
      bool IsConnect(){return(m_bConnected);}
 
      /**
-      * @brief Á¬½Ó
+      * @brief è¿æ¥
       * @return
       */
      virtual void Connect()=0;
 
      /**
-      * @brief ¶Ï¿ªÁ¬½Ó
+      * @brief æ–­å¼€è¿æ¥
       * @return
       */
      virtual void DisConnect();
 
      /**
-      * @brief Çå¿ÕÊı¾İ
+      * @brief æ¸…ç©ºæ•°æ®
       */
      void ClearData();
 
@@ -61,14 +61,14 @@ public slots:
 
 protected:
     /**
-     * @brief Ìí¼ÓĞÅÏ¢
+     * @brief æ·»åŠ ä¿¡æ¯
      * @param rData
      */
     void InsertData(const QByteArray& rData);
 
 protected:
-    QList<QByteArray> m_listReciveInfo; /// ±£´æËùÓĞµÄĞÅÏ¢
-    bool              m_bConnected;   /// µ±Ç°ÊÇ·ñ´¦ÓÚÁ¬½Ó×´Ì¬
+    QList<QByteArray> m_listReciveInfo; /// ä¿å­˜æ‰€æœ‰çš„ä¿¡æ¯
+    bool              m_bConnected;   /// å½“å‰æ˜¯å¦å¤„äºè¿æ¥çŠ¶æ€
 };
 
 #endif /// _YTY_CONNECTION_H__

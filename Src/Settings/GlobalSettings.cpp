@@ -78,12 +78,15 @@ CGlobalSettings::CGlobalSettings(QObject *parent) : QObject(parent)
     tmpMap["type"]=QString::fromUtf8("同步时间:");
     tmpMap["number"]=CConfigInfo::GetInstance()->GetSynTimes();
     m_sysSetting.push_back(tmpMap);
+
     tmpMap["type"]=QString::fromUtf8("重发次数:");
     tmpMap["number"]=CConfigInfo::GetInstance()->GetResendTimes();
     m_sysSetting.push_back(tmpMap);
+
     tmpMap["type"]=QString::fromUtf8("掉线判别:");
     tmpMap["number"]=CConfigInfo::GetInstance()->GetDroppedTimes();
     m_sysSetting.push_back(tmpMap);
+
     tmpMap["type"]=QString::fromUtf8("默认子弹数:");
     tmpMap["number"]=CConfigInfo::GetInstance()->GetDefaultBullets();
     m_sysSetting.push_back(tmpMap);
@@ -174,9 +177,6 @@ void CGlobalSettings::setStart()
     /// 查询所有人的状态
     CDealDataManager::GetInstance()->QueryAll();
 
-    /// 重置人员状态
-    CDataManager::GetInstance()->ResetPersonInfo();
-
     /// 重置演习时间
     CTimeServer::GetInstance()->ResetSimTime();
     emit startStatusChanged(m_bIsStart);
@@ -194,6 +194,8 @@ void CGlobalSettings::setStop()
     m_bIsStart = false;
     CConfigInfo::GetInstance()->GetStart()=false;
     CDealDataManager::GetInstance()->AllStop();
+    /// 重置人员状态
+    CDataManager::GetInstance()->ResetPersonInfo();
     emit startStatusChanged(m_bIsStart);
 }
 

@@ -1,12 +1,12 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.12
 import QtQml 2.12
-
+//kunag
 ScrollView
 {
     id:showNotice
-    width: 770
-    height: 380
+    width: 770*dpx
+    height: 380*dpy
 //    y:parent.height + height
 //    anchors.right:  parent.right
     anchors.centerIn: parent
@@ -15,8 +15,8 @@ ScrollView
     TextArea
     {
         id:showText
-        color: "white"
-        font.pointSize: 16
+        color: $app.typeColor
+        font.pointSize: 16*dpy
         font.bold: true
         background: Rectangle
         {
@@ -78,15 +78,4 @@ ScrollView
         }
     }
 
-//    Timer
-//    {
-//        id:hidTimer
-//        interval: 5000;
-//        running: true;
-//        repeat: false
-//        onTriggered:
-//        {
-//            leave.running=true;
-//        }
-//    }
 }

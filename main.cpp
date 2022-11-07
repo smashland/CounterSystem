@@ -1,6 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-
+#include <QQmlContext>
 #include <QLocale>
 #include <QTranslator>
 #include <QFontDatabase>
@@ -12,6 +12,13 @@
 #include "Src/JudgeValid/Blur.h"
 #include "Src/AppGlobal.h"
 #include "Src/SingleApplication/SingleApplication"
+#include "Src/SceInfo/SceManager.h"
+#include "Src/SceInfo/ScePersonInfo.h"
+#include "Src/SceInfo/SceInfo.h"
+#include "Src/XmlNode/TestXml.h"
+#include "Src/Settings/EarthManager.h"
+#include "Src/Settings/CSetEarth.h"
+
 
 int main(int argc, char *argv[])
 {
@@ -42,6 +49,17 @@ int main(int argc, char *argv[])
     qmlRegisterType<QAppGlobal>("MyItem",1,0,"AppGlobal");
     qmlRegisterType<QmlBlur>("MyItem",1,0,"Blur");
     qmlRegisterType<QtOsgItem>("SceneGraphRendering", 1, 0, "QuickOSGViewer");
+    qmlRegisterType<SceManager>("MyItem",1,0,"SceManager");
+    qmlRegisterType<CSceInfo>("MyItem",1,0,"SceInfo");
+    qmlRegisterType<TestXml>("MyItem",1,0,"TestXml");
+    qmlRegisterType<EarthManager>("MyItem",1,0,"EarthManager");
+    qmlRegisterType<CSetEarth>("MyItem",1,0,"CSetEarth");
+
+    qRegisterMetaType<ScePersonInfo*>("ScePersonInfo*");
+    qRegisterMetaType<CSceInfo*>("CSceInfo*");
+    qRegisterMetaType<SceManager*>("SceManager*");
+    qRegisterMetaType<CSetEarth*>("CSetEarth*");
+    qRegisterMetaType<EarthManager*>("EarthManager*");
 
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
@@ -56,6 +74,7 @@ int main(int argc, char *argv[])
     }
 
     QQmlApplicationEngine engine;
+    engine.rootContext()->setContextProperty("appDir",qApp->applicationDirPath());
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl)

@@ -35,6 +35,17 @@ contains(SDK_CONFIG,Map){
    }
 }
 
+contains(SDK_CONFIG ,QXLSX){
+    INCLUDEPATH *=$${PWD}/QXlsx/include
+    LIBS *= -L$${PWD}/QXlsx/lib
+
+    CONFIG (debug, debug|release){
+        LIBS *= -lQXlsxQt5d
+    }else{
+        LIBS *= -lQXlsxQt5
+    }
+}
+
 contains(SDK_CONFIG,Gis){
    INCLUDEPATH *= $${PWD}/../VersionMath/Inc
    INCLUDEPATH *= $${PWD}/../VersionMath/Inc/Math

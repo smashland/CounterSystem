@@ -6,6 +6,12 @@ Item {
     id: closebar
     width: mainWindow.width
     height: 60 *dpy
+    MouseArea {
+        anchors.fill: parent
+        onWheel: {
+            // 屏蔽滚轮事件，防止滚动方案列表时缩放地球
+        }
+    }
     Image {
         anchors.fill: parent
         source: "qrc:/Image/Case_bg.png"

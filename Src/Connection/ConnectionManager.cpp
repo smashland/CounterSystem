@@ -1,27 +1,28 @@
 #include <QList>
+#include <QTimerEvent>
 #include "ConnectionManager.h"
 #include "WifiConnection.h"
 #include "SerialConnection.h"
 #include "../ErrorReport.h"
-static QString S_SEND = QString::fromLocal8Bit("·¢ËÍ:");
-/// Á¬½Ó¹ÜÀíÀàµ¥ÀıÖ¸Õë
+static QString S_SEND = QString::fromUtf8("å‘é€:");
+/// è¿æ¥ç®¡ç†ç±»å•ä¾‹æŒ‡é’ˆ
 CConnectionManager *CConnectionManager::GetInstance()
 {
     static CConnectionManager s_connectionManager;
     return(&s_connectionManager);
 }
 
-/// Á¬½Ó
+/// è¿æ¥
 void CConnectionManager::Connect()
 {
-    if(nullptr != m_pConnection)
+    if(nullptr != m_pConnection && !m_pConnection->IsConnect())
     {
         m_pConnection->Connect();
     }
 
 }
 
-/// ¶Ï¿ªÁ¬½Ó
+/// æ–­å¼€è¿æ¥
 void CConnectionManager::DisConnect()
 {
     if(nullptr != m_pConnection)
@@ -30,10 +31,10 @@ void CConnectionManager::DisConnect()
     }
 }
 
-/// ´´½¨Á´½Ó
+/// åˆ›å»ºé“¾æ¥
 bool CConnectionManager::InitConnection(CONN_TYPE emType)
 {
-    /// Èç¹ûÁ¬½ÓÒÑ¾­´æÔÚ
+    /// å¦‚æœè¿æ¥å·²ç»å­˜åœ¨
     if(nullptr != m_pConnection)
     {
         delete m_pConnection;
@@ -58,7 +59,7 @@ bool CConnectionManager::InitConnection(CONN_TYPE emType)
     if(nullptr != m_pConnection)
     {
         connect(m_pConnection,&CConnection::connected2Center,this,&CConnectionManager::conected);
-        connect(m_pConnection,&CConnection::lostConnected2Center,this,&CConnectionManager::disConnected);
+        connect(m_pConnection,&CConnection::lostConnected2Center,this,&CConnectionManager::connectionLost);
         return(true);
     }
     else
@@ -67,13 +68,13 @@ bool CConnectionManager::InitConnection(CONN_TYPE emType)
     }
 }
 
-/// ÊÇ·ñ³õÊ¼»¯
+/// æ˜¯å¦åˆå§‹åŒ–
 bool CConnectionManager::IsInit()
 {
     return(nullptr != m_pConnection);
 }
 
-/// »ñÈ¡×îĞÂµÄÊı¾İĞÅÏ¢
+/// è·å–æœ€æ–°çš„æ•°æ®ä¿¡æ¯
 const QByteArray &CConnectionManager::GetData()
 {
     static QByteArray s_ByteArray;
@@ -87,7 +88,7 @@ const QByteArray &CConnectionManager::GetData()
     }
 }
 
-/// ·¢ËÍÊı¾İ
+/// å‘é€æ•°æ®
 bool CConnectionManager::SendData(const QByteArray &rSendInfo)
 {
     if(nullptr != m_pConnection)
@@ -101,7 +102,7 @@ bool CConnectionManager::SendData(const QByteArray &rSendInfo)
     }
 }
 
-/// ÊÇ·ñ´¦ÓÚÁ¬½Ó×´Ì¬
+/// æ˜¯å¦å¤„äºè¿æ¥çŠ¶æ€
 bool CConnectionManager::IsConnect()
 {
     if(nullptr != m_pConnection)
@@ -119,19 +120,39 @@ void CConnectionManager::ClearData()
     m_pConnection->ClearData();
 }
 
+void CConnectionManager::timerEvent(QTimerEvent *event)
+{
+    Connect();
 
-/// Á¬½Ó¹ÜÀíÀà
+    if(nullptr != m_pConnection && m_pConnection->IsConnect())
+    {
+        killTimer(m_nTimerID);
+        m_nTimerID = -1;
+    }
+}
+
+
+/// è¿æ¥ç®¡ç†ç±»
 CConnectionManager::CConnectionManager():
     m_pConnection(nullptr),
     m_emType(CONN_UNUSE)
 {
 }
 
-/// Îö¹¹
+/// ææ„
 CConnectionManager::~CConnectionManager()
 {
     if(nullptr != m_pConnection)
      {
         delete m_pConnection;
+    }
+}
+
+void CConnectionManager::connectionLost()
+{
+    if(m_nTimerID < 1)
+    {
+        emit disConnected();
+        m_nTimerID = startTimer(1000);
     }
 }

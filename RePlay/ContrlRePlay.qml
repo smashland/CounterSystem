@@ -1,23 +1,14 @@
- import QtQuick 2.0
+import QtQuick 2.0
 import QtQuick.Controls 2.2
-import ".."
+import "../Common"
+import "../Exercise/Plugins"
+
 Item
 {
     id:rePlayShow
     property int nTimes:100
     property bool bStart: true
 
-    Text {
-        x: 80 *dpx
-        y: contentHeight
-        height: 100 *dpy
-        text: qsTr("方案名称：")
-        font.pixelSize: 20*dpx;
-        color: "#ffffff";
-        font.bold: true
-        font.family: "MicrosoftYaHei Bold"
-
-    }
     Column {
         x: (index.width-width)/2
         Row
@@ -58,15 +49,16 @@ Item
                         {
                             $app.allData.beginReplay();
                             rePlayShow.bStart = false;
+                            time_run.start();
                         }
                         else
                         {
                             $app.allData.pauseReplay();
                         }
-
                         bofang.text= "\ue626"
                     }
                     bStart = !bStart
+
                 }
             }
 
@@ -139,56 +131,74 @@ Item
 
                 onPressed:
                 {
-                    confirm.open();
+                    removeDialog_huifang.open()
                 }
+            }
+
+            CampHidden {
+                id: xianyin
+                y: 5*dpy
+                visible: true
             }
         }
 
-        ConfirmPopUp
-        {
-            id:confirm;
-
-            exitShowLabel:"是否退出回放"
-            onYesPutDown:
-            {
+        RemoveDialog {
+            id: removeDialog_huifang
+            visible: false
+            y: (index.height - removeDialog_huifang.height-parent.height)/2
+            title:"退出"
+            content1: "是否退出回放?"
+            content2: exitShowLabel
+            onYesPutDown: {
                 rePlayShow.visible=false
                 rePlayShow.bStart = true
                 $app.settings.endReplay()
                 $app.allData.endReplay()
+                manoeuvre.imgSource = "qrc:/Image/Start_bg.png"
+                manoeuvre.height = 136*dpx
+                xianyin.isXianshi()
             }
-            onNoPutDown:
-            {
+            onNoPutDown: {
+
             }
         }
 
+
         Text {
+            id: timeText
             x:(parent.width-width)/2
-            text: qsTr("演习时长")+nTimes+qsTr("秒")
+            text: formateTime(nTimes)
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             height: 30
-            font.pixelSize: 15
+            font.pixelSize: 16*dpy
             color: "white"
             style:Text.Outline;styleColor: "black"
+            font.family: "Microsoft YaHei"
         }
 
     }
+    function formateTime(time) {
+        const h = parseInt(time / 3600)
+        const minute = parseInt(time / 60 % 60)
+        const second = Math.ceil(time % 60)
+        const hours = h < 10 ? '0' + h : h
+        const formatSecond = second > 59 ? 59 : second
+        return `${hours > 0 ? `${hours}:` : ''}${minute < 10 ? '0' + minute : minute}:${formatSecond < 10 ? '0' + formatSecond : formatSecond}`
+    }
+    Timer{
+        id:time_run
+        interval: 1000
+        repeat: true
+        running: false
+        triggeredOnStart: true
+        onTriggered: {
+            nTimes--
+            if (formateTime(nTimes) <= "00:00") {
+                time_run.stop()
+                bofang.text= "\ue609"
+            }
+        }
+    }
 
-    //    Dialog
-    //    {
-    //        x: -renderer.width/2
-    //        y: -renderer.height/2
-    //        id:exitReplay
-    //        Text {
-    //            anchors.fill: parent
-    //            id: name
-    //            text: qsTr("退出回放?")
-    //        }
-    //        modal: true
-    //        standardButtons: Dialog.Ok | Dialog.Cancel
-    //        onAccepted:
-    //        {
-
-    //        }
-    //    }
 }

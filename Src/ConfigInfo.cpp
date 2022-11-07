@@ -1,6 +1,7 @@
 #include <QApplication>
 #include <QDir>
 #include <QSerialPortInfo>
+#include <QXmlStreamReader>
 #include "ConfigInfo.h"
 #include <fstream>
 #include <google/protobuf/util/json_util.h>
@@ -109,6 +110,45 @@ void CConfigInfo::PraseIni()
     }
     m_nResendTimes = 5;
     m_nOfflineTime = m_nSynTimes * m_nDroppedTimes;
+}
+
+void CConfigInfo::PraseXml()
+{
+    /// 获取文件地址
+    QString filePath = QApplication::applicationDirPath() + "/Data/Earth/Geocentric.earth";
+    QFile configFile(filePath);
+    QMap<quint16,QString> tmpMapInfo;
+    if(configFile.open(QIODevice::ReadOnly))
+    {
+        QXmlStreamReader xmlReader(&configFile);
+        QXmlStreamReader::TokenType type;
+        QString sElementName;
+        quint16 nType;
+        QString sInfo;
+        while (!xmlReader.atEnd())
+        {
+            switch (type=xmlReader.readNext())
+            {
+            case QXmlStreamReader::StartElement:
+                if(xmlReader.name() == "valuemap")
+                {
+                    tmpMapInfo.clear();
+                    sElementName = xmlReader.attributes().value("type").toString();
+                    m_mapAllInfo[sElementName].clear();
+                }
+                else if(xmlReader.name() == "value")
+                {
+                    nType = xmlReader.attributes().value("type").toUInt();
+                    sInfo = xmlReader.attributes().value("name").toString();
+                    m_mapAllInfo[sElementName].insert(nType,sInfo);
+                }
+                break;
+            default:
+                break;
+            }
+        }
+        configFile.close();
+    }
 }
 
 /// 保存Ini的文件

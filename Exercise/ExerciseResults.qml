@@ -1,6 +1,5 @@
-//                                        击杀情况
+//                                        演习结果
 import QtQuick 2.12
-//import QtQuick.Controls 2.15
 import Qt.labs.qmlmodels 1.0
 import Qt.labs.platform 1.1
 import QtQuick.Controls 1.4 as QC114
@@ -15,25 +14,27 @@ Item {
     width: 1184 *dpx
     height: 860 *dpy
 
+    property string defaltFolderUrl: "file:///D:/InstallSoftWare/CounterSystem/Data/Szy/"
+    property string loactionStr:"{"+earthManager.currentLat+","+earthManager.currentLon+"}"
+
     Image {
         id: loginImage
         anchors.fill: parent
-        source: "qrc:/Image/Popup_bg_20.png"
+        source: "qrc:/Image/Popup_bg_27.png"
     }
 
     PopupTitle {
         name: "演习结果"
         icon:"\ue654"
+        x: 65*dpx
+        y: 64*dpy
     }
-    TransverseLine {
-        x: 80 *dpx
-        y: 95 *dpy
-    }
+
     CloseButton {
         anchors.right: exerciseResults.right
         anchors.rightMargin: 70 *dpx
         anchors.top: exerciseResults.top
-        anchors.topMargin: 60 *dpy
+        anchors.topMargin: 70 *dpy
         onClicked: exerciseResults.visible = false
     }
 
@@ -43,9 +44,10 @@ Item {
         spacing: 13*dpy
 
         ExerciseItem {
+            id:sceName
             width: 300*dpx
             title:"演习名称:"
-            name:"这是演习名称1"
+            name:sceManager.currentSceName
         }
 
         Row {
@@ -97,14 +99,16 @@ Item {
         Row {
             spacing: 200*dpx
             ExerciseItem {
+                id:earthName
                 width: 300*dpx
                 title:"地图名称:"
-                name:"这是演习名称1"
+                name:earthManager.currentName
             }
             ExerciseItem {
+                id:earthLoction
                 width: 300*dpx
                 title:"位置:"
-                name:"这是演习名称1"
+                name:loactionStr
             }
         }
     }
@@ -116,6 +120,7 @@ Item {
         x: 80 *dpx
         width: 1024 *dpx
         height: 142*dpy
+//        horizontalScrollBarPolicy: Qt.ScrollBarAlwaysOff
 
         style:TableViewStyle
         {
@@ -132,7 +137,7 @@ Item {
                     anchors.verticalCenter: parent.verticalCenter
                     text: styleData.value
                     color: "white"
-                    font.pixelSize: 20
+                    font.pixelSize: 20*dpy
                     font.bold: true
                 }
             }
@@ -140,7 +145,7 @@ Item {
             // 设置行
             rowDelegate:Rectangle
             {
-                height:51;
+                height:50*dpy;
                 color:styleData.alternate ? "#4671a6":"#2D5689"
             }
 
@@ -211,8 +216,8 @@ Item {
                 }
 
                 RedChart {
-                     width :500
-                     height: 320
+                     width :500*dpx
+                     height: 320*dpy
 //                     title: modelData.belong
                      hurtData:modelData.hurt
                      deathData:modelData.dealth
@@ -255,10 +260,11 @@ Item {
         FileDialog
         {
             id:openFile
-            folder:$app.appPath
+            folder:defaltFolderUrl
             fileMode:FileDialog.SaveFile
             title: qsTr("保存演习数据")
             nameFilters: [qsTr("演习数据(*.szy)")]
+            options: FileDialog.DontConfirmOverwrite
             onAccepted:
             {
                 $app.allData.saveData(currentFile);
@@ -297,6 +303,7 @@ Item {
             nameFilters: [qsTr("演习报告(*.docx)")]
             onAccepted:
             {
+                $app.allData.getSceName(sceName.name);
                 $app.allData.createReport(currentFile);
             }
         }

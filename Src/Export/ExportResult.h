@@ -1,4 +1,4 @@
-#ifndef CEXPORTRESULT_H
+ #ifndef CEXPORTRESULT_H
 #define CEXPORTRESULT_H
 
 #include <QString>
@@ -10,28 +10,36 @@ class CExportResult
 {
 public:
     /**
-     * @brief »ñÈ¡µ¥Àı
+     * @brief è·å–å•ä¾‹
      * @return
      */
     static CExportResult* GetInstance();
 
+
     /**
-     * @brief ´´½¨ÎÄµµ
+     * @brief åˆ›å»ºæ–‡æ¡£
      */
     void CreateDocx(const QString& sFileName, const QString &sTile, const QMap<QString,CMyListModel*>& rInfo);
 
     /**
-     * @brief ·µ»Øµ¼³öµÄ±í¸ñÂ·¾¶
+     * @brief è¿”å›å¯¼å‡ºçš„è¡¨æ ¼è·¯å¾„
      * @return
      */
     const QString& GetPath();
+
+    /**
+     * @brief è®¾ç½®å½“å‰çš„æ¼”ä¹ æ–¹æ¡ˆåç§°
+     * @param sSceName
+     */
+    void setCurrentSceName(const QString& sSceName);
 
 protected:
     CExportResult();
     ~CExportResult();
 private:
-    QString               m_sReportPath;  /// µ¼³öµÄÄ¿Â¼
-    static CExportResult* S_PInstance;    /// µ¥ÀıÖ¸Õë
+    QString               m_sReportPath;  /// å¯¼å‡ºçš„ç›®å½•
+    static CExportResult* S_PInstance;    /// å•ä¾‹æŒ‡é’ˆ
+    QString               m_currentSceName;
 };
 
 #endif // CEXPORTRESULT_H

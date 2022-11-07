@@ -6,15 +6,22 @@ import Qt.labs.platform 1.1
 import Qt.labs.qmlmodels 1.0
 import "../Status" as MyStatus
 import "../RePlay" as MyRePlay
-//import Qt.labs.settings 1.0
+import "Plugins"
 
 Item {
     id: manoeuvre
     width: mainWindow.width
     height: 136 *dpy
+    property var imgSource: "qrc:/Image/Start_bg.png"
     Image {
         anchors.fill: parent
-        source: "qrc:/Image/Start_bg.png"
+        source: imgSource
+    }
+    MouseArea {
+        anchors.fill: parent
+        onWheel: {
+            // 屏蔽滚轮事件，防止滚动方案列表时缩放地球
+        }
     }
     signal yesPutDown()
     property var objSetting;
@@ -25,8 +32,10 @@ Item {
     property string endTime;
 
     Row {
+        id:yanxishijianItem
         x: 80*dpx
         y: (136 *dpy + 50 *dpy - yanxiTime.contentHeight)/2
+        visible: false
         Text {
             id: yanxiTime
             width:yanxiTime.contentWidth
@@ -36,88 +45,36 @@ Item {
             color: "#ffffff";
             font.family: "Microsoft YaHei";
         }
-        Rectangle{
+        TimeText{
             //shi
             id:hour_rec
-            width:hour_text.contentWidth
-            height: hour_text.contentHeight
-            color: "transparent"
-            Label{
-                id:hour_text
-                text: manoeuvre.hour
-                anchors.centerIn: parent
-                font.bold: true
-                font.pixelSize: 20*dpx;
-                color: "#ffffff";
-                font.family: "Microsoft YaHei";
-            }
+            text: manoeuvre.hour
         }
-        Rectangle{
-            //fen
-            id:dian
-            width:hour_text.contentWidth
-            height: hour_text.contentHeight
-            color: "transparent"
-            Label{
-                id:dian_text
-                text: ":"
-                anchors.centerIn: parent
-                font.bold: true
-                font.pixelSize: 20*dpx;
-                color: "#ffffff";
-                font.family: "Microsoft YaHei";
-            }
+        TimeText{
+            //dian
+            id:dian_rec
+            text: ":"
         }
-        Rectangle{
+        TimeText{
             //fen
             id:minute_rec
-            width:hour_text.contentWidth
-            height: hour_text.contentHeight
-            color: "transparent"
-            Label{
-                id:minute_text
-                text: manoeuvre.minute
-                anchors.centerIn: parent
-                font.bold: true
-                font.pixelSize: 20*dpx;
-                color: "#ffffff";
-                font.family: "Microsoft YaHei";
-            }
+            text: manoeuvre.minute
         }
-        Rectangle{
-            //fen
-            id:diandian
-            width:hour_text.contentWidth
-            height: hour_text.contentHeight
-            color: "transparent"
-            Label{
-                id:diandian_text
-                text: ":"
-                anchors.centerIn: parent
-                font.bold: true
-                font.pixelSize: 20*dpx;
-                color: "#ffffff";
-                font.family: "Microsoft YaHei";
-            }
+        TimeText{
+            //dian
+            id:dian_rec2
+            text: ":"
         }
-
-        Rectangle{
-            //miao
+        TimeText{
+            //shi
             id:second_rec
-            width:hour_text.contentWidth
-            height: hour_text.contentHeight
-            color: "transparent"
-            Label{
-                id:second_text
-                text: manoeuvre.second
-                anchors.centerIn: parent
-                font.bold: true
-                font.pixelSize: 20*dpx;
-                color: "#ffffff";
-                font.family: "Microsoft YaHei";
-            }
+            text: manoeuvre.second
         }
     }
+    CampHidden {
+        id: xianyin
+    }
+
     Timer{
         id:time_run
         interval: 1000
@@ -135,26 +92,29 @@ Item {
                     if(manoeuvre.hour == 24)
                         hour = 0
                     if(manoeuvre.hour < 10)
-                        hour_text.text = "0"+manoeuvre.hour
+                        hour_rec.text = "0"+manoeuvre.hour
                     else
-                        hour_text.text = manoeuvre.hour
+                        hour_rec.text = manoeuvre.hour
                 }
                 if(manoeuvre.minute < 10)
-                    minute_text.text = "0" + manoeuvre.minute
+                    minute_rec.text = "0" + manoeuvre.minute
                 else
-                    minute_text.text = manoeuvre.minute
+                    minute_rec.text = manoeuvre.minute
             }
             if(manoeuvre.second < 10)
-                second_text.text = "0" + manoeuvre.second
+                second_rec.text = "0" + manoeuvre.second
             else
-                second_text.text = manoeuvre.second
+                second_rec.text = manoeuvre.second
         }
 
     }
 
-
-    BeginButton {
+    // 开始演习
+    ControlButtons {
         id:beginButton
+        jianbianColor: "#00baff"
+        icon: qsTr("\ue623")
+        text: qsTr("开始")
         MouseArea {
             anchors.fill: parent
             onClicked: {
@@ -166,11 +126,18 @@ Item {
                 }
                 changeStatus()
                 closebar.visible = false
+                yanxishijianItem.visible = true
+                xianyin.visible = true
+                toggleSettings.visible = false
             }
         }
     }
-    FinishButton {
+    // 结束演习
+    ControlButtons {
         id: finishButton
+        jianbianColor: "#59eba5"
+        icon: qsTr("\ue638")
+        text: qsTr("结束")
         visible: false
         MouseArea {
             anchors.fill: parent
@@ -184,9 +151,14 @@ Item {
                 manoeuvre.second="00"
                 closebar.visible = true
                 killExpand.visible = false
+                yanxishijianItem.visible = false
+                xianyin.visible = false
+                xianyin.isXianshi()
+                toggleSettings.visible = true
             }
         }
     }
+
     Connections
     {
         target: $app.settings
@@ -207,19 +179,11 @@ Item {
     {
         beginButton.visible = false
         finishButton.visible = true
-//        if(null !== objSetting)
-//        {
-//            objSetting.visible = false
-//        }
     }
     function showTest()
     {
         beginButton.visible = true
         finishButton.visible = false
-//        if(null !== objSetting)
-//        {
-//            objSetting.visible = true
-//        }
     }
     function changeStatus()
     {
@@ -269,54 +233,12 @@ Item {
         }
     }
 
-    Rectangle {
-        id: switchSet
+    ToggleSettings {
+        id: toggleSettings
         anchors.bottom: parent.bottom
         anchors.bottomMargin: -34*dpy
         anchors.right: parent.right
         anchors.rightMargin: -20 *dpx
-        width: 140*dpx
-        height: 68 *dpy
-        color: Qt.rgba(36/255, 41/255, 57/255, 0.6);
-        radius: 20*dpy
-
-        Rectangle {
-            x: 10*dpx
-            y: 7*dpy
-            color: "transparent"
-            width: 20*dpx
-            height: 20*dpx
-
-            Text {
-                anchors.fill: parent
-                text: qsTr("\ue628")
-                color: "#e7f6ff"
-                font.family: "iconfont"
-                font.pixelSize: 22*dpx
-                verticalAlignment: Text.AlignVCenter
-            }
-        }
-        Rectangle {
-             y: 7*dpy
-            x: 35*dpx
-            color: "transparent"
-            Text {
-                text: qsTr("切换设置")
-                font.pixelSize: 16*dpx;
-                color: "#ffffff";
-                font.family: "Microsoft YaHei"
-                verticalAlignment: Text.AlignVCenter
-                horizontalAlignment: Text.AlignHCenter
-            }
-        }
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                manoeuvre.visible = false
-                footerBar.visible = true
-            }
-        }
     }
 
 

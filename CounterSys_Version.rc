@@ -1,0 +1,41 @@
+IDI_ICON1		ICON		DISCARDABLE	"CounterStrike.ico"
+#if defined(UNDER_CE)
+#include <winbase.h>
+#else
+#include <winver.h>
+#endif
+VS_VERSION_INFO     VERSIONINFO
+    FILEVERSION 1,0,0,0
+    PRODUCTVERSION 1,0,0,0
+    FILEFLAGSMASK VS_FFI_FILEFLAGSMASK
+#ifdef _DEBUG
+    FILEFLAGS VS_FF_DEBUG
+#else
+    FILEFLAGS 0x0L
+#endif
+    FILEOS VOS_NT_WINDOWS32
+    FILETYPE VFT_DLL
+    FILESUBTYPE VFT2_UNKNOWN
+    BEGIN
+        BLOCK "StringFileInfo"
+        BEGIN
+            BLOCK "080404B0"
+            BEGIN
+                VALUE "FileDescription","轻武器激光模拟对抗系统"
+                VALUE "FileVersion","1.0.0.0"
+                VALUE "InternalName","RealSoldiersTraSys"
+                VALUE "LegalCopyright","Copyright (c)2022-2023"
+                #ifdef _DEBUG
+                    VALUE "OriginalFilename","CounterSystem"
+                #else
+                    VALUE "OriginalFilename","CounterSystem"
+                #endif
+                VALUE "ProductName","轻武器激光模拟对抗系统"
+                VALUE "ProductVersion","1.0.0.0"
+            END
+        END
+        BLOCK "VarFileInfo"
+        BEGIN
+        VALUE "Translation", 0x0804, 1200
+        END
+    END

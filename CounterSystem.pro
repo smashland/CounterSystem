@@ -1,10 +1,21 @@
-QT += quick texttospeech charts serialport network multimedia
+QT += quick texttospeech charts serialport network multimedia core xml axcontainer
 
 CONFIG += c++11
 
-SDK_CONFIG *= Map Gis proto qrcode
+TARGET = CounterSystem
+
+SDK_CONFIG *= Map Gis proto qrcode QXLSX
 include($$PWD/SoftSDK.pri)
 DEFINES += QAPPLICATION_CLASS=QApplication
+
+win32{
+ RC_FILE = CounterSys_Version.rc
+
+ DESTDIR = $${PWD}/../Bin
+}else{
+  VERSION = 2.0.0
+}
+
 SOURCES += \
         Src/API-CRCheck.cpp \
         Src/AppGlobal.cpp \
@@ -43,8 +54,14 @@ SOURCES += \
         Src/ParseData/MyParse/MySetQuipment.cpp \
         Src/ParseData/MyParseData.cpp \
         Src/ParseData/ParseData.cpp \
+        Src/SceInfo/SceInfo.cpp \
+        Src/SceInfo/SceManager.cpp \
+        Src/SceInfo/ScePersonInfo.cpp \
+        Src/Settings/CSetEarth.cpp \
+        Src/Settings/EarthManager.cpp \
         Src/Settings/GlobalSettings.cpp \
         Src/TimeServer/TimeServer.cpp \
+        Src/XmlNode/TestXml.cpp \
         Src/md5.cpp \
         main.cpp
 
@@ -108,9 +125,15 @@ HEADERS += \
     Src/ParseData/MyParse/MySetQuipment.h \
     Src/ParseData/MyParseData.h \
     Src/ParseData/ParseData.h \
+    Src/SceInfo/SceInfo.h \
+    Src/SceInfo/SceManager.h \
+    Src/SceInfo/ScePersonInfo.h \
+    Src/Settings/CSetEarth.h \
+    Src/Settings/EarthManager.h \
     Src/Settings/GlobalSettings.h \
     Src/TimeServer/ITimeObserver.h \
     Src/TimeServer/TimeServer.h \
+    Src/XmlNode/TestXml.h \
     Src/md5.h
 
 FORMS += \

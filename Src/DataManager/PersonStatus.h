@@ -2,9 +2,9 @@
 #define PERSONSTATUS_H
 
 /**
- * @brief ÏÔÊ¾ÈËÔ±µÄ¼òÒªĞÅÏ¢
- *   Ö÷Òª°üÀ¨¸÷ÖÖ×°¾ßµÄÁ¬½Ó×´Ì¬£¬ÈËÔ±½¡¿µ×´Ì¬£¬·Ö×é£¬Ãû³Æ¡¢±àºÅ
- *   µç³ØµçÁ¿
+ * @brief æ˜¾ç¤ºäººå‘˜çš„ç®€è¦ä¿¡æ¯
+ *   ä¸»è¦åŒ…æ‹¬å„ç§è£…å…·çš„è¿æ¥çŠ¶æ€ï¼Œäººå‘˜å¥åº·çŠ¶æ€ï¼Œåˆ†ç»„ï¼Œåç§°ã€ç¼–å·
+ *   ç”µæ± ç”µé‡
  */
 
 #include <QObject>
@@ -28,20 +28,24 @@ public:
     Q_PROPERTY(bool bRifle MEMBER m_bRifle NOTIFY rifleChanged)
     Q_PROPERTY(int  nBaty MEMBER m_nBaty NOTIFY batyChanged)
     Q_PROPERTY(int  nHealth MEMBER m_nHealth NOTIFY healthChanged)
+    Q_PROPERTY(bool bRenZhi MEMBER m_bRenZhi NOTIFY renZhiChanged)
 
     /**
-     * @brief ¸üĞÂĞÅÏ¢
+     * @brief æ›´æ–°ä¿¡æ¯
      */
     void Update(quint16 uTimes);
 
+    void setId(int nId);
     int  getId(){return(m_nID);}
     void setName(const QString& sName);
+    bool getBtk(){return m_bTK;}
     int getHealth(){return(m_nHealth);}
     const QString& getName(){return(m_sName);}
     void updateTime(quint16 unTimes);
     bool IsOnLine(){return(m_bOnLine);}
     Q_INVOKABLE void setType(const QString& sType);
     Q_INVOKABLE const QString& getType(){return(m_sType);}
+    void setRenzhi(bool bHostage);
 
 signals:
     void idChanged(int);
@@ -54,27 +58,30 @@ signals:
     void rifleChanged(bool);
     void batyChanged(int);
     void healthChanged(int);
+    void renZhiChanged(bool);
 
 
 protected:
     /**
-     * @brief ¸üĞÂÁ¬½Ó×´Ì¬
+     * @brief æ›´æ–°è¿æ¥çŠ¶æ€
      */
     void UpdateStatus(const ConnectStatus&);
 
 private:
     int  m_nID{};
-    bool m_bGPS=false;   /// GPSÊÇ·ñÁ¬½Ó
-    bool m_bTK=false;    /// Í·¿øÊÇ·ñÁ¬½Ó
-    bool m_bOnLine=false;/// ÊÇ·ñÔÚÏß
-    bool m_bPistol=false;///ÊÖÇ¹Á¬½Ó×´Ì¬
-    bool m_bRifle=false; ///²½Ç¹Á¬½Ó×´Ì¬
+    bool m_bGPS=false;   /// GPSæ˜¯å¦è¿æ¥
+    bool m_bTK=false;    /// å¤´ç›”æ˜¯å¦è¿æ¥
+    bool m_bOnLine=false;/// æ˜¯å¦åœ¨çº¿
+    bool m_bPistol=false;///æ‰‹æªè¿æ¥çŠ¶æ€
+    bool m_bRifle=false; ///æ­¥æªè¿æ¥çŠ¶æ€
 
-    int  m_nBaty{100};     /// µç³ØµçÁ¿
-    int  m_nHealth{100};   /// ½¡¿µ×´¿ö
-    int  m_unTimes{0};   /// ×îºóÒ»´ÎµÄtime
+    int  m_nBaty{100};     /// ç”µæ± ç”µé‡
+    int  m_nHealth{100};   /// å¥åº·çŠ¶å†µ
+    int  m_unTimes{0};   /// æœ€åä¸€æ¬¡çš„time
 
-    QString m_sName;    /// Ãû×Ö
-    QString m_sType;    /// ·Ö×é
+    QString m_sName;    /// åå­—
+    QString m_sType;    /// åˆ†ç»„
+
+    bool m_bRenZhi=false;///æ˜¯å¦äººè´¨
 };
 #endif // PERSONSTATUS_H

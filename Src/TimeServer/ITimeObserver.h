@@ -1,7 +1,7 @@
 #ifndef ITIMEOBSERVER_H
 #define ITIMEOBSERVER_H
 /********************************
- * 用于订阅时间
+ * 鐢ㄤ簬璁㈤槄鏃堕棿
  ********************************/
 
 #include <QDateTime>
@@ -12,19 +12,19 @@ public:
     virtual ~ITimeObserver(){}
 
     /**
-     * @brief 获取当前时间
+     * @brief 鑾峰彇褰撳墠鏃堕棿
      * @param rDateTime
      */
     virtual void UpdateTime(const QDateTime&){}
 
     /**
-     * @brief 更新相对于开始时间的秒数
+     * @brief 鏇存柊鐩稿浜庡紑濮嬫椂闂寸殑绉掓暟
      * @param nSeconds
      */
     virtual void UpdateSeconds(const quint16&){}
 
     /**
-     * @brief 更新仿真时间
+     * @brief 鏇存柊浠跨湡鏃堕棿
      */
     virtual void UpdateSimulationTime(const quint16&){}
 };

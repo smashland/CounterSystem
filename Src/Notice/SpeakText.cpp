@@ -13,7 +13,7 @@ CSpeakText::~CSpeakText()
     delete m_pSpeech;
 }
 
-/// ³õÊ¼»¯ÓïÒô
+/// åˆå§‹åŒ–è¯­éŸ³
 bool CSpeakText::Init()
 {
     if(m_bInit)
@@ -46,26 +46,26 @@ bool CSpeakText::Init()
     return(m_bInit);
 }
 
-/// ²¥±¨ÓïÒô
+/// æ’­æŠ¥è¯­éŸ³
 bool CSpeakText::SpeakText(const QString &sInfo)
 {
     if(m_bInit)
     {
-        /// È¥µôÉùÒôÐÅÏ¢
-        m_pSpeech->say(sInfo.right(sInfo.size() - 9));
+        /// åŽ»æŽ‰å£°éŸ³ä¿¡æ¯
+        m_pSpeech->say(sInfo);
     }
 
     return(m_bInit);
 }
 
-/// ÉèÖÃÉùÒô´óÐ¡
+/// è®¾ç½®å£°éŸ³å¤§å°
 void CSpeakText::SetVolume(double dVolume)
 {
     if(fabs(m_dVolume - dVolume) > 1e-8)
     {
         m_dVolume = dVolume < 0.0 ? 0.0 : dVolume;
 
-        /// Èç¹ûÒÑ¾­³õÊ¼»¯
+        /// å¦‚æžœå·²ç»åˆå§‹åŒ–
         if(m_bInit)
         {
             m_pSpeech->setVolume(m_dVolume);

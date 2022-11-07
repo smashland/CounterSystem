@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "*.qml": "cpp",
+        "*.earth": "xml",
+        "xiosbase": "cpp",
+        "xmemory": "cpp"
+    }
+}

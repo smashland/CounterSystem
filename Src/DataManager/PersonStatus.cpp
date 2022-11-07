@@ -69,6 +69,7 @@ CPersonStatus::CPersonStatus(int nID, QObject *parent)
     ,m_nBaty(100)
     ,m_nHealth(100)
     ,m_unTimes(0)
+    ,m_bRenZhi(false)
 {
 }
 
@@ -106,6 +107,16 @@ void CPersonStatus::Update(quint16 uTimes)
 
 }
 
+///设置设备ID
+void CPersonStatus::setId(int nId)
+{
+    if(nId!=m_nID)
+    {
+        m_nID=nId;
+        emit(idChanged(m_nID));
+    }
+}
+
 /// 设置名称
 void CPersonStatus::setName(const QString &sName)
 {
@@ -140,6 +151,15 @@ void CPersonStatus::setType(const QString &sType)
     {
         m_sType = sType;
         emit(typeChanged(m_sType));
+    }
+}
+
+void CPersonStatus::setRenzhi(bool bHostage)
+{
+    if(bHostage!=m_bRenZhi)
+    {
+        m_bRenZhi=bHostage;
+        emit(renZhiChanged(m_bRenZhi));
     }
 }
 

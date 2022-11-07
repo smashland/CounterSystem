@@ -161,6 +161,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_PersonInfo_2eproto::offsets[] 
   PROTOBUF_FIELD_OFFSET(::PersonInfo, curtpos_),
   PROTOBUF_FIELD_OFFSET(::PersonInfo, hurtinfo_),
   PROTOBUF_FIELD_OFFSET(::PersonInfo, hitinfo_),
+  PROTOBUF_FIELD_OFFSET(::PersonInfo, name_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::HurtInfo)},
@@ -188,12 +189,12 @@ const char descriptor_table_protodef_PersonInfo_2eproto[] PROTOBUF_SECTION_VARIA
   "onType\030\003 \001(\0162\014.Weapon_Type\"n\n\rConnectSta"
   "tus\022\013\n\003bTK\030\001 \001(\010\022\014\n\004bGPS\030\002 \001(\010\022\016\n\006bStand"
   "\030\003 \001(\010\022\022\n\nfBatyValue\030\004 \001(\002\022\036\n\007weapons\030\005 "
-  "\003(\0132\r.WeaponStatus\"\302\001\n\nPersonInfo\022\n\n\002id\030"
+  "\003(\0132\r.WeaponStatus\"\320\001\n\nPersonInfo\022\n\n\002id\030"
   "\001 \001(\r\022\016\n\006hearth\030\002 \001(\005\022\016\n\006reLive\030\003 \001(\r\022\020\n"
   "\010setDeath\030\004 \001(\r\022\"\n\ncurtStatus\030\005 \001(\0132\016.Co"
   "nnectStatus\022\031\n\007curtPos\030\006 \001(\0132\010.Postion\022\033"
   "\n\010hurtInfo\030\007 \003(\0132\t.HurtInfo\022\032\n\007hitInfo\030\010"
-  " \003(\0132\t.HurtInfob\006proto3"
+  " \003(\0132\t.HurtInfo\022\014\n\004name\030\t \001(\tb\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_PersonInfo_2eproto_deps[1] = {
   &::descriptor_table_TypeDefine_2eproto,
@@ -207,7 +208,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_Per
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_PersonInfo_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_PersonInfo_2eproto = {
-  false, false, descriptor_table_protodef_PersonInfo_2eproto, "PersonInfo.proto", 583,
+  false, false, descriptor_table_protodef_PersonInfo_2eproto, "PersonInfo.proto", 597,
   &descriptor_table_PersonInfo_2eproto_once, descriptor_table_PersonInfo_2eproto_sccs, descriptor_table_PersonInfo_2eproto_deps, 5, 1,
   schemas, file_default_instances, TableStruct_PersonInfo_2eproto::offsets,
   file_level_metadata_PersonInfo_2eproto, 5, file_level_enum_descriptors_PersonInfo_2eproto, file_level_service_descriptors_PersonInfo_2eproto,
@@ -1301,6 +1302,11 @@ PersonInfo::PersonInfo(const PersonInfo& from)
       hurtinfo_(from.hurtinfo_),
       hitinfo_(from.hitinfo_) {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_name().empty()) {
+    name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_name(), 
+      GetArena());
+  }
   if (from._internal_has_curtstatus()) {
     curtstatus_ = new ::ConnectStatus(*from.curtstatus_);
   } else {
@@ -1319,6 +1325,7 @@ PersonInfo::PersonInfo(const PersonInfo& from)
 
 void PersonInfo::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_PersonInfo_PersonInfo_2eproto.base);
+  name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
       reinterpret_cast<char*>(&curtstatus_) - reinterpret_cast<char*>(this)),
       0, static_cast<size_t>(reinterpret_cast<char*>(&setdeath_) -
@@ -1333,6 +1340,7 @@ PersonInfo::~PersonInfo() {
 
 void PersonInfo::SharedDtor() {
   GOOGLE_DCHECK(GetArena() == nullptr);
+  name_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete curtstatus_;
   if (this != internal_default_instance()) delete curtpos_;
 }
@@ -1360,6 +1368,7 @@ void PersonInfo::Clear() {
 
   hurtinfo_.Clear();
   hitinfo_.Clear();
+  name_.ClearToEmpty();
   if (GetArena() == nullptr && curtstatus_ != nullptr) {
     delete curtstatus_;
   }
@@ -1447,6 +1456,15 @@ const char* PersonInfo::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID:
           } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<66>(ptr));
         } else goto handle_unusual;
         continue;
+      // string name = 9;
+      case 9:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 74)) {
+          auto str = _internal_mutable_name();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "PersonInfo.name"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
         if ((tag & 7) == 4 || tag == 0) {
@@ -1531,6 +1549,16 @@ failure:
       InternalWriteMessage(8, this->_internal_hitinfo(i), target, stream);
   }
 
+  // string name = 9;
+  if (this->name().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_name().data(), static_cast<int>(this->_internal_name().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "PersonInfo.name");
+    target = stream->WriteStringMaybeAliased(
+        9, this->_internal_name(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -1559,6 +1587,13 @@ size_t PersonInfo::ByteSizeLong() const {
   for (const auto& msg : this->hitinfo_) {
     total_size +=
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  // string name = 9;
+  if (this->name().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_name());
   }
 
   // .ConnectStatus curtStatus = 5;
@@ -1636,6 +1671,9 @@ void PersonInfo::MergeFrom(const PersonInfo& from) {
 
   hurtinfo_.MergeFrom(from.hurtinfo_);
   hitinfo_.MergeFrom(from.hitinfo_);
+  if (from.name().size() > 0) {
+    _internal_set_name(from._internal_name());
+  }
   if (from.has_curtstatus()) {
     _internal_mutable_curtstatus()->::ConnectStatus::MergeFrom(from._internal_curtstatus());
   }
@@ -1679,6 +1717,7 @@ void PersonInfo::InternalSwap(PersonInfo* other) {
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   hurtinfo_.InternalSwap(&other->hurtinfo_);
   hitinfo_.InternalSwap(&other->hitinfo_);
+  name_.Swap(&other->name_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(PersonInfo, setdeath_)
       + sizeof(PersonInfo::setdeath_)

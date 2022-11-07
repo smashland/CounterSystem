@@ -1,6 +1,18 @@
 #include <QGuiApplication>
 #include <QFontDatabase>
 
+#include <ISceneCore.h>
+#include <SceneGraph/ISceneGraphManager.h>
+#include <Plot/Map/IMap.h>
+#include <QDesktopServices>
+#include <QResource>
+#include <QUrl>
+#include <QDir>
+#include <QList>
+#include <QTextCodec>
+#include <QDebug>
+#include <QMap>
+
 #include "AppGlobal.h"
 #include "TimeServer/TimeServer.h"
 #include "ParseData/DealDataManager.h"
@@ -59,9 +71,17 @@ void QAppGlobal::startConnect()
     CConnectionManager::GetInstance()->Connect();
 }
 
+void QAppGlobal::changeEarth()
+{
+    auto pSeneGraph = GetSceneCore()->GetSceneGraphManager()->FindSceneGraph(m_pOsgItem);
+    pSeneGraph->GetMap()->LoadUserMap(GetDataPath()+"/Earth/Geocentric.earth",false,true);
+}
+
 /// 更新信息
 void QAppGlobal::updateNotic(const QString &rInfo)
 {
+//    QString sInfo;
+//    sInfo = QTime::currentTime().toString("hh:mm:ss ") + rInfo;
     emit(notic(rInfo));
 }
 
@@ -116,25 +136,6 @@ void QAppGlobal::setData(CGlobalData *pData)
     }
 }
 
-
-#include <ISceneCore.h>
-#include <SceneGraph/ISceneGraphManager.h>
-#include <QDesktopServices>
-#include <QResource>
-#include <QUrl>
-#include <QDir>
-#include <QList>
-void QAppGlobal::openWord()
-{
-    QString str = GetDataPath().c_str() + QString("Config/Instructionbook.doc");
-    QDesktopServices::openUrl(QUrl::fromLocalFile(str));
-}
-void QAppGlobal::openVideo()
-{
-    QString str = GetDataPath().c_str() + QString("Config/Instructionvideo.mkv");
-    QDesktopServices::openUrl(QUrl::fromLocalFile(str));
-}
-
 QStringList QAppGlobal::openPath()
 {
     QDir *dir=new QDir(QString("%1/%2").arg(GetDataPath().c_str()).arg("Szy")); //文件夹
@@ -144,13 +145,29 @@ QStringList QAppGlobal::openPath()
     QFileInfoList fileInfoList = dir->entryInfoList(filter);
     delete dir;
     QStringList string_list;
-
     for(int i=0; i < fileInfoList.count(); i++)
     {
-        string_list.append(fileInfoList.at(i).absoluteFilePath());
+        string_list.append(fileInfoList.at(i).baseName());
     }
     return(string_list);
+    //    QDir *dir=new QDir(QString("%1/%2").arg(GetDataPath().c_str()).arg("Szy")); //文件夹
+    //    QStringList filter; //过滤
+    //    filter<<"*.szy";
+    //    dir->setNameFilters(filter);
+    //    QFileInfoList fileInfoList = dir->entryInfoList(filter);
+    //    delete dir;
+    //    QStringList string_list;
+    //     QMap<QString,QString> mapNameToTime;
+    //    QString fileName,fileTime;
+    //    for(int i=0; i < fileInfoList.count(); i++)
+    //    {
+    //        m_sReplayName=fileInfoList.at(i).baseName();
+    //        m_sReplayTime=fileInfoList.at(i).created().toString("yyyy-MM-dd HH:mm:ss");
+    //        string_list.append(m_sReplayName+m_sReplayTime);
+    //    }
+    //    return(string_list);
 }
+
 /// 设置osgItem
 void QAppGlobal::setOsgItem(QQuickItem *pOsgItem)
 {
@@ -159,8 +176,58 @@ void QAppGlobal::setOsgItem(QQuickItem *pOsgItem)
 
     m_pData->SetSeceneGraph(pSeneGraph);
 }
+
+QString QAppGlobal::copyFile(const QString &strImagePath, const QString &folderName)
+{
+    QFileInfo fileInfo(strImagePath);
+    QString name = folderName + "/" + fileInfo.fileName();
+    QFile::copy(strImagePath, GetDataPath().c_str() + name);
+    return name;
+}
+
+QStringList QAppGlobal::openHelp()
+{
+    QDir *dir=new QDir(QString("%1/%2").arg(GetDataPath().c_str()).arg("Help")); //文件夹
+    QStringList filter; //过滤
+    filter<<"*.chm"<<"*.doc"<<"*.docx"<<"*.mp4"<<"*.mkv";
+    dir->setNameFilters(filter);
+    QFileInfoList fileInfoList = dir->entryInfoList(filter);
+    delete dir;
+    QStringList string_list;
+    for(int i=0; i < fileInfoList.count(); i++)
+    {
+        string_list.append(fileInfoList.at(i).absoluteFilePath());
+    }
+    return(string_list);
+}
+
+void QAppGlobal::openFile(const QUrl &rReplayFile)
+{
+    //    QTextCodec *code = QTextCodec::codecForName("utf-8");
+    QString str = rReplayFile.toLocalFile().toLocal8Bit().data();/*GetDataPath().c_str() + QString("Help/")*/;
+    //    QString string = code->fromUnicode(str);
+    QDesktopServices::openUrl(QUrl::fromLocalFile(str));
+}
 ///
- void QAppGlobal::setOpenSpeak(bool bOpenSpeak)
- {
-     CNoticeManager::GetInstance()->OpenSpeak(bOpenSpeak);
- }
+void QAppGlobal::setOpenSpeak(bool bOpenSpeak)
+{
+    CNoticeManager::GetInstance()->OpenSpeak(bOpenSpeak);
+}
+
+void QAppGlobal::setGroupId(int typeID)
+{
+    auto type=m_pData->GetOrCreatePersonStatus(typeID);
+    if(type->getType()=="蓝方")
+    {
+        m_typeColor=Qt::blue;
+    }
+    else if(type->getType()=="红方")
+    {
+        m_typeColor=Qt::red;
+    }
+    else
+    {
+        m_typeColor=Qt::white;
+    }
+    emit typeColorChanged();
+}

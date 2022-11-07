@@ -8,117 +8,117 @@
 
 class Config;
 /**
- * @brief Õû¸öÈí¼şµÄÅäÖÃĞÅÏ¢
+ * @brief æ•´ä¸ªè½¯ä»¶çš„é…ç½®ä¿¡æ¯
  */
 class CConfigInfo
 {
 public:
     /**
-     * @brief »ñÈ¡Î¨Ò»ÊµÀı
-     * @return ÅäÖÃº¯ÊıÖ¸Õë
+     * @brief è·å–å”¯ä¸€å®ä¾‹
+     * @return é…ç½®å‡½æ•°æŒ‡é’ˆ
      */
     static CConfigInfo* GetInstance();
 
     /**
-     * @brief »ñÈ¡´®¿ÚĞÅÏ¢
+     * @brief è·å–ä¸²å£ä¿¡æ¯
      * @return
      */
     QString& GetComName(){return(m_stComName);}
 
     /**
-     * @brief »ñÈ¡ÅĞ¶ÏµôÏßµÄ´ÎÊı
+     * @brief è·å–åˆ¤æ–­æ‰çº¿çš„æ¬¡æ•°
      * @return
      */
     int&  GetDroppedTimes(){return(m_nDroppedTimes);}
 
     /**
-     * @brief »ñÈ¡Í¬²½Ê±¼ä
+     * @brief è·å–åŒæ­¥æ—¶é—´
      * @return
      */
     int&  GetSynTimes(){return(m_nSynTimes);}
 
     /**
-     * @brief ¼ÆËãµôÏßÊ±¼ä
+     * @brief è®¡ç®—æ‰çº¿æ—¶é—´
      */
     void CalOfflineTime();
 
     /**
-     * @brief »ñÈ¡µôÏßÊ±¼ä
+     * @brief è·å–æ‰çº¿æ—¶é—´
      * @return
      */
     int GetOfflineTime();
 
     /**
-     * @brief »ñÈ¡ÖØ·¢´ÎÊı
+     * @brief è·å–é‡å‘æ¬¡æ•°
      * @return
      */
     int&  GetResendTimes(){return(m_nResendTimes);}
 
     /**
-     * @brief »ñÈ¡Ä¬ÈÏ×Óµ¯Êı
+     * @brief è·å–é»˜è®¤å­å¼¹æ•°
      * @return
      */
     int&  GetDefaultBullets(){return(m_nDefaultBullets);}
 
 
     /**
-     * @brief »ñÈ¡ÊÇ·ñÑİÏ°¿ªÊ¼
+     * @brief è·å–æ˜¯å¦æ¼”ä¹ å¼€å§‹
      * @return
      */
     bool& GetStart(){return(m_bStart);}
 
     /**
-     * @brief »ñÈ¡¿ªÊ¼ÈÕÆÚ
+     * @brief è·å–å¼€å§‹æ—¥æœŸ
      * @return
      */
     QDateTime& GetDateTime(){return(m_qStartDateTime);}
 
     /**
-     * @brief »ñÈ¡´ò»÷ÏßµÄÉ¾³ıÊ±¼ä
+     * @brief è·å–æ‰“å‡»çº¿çš„åˆ é™¤æ—¶é—´
      * @return
      */
     int& GetDelHitLineSecs(){return (m_nHitLineDelSec);}
 
     /**
-     * @brief »ñÈ¡ÏµÍ³ÖĞ´®¿ÚÃû×ÖÁĞ±í
+     * @brief è·å–ç³»ç»Ÿä¸­ä¸²å£åå­—åˆ—è¡¨
      * @return
      */
     QStringList GetComNameList();
 
     /**
-     * @brief ÊÇ·ñ¿ªÆô¶ÓÓÑÉËº¦
+     * @brief æ˜¯å¦å¼€å¯é˜Ÿå‹ä¼¤å®³
      * @return
      */
     bool&  IsAllowKillSelf(){return(m_bKillSelf);}
 
     /**
-     * @brief ÃüÖĞËÀÍöÊÇ·ñÓĞĞ§
+     * @brief å‘½ä¸­æ­»äº¡æ˜¯å¦æœ‰æ•ˆ
      * @return
      */
     bool&  CanHitDeath(){return(m_bCanHitDeath);}
 
     /**
-     * @brief »ñÈ¡IPµØÖ·
+     * @brief è·å–IPåœ°å€
      * @return
      */
     void SetIP(const QString& sIP);
     const std::string& GetIP();
 
     /**
-     * @brief »ñµÃ¶Ë¿ÚºÅ
+     * @brief è·å¾—ç«¯å£å·
      * @return
      */
     uint GetPort();
     void SetPort(uint nPort);
 
     /**
-     * @brief »ñÈ¡Í¨ĞÅÀàĞÍ
+     * @brief è·å–é€šä¿¡ç±»å‹
      * @return
      */
     int  GetConnectionType();
 
     /**
-     * @brief ÉèÖÃÃüÖĞµÃ·ÖÇé¿ö
+     * @brief è®¾ç½®å‘½ä¸­å¾—åˆ†æƒ…å†µ
      * @param nType
      * @return
      */
@@ -127,7 +127,7 @@ public:
     void SetHurtMark(int nIndex,int nValue);
 
     /**
-     * @brief ÉèÖÃÃüÖĞÉúÃüÖµËğÉËÇé¿ö
+     * @brief è®¾ç½®å‘½ä¸­ç”Ÿå‘½å€¼æŸä¼¤æƒ…å†µ
      * @param nType
      * @return
      */
@@ -137,56 +137,60 @@ public:
     void AllSetHitDamae();
 
     /**
-     * @brief »ñÈ¡ÀàĞÍ¶ÔÓ¦µÄÖĞÎÄÃû
+     * @brief è·å–ç±»å‹å¯¹åº”çš„ä¸­æ–‡å
      * @param nType
      * @return
      */
     const QString& GetBodyName(int nType);
 
     /**
-     * @brief ÅĞ¶ÏÊÇ·ñ´¦ÓÚ»Ø·Å×´Ì¬
+     * @brief åˆ¤æ–­æ˜¯å¦å¤„äºå›æ”¾çŠ¶æ€
      * @return
      */
     bool &GetIsReplay();
+
 private:
     /**
-     * @brief ½âÎöINIÎÄ¼ş
+     * @brief è§£æINIæ–‡ä»¶
      */
     void PraseIni();
+    void PraseXml();
 
     /**
-     * @brief ±£´æiniÎÄ¼ş
+     * @brief ä¿å­˜iniæ–‡ä»¶
      */
     void SaveIni();
 
-    /// ¹¹Ôìº¯Êı
+    /// æ„é€ å‡½æ•°
     CConfigInfo();
     ~CConfigInfo();
 
 private:
-    int     m_nDroppedTimes;   /// µ±¼¸´ÎÃ»ÓĞ»ñµÃĞÄÌøĞÅÏ¢£¬ÔòÈÏÎªµôÏß
-    int     m_nSynTimes;       /// Í¬²½Ê±¼ä
-    int     m_nResendTimes;    /// ÉèÖÃÖØ·¢´ÎÊı
-    int     m_nDefaultBullets; /// Ä¬ÈÏ×Óµ¯Êı
-    int     m_nHitLineDelSec;  /// É¾³ı´ò»÷ÏßµÄÊ±¼ä
-    int     m_nType;           /// ÀàĞÍ
-    int     m_nOfflineTime;    /// µôÏßÊ±¼ä
-    bool    m_bStart;          /// ÊÇ·ñ¿ªÊ¼ÑİÏ°
-    bool    m_bKillSelf;       /// ÊÇ·ñÔÊĞí¶ÓÓÑÉËº¦
-    bool    m_bCanHitDeath;    /// ÃüÖĞËÀÍöÈËÊÇ·ñµÃ·Ö
-    bool    m_bReplay;         /// ÊÇ·ñ´¦ÓÚÊı¾İ»Ø·Å×´Ì¬
-    std::string m_sFileName;   /// ±£´æÎÄ¼şÃû³Æ
+    int     m_nDroppedTimes;   /// å½“å‡ æ¬¡æ²¡æœ‰è·å¾—å¿ƒè·³ä¿¡æ¯ï¼Œåˆ™è®¤ä¸ºæ‰çº¿
+    int     m_nSynTimes;       /// åŒæ­¥æ—¶é—´
+    int     m_nResendTimes;    /// è®¾ç½®é‡å‘æ¬¡æ•°
+    int     m_nDefaultBullets; /// é»˜è®¤å­å¼¹æ•°
+    int     m_nHitLineDelSec;  /// åˆ é™¤æ‰“å‡»çº¿çš„æ—¶é—´
+    int     m_nType;           /// ç±»å‹
+    int     m_nOfflineTime;    /// æ‰çº¿æ—¶é—´
+    bool    m_bStart;          /// æ˜¯å¦å¼€å§‹æ¼”ä¹ 
+    bool    m_bKillSelf;       /// æ˜¯å¦å…è®¸é˜Ÿå‹ä¼¤å®³
+    bool    m_bCanHitDeath;    /// å‘½ä¸­æ­»äº¡äººæ˜¯å¦å¾—åˆ†
+    bool    m_bReplay;         /// æ˜¯å¦å¤„äºæ•°æ®å›æ”¾çŠ¶æ€
+    std::string m_sFileName;   /// ä¿å­˜æ–‡ä»¶åç§°
+
+    QMap<QString,QMap<quint16,QString>> m_mapAllInfo;
 
 
-    QString         m_stComName;      /// ´®¿ÚĞÅÏ¢
-    QDateTime       m_qStartDateTime; /// µã»÷¿ªÊ¼Ê±µÄÊ±¼ä
+    QString         m_stComName;      /// ä¸²å£ä¿¡æ¯
+    QDateTime       m_qStartDateTime; /// ç‚¹å‡»å¼€å§‹æ—¶çš„æ—¶é—´
 
-    QHostAddress            m_addrTcp;     /// IP µØÖ·
-    ushort                  m_unPort;      /// °ó¶¨¶Ë¿ÚºÅ
+    QHostAddress            m_addrTcp;     /// IP åœ°å€
+    ushort                  m_unPort;      /// ç»‘å®šç«¯å£å·
 
-    Config*          m_pConfig;       /// Á¬½ÓĞÅÏ¢
-    QVector<int>     m_vHurtMark;          /// µÃ·ÖÇé¿ö
-    QVector<int>     m_vHitDamea;          /// ÉËº¦Öµ
+    Config*          m_pConfig;       /// è¿æ¥ä¿¡æ¯
+    QVector<int>     m_vHurtMark;          /// å¾—åˆ†æƒ…å†µ
+    QVector<int>     m_vHitDamea;          /// ä¼¤å®³å€¼
 };
 
 #endif // CCONFIGINFO_H

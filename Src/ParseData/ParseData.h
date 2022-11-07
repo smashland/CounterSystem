@@ -3,7 +3,7 @@
 
 #include "../CommonTypeDefine.h"
 /**
- * @brief ½âÎöÊı¾İ»ùÀà
+ * @brief è§£ææ•°æ®åŸºç±»
  */
 
 #include <QByteArray>
@@ -16,153 +16,153 @@ public:
     virtual ~CParseData();
 
     /**
-     * @brief ½âÎöÊı¾İ
+     * @brief è§£ææ•°æ®
      * @param rArray
      * @return
      */
     virtual bool ParseData(const QByteArray&);
 
     /**
-     * @brief ¸üĞÂÊ±¼ä
+     * @brief æ›´æ–°æ—¶é—´
      */
     virtual void UpdateSeconds(const quint16& unSeconds);
 
     /**
-     * @brief Çå¿ÕÔİ´æ×´Ì¬
+     * @brief æ¸…ç©ºæš‚å­˜çŠ¶æ€
      */
     virtual void Clear(){}
 
     /**
-     * @brief Í¬²½Ê±¼ä
+     * @brief åŒæ­¥æ—¶é—´
      */
     virtual void AllSycTime(quint16){}
     virtual void PersonalSycTime(quint16,quint16){}
 
     /**
-     * @brief ÑİÏ°¿ªÊ¼
+     * @brief æ¼”ä¹ å¼€å§‹
      */
     virtual void AllStart();
     virtual void SetStart(quint16){}
 
     /**
-     * @brief ÑİÏ°½áÊø
+     * @brief æ¼”ä¹ ç»“æŸ
      */
     virtual void AllStop();
     virtual void SetStop(quint16){}
 
     /**
-     * @brief ÅĞËÀ
+     * @brief åˆ¤æ­»
      * @param unID
      */
     virtual void PersonalPanSi(quint16){}
 
     /**
-     * @brief ¸´»î
+     * @brief å¤æ´»
      * @param unID
      */
     virtual void PersonalFuHuo(quint16){}
 
     /**
-     * @brief ËğÉË±ÈÀıÖµ
+     * @brief æŸä¼¤æ¯”ä¾‹å€¼
      */
     virtual void Damage(const QVariant&){}
 
     /**
-     * @brief ±ÕËøËùÓĞÈËµÄËùÓĞÇ¹
-     * @brief ±ÕËøËùÓĞÈËµÄÄ³ÀàÇ¹
+     * @brief é—­é”æ‰€æœ‰äººçš„æ‰€æœ‰æª
+     * @brief é—­é”æ‰€æœ‰äººçš„æŸç±»æª
      */
     virtual void AllBiSuo(){}
     virtual void AllBiSuo(const QVariant&){}
 
     /**
-     * @brief ±ÕËøÄ³¸öÈËµÄËùÓĞÇ¹
-     * @brief ±ÕËøÄ³¸öÈËµÄÄ³Ğ©Ç¹
+     * @brief é—­é”æŸä¸ªäººçš„æ‰€æœ‰æª
+     * @brief é—­é”æŸä¸ªäººçš„æŸäº›æª
      * @param unID
      */
     virtual void PersonalBiSuo(quint16){}
     virtual void PersonalBiSuo(quint16 ,const QVariant&){}
 
     /**
-     * @brief ½âËøËùÓĞÈËµÄËùÓĞÇ¹
-     * @brief ½âËøËùÓĞÈËµÄÄ³Ğ©Ç¹
+     * @brief è§£é”æ‰€æœ‰äººçš„æ‰€æœ‰æª
+     * @brief è§£é”æ‰€æœ‰äººçš„æŸäº›æª
      */
     virtual void AllJieSuo(){}
     virtual void AllJieSuo(const QVariant&){}
 
     /**
-     * @brief ½âËøÄ³¸öÈËµÄËùÓĞÇ¹
-     * @brief ½âËøÄ³¸öÈËµÄÄ³Ğ©Ç¹
+     * @brief è§£é”æŸä¸ªäººçš„æ‰€æœ‰æª
+     * @brief è§£é”æŸä¸ªäººçš„æŸäº›æª
      * @param unID
      */
     virtual void PersonalJieSuo(quint16 ){}
     virtual void PersonalJieSuo(quint16 ,const QVariant& ){}
 
     /**
-     * @brief ¸øËùÓĞµÄÈË³äµ¯
+     * @brief ç»™æ‰€æœ‰çš„äººå……å¼¹
      */
     virtual void AllChongDan(const QVariant&){}
     virtual void PersonalChongDan(quint16,const QVariant&){}
 
     /**
-     * @brief ÃüÖĞÌáÊ¾
+     * @brief å‘½ä¸­æç¤º
      * @param unID
      * @param hitInfo
      */
     virtual void HitNotice(quint16,const QVariant&){}
 
     /**
-     * @brief ½â³ıÅÔ°×
+     * @brief è§£é™¤æ—ç™½
      */
     virtual void AllPangBai(){}
 
     /**
-     * @brief ·ÂÕæÊ±¼ä
+     * @brief ä»¿çœŸæ—¶é—´
      */
     virtual void AllSetSimTime(quint16){}
     virtual void PersonSimTime(quint16,quint16){}
 
     /**
-     * @brief ÅäÇ¹
+     * @brief é…æª
      */
     virtual void AllPeiQiang(const QVariant&){}
     virtual void PersonalPeiQiang(quint16,const QVariant&){}
 
     /**
-     * @brief Ê±¼äĞ£×¼
+     * @brief æ—¶é—´æ ¡å‡†
      */
     virtual void CalibrationCharge(quint16){}
 
     /**
-     * @brief ¿ªÆôµÚÈıÕßÄ£Ê½
+     * @brief å¼€å¯ç¬¬ä¸‰è€…æ¨¡å¼
      */
     virtual void Open3rd(){}
     virtual void Close3rd(){}
 
     /**
-     * @brief ²éÑ¯ËùÓĞµÄ×´Ì¬
+     * @brief æŸ¥è¯¢æ‰€æœ‰çš„çŠ¶æ€
      */
     virtual void QueryAll(){}
 
 protected:
     /**
-     * @brief ³õÊ¼»¯×´Ì¬
+     * @brief åˆå§‹åŒ–çŠ¶æ€
      */
     void InitState();
 
 protected:
-    static uint C_BUFFER_LENGTH;  /// Ä¬ÈÏ»º´æ´óĞ¡
-    bool    m_bBegin;       /// ÊÇ·ñÒÑ¾­¿ªÊ¼
-    quint16 m_unSeconds;   /// µ±Ç°µÄÃëÊı
-    quint16 m_unID;        /// µ±Ç°Î»ÖÃ
+    static uint C_BUFFER_LENGTH;  /// é»˜è®¤ç¼“å­˜å¤§å°
+    bool    m_bBegin;       /// æ˜¯å¦å·²ç»å¼€å§‹
+    quint16 m_unSeconds;   /// å½“å‰çš„ç§’æ•°
+    quint16 m_unID;        /// å½“å‰ä½ç½®
 
-    uchar* m_pBuffer;      /// »º´æÊı¾İ³¤¶È
-    int   m_nDataLength;  /// Êı¾İ³¤¶È
-    int   m_nDataGet;     /// µ±Ç°»ñÈ¡µ½µÄÊı¾İ
-    int   m_nNowLength;   /// ¶ÁÈ¡Êı¾İ³¤¶È
+    uchar* m_pBuffer;      /// ç¼“å­˜æ•°æ®é•¿åº¦
+    int   m_nDataLength;  /// æ•°æ®é•¿åº¦
+    int   m_nDataGet;     /// å½“å‰è·å–åˆ°çš„æ•°æ®
+    int   m_nNowLength;   /// è¯»å–æ•°æ®é•¿åº¦
 
-    uchar m_ucType;  /// ÃüÁîÀàĞÍ
-    stAddr m_stAddr; /// Éè±¸µØÖ·
-    QVariant m_vaInfo; /// ĞèÒªÉèÖÃµÄĞÅÏ¢
+    uchar m_ucType;  /// å‘½ä»¤ç±»å‹
+    stAddr m_stAddr; /// è®¾å¤‡åœ°å€
+    QVariant m_vaInfo; /// éœ€è¦è®¾ç½®çš„ä¿¡æ¯
 };
 
 #endif // PARSEDATA_H

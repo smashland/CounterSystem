@@ -5,6 +5,7 @@ DropArea
 {
     id:root
     property alias type: group.groupType
+    property alias source: zhenyingtu.source
 
     width: 340 *dpx
     height: Screen.desktopAvailableHeight*0.4
@@ -13,8 +14,17 @@ DropArea
     {
         width=340 *dpx
     }
-
-
+    MouseArea {
+        anchors.fill: parent
+        onWheel: {
+            // 屏蔽滚轮事件，防止滚动方案列表时缩放地球
+        }
+    }
+    Image {
+        id:zhenyingtu
+        anchors.fill: parent
+//        source: "qrc:/Image/Grey_bg_all.png"
+    }
 
     GroupInfo
     {

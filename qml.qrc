@@ -73,11 +73,8 @@
         <file>Image/icon/zanting.svg</file>
         <file>Image/icon/zanting1.svg</file>
         <file>Image/icon/zhankai.svg</file>
-        <file>Login/PopupDef.qml</file>
-        <file>Login/PopupWin.qml</file>
         <file>Login/Connect.qml</file>
         <file>Common/NavImage.qml</file>
-        <file>Exercise/SoldierItem.qml</file>
         <file>Common/PopupButton.qml</file>
         <file>Common/CloseButton.qml</file>
         <file>Exercise/Manoeuvre.qml</file>
@@ -91,12 +88,8 @@
         <file>Manage/SetLoader.qml</file>
         <file>Common/SwitchButton.qml</file>
         <file>Common/ViewButton.qml</file>
-        <file>Manage/ScenarioPopup.qml</file>
-        <file>Manage/ScenarioRevise.qml</file>
-        <file>Manage/ScenarioRemove.qml</file>
-        <file>Manage/PlaybackRefresh.qml</file>
+        <file>Manage/ScePopup.qml</file>
         <file>OsgWindow.qml</file>
-        <file>Manage/Progressbar.qml</file>
         <file>Exercise/CloseBar.qml</file>
         <file>Exercise/CloseBarFull.qml</file>
         <file>Exercise/Kill.qml</file>
@@ -104,25 +97,15 @@
         <file>Exercise/ExerciseResults.qml</file>
         <file>Common/PopupTitle.qml</file>
         <file>font/iconfont.ttf</file>
-        <file>Common/TransverseLine.qml</file>
         <file>Exercise/RedChart.qml</file>
-        <file>ShowItem.qml</file>
-        <file>SelectWifi.qml</file>
-        <file>SelectComName.qml</file>
         <file>Setting/ChongDan.qml</file>
-        <file>Setting/ConnectSetting.qml</file>
-        <file>Setting/Setting.qml</file>
         <file>RePlay/ContrlRePlay.qml</file>
         <file>Status/BoardNotice.qml</file>
         <file>Status/EquipConnStat.qml</file>
         <file>Status/GroupDropArea.qml</file>
         <file>Status/GroupInfo.qml</file>
         <file>Status/PersonAllInfo.qml</file>
-        <file>Status/PersonBackHurtInfo.qml</file>
-        <file>Status/PersonFontHurtInfo.qml</file>
-        <file>Status/PersonInfoLabel.qml</file>
         <file>Status/PersonStatus.qml</file>
-        <file>ConfirmPopUp.qml</file>
         <file>MainWindow.qml</file>
         <file>Manage/BasicGroupBox.qml</file>
         <file>Manage/BasicSpinBox.qml</file>
@@ -141,10 +124,38 @@
         <file>Image/wuqi/toukui.png</file>
         <file>Common/MenuBackground.qml</file>
         <file>Image/Start_bg.png</file>
-        <file>Exercise/BeginButton.qml</file>
-        <file>Exercise/FinishButton.qml</file>
         <file>Exercise/ExerciseItem.qml</file>
-        <file>Setting/ChongdanItem.qml</file>
         <file>Manage/SetMapLoader.qml</file>
+        <file>Common/RemoveDialog.qml</file>
+        <file>Manage/PersonAdd.qml</file>
+        <file>Image/true.png</file>
+        <file>Manage/HelpAdd.qml</file>
+        <file>Common/TextListItem.qml</file>
+        <file>Common/SearchItem.qml</file>
+        <file>Manage/MapAdd.qml</file>
+        <file>Manage/Plugins/ListHeader.qml</file>
+        <file>Manage/Plugins/ManageRect.qml</file>
+        <file>Manage/Plugins/ScePlayList.qml</file>
+        <file>Manage/Plugins/SceNewList.qml</file>
+        <file>Manage/Plugins/SceNewText.qml</file>
+        <file>Manage/Plugins/NewPerson.qml</file>
+        <file>Manage/Plugins/InputItem.qml</file>
+        <file>Manage/Plugins/TextItem.qml</file>
+        <file>Manage/Plugins/ComboBoxItem.qml</file>
+        <file>Manage/SetNet.qml</file>
+        <file>Manage/Plugins/TextFieldItem.qml</file>
+        <file>Manage/Plugins/CheckBoxItem.qml</file>
+        <file>Exercise/Plugins/ControlButtons.qml</file>
+        <file>Exercise/Plugins/TimeText.qml</file>
+        <file>Exercise/Plugins/CampHidden.qml</file>
+        <file>Exercise/Plugins/ToggleSettings.qml</file>
+        <file>Login/LoginImage.qml</file>
+        <file>Status/Plugins/PersonText.qml</file>
+        <file>Manage/Plugins/MapHelpList.qml</file>
+        <file>Login/LoginComboBox.qml</file>
+        <file>Login/LoginTextField.qml</file>
+        <file>Common/SoldierItem2.qml</file>
+        <file>Common/SoldierItem.qml</file>
+        <file>Manage/Plugins/DelegateRectangle.qml</file>
     </qresource>
 </RCC>

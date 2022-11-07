@@ -73,20 +73,24 @@ public:
     const QString& GetError(){return(m_sLastError);}
 
     void ClearData();
-
 signals:
     void conected();
     void disConnected();
 
+protected:
+    void timerEvent(QTimerEvent *event);
+
 private:
     CConnectionManager();
     ~CConnectionManager();
-
+protected slots:
+    void connectionLost();
 private:
 
     QString            m_sLastError;     /// 最后一个错误信息
     CConnection*       m_pConnection;    /// 默认的连接
-    CONN_TYPE            m_emType;        /// 当前连接的 类型
+    CONN_TYPE          m_emType;        /// 当前连接的 类型
+    int                m_nTimerID{-1};
 };
 
 #endif // CONNECTIONMANAGER_H

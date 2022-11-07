@@ -26,34 +26,21 @@ QJudgeLicense::QJudgeLicense(QQuickItem *parent)
 /// 析构
 QJudgeLicense::~QJudgeLicense()
 {
-    int n=0;
-    ++n;
 }
 ///判断文件是否存在
 bool QJudgeLicense::isFileExist()
 {
-    QFileInfo fileInfo(QGuiApplication::applicationDirPath() + "/lic");
-    if(fileInfo.isFile())
+    if(QFileInfo::exists(QGuiApplication::applicationDirPath() + "/lic"))
     {
         return true;
     }
+
     return false;
 }
-void QJudgeLicense::deleteFile()
-{
-    QFile file(QGuiApplication::applicationDirPath() + "/lic");
-    if (file.exists()) {
-        file.remove();
-    }
-}
+
 /// 检查是否有许可
 void QJudgeLicense::checkLicense()
 {
-    if(!m_bGet)
-    {
-        getMachineInfo();
-    }
-
     if(m_sLicInfo.size() < 1)
     {
         m_sErrorInfo = S_LIC_NONE;
@@ -63,12 +50,10 @@ void QJudgeLicense::checkLicense()
     {
         if(!checkLicense(m_sLicInfo))
         {
-           qDebug()<<"测试1111111111错误";
            emit(showError(m_sErrorInfo));
         }
         else
         {
-            qDebug()<<"测试1111111111正常";
             emit(checked());
         }
     }
@@ -77,29 +62,16 @@ void QJudgeLicense::checkLicense()
 
 void QJudgeLicense::saveLicense(const QByteArray &sLicInfo)
 {
-//    if(!m_bGet)
-//    {
-//        getMachineInfo();
-//    }
-
-    if(!checkLicense(sLicInfo))
+    QFile licFile(QGuiApplication::applicationDirPath() + "/lic");
+    if(licFile.open(QIODevice::WriteOnly|QIODevice::Text))
     {
-        emit(showError(m_sErrorInfo));
+        licFile.write(sLicInfo);
+        m_sLicInfo = sLicInfo;
+        licFile.close();
     }
     else
     {
-        QFile licFile(QGuiApplication::applicationDirPath() + "/lic");
-        if(licFile.open(QIODevice::WriteOnly|QIODevice::Text))
-        {
-            licFile.write(sLicInfo);
-            m_sLicInfo = sLicInfo;
-            emit(checked());
-        }
-        else
-        {
-            m_sErrorInfo = S_CANT_WRITE;
-            emit(showError(m_sErrorInfo));
-        }
+        m_sErrorInfo = S_CANT_WRITE;
     }
 }
 
@@ -143,7 +115,8 @@ QString QJudgeLicense::read()
 {
     QString content;
     QFile file(QGuiApplication::applicationDirPath() + "/lic");
-    if ( file.open(QIODevice::ReadOnly) ) {
+    if ( file.open(QIODevice::ReadOnly) )
+    {
         content = file.readAll();
         file.close();
     }
@@ -159,7 +132,13 @@ bool QJudgeLicense::checkLicense(const QByteArray& sLicInfo)
     if(14 != array.length())
     {
         m_sErrorInfo = S_INVALID_MACHINE;
+        emit(showError(m_sErrorInfo));
         return(false);
+    }
+
+    if(!m_bGet)
+    {
+        getMachineInfo();
     }
 
     quint16 unCRC = CRC16RTU(reinterpret_cast<const uchar*>(m_sMachineInfo.c_str()),m_sMachineInfo.length());
@@ -184,13 +163,13 @@ bool QJudgeLicense::checkLicense(const QByteArray& sLicInfo)
         case 0:   /// 长期有效
             nLicDays = _I64_MAX;
             break;
-        case 1:   /// 年
+        case 3:   /// 年
             nLicDays = static_cast<int>(*reinterpret_cast<const uchar*>(pBuffer) * 365.25);
             break;
         case 2:   /// 月
             nLicDays = *reinterpret_cast<const uchar*>(pBuffer) * 30;
             break;
-        case 3:   /// 日
+        case 1:   /// 日
             nLicDays = *reinterpret_cast<const uchar*>(pBuffer);
             break;
         default:

@@ -1,7 +1,7 @@
 #ifndef _INTERFACE_DATA_MANAGER_OBSERVER_H_
 #define _INTERFACE_DATA_MANAGER_OBSERVER_H_
 /*****************************************************
- *  Êı¾İ¹ÜÀíÀà¹Û²ìÕß
+ *  æ•°æ®ç®¡ç†ç±»è§‚å¯Ÿè€…
  *****************************************************/
 #include "../CommonTypeDefine.h"
 
@@ -11,13 +11,13 @@ public:
     virtual ~IDataManagerObserver(){}
 
     /**
-     * @brief Í¨ÖªÓÃ»§ĞÅÏ¢¸ü¸Ä
+     * @brief é€šçŸ¥ç”¨æˆ·ä¿¡æ¯æ›´æ”¹
      * @param unID
      */
     virtual void UpdateID(quint16){}
 
     /**
-     * @brief ¸üĞÂÃüÖĞÊÂ¼ş
+     * @brief æ›´æ–°å‘½ä¸­äº‹ä»¶
      */
     virtual void UpdateEvent(quint16){}
 };

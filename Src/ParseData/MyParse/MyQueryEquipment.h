@@ -9,20 +9,20 @@ public:
     CMyQueryEquipment();
 
     /**
-     * @brief ÉèÖÃID
+     * @brief è®¾ç½®ID
      * @param crAddr
      */
     void SetPerson(PersonInfo* pPerson);
 
     /**
-     * @brief ¸üĞÂ×´Ì¬ĞÅÏ¢
+     * @brief æ›´æ–°çŠ¶æ€ä¿¡æ¯
      * @param pData
      * @param nLength
      */
     void Update(const unsigned char* pData, int nLength);
 
     /**
-     * @brief ²éÑ¯ËùÓĞµÄ×´Ì¬
+     * @brief æŸ¥è¯¢æ‰€æœ‰çš„çŠ¶æ€
      */
     void QueryAll();
 private:

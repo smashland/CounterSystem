@@ -1,63 +1,116 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
+import MyItem 1.0
+import QtQuick.Dialogs 1.3
 import Qt.labs.platform 1.1
+import Qt.labs.qmlmodels 1.0
+import "../Common"
+import "../Exercise"
+import "Plugins"
 
-Grid {
-    columns: 3
-    spacing: 3
-    Repeater
-    {
-        model: 9
-        Column {
-            spacing: 3
-            Rectangle {
-                width: 230
-                height: 145
-                border.color: "white"
-                color: "transparent"
-                Image {
-                    anchors.fill: parent
-                    source: fileDialog.fileUrl
-                }
-                MouseArea{
-                    anchors.fill: parent
-                    onClicked: {
-                        fileDialog.visible = true
-                    }
+Rectangle {
+    id: setMapLoade
+    width: 710 *dpx
+    height: 510 *dpy
+    color: "transparent"
+
+    Connections{
+        function onSignalAddMap(name,path,lat,lon)
+        {
+            var earth = earthManager.addMaps(name);
+            if(null!==earth)
+            {
+                earth.earthName = name;
+                earth.earthPath = path;
+                earth.nLat = lat;
+                earth.nLon = lon;
+                listView.model=earthManager.earthList
+            }
+            else{
+                console.log("地图名称重复")
+
+            }
+        }
+        target: mapAdd
+    }
+
+    MapHelpList{
+        id: listView
+        width: 710 *dpx
+        height: 510 *dpy
+        model:earthManager.earthList
+        delegate: DelegateRectangle {
+            id: wrapper
+
+            TextListItem {
+                id: fileName
+                text: modelData.earthName
+                anchors.centerIn: parent
+            }
+            MouseArea {
+                anchors.fill: parent
+                hoverEnabled: true
+                onClicked: {
+                    earthManager.praseEarthXml(modelData.earthPath)
+                    $app.changeEarth(modelData.earthPath)
+                    earthManager.saveCurrentEarth(modelData.earthName,modelData.nLat,modelData.nLon);
+                    earthManager.praseCurrentEarth();
                 }
             }
-            Rectangle {
-                width: 230
-                height: 20
-                border.color: "white"
-                color: "transparent"
-                TextInput {
-                    anchors.fill: parent
-                    font.pixelSize: 14*dpx
-                    color: "#d5e2f5"
-                    clip: true
-                    text: "地图" + index
-                    selectByMouse: true
-                    selectionColor: "#00aefd"
-                    font.family: "Microsoft YaHei"
-                    verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: Text.AlignHCenter
+        }
 
-                }
+    }
+
+    property var mapValue:{0:0}
+    property var component;
+    function openQml(obj) {
+        component = Qt.createComponent("MapAdd.qml");
+        if (component.status === Component.Ready) {
+            var qmlObj = component.createObject(setMapLoade,{map:obj});
+            if (qmlObj !== null) {
+                mapValue[obj] = qmlObj;
+                return(qmlObj);
             }
+        } else {
+            component.destroy();
+            return(null);
         }
     }
-    FileDialog {
-        id: fileDialog
-        folder: shortcuts.home
-        onAccepted: {
-            source: fileDialog.fileUrl
+
+    //    function finishQml(obj) {
+    //        if (component.status === Component.Ready) {
+    //            var qmlObj = component.createObject(setMapLoade,{map:obj});
+    //            if (qmlObj !== null) {
+    //                mapValue[obj] = qmlObj;
+    //                return(qmlObj);
+    //            }
+    //        }else {
+
+    //        }
+    //    }
+
+    property var mapName:fileName.text
+
+    MapAdd {
+        id: mapAdd
+        width: 600*dpx
+        height: 430*dpy
+        //        anchors.centerIn: parent
+        visible: false
+    }
+    PopupButton {
+        id:addMap
+        anchors.bottom: parent.bottom
+        x: 311*dpx
+        background: Rectangle {
+            color: "#265aef"
         }
-        onRejected: {
-            //                    console.log("Canceled")
+        nameButton: "添加"
+        onClicked: {
+            mapAdd.visible = true
+//            openQml(earthManager.addMaps(mapName),"MapAdd.qml")
         }
-        Component.onCompleted: visible = flase
     }
 
 }
-

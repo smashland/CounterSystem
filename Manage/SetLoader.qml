@@ -2,50 +2,37 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
-//import QtQuick.Controls 2.14 as QC14
+import QtQuick.Controls.Styles 1.2
+import QtQuick.Shapes 1.0
 import "../Common"
 import "../Exercise"
-import QtQuick.Controls.Styles 1.2
+import "Plugins"
+import "../Setting"
+import "../Login"
 
-Rectangle {
+ManageRect{
     id: setloader
-    anchors.fill: parent
-    color: "transparent"
+    rectWidth: 1102 *dpx
+    rectHeight: 680 *dpy
+    rectImage: "qrc:/Image/Popup_bg_27.png"
 
-    Item {
-        id: backgroundItem
-        width: 1102 *dpx
-        height: 680 *dpy
-        anchors.centerIn: parent
-        MouseArea {
-            anchors.fill: parent
-            onWheel: {
-                // 屏蔽滚轮事件，防止滚动方案列表时缩放地球
-            }
-        }
-        Image {
-            id: loginImage
-            anchors.fill: parent
-            source: "qrc:/Image/Popup_bg_20.png"
-        }
-        CloseButton {
-            anchors.right: backgroundItem.right
-            anchors.rightMargin: 60 *dpx
-            anchors.top: backgroundItem.top
-            anchors.topMargin: 60 *dpy
-            onClicked: footerBar.btnSet.checked = false
-        }
+    CloseButton {
+        anchors.right: setloader.right
+        anchors.rightMargin: 65 *dpx
+        anchors.top: setloader.top
+        anchors.topMargin: 58 *dpy
+        onClicked: footerBar.btnSet.checked = false
+    }
 
-        PopupTitle {
-            name: ("击杀情况")
-            icon: "\ue795"
-        }
-        TransverseLine {
-            x: 80 *dpx
-            y: 95*dpy
-        }
+    PopupTitle {
+        name: ("设置管理")
+        icon: "\ue795"
+        x: 74*dpx
+        y: 54*dpy
+    }
 
     Rectangle {
+        id: xuanzeButton
         x: 80*dpx
         y: 110*dpy
         width: 190*dpx
@@ -56,7 +43,7 @@ Rectangle {
         }
         Column {
             id:columnEditBtns
-    //        anchors.verticalCenter: parent.verticalCenter
+            //        anchors.verticalCenter: parent.verticalCenter
             spacing:  0*dpx
             SwitchButton{
                 id: name_text
@@ -66,6 +53,7 @@ Rectangle {
                     harmGroupBox.visible=true
                     systemGroupBox.visible=true
                     setMapLoader.visible = false
+                    setNet.visible = false
                 }
             }
             SwitchButton{
@@ -76,6 +64,7 @@ Rectangle {
                     harmGroupBox.visible=false
                     systemGroupBox.visible=false
                     setMapLoader.visible = true
+                    setNet.visible = false
                 }
 
             }
@@ -87,6 +76,19 @@ Rectangle {
                     systemGroupBox.visible=false
                     scoreGroupBox.visible=true
                     setMapLoader.visible = false
+                    setNet.visible = false
+                }
+
+            }
+            SwitchButton {
+                id: yunxing_text
+                text: qsTr("连接设置")
+                onClicked: {
+                    harmGroupBox.visible=false
+                    systemGroupBox.visible=false
+                    scoreGroupBox.visible=false
+                    setMapLoader.visible = false
+                    setNet.visible = true
                 }
 
             }
@@ -94,131 +96,131 @@ Rectangle {
         }
     }
 
-
-//    QC14.GroupBox
-    BasicGroupBox
-    {
-        id: scoreGroupBox
+    Rectangle {
+        id: set
+        x: 320*dpx
         y: 100*dpy
-        title: qsTr("命中计分:")
-        ListView
+        width:710*dpx
+        height: 530*dpy
+        color: "transparent"
+        clip: true
+        BasicGroupBox
         {
-            property var name: "score"
-            clip: true
-            id: scoreList
-            anchors.leftMargin: 60
-            anchors.topMargin: 20
-            anchors.fill: parent
-            delegate: contactDelegate
-            model:$app.settings.scoreSetting
-        }
-
-    }
-
-//    QC14.GroupBox
-    BasicGroupBox
-    {
-        id: harmGroupBox
-        y: 100*dpy
-        title: qsTr("损伤设置:")
-        ListView
-        {
-            property var name: "harm"
-            id: harmList
-            anchors.leftMargin: 60
-            anchors.topMargin: 20
-            anchors.fill: parent
-            delegate: contactDelegate
-            model:$app.settings.harmSetting
-            clip: true
-        }
-
-    }
-
-//    QC14.GroupBox
-    BasicGroupBox
-    {
-        id: systemGroupBox
-        anchors.top: harmGroupBox.bottom
-        anchors.topMargin: 20
-        title: qsTr("系统设置:")
-
-        ListView
-        {
-            property var name: "sys"
-            id: systemList
-            anchors.leftMargin: 60
-            anchors.topMargin: 20
-            anchors.fill: parent
-            delegate: contactDelegate
-            model:$app.settings.systemSetting
-            clip: true
-        }
-        CheckBox {
-            id: voiceControl
-            x:55*dpx
-            y:150*dpy
-            text: qsTr(" 开启语音")
-            font.pixelSize: 20
-            checked:$app.setOpenSpeak
-            contentItem: Text {
-                text: voiceControl.text
-                font: voiceControl.font
-                opacity: enabled ? 1.0 : 0.3
-                color:"white"
-                verticalAlignment: Text.AlignVCenter
-                leftPadding: voiceControl.indicator.width + voiceControl.spacing
-            }
-
-            onClicked: {
-
-                if(voiceControl.checked)
-                {
-                    $app.setOpenSpeak(true);
-
-                }
-                else
-                {
-                    $app.setOpenSpeak(false);
-                }
-
-            }
-        }
-    }
-
-    Component
-    {
-        id: contactDelegate
-        Item
-        {
-            id:showListItem
-            width:100 ; height: 30
-            RowLayout
+            id: scoreGroupBox
+            y:15*dpy
+            title: qsTr("命中计分:")
+            ListView
             {
-                Text { Layout.preferredWidth: 120;text:modelData.type ;font.pixelSize: 20*dpx;color: "#ffffff"}
+                property var name: "score"
+                clip: true
+                id: scoreList
+                anchors.leftMargin: 60*dpx
+                anchors.topMargin: 20*dpy
+                anchors.fill: parent
+                delegate: contactDelegate
+                model:$app.settings.scoreSetting
+            }
 
-//                QC14.SpinBox
-                BasicSpinBox
-                {
-                    value:modelData.number;
-                    from: 1
-                    to: modelData.type === "默认子弹数:" ? 9999 : 100
-                    editable: true
-                    borderVisible: true
+        }
+
+        //    QC14.GroupBox
+        BasicGroupBox
+        {
+            id: harmGroupBox
+            y:15*dpy
+            title: qsTr("损伤设置:")
+            ListView
+            {
+                property var name: "harm"
+                id: harmList
+                anchors.leftMargin: 60*dpx
+                anchors.topMargin: 20*dpy
+                anchors.fill: parent
+                delegate: contactDelegate
+                model:$app.settings.harmSetting
+                clip: true
+            }
+
+        }
+
+        //    QC14.GroupBox
+        BasicGroupBox
+        {
+            id: systemGroupBox
+            anchors.top: harmGroupBox.bottom
+            anchors.topMargin: 20*dpy
+            title: qsTr("系统设置:")
+
+            ListView
+            {
+                property var name: "sys"
+                id: systemList
+                anchors.leftMargin: 60*dpx
+                anchors.topMargin: 20*dpy
+                anchors.fill: parent
+                delegate: contactDelegate
+                model:$app.settings.systemSetting
+                clip: true
+            }
+
+            CheckBoxItem {
+                id:voiceControl
+                anchors.left: parent.left
+                anchors.leftMargin: 60*dpx
+                anchors.top: parent.top
+                anchors.topMargin: 150*dpy
+                name: qsTr("开启语音")
+                boolCheck:true
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        if(voiceControl.checked)
+                        {
+                            $app.setOpenSpeak(true);
+                        }
+                        else
+                        {
+                            $app.setOpenSpeak(false);
+                        }
+                    }
                 }
             }
         }
+
+        Component
+        {
+            id: contactDelegate
+            Item
+            {
+                id:showListItem
+                width:100 ; height: 30
+                RowLayout
+                {
+                    Text { Layout.preferredWidth: 120;text:modelData.type ;font.pixelSize: 20*dpx;color: "#ffffff"}
+
+                    //                QC14.SpinBox
+                    BasicSpinBox
+                    {
+                        value:modelData.number;
+                        from: 1
+                        to: modelData.type === "默认子弹数:" ? 9999 : 100
+                        editable: true
+                        borderVisible: true
+                    }
+                }
+            }
+        }
+
+        SetNet {
+            id:setNet
+            visible: false
+        }
+
+        SetMapLoader {
+            id: setMapLoader
+            visible: false
+        }
+
     }
-    SetMapLoader {
-        id: setMapLoader
-        x: 280
-        y: 120
-        visible: false
-    }
-
-  }
-
-
-
 
 }

@@ -4,13 +4,17 @@ import "Setting" as Settings
 import "Common"
 import "Login"
 import "Exercise"
+import "Exercise/Plugins"
 import "Manage"
 import "Status"
 import "RePlay" as MyRePlay
+import MyItem 1.0
 
 
 Rectangle
 {
+    property var modifySceInfo: null
+    property var newEarthInfo: null
     id: index
     anchors.fill: parent
     color: "transparent"
@@ -19,15 +23,12 @@ Rectangle
     {
         id:unGroup
         type:""
-        Image {
-            anchors.fill: parent
-            source: "qrc:/Image/Grey_bg_all.png"
-        }
+        source: "qrc:/Image/Grey_bg_all.png"
         height: 880 *dpy
         anchors.left: parent.left
         anchors.top: parent.top
-        anchors.leftMargin: 80
-        anchors.topMargin: 80
+        anchors.leftMargin: 80*dpx
+        anchors.topMargin: 80*dpy
         visible: !$app.settings.bIsStart&&!$app.settings.bIsReplay
     }
 
@@ -35,33 +36,25 @@ Rectangle
     {
         id:blue
         type:"蓝方"
-        Image {
-            anchors.fill: parent
-            source: "qrc:/Image/Blue_bg_all.png"
-        }
-
+        source: "qrc:/Image/Blue_bg_all.png"
         anchors.right: parent.right;
         anchors.top: parent.top
-        anchors.rightMargin: 80
-        anchors.topMargin: 80
+        anchors.rightMargin: 80*dpx
+        anchors.topMargin: 80*dpy
     }
 
     GroupDropArea
     {
         id:red
         type:"红方"
-        Image {
-            anchors.fill: parent
-            source: "qrc:/Image/Red_bg_all.png"
-        }
-
+        source: "qrc:/Image/Red_bg_all.png"
         anchors.right: ($app.settings.bIsStart || $app.settings.bIsReplay) ? undefined : parent.right
         anchors.top: ($app.settings.bIsStart || $app.settings.bIsReplay) ? parent.top : blue.bottom
         anchors.left: ($app.settings.bIsStart || $app.settings.bIsReplay) ? parent.left : undefined
 
-        anchors.leftMargin: 80
-        anchors.rightMargin: 80
-        anchors.topMargin: 80
+        anchors.leftMargin: 80*dpx
+        anchors.rightMargin: 80*dpx
+        anchors.topMargin: 80*dpy
     }
 
     Menu
@@ -70,33 +63,36 @@ Rectangle
         property int userID
         width: 100*dpx
         height: 240*dpy
+
         MenuBackground
         {
             name: "充弹"
             onTriggered:
             {
-                chongdan.nID=contextMenu.userID;
-                chongdan.open();
+                if(!$app.settings.bIsReplay)
+                {
+                    chongdan.nID=contextMenu.userID;
+                    chongdan.open();
+                }
             }
         }
-//        MenuItem { text: "配枪" ;onTriggered: { peiqiang.nID = contextMenu.userID;peiqiang.open();}}
-        MenuBackground { name: "闭锁" ;onTriggered:$app.settings.setBiSuo(contextMenu.userID)}
-        MenuBackground { name: "解锁" ;onTriggered:$app.settings.setJiesuoSuo(contextMenu.userID)}
-        MenuBackground { name: "解除旁白";onTriggered:$app.settings.setJieChu(contextMenu.userID) }
-        MenuBackground { name: "判死";onTriggered:$app.settings.setPanSi(contextMenu.userID)}
-        MenuBackground { name: "复活" ;onTriggered:{$app.settings.setFuHuo(contextMenu.userID)}}
+        //        MenuItem { text: "配枪" ;onTriggered: { peiqiang.nID = contextMenu.userID;peiqiang.open();}}
+        MenuBackground { name: "闭锁" ;onTriggered:if(!$app.settings.bIsReplay){$app.settings.setBiSuo(contextMenu.userID)}}
+        MenuBackground { name: "解锁" ;onTriggered:if(!$app.settings.bIsReplay){$app.settings.setJiesuoSuo(contextMenu.userID)}}
+        MenuBackground { name: "解除旁白";onTriggered:if(!$app.settings.bIsReplay){$app.settings.setJieChu(contextMenu.userID)} }
+        MenuBackground { name: "判死";onTriggered:if(!$app.settings.bIsReplay){$app.settings.setPanSi(contextMenu.userID)}}
+        MenuBackground { name: "复活" ;onTriggered:{if(!$app.settings.bIsReplay){$app.settings.setFuHuo(contextMenu.userID)}}}
         MenuBackground { name: "关机" }
-//        MenuItem { text: "同步时间";onTriggered:{sycntime.nID = contextMenu.userID;sycntime.open();}}
+        //        MenuItem { text: "同步时间";onTriggered:{sycntime.nID = contextMenu.userID;sycntime.open();}}
         MenuBackground { name: "定位";onTriggered:{$app.allData.dingWei(contextMenu.userID)}}
     }
-
     /// 充弹窗口
     Settings.ChongDan
     {
         anchors.centerIn: parent
         id:chongdan
-        width: 600
-        height: 500
+        width: 600*dpx
+        height: 470*dpy
     }
 
     Dialog
@@ -190,6 +186,7 @@ Rectangle
         x: (index.width-setloader.width) / 2
         y: (index.height-setloader.height) / 2
     }
+
     HelpLoader {
         id: helploader
         visible: footerBar.btnHelp.checked
@@ -208,41 +205,20 @@ Rectangle
         x: (index.width-scenarioNew.width) / 2
         y: (index.height-scenarioNew.height) / 2
     }
-    ScenarioPopup {
-        id: scenariopop
-        visible: false
-        x: (index.width-scenariopop.width) / 2
-        y: (index.height-scenariopop.height) / 2
-    }
+
     PlaybackLoader {
         id: playbackLoader
         visible: footerBar.btnPlayback.checked
         x: (index.width-playbackLoader.width) / 2
         y: (index.height-playbackLoader.height) / 2
     }
-    ScenarioRevise {
-        id: scenarioRevise
-        visible: false
-        x: (index.width-scenarioRevise.width) / 2
-        y: (index.height-scenarioRevise.height) / 2
-    }
-    PlaybackRefresh {
-        id: playbackRefresh
-        visible: false
-        x: (index.width-playbackRefresh.width) / 2
-        y: (index.height-playbackRefresh.height) / 2
-    }
-    ScenarioRemove {
-        id: scenarioRemove
-        visible: false
-        x: (index.width-scenarioRemove.width) / 2
-        y: (index.height-scenarioRemove.height) / 2
-    }
 
-//        Progressbar {
-//            id: progressbar
-//            visible: true
-//        }
+    ScePopup {
+        id: scePopup2
+        visible: false
+        anchors.centerIn: parent
+        text: "方案名称相同，请重新添加方案！"
+    }
         CloseBar {
             id: closebar
             visible: true
@@ -286,24 +262,10 @@ Rectangle
     {
         id:ctrReplay
         anchors.top: index.top
-//        anchors.left: index.left
-//        anchors.leftMargin: (index.width-ctrReplay.width)/2
+        //        anchors.left: index.left
+        //        anchors.leftMargin: (index.width-ctrReplay.width)/2
         visible: false
     }
-//    GroupInfoDisplay {
-//        id: groupInfoDisplay
-
-//        Drag.active: dragAreagroupInfoDisplay.drag.active
-//        Drag.hotSpot.x: 10
-//        Drag.hotSpot.y: 10
-
-//        MouseArea {
-//            id: dragAreagroupInfoDisplay
-//            anchors.fill: parent
-//            drag.target: parent
-//            propagateComposedEvents: true
-//        }
-//    }
 
     ResizeItem {
         id: resizeItem
@@ -312,6 +274,31 @@ Rectangle
         focus: true
         visible: false
     }
+
+    PersonAdd {
+        id: personAdd
+        anchors.centerIn: parent
+        visible: false
+    }
+    SceManager{
+        id:sceManager
+    }
+    EarthManager{
+        id:earthManager
+    }
+
+    RemoveDialog {
+        id: removeDialog_quit
+        visible: false
+        title:"退出"
+        content1: "此操作将退出程序，"
+        content2: "确认要退出吗？"
+        onYesPutDown: {
+            $app.exitApp();
+            Qt.quit()
+        }
+    }
+
 
 
 }

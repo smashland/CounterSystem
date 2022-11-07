@@ -15,42 +15,42 @@ public:
     ~CMyParseData();
 
     /**
-     * @brief ½âÎöÊı¾İ
+     * @brief è§£ææ•°æ®
      * @param rArray
      * @return
      */
     bool ParseData(const QByteArray &rArray);
 
     /**
-     * @brief ¸üĞÂ
+     * @brief æ›´æ–°
      * @param nSeconds
      */
     void UpdateSeconds(const quint16 &nSeconds);
 
     /**
-     * @brief ¸ù¾İÃüÁî½âÎöÊı¾İ
+     * @brief æ ¹æ®å‘½ä»¤è§£ææ•°æ®
      */
     void ParseData();
 
     /**
-     * @brief Çå¿ÕĞÅÏ¢
+     * @brief æ¸…ç©ºä¿¡æ¯
      */
     void Clear();
 
     /**
-     * @brief ÑİÏ°¿ªÊ¼
+     * @brief æ¼”ä¹ å¼€å§‹
      */
     void SetStart(quint16 unID);
     void AllStart();
 
     /**
-     * @brief ÑİÏ°½áÊø
+     * @brief æ¼”ä¹ ç»“æŸ
      */
     void SetStop(quint16 unID);
     void AllStop();
 
     /**
-     * @brief ±ÕËø
+     * @brief é—­é”
      */
     void AllBiSuo();
     void AllBiSuo(const QVariant &gunInfo);
@@ -58,7 +58,7 @@ public:
     void PersonalBiSuo(quint16 unID, const QVariant &gunInfo);
 
     /**
-     * @brief ½âËø
+     * @brief è§£é”
      */
     void AllJieSuo();
     void AllJieSuo(const QVariant &gunInfo);
@@ -67,19 +67,19 @@ public:
 
 
     /**
-     * @brief ÃüÖĞÌáÊ¾
+     * @brief å‘½ä¸­æç¤º
      * @param unID
      * @param hitInfo
      */
     void HitNotice(quint16 unID,const QVariant& hitInfo);
 
     /**
-     * @brief ½â³ıÅÔ°×
+     * @brief è§£é™¤æ—ç™½
      */
     void AllPangBai();
 
     /**
-     * @brief ÅĞËÀ¸´»î
+     * @brief åˆ¤æ­»å¤æ´»
      * @param unID
      */
     void PersonalPanSi(quint16 unID);
@@ -89,53 +89,53 @@ public:
     void PersonalChongDan(quint16 unID,const QVariant& rInfo);
 
     /**
-     * @brief ÅäÇ¹
+     * @brief é…æª
      * @param rInfo
      */
     void AllPeiQiang(const QVariant & rInfo);
     void PersonalPeiQiang(quint16 unID, const QVariant& rInfo);
 
     /**
-     * @brief Í¬²½Ê±¼ä
+     * @brief åŒæ­¥æ—¶é—´
      */
     void AllSycTime(quint16);
     void PersonalSycTime(quint16 unID, quint16 unTime);
 
     /**
-     * @brief ÉèÖÃ·ÂÕæÊ±¼ä
+     * @brief è®¾ç½®ä»¿çœŸæ—¶é—´
      */
     void AllSetSimTime(quint16);
     void PersonSimTime(quint16, quint16);
 
     /**
-     * @brief Ğ£×¼µçÁ¿
+     * @brief æ ¡å‡†ç”µé‡
      */
     void CalibrationCharge(quint16 unID);
 
     /**
-     * @brief ¿ªÆô/¹Ø±ÕµÚÈıÕßÄ£Ê½
+     * @brief å¼€å¯/å…³é—­ç¬¬ä¸‰è€…æ¨¡å¼
      */
     void Open3rd();
     void Close3rd();
 
     /**
-     * @brief ËğÉË±ÈÀıÖµ
+     * @brief æŸä¼¤æ¯”ä¾‹å€¼
      * @param rInfo
      */
     void Damage(const QVariant& rInfo);
 
     /**
-     * @brief ²éÑ¯ËùÓĞµÄ×´Ì¬
+     * @brief æŸ¥è¯¢æ‰€æœ‰çš„çŠ¶æ€
      */
     void QueryAll();
 
 private:
-    quint16 m_usCRC16;          /// CRCÊıÖµ
-    uchar* m_pData;             /// ÕæÊµÊı¾İÖ¸Õë
-    PersonInfo*        m_pPerson;/// ÈËÔ±ĞÅÏ¢
-    CMyQueryEquipment* m_pQuery;/// ²éÑ¯Êı¾İ
-    CMySetQuipment*    m_pSet;  /// ÉèÖÃÊı¾İ
-    CMyEventInfo*      m_pEvent;/// ÊÂ¼şÊı¾İ
+    quint16 m_usCRC16;          /// CRCæ•°å€¼
+    uchar* m_pData;             /// çœŸå®æ•°æ®æŒ‡é’ˆ
+    PersonInfo*        m_pPerson;/// äººå‘˜ä¿¡æ¯
+    CMyQueryEquipment* m_pQuery;/// æŸ¥è¯¢æ•°æ®
+    CMySetQuipment*    m_pSet;  /// è®¾ç½®æ•°æ®
+    CMyEventInfo*      m_pEvent;/// äº‹ä»¶æ•°æ®
 };
 
 #endif // MYPARSEDATA_H

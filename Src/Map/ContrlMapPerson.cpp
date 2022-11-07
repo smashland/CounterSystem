@@ -32,7 +32,7 @@ void CContrlMapPerson::Locate(quint16 unID)
     tmpViewPoint.stPos.dY = pos.dY;
     tmpViewPoint.stPos.dZ = pos.dZ;
     tmpViewPoint.fElev = 90.f;
-    tmpViewPoint.fDistance = 1000;
+    tmpViewPoint.fDistance = 5000;
 
     m_pSceneGraph->GetMainWindow()->GetMainViewPoint()->SetViewPoint(tmpViewPoint,5);
 }

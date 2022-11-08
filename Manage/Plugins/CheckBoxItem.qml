@@ -4,13 +4,13 @@ import QtQuick.Controls 2.15
 Item {
 //    spacing: 10*dpx
     property alias name: checkText.text
-    property bool boolCheck: check.checked
+    property bool boolCheck: $app.openSpeak
     CheckBox {
         id: check
         y: 2*dpy
         width: 17*dpx
         height: 17*dpy
-//        checked:true
+        checked:$app.openSpeak
         indicator: Rectangle {
             width: check.width
             height: check.height
@@ -22,7 +22,7 @@ Item {
                 source: check.checked ? "qrc:/Image/true.png" : ""
             }
         }
-
+        onClicked: {$app.setOpenSpeak(check.checked);}
     }
     Text {
         id: checkText

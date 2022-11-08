@@ -568,6 +568,7 @@ class SystemInfo PROTOBUF_FINAL :
     kBOpenBoardFieldNumber = 3,
     kBOpenSoundFieldNumber = 4,
     kBOpenSWindFieldNumber = 5,
+    kNOpenSpeakFieldNumber = 6,
   };
   // int32 nDeleHitLine = 1;
   void clear_ndelehitline();
@@ -614,6 +615,15 @@ class SystemInfo PROTOBUF_FINAL :
   void _internal_set_bopenswind(bool value);
   public:
 
+  // int32 nOpenSpeak = 6;
+  void clear_nopenspeak();
+  ::PROTOBUF_NAMESPACE_ID::int32 nopenspeak() const;
+  void set_nopenspeak(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_nopenspeak() const;
+  void _internal_set_nopenspeak(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:SystemInfo)
  private:
   class _Internal;
@@ -626,6 +636,7 @@ class SystemInfo PROTOBUF_FINAL :
   bool bopenboard_;
   bool bopensound_;
   bool bopenswind_;
+  ::PROTOBUF_NAMESPACE_ID::int32 nopenspeak_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Config_2eproto;
 };
@@ -1671,6 +1682,26 @@ inline void SystemInfo::_internal_set_bopenswind(bool value) {
 inline void SystemInfo::set_bopenswind(bool value) {
   _internal_set_bopenswind(value);
   // @@protoc_insertion_point(field_set:SystemInfo.bOpenSWind)
+}
+
+// int32 nOpenSpeak = 6;
+inline void SystemInfo::clear_nopenspeak() {
+  nopenspeak_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 SystemInfo::_internal_nopenspeak() const {
+  return nopenspeak_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 SystemInfo::nopenspeak() const {
+  // @@protoc_insertion_point(field_get:SystemInfo.nOpenSpeak)
+  return _internal_nopenspeak();
+}
+inline void SystemInfo::_internal_set_nopenspeak(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  nopenspeak_ = value;
+}
+inline void SystemInfo::set_nopenspeak(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_nopenspeak(value);
+  // @@protoc_insertion_point(field_set:SystemInfo.nOpenSpeak)
 }
 
 // -------------------------------------------------------------------

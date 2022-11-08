@@ -149,6 +149,13 @@ public:
      */
     bool &GetIsReplay();
 
+    /**
+     * @brief 获取IP地址
+     * @return
+     */
+    void SetSpeack(bool IsSpeack);
+    int GetSpeack();
+
 private:
     /**
      * @brief 解析INI文件
@@ -177,6 +184,7 @@ private:
     bool    m_bKillSelf;       /// 是否允许队友伤害
     bool    m_bCanHitDeath;    /// 命中死亡人是否得分
     bool    m_bReplay;         /// 是否处于数据回放状态
+    int     m_nSpeak;          /// 是否开启语音
     std::string m_sFileName;   /// 保存文件名称
 
     QMap<QString,QMap<quint16,QString>> m_mapAllInfo;

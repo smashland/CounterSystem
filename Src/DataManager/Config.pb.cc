@@ -160,6 +160,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_Config_2eproto::offsets[] PROT
   PROTOBUF_FIELD_OFFSET(::SystemInfo, bopenboard_),
   PROTOBUF_FIELD_OFFSET(::SystemInfo, bopensound_),
   PROTOBUF_FIELD_OFFSET(::SystemInfo, bopenswind_),
+  PROTOBUF_FIELD_OFFSET(::SystemInfo, nopenspeak_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::HitScore, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -191,9 +192,9 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 0, -1, sizeof(::Config)},
   { 8, -1, sizeof(::ConnectInfo)},
   { 17, -1, sizeof(::SystemInfo)},
-  { 27, -1, sizeof(::HitScore)},
-  { 34, -1, sizeof(::HitRate)},
-  { 41, -1, sizeof(::SimulationInfo)},
+  { 28, -1, sizeof(::HitScore)},
+  { 35, -1, sizeof(::HitRate)},
+  { 42, -1, sizeof(::SimulationInfo)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -211,17 +212,18 @@ const char descriptor_table_protodef_Config_2eproto[] PROTOBUF_SECTION_VARIABLE(
   "Info\030\002 \001(\0132\013.SystemInfo\022 \n\007simInfo\030\003 \001(\013"
   "2\017.SimulationInfo\"X\n\013ConnectInfo\022\013\n\003sIP\030"
   "\001 \001(\t\022\r\n\005sPort\030\002 \001(\r\022\020\n\010sComName\030\003 \001(\t\022\033"
-  "\n\007conType\030\004 \001(\0162\n.CONN_TYPE\"r\n\nSystemInf"
-  "o\022\024\n\014nDeleHitLine\030\001 \001(\005\022\022\n\nbOpenBroad\030\002 "
-  "\001(\010\022\022\n\nbOpenBoard\030\003 \001(\010\022\022\n\nbOpenSound\030\004 "
-  "\001(\010\022\022\n\nbOpenSWind\030\005 \001(\010\"9\n\010HitScore\022\035\n\007h"
-  "itPart\030\001 \001(\0162\014.PERSON_PART\022\016\n\006nScore\030\002 \001"
-  "(\005\"7\n\007HitRate\022\035\n\007hitPart\030\001 \001(\0162\014.PERSON_"
-  "PART\022\r\n\005nRate\030\002 \001(\005\"\252\001\n\016SimulationInfo\022\021"
-  "\n\tnSycnTime\030\001 \001(\005\022\022\n\nnTime2Drop\030\002 \001(\005\022\024\n"
-  "\014nInitbullets\030\003 \001(\005\022\021\n\tbKillSelf\030\004 \001(\010\022\020"
-  "\n\010bDeaKill\030\005 \001(\010\022\033\n\010scoreSet\030\006 \003(\0132\t.Hit"
-  "Score\022\031\n\007rateSet\030\007 \003(\0132\010.HitRateb\006proto3"
+  "\n\007conType\030\004 \001(\0162\n.CONN_TYPE\"\206\001\n\nSystemIn"
+  "fo\022\024\n\014nDeleHitLine\030\001 \001(\005\022\022\n\nbOpenBroad\030\002"
+  " \001(\010\022\022\n\nbOpenBoard\030\003 \001(\010\022\022\n\nbOpenSound\030\004"
+  " \001(\010\022\022\n\nbOpenSWind\030\005 \001(\010\022\022\n\nnOpenSpeak\030\006"
+  " \001(\005\"9\n\010HitScore\022\035\n\007hitPart\030\001 \001(\0162\014.PERS"
+  "ON_PART\022\016\n\006nScore\030\002 \001(\005\"7\n\007HitRate\022\035\n\007hi"
+  "tPart\030\001 \001(\0162\014.PERSON_PART\022\r\n\005nRate\030\002 \001(\005"
+  "\"\252\001\n\016SimulationInfo\022\021\n\tnSycnTime\030\001 \001(\005\022\022"
+  "\n\nnTime2Drop\030\002 \001(\005\022\024\n\014nInitbullets\030\003 \001(\005"
+  "\022\021\n\tbKillSelf\030\004 \001(\010\022\020\n\010bDeaKill\030\005 \001(\010\022\033\n"
+  "\010scoreSet\030\006 \003(\0132\t.HitScore\022\031\n\007rateSet\030\007 "
+  "\003(\0132\010.HitRateb\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_Config_2eproto_deps[1] = {
   &::descriptor_table_TypeDefine_2eproto,
@@ -236,7 +238,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_Con
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_Config_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_Config_2eproto = {
-  false, false, descriptor_table_protodef_Config_2eproto, "Config.proto", 640,
+  false, false, descriptor_table_protodef_Config_2eproto, "Config.proto", 661,
   &descriptor_table_Config_2eproto_once, descriptor_table_Config_2eproto_sccs, descriptor_table_Config_2eproto_deps, 6, 1,
   schemas, file_default_instances, TableStruct_Config_2eproto::offsets,
   file_level_metadata_Config_2eproto, 6, file_level_enum_descriptors_Config_2eproto, file_level_service_descriptors_Config_2eproto,
@@ -866,16 +868,16 @@ SystemInfo::SystemInfo(const SystemInfo& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::memcpy(&ndelehitline_, &from.ndelehitline_,
-    static_cast<size_t>(reinterpret_cast<char*>(&bopenswind_) -
-    reinterpret_cast<char*>(&ndelehitline_)) + sizeof(bopenswind_));
+    static_cast<size_t>(reinterpret_cast<char*>(&nopenspeak_) -
+    reinterpret_cast<char*>(&ndelehitline_)) + sizeof(nopenspeak_));
   // @@protoc_insertion_point(copy_constructor:SystemInfo)
 }
 
 void SystemInfo::SharedCtor() {
   ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
       reinterpret_cast<char*>(&ndelehitline_) - reinterpret_cast<char*>(this)),
-      0, static_cast<size_t>(reinterpret_cast<char*>(&bopenswind_) -
-      reinterpret_cast<char*>(&ndelehitline_)) + sizeof(bopenswind_));
+      0, static_cast<size_t>(reinterpret_cast<char*>(&nopenspeak_) -
+      reinterpret_cast<char*>(&ndelehitline_)) + sizeof(nopenspeak_));
 }
 
 SystemInfo::~SystemInfo() {
@@ -910,8 +912,8 @@ void SystemInfo::Clear() {
   (void) cached_has_bits;
 
   ::memset(&ndelehitline_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&bopenswind_) -
-      reinterpret_cast<char*>(&ndelehitline_)) + sizeof(bopenswind_));
+      reinterpret_cast<char*>(&nopenspeak_) -
+      reinterpret_cast<char*>(&ndelehitline_)) + sizeof(nopenspeak_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -954,6 +956,13 @@ const char* SystemInfo::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID:
       case 5:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 40)) {
           bopenswind_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int32 nOpenSpeak = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 48)) {
+          nopenspeak_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -1015,6 +1024,12 @@ failure:
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(5, this->_internal_bopenswind(), target);
   }
 
+  // int32 nOpenSpeak = 6;
+  if (this->nopenspeak() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(6, this->_internal_nopenspeak(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -1056,6 +1071,13 @@ size_t SystemInfo::ByteSizeLong() const {
   // bool bOpenSWind = 5;
   if (this->bopenswind() != 0) {
     total_size += 1 + 1;
+  }
+
+  // int32 nOpenSpeak = 6;
+  if (this->nopenspeak() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_nopenspeak());
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1104,6 +1126,9 @@ void SystemInfo::MergeFrom(const SystemInfo& from) {
   if (from.bopenswind() != 0) {
     _internal_set_bopenswind(from._internal_bopenswind());
   }
+  if (from.nopenspeak() != 0) {
+    _internal_set_nopenspeak(from._internal_nopenspeak());
+  }
 }
 
 void SystemInfo::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -1128,8 +1153,8 @@ void SystemInfo::InternalSwap(SystemInfo* other) {
   using std::swap;
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(SystemInfo, bopenswind_)
-      + sizeof(SystemInfo::bopenswind_)
+      PROTOBUF_FIELD_OFFSET(SystemInfo, nopenspeak_)
+      + sizeof(SystemInfo::nopenspeak_)
       - PROTOBUF_FIELD_OFFSET(SystemInfo, ndelehitline_)>(
           reinterpret_cast<char*>(&ndelehitline_),
           reinterpret_cast<char*>(&other->ndelehitline_));

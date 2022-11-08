@@ -111,11 +111,17 @@ Column {
                 anchors.fill: parent
                 onClicked:
                 {
-                    $app.settings.setComName(control.currentText);
-                    $app.startConnect();
-                    $licCheck.saveLicense(lrText.text);
-                    $licCheck.checkLicense()
-
+                    if(control.currentText!=="")
+                    {
+                        $app.settings.setComName(control.currentText);
+                        $app.startConnect();
+                        $licCheck.saveLicense(lrText.text);
+                        $licCheck.checkLicense()
+                    }
+                    else
+                    {
+                        comErrorDialog.visible = true
+                    }
                 }
             }
         }

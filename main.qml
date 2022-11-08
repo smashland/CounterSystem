@@ -156,4 +156,24 @@ Window {
         }
     }
 
+    RemoveDialog {
+        id: comErrorDialog
+        visible: false
+        title:"错误"
+        content1: "串口选择错误，"
+        content2: "请重新选择！"
+        onYesPutDown: {
+            comErrorDialog.close()
+//            $app.exitApp();
+//            Qt.quit();
+        }
+//        onNoPutDown: {
+//            comErrorDialog.close()
+//            if(exitShowLabel !== removeDialog_shouquanma.content1)
+//            {
+//                removeDialog_shouquanma.content1 = exitShowLabel;
+//            }
+//        }
+    }
+
 }

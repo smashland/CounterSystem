@@ -170,20 +170,6 @@ ManageRect{
                 anchors.top: parent.top
                 anchors.topMargin: 150*dpy
                 name: qsTr("开启语音")
-                boolCheck:true
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        if(voiceControl.checked)
-                        {
-                            $app.setOpenSpeak(true);
-                        }
-                        else
-                        {
-                            $app.setOpenSpeak(false);
-                        }
-                    }
-                }
             }
         }
 

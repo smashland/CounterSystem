@@ -4,6 +4,8 @@
 #include "WifiConnection.h"
 #include "SerialConnection.h"
 #include "../ErrorReport.h"
+#include <QDebug>
+
 static QString S_SEND = QString::fromUtf8("发送:");
 /// 连接管理类单例指针
 CConnectionManager *CConnectionManager::GetInstance()
@@ -14,12 +16,11 @@ CConnectionManager *CConnectionManager::GetInstance()
 
 /// 连接
 void CConnectionManager::Connect()
-{
-    if(nullptr != m_pConnection && !m_pConnection->IsConnect())
+{    
+    if(nullptr != m_pConnection /*&& !m_pConnection->IsConnect()*/)
     {
         m_pConnection->Connect();
     }
-
 }
 
 /// 断开连接

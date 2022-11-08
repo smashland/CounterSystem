@@ -152,7 +152,7 @@ void CContrlMapPerson::UpdateSeconds(const quint16 &seconds)
         {
             m_pLayer->RemoveSceneNode((*one).pLine);
             one = m_hitLine.erase(one);
-        }·
+        }
         else
         {
             ++one;

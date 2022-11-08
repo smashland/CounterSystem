@@ -109,47 +109,12 @@ Column {
             }
             MouseArea {
                 anchors.fill: parent
-                onClicked: {
-                    //popupRectWin.visible = true                   
-                    objCheckLic.getMD5MachineInfo();
-                    if(!objCheckLic.isFileExist())
-                    {
-                        loginCenter.nextFrame(lrText.text)
-                        if(objCheckLic.checkLicense(lrText.text))
-                        {
-                            $app.settings.setComName(control.currentText);
-                            loadQml("qrc:/OsgWindow.qml");
-                            $app.initSystem()
-                            $app.startConnect();
-                        }
-                    }
-                    else
-                    {
-                        if(objCheckLic.checkLicense(objCheckLic.read()))
-                        {
-                            $app.settings.setComName(control.currentText);
-                            loadQml("qrc:/OsgWindow.qml");
-                            $app.initSystem()
-                            $app.startConnect();
-                        }
-                        else
-                        {
-                            objCheckLic.deleteFile();
-                            loginCenter.nextFrame(lrText.text)
-                            if(objCheckLic.checkLicense(lrText.text))
-                            {
-                                $app.settings.setComName(control.currentText);
-                                loadQml("qrc:/OsgWindow.qml");
-                                $app.initSystem()
-                                $app.startConnect();
-                            }
-                            else
-                            {
-                               objCheckLic.showError.connect(checkLicenseFaild);
-                            }
-                        }
-
-                    }
+                onClicked:
+                {
+                    $app.settings.setComName(control.currentText);
+                    $app.startConnect();
+                    $licCheck.saveLicense(lrText.text);
+                    $licCheck.checkLicense()
 
                 }
             }

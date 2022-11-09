@@ -24,6 +24,8 @@ public:
     Q_PROPERTY(QColor typeColor MEMBER m_typeColor NOTIFY typeColorChanged)
     Q_PROPERTY(bool openSpeak MEMBER m_bopenSpeak NOTIFY openSpeakChanged)
 
+    Q_PROPERTY(bool openChonglian MEMBER m_bopenChonglian NOTIFY openChonglianChanged)
+
     //    Q_PROPERTY(QList<QObject*> replay MEMBER m_listReplay  NOTIFY replayChanged)
 
     /**
@@ -74,6 +76,7 @@ signals:
     void typeColorChanged();
     void replayChanged();
     void openSpeakChanged();
+    void openChonglianChanged();
 
 public slots:
 private:
@@ -89,6 +92,8 @@ private:
 
     QColor          m_typeColor;       ///分组的颜色
     bool            m_bopenSpeak;      ///开启语音
+
+    bool            m_bopenChonglian;      /// 打开自动重连
 
 };
 

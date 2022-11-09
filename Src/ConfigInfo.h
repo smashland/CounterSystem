@@ -185,6 +185,7 @@ private:
     bool    m_bCanHitDeath;    /// 命中死亡人是否得分
     bool    m_bReplay;         /// 是否处于数据回放状态
     int     m_nSpeak;          /// 是否开启语音
+    QString     m_nIp;          /// 是否开启语音
     std::string m_sFileName;   /// 保存文件名称
 
     QMap<QString,QMap<quint16,QString>> m_mapAllInfo;

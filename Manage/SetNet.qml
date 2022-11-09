@@ -48,25 +48,66 @@ Rectangle {
             }
         }
     }
-    CheckBoxItem {
-        id: dkcl
+//    CheckBoxItem {
+//        id: dkcl
+//        anchors.left: parent.left
+//        anchors.leftMargin: 60*dpx
+//        anchors.top: parent.top
+//        anchors.topMargin: 35*dpy
+//        name: qsTr("断开自动重连")
+//        boolCheck:false
+//        MouseArea {
+//            anchors.fill: parent
+//            onClicked: {
+//                if(boolCheck === true) {
+//                    tryToConnect()
+//                }else if(boolCheck === false) {
+//                    timer.stop();
+//                }
+//            }
+//        }
+//    }
+
+    Item {
         anchors.left: parent.left
         anchors.leftMargin: 60*dpx
         anchors.top: parent.top
         anchors.topMargin: 35*dpy
-        name: qsTr("断开自动重连")
-        boolCheck:false
-        MouseArea {
-            anchors.fill: parent
+        CheckBox {
+            id: check
+            y: 2*dpy
+            width: 17*dpx
+            height: 17*dpy
+            checked:true
+            indicator: Rectangle {
+                width: check.width
+                height: check.height
+                color: "#1d4f88"
+                border.color: "#3b6daa"
+                Image {
+                    width: check.width
+                    height: check.height
+                    source: check.checked ? "qrc:/Image/true.png" : ""
+                }
+            }
             onClicked: {
-                if(boolCheck === true) {
+                if(checked === true) {
                     tryToConnect()
-                }else if(boolCheck === false) {
+                }else if(checked === false) {
                     timer.stop();
                 }
             }
         }
+        Text {
+            id: checkText
+            x: 27*dpx
+            color: "#d5e2f5"
+            font.pixelSize: 14*dpx
+            font.family: "Microsoft YaHei"
+            text: qsTr("断开自动重连")
+        }
     }
+
 
     BasicGroupBox
     {

@@ -61,6 +61,7 @@ void CConfigInfo::PraseIni()
 
         m_nHitLineDelSec = m_pConfig->mutable_sysinfo()->ndelehitline();
         m_nSpeak = m_pConfig->mutable_sysinfo()->nopenspeak();
+//        m_nIp = m_pConfig->mutable_coninfo()->sip();
         m_nSynTimes=m_pConfig->mutable_siminfo()->nsycntime();
         m_nDroppedTimes=m_pConfig->mutable_siminfo()->ntime2drop();
         m_bKillSelf=m_pConfig->mutable_siminfo()->bkillself();
@@ -160,6 +161,7 @@ void CConfigInfo::SaveIni()
     m_pConfig->mutable_coninfo()->set_scomname(m_stComName.toUtf8().data());
     m_pConfig->mutable_sysinfo()->set_ndelehitline(m_nHitLineDelSec);
     m_pConfig->mutable_sysinfo()->set_nopenspeak(m_nSpeak);
+//    m_pConfig->mutable_sysinfo()->set_sip(m_nIp);
     m_pConfig->mutable_siminfo()->set_nsycntime(m_nSynTimes);
     m_pConfig->mutable_siminfo()->set_ntime2drop(m_nDroppedTimes);
     m_pConfig->mutable_siminfo()->set_bkillself(m_bKillSelf);

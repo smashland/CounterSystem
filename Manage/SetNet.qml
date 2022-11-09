@@ -395,8 +395,13 @@ Rectangle {
                             radius: 2
                         }
                     }
+                    onPressedChanged: {
+                        control.model=$app.settings.comNameList();
+                    }
+
                 }
             }
+
         }
         PopupButton {
             anchors.bottom: parent.bottom
@@ -407,14 +412,15 @@ Rectangle {
             }
             nameButton: "连接"
             onClicked: {
-                $app.settings.setComName(control.currentText);
-                $app.startConnect();
-                $licCheck.saveLicense(lrText.text);
-                $licCheck.checkLicense()
+                if(control.currentText!=="")
+                {
+                    $app.settings.setComName(control.currentText);
+                    $app.startConnect();
+//                    $licCheck.saveLicense(lrText.text);
+//                    $licCheck.checkLicense()
+                }
             }
         }
 
     }
-
-
 }

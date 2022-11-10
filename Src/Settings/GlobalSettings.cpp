@@ -150,6 +150,18 @@ void CGlobalSettings::setWifiInfo(const QString &sIP, ushort unPort)
     CConfigInfo::GetInstance()->SetPort(unPort);
 }
 
+QString CGlobalSettings::getSip()
+{
+    qDebug()<<"ip:"<< CConfigInfo::GetInstance()->GetIP().c_str();
+    return CConfigInfo::GetInstance()->GetIP().c_str();
+}
+
+ushort CGlobalSettings::getPort()
+{
+    qDebug()<<"port"<<CConfigInfo::GetInstance()->GetPort();
+    return  CConfigInfo::GetInstance()->GetPort();
+}
+
 /// 演习开始
 void CGlobalSettings::setStart()
 {

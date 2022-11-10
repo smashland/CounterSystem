@@ -3,7 +3,7 @@ import QtQuick.Controls 2.15
 
 TextField {
     id:textField
-    color: "#4582c7"
+    color: Qt.rgba(255/255, 255/255, 255/255, 0.8);
     font.pixelSize: 16*dpx;
     font.bold: true
     font.family: "Microsoft YaHei";

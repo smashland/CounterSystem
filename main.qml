@@ -81,7 +81,7 @@ Window {
     }
 
     // 通过license校验显示主界面
-    function  showMainWindow()
+    function showMainWindow()
     {
         $app.initSystem();
         $app.startConnect();

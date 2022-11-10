@@ -6,7 +6,7 @@
 #include <Plot/Common/ISceneLodGroup.h>
 #include <Plot/Common/ISceneScaleGroup.h>
 #include "PlaceNodeInfo.h"
-
+#include <QDebug>
 
 CPlaceNodeInfo::CPlaceNodeInfo(ISceneGraph *pSceneGraph):m_pSceneGraph(pSceneGraph)
 {
@@ -120,6 +120,7 @@ void CPlaceNodeInfo::InitNode()
 //    m_pLabel->SetPixelOffset(spOffset);
 }
 
+
 /// 样式更改
 void CPlaceNodeInfo::TypeChanged()
 {
@@ -132,9 +133,9 @@ void CPlaceNodeInfo::TypeChanged()
     case RED_GROUP:
         sImagePath += "red";
         break;
-//    case GREEN_GROUP:
-//        sImagePath += "green";
-//        break;
+    case GREEN_GROUP:
+        sImagePath += "green";
+        break;
     default:
         sImagePath += "white";
         break;

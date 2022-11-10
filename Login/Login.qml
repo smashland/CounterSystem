@@ -89,36 +89,6 @@ Column {
                 if(1 === $app.settings.conType)
                 {
                     control.visible = true
-                    if(control.currentText!==""&&lrText.text!=="")
-                    {
-                        if($app.settings.isExistcomName(control.currentText))
-                        {
-                            $app.settings.setComName(control.currentText);
-                            $app.startConnect();
-                            $licCheck.saveLicense(lrText.text);
-                            $licCheck.checkLicense()
-                        }
-                        else
-                        {
-                            comErrorDialog.visible = true
-                            control.model=$app.settings.comNameList();
-
-                        }
-
-                    }
-                    else
-                    {
-                        if(control.currentText==="")
-                        {
-                            comErrorDialog.visible = true
-                        }
-                         if(lrText.text==="")
-                         {
-                              $licCheck.checkLicense()
-                              $licCheck.isFileExist();
-                         }
-
-                    }
                 }
                 else
                 {

@@ -409,6 +409,7 @@ Rectangle {
                     {
                         $app.settings.setComName(control.currentText);
                         $app.startConnect();
+                        toConnect();
                     }
                     else
                     {

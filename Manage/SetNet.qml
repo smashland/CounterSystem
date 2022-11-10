@@ -14,40 +14,13 @@ Rectangle {
     width:710*dpx
     height: 530*dpy
     color: "transparent"
-    property var ip: [4]
+    property string ip: "0.0.0.0"
     property int nport: 0
     signal toConnect()
 
     property int iTime: 0
 
-    function tryToConnect()
-    {
-        timer.start();
-    }
-    function connectFaild()
-    {
-        if(1 === $app.settings.conType)
-        {
-            console.log("连接失败")
-        }
-        else
-        {
-            console.log("连接超时")
-        }
-    }
-    Timer
-    {
-        id:timer
-        interval:iTime
-        running:false
-        onTriggered:
-        {
-            if(0 === $app.settings.conType)
-            {
-                connectFaild();
-            }
-        }
-    }
+
 
     Item {
         anchors.left: parent.left
@@ -71,13 +44,13 @@ Rectangle {
                     source: check.checked ? "qrc:/Image/true.png" : ""
                 }
             }
-            onClicked: {
-                if(checked === true) {
-                    tryToConnect()
-                }else if(checked === false) {
-                    timer.stop();
-                }
-            }
+//            onClicked: {
+//                if(checked === true) {
+//                    tryToConnect()
+//                }else if(checked === false) {
+//                    timer.stop();
+//                }
+//            }
         }
         Text {
             id: checkText
@@ -127,9 +100,9 @@ Rectangle {
                     x:chonglian.contentWidth+80*dpx
                     text:"5"
                     validator: IntValidator{bottom: 0;top:99999;}
-                    onTextEdited: {
-                        iTime = (chonglianTime.text) * 1000
-                    }
+//                    onTextEdited: {
+//                        iTime = (chonglianTime.text) * 1000
+//                    }
                 }
             }
 
@@ -143,46 +116,22 @@ Rectangle {
                     font.bold: false
                 }
 
-                Repeater
-                {
-                    id:repeater
-                    model: 3
-                    x:ipText.contentWidth+80*dpx
-                    Row
-                    {
-                        TextFieldItem {
-                            id:textField
-                            validator: RegExpValidator
-                            {
-                                regExp:0 === index ? /(?!0)(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d))/ :/(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d))/
-                            }
-                            onActiveFocusChanged:
-                            {
-                                if(!activeFocus)
-                                {
-                                    ip[index] = textField.text
-                                }
-                            }
-                        }
-
-                        TextListItem {
-                            text: "."
-                            heightTitle: 34*dpx
-                            font.bold: false
-                        }
-                    }
-                }
                 TextFieldItem
                 {
                     id:outInput
-                    width: 100*dpx
-                    validator: RegExpValidator{regExp:/(?!0)(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d))/}
-                    onActiveFocusChanged:
-                    {
-                        if(!activeFocus)
-                        {
-                            ip[3] = outInput.text
-                        }
+                    width: 150*dpx
+                    text: $app.settings.getSip()
+//                    onActiveFocusChanged:
+//                    {
+//                        if(!activeFocus)
+//                        {
+//                            ip = outInput.text
+//                        }
+//                    }
+                    onTextChanged: {
+
+                            ip = outInput.text
+
                     }
                 }
             }
@@ -199,13 +148,18 @@ Rectangle {
                     width: 100*dpx
                     x:dkh.contentWidth+80*dpx
                     validator: IntValidator{bottom: 0;top:65535;}
+                    text: $app.settings.getPort()
+//                    onActiveFocusChanged:
+//                    {
+//                        if(!activeFocus)
+//                        {
+//                            nport = portInput.text
+//                        }
+//                    }
+                    onTextChanged: {
 
-                    onActiveFocusChanged:
-                    {
-                        if(!activeFocus)
-                        {
                             nport = portInput.text
-                        }
+
                     }
                 }
 
@@ -220,22 +174,8 @@ Rectangle {
             }
             nameButton: "连接"
             onClicked: {
-                var sIp='';
-                for(var nIndex=0; nIndex<4; ++nIndex)
-                {
-                    sIp += ip[nIndex];
-                    if(3 !== nIndex)
-                    {
-                        sIp+='.'
-                    }
-                }
-
-                console.log(sIp,nport);
-
-//                    selectWifi.close();
-                $app.settings.setWifiInfo(sIp,nport);
+                $app.settings.setWifiInfo(ip,nport);
                 $app.startConnect();
-                toConnect();
             }
         }
     }

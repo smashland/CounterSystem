@@ -8,91 +8,44 @@ import "Plugins"
 
 Column {
     signal toConnect()
-    property var ip: [4]
+    property string ip: "0.0.0.0"
     property int nport: 0
 
     id: columnTextField
-    spacing: 20*dpy
+    spacing: 50*dpy
     Row
     {
         id: row
-        TextListItem {
-            id: ipText
-            text: "IP 地址："
-            heightTitle: 34*dpx
-            font.bold: false
-        }
+        spacing: 15*dpx
 
-        Repeater
-        {
-            id:repeater
-            model: 3
-            x:ipText.contentWidth+80*dpx
-            Row
-            {
-                TextFieldItem {
-                    id:textField
-//                    color: Qt.rgba(255/255, 255/255, 255/255, 0.8);
-                    background: Rectangle {
-                        color: Qt.rgba(0/255, 31/255, 94/255, 0.6);
-                        border.color: "#00baff"
-                    }
-                    text: $app.settings.getSip()
-                    font.bold: false
-                    validator: RegExpValidator
-                    {
-                        regExp:0 === index ? /(?!0)(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d))/ :/(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d))/
-                    }
-                    onActiveFocusChanged:
-                    {
-                        if(!activeFocus)
-                        {
-                            ip[index] = textField.text
-                        }
-                    }
-                }
-
-                TextListItem {
-                    text: "."
-                    heightTitle: 34*dpx
-                    font.bold: false
-                }
-            }
-        }
         TextFieldItem
         {
             id:outInput
-            width: 100*dpx
-//            color: Qt.rgba(255/255, 255/255, 255/255, 0.8);
+            width: 220*dpx
+            height: 50 *dpy
             background: Rectangle {
                 color: Qt.rgba(0/255, 31/255, 94/255, 0.6);
                 border.color: "#00baff"
             }
             text: $app.settings.getSip()
             font.bold: false
-            validator: RegExpValidator{regExp:/(?!0)(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d))/}
+            placeholderText: qsTr("请输入IP地址")
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
             onActiveFocusChanged:
             {
                 if(!activeFocus)
                 {
-                    ip[3] = outInput.text
+                    ip = portInput.text
                 }
             }
-        }
-    }
-    Row {
-        TextListItem {
-            id:dkh
-            text: "端口号："
-            heightTitle: 34*dpx
-            font.bold: false
         }
 
         TextFieldItem {
             id:portInput
-            width: 100*dpx
-            x:dkh.contentWidth+80*dpx
-//            color: Qt.rgba(255/255, 255/255, 255/255, 0.8);
+            width: 120*dpx
+            height: 50 *dpy
+            placeholderText: qsTr("端口号")
             background: Rectangle {
                 color: Qt.rgba(0/255, 31/255, 94/255, 0.6);
                 border.color: "#00baff"
@@ -108,27 +61,25 @@ Column {
                 }
             }
         }
-
     }
-
 
     LoginButton {
         MouseArea {
             anchors.fill: parent
             onClicked:
             {
-                var sIp='';
-                for(var nIndex=0; nIndex<4; ++nIndex)
-                {
-                    sIp += ip[nIndex];
-                    if(3 !== nIndex)
-                    {
-                        sIp+='.'
-                    }
-                }
+//                var sIp='';
+//                for(var nIndex=0; nIndex<4; ++nIndex)
+//                {
+//                    sIp += ip[nIndex];
+//                    if(3 !== nIndex)
+//                    {
+//                        sIp+='.'
+//                    }
+//                }
 
-                console.log(sIp,nport);
-                $app.settings.setWifiInfo(sIp,nport);
+//                console.log(sIp,nport);
+                $app.settings.setWifiInfo(ip,nport);
                 $app.startConnect();
                 $licCheck.saveLicense(lrText.text);
                 $licCheck.checkLicense()

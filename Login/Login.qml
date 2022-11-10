@@ -61,10 +61,7 @@ Column {
                     leftPadding:  52*dpx
                     Component.onCompleted:
                     {
-                        if($licCheck.isFileExist())
-                        {
-                            lrText.text = qsTr($licCheck.read());
-                        }
+                      lrText.text = qsTr($licCheck.read());
                     }
                     selectByMouse: true
                     selectionColor: "#0187d6"
@@ -111,16 +108,35 @@ Column {
                 anchors.fill: parent
                 onClicked:
                 {
-                    if(control.currentText!=="")
+                    if(control.currentText!==""&&lrText.text!=="")
                     {
-                        $app.settings.setComName(control.currentText);
-                        $app.startConnect();
-                        $licCheck.saveLicense(lrText.text);
-                        $licCheck.checkLicense()
+                        if($app.settings.isExistcomName(control.currentText))
+                        {
+                            $app.settings.setComName(control.currentText);
+                            $app.startConnect();
+                            $licCheck.saveLicense(lrText.text);
+                            $licCheck.checkLicense()
+                        }
+                        else
+                        {
+                            comErrorDialog.visible = true
+                            control.model=$app.settings.comNameList();
+
+                        }
+
                     }
                     else
                     {
-                        comErrorDialog.visible = true
+                        if(control.currentText==="")
+                        {
+                            comErrorDialog.visible = true
+                        }
+                         if(lrText.text==="")
+                         {
+                              $licCheck.checkLicense()
+                              $licCheck.isFileExist();
+                         }
+
                     }
                 }
             }

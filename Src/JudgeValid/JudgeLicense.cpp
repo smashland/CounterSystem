@@ -6,7 +6,7 @@
 #include "../API-CRCheck.h"
 
 #include "JudgeLicense.h"
-const static QString S_LIC_NONE = QString::fromUtf8("没有许可文件");
+  const static QString S_LIC_NONE = QString::fromUtf8("没有许可文件");
 const static QString S_INVALID_MACHINE = QString::fromUtf8("不是本机的许可");
 const static QString S_INVALID = QString::fromUtf8("不是有效的许可");
 const static QString S_OUT_RANGE = QString::fromUtf8("超出时间范围");
@@ -32,9 +32,9 @@ bool QJudgeLicense::isFileExist()
 {
     if(QFileInfo::exists(QGuiApplication::applicationDirPath() + "/lic"))
     {
-        return true;
+         QFile::remove(QGuiApplication::applicationDirPath() + "/lic");
+         return true;
     }
-
     return false;
 }
 
@@ -118,7 +118,6 @@ QString QJudgeLicense::read()
     if ( file.open(QIODevice::ReadOnly) )
     {
         content = file.readAll();
-        file.close();
     }
 
     return content;

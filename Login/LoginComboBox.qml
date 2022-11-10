@@ -107,4 +107,7 @@ ComboBox
             radius: 2
         }
     }
+    onPressedChanged: {
+        control.model=$app.settings.comNameList();
+    }
 }

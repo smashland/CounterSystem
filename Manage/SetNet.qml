@@ -48,23 +48,56 @@ Rectangle {
             }
         }
     }
-    CheckBoxItem {
-        id: dkcl
+
+    Item {
         anchors.left: parent.left
         anchors.leftMargin: 60*dpx
         anchors.top: parent.top
         anchors.topMargin: 35*dpy
-        name: qsTr("断开自动重连")
-        boolCheck:false
-        MouseArea {
-            anchors.fill: parent
+        CheckBox {
+            id: check
+            y: 2*dpy
+            width: 17*dpx
+            height: 17*dpy
+            checked:true
+            indicator: Rectangle {
+                width: check.width
+                height: check.height
+                color: "#1d4f88"
+                border.color: "#3b6daa"
+                Image {
+                    width: check.width
+                    height: check.height
+                    source: check.checked ? "qrc:/Image/true.png" : ""
+                }
+            }
             onClicked: {
-                if(boolCheck === true) {
+                if(checked === true) {
                     tryToConnect()
-                }else if(boolCheck === false) {
+                }else if(checked === false) {
                     timer.stop();
                 }
             }
+        }
+        Text {
+            id: checkText
+            x: 27*dpx
+            color: "#d5e2f5"
+            font.pixelSize: 14*dpx
+            font.family: "Microsoft YaHei"
+            text: qsTr("断开自动重连")
+        }
+    }
+
+    Component.onCompleted:
+    {
+        if(1 === $app.settings.conType)
+        {
+            chuankouGroupBox.visible = true
+        }
+        else
+        {
+            wifiGroupBox.visible = true
         }
     }
 
@@ -74,7 +107,7 @@ Rectangle {
         y: 15*dpy
         title: qsTr("网络设置:")
         height: 280*dpy
-        visible: true
+        visible: false
         Column {
             x:60*dpx
             y:50*dpy
@@ -143,8 +176,7 @@ Rectangle {
                 {
                     id:outInput
                     width: 100*dpx
-                    validator: IntValidator{bottom: 0;top:65535;}
-
+                    validator: RegExpValidator{regExp:/(?!0)(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d))/}
                     onActiveFocusChanged:
                     {
                         if(!activeFocus)
@@ -215,7 +247,7 @@ Rectangle {
         anchors.topMargin: 20
         height: 150*dpy
         title: qsTr("串口设置:")
-        visible: true
+        visible: false
         Text {
             id: chuankouhao
             x:60*dpx

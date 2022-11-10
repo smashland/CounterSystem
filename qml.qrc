@@ -149,13 +149,15 @@
         <file>Exercise/Plugins/TimeText.qml</file>
         <file>Exercise/Plugins/CampHidden.qml</file>
         <file>Exercise/Plugins/ToggleSettings.qml</file>
-        <file>Login/LoginImage.qml</file>
         <file>Status/Plugins/PersonText.qml</file>
         <file>Manage/Plugins/MapHelpList.qml</file>
         <file>Login/LoginComboBox.qml</file>
-        <file>Login/LoginTextField.qml</file>
         <file>Common/SoldierItem2.qml</file>
         <file>Common/SoldierItem.qml</file>
         <file>Manage/Plugins/DelegateRectangle.qml</file>
+        <file>Login/LoginWifi.qml</file>
+        <file>Login/Plugins/LoginButton.qml</file>
+        <file>Login/Plugins/LoginImage.qml</file>
+        <file>Login/Plugins/LoginTextField.qml</file>
     </qresource>
 </RCC>

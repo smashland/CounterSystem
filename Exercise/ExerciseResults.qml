@@ -6,6 +6,7 @@ import QtQuick.Controls 1.4 as QC114
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Controls 2.1
 import QtQuick.Layouts 1.14
+import QtGraphicalEffects 1.15
 import "../Common"
 
 
@@ -205,6 +206,7 @@ Item {
 
                 Text
                 {
+                    id: sahngwangqingkuang
                     x: 40 *dpx
                     y: 20 *dpy
                     text:qsTr(modelData.belong+"伤亡情况")
@@ -212,7 +214,7 @@ Item {
                     horizontalAlignment: Text.AlignHCenter
                     font.pixelSize: 20*dpx
                     color: "#ffffff"
-                    font.family: "MicrosoftYaHei"
+                    font.family: "Microsoft YaHei"
                 }
 
                 RedChart {
@@ -222,6 +224,43 @@ Item {
                      hurtData:modelData.hurt
                      deathData:modelData.dealth
                      okData:modelData.ok
+                }
+                Rectangle {
+                    id: circle
+                    width: 125*dpy
+                    height: 125*dpy
+                    border.color: "skyblue"
+                    color: "transparent"
+                    radius: width/2
+                    antialiasing: true
+                    anchors.centerIn: parent
+                }
+
+                Glow {
+                    anchors.fill: circle
+                    radius:9
+                    samples: 13
+                    color: "#dddddd"
+                    source: circle
+                    spread: 0.5
+                    opacity: 0.8
+                    NumberAnimation on opacity {
+                        id:an1
+                        to:0.8
+                        duration: 2000
+                        running: true
+                        onStopped: {
+                            an2.start()
+                        }
+                    }
+                    NumberAnimation on opacity {
+                        id:an2
+                        to:0.2
+                        duration: 2000
+                        onStopped: {
+                            an1.start()
+                        }
+                    }
                 }
 
             }

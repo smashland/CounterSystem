@@ -132,9 +132,9 @@ void CPlaceNodeInfo::TypeChanged()
     case RED_GROUP:
         sImagePath += "red";
         break;
-    case GREEN_GROUP:
-        sImagePath += "green";
-        break;
+//    case GREEN_GROUP:
+//        sImagePath += "green";
+//        break;
     default:
         sImagePath += "white";
         break;

@@ -29,6 +29,7 @@ public:
     Q_INVOKABLE QStringList types();
     Q_INVOKABLE int index(const QString& sType);
     Q_INVOKABLE QStringList comNameList();
+    Q_INVOKABLE bool isExistcomName(const QString& sComName);
 
     Q_INVOKABLE void setComName(const QString& sComName);
     Q_INVOKABLE void setWifiInfo(const QString& sIP, ushort unPort);

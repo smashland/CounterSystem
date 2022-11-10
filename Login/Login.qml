@@ -68,10 +68,7 @@ Column {
                     readOnly:false
                     Component.onCompleted:
                     {
-                        if($licCheck.isFileExist())
-                        {
-                            lrText.text = qsTr($licCheck.read());
-                        }
+                      lrText.text = qsTr($licCheck.read());
                     }
                     selectByMouse: true
                     selectionColor: "#0187d6"

@@ -137,6 +137,16 @@ QStringList CGlobalSettings::comNameList()
     return(CConfigInfo::GetInstance()->GetComNameList());
 }
 
+bool CGlobalSettings::isExistcomName(const QString &sComName)
+{
+    QStringList comList=CConfigInfo::GetInstance()->GetComNameList();
+    if(comList.contains(sComName))
+    {
+        return true;
+    }
+    return false;
+}
+
 /// 设置串口名称
 void CGlobalSettings::setComName(const QString &sComName)
 {

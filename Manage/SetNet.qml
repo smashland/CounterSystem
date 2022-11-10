@@ -345,11 +345,28 @@ Rectangle {
             onClicked: {
                 if(control.currentText!=="")
                 {
-                    $app.settings.setComName(control.currentText);
-                    $app.startConnect();
-//                    $licCheck.saveLicense(lrText.text);
-//                    $licCheck.checkLicense()
+                    if($app.settings.isExistcomName(control.currentText))
+                    {
+                        $app.settings.setComName(control.currentText);
+                        $app.startConnect();
+                        toConnect();
+                    }
+                    else
+                    {
+                        comErrorDialog.visible = true
+                        control.model=$app.settings.comNameList();
+
+                    }
+
                 }
+                else
+                {
+                    if(control.currentText==="")
+                    {
+                        comErrorDialog.visible = true
+                    }
+                }
+
             }
         }
 

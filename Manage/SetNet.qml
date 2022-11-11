@@ -16,51 +16,8 @@ Rectangle {
     color: "transparent"
     property string ip: "0.0.0.0"
     property int nport: 0
-    signal toConnect()
 
     property int iTime: 0
-
-
-
-    Item {
-        anchors.left: parent.left
-        anchors.leftMargin: 60*dpx
-        anchors.top: parent.top
-        anchors.topMargin: 35*dpy
-        CheckBox {
-            id: check
-            y: 2*dpy
-            width: 17*dpx
-            height: 17*dpy
-            checked:true
-            indicator: Rectangle {
-                width: check.width
-                height: check.height
-                color: "#1d4f88"
-                border.color: "#3b6daa"
-                Image {
-                    width: check.width
-                    height: check.height
-                    source: check.checked ? "qrc:/Image/true.png" : ""
-                }
-            }
-//            onClicked: {
-//                if(checked === true) {
-//                    tryToConnect()
-//                }else if(checked === false) {
-//                    timer.stop();
-//                }
-//            }
-        }
-        Text {
-            id: checkText
-            x: 27*dpx
-            color: "#d5e2f5"
-            font.pixelSize: 14*dpx
-            font.family: "Microsoft YaHei"
-            text: qsTr("断开自动重连")
-        }
-    }
 
     Component.onCompleted:
     {
@@ -74,6 +31,16 @@ Rectangle {
         }
     }
 
+    Timer {
+        id: timer
+        interval: iTime
+        running: false
+        onTriggered: {
+            $app.settings.setWifiInfo(ip,nport);
+            $app.startConnect();
+        }
+    }
+
     BasicGroupBox
     {
         id: wifiGroupBox
@@ -81,9 +48,49 @@ Rectangle {
         title: qsTr("网络设置:")
         height: 280*dpy
         visible: false
+        Item {
+            anchors.left: parent.left
+            anchors.leftMargin: 60*dpx
+            anchors.top: parent.top
+            anchors.topMargin: 35*dpy
+            height: 17*dpy
+            CheckBox {
+                id: check
+                y: 2*dpy
+                width: 17*dpx
+                height: 17*dpy
+                checked:true
+                indicator: Rectangle {
+                    width: check.width
+                    height: check.height
+                    color: "#1d4f88"
+                    border.color: "#3b6daa"
+                    Image {
+                        width: check.width
+                        height: check.height
+                        source: check.checked ? "qrc:/Image/true.png" : ""
+                    }
+                }
+                onClicked: {
+                    if(checked === true) {
+                        timer.start();
+                    }else if(checked === false) {
+                        timer.stop();
+                    }
+                }
+            }
+            Text {
+                id: checkText
+                x: 27*dpx
+                color: "#d5e2f5"
+                font.pixelSize: 14*dpx
+                font.family: "Microsoft YaHei"
+                text: qsTr("断开自动重连")
+            }
+        }
         Column {
             x:60*dpx
-            y:50*dpy
+            y:60*dpy
             spacing:15*dpy
 
             Row {
@@ -100,9 +107,9 @@ Rectangle {
                     x:chonglian.contentWidth+80*dpx
                     text:"5"
                     validator: IntValidator{bottom: 0;top:99999;}
-//                    onTextEdited: {
-//                        iTime = (chonglianTime.text) * 1000
-//                    }
+                    onTextEdited: {
+                        iTime = (chonglianTime.text) * 1000
+                    }
                 }
             }
 
@@ -121,18 +128,6 @@ Rectangle {
                     id:outInput
                     width: 150*dpx
                     text: $app.settings.getSip()
-//                    onActiveFocusChanged:
-//                    {
-//                        if(!activeFocus)
-//                        {
-//                            ip = outInput.text
-//                        }
-//                    }
-                    onTextChanged: {
-
-                            ip = outInput.text
-
-                    }
                 }
             }
             Row {
@@ -149,18 +144,6 @@ Rectangle {
                     x:dkh.contentWidth+80*dpx
                     validator: IntValidator{bottom: 0;top:65535;}
                     text: $app.settings.getPort()
-//                    onActiveFocusChanged:
-//                    {
-//                        if(!activeFocus)
-//                        {
-//                            nport = portInput.text
-//                        }
-//                    }
-                    onTextChanged: {
-
-                            nport = portInput.text
-
-                    }
                 }
 
             }
@@ -183,8 +166,7 @@ Rectangle {
     BasicGroupBox
     {
         id: chuankouGroupBox
-        anchors.top: wifiGroupBox.bottom
-        anchors.topMargin: 20
+        y: 15*dpy
         height: 150*dpy
         title: qsTr("串口设置:")
         visible: false

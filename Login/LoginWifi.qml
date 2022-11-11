@@ -83,7 +83,6 @@ Column {
                 $app.startConnect();
                 $licCheck.saveLicense(lrText.text);
                 $licCheck.checkLicense()
-                toConnect();
             }
         }
     }

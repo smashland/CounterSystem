@@ -137,6 +137,16 @@ QStringList CGlobalSettings::comNameList()
     return(CConfigInfo::GetInstance()->GetComNameList());
 }
 
+bool CGlobalSettings::isExistcomName(const QString &sComName)
+{
+    QStringList comList=CConfigInfo::GetInstance()->GetComNameList();
+    if(comList.contains(sComName))
+    {
+        return true;
+    }
+    return false;
+}
+
 /// 设置串口名称
 void CGlobalSettings::setComName(const QString &sComName)
 {
@@ -148,6 +158,18 @@ void CGlobalSettings::setWifiInfo(const QString &sIP, ushort unPort)
 {
     CConfigInfo::GetInstance()->SetIP(sIP);
     CConfigInfo::GetInstance()->SetPort(unPort);
+}
+
+QString CGlobalSettings::getSip()
+{
+    qDebug()<<"ip:"<< CConfigInfo::GetInstance()->GetIP().c_str();
+    return CConfigInfo::GetInstance()->GetIP().c_str();
+}
+
+ushort CGlobalSettings::getPort()
+{
+    qDebug()<<"port"<<CConfigInfo::GetInstance()->GetPort();
+    return  CConfigInfo::GetInstance()->GetPort();
 }
 
 /// 演习开始

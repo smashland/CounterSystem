@@ -48,17 +48,24 @@ void CContrlMapPerson::UpdateGroup(quint16 unID, const QString & sGroup)
 {
     auto pMapPerson = GetOrCreateMapPersonInfo(unID);
 
-    if(sGroup == QString::fromLocal8Bit("蓝方"))
+    if(sGroup == QString::fromUtf8("人质"))
     {
-        pMapPerson->SetGroupType(BLUE_GROUP);
-    }
-    else if(sGroup == QString::fromLocal8Bit("红方"))
-    {
-        pMapPerson->SetGroupType(RED_GROUP);
+        pMapPerson->SetGroupType(GREEN_GROUP);
     }
     else
     {
-        pMapPerson->SetGroupType(UN_KNOW);
+        if(sGroup == QString::fromUtf8("蓝方"))
+        {
+            pMapPerson->SetGroupType(BLUE_GROUP);
+        }
+        else if(sGroup == QString::fromUtf8("红方"))
+        {
+            pMapPerson->SetGroupType(RED_GROUP);
+        }
+        else
+        {
+            pMapPerson->SetGroupType(UN_KNOW);
+        }
     }
 }
 

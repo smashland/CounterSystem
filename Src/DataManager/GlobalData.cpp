@@ -372,7 +372,7 @@ void CGlobalData::SetSeceneGraph(ISceneGraph *pSceneGraph)
     if(nullptr == m_pCtrMapPerson)
     {
         m_pCtrMapPerson = new CContrlMapPerson(pSceneGraph,this);
-//        connect(m_pCtrMapPerson,&CContrlMapPerson::mapPersonInfo,this,&CGlobalData::mapPersonInfo);
+        //        connect(m_pCtrMapPerson,&CContrlMapPerson::mapPersonInfo,this,&CGlobalData::mapPersonInfo);
         CTimeServer::GetInstance()->SubTime(m_pCtrMapPerson);
     }
 }
@@ -573,6 +573,14 @@ void CGlobalData::loadSceInfo(const QString &sceName)
 
         /// 更新所有的状态信息
         updateAllDataSize(m_mapStatusModel.count());
+
+        if(cePersonInfo->getHostage())
+        {
+            m_pCtrMapPerson->UpdateGroup(cePersonInfo->getID(),"人质");
+        }
+        else{
+            m_pCtrMapPerson->UpdateGroup(cePersonInfo->getID(),typeTemp);
+        }
     }
 
 }

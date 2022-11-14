@@ -6,7 +6,7 @@
 #include <Plot/Common/ISceneLodGroup.h>
 #include <Plot/Common/ISceneScaleGroup.h>
 #include "PlaceNodeInfo.h"
-
+#include <QDebug>
 
 CPlaceNodeInfo::CPlaceNodeInfo(ISceneGraph *pSceneGraph):m_pSceneGraph(pSceneGraph)
 {
@@ -119,6 +119,7 @@ void CPlaceNodeInfo::InitNode()
 //    spOffset.sWidth=0;
 //    m_pLabel->SetPixelOffset(spOffset);
 }
+
 
 /// 样式更改
 void CPlaceNodeInfo::TypeChanged()

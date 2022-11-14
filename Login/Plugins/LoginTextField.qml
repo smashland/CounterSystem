@@ -8,7 +8,7 @@ TextField {
     clip: true
     verticalAlignment: Text.AlignVCenter
     leftPadding:  52*dpx
-    readOnly:true
+//    readOnly:true
     activeFocusOnPress:true
     background: Rectangle {
         color: "transparent"

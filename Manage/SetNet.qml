@@ -14,100 +14,32 @@ Rectangle {
     width:710*dpx
     height: 530*dpy
     color: "transparent"
-    property var ip: [4]
+    property string ip: "0.0.0.0"
     property int nport: 0
-    signal toConnect()
 
     property int iTime: 0
 
-    function tryToConnect()
-    {
-        timer.start();
-    }
-    function connectFaild()
+    Component.onCompleted:
     {
         if(1 === $app.settings.conType)
         {
-            console.log("连接失败")
+            chuankouGroupBox.visible = true
         }
         else
         {
-            console.log("连接超时")
-        }
-    }
-    Timer
-    {
-        id:timer
-        interval:iTime
-        running:false
-        onTriggered:
-        {
-            if(0 === $app.settings.conType)
-            {
-                connectFaild();
-            }
-        }
-    }
-//    CheckBoxItem {
-//        id: dkcl
-//        anchors.left: parent.left
-//        anchors.leftMargin: 60*dpx
-//        anchors.top: parent.top
-//        anchors.topMargin: 35*dpy
-//        name: qsTr("断开自动重连")
-//        boolCheck:false
-//        MouseArea {
-//            anchors.fill: parent
-//            onClicked: {
-//                if(boolCheck === true) {
-//                    tryToConnect()
-//                }else if(boolCheck === false) {
-//                    timer.stop();
-//                }
-//            }
-//        }
-//    }
-
-    Item {
-        anchors.left: parent.left
-        anchors.leftMargin: 60*dpx
-        anchors.top: parent.top
-        anchors.topMargin: 35*dpy
-        CheckBox {
-            id: check
-            y: 2*dpy
-            width: 17*dpx
-            height: 17*dpy
-            checked:true
-            indicator: Rectangle {
-                width: check.width
-                height: check.height
-                color: "#1d4f88"
-                border.color: "#3b6daa"
-                Image {
-                    width: check.width
-                    height: check.height
-                    source: check.checked ? "qrc:/Image/true.png" : ""
-                }
-            }
-            onClicked: {
-                if(checked === true) {
-                    tryToConnect()
-                }else if(checked === false) {
-                    timer.stop();
-                }
-            }
-        }
-        Text {
-            id: checkText
-            x: 27*dpx
-            color: "#d5e2f5"
-            font.pixelSize: 14*dpx
-            font.family: "Microsoft YaHei"
-            text: qsTr("断开自动重连")
+            wifiGroupBox.visible = true
         }
     }
 
+    Timer {
+        id: timer
+        interval: iTime
+        running: false
+        onTriggered: {
+            $app.settings.setWifiInfo(ip,nport);
+            $app.startConnect();
+        }
+    }
 
     BasicGroupBox
     {
@@ -115,10 +47,50 @@ Rectangle {
         y: 15*dpy
         title: qsTr("网络设置:")
         height: 280*dpy
-        visible: true
+        visible: false
+        Item {
+            anchors.left: parent.left
+            anchors.leftMargin: 60*dpx
+            anchors.top: parent.top
+            anchors.topMargin: 35*dpy
+            height: 17*dpy
+            CheckBox {
+                id: check
+                y: 2*dpy
+                width: 17*dpx
+                height: 17*dpy
+                checked:true
+                indicator: Rectangle {
+                    width: check.width
+                    height: check.height
+                    color: "#1d4f88"
+                    border.color: "#3b6daa"
+                    Image {
+                        width: check.width
+                        height: check.height
+                        source: check.checked ? "qrc:/Image/true.png" : ""
+                    }
+                }
+                onClicked: {
+                    if(checked === true) {
+                        timer.start();
+                    }else if(checked === false) {
+                        timer.stop();
+                    }
+                }
+            }
+            Text {
+                id: checkText
+                x: 27*dpx
+                color: "#d5e2f5"
+                font.pixelSize: 14*dpx
+                font.family: "Microsoft YaHei"
+                text: qsTr("断开自动重连")
+            }
+        }
         Column {
             x:60*dpx
-            y:50*dpy
+            y:60*dpy
             spacing:15*dpy
 
             Row {
@@ -151,48 +123,11 @@ Rectangle {
                     font.bold: false
                 }
 
-                Repeater
-                {
-                    id:repeater
-                    model: 3
-                    x:ipText.contentWidth+80*dpx
-                    Row
-                    {
-                        TextFieldItem {
-                            id:textField
-                            validator: RegExpValidator
-                            {
-                                regExp:0 === index ? /(?!0)(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d))/ :/(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d))/
-                            }
-                            onActiveFocusChanged:
-                            {
-                                if(!activeFocus)
-                                {
-                                    ip[index] = textField.text
-                                }
-                            }
-                        }
-
-                        TextListItem {
-                            text: "."
-                            heightTitle: 34*dpx
-                            font.bold: false
-                        }
-                    }
-                }
                 TextFieldItem
                 {
                     id:outInput
-                    width: 100*dpx
-                    validator: IntValidator{bottom: 0;top:65535;}
-
-                    onActiveFocusChanged:
-                    {
-                        if(!activeFocus)
-                        {
-                            ip[3] = outInput.text
-                        }
-                    }
+                    width: 150*dpx
+                    text: $app.settings.getSip()
                 }
             }
             Row {
@@ -208,14 +143,7 @@ Rectangle {
                     width: 100*dpx
                     x:dkh.contentWidth+80*dpx
                     validator: IntValidator{bottom: 0;top:65535;}
-
-                    onActiveFocusChanged:
-                    {
-                        if(!activeFocus)
-                        {
-                            nport = portInput.text
-                        }
-                    }
+                    text: $app.settings.getPort()
                 }
 
             }
@@ -229,22 +157,8 @@ Rectangle {
             }
             nameButton: "连接"
             onClicked: {
-                var sIp='';
-                for(var nIndex=0; nIndex<4; ++nIndex)
-                {
-                    sIp += ip[nIndex];
-                    if(3 !== nIndex)
-                    {
-                        sIp+='.'
-                    }
-                }
-
-                console.log(sIp,nport);
-
-//                    selectWifi.close();
-                $app.settings.setWifiInfo(sIp,nport);
+                $app.settings.setWifiInfo(ip,nport);
                 $app.startConnect();
-                toConnect();
             }
         }
     }
@@ -252,11 +166,10 @@ Rectangle {
     BasicGroupBox
     {
         id: chuankouGroupBox
-        anchors.top: wifiGroupBox.bottom
-        anchors.topMargin: 20
+        y: 15*dpy
         height: 150*dpy
         title: qsTr("串口设置:")
-        visible: true
+        visible: false
         Text {
             id: chuankouhao
             x:60*dpx
@@ -414,11 +327,28 @@ Rectangle {
             onClicked: {
                 if(control.currentText!=="")
                 {
-                    $app.settings.setComName(control.currentText);
-                    $app.startConnect();
-//                    $licCheck.saveLicense(lrText.text);
-//                    $licCheck.checkLicense()
+                    if($app.settings.isExistcomName(control.currentText))
+                    {
+                        $app.settings.setComName(control.currentText);
+                        $app.startConnect();
+                        toConnect();
+                    }
+                    else
+                    {
+                        comErrorDialog.visible = true
+                        control.model=$app.settings.comNameList();
+
+                    }
+
                 }
+                else
+                {
+                    if(control.currentText==="")
+                    {
+                        comErrorDialog.visible = true
+                    }
+                }
+
             }
         }
 

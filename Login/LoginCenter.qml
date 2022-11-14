@@ -34,6 +34,7 @@ Item
         x: (mainWindow.width-loginRect.width)/2
         y: (mainWindow.height-loginRect.height)/2
     }
+
     Rectangle
     {
         id: rectangle

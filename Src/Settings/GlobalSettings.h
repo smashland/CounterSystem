@@ -21,14 +21,21 @@ public:
     Q_PROPERTY(QVariantList harmSetting MEMBER m_harmSetting NOTIFY harmSettingChanged)
     Q_PROPERTY(QVariantList systemSetting MEMBER m_sysSetting NOTIFY sysSettingChanged)
 
+//    Q_PROPERTY(int sIp MEMBER m_sIp NOTIFY sIpChanged)
+//    Q_PROPERTY(int sPort MEMBER m_sPort NOTIFY sPortChanged)
+
     Q_INVOKABLE QColor type2Color(const QString& sType);
     Q_INVOKABLE QColor type2BackColor(const QString& sType);
     Q_INVOKABLE QStringList types();
     Q_INVOKABLE int index(const QString& sType);
     Q_INVOKABLE QStringList comNameList();
+    Q_INVOKABLE bool isExistcomName(const QString& sComName);
 
     Q_INVOKABLE void setComName(const QString& sComName);
     Q_INVOKABLE void setWifiInfo(const QString& sIP, ushort unPort);
+
+    Q_INVOKABLE QString getSip();
+    Q_INVOKABLE ushort getPort();
 
     Q_INVOKABLE void setStart();
     Q_INVOKABLE void setStop();
@@ -62,6 +69,9 @@ signals:
     void scoreSettingChanged(const QVariantList&);
     void harmSettingChanged(const QVariantList&);
     void sysSettingChanged(const QVariantList&);
+
+//    int sIpChanged;
+//    int sPortChanged;
 public slots:
     void updateConfig();
 private:

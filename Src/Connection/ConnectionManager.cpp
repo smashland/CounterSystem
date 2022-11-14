@@ -56,6 +56,7 @@ bool CConnectionManager::InitConnection(CONN_TYPE emType)
         m_emType = CONN_UNUSE;
         break;
     }
+    qDebug()<<"连接类型\t"<<m_emType;
 
     if(nullptr != m_pConnection)
     {

@@ -1,4 +1,4 @@
-#include "EarthManager.h"
+﻿#include "EarthManager.h"
 #include <QApplication>
 #include <QFile>
 #include <QDir>
@@ -16,6 +16,11 @@ EarthManager::EarthManager(QObject *parent)
 {
     ReadFile();
     praseCurrentEarth();
+}
+
+EarthManager::~EarthManager()
+{
+    saveFile();
 }
 
 CSetEarth *EarthManager::createMap()
@@ -49,15 +54,21 @@ CSetEarth *EarthManager::addMaps(const QString &earthName)
     return nullptr;
 }
 
-bool EarthManager::deleteEarth(QObject *pEarth)
+bool EarthManager::deleteEarth(const QString &earthName)
 {
-    bool bRemove = m_listEarth.removeOne(pEarth);
-    if(bRemove)
+    auto findOne = m_mapName2EarthInfo.find(earthName);
+    if(m_mapName2EarthInfo.end() != findOne)
     {
-        delete pEarth;
+        m_listEarth.removeOne(findOne.value());
         emit earthChanged();
+        delete findOne.value();
+        m_mapName2EarthInfo.erase(findOne);
+        return(true);
     }
-    return(bRemove);
+    else
+    {
+        return(false);
+    }
 }
 
 void EarthManager::ReadFile()
@@ -77,17 +88,19 @@ void EarthManager::ReadFile()
         }
         QJsonObject rootObj = jsonDoc.object();
         auto array = rootObj.value(cs_JsonKey).toArray();
-        foreach(auto one, array){
-            CSetEarth* pNote = new CSetEarth;
-            pNote->readEarth(one.toObject());
-            m_listEarth.append(pNote);
+        for (int i = 0; i < array.size(); ++i)
+        {
+            CSetEarth* pNote = new CSetEarth(this);
+             pNote->readEarth(array[i].toObject());
+             m_mapName2EarthInfo.insert(array[i].toObject().value("Name").toString(),pNote);
+             m_listEarth.append(pNote);
+
         }
     }
 }
 
 void EarthManager::saveFile()
 {
-    qDebug()<<"保存地图信息";
     QString sFilePath = QApplication::applicationDirPath() + QString("/Data/Earth/%1").arg(cs_FileName);
     QFile openFile(sFilePath);
     if(openFile.open(QFile::WriteOnly))

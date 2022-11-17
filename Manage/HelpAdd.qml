@@ -1,4 +1,4 @@
-import QtQuick 2.12
+﻿import QtQuick 2.12
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import MyItem 1.0
@@ -23,7 +23,6 @@ Rectangle {
         nameButton: "添加"
         onClicked: {
             fileDialog.open()
-//            listView.model = $app.openHelp()
         }
     }
     FileDialog {
@@ -84,7 +83,8 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-
+                       $app.removeHelpFile(modelData)
+                       listView.model = $app.openHelp()
                     }
                 }
             }

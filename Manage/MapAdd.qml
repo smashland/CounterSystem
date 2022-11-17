@@ -1,4 +1,4 @@
-import QtQuick 2.0
+﻿import QtQuick 2.0
 import QtQuick.Controls 2.3
 import QtQuick.Dialogs 1.3
 import Qt.labs.platform 1.1
@@ -121,11 +121,40 @@ Rectangle {
         }
         nameButton: "确定"
         onClicked: {
-            signalAddMap(mapName.name,mapPath.name,mapLat.name,mapLon.name);
-            earthManager.saveFile();
-            mapAdd.visible = false;
-            qingkong()
+            if(mapName.name===""||mapPath.name==="")
+            {
+                earthPopup.text="地图名称或路径不能为空"
+                earthPopup.visible=true
+                timer.start()
+                console.log("地图名称或者路径不能为空");
+            }
+            else
+            {
+                signalAddMap(mapName.name,mapPath.name,mapLat.name,mapLon.name);
+            }
         }
+    }
+
+    ScePopup {
+        id: earthPopup
+        visible: false
+        anchors.centerIn: parent
+    }
+    Timer {
+        id: timer
+        interval: 2500
+        repeat: fasle
+        running: fasle
+        triggeredOnStart: false
+        onTriggered: {
+            earthPopup.visible = false
+        }
+    }
+    function earthTip()
+    {
+        earthPopup.text="地图名称重复，请重新输入"
+        earthPopup.visible=true
+        timer.start()
     }
     function qingkong() {
         mapPath.name = ""

@@ -1,4 +1,4 @@
-import QtQuick 2.12
+﻿import QtQuick 2.12
 import QtQuick.Controls 2.3
 import "Setting" as Settings
 import "Common"
@@ -217,7 +217,7 @@ Rectangle
         id: scePopup2
         visible: false
         anchors.centerIn: parent
-        text: "方案名称相同，请重新添加方案！"
+        text: "方案名称为空或重复，请重新添加方案！"
     }
         CloseBar {
             id: closebar

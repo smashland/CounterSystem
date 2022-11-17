@@ -1,4 +1,4 @@
-import QtQuick 2.7
+﻿import QtQuick 2.7
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
 import QtQuick.Dialogs 1.3
@@ -303,8 +303,6 @@ Rectangle
             onClicked: {
                 ok(shebeiId.name,personName.name, position/*combobox_renyuan.currentIndex*/,
                    zhenying.currentIndex,control3.checked,imagePath);
-                personAdd.visible = false
-                qingkong()
             }
 
         }
@@ -318,6 +316,16 @@ Rectangle
                 qingkong()
             }
         }
+    }
+    ScePopup {
+        id: scePopup
+        visible: false
+        anchors.centerIn: parent
+        text: "人员ID重复，请重新输入！"
+    }
+    function scePopupSignal(sceSignal)
+    {
+        scePopup.visible=sceSignal
     }
     function qingkong() {
         shebeiId.name=""

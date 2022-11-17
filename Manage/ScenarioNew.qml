@@ -1,4 +1,4 @@
-//                                                  新建方案
+﻿//                                                  新建方案
 import QtQuick 2.12
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
@@ -33,9 +33,11 @@ Item {
                 person.imagePath=imPath;
                 listView.model=modifySceInfo.listPerson
                 nCount = modifySceInfo.getCount();
+                personAdd.visible = false
+                personAdd.qingkong()
             }
             else{
-                scePopup.visible = true
+                personAdd.scePopupSignal(true)
                 timer.start()
             }
 
@@ -247,16 +249,21 @@ Item {
             nameButton: "确定"
             onClicked: {
                 if(nameItemContent.text === '') {
-                    console.log("没有方案名称")
+                    scePopup2.visible = true
+                    timer.start()
                 }else {
                     if(null===sceManager.addScenari(nameItemContent.text,modifySceInfo))
                     {
                         scePopup2.visible = true
                         timer.start()
                     }
-                    sceManager.write();
-                    scenarioNew.visible = false
-                    qingkong()
+                    else
+                    {
+                        sceManager.write();
+                        scenarioNew.visible = false
+                        qingkong()
+                    }
+
                 }
             }
         }
@@ -273,13 +280,6 @@ Item {
             }
         }
     }
-    ScePopup {
-        id: scePopup
-        visible: false
-        anchors.centerIn: parent
-        text: "人员ID重复，请重新输入！"
-    }
-
     Timer {
         id: timer
         interval: 2500
@@ -287,7 +287,7 @@ Item {
         running: fasle
         triggeredOnStart: false
         onTriggered: {
-            scePopup.visible = false
+            personAdd.scePopupSignal(false)
             scePopup2.visible = false
         }
     }

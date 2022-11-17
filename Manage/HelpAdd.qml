@@ -63,6 +63,31 @@ Rectangle {
                     $app.openFile("file:///"+modelData)
                 }
             }
+            ViewButton {
+                width: 22*dpx
+                height: 22*dpx
+                color: viewColor_shanchu
+                anchors.right: parent.right
+                anchors.rightMargin: 10*dpx
+                y: 8 *dpy
+                Text {
+                    id:textIcon
+                    color: "#ffffff"
+                    font.family: "iconfont"
+                    font.pixelSize: 16*dpx
+                    anchors.centerIn: parent
+                    width: textIcon.contentWidth
+                    height: textIcon.contentHeight
+                    text: "\ue61c"
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+
+                    }
+                }
+            }
         }
 
     }

@@ -1,4 +1,4 @@
-import QtQuick 2.12
+﻿import QtQuick 2.12
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import MyItem 1.0
@@ -26,10 +26,12 @@ Rectangle {
                 earth.nLat = lat;
                 earth.nLon = lon;
                 listView.model=earthManager.earthList
+                earthManager.saveFile();
+                mapAdd.visible = false;
+                mapAdd.qingkong();
             }
             else{
-                console.log("地图名称重复")
-
+                mapAdd.earthTip();
             }
         }
         target: mapAdd
@@ -66,7 +68,8 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-
+                        earthManager.deleteEarth(modelData.earthName)
+                        listView.model=earthManager.earthList
                     }
                 }
             }

@@ -1,4 +1,4 @@
-#include "CSetEarth.h"
+﻿#include "CSetEarth.h"
 
 CSetEarth::CSetEarth(QObject *parent)
     : QObject{parent}

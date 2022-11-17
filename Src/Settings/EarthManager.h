@@ -1,4 +1,4 @@
-#ifndef EARTHMANAGER_H
+﻿#ifndef EARTHMANAGER_H
 #define EARTHMANAGER_H
 
 #include <QObject>
@@ -16,7 +16,7 @@ public:
     Q_PROPERTY(int currentLon MEMBER m_nCurrentLon NOTIFY currentLonChanged)
 
     explicit EarthManager(QObject *parent = nullptr);
-
+    ~EarthManager();
 
     Q_INVOKABLE CSetEarth* createMap();
     /**
@@ -30,7 +30,7 @@ public:
      * @param earthName
      * @return
      */
-    Q_INVOKABLE bool deleteEarth(QObject *pEarth);
+    Q_INVOKABLE bool deleteEarth(const QString &earthName);
 
     Q_INVOKABLE void saveFile();
 

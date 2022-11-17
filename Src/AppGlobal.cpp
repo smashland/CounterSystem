@@ -1,4 +1,4 @@
-#include <QGuiApplication>
+﻿#include <QGuiApplication>
 #include <QFontDatabase>
 
 #include <ISceneCore.h>
@@ -209,7 +209,19 @@ void QAppGlobal::openFile(const QUrl &rReplayFile)
     //    QString string = code->fromUnicode(str);
     QDesktopServices::openUrl(QUrl::fromLocalFile(str));
 }
-///
+///删除帮助说明文件
+bool QAppGlobal::removeHelpFile(const QUrl &rRemoveFile)
+{
+    QString filePath = rRemoveFile.toString();
+    if (filePath.isEmpty())//是否传入了空的路径
+        return false;
+
+    QFileInfo FileInfo(filePath);
+    if (FileInfo.isFile())//如果是文件
+        QFile::remove(filePath);
+    return true;
+}
+///设置打开语音
 void QAppGlobal::setOpenSpeak(bool bOpenSpeak)
 {
     if(bOpenSpeak!=m_bopenSpeak)
@@ -220,6 +232,7 @@ void QAppGlobal::setOpenSpeak(bool bOpenSpeak)
         emit openSpeakChanged();
     }
 }
+///得到语音设置
 bool QAppGlobal::getOpenSpeak()
 {
     int speak=CConfigInfo::GetInstance()->GetSpeack();

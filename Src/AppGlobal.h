@@ -1,4 +1,4 @@
-#ifndef APPGLOBAL_H
+﻿#ifndef APPGLOBAL_H
 #define APPGLOBAL_H
 
 #include <QObject>
@@ -50,6 +50,7 @@ public:
     Q_INVOKABLE QString copyFile(const QString &strImagePath, const QString &folderName = "Help");
     Q_INVOKABLE QStringList openHelp();
     Q_INVOKABLE void openFile(const QUrl &rReplayFile);
+    Q_INVOKABLE bool removeHelpFile(const QUrl &rRemoveFile);
 
     ///回放文件
     Q_INVOKABLE QStringList openPath();

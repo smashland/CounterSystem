@@ -42,7 +42,6 @@ Rectangle {
         model:earthManager.earthList
         delegate: DelegateRectangle {
             id: wrapper
-
             TextListItem {
                 id: fileName
                 text: modelData.earthName
@@ -56,6 +55,19 @@ Rectangle {
                     $app.changeEarth(modelData.earthPath)
                     earthManager.saveCurrentEarth(modelData.earthName,modelData.nLat,modelData.nLon);
                     earthManager.praseCurrentEarth();
+                }
+            }
+            ViewButton {
+                name: qsTr("删除")
+                color: viewColor_shanchu
+                anchors.right: parent.right
+                anchors.rightMargin: 10*dpx
+                y: 10 *dpy
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+
+                    }
                 }
             }
         }

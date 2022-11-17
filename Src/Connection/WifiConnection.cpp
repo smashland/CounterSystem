@@ -21,6 +21,7 @@ CWifiConnection::~CWifiConnection()
 /// 连接
 void CWifiConnection::Connect()
 {
+    qDebug()<<CConfigInfo::GetInstance()->GetIP().c_str()<<':'<<CConfigInfo::GetInstance()->GetPort();
     m_pTcp->connectToHost(CConfigInfo::GetInstance()->GetIP().c_str(),CConfigInfo::GetInstance()->GetPort());
 }
 

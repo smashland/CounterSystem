@@ -159,6 +159,8 @@ Rectangle {
             onClicked: {
                 $app.settings.setWifiInfo(ip,nport);
                 $app.startConnect();
+                wangxianPopup.visible = false
+                lianjieTimer.start()
             }
         }
     }
@@ -331,11 +333,12 @@ Rectangle {
                     {
                         $app.settings.setComName(control.currentText);
                         $app.startConnect();
-                        toConnect();
+                        chuankouPopup.visible = true;// 串口连接弹窗
+                        lianjieTimer.start();
                     }
                     else
                     {
-                        comErrorDialog.visible = true
+                        comErrorDialog.visible = true// 串口错误弹窗
                         control.model=$app.settings.comNameList();
 
                     }
@@ -349,6 +352,29 @@ Rectangle {
                     }
                 }
 
+            }
+        }
+        ScePopup {
+            id: wangxianPopup
+            visible: false
+            anchors.centerIn: parent
+            text: "串口已连接！"
+        }
+        ScePopup {
+            id: chuankouPopup
+            visible: false
+            anchors.centerIn: parent
+            text: "串口已连接！"
+        }
+        Timer {
+            id: lianjieTimer
+            interval: 2500
+            repeat: fasle
+            running: fasle
+            triggeredOnStart: false
+            onTriggered: {
+                chuankouPopup.visible = false
+                wangxianPopup.visible = false
             }
         }
 

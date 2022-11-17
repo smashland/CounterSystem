@@ -4,7 +4,7 @@ import QtQuick.Controls 2.15
 import "../Common"
 Item {
     id: killExpand
-    width: 1040*dpx
+    width: 630*dpx
     height: 50 *dpy
     Image {
         anchors.fill: parent
@@ -39,29 +39,10 @@ Item {
         horizontalAlignment: Text.AlignHCenter
     }
 
-    Text {
-        anchors.right: parent.right
-        anchors.rightMargin: 50*dpx
-        height: 50*dpy
-        text: qsTr("查看更多 >")
-        color: "#ffb128"
-        font.family: "MicrosoftYaHei-Bold"
-        font.pixelSize: 22*dpx
-        verticalAlignment: Text.AlignVCenter
-        horizontalAlignment: Text.AlignHCenter
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                killSituation.visible = true
-            }
-        }
-    }
-
-
     Rectangle
     {
         id:showNotice
-        width: 196*dpx
+        width: 400*dpx
         height: 50*dpy
         x: 150*dpx
         color: "transparent"
@@ -93,7 +74,7 @@ Item {
                 id: enter
                 from: 0
                 to: - (showText.width - 190* dpx)
-                duration: 1000
+                duration: 3000
                 running: false
             }
         }
@@ -103,15 +84,20 @@ Item {
             target: $app
             function onNotic(sNoticInfo)
             {
-                showText.text += sNoticInfo+ " "
+                showText.text += sNoticInfo+ "   "
 //                showText.text += '\n'
-                console.log(showText.contentWidth)
                 if(showText.width > showNotice.width) {
                     enter.running = true
                 }
             }
         }
 
+    }
+    MouseArea {
+        anchors.fill: parent
+        onDoubleClicked: {
+            killSituation.visible = true
+        }
     }
 
 

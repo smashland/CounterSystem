@@ -1,11 +1,9 @@
 import QtQuick 2.0
 
 Item {
-    property int enableSize: 4
+    property int enableSize: 3
     property bool isPressed: false
     property point customPoint
-
-
 
     //左上角
     Item {

@@ -19,10 +19,10 @@ ChartView {
     height: 310*dpy
     anchors.fill: parent
     legend.visible: false
-    antialiasing: true
     animationOptions: ChartView.AllAnimations
     backgroundColor: "transparent"
     legend.alignment:Qt.AlignTop
+    antialiasing:false
     PieSeries {
         holeSize:0.58
         PieSlice {

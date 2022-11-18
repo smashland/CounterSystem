@@ -1,4 +1,4 @@
-#include <QApplication>
+﻿#include <QApplication>
 #include <QDir>
 #include <QSerialPortInfo>
 #include <QXmlStreamReader>
@@ -260,6 +260,7 @@ QStringList CConfigInfo::GetComNameList()
 
 void CConfigInfo::SetIP(const QString &sIP)
 {
+    qDebug()<<"测试设置IP"<<sIP<<" "<<sIP.toUtf8().data();
     m_pConfig->mutable_coninfo()->set_sip(sIP.toUtf8().data());
 }
 

@@ -1,4 +1,4 @@
-import QtQuick 2.12
+﻿import QtQuick 2.12
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Controls.Styles 1.2
@@ -323,7 +323,7 @@ Rectangle {
             background: Rectangle {
                 color: "#265aef"
             }
-            nameButton: "连接"
+            nameButton: "连接111"
             onClicked: {
                 if(control.currentText!=="")
                 {

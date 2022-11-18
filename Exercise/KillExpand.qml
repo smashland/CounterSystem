@@ -1,4 +1,4 @@
-//                                                          设置窗口条展开
+﻿//                                                          设置窗口条展开
 import QtQuick 2.12
 import QtQuick.Controls 2.15
 import "../Common"

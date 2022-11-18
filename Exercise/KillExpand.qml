@@ -8,7 +8,7 @@ Item {
     height: 50 *dpy
     Image {
         anchors.fill: parent
-        source: "qrc:/Image/Killing_unfold.png"
+        source: "qrc:/Image/Killing_unfoldo.png"
     }
     Text {
         x: 10*dpx

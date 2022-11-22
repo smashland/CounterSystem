@@ -60,6 +60,8 @@ public:
 
     void setGroupId(int typeID);
 
+     Q_INVOKABLE QStringList getListNoice();
+
 
 signals:
     /**
@@ -95,6 +97,8 @@ private:
     bool            m_bopenSpeak;      ///开启语音
 
     bool            m_bopenChonglian;      /// 打开自动重连
+
+    QStringList     m_slistNoice;          ///播报内容
 
 };
 

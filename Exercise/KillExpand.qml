@@ -38,6 +38,23 @@ Item {
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
     }
+    Text {
+        anchors.right: parent.right
+        anchors.rightMargin: 50*dpx
+        height: 50*dpy
+        text: qsTr("查看更多 >")
+        color: "#ffb128"
+        font.family: "MicrosoftYaHei-Bold"
+        font.pixelSize: 22*dpx
+        verticalAlignment: Text.AlignVCenter
+        horizontalAlignment: Text.AlignHCenter
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                killSituation.visible = true
+            }
+        }
+    }
 
     Rectangle
     {

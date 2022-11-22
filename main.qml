@@ -9,11 +9,13 @@ import "Common"
 
 Window {
     id: mainWindow
-    width: Screen.width
-    height: Screen.height
+    property var sWidth: Screen.width
+    property var sHeight: Screen.height
+    width: sWidth
+    height: sHeight
     property bool fullScreen: true
 
-//    flags: fullScreen ? Qt.Window : Qt.FramelessWindowHint
+    //    flags: fullScreen ? Qt.Window : Qt.FramelessWindowHint
     visible: true
     color: "transparent"
     modality: Qt.ApplicationModal
@@ -42,6 +44,9 @@ Window {
         case 3:
             flags = Qt.Window
             break;
+//        case 5:
+//            flags = Qt.WindowFullScreen
+//            break;
         }
     }
 
@@ -126,7 +131,8 @@ Window {
         }
     }
 
-    RemoveDialog {
+    RemoveDialog
+    {
         id: removeDialog_shouquanma
         visible: false
         title:"退出"
@@ -144,7 +150,8 @@ Window {
             }
         }
     }
-    RemoveDialog {
+    RemoveDialog
+    {
         id: removeDialog_quit
         visible: false
         title:"退出"
@@ -156,7 +163,8 @@ Window {
         }
     }
 
-    RemoveDialog {
+    RemoveDialog
+    {
         id: comErrorDialog
         visible: false
         title:"错误"

@@ -13,7 +13,6 @@
         <file>Image/Grey_bg_all.png</file>
         <file>Image/Infor_onoff.png</file>
         <file>Image/Killing_packup.png</file>
-        <file>Image/Killing_unfold.png</file>
         <file>Image/Login_bg.jpg</file>
         <file>Image/Login_box.png</file>
         <file>Image/Login_box_2.png</file>
@@ -159,5 +158,6 @@
         <file>Login/Plugins/LoginButton.qml</file>
         <file>Login/Plugins/LoginImage.qml</file>
         <file>Login/Plugins/LoginTextField.qml</file>
+        <file>Image/Killing_unfoldo.png</file>
     </qresource>
 </RCC>

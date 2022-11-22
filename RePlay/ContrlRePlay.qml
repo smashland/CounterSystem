@@ -14,107 +14,113 @@ Item
         Row
         {
 
-            spacing: bofang.contentWidth/2
+            spacing: 10*dpx
             /// 演习开始按钮
-            Button
-            {
-                id: start
-                width: bofang.contentWidth
-                height: bofang.contentHeight
-                property bool bStart: false
-                contentItem: Text {
-                    id: bofang
-                    //  x: 36 *dpx
-                    z: 2
-                    color: "green"
-                    text: "\ue609"
-                    font.family: "iconfont"
-                    font.pixelSize: 32*dpx
-                    verticalAlignment: Text.AlignVCenter
-                }
-                background: Rectangle{
-                    color:"transparent"
-                }
-
-                onPressed:
+            Row {
+                Button
                 {
-                    if(bStart)
-                    {
-                        $app.allData.pauseReplay();
-                        bofang.text= "\ue609"
+                    id: start
+                    width: bofang.contentWidth
+                    height: bofang.contentHeight
+                    property bool bStart: false
+                    contentItem: Text {
+                        id: bofang
+                        //  x: 36 *dpx
+                        z: 2
+                        color: "#00CD66"
+                        text: "\ue609"
+                        font.family: "iconfont"
+                        font.pixelSize: 32*dpx
+                        verticalAlignment: Text.AlignVCenter
                     }
-                    else
+                    background: Rectangle{
+                        color:"transparent"
+                    }
+
+                    onPressed:
                     {
-                        if(rePlayShow.bStart)
+                        if(bStart)
                         {
-                            $app.allData.beginReplay();
-                            rePlayShow.bStart = false;
-                            time_run.start();
+                            $app.allData.pauseReplay();
+                            bofang.text= "\ue609"
+                            time_run.stop()
+//                            console.log("00000000000000000000000000")
                         }
                         else
                         {
-                            $app.allData.pauseReplay();
+                            if(rePlayShow.bStart)
+                            {
+                                $app.allData.beginReplay();
+                                rePlayShow.bStart = false;
+                                time_run.start();
+//                                console.log("111111111111111111111111")
+                            }
+                            else
+                            {
+                                $app.allData.pauseReplay();
+//                                console.log("2222222222222222222222222")
+                                time_run.start();
+                            }
+                            bofang.text= "\ue626"
                         }
-                        bofang.text= "\ue626"
-                    }
-                    bStart = !bStart
-
-                }
-            }
-
-            Slider
-            {
-                id:horizontalSlider
-                from: 0
-                value: 0
-                to: nTimes
-                stepSize:1
-                y:sliderBackground.implicitHeight
-                background:Rectangle{
-                    id: sliderBackground
-                    x: horizontalSlider.leftPadding
-                    y: horizontalSlider.topPadding+horizontalSlider.availableHeight/2-height/2
-                    color:"white"
-                    implicitWidth: 260
-                    implicitHeight: 6
-                    width:implicitWidth
-                    height: implicitHeight
-                    Rectangle {
-                        width:horizontalSlider.visualPosition *parent.width
-                        height: parent.height
-                        color:"green"
+                        bStart = !bStart
                     }
                 }
 
-                handle: Rectangle{
-                    id:sliderHandle
-                    x: horizontalSlider.leftPadding+horizontalSlider.visualPosition*(horizontalSlider.availableWidth)-2
-                    y: horizontalSlider.topPadding+horizontalSlider.availableHeight/2-height/2
-                    color: horizontalSlider.pressed?"red":"orange"
-                    implicitWidth: 16
-                    implicitHeight: 16
-                    radius: 8
+                Slider
+                {
+                    id:horizontalSlider
+                    from: 0
+                    value: 0
+                    to: nTimes
+                    stepSize:1
+                    y:sliderBackground.implicitHeight
+                    background:Rectangle{
+                        id: sliderBackground
+                        x: horizontalSlider.leftPadding
+                        y: horizontalSlider.topPadding+horizontalSlider.availableHeight/2-height/2
+                        color:"white"
+                        implicitWidth: 260
+                        implicitHeight: 6
+                        width:implicitWidth
+                        height: implicitHeight
+                        Rectangle {
+                            width:horizontalSlider.visualPosition *parent.width
+                            height: parent.height
+                            color:"#00CD66"
+                        }
+                    }
+
+                    handle: Rectangle{
+                        id:sliderHandle
+                        x: horizontalSlider.leftPadding+horizontalSlider.visualPosition*(horizontalSlider.availableWidth)-2
+                        y: horizontalSlider.topPadding+horizontalSlider.availableHeight/2-height/2
+                        color: horizontalSlider.pressed?"#dbbb5a":"#00CD66"
+                        implicitWidth: 12
+                        implicitHeight: 12
+                        radius: 6
+                    }
+
+                    onMoved:
+                    {
+                        $app.allData.setSimuTime(value)
+                    }
                 }
 
-                onMoved:
+                Connections
                 {
-                    $app.allData.setSimuTime(value)
+                    target: $app.allData
+                    function onSimTimeChanged(simTime)
+                    {
+                        horizontalSlider.value = simTime;
+                    }
                 }
             }
-
-            Connections
-            {
-                target: $app.allData
-                function onSimTimeChanged(simTime)
-                {
-                    horizontalSlider.value = simTime;
-                }
-            }
-
 
             /// 关闭按钮
             Button
             {
+                y: 1*dpy
                 width: shanchu.contentWidth
                 height: shanchu.contentHeight
                 contentItem:Text {
@@ -122,7 +128,7 @@ Item
                     color: "#ffffff"
                     text: "\ueaf2"
                     font.family: "iconfont"
-                    font.pixelSize: 32*dpx
+                    font.pixelSize: 28*dpx
                     verticalAlignment: Text.AlignVCenter
                 }
                 background: Rectangle{
@@ -135,11 +141,6 @@ Item
                 }
             }
 
-            CampHidden {
-                id: xianyin
-                y: 5*dpy
-                visible: true
-            }
         }
 
         RemoveDialog {
@@ -162,21 +163,18 @@ Item
 
             }
         }
+    }
 
-
-        Text {
-            id: timeText
-            x:(parent.width-width)/2
-            text: formateTime(nTimes)
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            height: 30
-            font.pixelSize: 16*dpy
-            color: "white"
-            style:Text.Outline;styleColor: "black"
-            font.family: "Microsoft YaHei"
-        }
-
+    Text {
+        id: timeText
+        x: (index.width-width)/2
+        y: 30*dpy
+        text: formateTime(nTimes)
+        height: 30
+        font.pixelSize: 16*dpy
+        color: "white"
+        style:Text.Outline;styleColor: "black"
+        font.family: "Microsoft YaHei"
     }
     function formateTime(time) {
         const h = parseInt(time / 3600)
@@ -197,8 +195,24 @@ Item
             if (formateTime(nTimes) <= "00:00") {
                 time_run.stop()
                 bofang.text= "\ue609"
+
+                rePlayShow.visible=false
+                rePlayShow.bStart = true
+                $app.settings.endReplay()
+                $app.allData.endReplay()
+                manoeuvre.imgSource = "qrc:/Image/Start_bg.png"
+                manoeuvre.height = 136*dpx
+                xianyin.isXianshi()
+
+                footerBar.btnPlayback.checked = true
             }
         }
+    }
+    CampHidden {
+        id: xianyin
+        y: 14*dpy
+        x: 1670*dpx
+        visible: true
     }
 
 }

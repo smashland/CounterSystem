@@ -98,6 +98,7 @@ Item {
             }
         }
 
+        //上面显示的击杀情况
         Connections
         {
             target: $app

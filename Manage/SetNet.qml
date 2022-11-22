@@ -36,7 +36,7 @@ Rectangle {
         interval: iTime
         running: false
         onTriggered: {
-            $app.settings.setWifiInfo(ip,nport);
+            $app.settings.setWifiInfo(outInput.text,portInput.text);
             $app.startConnect();
         }
     }
@@ -157,8 +157,19 @@ Rectangle {
             }
             nameButton: "连接"
             onClicked: {
-                $app.settings.setWifiInfo(ip,nport);
-                $app.startConnect();
+                if(outInput.text!==""&&portInput.text!=="")
+                {
+                    $app.settings.setWifiInfo(outInput.text,portInput.text);
+                    $app.startConnect();
+                }
+                else
+                {
+                    if(outInput.text===""||portInput.text!=="")
+                    {
+                        sIpErrorDialog.visible=true
+                    }
+                }
+
             }
         }
     }
@@ -323,7 +334,7 @@ Rectangle {
             background: Rectangle {
                 color: "#265aef"
             }
-            nameButton: "连接111"
+            nameButton: "连接"
             onClicked: {
                 if(control.currentText!=="")
                 {

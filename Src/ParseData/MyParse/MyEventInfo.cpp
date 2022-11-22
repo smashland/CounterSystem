@@ -227,7 +227,7 @@ void CMyEventInfo::Update(const unsigned char *pData, int nLength)
                                 //                                        .arg(pShotPerson->id()).arg(QTime::currentTime().toString("hh:mm:ss"))
                                 //                                        .arg(type); QString::fromStdString(pShotPerson->name())
 
-                                QString listInfo=QString::fromUtf8("%1%2使用%3击中%4%5").arg(pShotPerson->id()).arg(pShotPerson->name().c_str()).arg(type)
+                                QString listInfo=QString::fromUtf8("%1%2使用%3炸死%4%5").arg(pShotPerson->id()).arg(pShotPerson->name().c_str()).arg(type)
                                         .arg(m_pPerson->id()).arg(m_pPerson->name().c_str());
 
                                 /// 发送消息

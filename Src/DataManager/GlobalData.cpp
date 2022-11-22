@@ -152,43 +152,56 @@ void CGlobalData::UpdateSimulationTime(const quint16 &uSimTimes)
             //            QString listInfo=QString::fromUtf8("%1被%2击中").arg(pPerson->id())
             //                    .arg(pPerson->hurtinfo(nHurtIndex).id());
             QString type;
-            switch (pPerson->hurtinfo(nHurtIndex).type())
+            QString oper;
+            int nGunType=pPerson->hurtinfo(nHurtIndex).type();
+            switch (nGunType)
             {
             case 0:
                 type = QString::fromUtf8("没有武器");
                 break;
             case 1:
                 type = QString::fromUtf8("步枪");
+                oper = QString::fromUtf8("击中");
                 break;
             case 2:
                 type = QString::fromUtf8("步枪");
+                oper = QString::fromUtf8("击中");
                 break;
             case 4:
                 type = QString::fromUtf8("手枪");
+                oper = QString::fromUtf8("击中");
                 break;
             case 8:
                 type = QString::fromUtf8("手雷");
+                oper = QString::fromUtf8("炸死");
                 break;
             case 16:
                 type = QString::fromUtf8("手雷");
+                oper = QString::fromUtf8("炸死");
                 break;
             case 32:
                 type = QString::fromUtf8("手枪");
+                oper = QString::fromUtf8("击中");
                 break;
             case 64:
                 type = QString::fromUtf8("爆炸物");
+                oper = QString::fromUtf8("炸死");
                 break;
             case 128:
                 type = QString::fromUtf8("狙击枪");
+                oper = QString::fromUtf8("击中");
                 break;
             default:
                 break;
             }
 
             auto pPerson1 = CDataManager::GetInstance()->GetOrCreatePersonInfo(pPerson->hurtinfo(nHurtIndex).id());
-            QString listInfo=QString::fromUtf8("%1%2使用%3击中%4%5").arg(pPerson->hurtinfo(nHurtIndex).id()).arg(pPerson1->name().c_str()).arg(type)
-                    .arg(pPerson->id()).arg(pPerson->name().c_str());
-            listInfo += CConfigInfo::GetInstance()->GetBodyName(pPerson->hurtinfo(nHurtIndex).hurtpart());
+            QString listInfo=QString::fromUtf8("%1%2使用%3%6%4%5").arg(pPerson->hurtinfo(nHurtIndex).id()).arg(pPerson1->name().c_str()).arg(type)
+                    .arg(pPerson->id()).arg(pPerson->name().c_str()).arg(oper);
+            if(nGunType!=0&&nGunType!=8&&nGunType!=16&&nGunType!=64)
+            {
+                listInfo += CConfigInfo::GetInstance()->GetBodyName(pPerson->hurtinfo(nHurtIndex).hurtpart());
+            }
 
             /// 发送消息
             CNoticeManager::GetInstance()->SetNoticInfo(listInfo);

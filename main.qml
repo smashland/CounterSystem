@@ -164,16 +164,19 @@ Window {
         content2: "请重新选择！"
         onYesPutDown: {
             comErrorDialog.close()
-//            $app.exitApp();
-//            Qt.quit();
         }
-//        onNoPutDown: {
-//            comErrorDialog.close()
-//            if(exitShowLabel !== removeDialog_shouquanma.content1)
-//            {
-//                removeDialog_shouquanma.content1 = exitShowLabel;
-//            }
-//        }
+    }
+
+
+    RemoveDialog {
+        id: sIpErrorDialog
+        visible: false
+        title:"错误"
+        content1: "IP地址或端口号不能为空，"
+        content2: "请重新填写！"
+        onYesPutDown: {
+            sIpErrorDialog.close()
+        }
     }
 
 }

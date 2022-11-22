@@ -43,6 +43,8 @@ Item
                         {
                             $app.allData.pauseReplay();
                             bofang.text= "\ue609"
+                            time_run.stop()
+//                            console.log("00000000000000000000000000")
                         }
                         else
                         {
@@ -51,15 +53,17 @@ Item
                                 $app.allData.beginReplay();
                                 rePlayShow.bStart = false;
                                 time_run.start();
+//                                console.log("111111111111111111111111")
                             }
                             else
                             {
                                 $app.allData.pauseReplay();
+//                                console.log("2222222222222222222222222")
+                                time_run.start();
                             }
                             bofang.text= "\ue626"
                         }
                         bStart = !bStart
-
                     }
                 }
 
@@ -160,6 +164,7 @@ Item
             }
         }
     }
+
     Text {
         id: timeText
         x: (index.width-width)/2
@@ -190,6 +195,16 @@ Item
             if (formateTime(nTimes) <= "00:00") {
                 time_run.stop()
                 bofang.text= "\ue609"
+
+                rePlayShow.visible=false
+                rePlayShow.bStart = true
+                $app.settings.endReplay()
+                $app.allData.endReplay()
+                manoeuvre.imgSource = "qrc:/Image/Start_bg.png"
+                manoeuvre.height = 136*dpx
+                xianyin.isXianshi()
+
+                footerBar.btnPlayback.checked = true
             }
         }
     }

@@ -34,20 +34,20 @@ Window {
 
     onVisibilityChanged:
     {
-//        switch(visibility)
-//        {
-//        case 2:
-//            flags = Qt.FramelessWindowHint|Qt.Window
-//            width= mainWindow.width + 1
-//            height= mainWindow.height + 1
+        switch(visibility)
+        {
+        case 2:
+            flags = Qt.FramelessWindowHint|Qt.Window
+            width= mainWindow.width + 1
+            height= mainWindow.height + 1
+            break;
+        case 3:
+            flags = Qt.Window
+            break;
+//        case 5:
+//            flags = Qt.WindowFullScreen
 //            break;
-////        case 3:
-////            flags = Qt.Window
-////            break;
-////        case 5:
-////            flags = Qt.WindowFullScreen
-////            break;
-//        }
+        }
     }
 
     function fullWindow() {

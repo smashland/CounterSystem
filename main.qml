@@ -44,14 +44,7 @@ Window {
         case 3:
             flags = Qt.Window
             break;
-//        case 5:
-//            flags = Qt.WindowFullScreen
-//            break;
         }
-    }
-
-    function fullWindow() {
-        mainWindow.visibility = Window.FullScreen;
     }
 
     /// 用于加载组件

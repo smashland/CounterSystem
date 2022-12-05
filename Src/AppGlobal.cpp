@@ -83,6 +83,7 @@ void QAppGlobal::updateNotic(const QString &rInfo)
 {
 //    QString sInfo;
 //    sInfo = QTime::currentTime().toString("hh:mm:ss ") + rInfo;
+    m_slistNoice.append(rInfo);
     emit(notic(rInfo));
 }
 
@@ -264,4 +265,12 @@ void QAppGlobal::setGroupId(int typeID)
         m_typeColor=Qt::white;
     }
     emit typeColorChanged();
+}
+
+QStringList QAppGlobal::getListNoice()
+{
+//    m_slistNoice.append("name1");
+//    m_slistNoice.append("name2");
+//    m_slistNoice.append("name3");
+    return m_slistNoice;
 }

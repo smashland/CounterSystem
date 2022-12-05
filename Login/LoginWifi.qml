@@ -51,10 +51,27 @@ Column {
             anchors.fill: parent
             onClicked:
             {
-                $app.settings.setWifiInfo(outInput.text,portInput.text);
-                $app.startConnect();
-                $licCheck.saveLicense(lrText.text);
-                $licCheck.checkLicense()
+                if(lrText.text!==""&&outInput.text!==""&&portInput.text!=="")
+                {
+                    $app.settings.setWifiInfo(outInput.text,portInput.text);
+                    $app.startConnect();
+                    $licCheck.saveLicense(lrText.text);
+                    $licCheck.checkLicense()
+                }
+                else
+                {
+                    if(lrText.text==="")
+                    {
+                        $licCheck.checkLicense()
+                        $licCheck.isFileExist();
+                    }
+                    else if(outInput.text===""||portInput.text!=="")
+                    {
+                        sIpErrorDialog.visible=true
+                    }
+
+                }
+
             }
         }
     }

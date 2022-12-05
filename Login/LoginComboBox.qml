@@ -144,14 +144,14 @@ Column {
                 }
                 else
                 {
-                    if(control.currentText==="")
-                    {
-                        comErrorDialog.visible = true
-                    }
                      if(lrText.text==="")
                      {
                           $licCheck.checkLicense()
                           $licCheck.isFileExist();
+                     }
+                     else if(control.currentText==="")
+                     {
+                         comErrorDialog.visible = true
                      }
 
                 }

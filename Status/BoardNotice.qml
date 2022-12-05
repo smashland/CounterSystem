@@ -1,4 +1,4 @@
-import QtQuick 2.0
+﻿import QtQuick 2.0
 import QtQuick.Controls 2.12
 import QtQml 2.12
 import "../Manage/Plugins"
@@ -83,23 +83,22 @@ Item
     MapHelpList{
         id: listView
         width: 710 *dpx
-        height: 510 *dpy
-        model:earthManager.earthList
+        height: 420 *dpy
+        model:$app.getListNoice()
         delegate: DelegateRectangle {
             id: wrapper
             TextListItem {
                 id: fileName
-                text: modelData.earthName
+                text: modelData
                 anchors.centerIn: parent
-                color: index%2 ? "red" : "orange"
+                color:$app.typeColor /*index%2 ? "red" : "orange"*/
             }
-            MouseArea {
-                anchors.fill: parent
-                hoverEnabled: true
-                onClicked: {
-
-                }
-            }
+//            MouseArea {
+//                anchors.fill: parent
+//                hoverEnabled: true
+//                onClicked: {
+//                }
+//            }
 
         }
 

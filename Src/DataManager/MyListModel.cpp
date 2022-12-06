@@ -1,4 +1,4 @@
-#include "PersonStatus.h"
+﻿#include "PersonStatus.h"
 #include "MyListModel.h"
 #include "GroupStatus.h"
 #include "DataManager.h"
@@ -124,6 +124,12 @@ void CMyListModel::append(CPersonStatus *pPerson)
     endInsertRows();
 }
 
+void CMyListModel::deathDefault()
+{
+    m_nDeathNum=0;
+    emit(deathNumChanged(m_nDeathNum));
+}
+
 int CMyListModel::hurtNum()
 {
     return(m_setHurt.size());
@@ -240,7 +246,7 @@ void CMyListModel::Clear()
     m_setHurt.clear();
     m_setLive.clear();
     m_allPerson.clear();
-
+    deathDefault();
     for(auto one = m_allData.begin();
         one != m_allData.end(); ++one)
     {

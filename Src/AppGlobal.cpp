@@ -83,7 +83,11 @@ void QAppGlobal::updateNotic(const QString &rInfo)
 {
 //    QString sInfo;
 //    sInfo = QTime::currentTime().toString("hh:mm:ss ") + rInfo;
-    m_slistNoice.append(rInfo);
+    NoticInfo* pNoticInfo=new NoticInfo;
+    pNoticInfo->setNoiceText(rInfo);
+    pNoticInfo->setColorNotic(m_typeColor);
+    m_slistNoice.append(pNoticInfo);
+    emit noiceChanged();
     emit(notic(rInfo));
 }
 
@@ -246,7 +250,21 @@ bool QAppGlobal::getOpenSpeak()
         m_bopenSpeak=false;
     }
      CNoticeManager::GetInstance()->OpenSpeak(m_bopenSpeak);
-    return m_bopenSpeak;
+     return m_bopenSpeak;
+}
+
+void QAppGlobal::setClearNoticText()
+{
+    foreach(auto one,m_slistNoice)
+    {
+        if(one)
+        {
+            m_slistNoice.removeOne(one);
+            delete one;
+            one=NULL;
+        }
+    }
+    emit noiceChanged();
 }
 
 void QAppGlobal::setGroupId(int typeID)
@@ -265,12 +283,4 @@ void QAppGlobal::setGroupId(int typeID)
         m_typeColor=Qt::white;
     }
     emit typeColorChanged();
-}
-
-QStringList QAppGlobal::getListNoice()
-{
-//    m_slistNoice.append("name1");
-//    m_slistNoice.append("name2");
-//    m_slistNoice.append("name3");
-    return m_slistNoice;
 }

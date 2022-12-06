@@ -1,4 +1,4 @@
-#include <QGuiApplication>
+﻿#include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QLocale>
@@ -18,7 +18,7 @@
 #include "Src/XmlNode/TestXml.h"
 #include "Src/Settings/EarthManager.h"
 #include "Src/Settings/CSetEarth.h"
-
+#include "Src/NoticInfo.h"
 
 int main(int argc, char *argv[])
 {
@@ -54,12 +54,15 @@ int main(int argc, char *argv[])
     qmlRegisterType<TestXml>("MyItem",1,0,"TestXml");
     qmlRegisterType<EarthManager>("MyItem",1,0,"EarthManager");
     qmlRegisterType<CSetEarth>("MyItem",1,0,"CSetEarth");
+//    qmlRegisterType<NoticInfo>("MyItem",1,0,"NoticInfo");
+
 
     qRegisterMetaType<ScePersonInfo*>("ScePersonInfo*");
     qRegisterMetaType<CSceInfo*>("CSceInfo*");
     qRegisterMetaType<SceManager*>("SceManager*");
     qRegisterMetaType<CSetEarth*>("CSetEarth*");
     qRegisterMetaType<EarthManager*>("EarthManager*");
+    qRegisterMetaType<NoticInfo*>("NoticInfo*");
 
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();

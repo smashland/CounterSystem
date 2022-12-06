@@ -5,6 +5,7 @@
 #include "Settings/GlobalSettings.h"
 #include "DataManager/GlobalData.h"
 #include <QTextCodec>
+#include "NoticInfo.h"
 
 class QQuickItem;
 
@@ -25,8 +26,7 @@ public:
     Q_PROPERTY(bool openSpeak MEMBER m_bopenSpeak NOTIFY openSpeakChanged)
 
     Q_PROPERTY(bool openChonglian MEMBER m_bopenChonglian NOTIFY openChonglianChanged)
-
-    //    Q_PROPERTY(QList<QObject*> replay MEMBER m_listReplay  NOTIFY replayChanged)
+    Q_PROPERTY(QList<QObject*> noiceList MEMBER m_slistNoice  NOTIFY noiceChanged)
 
     /**
      * @brief 退出app
@@ -43,10 +43,8 @@ public:
     void setSettings(CGlobalSettings* pSettings);
     void setData(CGlobalData* pData);
     Q_INVOKABLE void setOsgItem(QQuickItem* pOsgItem);
-    //    Q_INVOKABLE void openWord();
-    //    Q_INVOKABLE void openVideo();
 
-    // 帮助文档
+    ///帮助文档
     Q_INVOKABLE QString copyFile(const QString &strImagePath, const QString &folderName = "Help");
     Q_INVOKABLE QStringList openHelp();
     Q_INVOKABLE void openFile(const QUrl &rReplayFile);
@@ -58,9 +56,12 @@ public:
     Q_INVOKABLE void setOpenSpeak(bool);
     Q_INVOKABLE bool getOpenSpeak();
 
+    ///击杀情况清空
+    Q_INVOKABLE void setClearNoticText();
     void setGroupId(int typeID);
 
-     Q_INVOKABLE QStringList getListNoice();
+
+
 
 
 signals:
@@ -80,6 +81,7 @@ signals:
     void replayChanged();
     void openSpeakChanged();
     void openChonglianChanged();
+    void noiceChanged();
 
 public slots:
 private:
@@ -98,8 +100,7 @@ private:
 
     bool            m_bopenChonglian;      /// 打开自动重连
 
-    QStringList     m_slistNoice;          ///播报内容
-
+    QList<QObject*>     m_slistNoice;          ///播报内容
 };
 
 Q_DECLARE_METATYPE(CGlobalSettings*)

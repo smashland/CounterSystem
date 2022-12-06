@@ -1,4 +1,4 @@
-#ifndef CMYLISTMODEL_H
+﻿#ifndef CMYLISTMODEL_H
 #define CMYLISTMODEL_H
 #include <QAbstractListModel>
 #include <QSet>
@@ -27,6 +27,8 @@ public:
     Q_INVOKABLE void remove(int nIndex);
     Q_INVOKABLE void append(CPersonStatus* pPerson);
 
+    ///默认战损人数
+    void deathDefault();
     int  hurtNum();
     int  deathNum();
     int  totalNum();

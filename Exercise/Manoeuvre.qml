@@ -1,4 +1,4 @@
-//                                               底部播放条
+﻿//                                               底部播放条
 
 import QtQuick 2.12
 import QtQuick.Controls 2.15
@@ -190,6 +190,7 @@ Item {
         if($app.settings.bIsStart)
         {
             /// 演习结束
+            $app.setClearNoticText();
             $app.settings.setStop();
             $app.allData.calResult();
             endTime=$app.settings.getSysTime();

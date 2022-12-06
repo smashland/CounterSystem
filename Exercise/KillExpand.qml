@@ -102,8 +102,7 @@ Item {
             target: $app
             function onNotic(sNoticInfo)
             {
-                showText.text += sNoticInfo+ "   "
-//                showText.text += '\n'
+                showText.text=sNoticInfo+ "   "
                 if(showText.width > showNotice.width) {
                     enter.running = true
                 }

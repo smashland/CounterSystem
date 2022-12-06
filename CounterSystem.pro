@@ -44,6 +44,7 @@ SOURCES += \
         Src/JudgeValid/MyRectageItem.cpp \
         Src/Map/ContrlMapPerson.cpp \
         Src/Map/PlaceNodeInfo.cpp \
+        Src/NoticInfo.cpp \
         Src/Notice/NoticeManager.cpp \
         Src/Notice/PlayMp3.cpp \
         Src/Notice/ShowNotice.cpp \
@@ -114,6 +115,7 @@ HEADERS += \
     Src/JudgeValid/MyRectageItem.h \
     Src/Map/ContrlMapPerson.h \
     Src/Map/PlaceNodeInfo.h \
+    Src/NoticInfo.h \
     Src/Notice/NoticeManager.h \
     Src/Notice/PlayMp3.h \
     Src/Notice/ShowNotice.h \

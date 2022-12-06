@@ -84,22 +84,15 @@ Item
         id: listView
         width: 710 *dpx
         height: 420 *dpy
-        model:$app.getListNoice()
+        model:$app.noiceList
         delegate: DelegateRectangle {
             id: wrapper
             TextListItem {
                 id: fileName
-                text: modelData
+                text: modelData.noiceText
                 anchors.centerIn: parent
-                color:$app.typeColor /*index%2 ? "red" : "orange"*/
+                color:modelData.colorNotic
             }
-//            MouseArea {
-//                anchors.fill: parent
-//                hoverEnabled: true
-//                onClicked: {
-//                }
-//            }
-
         }
 
     }

@@ -6,7 +6,7 @@ Text {
     property alias heightTitle: tabtitle.height
     id: tabtitle
     color: "#ffffff"
-    font.pixelSize: 16*dpx
+    font.pixelSize: 18*dpx
     font.family: "Microsoft YaHei";
     font.bold: true
     horizontalAlignment: Text.AlignHCenter

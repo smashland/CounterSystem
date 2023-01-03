@@ -91,13 +91,13 @@ Popup
 
         Rectangle {
             id: colum2
-            y: shibbingxinxi.contentHeight + line1.height + 20 *dpy + 74 *dpy
+            y: shibbingxinxi.contentHeight + line1.height + 74 *dpy+ 20 *dpy
             color: "transparent"
             Text {
                 id: fushangxinxi
                 width: fushangxinxi.contentWidth
                 height: fushangxinxi.contentHeight
-                text: qsTr("负伤信息")
+                text: qsTr("装备信息")
                 font.pixelSize: 18*dpx;
                 color: "#ffffff";
                 font.family: "Microsoft YaHei"
@@ -110,15 +110,22 @@ Popup
                 color: "#3b6daa"
             }
             SoldierItem {
-                id:reliveName
+                id:shouqiang
                 y: fushangxinxi.contentHeight + line2.height + 20 *dpy
-                text: "复活次数:"
-                name: outData.uRelive
+                text: "手枪子弹数:"
+                name: outData.nPistol + "/9999"
+            }
+            SoldierItem {
+                id:buqiang
+                x: line2.width/2
+                y: fushangxinxi.contentHeight + line2.height + 20 *dpy
+                text: "步枪子弹数:"
+                name: outData.nRifle + "/9999"
             }
         }
         Rectangle {
             id: colum3
-            y: (fushangxinxi.contentHeight + line2.height + 20 *dpy + 74 *dpy) * 2
+            y: (fushangxinxi.contentHeight + line2.height + 74 *dpy+ 20 *dpy) * 2
             color: "transparent"
             Text {
                 id: weizhixinxi
@@ -152,13 +159,13 @@ Popup
         }
         Rectangle {
             id: colum4
-            y: (fushangxinxi.contentHeight + line2.height + 20 *dpy + 74 *dpy) * 3
+            y: (fushangxinxi.contentHeight + line2.height + 74 *dpy+ 20 *dpy) * 3
             color: "transparent"
             Text {
                 id: zhuangbei
                 width: zhuangbei.contentWidth
                 height: zhuangbei.contentHeight
-                text: qsTr("装备连接状态")
+                text: qsTr("状态信息")
                 font.pixelSize: 18*dpx;
                 color: "#ffffff";
                 font.family: "Microsoft YaHei"
@@ -170,34 +177,18 @@ Popup
                 height: 2 *dpy
                 color: "#3b6daa"
             }
-            Item {
+            SoldierItem {
+                id:mingzhong
                 y: zhuangbei.contentHeight + line3.height + 20 *dpy
-                Rectangle {
-                    color: "transparent"
-                    Text {
-                        id: toukui
-                        width: toukui.contentWidth
-                        height: 34 *dpy
-                        text: "头盔连接:"
-                        color: "#ffffff"
-                        font.pixelSize: 17*dpx;
-                        font.family: "Microsoft YaHei";
-                        verticalAlignment: Text.AlignVCenter
-                    }
-                }
-                Rectangle {
-                    x: toukui.contentWidth + 20 *dpx
-                    width: 200*dpx
-                    height: 34 *dpy
-                    color: "#52749e"
-                    border.color: "#3b6daa"
-                    EquipConnStat
-                    {
-                        id: toukuizhuangtai
-                        bConnected: outData.bTK
-                        source: "qrc:/Image/wuqi/toukui.png"
-                    }
-                }
+                text: "命       中:"
+                name:"1"
+            }
+            SoldierItem {
+                id:beimingzhong
+                x: line1.width/2
+                y: zhuangbei.contentHeight + line3.height + 20 *dpy
+                text: "被  命  中:"
+                name: "2"
             }
         }
 
@@ -206,7 +197,7 @@ Popup
     Row {
         spacing: 15 *dpx
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 60 *dpy
+        anchors.bottomMargin: 40 *dpy
         x: 413*dpx
         PopupButton {
             background: Rectangle {

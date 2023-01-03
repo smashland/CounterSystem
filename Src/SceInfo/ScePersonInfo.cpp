@@ -1,4 +1,4 @@
-#include "ScePersonInfo.h"
+﻿#include "ScePersonInfo.h"
 #include <QDebug>
 #include <QFileInfo>
 #include <QFile>
@@ -92,7 +92,7 @@ void ScePersonInfo::praseExcelPerson(QXlsx::Worksheet *workSheet,int rowCount, i
         }
 
     }
-//    qDebug()<<m_ID<<m_Name<<m_Positon<<m_Group<<m_host;
+    qDebug()<<m_ID<<m_Name<<m_Positon<<m_Group<<m_host;
 }
 
 

@@ -186,7 +186,6 @@ void CMyEventInfo::Update(const unsigned char *pData, int nLength)
                             auto hitInfo = pShotPerson->add_hitinfo();
                             hitInfo->set_id(m_pPerson->id());
 
-
                             nIndex = g_nGunType / 1000;
 
                             int nLeftMove = nIndex - 1;

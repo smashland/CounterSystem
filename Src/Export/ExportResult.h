@@ -1,4 +1,4 @@
- #ifndef CEXPORTRESULT_H
+﻿ #ifndef CEXPORTRESULT_H
 #define CEXPORTRESULT_H
 
 #include <QString>
@@ -32,6 +32,7 @@ public:
      * @param sSceName
      */
     void setCurrentSceName(const QString& sSceName);
+    void setAveLocation(const QString& sLocation);
 
 protected:
     CExportResult();
@@ -39,7 +40,8 @@ protected:
 private:
     QString               m_sReportPath;  /// 导出的目录
     static CExportResult* S_PInstance;    /// 单例指针
-    QString               m_currentSceName;
+    QString               m_currentSceName;///当前方案名称
+    QString               m_aveLocation;   ///平均位置
 };
 
 #endif // CEXPORTRESULT_H

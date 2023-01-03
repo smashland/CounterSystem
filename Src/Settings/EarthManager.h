@@ -30,7 +30,9 @@ public:
      * @param earthName
      * @return
      */
-    Q_INVOKABLE bool deleteEarth(const QString &earthName);
+
+    Q_INVOKABLE bool deleteEarth(const QString &earthName,const QString &earthInfo);
+    bool removeEarthFile(const QString &earthInfo);
 
     Q_INVOKABLE void saveFile();
 

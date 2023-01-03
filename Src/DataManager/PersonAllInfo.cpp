@@ -1,4 +1,4 @@
-#include "../ConfigInfo.h"
+﻿#include "../ConfigInfo.h"
 #include "DataManager.h"
 #include "PersonAllInfo.h"
 #include "PersonInfo.pb.h"
@@ -10,6 +10,7 @@ static QString sHitDeath=QString::fromUtf8("炸死%1");
 
 CPersonAllInfo::CPersonAllInfo(QObject *parent) : QObject(parent)
 {
+
 }
 
 ///通过查找人员信息更新显示
@@ -63,6 +64,7 @@ void CPersonAllInfo::UpdateBaseInfo(PersonInfo *pPersonInfo)
     }
 
     int nHurtSize = pPersonInfo->hurtinfo_size();
+    qDebug()<<"测试命中信息"<<nHurtSize;
     if(0==nHurtSize)
     {
         if(m_bHead){m_bHead=false;emit(headChanged(m_bHead));}
@@ -226,8 +228,8 @@ void CPersonAllInfo::UpdateBaseInfo(PersonInfo *pPersonInfo)
     auto repos= pPersonInfo->relive();
     if(0!=repos)
     {
-       m_uRelive = repos;
-       emit(reliveChanged(m_uRelive));
+        m_uRelive = repos;
+        emit(reliveChanged(m_uRelive));
     }
 
 }

@@ -57,9 +57,10 @@ Rectangle {
                 anchors.fill: parent
                 hoverEnabled: true
                 onClicked: {
+                    console.log("帮助说明"+modelData);
                     mouse.accepted = true
                     wrapper.ListView.view.currentIndex = index
-                    $app.openFile("file:///"+modelData)
+                    $app.openFile(modelData)
                 }
             }
             ViewButton {

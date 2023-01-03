@@ -1,4 +1,4 @@
-#include "../Connection/ConnectionManager.h"
+﻿#include "../Connection/ConnectionManager.h"
 #include "DealDataManager.h"
 #include "MyParseData.h"
 #include "../ErrorReport.h"
@@ -14,7 +14,7 @@ void CDealDataManager::UpdateSeconds(const quint16 &nSeconds)
 {
     m_pParse->UpdateSeconds(nSeconds);
 }
-
+#include <QDebug>
 /// 处理数据
 void CDealDataManager::UpdateTime(const QDateTime &)
 {

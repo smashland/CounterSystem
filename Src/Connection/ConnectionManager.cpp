@@ -1,4 +1,4 @@
-#include <QList>
+﻿#include <QList>
 #include <QTimerEvent>
 #include "ConnectionManager.h"
 #include "WifiConnection.h"

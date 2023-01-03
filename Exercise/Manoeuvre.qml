@@ -194,6 +194,8 @@ Item {
             $app.settings.setStop();
             $app.allData.calResult();
             endTime=$app.settings.getSysTime();
+            $app.setAveLocation();
+
         }
         else
         {

@@ -1,4 +1,4 @@
-#include <QtEndian>
+﻿#include <QtEndian>
 #include "../API-CRCheck.h"
 #include "MyParseData.h"
 #include "MyParse/MyParsetype.h"
@@ -15,6 +15,8 @@
 Q_DECLARE_FLAGS(Guntypes,GunType)
 static const uchar CS_BEGIN(0xAA);
 static const uchar CS_CONNECTION(0x1E);
+
+extern bool replayFlags;
 
 CMyParseData::CMyParseData()
 {
@@ -101,8 +103,9 @@ bool CMyParseData::ParseData(const QByteArray &rArray)
                 /// 获取校验值
                 quint16 unCRC = CRC16RTU(m_pBuffer,m_nNowLength+2);
 
+
                 /// 如果校验通过
-                if(m_usCRC16 == unCRC)
+                if(m_usCRC16 == unCRC && !replayFlags)
                 {
                     m_pPerson = CDataManager::GetInstance()->GetOrCreatePersonInfo(m_unID);
                     ParseData();

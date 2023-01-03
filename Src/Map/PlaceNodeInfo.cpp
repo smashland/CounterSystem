@@ -1,4 +1,4 @@
-#include <ISceneCore.h>
+﻿#include <ISceneCore.h>
 #include <Plot/Map/IMapLocation.h>
 #include <Plot/SceneShape/ILabel.h>
 #include <Plot/SceneShape/IImage.h>
@@ -7,7 +7,6 @@
 #include <Plot/Common/ISceneScaleGroup.h>
 #include "PlaceNodeInfo.h"
 #include <QDebug>
-
 CPlaceNodeInfo::CPlaceNodeInfo(ISceneGraph *pSceneGraph):m_pSceneGraph(pSceneGraph)
 {
     InitNode();
@@ -106,7 +105,6 @@ void CPlaceNodeInfo::InitNode()
     m_pLabel->AlwasOnTop(true);
 //    m_pLocation->SetCanPick(true);
     TypeChanged();
-
     pScreenGroup->AddSceneNode(m_pImage);
     pScreenGroup->AddSceneNode(m_pLabel);
     pScreenGroup->AlwasOnTop(true);

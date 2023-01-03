@@ -1,4 +1,8 @@
 ﻿#include "CSetEarth.h"
+#include <QFileInfo>
+#include <QFile>
+#include <QApplication>
+
 
 CSetEarth::CSetEarth(QObject *parent)
     : QObject{parent}
@@ -19,7 +23,8 @@ void CSetEarth::setEarthPath(const QString &sEarthPath)
 {
     if(sEarthPath!=m_sEarthPath)
     {
-        m_sEarthPath=sEarthPath;
+        //        m_sEarthPath=sEarthPath;
+        m_sEarthPath=copyEarthFile(m_sEarthName,sEarthPath);
         emit earthPathChanged(m_sEarthPath);
     }
 }
@@ -63,4 +68,72 @@ void CSetEarth::readEarth(const QJsonObject &rObj)
 
     if (rObj.contains("Lon") && rObj["Lon"].isDouble())
         m_nLon = rObj["Lon"].toInt();
+}
+
+
+
+QString CSetEarth::copyEarthFile(const QString &sEarthName,const QString &strImagePath)
+{
+    QFileInfo fileInfo(strImagePath);
+    QString newFilePath = QString("%1/Data/Earth/Map/%2").arg(QApplication::applicationDirPath()).arg(sEarthName);
+    ///tiff
+    if(fileInfo.suffix()=="tif")
+    {
+        newFilePath = QString("%1.%2").arg(newFilePath).arg(fileInfo.suffix());
+        QFile file(newFilePath);
+        if (file.exists())
+        {
+            file.remove();
+        }
+        QFile::copy(strImagePath,newFilePath);
+
+    }
+    else if(fileInfo.suffix()=="xml")
+    {
+        QDir  fromDir(fileInfo.path());
+        QDir  toDir(newFilePath);
+        qCopyDirectory(fromDir,toDir,true);
+        newFilePath=QString("%1/%2").arg(newFilePath).arg(fileInfo.fileName());
+    }
+    return newFilePath;
+}
+
+bool CSetEarth::qCopyDirectory(const QDir& fromDir, const QDir& toDir, bool bCoverIfFileExists)
+{
+    QDir formDir_ = fromDir;
+    QDir toDir_ = toDir;
+
+    if(!toDir_.exists())
+    {
+        if(!toDir_.mkdir(toDir.absolutePath()))
+            return false;
+    }
+
+    QFileInfoList fileInfoList = formDir_.entryInfoList();
+    foreach(QFileInfo fileInfo, fileInfoList)
+    {
+        if(fileInfo.fileName() == "." || fileInfo.fileName() == "..")
+            continue;
+
+        //拷贝子目录
+        if(fileInfo.isDir())
+        {
+            //递归调用拷贝
+            if(!qCopyDirectory(fileInfo.filePath(), toDir_.filePath(fileInfo.fileName()),true))
+                return false;
+        }
+        //拷贝子文件
+        else
+        {
+            if(bCoverIfFileExists && toDir_.exists(fileInfo.fileName()))
+            {
+                toDir_.remove(fileInfo.fileName());
+            }
+            if(!QFile::copy(fileInfo.filePath(), toDir_.filePath(fileInfo.fileName())))
+            {
+                return false;
+            }
+        }
+    }
+    return true;
 }

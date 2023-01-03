@@ -1,4 +1,4 @@
-#ifndef _YTY_CONNECTION_H__
+﻿#ifndef _YTY_CONNECTION_H__
 #define _YTY_CONNECTION_H__
 
 #include <QObject>
@@ -50,6 +50,7 @@ public:
       * @brief 清空数据
       */
      void ClearData();
+
 
 signals:
      void connected2Center();

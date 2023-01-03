@@ -1,4 +1,4 @@
-#include <SceneGraph/ISceneGraph.h>
+﻿#include <SceneGraph/ISceneGraph.h>
 #include <Plot/Map/IMap.h>
 #include <Plot/Map/IMapLayer.h>
 #include <Plot/IPlot.h>

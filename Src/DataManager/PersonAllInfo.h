@@ -1,4 +1,4 @@
-#ifndef CPERSONALLINFO_H
+﻿#ifndef CPERSONALLINFO_H
 #define CPERSONALLINFO_H
 
 #include <QObject>
@@ -56,7 +56,6 @@ public:
      * @param sType
      */
     void UpdateTypeAndName(const QString& sName, const QString& sType);
-
 signals:
     void pistolNumChanged(int);
     void rifleNumChanged(int);

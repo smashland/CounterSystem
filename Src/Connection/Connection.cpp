@@ -1,4 +1,4 @@
-#include <QList>
+﻿#include <QList>
 #include "Connection.h"
 
 /// 发送命令

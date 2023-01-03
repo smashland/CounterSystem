@@ -1,4 +1,4 @@
-#ifndef CCONTROLSERIAL_H
+﻿#ifndef CCONTROLSERIAL_H
 #define CCONTROLSERIAL_H
 ///////////////////////////////////////////////////////
 ///  本类负责读取串口数据

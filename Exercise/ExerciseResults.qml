@@ -1,4 +1,4 @@
-//                                        演习结果
+﻿//                                        演习结果
 import QtQuick 2.12
 import Qt.labs.qmlmodels 1.0
 import Qt.labs.platform 1.1
@@ -16,7 +16,8 @@ Item {
     height: 860 *dpy
 
     property string defaltFolderUrl: "file:///D:/InstallSoftWare/CounterSystem/Data/Szy/"
-    property string loactionStr:"{"+earthManager.currentLat+","+earthManager.currentLon+"}"
+//    property string loactionStr:"{"+earthManager.currentLat+","+earthManager.currentLon+"}"
+    property string loactionStr:"{"+$app.dAveLon+","+$app.dAveLat+"}"
 
     Image {
         id: loginImage
@@ -342,7 +343,7 @@ Item {
             nameFilters: [qsTr("演习报告(*.docx)")]
             onAccepted:
             {
-                $app.allData.getSceName(sceName.name);
+                $app.allData.getSceVsLoc(sceName.name,earthLoction.name);
                 $app.allData.createReport(currentFile);
             }
         }

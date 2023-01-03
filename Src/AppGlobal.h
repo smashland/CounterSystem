@@ -26,7 +26,10 @@ public:
     Q_PROPERTY(bool openSpeak MEMBER m_bopenSpeak NOTIFY openSpeakChanged)
 
     Q_PROPERTY(bool openChonglian MEMBER m_bopenChonglian NOTIFY openChonglianChanged)
-    Q_PROPERTY(QList<QObject*> noiceList MEMBER m_slistNoice  NOTIFY noiceChanged)
+    Q_PROPERTY(QList<QObject*> noiceList MEMBER m_slistNoice NOTIFY noiceChanged)
+
+    Q_PROPERTY(double  dAveLat MEMBER m_dAveLat NOTIFY aveLatChanged)
+    Q_PROPERTY(double  dAveLon MEMBER m_dAveLon NOTIFY aveLonChanged)
 
     /**
      * @brief 退出app
@@ -47,8 +50,8 @@ public:
     ///帮助文档
     Q_INVOKABLE QString copyFile(const QString &strImagePath, const QString &folderName = "Help");
     Q_INVOKABLE QStringList openHelp();
-    Q_INVOKABLE void openFile(const QUrl &rReplayFile);
-    Q_INVOKABLE bool removeHelpFile(const QUrl &rRemoveFile);
+    Q_INVOKABLE void openFile(const QString &strHelpFileName);
+    Q_INVOKABLE bool removeHelpFile(const QString &strHelpFileName);
 
     ///回放文件
     Q_INVOKABLE QStringList openPath();
@@ -60,9 +63,8 @@ public:
     Q_INVOKABLE void setClearNoticText();
     void setGroupId(int typeID);
 
-
-
-
+    ///得到人员的平均位置
+    Q_INVOKABLE void setAveLocation();
 
 signals:
     /**
@@ -82,6 +84,8 @@ signals:
     void openSpeakChanged();
     void openChonglianChanged();
     void noiceChanged();
+    void aveLatChanged(double);
+    void aveLonChanged(double);
 
 public slots:
 private:
@@ -100,7 +104,9 @@ private:
 
     bool            m_bopenChonglian;      /// 打开自动重连
 
-    QList<QObject*>     m_slistNoice;          ///播报内容
+    QList<QObject*> m_slistNoice;          ///播报内容
+    double          m_dAveLat=0.0;          ///平均纬度
+    double          m_dAveLon=0.0;          ///平均经度
 };
 
 Q_DECLARE_METATYPE(CGlobalSettings*)

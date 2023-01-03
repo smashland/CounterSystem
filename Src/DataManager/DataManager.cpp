@@ -1,4 +1,4 @@
-#include <QDir>
+﻿#include <QDir>
 #include <QCoreApplication>
 #include "DataManager.h"
 #include "IDataManagerObserver.h"
@@ -84,8 +84,19 @@ void CDataManager::ClearRecordInfo()
 
         one.clear();
     }
-
     m_vRecordPersonInfo.clear();
+}
+
+///得到每个人的id
+QList<int> CDataManager::AllPersonId()
+{
+    QList<int> int_list;
+    for(QMap<quint16,PersonInfo*>::const_iterator it=m_allPersonInfo.constBegin();it!=m_allPersonInfo.constEnd();it++)
+    {
+        qDebug()<<it.key()<<m_allPersonInfo.size();
+        int_list.append(it.key());
+    }
+    return int_list;
 }
 
 /// 发送命中信息
@@ -104,12 +115,11 @@ PersonInfo *CDataManager::GetOrCreatePersonInfo(quint16 uID)
     if(nullptr == pPerson)
     {
         pPerson = PersonInfo::default_instance().New();
-
         InitPerson(pPerson);
         pPerson->set_id(uID);
         m_allPersonInfo.insert(uID,pPerson);
-    }
 
+    }
     return(pPerson);
 }
 

@@ -167,6 +167,8 @@ int CMyListModel::getScore()
                 nTotalScore +=CConfigInfo::GetInstance()->CalHurtMark(pPerson->hitinfo(i).hurtpart());
             }
         }
+         qDebug()<<"测试人员3！！！！"<<nTotalScore;
+
     }
     return(nTotalScore);
 }

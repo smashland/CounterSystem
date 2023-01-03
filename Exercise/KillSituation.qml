@@ -7,7 +7,7 @@ import "../RePlay" as MyRePlay
 
 Item {
     id:killSituation
-    width: 930 *dpx
+    width: 860 *dpx
     height: 560 *dpy
     Image {
         id: loginImage

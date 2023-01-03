@@ -12,9 +12,9 @@ ChartView {
     property var flagData
 
     property int zongshu: okData+hurtData+deathData
-    property string percentageOk: okData/zongshu *100 + "%"
-    property string percentageHurt: hurtData/zongshu *100 + "%"
-    property string percentageDeath: deathData/zongshu *100 + "%"
+    property string percentageOk: okData/zongshu *100
+    property string percentageHurt: hurtData/zongshu *100
+    property string percentageDeath: deathData/zongshu *100
     width: 310*dpy
     height: 310*dpy
     anchors.fill: parent
@@ -27,7 +27,7 @@ ChartView {
         holeSize:0.58
         PieSlice {
             id: lianghao
-            label: qsTr("良好 "/*+value*/ + percentageOk);
+            label: qsTr("良好 "/*+value*/ + parseInt(percentageOk)+ "%");
             labelVisible:value?true:false;
             value:okData;
             labelColor:"#ffffff";
@@ -36,7 +36,7 @@ ChartView {
             labelArmLengthFactor: 0.35;
         }
         PieSlice {
-            label: qsTr("受伤 "/*+value*/ + percentageHurt);
+            label: qsTr("受伤 "/*+value*/ + parseInt(percentageHurt)+ "%");
             labelVisible:value?true:false;
             value:hurtData;
             labelColor:"#ffffff";
@@ -45,7 +45,7 @@ ChartView {
             labelArmLengthFactor: 0.35;
         }
         PieSlice {
-            label: qsTr("死亡 "/*+value*/ + percentageDeath);
+            label: qsTr("死亡 "/*+value*/ + parseInt(percentageDeath)+ "%");
             labelVisible:value?true:false;
             value:deathData;
             labelColor:"#ffffff";

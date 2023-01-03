@@ -27,11 +27,11 @@ Dialog{
         {
             allNum[i] = allInfo.itemAt(i).children[1].text;
         }
-
         $app.settings.chongDan(nID,allNum);
     }
 
     Column {
+        id:allInfo
         spacing: 16
         anchors.centerIn: parent
         SoldierItem2 {
@@ -55,6 +55,39 @@ Dialog{
 //            danwei: "个"
         }
     }
+    Row {
+        spacing: 15 *dpx
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 40 *dpy
+        x: 204.5*dpx
+        PopupButton {
+            background: Rectangle {
+                color: "#265aef"
+            }
+
+            nameButton: "确定"
+            onClicked: {
+                var allNum=[8];
+                for(var i=0; i<allInfo.count;++i)
+                {
+                    allNum[i] = allInfo.itemAt(i).children[1].text;
+                }
+                $app.settings.chongDan(nID,allNum);
+                dialog.close()
+            }
+
+        }
+        PopupButton {
+            background: Rectangle {
+                color: "#1d4f88"
+            }
+            nameButton: "取消"
+            onClicked: {
+                dialog.close()
+            }
+        }
+    }
+
 
 }
 

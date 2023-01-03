@@ -6,14 +6,13 @@ import "../Exercise/Plugins"
 Item
 {
     id:rePlayShow
-    property int nTimes:100
+    property int nTimes:0
     property bool bStart: true
 
     Column {
         x: (index.width-width)/2
         Row
         {
-
             spacing: 10*dpx
             /// 演习开始按钮
             Row {
@@ -42,9 +41,8 @@ Item
                         if(bStart)
                         {
                             $app.allData.pauseReplay();
-                            bofang.text= "\ue609"
-                            time_run.stop()
-//                            console.log("00000000000000000000000000")
+                            bofang.text= "\ue609";
+                            time_run.stop();
                         }
                         else
                         {
@@ -53,17 +51,15 @@ Item
                                 $app.allData.beginReplay();
                                 rePlayShow.bStart = false;
                                 time_run.start();
-//                                console.log("111111111111111111111111")
                             }
                             else
                             {
                                 $app.allData.pauseReplay();
-//                                console.log("2222222222222222222222222")
                                 time_run.start();
                             }
                             bofang.text= "\ue626"
                         }
-                        bStart = !bStart
+                        bStart = !bStart;
                     }
                 }
 
@@ -73,9 +69,10 @@ Item
                     from: 0
                     value: 0
                     to: nTimes
-                    stepSize:1
+                    stepSize:0.1
                     y:sliderBackground.implicitHeight
                     background:Rectangle{
+                        // 进度条
                         id: sliderBackground
                         x: horizontalSlider.leftPadding
                         y: horizontalSlider.topPadding+horizontalSlider.availableHeight/2-height/2
@@ -92,6 +89,7 @@ Item
                     }
 
                     handle: Rectangle{
+                        // 滑块
                         id:sliderHandle
                         x: horizontalSlider.leftPadding+horizontalSlider.visualPosition*(horizontalSlider.availableWidth)-2
                         y: horizontalSlider.topPadding+horizontalSlider.availableHeight/2-height/2
@@ -99,12 +97,15 @@ Item
                         implicitWidth: 12
                         implicitHeight: 12
                         radius: 6
+                        antialiasing: true
                     }
 
                     onMoved:
                     {
                         $app.allData.setSimuTime(value)
+                        timeText.text = formateTime(nTimes - value)
                     }
+
                 }
 
                 Connections
@@ -184,6 +185,8 @@ Item
         const formatSecond = second > 59 ? 59 : second
         return `${hours > 0 ? `${hours}:` : ''}${minute < 10 ? '0' + minute : minute}:${formatSecond < 10 ? '0' + formatSecond : formatSecond}`
     }
+
+
     Timer{
         id:time_run
         interval: 1000

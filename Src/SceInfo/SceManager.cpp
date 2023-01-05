@@ -328,11 +328,11 @@ void SceManager::parseExcel(const QString &strImagePath)
     QFileInfo fileInfo(strImagePath);
     QXlsx::Document xlsx2(strImagePath);
     QStringList sheetnames = xlsx2.sheetNames();
-    qDebug()<<sheetnames;
-    for(int sheetCout=0;sheetCout<sheetnames.size();sheetCout++)
+    qDebug()<<sheetnames<<" 00"<<fileInfo.baseName();
+    for(int sheetCout=0;sheetCout<1/*sheetnames.size()*/;sheetCout++)
     {
         QXlsx::Worksheet* workSheet = dynamic_cast<QXlsx::Worksheet*>(xlsx2.sheet(sheetnames[sheetCout]));
-       qDebug()<<workSheet->sheetName()<<','<<workSheet->sheetType();
+       qDebug()<<workSheet->sheetName()<<','<<workSheet->sheetType()<<sheetnames.size();
         QStringList titles;
         int rowCount=workSheet->dimension().rowCount();
         int columnCount=workSheet->dimension().columnCount();
@@ -350,8 +350,8 @@ void SceManager::parseExcel(const QString &strImagePath)
             CSceInfo* pSceInfo = new CSceInfo;
             pSceInfo->PraseExcelInfo(workSheet,rowCount,columnCount);
             qDebug()<<"方案内容"<<workSheet->sheetName();
-            pSceInfo->setSceName(workSheet->sheetName());
-            m_mapName2SceInfo.insert(workSheet->sheetName(),pSceInfo);
+            pSceInfo->setSceName(fileInfo.baseName());
+            m_mapName2SceInfo.insert(fileInfo.baseName(),pSceInfo);
             m_listSces.append(pSceInfo);
             write();
         }

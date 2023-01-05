@@ -1,4 +1,4 @@
-#ifndef GLOBALSETTINGS_H
+﻿#ifndef GLOBALSETTINGS_H
 #define GLOBALSETTINGS_H
 
 #include <QObject>
@@ -20,9 +20,10 @@ public:
     Q_PROPERTY(QVariantList scoreSetting MEMBER m_scoreSetting NOTIFY scoreSettingChanged)
     Q_PROPERTY(QVariantList harmSetting MEMBER m_harmSetting NOTIFY harmSettingChanged)
     Q_PROPERTY(QVariantList systemSetting MEMBER m_sysSetting NOTIFY sysSettingChanged)
+    Q_PROPERTY(int bIsStart MEMBER m_bIsStart NOTIFY startStatusChanged)
 
-//    Q_PROPERTY(int sIp MEMBER m_sIp NOTIFY sIpChanged)
-//    Q_PROPERTY(int sPort MEMBER m_sPort NOTIFY sPortChanged)
+    //    Q_PROPERTY(int sIp MEMBER m_sIp NOTIFY sIpChanged)
+    //    Q_PROPERTY(int sPort MEMBER m_sPort NOTIFY sPortChanged)
 
     Q_INVOKABLE QColor type2Color(const QString& sType);
     Q_INVOKABLE QColor type2BackColor(const QString& sType);
@@ -70,8 +71,8 @@ signals:
     void harmSettingChanged(const QVariantList&);
     void sysSettingChanged(const QVariantList&);
 
-//    int sIpChanged;
-//    int sPortChanged;
+    //    int sIpChanged;
+    //    int sPortChanged;
 public slots:
     void updateConfig();
 private:
@@ -86,7 +87,7 @@ private:
     QVariantList         m_scoreSetting;     /// 得分设置
     QVariantList         m_harmSetting;      /// 损伤设置
     QVariantList         m_sysSetting;       /// 系统设置
-    QString              sBeginTime;
+    QString              sBeginTime;         ///开始时间
 };
 
 #endif // GLOBALSETTINGS_H

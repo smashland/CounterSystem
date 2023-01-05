@@ -1,4 +1,4 @@
-#ifndef DEALDATAMANAGER_H
+﻿#ifndef DEALDATAMANAGER_H
 #define DEALDATAMANAGER_H
 
 /**********************
@@ -85,6 +85,9 @@ public:
      */
     void AllChongDan(const QVariant& gunInfo);
     void PersonalChongDan(quint16 unID,const QVariant& gunInfo);
+    void SetBulletSum(quint16 unID,const QStringList& bulletInfo);
+    QStringList GetBulletSum(quint16 unID);
+    void clearBulletSum();
 
     /**
      * @brief 配枪
@@ -137,6 +140,7 @@ private:
 
 private:
     CParseData*   m_pParse;    /// 默认的解析文件
+    QMap<int,QStringList> m_mapId2BulletSum; ///编号和设置的子弹总数
 };
 
 #endif // DEALDATAMANAGER_H

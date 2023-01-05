@@ -2,6 +2,8 @@
 #include "DealDataManager.h"
 #include "MyParseData.h"
 #include "../ErrorReport.h"
+#include "../ConfigInfo.h"
+
 static QString S_RECIVE = QString::fromUtf8("接收到:");
 CDealDataManager *CDealDataManager::GetInstance()
 {
@@ -132,6 +134,35 @@ void CDealDataManager::AllChongDan(const QVariant &gunInfo)
 void CDealDataManager::PersonalChongDan(quint16 unID, const QVariant &gunInfo)
 {
     m_pParse->PersonalChongDan(unID,gunInfo);
+}
+
+void CDealDataManager::SetBulletSum(quint16 unID, const QStringList &bulletInfo)
+{
+    m_mapId2BulletSum.insert(unID,bulletInfo);
+}
+
+QStringList CDealDataManager::GetBulletSum(quint16 unID)
+{
+    if(m_mapId2BulletSum.contains(unID))
+    {
+        return m_mapId2BulletSum.value(unID);
+    }
+    else
+    {
+    QStringList listFaultBullets;
+    QString strFaultBullets=QString::number(CConfigInfo::GetInstance()->GetDefaultBullets());
+    for(int i=0;i<7;++i)
+    {
+        listFaultBullets.append(strFaultBullets);
+    }
+    m_mapId2BulletSum.insert(unID,listFaultBullets);
+    }
+    return m_mapId2BulletSum.value(unID);
+}
+
+void CDealDataManager::clearBulletSum()
+{
+    m_mapId2BulletSum.clear();
 }
 
 /// 配枪

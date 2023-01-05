@@ -16,8 +16,8 @@ Item {
     height: 860 *dpy
 
     property string defaltFolderUrl: "file:///D:/InstallSoftWare/CounterSystem/Data/Szy/"
-//    property string loactionStr:"{"+earthManager.currentLat+","+earthManager.currentLon+"}"
-    property string loactionStr:"{"+$app.dAveLon+","+$app.dAveLat+"}"
+    //    property string loactionStr:"{"+earthManager.currentLat+","+earthManager.currentLon+"}"
+    property string loactionStr:"{"+$app.sAveLon+","+$app.sAveLat+"}"
 
     Image {
         id: loginImage
@@ -37,7 +37,11 @@ Item {
         anchors.rightMargin: 70 *dpx
         anchors.top: exerciseResults.top
         anchors.topMargin: 70 *dpy
-        onClicked: exerciseResults.visible = false
+        onClicked:
+        {
+            exerciseResults.visible = false
+            $app.allData.clearInfo();
+        }
     }
 
     Column {
@@ -122,7 +126,7 @@ Item {
         x: 80 *dpx
         width: 1024 *dpx
         height: 142*dpy
-//        horizontalScrollBarPolicy: Qt.ScrollBarAlwaysOff
+        //        horizontalScrollBarPolicy: Qt.ScrollBarAlwaysOff
 
         style:TableViewStyle
         {
@@ -191,7 +195,7 @@ Item {
             title: qsTr("得分情况")
             width: resultTable.viewport.width/resultTable.columnCount
         }
-        model: $app.allData.listResult;        
+        model: $app.allData.listResult;
     }
 
     Row {
@@ -219,12 +223,12 @@ Item {
                 }
 
                 RedChart {
-                     width :500*dpx
-                     height: 320*dpy
-//                     title: modelData.belong
-                     hurtData:modelData.hurt
-                     deathData:modelData.dealth
-                     okData:modelData.ok
+                    width :500*dpx
+                    height: 320*dpy
+                    //                     title: modelData.belong
+                    hurtData:modelData.hurt
+                    deathData:modelData.dealth
+                    okData:modelData.ok
                 }
                 Rectangle {
                     id: circle
@@ -275,7 +279,7 @@ Item {
         x: 375.5*dpx
         PopupButton {
             id: save
-             width: 150*dpx
+            width: 150*dpx
             background: Rectangle {
                 color: "#265aef"
                 Text {
@@ -291,7 +295,7 @@ Item {
                 }
             }
 
-//            nameButton: "保存演习数据"
+            //            nameButton: "保存演习数据"
             onClicked: {
                 openFile.open()
             }
@@ -311,27 +315,27 @@ Item {
             }
         }
         PopupButton {
-//            id: print
+            //            id: print
             width: 150*dpx
-           background: Rectangle {
-               color: "#265aef"
-               Text {
-                   height: 36 *dpy
-                   width: 150*dpx
-                   verticalAlignment: Text.AlignVCenter
-                   horizontalAlignment: Text.AlignHCenter
-                   text: "打印演习报告"
-                   font.pixelSize: 16*dpx
-                   color: "#ffffff"
-                   font.family: "Microsoft YaHei"
-               }
-           }
+            background: Rectangle {
+                color: "#265aef"
+                Text {
+                    height: 36 *dpy
+                    width: 150*dpx
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                    text: "打印演习报告"
+                    font.pixelSize: 16*dpx
+                    color: "#ffffff"
+                    font.family: "Microsoft YaHei"
+                }
+            }
 
-//            nameButton: "打印演习报告"
-           onClicked:
-           {
-               printWPS.open();
-           }
+            //            nameButton: "打印演习报告"
+            onClicked:
+            {
+                printWPS.open();
+            }
 
         }
         FileDialog
@@ -352,7 +356,11 @@ Item {
                 color: "#1d4f88"
             }
             nameButton: "取消"
-            onClicked: exerciseResults.visible = false
+            onClicked:
+            {
+                exerciseResults.visible = false
+                $app.allData.clearInfo();
+            }
         }
     }
 }

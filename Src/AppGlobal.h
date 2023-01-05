@@ -28,8 +28,8 @@ public:
     Q_PROPERTY(bool openChonglian MEMBER m_bopenChonglian NOTIFY openChonglianChanged)
     Q_PROPERTY(QList<QObject*> noiceList MEMBER m_slistNoice NOTIFY noiceChanged)
 
-    Q_PROPERTY(double  dAveLat MEMBER m_dAveLat NOTIFY aveLatChanged)
-    Q_PROPERTY(double  dAveLon MEMBER m_dAveLon NOTIFY aveLonChanged)
+    Q_PROPERTY(QString  sAveLat MEMBER m_sAveLat NOTIFY aveLatChanged)
+    Q_PROPERTY(QString  sAveLon MEMBER m_sAveLon NOTIFY aveLonChanged)
 
     /**
      * @brief 退出app
@@ -84,8 +84,8 @@ signals:
     void openSpeakChanged();
     void openChonglianChanged();
     void noiceChanged();
-    void aveLatChanged(double);
-    void aveLonChanged(double);
+    void aveLatChanged(QString);
+    void aveLonChanged(QString);
 
 public slots:
 private:
@@ -107,6 +107,8 @@ private:
     QList<QObject*> m_slistNoice;          ///播报内容
     double          m_dAveLat=0.0;          ///平均纬度
     double          m_dAveLon=0.0;          ///平均经度
+    QString         m_sAveLat;          ///平均纬度
+    QString         m_sAveLon;          ///平均经度
 };
 
 Q_DECLARE_METATYPE(CGlobalSettings*)

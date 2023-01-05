@@ -33,6 +33,11 @@ public:
     Q_PROPERTY(double  dLon MEMBER m_dLon NOTIFY lonChanged)
     Q_PROPERTY(int uRelive MEMBER m_uRelive NOTIFY reliveChanged)
 
+    Q_PROPERTY(int nPistolSum MEMBER m_nPistolSum NOTIFY pistolSumChanged)
+    Q_PROPERTY(int nRifleSum MEMBER m_nRifleSum NOTIFY rifleSumChanged)
+    Q_PROPERTY(int nHitCount MEMBER m_nHitCount NOTIFY hitCountChanged)
+    Q_PROPERTY(int nHurtCount MEMBER m_nHurtCount NOTIFY hurtCountChanged)
+
     int        getId()      {return m_nID;}
     QString    getName()    {return m_sName;}
     int        getRelive()  {return m_uRelive;}
@@ -77,6 +82,10 @@ signals:
     void latChanged(double);
     void lonChanged(double);
     void reliveChanged(int);
+    void pistolSumChanged(int);
+    void rifleSumChanged(int);
+    void hitCountChanged(int);
+    void hurtCountChanged(int);
 
 protected:
     void UpdateBaseInfo(PersonInfo* pPersonInfo);
@@ -84,6 +93,11 @@ protected:
 private:
     int m_nPistol=0;
     int m_nRifle=0;
+    int m_nRifleSum=0; //总数
+    int m_nPistolSum=0;//总数
+
+    int m_nHitCount=0; ///击中的次数
+    int m_nHurtCount=0; ///被击中的次数
 
     bool m_bPistol=false;
     bool m_bRifle=false;

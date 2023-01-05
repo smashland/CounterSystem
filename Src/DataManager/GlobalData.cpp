@@ -596,7 +596,6 @@ void CGlobalData::loadSceInfo(const QString &sceName)
 
         /// 更新所有的状态信息
         updateAllDataSize(m_mapStatusModel.count());
-
         if(cePersonInfo->getHostage())
         {
             m_pCtrMapPerson->UpdateGroup(cePersonInfo->getID(),"人质");
@@ -604,6 +603,15 @@ void CGlobalData::loadSceInfo(const QString &sceName)
         else{
             m_pCtrMapPerson->UpdateGroup(cePersonInfo->getID(),typeTemp);
         }
+
+        ///地图上人员信息
+        auto pPerson = CDataManager::GetInstance()->GetOrCreatePersonInfo(cePersonInfo->getID());
+
+        QString UIdVName=QString::number(cePersonInfo->getID())+cePersonInfo->getName();
+        m_pCtrMapPerson->UpdateName(cePersonInfo->getID(),UIdVName);
+        m_pCtrMapPerson->UpdatePos(cePersonInfo->getID(),
+                                   pPerson->curtpos().dlon(),
+                                   pPerson->curtpos().dlat());
     }
 
 }
@@ -763,7 +771,6 @@ void CGlobalData::UpdateMap(quint16 unID)
                                pPerson->curtpos().dlat());
 
     m_pCtrMapPerson->UpdateStatus(unID,pPerson->hearth());
-
 }
 
 /// 更新活着的人数

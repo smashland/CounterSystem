@@ -1,4 +1,5 @@
 ﻿#include "../ConfigInfo.h"
+#include "../ParseData/DealDataManager.h"
 #include "DataManager.h"
 #include "PersonAllInfo.h"
 #include "PersonInfo.pb.h"
@@ -64,7 +65,11 @@ void CPersonAllInfo::UpdateBaseInfo(PersonInfo *pPersonInfo)
     }
 
     int nHurtSize = pPersonInfo->hurtinfo_size();
-    qDebug()<<"测试命中信息"<<nHurtSize;
+    if(m_nHurtCount!=nHurtSize)
+    {
+        m_nHurtCount=nHurtSize;
+        emit(hurtCountChanged(m_nHurtCount));
+    }
     if(0==nHurtSize)
     {
         if(m_bHead){m_bHead=false;emit(headChanged(m_bHead));}
@@ -117,6 +122,11 @@ void CPersonAllInfo::UpdateBaseInfo(PersonInfo *pPersonInfo)
     }
 
     nHurtSize = pPersonInfo->hitinfo_size();
+    if(m_nHitCount!=nHurtSize)
+    {
+        m_nHitCount=nHurtSize;
+        emit(hitCountChanged(m_nHitCount));
+    }
     for(int nIndex=0; nIndex<nHurtSize; ++nIndex)
     {
         /// 增加命中信息
@@ -158,6 +168,7 @@ void CPersonAllInfo::UpdateBaseInfo(PersonInfo *pPersonInfo)
         case RIFLE:
             bLink1 = UNLINK != conStatus.weapons(nIndex).contype();
             if(bLink1) nNum = conStatus.weapons(nIndex).bulletnum();
+            qDebug()<<"手枪0："<<nNum;
             break;
         case PISTOL:
             bLink = UNLINK != conStatus.weapons(nIndex).contype();
@@ -172,6 +183,7 @@ void CPersonAllInfo::UpdateBaseInfo(PersonInfo *pPersonInfo)
             {
                 m_nRifle = nNum;
                 emit(rifleNumChanged(m_nRifle));
+                qDebug()<<"步枪1："<<nNum;
             }
             break;
         case GRENAD:
@@ -196,6 +208,7 @@ void CPersonAllInfo::UpdateBaseInfo(PersonInfo *pPersonInfo)
             break;
         }
     }
+    //    countDanFlag=false;
 
     /// 如果命中信息更新则返回
     if(m_listHitInfo != tmpList)
@@ -231,5 +244,25 @@ void CPersonAllInfo::UpdateBaseInfo(PersonInfo *pPersonInfo)
         m_uRelive = repos;
         emit(reliveChanged(m_uRelive));
     }
-
+    if(CConfigInfo::GetInstance()->GetStart())
+    {
+        QStringList listBulletSum =CDealDataManager::GetInstance()->GetBulletSum(pPersonInfo->id());
+        for(int i = 0; i< listBulletSum.size();++i)
+        {
+            if(listBulletSum.at(i)==NULL)
+            {
+                listBulletSum[i]="0";
+            }
+        }
+        if(m_nRifleSum!=listBulletSum.at(0).toInt())
+        {
+            m_nRifleSum=listBulletSum.at(0).toInt();
+            emit(rifleSumChanged(m_nRifleSum));
+        }
+        if(m_nPistolSum!=listBulletSum.at(1).toInt())
+        {
+            m_nPistolSum=listBulletSum.at(1).toInt();
+            emit(pistolSumChanged(m_nPistolSum));
+        }
+    }
 }

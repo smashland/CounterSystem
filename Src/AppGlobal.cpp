@@ -21,7 +21,7 @@
 #include "DataManager/DataManager.h"
 #include "Notice/NoticeManager.h"
 #include "ConfigInfo.h"
-
+#include <iomanip>
 
 QAppGlobal::QAppGlobal(QObject *parent) : QObject(parent)
 {
@@ -310,7 +310,9 @@ void QAppGlobal::setAveLocation()
 
     }
     m_dAveLat=m_sumLat/personCount;
-    emit aveLatChanged(m_dAveLat);
+    m_sAveLat=QString::number(m_dAveLat, 'f', 4);
+    emit aveLatChanged(m_sAveLat);
     m_dAveLon=m_sumLon/personCount;
-    emit aveLonChanged(m_dAveLon);
+    m_sAveLon=QString::number(m_dAveLon, 'f', 4);
+    emit aveLonChanged(m_sAveLon);
 }

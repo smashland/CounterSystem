@@ -1,4 +1,4 @@
-#include <QUrl>
+﻿#include <QUrl>
 #include <QApplication>
 #include "../ParseData/DealDataManager.h"
 #include "GlobalData.h"
@@ -17,6 +17,7 @@
 #include "../SceInfo/SceManager.h"
 #include "../SceInfo/ScePersonInfo.h"
 #include "../SceInfo/SceInfo.h"
+#include "../Connection/ConnectionManager.h"
 
 CGlobalData::CGlobalData(QObject *parent) : QObject(parent),
     m_sCurrentFileName(QDir::homePath())
@@ -136,7 +137,6 @@ void CGlobalData::UpdateSimulationTime(const quint16 &uSimTimes)
     {
         one->updateTime(uSimTimes);
         one->Update(uSimTimes);
-
         UpdateMap(one->getId());
     }
 
@@ -286,9 +286,11 @@ CPersonAllInfo *CGlobalData::getPersonAllInfo(quint16 unID)
 /// 设置用户名称
 void CGlobalData::setUserName(quint16 unID, const QString &sName)
 {
+    QString IdVsName;
     auto pPersonStatus = GetOrCreatePersonStatus(unID);
     pPersonStatus->setName(sName);
-    m_pCtrMapPerson->UpdateName(unID,unID + sName);
+    IdVsName=QString::number(unID)+" "+sName;
+    m_pCtrMapPerson->UpdateName(unID,IdVsName/*unID + sName*/);
 
     auto pPersonInfo = CDataManager::GetInstance()->GetOrCreatePersonInfo(unID);
     pPersonInfo->set_name(sName.toStdString());
@@ -458,11 +460,16 @@ int CGlobalData::openReplayFile(const QUrl &rReplayFile)
 
     return(unTimes);
 }
-
+bool replayFlags=false;
 /// 演习开始
 void CGlobalData::beginReplay()
 {
-    CTimeServer::GetInstance()->SimuStart();
+    if(!replayFlags)
+    {
+        m_pCtrMapPerson->ClearMap();
+        CTimeServer::GetInstance()->SimuStart();
+        replayFlags = true;
+    }
 }
 
 void CGlobalData::pauseReplay()
@@ -487,6 +494,7 @@ void CGlobalData::endReplay()
     }
 
     m_allReplayStatus.clear();
+    replayFlags = false;
 }
 
 bool CGlobalData::deleteReplayFile(const QString &sReplayame)
@@ -521,9 +529,11 @@ void CGlobalData::createReport(const QUrl &sReportFileName)
     CExportResult::GetInstance()->CreateDocx(sReportFileName.toLocalFile(),sReportFileName.fileName().split(".")[0],m_mapTypeInfo);
 }
 
-void CGlobalData::getSceName(const QString &sceName)
+///得到方案名称和平均位置
+void CGlobalData::getSceVsLoc(const QString &sceName,const QString &aveLocation)
 {
     CExportResult::GetInstance()->setCurrentSceName(sceName);
+    CExportResult::GetInstance()->setAveLocation(aveLocation);
 }
 
 ///保存方案信息
@@ -586,14 +596,17 @@ void CGlobalData::loadSceInfo(const QString &sceName)
 
         /// 更新所有的状态信息
         updateAllDataSize(m_mapStatusModel.count());
-
         if(cePersonInfo->getHostage())
         {
-            m_pCtrMapPerson->UpdateGroup(cePersonInfo->getID(),"人质");
+            m_pCtrMapPerson->UpdateGroup(cePersonInfo->getID(),"人质");;
         }
         else{
             m_pCtrMapPerson->UpdateGroup(cePersonInfo->getID(),typeTemp);
         }
+
+//        ///地图上人员信息
+        QString UIdVName=QString::number(cePersonInfo->getID())+cePersonInfo->getName();
+        m_pCtrMapPerson->UpdateName(cePersonInfo->getID(),UIdVName);
     }
 
 }
@@ -753,7 +766,6 @@ void CGlobalData::UpdateMap(quint16 unID)
                                pPerson->curtpos().dlat());
 
     m_pCtrMapPerson->UpdateStatus(unID,pPerson->hearth());
-
 }
 
 /// 更新活着的人数

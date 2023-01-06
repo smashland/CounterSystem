@@ -14,13 +14,14 @@
 #include <QMap>
 
 #include "AppGlobal.h"
+#include "Src/DataManager/PersonInfo.pb.h"
 #include "TimeServer/TimeServer.h"
 #include "ParseData/DealDataManager.h"
 #include "Connection/ConnectionManager.h"
 #include "DataManager/DataManager.h"
 #include "Notice/NoticeManager.h"
 #include "ConfigInfo.h"
-
+#include <iomanip>
 
 QAppGlobal::QAppGlobal(QObject *parent) : QObject(parent)
 {
@@ -58,7 +59,7 @@ void QAppGlobal::initSystem()
     CTimeServer::GetInstance()->Start();
 
     /// 初始化声音
-//    CNoticeManager::GetInstance()->OpenSpeak(true);
+    //    CNoticeManager::GetInstance()->OpenSpeak(true);
     CNoticeManager::GetInstance()->SetVolume(100);
     CNoticeManager::GetInstance()->SetGlobal(this);
 
@@ -81,8 +82,8 @@ void QAppGlobal::changeEarth()
 /// 更新信息
 void QAppGlobal::updateNotic(const QString &rInfo)
 {
-//    QString sInfo;
-//    sInfo = QTime::currentTime().toString("hh:mm:ss ") + rInfo;
+    //    QString sInfo;
+    //    sInfo = QTime::currentTime().toString("hh:mm:ss ") + rInfo;
     NoticInfo* pNoticInfo=new NoticInfo;
     pNoticInfo->setNoiceText(rInfo);
     pNoticInfo->setColorNotic(m_typeColor);
@@ -202,22 +203,21 @@ QStringList QAppGlobal::openHelp()
     QStringList string_list;
     for(int i=0; i < fileInfoList.count(); i++)
     {
-        string_list.append(fileInfoList.at(i).absoluteFilePath());
+        //        string_list.append(fileInfoList.at(i).absoluteFilePath());
+        string_list.append(fileInfoList.at(i).fileName());
     }
     return(string_list);
 }
-
-void QAppGlobal::openFile(const QUrl &rReplayFile)
+///打开帮助文档
+void QAppGlobal::openFile(const QString &strHelpFileName)
 {
-    //    QTextCodec *code = QTextCodec::codecForName("utf-8");
-    QString str = rReplayFile.toLocalFile().toLocal8Bit().data();/*GetDataPath().c_str() + QString("Help/")*/;
-    //    QString string = code->fromUnicode(str);
+    QString str=GetDataPath().c_str() + QString("Help\\%1").arg(strHelpFileName);
     QDesktopServices::openUrl(QUrl::fromLocalFile(str));
 }
 ///删除帮助说明文件
-bool QAppGlobal::removeHelpFile(const QUrl &rRemoveFile)
+bool QAppGlobal::removeHelpFile(const QString &strHelpFileName)
 {
-    QString filePath = rRemoveFile.toString();
+    QString filePath = GetDataPath().c_str() + QString("Help\\%1").arg(strHelpFileName);
     if (filePath.isEmpty())//是否传入了空的路径
         return false;
 
@@ -249,8 +249,8 @@ bool QAppGlobal::getOpenSpeak()
     {
         m_bopenSpeak=false;
     }
-     CNoticeManager::GetInstance()->OpenSpeak(m_bopenSpeak);
-     return m_bopenSpeak;
+    CNoticeManager::GetInstance()->OpenSpeak(m_bopenSpeak);
+    return m_bopenSpeak;
 }
 
 void QAppGlobal::setClearNoticText()
@@ -283,4 +283,36 @@ void QAppGlobal::setGroupId(int typeID)
         m_typeColor=Qt::white;
     }
     emit typeColorChanged();
+}
+
+void QAppGlobal::setAveLocation()
+{
+    QList<int> int_listId=CDataManager::GetInstance()->AllPersonId();
+    if(int_listId.isEmpty())
+    {
+        return;
+    }
+    double personCount=(double)int_listId.size();
+    double m_sumLat=0.0,m_sumLon=0.0;
+    QList<int>::iterator it;
+    for(/*QList<int>::iterator*/ it = int_listId.begin(); it!=int_listId.end(); ++it)
+    {
+        auto pPersonInfo = CDataManager::GetInstance()->GetOrCreatePersonInfo(*it);
+        auto &pos=pPersonInfo->curtpos();
+        if(fabs(m_sumLat-pos.dlat())>DBL_EPSILON)
+        {
+            m_sumLat=m_sumLat+pos.dlat();
+        }
+        if(fabs(m_sumLon - pos.dlon())>DBL_EPSILON)
+        {
+            m_sumLon=m_sumLon+pos.dlon();
+        }
+
+    }
+    m_dAveLat=m_sumLat/personCount;
+    m_sAveLat=QString::number(m_dAveLat, 'f', 4);
+    emit aveLatChanged(m_sAveLat);
+    m_dAveLon=m_sumLon/personCount;
+    m_sAveLon=QString::number(m_dAveLon, 'f', 4);
+    emit aveLonChanged(m_sAveLon);
 }

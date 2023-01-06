@@ -1,8 +1,9 @@
-#ifndef CSETEARTH_H
+﻿#ifndef CSETEARTH_H
 #define CSETEARTH_H
 
 #include <QObject>
 #include <QJsonObject>
+#include <QDir>
 
 class CSetEarth : public QObject
 {
@@ -57,6 +58,8 @@ public:
      */
     void readEarth(const QJsonObject& rObj);
 
+    QString copyEarthFile(const QString &sEarthName,const QString &strImagePath);
+    bool qCopyDirectory(const QDir& fromDir, const QDir& toDir, bool bCoverIfFileExists);
 signals:
     void earthNameChanged(QString);
     void earthPathChanged(QString);

@@ -1,4 +1,4 @@
-#include "SceManager.h"
+﻿#include "SceManager.h"
 #include <QJsonDocument>
 #include <QFile>
 #include <QApplication>
@@ -328,11 +328,11 @@ void SceManager::parseExcel(const QString &strImagePath)
     QFileInfo fileInfo(strImagePath);
     QXlsx::Document xlsx2(strImagePath);
     QStringList sheetnames = xlsx2.sheetNames();
-//    qDebug()<<sheetnames;
-    for(int sheetCout=0;sheetCout<sheetnames.size();sheetCout++)
+    qDebug()<<sheetnames<<" 00"<<fileInfo.baseName();
+    for(int sheetCout=0;sheetCout<1/*sheetnames.size()*/;sheetCout++)
     {
         QXlsx::Worksheet* workSheet = dynamic_cast<QXlsx::Worksheet*>(xlsx2.sheet(sheetnames[sheetCout]));
-//        qDebug()<<workSheet->sheetName()<<','<<workSheet->sheetType();
+       qDebug()<<workSheet->sheetName()<<','<<workSheet->sheetType()<<sheetnames.size();
         QStringList titles;
         int rowCount=workSheet->dimension().rowCount();
         int columnCount=workSheet->dimension().columnCount();
@@ -343,14 +343,15 @@ void SceManager::parseExcel(const QString &strImagePath)
             QXlsx::Cell *cell = workSheet->cellAt(1, j);
             titles.append(cell->value().toString());
         }
-//        qDebug()<<titles[0]<<titles[1]<<titles[2]<<titles[3]<<titles[4];
+        qDebug()<<titles[0]<<titles[1]<<titles[2]<<titles[3]<<titles[4];
         if(titles[0]=="设备ID"&&titles[1]=="姓名"&&titles[2]=="职务"&&titles[3]=="阵营"&&titles[4]=="人质")
         {
-//            qDebug()<<"表头正确";
+            qDebug()<<"表头正确";
             CSceInfo* pSceInfo = new CSceInfo;
             pSceInfo->PraseExcelInfo(workSheet,rowCount,columnCount);
-            pSceInfo->setSceName(workSheet->sheetName());
-            m_mapName2SceInfo.insert(workSheet->sheetName(),pSceInfo);
+            qDebug()<<"方案内容"<<workSheet->sheetName();
+            pSceInfo->setSceName(fileInfo.baseName());
+            m_mapName2SceInfo.insert(fileInfo.baseName(),pSceInfo);
             m_listSces.append(pSceInfo);
             write();
         }

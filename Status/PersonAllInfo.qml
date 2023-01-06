@@ -1,4 +1,4 @@
-import QtQuick 2.7
+﻿import QtQuick 2.7
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
 import "../Common"
@@ -113,14 +113,14 @@ Popup
                 id:shouqiang
                 y: fushangxinxi.contentHeight + line2.height + 20 *dpy
                 text: "手枪子弹数:"
-                name: outData.nPistol + "/9999"
+                name: outData.nRifle + "/"+outData.nRifleSum
             }
             SoldierItem {
                 id:buqiang
                 x: line2.width/2
                 y: fushangxinxi.contentHeight + line2.height + 20 *dpy
                 text: "步枪子弹数:"
-                name: outData.nRifle + "/9999"
+                name: outData.nPistol +   "/" +  outData.nPistolSum; //   "/9999"       /*+outData.nRifleSum  */
             }
         }
         Rectangle {
@@ -181,14 +181,14 @@ Popup
                 id:mingzhong
                 y: zhuangbei.contentHeight + line3.height + 20 *dpy
                 text: "命       中:"
-                name:"1"
+                name:outData.nHitCount
             }
             SoldierItem {
                 id:beimingzhong
                 x: line1.width/2
                 y: zhuangbei.contentHeight + line3.height + 20 *dpy
                 text: "被  命  中:"
-                name: "2"
+                name: outData.nHurtCount
             }
         }
 

@@ -1,4 +1,4 @@
-#include <QtEndian>
+﻿#include <QtEndian>
 #include <QDir>
 #include <QVariant>
 #include "GlobalSettings.h"
@@ -8,21 +8,22 @@
 #include "../DataManager/GlobalData.h"
 #include "../DataManager/DataManager.h"
 #include "../TimeServer/TimeServer.h"
+#include "Src/DataManager/PersonInfo.pb.h"
 CGlobalSettings::CGlobalSettings(QObject *parent) : QObject(parent)
 {
     m_nType = CConfigInfo::GetInstance()->GetConnectionType();
     m_qConnectColor.setRgbF(1.0,1.0,1.0);
     m_qDisConnectColor.setRgbF(0.2,0.2,0.2);
 
-//    m_mapType2Color.insert(QString::fromUtf8("红方"),QColor(255,0,0));
-//    m_mapType2Color.insert(QString::fromUtf8("蓝方"),QColor(0,0,255));
-//    m_mapType2Color.insert(QString::fromUtf8("白方"),QColor(255,255,255));
-//    m_mapType2Color.insert(QString::fromUtf8("未知"),QColor(127,127,127));
+    //    m_mapType2Color.insert(QString::fromUtf8("红方"),QColor(255,0,0));
+    //    m_mapType2Color.insert(QString::fromUtf8("蓝方"),QColor(0,0,255));
+    //    m_mapType2Color.insert(QString::fromUtf8("白方"),QColor(255,255,255));
+    //    m_mapType2Color.insert(QString::fromUtf8("未知"),QColor(127,127,127));
 
-//    m_mapType2BackColor.insert(QString::fromUtf8("红方"),QColor(255,0,0,79));
-//    m_mapType2BackColor.insert(QString::fromUtf8("蓝方"),QColor(0,0,255,79));
-//    m_mapType2BackColor.insert(QString::fromUtf8("白方"),QColor(255,255,255,79));
-//    m_mapType2BackColor.insert(QString::fromUtf8("未知"),QColor(127,127,127,79));
+    //    m_mapType2BackColor.insert(QString::fromUtf8("红方"),QColor(255,0,0,79));
+    //    m_mapType2BackColor.insert(QString::fromUtf8("蓝方"),QColor(0,0,255,79));
+    //    m_mapType2BackColor.insert(QString::fromUtf8("白方"),QColor(255,255,255,79));
+    //    m_mapType2BackColor.insert(QString::fromUtf8("未知"),QColor(127,127,127,79));
     m_mapType2Color.insert(QString::fromUtf8("红方"),QColor(0,0,0,0));
     m_mapType2Color.insert(QString::fromUtf8("蓝方"),QColor(0,0,255,0));
     m_mapType2Color.insert(QString::fromUtf8("白方"),QColor(255,255,255,0));
@@ -198,10 +199,15 @@ void CGlobalSettings::setStart()
 
     /// 查询所有人的状态
     CDealDataManager::GetInstance()->QueryAll();
+    /// 重置人员状态添加(测试)
+    CDataManager::GetInstance()->ResetPersonInfo();
 
     /// 重置演习时间
     CTimeServer::GetInstance()->ResetSimTime();
     emit startStatusChanged(m_bIsStart);
+
+    CDealDataManager::GetInstance()->clearBulletSum();
+
 }
 QString CGlobalSettings::getSysTime()
 {
@@ -216,8 +222,8 @@ void CGlobalSettings::setStop()
     m_bIsStart = false;
     CConfigInfo::GetInstance()->GetStart()=false;
     CDealDataManager::GetInstance()->AllStop();
-    /// 重置人员状态
-    CDataManager::GetInstance()->ResetPersonInfo();
+    //    /// 重置人员状态
+    //    CDataManager::GetInstance()->ResetPersonInfo();
     emit startStatusChanged(m_bIsStart);
 }
 
@@ -269,6 +275,7 @@ void CGlobalSettings::setFuHuo(quint16 nID)
 void CGlobalSettings::chongDan(quint16 nID, const QStringList &allInfo)
 {
     CDealDataManager::GetInstance()->PersonalChongDan(nID,allInfo);
+    CDealDataManager::GetInstance()->SetBulletSum(nID,allInfo);
 }
 
 /// 配枪

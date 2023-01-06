@@ -39,7 +39,7 @@ Rectangle {
         id: fileDialog
         folder: shortcuts.home
         title: qsTr("请选择文件")
-        nameFilters: [qsTr("图片 (*.tif)"),qsTr("文件 (*.xml)"),  qsTr("全部文件 (*.*)")]
+        nameFilters: [qsTr("图片 (*.tif)"),qsTr("文件 (*.xml)")/*, qsTr("全部文件 (*.*)")*/]
         onAccepted: {
             var earthPath=String(fileDialog.currentFile)
             earthPath=earthPath.substr(8)

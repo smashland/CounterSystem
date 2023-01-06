@@ -1,4 +1,4 @@
-import QtQuick 2.0
+﻿import QtQuick 2.0
 import QtQuick.Controls 2.3
 import "../Common"
 
@@ -20,15 +20,17 @@ Dialog{
         y: 44*dpy
     }
 
-    onAccepted:
-    {
-        var allNum=[8];
-        for(var i=0; i<allInfo.count;++i)
-        {
-            allNum[i] = allInfo.itemAt(i).children[1].text;
-        }
-        $app.settings.chongDan(nID,allNum);
-    }
+    signal danYaosignal(int shou,int bu,int ji,int juji,int shoulei);
+
+    //    onAccepted:
+    //    {
+    //        var allNum=[8];
+    //        for(var i=0; i<allInfo.count;++i)
+    //        {
+    //            allNum[i] = allInfo.itemAt(i).children[1].text;
+    //        }
+    //        $app.settings.chongDan(nID,allNum);
+    //    }
 
     Column {
         id:allInfo
@@ -36,25 +38,54 @@ Dialog{
         anchors.centerIn: parent
         SoldierItem2 {
             title: "手      枪："
-//            danwei: "支"
+            //            danwei: "支"
         }
         SoldierItem2 {
             title: "步      枪："
-//            danwei: "支"
+            //            danwei: "支"
         }
         SoldierItem2 {
             title: "机      枪："
-//            danwei: "支"
+            //            danwei: "支"
         }
         SoldierItem2 {
             title: "狙击步枪："
-//            danwei: "支"
+            //            danwei: "支"
         }
         SoldierItem2 {
             title: "手      雷："
-//            danwei: "个"
+            //            danwei: "个"
         }
     }
+    //    Column
+    //    {
+    //        width: 161
+    //        height: 320
+    //        Repeater
+    //        {
+    //            id:allInfo
+    //            model: 5
+    //            Row
+    //            {
+    //                Label
+    //                {
+    //                    text: index
+    //                }
+
+    //                TextField
+    //                {
+    //                    id:zdshu
+    //                    maximumLength:4
+    //                    placeholderText:'子弹数量'
+    //                    validator: IntValidator
+    //                    {
+    //                        bottom:1
+    //                        top:9999
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
     Row {
         spacing: 15 *dpx
         anchors.bottom: parent.bottom
@@ -68,14 +99,13 @@ Dialog{
             nameButton: "确定"
             onClicked: {
                 var allNum=[8];
-                for(var i=0; i<allInfo.count;++i)
+                for(var i=0; i<allInfo.children.length; i++)
                 {
-                    allNum[i] = allInfo.itemAt(i).children[1].text;
+                    allNum[i]=allInfo.children[i].name
                 }
                 $app.settings.chongDan(nID,allNum);
                 dialog.close()
             }
-
         }
         PopupButton {
             background: Rectangle {

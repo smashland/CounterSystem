@@ -54,7 +54,7 @@ CSetEarth *EarthManager::addMaps(const QString &earthName)
     return nullptr;
 }
 
-bool EarthManager::deleteEarth(const QString &earthName)
+bool EarthManager::deleteEarth(const QString &earthName,const QString &earthInfo)
 {
     auto findOne = m_mapName2EarthInfo.find(earthName);
     if(m_mapName2EarthInfo.end() != findOne)
@@ -63,6 +63,7 @@ bool EarthManager::deleteEarth(const QString &earthName)
         emit earthChanged();
         delete findOne.value();
         m_mapName2EarthInfo.erase(findOne);
+        removeEarthFile(earthInfo);
         return(true);
     }
     else
@@ -70,7 +71,27 @@ bool EarthManager::deleteEarth(const QString &earthName)
         return(false);
     }
 }
+bool EarthManager::removeEarthFile(const QString &earthInfo)
+{
+    if (earthInfo.isEmpty() || !QDir().exists(earthInfo))//是否传入了空的路径||路径是否存在
+        return false;
 
+    QFileInfo earthFileInfo(earthInfo);
+
+    if(earthFileInfo.suffix()=="tif")
+    {
+        if (earthFileInfo.isFile())//如果是文件
+            QFile::remove(earthInfo);
+    }
+    else if(earthFileInfo.suffix()=="xml")
+    {
+        QDir dir;
+        dir.setPath(earthFileInfo.path());
+        dir.removeRecursively();
+    }
+
+    return true;
+}
 void EarthManager::ReadFile()
 {
     ClearEarthInfo();

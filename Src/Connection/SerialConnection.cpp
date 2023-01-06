@@ -1,4 +1,4 @@
-#include <QSerialPortInfo>
+﻿#include <QSerialPortInfo>
 #include "SerialConnection.h"
 #include "../ConfigInfo.h"
 
@@ -133,3 +133,5 @@ void CControlSerial::DisConnect()
 
     CConnection::DisConnect();
 }
+
+

@@ -1,4 +1,4 @@
-#include <QDate>
+﻿#include <QDate>
 #include <QString>
 #include <QApplication>
 #include <QDir>
@@ -56,7 +56,7 @@ void CExportResult::CreateDocx(const QString &sFileName, const QString& sTile,co
         l_merger.setClipboardValue("Result","nBeginTime",INI_File().GetBeginTime().toStdString());
         l_merger.setClipboardValue("Result","nFinishTime",INI_File().GetEndTime().toStdString());
         l_merger.setClipboardValue("Result","nMapName",EarthManager().getCurrentEarthName().toStdString());
-        l_merger.setClipboardValue("Result","nLocation",EarthManager().getCurrentEarthLoction().toStdString());
+        l_merger.setClipboardValue("Result","nLocation",m_aveLocation.toStdString());
         l_merger.paste("Result");
 
         for(auto one=rInfo.begin();one!=rInfo.end();++one)
@@ -264,5 +264,15 @@ void CExportResult::setCurrentSceName(const QString &sSceName)
     if(sSceName!=m_currentSceName)
     {
         m_currentSceName=sSceName;
+    }
+}
+
+void CExportResult::setAveLocation(const QString &sLocation)
+{
+//    QString location=QString("{%1,%2}").arg(m_nCurrentLat).arg(m_nCurrentLon);
+//    return location;
+    if(sLocation!=m_aveLocation)
+    {
+        m_aveLocation=sLocation;
     }
 }

@@ -36,58 +36,55 @@ Rectangle {
         }
         target: mapAdd
     }
-
     MapHelpList{
-        id: listView
-        width: 710 *dpx
-        height: 510 *dpy
-        model:earthManager.earthList
-        currentIndex: -1
-        delegate: DelegateRectangle {
-            id: wrapper
-            property bool hoverd: false
-            Rectangle {
-                id: background
-                anchors.fill: parent
-                color: listView.currentIndex === index ? "red" : (hoverd ? "orange" : index%2 ? "#2D5689" : "#4671a6")
-            }
-
-            TextListItem {
-                id: fileName
-                text: modelData.earthName
-                anchors.centerIn: parent
-            }
-            MouseArea {
-                anchors.fill: parent
-                hoverEnabled: true
-                onClicked: {
-//                    background.color = wrapper.onPressed ? "#222" : index%2 ? "#2D5689" : "#4671a6"
-                    earthManager.praseEarthXml(modelData.earthPath)
-                    $app.changeEarth(modelData.earthPath)
-                    earthManager.saveCurrentEarth(modelData.earthName,modelData.nLat,modelData.nLon);
-                    earthManager.praseCurrentEarth();
-                    listView.currentIndex = index
+            id: listView
+            width: 710 *dpx
+            height: 510 *dpy
+            model:earthManager.earthList
+            currentIndex: -1
+            delegate: DelegateRectangle {
+                id: wrapper
+                property bool hoverd: false
+                Rectangle {
+                    id: background
+                    anchors.fill: parent
+                    color: listView.currentIndex === index ? "#2D5689" : (hoverd ? "#2D5689" : "#4671a6")
                 }
-                onEntered: wrapper.hoverd = true
-                onExited: wrapper.hoverd = false
-            }
-            ViewButton {
-                name: qsTr("删除")
-                color: viewColor_shanchu
-                anchors.right: parent.right
-                anchors.rightMargin: 10*dpx
-                y: 10 *dpy
+
+                TextListItem {
+                    id: fileName
+                    text: modelData.earthName
+                    anchors.centerIn: parent
+                }
                 MouseArea {
                     anchors.fill: parent
+                    hoverEnabled: true
                     onClicked: {
-                        earthManager.deleteEarth(modelData.earthName)
-                        listView.model=earthManager.earthList
+                        earthManager.praseEarthXml(modelData.earthPath)
+                        $app.changeEarth(modelData.earthPath)
+                        earthManager.saveCurrentEarth(modelData.earthName,modelData.nLat,modelData.nLon);
+                        earthManager.praseCurrentEarth();
+                        listView.currentIndex = index
+                    }
+                    onEntered: wrapper.hoverd = true
+                    onExited: wrapper.hoverd = false
+                }
+                ViewButton {
+                    name: qsTr("删除")
+                    color: viewColor_shanchu
+                    anchors.right: parent.right
+                    anchors.rightMargin: 10*dpx
+                    y: 10 *dpy
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                             earthManager.deleteEarth(modelData.earthName,modelData.earthPath)
+                            listView.model=earthManager.earthList
+                        }
                     }
                 }
             }
         }
-    }
-
     property var mapValue:{0:0}
     property var component;
     function openQml(obj) {
@@ -135,7 +132,7 @@ Rectangle {
         nameButton: "添加"
         onClicked: {
             mapAdd.visible = true
-//            openQml(earthManager.addMaps(mapName),"MapAdd.qml")
+            //            openQml(earthManager.addMaps(mapName),"MapAdd.qml")
         }
     }
 

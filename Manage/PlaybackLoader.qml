@@ -1,4 +1,4 @@
-//                                       回放管理
+﻿//                                       回放管理
 import QtQuick 2.12
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
@@ -46,11 +46,6 @@ ManageRect{
             }
         }
     }
-
-//    SearchItem {
-
-//    }
-
     ScePlayList{
         id: listView
         model: $app.openPath()
@@ -91,7 +86,6 @@ ManageRect{
                     MouseArea{
                         anchors.fill: parent
                         onClicked: {
-                            //                                   replayFile.open();
                             ctrReplay.nTimes = $app.allData.openReplayFile("file:///"+appDir+"/Data/Szy/"+modelData+".szy");
                             ctrReplay.visible = true;
                             $app.settings.startReplay()

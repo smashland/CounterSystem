@@ -1,4 +1,4 @@
-#include <SceneGraph/ISceneGraph.h>
+﻿#include <SceneGraph/ISceneGraph.h>
 #include <Plot/Map/IMap.h>
 #include <Plot/Map/IMapLayer.h>
 #include <Plot/IPlot.h>
@@ -47,7 +47,6 @@ void CContrlMapPerson::Locate(quint16 unID)
 void CContrlMapPerson::UpdateGroup(quint16 unID, const QString & sGroup)
 {
     auto pMapPerson = GetOrCreateMapPersonInfo(unID);
-
     if(sGroup == QString::fromUtf8("人质"))
     {
         pMapPerson->SetGroupType(GREEN_GROUP);

@@ -1,8 +1,9 @@
-#ifndef CDATAMANAGER_H
+﻿#ifndef CDATAMANAGER_H
 #define CDATAMANAGER_H
 
 #include <QMap>
 #include <QSet>
+#include <QList>
 #include <fstream>
 #include "../TimeServer/ITimeObserver.h"
 #include "Src/DataManager/PersonStatus.h"
@@ -85,6 +86,11 @@ public:
      */
     const QString& GetFileName(const QString& sDataString);
 
+    /**
+     * @brief 所有人的Id
+     * @return id
+     */
+    QList<int> AllPersonId();
 private:
     explicit CDataManager();
     ~CDataManager();

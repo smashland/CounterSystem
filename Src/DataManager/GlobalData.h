@@ -1,4 +1,4 @@
-#ifndef GLOBALDATA_H
+﻿#ifndef GLOBALDATA_H
 #define GLOBALDATA_H
 #include <fstream>
 #include <QObject>
@@ -141,7 +141,12 @@ public:
      * @param sReportFileName
      */
     Q_INVOKABLE void createReport(const QUrl& sReportFileName);
-    Q_INVOKABLE void getSceName(const QString &sceName);
+    /**
+     * @brief 得到方案名称和平均位置
+     * @param sceName
+     * @param aveLocation
+     */
+    Q_INVOKABLE void getSceVsLoc(const QString &sceName,const QString &aveLocation);
     /**
      * @brief 保存方案
      * @param strScePath

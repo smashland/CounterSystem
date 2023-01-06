@@ -62,7 +62,7 @@ Rectangle
         id: contextMenu
         property int userID
         width: 100*dpx
-        height: 240*dpy
+        height: 210*dpy//240*dpy
 
         MenuBackground
         {
@@ -82,7 +82,7 @@ Rectangle
         MenuBackground { name: "解除旁白";onTriggered:if(!$app.settings.bIsReplay){$app.settings.setJieChu(contextMenu.userID)} }
         MenuBackground { name: "判死";onTriggered:if(!$app.settings.bIsReplay){$app.settings.setPanSi(contextMenu.userID)}}
         MenuBackground { name: "复活" ;onTriggered:{if(!$app.settings.bIsReplay){$app.settings.setFuHuo(contextMenu.userID)}}}
-        MenuBackground { name: "关机" }
+        //        MenuBackground { name: "关机" }
         //        MenuItem { text: "同步时间";onTriggered:{sycntime.nID = contextMenu.userID;sycntime.open();}}
         MenuBackground { name: "定位";onTriggered:{$app.allData.dingWei(contextMenu.userID)}}
     }
@@ -219,10 +219,10 @@ Rectangle
         anchors.centerIn: parent
         text: "方案名称为空或重复，请重新添加方案！"
     }
-        CloseBar {
-            id: closebar
-            visible: true
-        }
+    CloseBar {
+        id: closebar
+        visible: true
+    }
     CloseBarFull{
         id: closebarFull
         visible: false

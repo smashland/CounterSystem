@@ -598,20 +598,15 @@ void CGlobalData::loadSceInfo(const QString &sceName)
         updateAllDataSize(m_mapStatusModel.count());
         if(cePersonInfo->getHostage())
         {
-            m_pCtrMapPerson->UpdateGroup(cePersonInfo->getID(),"人质");
+            m_pCtrMapPerson->UpdateGroup(cePersonInfo->getID(),"人质");;
         }
         else{
             m_pCtrMapPerson->UpdateGroup(cePersonInfo->getID(),typeTemp);
         }
 
-        ///地图上人员信息
-        auto pPerson = CDataManager::GetInstance()->GetOrCreatePersonInfo(cePersonInfo->getID());
-
+//        ///地图上人员信息
         QString UIdVName=QString::number(cePersonInfo->getID())+cePersonInfo->getName();
         m_pCtrMapPerson->UpdateName(cePersonInfo->getID(),UIdVName);
-        m_pCtrMapPerson->UpdatePos(cePersonInfo->getID(),
-                                   pPerson->curtpos().dlon(),
-                                   pPerson->curtpos().dlat());
     }
 
 }

@@ -75,7 +75,6 @@ void CPlaceNodeInfo::SetGroupType(GroupType emGroupType)
 {
     if(emGroupType != m_emGroupType)
     {
-        qDebug()<<"测试人质"<<emGroupType;
         m_emGroupType = emGroupType;
         TypeChanged();
     }

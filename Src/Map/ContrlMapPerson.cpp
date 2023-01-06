@@ -47,11 +47,8 @@ void CContrlMapPerson::Locate(quint16 unID)
 void CContrlMapPerson::UpdateGroup(quint16 unID, const QString & sGroup)
 {
     auto pMapPerson = GetOrCreateMapPersonInfo(unID);
-
-     qDebug()<<"人质本质000"<<sGroup;
     if(sGroup == QString::fromUtf8("人质"))
     {
-        qDebug()<<"人质本质"<<sGroup;
         pMapPerson->SetGroupType(GREEN_GROUP);
     }
     else

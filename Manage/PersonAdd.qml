@@ -12,9 +12,10 @@ Rectangle
     width: 651*dpx
     height: 510*dpy
     anchors.centerIn: parent
-//    modal: true
+    //    modal: true
     property string imagePath;
     property var position:{0};
+    property var zhenying:{0};
 
     signal ok(int id,string name,int level,int group,bool isHost,string imPath);
 
@@ -29,7 +30,7 @@ Rectangle
             {
                 shebeiId.name=person.id
                 personName.name=person.name
-//                combobox_renyuan.currentText=person.position?"军官":"士兵"
+                //                combobox_renyuan.currentText=person.position?"军官":"士兵"
                 if(person.position===0)
                 {
                     combobox_renyuan.currentText=""
@@ -38,7 +39,7 @@ Rectangle
                 }else if(person.position===2){
                     combobox_renyuan.currentText="军官"
                 }
-                zhenying.currentText=person.groupType?"红方":"蓝方"
+                zhenying.currentText=person.groupType?"红":"蓝"
                 if(person.hostage)
                 {
                     control3.checked=true
@@ -49,7 +50,7 @@ Rectangle
                 }
 
                 avatarImage.source="file:///"+person.imagePath
-            }          
+            }
 
         }
         target: scenarioNew
@@ -163,13 +164,13 @@ Rectangle
                     {target:"军官"}
                 ]
                 onCurrentTextChanged:
-              /*  onCurrentIndexChanged:*/ {
-//                    var type = combobox_renyuan.currentIndex;
-//                    if(type === 0){
-//                        combobox_renyuan.currentText = "士兵"
-//                    }else if(type === 1) {
-//                        combobox_renyuan.currentText = "军官"
-//                    }
+                    /*  onCurrentIndexChanged:*/ {
+                    //                    var type = combobox_renyuan.currentIndex;
+                    //                    if(type === 0){
+                    //                        combobox_renyuan.currentText = "士兵"
+                    //                    }else if(type === 1) {
+                    //                        combobox_renyuan.currentText = "军官"
+                    //                    }
 
                     var type = combobox_renyuan.currentText;
                     if(type === "士兵"){
@@ -177,7 +178,7 @@ Rectangle
                     }else if(type === "军官") {
                         position=2
                     }else if(type === "") {
-                       position=0
+                        position=0
                     }
                 }
             }
@@ -301,8 +302,19 @@ Rectangle
             }
             nameButton: "确定"
             onClicked: {
-                ok(shebeiId.name,personName.name, position/*combobox_renyuan.currentIndex*/,
-                   zhenying.currentIndex,control3.checked,imagePath);
+                var type;
+                if( zhenying.currentText==="蓝")
+                {
+                    type=0
+                }
+                else if( zhenying.currentText==="红")
+                {
+                    type=1
+                }
+                ok(shebeiId.name,personName.name, position,
+                   type,control3.checked,imagePath);
+                //                ok(shebeiId.name,personName.name, position/*combobox_renyuan.currentIndex*/,
+                //                   zhenying.currentText,control3.checked,imagePath);
             }
 
         }

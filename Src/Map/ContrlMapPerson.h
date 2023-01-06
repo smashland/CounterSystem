@@ -84,7 +84,7 @@ protected:
      */
     CPlaceNodeInfo*   GetOrCreateMapPersonInfo(quint16);
 private:
-    quint16         m_unTimes=5000;
+    quint16         m_unTimes=1000;
     ISceneGraph*    m_pSceneGraph;            /// 场景图
     IMap*           m_pMap;                   /// 地图
     IMapLayer*     m_pLayer;                 ///标绘图层

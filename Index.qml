@@ -7,7 +7,7 @@ import "Exercise"
 import "Exercise/Plugins"
 import "Manage"
 import "Status"
-import "RePlay" as MyRePlay
+import "RePlay"
 import MyItem 1.0
 
 
@@ -258,7 +258,7 @@ Rectangle
             propagateComposedEvents: true
         }
     }
-    MyRePlay.ContrlRePlay
+    ContrlRePlay
     {
         id:ctrReplay
         anchors.top: index.top

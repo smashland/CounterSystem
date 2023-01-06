@@ -42,8 +42,16 @@ Rectangle {
         width: 710 *dpx
         height: 510 *dpy
         model:earthManager.earthList
+        currentIndex: -1
         delegate: DelegateRectangle {
             id: wrapper
+            property bool hoverd: false
+            Rectangle {
+                id: background
+                anchors.fill: parent
+                color: listView.currentIndex === index ? "red" : (hoverd ? "orange" : index%2 ? "#2D5689" : "#4671a6")
+            }
+
             TextListItem {
                 id: fileName
                 text: modelData.earthName
@@ -53,11 +61,15 @@ Rectangle {
                 anchors.fill: parent
                 hoverEnabled: true
                 onClicked: {
+//                    background.color = wrapper.onPressed ? "#222" : index%2 ? "#2D5689" : "#4671a6"
                     earthManager.praseEarthXml(modelData.earthPath)
                     $app.changeEarth(modelData.earthPath)
                     earthManager.saveCurrentEarth(modelData.earthName,modelData.nLat,modelData.nLon);
                     earthManager.praseCurrentEarth();
+                    listView.currentIndex = index
                 }
+                onEntered: wrapper.hoverd = true
+                onExited: wrapper.hoverd = false
             }
             ViewButton {
                 name: qsTr("删除")
@@ -74,7 +86,6 @@ Rectangle {
                 }
             }
         }
-
     }
 
     property var mapValue:{0:0}

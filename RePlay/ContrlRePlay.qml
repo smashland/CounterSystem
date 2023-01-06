@@ -49,8 +49,9 @@ Item
                             if(rePlayShow.bStart)
                             {
                                 $app.allData.beginReplay();
-                                rePlayShow.bStart = false;
                                 time_run.start();
+                                rePlayShow.bStart = false;
+
                             }
                             else
                             {
@@ -67,10 +68,15 @@ Item
                 {
                     id:horizontalSlider
                     from: 0
-                    value: 0
+//                    value: 0.1
                     to: nTimes
-                    stepSize:0.1
+                    stepSize:1000
                     y:sliderBackground.implicitHeight
+                    onValueChanged:
+                    {
+                        console.log(value)
+                    }
+
                     background:Rectangle{
                         // 进度条
                         id: sliderBackground
@@ -97,13 +103,13 @@ Item
                         implicitWidth: 12
                         implicitHeight: 12
                         radius: 6
-                        antialiasing: true
+//                        antialiasing: true
                     }
 
                     onMoved:
                     {
                         $app.allData.setSimuTime(value)
-                        timeText.text = formateTime(nTimes - value)
+                        timeText.text = parseInt(value)
                     }
 
                 }
@@ -194,8 +200,9 @@ Item
         running: false
         triggeredOnStart: true
         onTriggered: {
-            nTimes--
-            if (formateTime(nTimes) <= "00:00") {
+//            nTimes--
+
+            if (formateTime(nTimes) <= "00:00" || horizontalSlider.value == nTimes) {
                 time_run.stop()
                 bofang.text= "\ue609"
 

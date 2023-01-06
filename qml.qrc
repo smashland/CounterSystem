@@ -159,5 +159,6 @@
         <file>Login/Plugins/LoginImage.qml</file>
         <file>Login/Plugins/LoginTextField.qml</file>
         <file>Image/Killing_unfoldo.png</file>
+        <file>Image/listImage2.png</file>
     </qresource>
 </RCC>

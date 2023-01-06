@@ -1,4 +1,4 @@
-#ifndef CCONTRLMAPPERSON_H
+﻿#ifndef CCONTRLMAPPERSON_H
 #define CCONTRLMAPPERSON_H
 
 #include <QtCore>

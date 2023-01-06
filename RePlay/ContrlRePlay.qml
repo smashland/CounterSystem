@@ -1,4 +1,4 @@
-import QtQuick 2.0
+﻿import QtQuick 2.0
 import QtQuick.Controls 2.2
 import "../Common"
 import "../Exercise/Plugins"
@@ -38,6 +38,7 @@ Item
 
                     onPressed:
                     {
+
                         if(bStart)
                         {
                             $app.allData.pauseReplay();

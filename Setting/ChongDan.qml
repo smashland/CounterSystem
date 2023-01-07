@@ -37,11 +37,11 @@ Dialog{
         spacing: 16
         anchors.centerIn: parent
         SoldierItem2 {
-            title: "手      枪："
+            title: "步      枪："
             //            danwei: "支"
         }
         SoldierItem2 {
-            title: "步      枪："
+            title: "手      枪："
             //            danwei: "支"
         }
         SoldierItem2 {

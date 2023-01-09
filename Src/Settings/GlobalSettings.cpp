@@ -316,6 +316,10 @@ void CGlobalSettings::changeSetting(const QString& sListType,const int& rIndex,c
             CConfigInfo::GetInstance()->CalOfflineTime();
             break;
         case 3:
+            if(CConfigInfo::GetInstance()->GetDefaultBullets()!=rInt)
+            {
+                CDealDataManager::GetInstance()->clearBulletSum();
+            }
             CConfigInfo::GetInstance()->GetDefaultBullets()=rInt;
             break;
         }

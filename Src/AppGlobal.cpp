@@ -284,35 +284,41 @@ void QAppGlobal::setGroupId(int typeID)
     }
     emit typeColorChanged();
 }
-
 void QAppGlobal::setAveLocation()
 {
-    QList<int> int_listId=CDataManager::GetInstance()->AllPersonId();
-    if(int_listId.isEmpty())
-    {
-        return;
-    }
-    double personCount=(double)int_listId.size();
-    double m_sumLat=0.0,m_sumLon=0.0;
-    QList<int>::iterator it;
-    for(/*QList<int>::iterator*/ it = int_listId.begin(); it!=int_listId.end(); ++it)
-    {
-        auto pPersonInfo = CDataManager::GetInstance()->GetOrCreatePersonInfo(*it);
-        auto &pos=pPersonInfo->curtpos();
-        if(fabs(m_sumLat-pos.dlat())>DBL_EPSILON)
-        {
-            m_sumLat=m_sumLat+pos.dlat();
-        }
-        if(fabs(m_sumLon - pos.dlon())>DBL_EPSILON)
-        {
-            m_sumLon=m_sumLon+pos.dlon();
-        }
-
-    }
-    m_dAveLat=m_sumLat/personCount;
-    m_sAveLat=QString::number(m_dAveLat, 'f', 4);
-    emit aveLatChanged(m_sAveLat);
-    m_dAveLon=m_sumLon/personCount;
-    m_sAveLon=QString::number(m_dAveLon, 'f', 4);
-    emit aveLonChanged(m_sAveLon);
+       QList<int> int_listId=CDataManager::GetInstance()->AllPersonId();//CContrlMapPerson::AllMapPersonId()
+      //  QList<int> int_listId=m_pCtrMapPerson->AllMapPersonId();//CDataManager::GetInstance()->AllPersonId();
+       if(int_listId.isEmpty())
+       {
+           return;
+       }
+       int personCount=0;//=(double)int_listId.size();
+       double m_sumLat=0.0,m_sumLon=0.0;
+       QList<int>::iterator it;
+       for(/*QList<int>::iterator*/ it = int_listId.begin(); it!=int_listId.end(); ++it)
+       {
+           auto pPersonInfo = CDataManager::GetInstance()->GetOrCreatePersonInfo(*it);
+           auto &pos=pPersonInfo->curtpos();
+           if(fabs(m_sumLat-pos.dlat())>DBL_EPSILON&&fabs(m_sumLon - pos.dlon())>DBL_EPSILON)
+           {
+               if(fabs(m_sumLat-pos.dlat())>DBL_EPSILON)
+               {
+                   qDebug()<<fabs(m_sumLat-pos.dlat())<<*it;
+                   m_sumLat=m_sumLat+pos.dlat();
+               }
+               if(fabs(m_sumLon - pos.dlon())>DBL_EPSILON)
+               {
+                   qDebug()<<fabs(m_sumLon - pos.dlon())<<*it;
+                   m_sumLon=m_sumLon+pos.dlon();
+               }
+               personCount++;
+           }
+       }
+       m_dAveLat=m_sumLat/(double)personCount;
+       m_sAveLat=QString::number(m_dAveLat, 'f', 4);
+       emit aveLatChanged(m_sAveLat);
+       m_dAveLon=m_sumLon/(double)personCount;
+       m_sAveLon=QString::number(m_dAveLon, 'f', 4);
+       emit aveLonChanged(m_sAveLon);
+       qDebug()<<"测试经纬度："<<m_sAveLat<<m_sAveLon;
 }

@@ -16,7 +16,6 @@ Item {
     height: 860 *dpy
 
     property string defaltFolderUrl: "file:///D:/InstallSoftWare/CounterSystem/Data/Szy/"
-    //    property string loactionStr:"{"+earthManager.currentLat+","+earthManager.currentLon+"}"
     property string loactionStr:"{"+$app.sAveLon+","+$app.sAveLat+"}"
 
     Image {

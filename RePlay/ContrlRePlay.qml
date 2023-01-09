@@ -172,17 +172,17 @@ Item
         }
     }
 
-//    Text {
-//        id: timeText
-//        x: (index.width-width)/2
-//        y: 30*dpy
-//        text: formateTime(nTimes)
-//        height: 30
-//        font.pixelSize: 16*dpy
-//        color: "white"
-//        style:Text.Outline;styleColor: "black"
-//        font.family: "Microsoft YaHei"
-//    }
+    Text {
+        id: timeText
+        x: (index.width-width)/2
+        y: 30*dpy
+        text: formateTime(nTimes)
+        height: 30
+        font.pixelSize: 16*dpy
+        color: "white"
+        style:Text.Outline;styleColor: "black"
+        font.family: "Microsoft YaHei"
+    }
     function formateTime(time) {
         const h = parseInt(time / 3600)
         const minute = parseInt(time / 60 % 60)
@@ -200,7 +200,7 @@ Item
         running: false
         triggeredOnStart: true
         onTriggered: {
-//            nTimes--
+            nTimes--
 
             if (formateTime(nTimes) <= "00:00" || horizontalSlider.value == nTimes) {
                 time_run.stop()

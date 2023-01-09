@@ -112,15 +112,15 @@ Popup
             SoldierItem {
                 id:shouqiang
                 y: fushangxinxi.contentHeight + line2.height + 20 *dpy
-                text: "手枪子弹数:"
-                name: outData.nRifle + "/"+outData.nRifleSum
+                text: "步枪子弹数:"
+                name:outData.nRifle + "/"+outData.nRifleSum
             }
             SoldierItem {
                 id:buqiang
                 x: line2.width/2
                 y: fushangxinxi.contentHeight + line2.height + 20 *dpy
-                text: "步枪子弹数:"
-                name: outData.nPistol +   "/" +  outData.nPistolSum; //   "/9999"       /*+outData.nRifleSum  */
+                text: "手枪子弹数:"
+                name: outData.nPistol +   "/" +  outData.nPistolSum
             }
         }
         Rectangle {

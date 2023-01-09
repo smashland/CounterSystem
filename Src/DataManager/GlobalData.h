@@ -184,6 +184,8 @@ public:
          */
     CPersonStatus* GetOrCreatePersonStatus(quint16);
 
+
+
 signals:
     void simTimeChanged(quint16 simTime);
     void lineSizeChanged(int);
@@ -224,7 +226,7 @@ protected:
     /**
      * @brief 更新在线人数
      */
-    void UpdateLiveNum();
+    void UpdateLiveNum();   
 
 private:
     bool            m_bUpdate=false;          /// 是否更新人员状态

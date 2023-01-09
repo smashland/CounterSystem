@@ -394,6 +394,7 @@ void CGlobalData::SetSeceneGraph(ISceneGraph *pSceneGraph)
 
 int CGlobalData::openReplayFile(const QUrl &rReplayFile)
 {
+    m_pCtrMapPerson->ClearMap();
     std::string sFileName =rReplayFile.toLocalFile().toLocal8Bit().data();
     std::ifstream inFile;
     inFile.open(sFileName,std::ios::binary|std::ios::in);
@@ -427,10 +428,11 @@ int CGlobalData::openReplayFile(const QUrl &rReplayFile)
             inFile.read(reinterpret_cast<char*>(&nSize),sizeof(nSize));
             while(nIndex++ < nSize)
             {
-                inFile.read(reinterpret_cast<char*>(&nID),sizeof(nID));
+                inFile.read(reinterpret_cast<char*>(&nID),sizeof(nID));              
                 auto pPersonStatus = new CPersonStatus(nID,this);
                 pPersonStatus->setType(type);
                 m_pCtrMapPerson->UpdateGroup(nID,type);
+//                m_pCtrMapPerson->UpdateName(nID,);
                 m_allReplayStatus.push_back(pPersonStatus);
                 findType.value()->append(pPersonStatus);
             }
@@ -466,7 +468,6 @@ void CGlobalData::beginReplay()
 {
     if(!replayFlags)
     {
-        m_pCtrMapPerson->ClearMap();
         CTimeServer::GetInstance()->SimuStart();
         replayFlags = true;
     }

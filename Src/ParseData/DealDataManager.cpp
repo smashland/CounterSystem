@@ -149,15 +149,16 @@ QStringList CDealDataManager::GetBulletSum(quint16 unID)
     }
     else
     {
-    QStringList listFaultBullets;
-    QString strFaultBullets=QString::number(CConfigInfo::GetInstance()->GetDefaultBullets());
-    for(int i=0;i<7;++i)
-    {
-        listFaultBullets.append(strFaultBullets);
+        QStringList listFaultBullets;
+        QString strFaultBullets=QString::number(CConfigInfo::GetInstance()->GetDefaultBullets());
+        for(int i=0;i<7;++i)
+        {
+            listFaultBullets.append(strFaultBullets);
+        }
+        m_mapId2BulletSum.insert(unID,listFaultBullets);
+        return m_mapId2BulletSum.value(unID);
     }
-    m_mapId2BulletSum.insert(unID,listFaultBullets);
-    }
-    return m_mapId2BulletSum.value(unID);
+
 }
 
 void CDealDataManager::clearBulletSum()

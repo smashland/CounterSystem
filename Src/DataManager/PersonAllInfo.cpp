@@ -168,7 +168,6 @@ void CPersonAllInfo::UpdateBaseInfo(PersonInfo *pPersonInfo)
         case RIFLE:
             bLink1 = UNLINK != conStatus.weapons(nIndex).contype();
             if(bLink1) nNum = conStatus.weapons(nIndex).bulletnum();
-            qDebug()<<"手枪0："<<nNum;
             break;
         case PISTOL:
             bLink = UNLINK != conStatus.weapons(nIndex).contype();
@@ -204,6 +203,7 @@ void CPersonAllInfo::UpdateBaseInfo(PersonInfo *pPersonInfo)
             {
                 m_nPistol = nNum;
                 emit(pistolNumChanged(m_nPistol));
+                qDebug()<<"手枪1："<<nNum;
             }
             break;
         }
@@ -264,5 +264,7 @@ void CPersonAllInfo::UpdateBaseInfo(PersonInfo *pPersonInfo)
             m_nPistolSum=listBulletSum.at(1).toInt();
             emit(pistolSumChanged(m_nPistolSum));
         }
+
+
     }
 }

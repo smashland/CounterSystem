@@ -1,4 +1,4 @@
-#ifndef CCONFIGINFO_H
+﻿#ifndef CCONFIGINFO_H
 #define CCONFIGINFO_H
 #include <QString>
 #include <QDateTime>

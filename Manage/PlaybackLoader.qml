@@ -86,8 +86,12 @@ ManageRect{
                     MouseArea{
                         anchors.fill: parent
                         onClicked: {
-                            ctrReplay.nTimes = $app.allData.openReplayFile("file:///"+appDir+"/Data/Szy/"+modelData+".szy");
+                            $app.settings.endReplay()
+                            $app.allData.endReplay()
+
+                            ctrReplay.nTimes = $app.allData.openReplayFile("file:///"+appDir+"/Data/Szy/"+modelData+".szy");  
                             ctrReplay.visible = true;
+                            ctrReplay.bStart=true;
                             $app.settings.startReplay()
                             footerBar.btnPlayback.checked = false
                             manoeuvre.imgSource = "qrc:/Image/Set_up_bg.png"

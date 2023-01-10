@@ -466,11 +466,17 @@ bool replayFlags=false;
 /// 演习开始
 void CGlobalData::beginReplay()
 {
+    qDebug()<<"测试flag"<<replayFlags;
     if(!replayFlags)
     {
         CTimeServer::GetInstance()->SimuStart();
         replayFlags = true;
     }
+}
+///设置回放标志
+void CGlobalData::setReplayFlags(bool flag)
+{
+    replayFlags=flag;
 }
 
 void CGlobalData::pauseReplay()
@@ -496,6 +502,12 @@ void CGlobalData::endReplay()
 
     m_allReplayStatus.clear();
     replayFlags = false;
+}
+
+///回放演习结果初始化
+void CGlobalData::initReplay()
+{
+    emit simTimeChanged(0);
 }
 
 bool CGlobalData::deleteReplayFile(const QString &sReplayame)

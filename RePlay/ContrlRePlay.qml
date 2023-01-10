@@ -8,7 +8,7 @@ Item
     id:rePlayShow
     property int nTimes:0
     property bool bStart: true
-
+    property int nSlider:horizontalSlider.value
     Column {
         x: (index.width-width)/2
         Row
@@ -35,47 +35,96 @@ Item
                     background: Rectangle{
                         color:"transparent"
                     }
-
                     onPressed:
                     {
-
                         if(bStart)
                         {
+                            console.log("测试继续回放时间"+nTimes)
+                            console.log("测试继续回放！！！"+bStart)
                             $app.allData.pauseReplay();
                             bofang.text= "\ue609";
-                            time_run.stop();
+//                            time_run.stop();
                         }
                         else
                         {
+                            console.log("测试开始回放时间"+nTimes)
                             if(rePlayShow.bStart)
                             {
+                                console.log("测试开始回放！！！"+rePlayShow.bStart)
+//                                bofang.text= "\ue626"
+                                $app.allData.setReplayFlags(false)
                                 $app.allData.beginReplay();
-                                time_run.start();
+//                                time_run.start();
                                 rePlayShow.bStart = false;
 
                             }
                             else
                             {
+                                 console.log("测试开始暂停！！！"+rePlayShow.bStart)
+//                                bofang.text= "\ue609";
                                 $app.allData.pauseReplay();
-                                time_run.start();
+//                                time_run.start();
+//                                rePlayShow.bStart = true;
                             }
                             bofang.text= "\ue626"
                         }
                         bStart = !bStart;
-                    }
+                    } //on
+
+//                    onPressed:
+//                    {
+//                        if(bStart)
+//                        {
+//                            console.log("测试回放！！！"+bStart)
+//                            $app.allData.pauseReplay();
+//                            bofang.text= "\ue609";
+//                            time_run.stop();
+//                        }
+//                        else
+//                        {
+//                            if(rePlayShow.bStart)
+//                            {
+//                                console.log("测试开始回放！！！"+rePlayShow.bStart)
+//                    $app.allData.setReplayFlags(true)
+//                                $app.allData.beginReplay();
+//                                time_run.start();
+//                                rePlayShow.bStart = false;
+
+//                            }
+//                            else
+//                            {
+//                                 console.log("测试开始暂停！！！"+rePlayShow.bStart)
+//                                $app.allData.pauseReplay();
+//                                time_run.start();
+//                            }
+//                            bofang.text= "\ue626"
+//                        }
+//                        bStart = !bStart;
+//                    } //on
                 }
 
                 Slider
                 {
                     id:horizontalSlider
                     from: 0
-//                    value: 0.1
+//                    value: 0
                     to: nTimes
                     stepSize:1000
                     y:sliderBackground.implicitHeight
                     onValueChanged:
                     {
-                        console.log(value)
+                        console.log(value+" "+nTimes)
+                        if (horizontalSlider.value == nTimes) {
+                            bofang.text= "\ue609"
+
+                            rePlayShow.visible=false
+                            rePlayShow.bStart = true
+                            $app.settings.endReplay()
+                            $app.allData.endReplay()
+                            manoeuvre.imgSource = "qrc:/Image/Start_bg.png"
+                            manoeuvre.height = 136*dpx
+                            xianyin.isXianshi()
+                        }
                     }
 
                     background:Rectangle{
@@ -120,6 +169,7 @@ Item
                     target: $app.allData
                     function onSimTimeChanged(simTime)
                     {
+                        console.log("onSimTimeChanged  "+simTime)
                         horizontalSlider.value = simTime;
                     }
                 }

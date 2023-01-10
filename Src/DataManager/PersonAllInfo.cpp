@@ -244,27 +244,23 @@ void CPersonAllInfo::UpdateBaseInfo(PersonInfo *pPersonInfo)
         m_uRelive = repos;
         emit(reliveChanged(m_uRelive));
     }
-    if(CConfigInfo::GetInstance()->GetStart())
+    QStringList listBulletSum =CDealDataManager::GetInstance()->GetBulletSum(pPersonInfo->id());
+    for(int i = 0; i< listBulletSum.size();++i)
     {
-        QStringList listBulletSum =CDealDataManager::GetInstance()->GetBulletSum(pPersonInfo->id());
-        for(int i = 0; i< listBulletSum.size();++i)
+        if(listBulletSum.at(i)==NULL)
         {
-            if(listBulletSum.at(i)==NULL)
-            {
-                listBulletSum[i]="0";
-            }
+            listBulletSum[i]="0";
         }
-        if(m_nRifleSum!=listBulletSum.at(0).toInt())
-        {
-            m_nRifleSum=listBulletSum.at(0).toInt();
-            emit(rifleSumChanged(m_nRifleSum));
-        }
-        if(m_nPistolSum!=listBulletSum.at(1).toInt())
-        {
-            m_nPistolSum=listBulletSum.at(1).toInt();
-            emit(pistolSumChanged(m_nPistolSum));
-        }
-
-
     }
+    if(m_nRifleSum!=listBulletSum.at(0).toInt())
+    {
+        m_nRifleSum=listBulletSum.at(0).toInt();
+        emit(rifleSumChanged(m_nRifleSum));
+    }
+    if(m_nPistolSum!=listBulletSum.at(1).toInt())
+    {
+        m_nPistolSum=listBulletSum.at(1).toInt();
+        emit(pistolSumChanged(m_nPistolSum));
+    }
+
 }

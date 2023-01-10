@@ -123,6 +123,7 @@ public:
     Q_INVOKABLE void pauseReplay();
     Q_INVOKABLE void setSimuTime(quint16 uTimes);
     Q_INVOKABLE void endReplay();
+    Q_INVOKABLE void initReplay();
     /**
      * @brief 删除回放文件
      * @param sReplayame
@@ -177,6 +178,8 @@ public:
      * @brief 更改分组
      */
     Q_INVOKABLE void changeGroup(quint16,QString);
+
+    Q_INVOKABLE void setReplayFlags(bool flag);
 
     /**
          * @brief 获取或者创建qml显示的简要信息

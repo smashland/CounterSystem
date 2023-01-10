@@ -87,8 +87,7 @@ ManageRect{
                         anchors.fill: parent
                         onClicked: {
                             $app.settings.endReplay()
-                            $app.allData.endReplay()
-
+                            $app.allData.endReplay()                           
                             ctrReplay.nTimes = $app.allData.openReplayFile("file:///"+appDir+"/Data/Szy/"+modelData+".szy");  
                             ctrReplay.visible = true;
                             ctrReplay.bStart=true;

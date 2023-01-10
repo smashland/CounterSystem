@@ -9,6 +9,7 @@ Item
     property int nTimes:0
     property bool bStart: true
     property int nSlider:horizontalSlider.value
+    property int nTimeText:nTimes
     Column {
         x: (index.width-width)/2
         Row
@@ -113,7 +114,10 @@ Item
                     y:sliderBackground.implicitHeight
                     onValueChanged:
                     {
+//                        var nTimeText = nTimes
+                        nTimeText--
                         console.log(value+" "+nTimes)
+
                         if (horizontalSlider.value == nTimes) {
                             bofang.text= "\ue609"
 
@@ -124,6 +128,7 @@ Item
                             manoeuvre.imgSource = "qrc:/Image/Start_bg.png"
                             manoeuvre.height = 136*dpx
                             xianyin.isXianshi()
+
                         }
                     }
 
@@ -227,7 +232,7 @@ Item
         id: timeText
         x: (index.width-width)/2
         y: 30*dpy
-        text: formateTime(nTimes)
+        text: formateTime(nTimeText)
         height: 30
         font.pixelSize: 16*dpy
         color: "white"
@@ -244,30 +249,30 @@ Item
     }
 
 
-    Timer{
-        id:time_run
-        interval: 1000
-        repeat: true
-        running: false
-        triggeredOnStart: true
-        onTriggered: {
-            nTimes--
-            if (formateTime(nTimes) <= "00:00" || horizontalSlider.value == nTimes) {
-                time_run.stop()
-                bofang.text= "\ue609"
+//    Timer{
+//        id:time_run
+//        interval: 1000
+//        repeat: true
+//        running: false
+//        triggeredOnStart: true
+//        onTriggered: {
+//            nTimes--
+//            if (formateTime(nTimes) <= "00:00" || horizontalSlider.value == nTimes) {
+//                time_run.stop()
+//                bofang.text= "\ue609"
 
-                rePlayShow.visible=false
-                rePlayShow.bStart = true
-                $app.settings.endReplay()
-                $app.allData.endReplay()
-                manoeuvre.imgSource = "qrc:/Image/Start_bg.png"
-                manoeuvre.height = 136*dpx
-                xianyin.isXianshi()
+//                rePlayShow.visible=false
+//                rePlayShow.bStart = true
+//                $app.settings.endReplay()
+//                $app.allData.endReplay()
+//                manoeuvre.imgSource = "qrc:/Image/Start_bg.png"
+//                manoeuvre.height = 136*dpx
+//                xianyin.isXianshi()
 
-                footerBar.btnPlayback.checked = true
-            }
-        }
-    }
+//                footerBar.btnPlayback.checked = true
+//            }
+//        }
+//    }
     CampHidden {
         id: xianyin
         y: 14*dpy

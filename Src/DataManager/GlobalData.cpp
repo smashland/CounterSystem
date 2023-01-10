@@ -466,7 +466,7 @@ bool replayFlags=false;
 /// 演习开始
 void CGlobalData::beginReplay()
 {
-    if(!replayFlags)
+//    if(!replayFlags)
     {
         CTimeServer::GetInstance()->SimuStart();
         replayFlags = true;

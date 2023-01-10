@@ -14,6 +14,15 @@ Rectangle {
     width: 710 *dpx
     height: 510 *dpy
     color: "transparent"
+    MouseArea {
+        anchors.fill: parent
+        propagateComposedEvents: false
+        enabled:true
+        onWheel: {
+            // 屏蔽滚轮事件，防止滚动方案列表时缩放地球
+//            mouse.accepted = false
+        }
+    }
 
     Connections{
         function onSignalAddMap(name,path,lat,lon)
@@ -42,6 +51,7 @@ Rectangle {
             height: 510 *dpy
             model:earthManager.earthList
             currentIndex: -1
+            spacing:2*dpy
             delegate: DelegateRectangle {
                 id: wrapper
                 property bool hoverd: false
@@ -57,17 +67,23 @@ Rectangle {
                     anchors.centerIn: parent
                 }
                 MouseArea {
+                    id: mouseArea
                     anchors.fill: parent
-                    hoverEnabled: true
+//                    hoverEnabled: true
                     onClicked: {
                         earthManager.praseEarthXml(modelData.earthPath)
                         $app.changeEarth(modelData.earthPath)
                         earthManager.saveCurrentEarth(modelData.earthName,modelData.nLat,modelData.nLon);
                         earthManager.praseCurrentEarth();
                         listView.currentIndex = index
+                        mouse.accepted = false
                     }
-                    onEntered: wrapper.hoverd = true
-                    onExited: wrapper.hoverd = false
+//                    onEntered: {
+//                        wrapper.hoverd = true
+//                    }
+
+//                    onExited: wrapper.hoverd = false
+
                 }
                 ViewButton {
                     name: qsTr("删除")
@@ -122,6 +138,7 @@ Rectangle {
         //        anchors.centerIn: parent
         visible: false
     }
+
     PopupButton {
         id:addMap
         anchors.bottom: parent.bottom

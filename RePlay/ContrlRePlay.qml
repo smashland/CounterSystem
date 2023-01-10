@@ -110,7 +110,7 @@ Item
                     onMoved:
                     {
                         $app.allData.setSimuTime(value)
-//                        timeText.text = parseInt(value)
+//                        timeText.text = value
                     }
 
                 }
@@ -202,7 +202,6 @@ Item
         triggeredOnStart: true
         onTriggered: {
             nTimes--
-
             if (formateTime(nTimes) <= "00:00" || horizontalSlider.value == nTimes) {
                 time_run.stop()
                 bofang.text= "\ue609"

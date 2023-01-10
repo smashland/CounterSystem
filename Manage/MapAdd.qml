@@ -13,6 +13,16 @@ Rectangle {
     signal signalAddMap(string name,string path,int lat,int lon)    //添加地图
     property var map: null
 
+    MouseArea {
+        anchors.fill: parent
+        propagateComposedEvents: false
+        enabled:true
+        onWheel: {
+            // 屏蔽滚轮事件，防止滚动方案列表时缩放地球
+            mouse.accepted = false
+        }
+    }
+
     Image {
 //        anchors.fill: parent
         width: 600*dpx

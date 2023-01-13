@@ -19,7 +19,8 @@ CContrlMapPerson::CContrlMapPerson(ISceneGraph *pSceneGraph, CGlobalData *pData)
     m_pSceneGraph->GetTool()->SelecteTool("IPointPick");
     m_pSceneGraph->GetTool()->SubPickMessage(this);
     m_pMap = m_pSceneGraph->GetMap();
-    m_pMap->GetSpaceEnv()->ShowSpaceBackGround(false);
+    m_pSceneGraph->GetMap()->GetSpaceEnv()->SetVisible(false);
+//    m_pMap->GetSpaceEnv()->ShowSpaceBackGround(false);
     m_pMap->OpenLight(false);
     m_pLayer = m_pMap->CreateLayer("Test");
 }

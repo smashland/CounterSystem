@@ -162,6 +162,7 @@ Item
                     onMoved:
                     {
                         $app.allData.setSimuTime(value)
+                        nTimeText=nTimes
 //                        timeText.text = value
                     }
 

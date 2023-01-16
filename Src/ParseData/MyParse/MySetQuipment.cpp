@@ -1,4 +1,4 @@
-#include <QtEndian>
+﻿#include <QtEndian>
 #include <QVariant>
 #include "MySetQuipment.h"
 #include "../../Connection/ConnectionManager.h"
@@ -73,7 +73,6 @@ void CMySetQuipment::SendCommand(quint16 unID, SET_CMD typeCommand, const QVaria
     {
         QList<QVariant> tmpList = allInfo.toList();
         int nSize = tmpList.size();
-
         Guntypes types;
         g_nGunType = 1;
 

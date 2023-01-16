@@ -196,8 +196,8 @@ void CGlobalData::UpdateSimulationTime(const quint16 &uSimTimes)
             }
 
             auto pPerson1 = CDataManager::GetInstance()->GetOrCreatePersonInfo(pPerson->hurtinfo(nHurtIndex).id());
-            QString listInfo=QString::fromUtf8("%1%2使用%3%6%4%5").arg(pPerson->hurtinfo(nHurtIndex).id()).arg(pPerson1->name().c_str()).arg(type)
-                    .arg(pPerson->id()).arg(pPerson->name().c_str()).arg(oper);
+            QString listInfo=QString::fromUtf8("%1%2使用%3%4%5%6的").arg(pPerson->hurtinfo(nHurtIndex).id()).arg(pPerson1->name().c_str()).arg(type)
+                    .arg(oper).arg(pPerson->id()).arg(pPerson->name().c_str());
             if(nGunType!=0&&nGunType!=8&&nGunType!=16&&nGunType!=64)
             {
                 listInfo += CConfigInfo::GetInstance()->GetBodyName(pPerson->hurtinfo(nHurtIndex).hurtpart());
@@ -608,6 +608,7 @@ void CGlobalData::loadSceInfo(const QString &sceName)
         m_listTypeModel->append(personStatus);
 
         /// 更新所有的状态信息
+        setUserName(cePersonInfo->getID(),cePersonInfo->getName());
         updateAllDataSize(m_mapStatusModel.count());
         if(cePersonInfo->getHostage())
         {
@@ -620,6 +621,7 @@ void CGlobalData::loadSceInfo(const QString &sceName)
 //        ///地图上人员信息
         QString UIdVName=QString::number(cePersonInfo->getID())+cePersonInfo->getName();
         m_pCtrMapPerson->UpdateName(cePersonInfo->getID(),UIdVName);
+
     }
 
 }

@@ -164,7 +164,9 @@ Item
                     onMoved:
                     {
                         $app.allData.setSimuTime(value)
-//                        timeText.text = value
+                        timeText.text = value
+//                        var timeCache = timeText.text
+//                        horizontalSlider.value = timeCache
                     }
 
                 }

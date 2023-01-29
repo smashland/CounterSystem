@@ -95,6 +95,7 @@ ManageRect{
                             footerBar.btnPlayback.checked = false
                             manoeuvre.imgSource = "qrc:/Image/Set_up_bg.png"
                             manoeuvre.height = 100*dpx
+                            killExpand.visible = true
                         }
                     }
                 }

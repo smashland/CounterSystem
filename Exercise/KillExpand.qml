@@ -117,6 +117,10 @@ Item {
         }
     }
 
-
+    onVisibleChanged: {
+        if(killExpand.visible == false) {
+            showText.text=""
+        }
+    }
 
 }

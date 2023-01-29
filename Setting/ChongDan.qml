@@ -102,6 +102,7 @@ Dialog{
                 for(var i=0; i<allInfo.children.length; i++)
                 {
                     allNum[i]=allInfo.children[i].name
+                    console.log("枪型："+allNum[i])
                 }
                 $app.settings.chongDan(nID,allNum);
                 dialog.close()

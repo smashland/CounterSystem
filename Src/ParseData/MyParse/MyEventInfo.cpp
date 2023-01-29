@@ -208,13 +208,13 @@ void CMyEventInfo::Update(const unsigned char *pData, int nLength)
                             /// 更新人员健康状态
                             m_pPerson->set_hearth(m_pPerson->hearth() - CConfigInfo::GetInstance()->CalHitDamage(hurtInfo->hurtpart()));
 
-                            if(4==nIndex || 3 == nIndex || 6 == nIndex)
+                            if(5==nIndex || 4 == nIndex || 6 == nIndex)
                             {
                                 QString type;
                                 switch (nIndex)
                                 {
+                                case 5:
                                 case 4:
-                                case 3:
                                     type = QString::fromUtf8("手雷");
                                     break;
                                 case 6:
@@ -236,18 +236,14 @@ void CMyEventInfo::Update(const unsigned char *pData, int nLength)
                             {
                                 QString type;
                                 switch (nIndex)
-                                {
+                                {                             
+                                case 1:
                                 case 0:
                                     type = QString::fromUtf8("步枪");
                                     break;
-                                case 1:
-                                    type = QString::fromUtf8("步枪");
-                                    break;
+                                case 3:
                                 case 2:
-                                    type = QString::fromUtf8("手枪");
-                                    break;
-                                case 5:
-                                    type = QString::fromUtf8("手枪");
+                                    type = QString::fromUtf8("6手枪");
                                     break;
                                 case 7:
                                     type = QString::fromUtf8("狙击枪");
@@ -259,12 +255,11 @@ void CMyEventInfo::Update(const unsigned char *pData, int nLength)
                                 /// 增加命中状态
                                 //                                QString listInfo=QString::fromUtf8("%1%2使用%3击中%4%5").arg(pShotPerson->id()).arg(QString::fromStdString(pShotPerson->name())).arg(type)
                                 //                                                                                       .arg(m_pPerson->id()).arg(QString::fromStdString(m_pPerson->name()));
-                                QString listInfo=QString::fromUtf8("%1%2使用%3击中%4%5").arg(pShotPerson->id()).arg(pShotPerson->name().c_str()).arg(type)
+                                QString listInfo=QString::fromUtf8("%1%2使用%3击中%4%5的").arg(pShotPerson->id()).arg(pShotPerson->name().c_str()).arg(type)
                                         .arg(m_pPerson->id()).arg(m_pPerson->name().c_str());
                                 listInfo += CConfigInfo::GetInstance()->GetBodyName(hurtInfo->hurtpart());
 
                                 CNoticeManager::GetInstance()->SetGroupId(pShotPerson->id());
-
                                 /// 发送消息
                                 CNoticeManager::GetInstance()->SetNoticInfo(listInfo);
                             }

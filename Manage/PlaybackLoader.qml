@@ -87,10 +87,11 @@ ManageRect{
                         anchors.fill: parent
                         onClicked: {
                             $app.settings.endReplay()
-                            $app.allData.endReplay()                           
-                            ctrReplay.nTimes = $app.allData.openReplayFile("file:///"+appDir+"/Data/Szy/"+modelData+".szy");  
+                            $app.allData.endReplay()
+                            $app.allData.initReplay()
                             ctrReplay.visible = true;
                             ctrReplay.bStart=true;
+                            ctrReplay.nTimeText=ctrReplay.nTimes = $app.allData.openReplayFile("file:///"+appDir+"/Data/Szy/"+modelData+".szy");
                             $app.settings.startReplay()
                             footerBar.btnPlayback.checked = false
                             manoeuvre.imgSource = "qrc:/Image/Set_up_bg.png"

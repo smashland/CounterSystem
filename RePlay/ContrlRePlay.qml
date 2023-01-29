@@ -114,11 +114,10 @@ Item
                     y:sliderBackground.implicitHeight
                     onValueChanged:
                     {
-//                        var nTimeText = nTimes
                         nTimeText--
                         console.log(value+" "+nTimes)
 
-                        if (horizontalSlider.value == nTimes) {
+                        if (nTimeText===0&&horizontalSlider.value == nTimes) {
                             bofang.text= "\ue609"
 
                             rePlayShow.visible=false
@@ -128,7 +127,6 @@ Item
                             manoeuvre.imgSource = "qrc:/Image/Start_bg.png"
                             manoeuvre.height = 136*dpx
                             xianyin.isXianshi()
-
                         }
                     }
 
@@ -164,9 +162,8 @@ Item
                     onMoved:
                     {
                         $app.allData.setSimuTime(value)
-                        timeText.text = value
-//                        var timeCache = timeText.text
-//                        horizontalSlider.value = timeCache
+                        nTimeText=nTimes
+//                        timeText.text = value
                     }
 
                 }

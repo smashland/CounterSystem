@@ -127,6 +127,8 @@ Item
                             manoeuvre.imgSource = "qrc:/Image/Start_bg.png"
                             manoeuvre.height = 136*dpx
                             xianyin.isXianshi()
+                            killExpand.visible = false
+                            killSituation.visible = false
                         }
                     }
 
@@ -220,6 +222,8 @@ Item
                 manoeuvre.imgSource = "qrc:/Image/Start_bg.png"
                 manoeuvre.height = 136*dpx
                 xianyin.isXianshi()
+                killExpand.visible = false
+                killSituation.visible = false
             }
             onNoPutDown: {
 

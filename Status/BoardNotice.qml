@@ -2,6 +2,7 @@
 import QtQuick.Controls 2.12
 import QtQml 2.12
 import "../Manage/Plugins"
+import "../Exercise"
 import "../Common"
 //kunag
 Item
@@ -40,8 +41,6 @@ Item
         }
 
     }
-
-
 
 
 }

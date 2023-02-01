@@ -857,6 +857,7 @@ class PersonInfo PROTOBUF_FINAL :
     kHurtInfoFieldNumber = 7,
     kHitInfoFieldNumber = 8,
     kNameFieldNumber = 9,
+    kGroupTypeFieldNumber = 10,
     kCurtStatusFieldNumber = 5,
     kCurtPosFieldNumber = 6,
     kIdFieldNumber = 1,
@@ -914,6 +915,22 @@ class PersonInfo PROTOBUF_FINAL :
   const std::string& _internal_name() const;
   void _internal_set_name(const std::string& value);
   std::string* _internal_mutable_name();
+  public:
+
+  // string groupType = 10;
+  void clear_grouptype();
+  const std::string& grouptype() const;
+  void set_grouptype(const std::string& value);
+  void set_grouptype(std::string&& value);
+  void set_grouptype(const char* value);
+  void set_grouptype(const char* value, size_t size);
+  std::string* mutable_grouptype();
+  std::string* release_grouptype();
+  void set_allocated_grouptype(std::string* grouptype);
+  private:
+  const std::string& _internal_grouptype() const;
+  void _internal_set_grouptype(const std::string& value);
+  std::string* _internal_mutable_grouptype();
   public:
 
   // .ConnectStatus curtStatus = 5;
@@ -998,6 +1015,7 @@ class PersonInfo PROTOBUF_FINAL :
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::HurtInfo > hurtinfo_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::HurtInfo > hitinfo_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr grouptype_;
   ::ConnectStatus* curtstatus_;
   ::Postion* curtpos_;
   ::PROTOBUF_NAMESPACE_ID::uint32 id_;
@@ -1716,6 +1734,67 @@ inline void PersonInfo::set_allocated_name(std::string* name) {
   name_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), name,
       GetArena());
   // @@protoc_insertion_point(field_set_allocated:PersonInfo.name)
+}
+
+// string groupType = 10;
+inline void PersonInfo::clear_grouptype() {
+  grouptype_.ClearToEmpty();
+}
+inline const std::string& PersonInfo::grouptype() const {
+  // @@protoc_insertion_point(field_get:PersonInfo.groupType)
+  return _internal_grouptype();
+}
+inline void PersonInfo::set_grouptype(const std::string& value) {
+  _internal_set_grouptype(value);
+  // @@protoc_insertion_point(field_set:PersonInfo.groupType)
+}
+inline std::string* PersonInfo::mutable_grouptype() {
+  // @@protoc_insertion_point(field_mutable:PersonInfo.groupType)
+  return _internal_mutable_grouptype();
+}
+inline const std::string& PersonInfo::_internal_grouptype() const {
+  return grouptype_.Get();
+}
+inline void PersonInfo::_internal_set_grouptype(const std::string& value) {
+  
+  grouptype_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArena());
+}
+inline void PersonInfo::set_grouptype(std::string&& value) {
+  
+  grouptype_.Set(
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:PersonInfo.groupType)
+}
+inline void PersonInfo::set_grouptype(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  grouptype_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:PersonInfo.groupType)
+}
+inline void PersonInfo::set_grouptype(const char* value,
+    size_t size) {
+  
+  grouptype_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:PersonInfo.groupType)
+}
+inline std::string* PersonInfo::_internal_mutable_grouptype() {
+  
+  return grouptype_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
+}
+inline std::string* PersonInfo::release_grouptype() {
+  // @@protoc_insertion_point(field_release:PersonInfo.groupType)
+  return grouptype_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void PersonInfo::set_allocated_grouptype(std::string* grouptype) {
+  if (grouptype != nullptr) {
+    
+  } else {
+    
+  }
+  grouptype_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), grouptype,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:PersonInfo.groupType)
 }
 
 #ifdef __GNUC__

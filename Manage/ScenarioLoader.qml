@@ -1,4 +1,4 @@
-//                                       方案管理
+﻿//                                       方案管理
 //import QtQuick 1.1
 import QtQuick 2.12
 import QtQuick.Controls 2.15
@@ -145,9 +145,12 @@ ManageRect{
                     MouseArea{
                         anchors.fill: parent
                         onClicked: {
+                            if(!$app.settings.bIsReplay)
+                            {
                             $app.allData.loadSceInfo(modelData.sceName)
                             sceManager.setCurrentSceName(modelData.sceName)
                             footerBar.btnScenario.checked = false
+                            }
                         }
                     }
                 }

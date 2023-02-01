@@ -1,4 +1,4 @@
-#ifndef TIMESERVER_H
+﻿#ifndef TIMESERVER_H
 #define TIMESERVER_H
 
 #include <QObject>
@@ -72,7 +72,7 @@ private:
     ~CTimeServer();
 
 private:
-    QSet<ITimeObserver*> m_setObserver; /// 订阅到时间的服务器
+    QList<ITimeObserver*> m_setObserver; /// 订阅到时间的服务器
 
     int                  m_nTimerID;    /// 定时器ID
     int                  m_nInterval;   /// 定时器间隔

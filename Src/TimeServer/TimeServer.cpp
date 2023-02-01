@@ -1,4 +1,4 @@
-#include <QTimerEvent>
+﻿#include <QTimerEvent>
 #include <QElapsedTimer>
 
 #include "TimeServer.h"
@@ -30,13 +30,14 @@ void CTimeServer::SetInterval(int nMiSceond)
 /// 订阅时间
 void CTimeServer::SubTime(ITimeObserver *pObserver)
 {
-    m_setObserver.insert(pObserver);
+    //m_setObserver.insert(pObserver);
+    m_setObserver.push_back(pObserver);
 }
 
 /// 移除时间
 void CTimeServer::UnSubTime(ITimeObserver *pObserver)
 {
-    m_setObserver.remove(pObserver);
+    //m_setObserver.remove(pObserver);
 }
 
 /// 开启定时器

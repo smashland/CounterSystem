@@ -1,4 +1,4 @@
-#ifndef NOTICEMANAGER_H
+﻿#ifndef NOTICEMANAGER_H
 #define NOTICEMANAGER_H
 /************************
  * 事件管理类
@@ -20,6 +20,7 @@ public:
      * @param typeId
      */
     void SetGroupId(int typeId);
+    void SetColor(int typeId,QString color);
 
     /**
      * @brief 设置通知信息

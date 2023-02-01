@@ -62,6 +62,8 @@ public:
     ///击杀情况清空
     Q_INVOKABLE void setClearNoticText();
     void setGroupId(int typeID);
+    void setGroupC(int typeID,QString group);
+    void setGroupColor(QString group);
 
     ///得到人员的平均位置
     Q_INVOKABLE void setAveLocation();

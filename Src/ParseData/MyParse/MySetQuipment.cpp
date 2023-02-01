@@ -73,6 +73,7 @@ void CMySetQuipment::SendCommand(quint16 unID, SET_CMD typeCommand, const QVaria
     {
         QList<QVariant> tmpList = allInfo.toList();
         int nSize = tmpList.size();
+        qDebug()<<"ceshichangdu "<<nSize<<tmpList;
         Guntypes types;
         g_nGunType = 1;
 

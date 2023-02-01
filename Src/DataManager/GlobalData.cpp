@@ -131,6 +131,7 @@ void CGlobalData::UpdateSeconds(const quint16& unSconds)
 /// 更新仿真时间
 void CGlobalData::UpdateSimulationTime(const quint16 &uSimTimes)
 {
+    qDebug()<<"CGlobalData:-------------"<<uSimTimes;
     emit simTimeChanged(uSimTimes);
 
     for(auto one:m_allReplayStatus)
@@ -138,22 +139,38 @@ void CGlobalData::UpdateSimulationTime(const quint16 &uSimTimes)
         one->updateTime(uSimTimes);
         one->Update(uSimTimes);
         UpdateMap(one->getId());
-    }
+    } 
 
     const QVector<int>& events = m_allReplayEvent[uSimTimes];
+    qDebug() << "uSimTimes : " <<uSimTimes;
+    int a = 0;
+
     for(auto one : events)
     {
+        ++a;
+        qDebug() << "event : " << a<<one;
+        bool evevtFlag=true;
         /// 交火线
         auto pPerson = CDataManager::GetInstance()->GetOrCreatePersonInfo(one);
-        for(int nHurtIndex = pPerson->hurtinfo_size()-1; -1 < nHurtIndex;--nHurtIndex)
+        int b = 0;
+        int nHurtIndex=pPerson->hurtinfo_size()-1;
+//        for(int nHurtIndex = pPerson->hurtinfo_size()-1; -1 < nHurtIndex;--nHurtIndex)
+        if(evevtFlag==true&&-1<nHurtIndex)
         {
+            ++b;
+            evevtFlag=false;
+//            nHurtIndex = pPerson->hurtinfo_size()-1;
+            qDebug() << "huts : " << b;
+            qDebug()<<"nHurtIndex=="<<nHurtIndex<<"hurtinfo_size"<<pPerson->hurtinfo_size();
             m_pCtrMapPerson->UpdateHitLine(pPerson->hurtinfo(nHurtIndex).id(),one);
             /// 增加命中状态
             //            QString listInfo=QString::fromUtf8("%1被%2击中").arg(pPerson->id())
             //                    .arg(pPerson->hurtinfo(nHurtIndex).id());
+
             QString type;
             QString oper;
             int nGunType=pPerson->hurtinfo(nHurtIndex).type();
+
             switch (nGunType)
             {
             case 0:
@@ -203,8 +220,14 @@ void CGlobalData::UpdateSimulationTime(const quint16 &uSimTimes)
                 listInfo += CConfigInfo::GetInstance()->GetBodyName(pPerson->hurtinfo(nHurtIndex).hurtpart());
             }
 
+
+            ///阵营颜色
+           QString group=m_mapIdType.value(pPerson->hurtinfo(nHurtIndex).id());
+           qDebug()<<"======================"<<listInfo<<group;
+            CNoticeManager::GetInstance()->SetColor(pPerson->hurtinfo(nHurtIndex).id(),group);//SetGroupId(pPerson->hurtinfo(nHurtIndex).id());
             /// 发送消息
             CNoticeManager::GetInstance()->SetNoticInfo(listInfo);
+            --nHurtIndex;
         }
     }
 
@@ -394,10 +417,12 @@ void CGlobalData::SetSeceneGraph(ISceneGraph *pSceneGraph)
 
 int CGlobalData::openReplayFile(const QUrl &rReplayFile)
 {
+     qDebug()<<"rReplayFile:-------------"<<rReplayFile;
     m_pCtrMapPerson->ClearMap();
     std::string sFileName =rReplayFile.toLocalFile().toLocal8Bit().data();
     std::ifstream inFile;
     inFile.open(sFileName,std::ios::binary|std::ios::in);
+    qDebug()<<"inFile.is_open():-------------"<<inFile.is_open();
     char buffer[256]="";
     int nSize,nID;
     int nIndex(0),nGroupIndex(0),nGroupSize(0);
@@ -405,8 +430,10 @@ int CGlobalData::openReplayFile(const QUrl &rReplayFile)
     quint16 unTimes(0);
     if(inFile.is_open())
     {
+        qDebug()<<"inFile.is_open():-------------";
         PushBackStatus();
         m_allReplayEvent.clear();
+        m_mapIdType.clear();
         /// 获取路径大小
         inFile.read(reinterpret_cast<char*>(&nSize),sizeof(nSize));
         inFile.read(buffer,nSize);
@@ -428,11 +455,13 @@ int CGlobalData::openReplayFile(const QUrl &rReplayFile)
             inFile.read(reinterpret_cast<char*>(&nSize),sizeof(nSize));
             while(nIndex++ < nSize)
             {
-                inFile.read(reinterpret_cast<char*>(&nID),sizeof(nID));              
+                inFile.read(reinterpret_cast<char*>(&nID),sizeof(nID));
                 auto pPersonStatus = new CPersonStatus(nID,this);
                 pPersonStatus->setType(type);
+                qDebug()<<"openReplayFile:-------------"<<nID<<type;
                 m_pCtrMapPerson->UpdateGroup(nID,type);
-//                m_pCtrMapPerson->UpdateName(nID,);
+                //m_pCtrMapPerson->UpdateName(nID,);
+                m_mapIdType.insert(nID,type);
                 m_allReplayStatus.push_back(pPersonStatus);
                 findType.value()->append(pPersonStatus);
             }
@@ -458,15 +487,15 @@ int CGlobalData::openReplayFile(const QUrl &rReplayFile)
 
         CTimeServer::GetInstance()->SetSimuEndTime(unTimes);
         inFile.close();
+        qDebug()<<"inFile.close();:-------------"<<inFile.is_open();
     }
 
     return(unTimes);
 }
 bool replayFlags=false;
-/// 演习开始
+/// 回放演习开始
 void CGlobalData::beginReplay()
 {
-    qDebug()<<"测试flag"<<replayFlags;
     if(!replayFlags)
     {
         CTimeServer::GetInstance()->SimuStart();
@@ -492,6 +521,7 @@ void CGlobalData::setSimuTime(quint16 uTimes)
 /// 演习结束 恢复分组,删除临时变量
 void CGlobalData::endReplay()
 {
+    replayFlags = false;
     CTimeServer::GetInstance()->SimuEnd();
     PopUpStatus();
 
@@ -501,7 +531,6 @@ void CGlobalData::endReplay()
     }
 
     m_allReplayStatus.clear();
-    replayFlags = false;
 }
 
 ///回放演习结果初始化
@@ -618,7 +647,7 @@ void CGlobalData::loadSceInfo(const QString &sceName)
             m_pCtrMapPerson->UpdateGroup(cePersonInfo->getID(),typeTemp);
         }
 
-//        ///地图上人员信息
+        //        ///地图上人员信息
         QString UIdVName=QString::number(cePersonInfo->getID())+cePersonInfo->getName();
         m_pCtrMapPerson->UpdateName(cePersonInfo->getID(),UIdVName);
 
@@ -650,7 +679,7 @@ void CGlobalData::clearAllInfo()
 
     for(auto one = m_mapStatusModel.begin();one != m_mapStatusModel.end();++one)
     {
-        delete one.value();
+            delete one.value();
     }
     m_mapStatusModel.clear();
 

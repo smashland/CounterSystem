@@ -1,4 +1,4 @@
-#include "../AppGlobal.h"
+﻿#include "../AppGlobal.h"
 #include "SpeakText.h"
 #include "PlayMp3.h"
 #include "NoticeManager.h"
@@ -13,6 +13,11 @@ CNoticeManager *CNoticeManager::GetInstance()
 void CNoticeManager::SetGroupId(int typeId)
 {
     m_pGLobal->setGroupId(typeId);
+}
+
+void CNoticeManager::SetColor(int typeId, QString color)
+{
+    m_pGLobal->setGroupC(typeId,color);
 }
 
 /// 设置通信信息

@@ -251,6 +251,7 @@ private:
     QList<int>         m_listEvent;           /// 将事件保存下来
     QVariantList       m_listResult;          /// 各组的简要信息
     QVariantList       m_listAllResult;       /// 分组的详情
+    QMap<quint16,QString>  m_mapIdType;
 };
 
 #endif // GLOBALDATA_H

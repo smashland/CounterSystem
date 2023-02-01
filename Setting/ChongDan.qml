@@ -22,16 +22,6 @@ Dialog{
 
     signal danYaosignal(int shou,int bu,int ji,int juji,int shoulei);
 
-    //    onAccepted:
-    //    {
-    //        var allNum=[8];
-    //        for(var i=0; i<allInfo.count;++i)
-    //        {
-    //            allNum[i] = allInfo.itemAt(i).children[1].text;
-    //        }
-    //        $app.settings.chongDan(nID,allNum);
-    //    }
-
     Column {
         id:allInfo
         spacing: 16
@@ -95,7 +85,6 @@ Dialog{
             background: Rectangle {
                 color: "#265aef"
             }
-
             nameButton: "确定"
             onClicked: {
                 var allNum=[8];

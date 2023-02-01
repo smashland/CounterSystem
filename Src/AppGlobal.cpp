@@ -267,14 +267,40 @@ void QAppGlobal::setClearNoticText()
     emit noiceChanged();
 }
 
+// typeID 设备号
 void QAppGlobal::setGroupId(int typeID)
 {
     auto type=m_pData->GetOrCreatePersonStatus(typeID);
+//    setGroupColor(type->getType());
     if(type->getType()=="蓝方")
     {
         m_typeColor=Qt::blue;
     }
     else if(type->getType()=="红方")
+    {
+        m_typeColor=Qt::red;
+    }
+    else
+    {
+        m_typeColor=Qt::white;
+    }
+        emit typeColorChanged();
+}
+
+void QAppGlobal::setGroupC(int typeID, QString group)
+{
+//    auto type=m_pData->GetOrCreatePersonStatus(typeID);
+//    type->setType(group);
+    setGroupColor(group);
+}
+
+void QAppGlobal::setGroupColor(QString group)
+{
+    if(group=="蓝方")
+    {
+        m_typeColor=Qt::blue;
+    }
+    else if(group=="红方")
     {
         m_typeColor=Qt::red;
     }

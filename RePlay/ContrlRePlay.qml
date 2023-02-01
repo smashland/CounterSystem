@@ -28,7 +28,7 @@ Item
                         //  x: 36 *dpx
                         z: 2
                         color: "#00CD66"
-                        text: "\ue609"
+                        text: "\ue609"   ///609:暂停的三角标志
                         font.family: "iconfont"
                         font.pixelSize: 32*dpx
                         verticalAlignment: Text.AlignVCenter
@@ -44,18 +44,16 @@ Item
                             console.log("测试继续回放！！！"+bStart)
                             $app.allData.pauseReplay();
                             bofang.text= "\ue609";
-//                            time_run.stop();
                         }
                         else
                         {
-                            console.log("测试开始回放时间"+nTimes)
+                            console.log("测试开始回放时间"+nTimes+" "+bStart)
                             if(rePlayShow.bStart)
                             {
                                 console.log("测试开始回放！！！"+rePlayShow.bStart)
 //                                bofang.text= "\ue626"
                                 $app.allData.setReplayFlags(false)
                                 $app.allData.beginReplay();
-//                                time_run.start();
                                 rePlayShow.bStart = false;
 
                             }
@@ -64,7 +62,6 @@ Item
                                  console.log("测试开始暂停！！！"+rePlayShow.bStart)
 //                                bofang.text= "\ue609";
                                 $app.allData.pauseReplay();
-//                                time_run.start();
 //                                rePlayShow.bStart = true;
                             }
                             bofang.text= "\ue626"
@@ -115,11 +112,11 @@ Item
                     onValueChanged:
                     {
                         nTimeText--
-                        console.log(value+" "+nTimes)
+//                        console.log(value+" "+nTimes)
 
                         if (nTimeText===0&&horizontalSlider.value == nTimes) {
                             bofang.text= "\ue609"
-
+                            start.bStart=false
                             rePlayShow.visible=false
                             rePlayShow.bStart = true
                             $app.settings.endReplay()
@@ -165,7 +162,6 @@ Item
                     {
                         $app.allData.setSimuTime(value)
                         nTimeText=nTimes
-//                        timeText.text = value
                     }
 
                 }
@@ -175,7 +171,6 @@ Item
                     target: $app.allData
                     function onSimTimeChanged(simTime)
                     {
-                        console.log("onSimTimeChanged  "+simTime)
                         horizontalSlider.value = simTime;
                     }
                 }
@@ -215,6 +210,8 @@ Item
             content1: "是否退出回放?"
             content2: exitShowLabel
             onYesPutDown: {
+                bofang.text= "\ue609"
+                start.bStart=false
                 rePlayShow.visible=false
                 rePlayShow.bStart = true
                 $app.settings.endReplay()

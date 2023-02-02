@@ -182,7 +182,7 @@ void CPersonAllInfo::UpdateBaseInfo(PersonInfo *pPersonInfo)
             {
                 m_nRifle = nNum;
                 emit(rifleNumChanged(m_nRifle));
-                qDebug()<<"步枪1："<<nNum;
+                qDebug()<<"步枪gengxin1："<<nNum;
             }
             break;
         case GRENAD:
@@ -203,7 +203,7 @@ void CPersonAllInfo::UpdateBaseInfo(PersonInfo *pPersonInfo)
             {
                 m_nPistol = nNum;
                 emit(pistolNumChanged(m_nPistol));
-                qDebug()<<"手枪1："<<nNum;
+                qDebug()<<"手枪gengxin1："<<nNum;
             }
             break;
         }
@@ -257,9 +257,9 @@ void CPersonAllInfo::UpdateBaseInfo(PersonInfo *pPersonInfo)
         m_nRifleSum=listBulletSum.at(0).toInt();
         emit(rifleSumChanged(m_nRifleSum));
     }
-    if(m_nPistolSum!=listBulletSum.at(1).toInt())
+    if(m_nPistolSum!=listBulletSum.at(2).toInt())
     {
-        m_nPistolSum=listBulletSum.at(1).toInt();
+        m_nPistolSum=listBulletSum.at(2).toInt();
         emit(pistolSumChanged(m_nPistolSum));
     }
 

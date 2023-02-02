@@ -85,6 +85,10 @@ public:
     Q_INVOKABLE void clearInfo();
 
     /**
+     * @brief 清空名字
+     */
+    Q_INVOKABLE void clearNameInfo();
+    /**
      * @brief 根据类型创建模型列表
      * @param sType
      * @return

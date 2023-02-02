@@ -42,6 +42,10 @@ public:
      * @brief 重置人员状态
      */
     void ResetPersonInfo();
+    /**
+     * @brief 重置人员名称
+     */
+    void ResetPersonName();
 
     /**
      * @brief 创造或者查询人员信息
@@ -100,6 +104,11 @@ private:
      * @param pPerson
      */
     void InitPerson(PersonInfo* pPerson);
+    /**
+     * @brief 初始化人员名称
+     * @param pPerson
+     */
+    void InitPersonName(PersonInfo* pPerson);
 
     /**
      * @brief 初始化武器状态
@@ -111,6 +120,7 @@ private:
      * @brief 清空记录信息
      */
     void ClearRecordInfo();
+    void ClearInitName();
 
 private:
     QSet<IDataManagerObserver*> m_setObserver;   /// 订阅消息

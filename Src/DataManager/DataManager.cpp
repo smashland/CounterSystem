@@ -55,6 +55,11 @@ void CDataManager::InitPerson(PersonInfo *pPerson)
     InitWeapon(pPerson);
 }
 
+void CDataManager::InitPersonName(PersonInfo *pPerson)
+{
+    pPerson->clear_name();
+}
+
 /// 初始化武器状态
 void CDataManager::InitWeapon(PersonInfo *pPerson)
 {
@@ -269,5 +274,14 @@ void CDataManager::ResetPersonInfo()
     for(auto pPerson: m_allPersonInfo)
     {
         InitPerson(pPerson);
+    }
+}
+
+/// 重置人员名称
+void CDataManager::ResetPersonName()
+{
+    for(auto pPerson: m_allPersonInfo)
+    {
+        InitPersonName(pPerson);
     }
 }

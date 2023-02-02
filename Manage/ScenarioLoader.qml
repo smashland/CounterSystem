@@ -82,6 +82,7 @@ ManageRect{
                 anchors.fill: parent
                 onClicked: {
                     $app.allData.clearAllInfo();
+                    $app.allData.clearNameInfo();
                     sceManager.read();
                     listView.model= sceManager.listSces
                 }

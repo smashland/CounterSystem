@@ -239,14 +239,17 @@ void CMyEventInfo::Update(const unsigned char *pData, int nLength)
                                 {                             
                                 case 1:
                                 case 0:
-                                    type = QString::fromUtf8("步枪");
+                                    qDebug()<<"武器类型："<<nIndex;
+                                    type = QString::fromUtf8("一步枪");
                                     break;
                                 case 3:
                                 case 2:
-                                    type = QString::fromUtf8("6手枪");
+                                    qDebug()<<"武器类型："<<nIndex;
+                                    type = QString::fromUtf8("二手枪");
                                     break;
                                 case 7:
-                                    type = QString::fromUtf8("狙击枪");
+                                    qDebug()<<"武器类型："<<nIndex;
+                                    type = QString::fromUtf8("三狙击枪");
                                     break;
                                 default:
                                     break;

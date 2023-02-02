@@ -337,6 +337,11 @@ void CGlobalData::clearInfo()
     UpdateLiveNum();
 }
 
+void CGlobalData::clearNameInfo()
+{
+    CDataManager::GetInstance()->ResetPersonName();
+}
+
 /// 创建类型
 CMyListModel *CGlobalData::ceateType(const QString &sType)
 {

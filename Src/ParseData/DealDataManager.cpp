@@ -138,16 +138,16 @@ void CDealDataManager::PersonalChongDan(quint16 unID, const QVariant &gunInfo)
 
 void CDealDataManager::SetBulletSum(quint16 unID, const QStringList &bulletInfo)
 {
-    m_mapId2BulletSum.insert(unID,bulletInfo);
+//    m_mapId2BulletSum.insert(unID,bulletInfo);
 }
 
 QStringList CDealDataManager::GetBulletSum(quint16 unID)
 {
-    if(m_mapId2BulletSum.contains(unID))
-    {
-        return m_mapId2BulletSum.value(unID);
-    }
-    else
+//    if(m_mapId2BulletSum.contains(unID))
+//    {
+//        return m_mapId2BulletSum.value(unID);
+//    }
+//    else
     {
         QStringList listFaultBullets;
         QString strFaultBullets=QString::number(CConfigInfo::GetInstance()->GetDefaultBullets());

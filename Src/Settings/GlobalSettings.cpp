@@ -274,8 +274,47 @@ void CGlobalSettings::setFuHuo(quint16 nID)
 /// 充弹
 void CGlobalSettings::chongDan(quint16 nID, const QStringList &allInfo)
 {
-    CDealDataManager::GetInstance()->PersonalChongDan(nID,allInfo);
-    CDealDataManager::GetInstance()->SetBulletSum(nID,allInfo);
+    QStringList tempInfo;
+    auto pPerson = CDataManager::GetInstance()->GetOrCreatePersonInfo(nID);
+    /// 判断剩余子弹数
+    const ConnectStatus& conStatus = pPerson->curtstatus();
+    int nBaty = pPerson->curtstatus().weapons_size();
+
+    bool bLink1(false),bLink(false);
+    int nNum(0);
+    int temp=0;
+    for(int nIndex=0; nIndex < nBaty; ++nIndex)
+    {
+        switch(conStatus.weapons(nIndex).weapontype())
+        {
+        case RIFLE:
+            bLink1 = UNLINK != conStatus.weapons(nIndex).contype();
+            if(bLink1) nNum = conStatus.weapons(nIndex).bulletnum();
+            break;
+        case PISTOL:
+            bLink = UNLINK != conStatus.weapons(nIndex).contype();
+            if(bLink) nNum += conStatus.weapons(nIndex).bulletnum();
+            temp=allInfo.at(0).toInt();
+            temp=temp+nNum;
+            tempInfo.append(QString::number(temp));
+            qDebug()<<"步枪枪数："<<nNum<<temp;
+
+
+            break;
+        case GRENAD:
+            bLink1 = UNLINK != conStatus.weapons(nIndex).contype();
+            if(bLink1) nNum = conStatus.weapons(nIndex).bulletnum();
+            else       nNum = 0;
+            break;
+        case MORTAR:
+            bLink = UNLINK != conStatus.weapons(nIndex).contype();
+            if(bLink) nNum += conStatus.weapons(nIndex).bulletnum();
+
+            break;
+        }
+    }
+    CDealDataManager::GetInstance()->PersonalChongDan(nID,tempInfo/*allInfo*/);
+    CDealDataManager::GetInstance()->SetBulletSum(nID,allInfo/*allInfo*/);
 }
 
 /// 配枪

@@ -59,7 +59,8 @@ Rectangle
         {
             id: shouqiang
             bConnected: outData.bPistol
-            source: "qrc:/Image/wuqi/shouqiang.png"
+//            source: "qrc:/Image/wuqi/shouqiang.png"
+            source: "qrc:/Image/wuqi/shoulei.png"
         }
 //        EquipConnStat
 //        {

@@ -275,6 +275,7 @@ void CGlobalSettings::setFuHuo(quint16 nID)
 void CGlobalSettings::chongDan(quint16 nID, const QStringList &allInfo)
 {
     QStringList tempInfo;
+    tempInfo=allInfo;
     auto pPerson = CDataManager::GetInstance()->GetOrCreatePersonInfo(nID);
     /// 判断剩余子弹数
     const ConnectStatus& conStatus = pPerson->curtstatus();
@@ -296,7 +297,8 @@ void CGlobalSettings::chongDan(quint16 nID, const QStringList &allInfo)
             if(bLink) nNum += conStatus.weapons(nIndex).bulletnum();
             temp=allInfo.at(0).toInt();
             temp=temp+nNum;
-            tempInfo.append(QString::number(temp));
+//            tempInfo.append(QString::number(temp));
+            tempInfo.replace(0,QString::number(temp));
             qDebug()<<"步枪枪数："<<nNum<<temp;
 
 
@@ -309,10 +311,16 @@ void CGlobalSettings::chongDan(quint16 nID, const QStringList &allInfo)
         case MORTAR:
             bLink = UNLINK != conStatus.weapons(nIndex).contype();
             if(bLink) nNum += conStatus.weapons(nIndex).bulletnum();
+            temp=allInfo.at(2).toInt();
+            temp=temp+nNum;
+            tempInfo.replace(2,QString::number(temp));
+//            tempInfo.append(QString::number(temp));
+            qDebug()<<"shou枪枪数："<<nNum<<temp;
 
             break;
         }
     }
+//    tempInfo=allInfo;
     CDealDataManager::GetInstance()->PersonalChongDan(nID,tempInfo/*allInfo*/);
     CDealDataManager::GetInstance()->SetBulletSum(nID,allInfo/*allInfo*/);
 }

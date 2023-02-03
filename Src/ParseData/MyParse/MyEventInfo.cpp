@@ -176,6 +176,7 @@ void CMyEventInfo::Update(const unsigned char *pData, int nLength)
 
                             auto hurtInfo = m_pPerson->add_hurtinfo();
                             g_nGunType = qFromBigEndian<quint16>(pData);
+                            qDebug()<<"=====================yuanshishuju"<<g_nGunType;
                             nIndex = g_nGunType%1000;
                             hurtInfo->set_id(nIndex);
 
@@ -208,12 +209,12 @@ void CMyEventInfo::Update(const unsigned char *pData, int nLength)
                             /// 更新人员健康状态
                             m_pPerson->set_hearth(m_pPerson->hearth() - CConfigInfo::GetInstance()->CalHitDamage(hurtInfo->hurtpart()));
 
-                            if(5==nIndex || 4 == nIndex || 6 == nIndex)
+                            if(3==nIndex || 4 == nIndex || 6 == nIndex)
                             {
                                 QString type;
                                 switch (nIndex)
                                 {
-                                case 5:
+                                case 3:
                                 case 4:
                                     type = QString::fromUtf8("手雷");
                                     break;
@@ -239,17 +240,17 @@ void CMyEventInfo::Update(const unsigned char *pData, int nLength)
                                 {                             
                                 case 1:
                                 case 0:
-                                    qDebug()<<"武器类型："<<nIndex;
-                                    type = QString::fromUtf8("一步枪");
+                                    qDebug()<<"武器类型步枪："<<nIndex;
+                                    type = QString::fromUtf8("步枪");
                                     break;
-                                case 3:
+                                case 5:
                                 case 2:
-                                    qDebug()<<"武器类型："<<nIndex;
-                                    type = QString::fromUtf8("二手枪");
+                                    qDebug()<<"武器类型手枪："<<nIndex;
+                                    type = QString::fromUtf8("手枪");
                                     break;
                                 case 7:
                                     qDebug()<<"武器类型："<<nIndex;
-                                    type = QString::fromUtf8("三狙击枪");
+                                    type = QString::fromUtf8("狙击枪");
                                     break;
                                 default:
                                     break;

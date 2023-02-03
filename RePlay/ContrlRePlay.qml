@@ -2,7 +2,6 @@
 import QtQuick.Controls 2.2
 import "../Common"
 import "../Exercise/Plugins"
-
 Item
 {
     id:rePlayShow
@@ -14,7 +13,7 @@ Item
         x: (index.width-width)/2
         Row
         {
-            spacing: 10*dpx
+            spacing:1*dpx /*10*dpx*/
             /// 演习开始按钮
             Row {
                 Button
@@ -68,37 +67,6 @@ Item
                         }
                         bStart = !bStart;
                     } //on
-
-//                    onPressed:
-//                    {
-//                        if(bStart)
-//                        {
-//                            console.log("测试回放！！！"+bStart)
-//                            $app.allData.pauseReplay();
-//                            bofang.text= "\ue609";
-//                            time_run.stop();
-//                        }
-//                        else
-//                        {
-//                            if(rePlayShow.bStart)
-//                            {
-//                                console.log("测试开始回放！！！"+rePlayShow.bStart)
-//                    $app.allData.setReplayFlags(true)
-//                                $app.allData.beginReplay();
-//                                time_run.start();
-//                                rePlayShow.bStart = false;
-
-//                            }
-//                            else
-//                            {
-//                                 console.log("测试开始暂停！！！"+rePlayShow.bStart)
-//                                $app.allData.pauseReplay();
-//                                time_run.start();
-//                            }
-//                            bofang.text= "\ue626"
-//                        }
-//                        bStart = !bStart;
-//                    } //on
                 }
 
                 Slider
@@ -107,13 +75,11 @@ Item
                     from: 0
 //                    value: 0
                     to: nTimes
-                    stepSize:1000
+                    stepSize:1
                     y:sliderBackground.implicitHeight
                     onValueChanged:
                     {
                         nTimeText--
-//                        console.log(value+" "+nTimes)
-
                         if (nTimeText===0&&horizontalSlider.value == nTimes) {
                             bofang.text= "\ue609"
                             start.bStart=false
@@ -161,7 +127,7 @@ Item
                     onMoved:
                     {
                         $app.allData.setSimuTime(value)
-                        nTimeText=nTimes
+                        nTimeText=nTimes-value/*nTimes*/
                     }
 
                 }
@@ -248,31 +214,6 @@ Item
         return `${hours > 0 ? `${hours}:` : ''}${minute < 10 ? '0' + minute : minute}:${formatSecond < 10 ? '0' + formatSecond : formatSecond}`
     }
 
-
-//    Timer{
-//        id:time_run
-//        interval: 1000
-//        repeat: true
-//        running: false
-//        triggeredOnStart: true
-//        onTriggered: {
-//            nTimes--
-//            if (formateTime(nTimes) <= "00:00" || horizontalSlider.value == nTimes) {
-//                time_run.stop()
-//                bofang.text= "\ue609"
-
-//                rePlayShow.visible=false
-//                rePlayShow.bStart = true
-//                $app.settings.endReplay()
-//                $app.allData.endReplay()
-//                manoeuvre.imgSource = "qrc:/Image/Start_bg.png"
-//                manoeuvre.height = 136*dpx
-//                xianyin.isXianshi()
-
-//                footerBar.btnPlayback.checked = true
-//            }
-//        }
-//    }
     CampHidden {
         id: xianyin
         y: 14*dpy

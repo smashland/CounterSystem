@@ -206,6 +206,8 @@ void CPersonAllInfo::UpdateBaseInfo(PersonInfo *pPersonInfo)
                 qDebug()<<"手枪gengxin1："<<nNum;
             }
             break;
+         case SUBMACHINE:
+            break;
         }
     }
     //    countDanFlag=false;

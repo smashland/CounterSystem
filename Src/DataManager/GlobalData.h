@@ -128,6 +128,7 @@ public:
     Q_INVOKABLE void setSimuTime(quint16 uTimes);
     Q_INVOKABLE void endReplay();
     Q_INVOKABLE void initReplay();
+    Q_INVOKABLE void endNoInitRePlay();
     /**
      * @brief 删除回放文件
      * @param sReplayame

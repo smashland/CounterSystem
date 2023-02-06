@@ -212,23 +212,24 @@ void CMyEventInfo::Update(const unsigned char *pData, int nLength)
                             if(3==nIndex || 4 == nIndex || 6 == nIndex)
                             {
                                 QString type;
+                                QString listInfo;
                                 switch (nIndex)
                                 {
                                 case 3:
                                 case 4:
                                     type = QString::fromUtf8("手雷");
+                                     listInfo=QString::fromUtf8("%1号%2使用%3击中%4号%5").arg(pShotPerson->id()).arg(pShotPerson->name().c_str()).arg(type)
+                                            .arg(m_pPerson->id()).arg(m_pPerson->name().c_str());
                                     break;
                                 case 6:
                                     type = QString::fromUtf8("爆炸物");
+                                    listInfo=QString::fromUtf8("%1号%2%3击中%4号%5").arg(pShotPerson->id()).arg(pShotPerson->name().c_str()).arg(type)
+                                           .arg(m_pPerson->id()).arg(m_pPerson->name().c_str());
                                     break;
                                 }
-                                /// 增加命中状态
-                                //                                QString listInfo=QString::fromUtf8("%3 %1被%2的%4炸死").arg(m_pPerson->id())
-                                //                                        .arg(pShotPerson->id()).arg(QTime::currentTime().toString("hh:mm:ss"))
-                                //                                        .arg(type); QString::fromStdString(pShotPerson->name())
 
-                                QString listInfo=QString::fromUtf8("%1号%2使用%3炸死%4号%5").arg(pShotPerson->id()).arg(pShotPerson->name().c_str()).arg(type)
-                                        .arg(m_pPerson->id()).arg(m_pPerson->name().c_str());
+//                                QString listInfo=QString::fromUtf8("%1号%2使用%3击中%4号%5").arg(pShotPerson->id()).arg(pShotPerson->name().c_str()).arg(type)
+//                                        .arg(m_pPerson->id()).arg(m_pPerson->name().c_str());
 
                                 /// 发送消息
                                 CNoticeManager::GetInstance()->SetNoticInfo(listInfo);

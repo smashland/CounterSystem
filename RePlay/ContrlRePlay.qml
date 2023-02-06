@@ -50,18 +50,22 @@ Item
                             if(rePlayShow.bStart)
                             {
                                 console.log("测试开始回放！！！"+rePlayShow.bStart)
-//                                bofang.text= "\ue626"
+                                //                                bofang.text= "\ue626"
+                                $app.setClearNoticText();
+                                nTimeText=nTimes
                                 $app.allData.setReplayFlags(false)
                                 $app.allData.beginReplay();
                                 rePlayShow.bStart = false;
+                                killExpand.clearShowText();
+
 
                             }
                             else
                             {
-                                 console.log("测试开始暂停！！！"+rePlayShow.bStart)
-//                                bofang.text= "\ue609";
+                                console.log("测试开始暂停！！！"+rePlayShow.bStart)
+                                //                                bofang.text= "\ue609";
                                 $app.allData.pauseReplay();
-//                                rePlayShow.bStart = true;
+                                //                                rePlayShow.bStart = true;
                             }
                             bofang.text= "\ue626"
                         }
@@ -73,25 +77,30 @@ Item
                 {
                     id:horizontalSlider
                     from: 0
-//                    value: 0
+                    //                    value: 0
                     to: nTimes
                     stepSize:1
                     y:sliderBackground.implicitHeight
                     onValueChanged:
                     {
-                        nTimeText--
-                        if (nTimeText===0&&horizontalSlider.value == nTimes) {
-                            bofang.text= "\ue609"
-                            start.bStart=false
-                            rePlayShow.visible=false
-                            rePlayShow.bStart = true
-                            $app.settings.endReplay()
-                            $app.allData.endReplay()
-                            manoeuvre.imgSource = "qrc:/Image/Start_bg.png"
-                            manoeuvre.height = 136*dpx
-                            xianyin.isXianshi()
-                            killExpand.visible = false
-                            killSituation.visible = false
+                        if(nTimeText>0)
+                        {
+                            nTimeText--
+                            if (nTimeText===0&&horizontalSlider.value == nTimes) {
+                                bofang.text= "\ue609"
+                                start.bStart=false
+//                                rePlayShow.visible=false
+                                rePlayShow.bStart = true
+//                                $app.settings.endReplay()
+                                $app.allData.endNoInitRePlay()
+//                                $app.settings.endReplay()
+//                                $app.allData.endReplay()
+//                                manoeuvre.imgSource = "qrc:/Image/Start_bg.png"
+//                                manoeuvre.height = 136*dpx
+//                                xianyin.isXianshi()
+//                                killExpand.visible = false
+//                                killSituation.visible = false
+                            }
                         }
                     }
 
@@ -121,7 +130,7 @@ Item
                         implicitWidth: 12
                         implicitHeight: 12
                         radius: 6
-//                        antialiasing: true
+                        //                        antialiasing: true
                     }
 
                     onMoved:
@@ -187,6 +196,7 @@ Item
                 xianyin.isXianshi()
                 killExpand.visible = false
                 killSituation.visible = false
+                $app.setClearNoticText();
             }
             onNoPutDown: {
 

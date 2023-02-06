@@ -159,13 +159,39 @@ int CMyListModel::getScore()
     for(auto one : m_allData)
     {
         auto pPerson = CDataManager::GetInstance()->FindPersonInfo(one->getId());
+        qDebug()<<"测试人员id11111:"<<one->getId()<<one->getType()<<m_allData.size();
         if(nullptr != pPerson)
         {
             int nHitSize = pPerson->hitinfo_size();
             for(int i=0; i<nHitSize; ++i)
             {
+//                 auto pPersonHurt = CDataManager::GetInstance()->FindPersonInfo(pPerson->hitinfo(i).id());
+                bool hurtFlag=false;
+                int hurtId=pPerson->hitinfo(i).id();
+                 for(auto one : m_allData)
+                 {
+
+                     qDebug()<<"属方ceshi ----："<<one->getType()<<one->getId()<<hurtId<<m_allData.size();
+                    if(one->getId()==hurtId)
+                    {
+                        qDebug()<<"属方："<<one->getType()<<CConfigInfo::GetInstance()->CalHurtMark(pPerson->hitinfo(i).hurtpart());
+                        int temp=CConfigInfo::GetInstance()->CalHurtMark(pPerson->hitinfo(i).hurtpart());
+                        nTotalScore=nTotalScore-temp;//CConfigInfo::GetInstance()->CalHurtMark(pPerson->hitinfo(i).hurtpart());
+                        hurtFlag=true;
+                        break;
+                    }
+
+                 }
+
+                 if(hurtFlag)
+                 {
+                     continue;
+                 }
+                qDebug()<<"测试人员id222222222:"<<pPerson->hitinfo(i).id();
+
                 nTotalScore +=CConfigInfo::GetInstance()->CalHurtMark(pPerson->hitinfo(i).hurtpart());
             }
+
         }
     }
     return(nTotalScore);

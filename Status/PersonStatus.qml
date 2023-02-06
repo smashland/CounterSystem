@@ -1,4 +1,4 @@
-import QtQuick 2.0
+﻿import QtQuick 2.0
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.13
 import "Plugins"
@@ -59,15 +59,14 @@ Rectangle
         {
             id: shouqiang
             bConnected: outData.bPistol
-//            source: "qrc:/Image/wuqi/shouqiang.png"
-            source: "qrc:/Image/wuqi/shoulei.png"
+            source: "qrc:/Image/wuqi/shouqiang.png"
         }
-//        EquipConnStat
-//        {
-//            id: jujibuqiang
-//            bConnected: outData.bRifle//狙击步枪
-//            source: "qrc:/Image/wuqi/jujibuqiang.png"
-//        }
+        EquipConnStat
+        {
+            id: jujibuqiang
+            bConnected: outData.bSniper//狙击步枪
+            source: "qrc:/Image/wuqi/jujibuqiang.png"
+        }
 //        EquipConnStat
 //        {
 //            id: shoulei

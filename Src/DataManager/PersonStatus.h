@@ -1,4 +1,4 @@
-#ifndef PERSONSTATUS_H
+﻿#ifndef PERSONSTATUS_H
 #define PERSONSTATUS_H
 
 /**
@@ -26,6 +26,7 @@ public:
     Q_PROPERTY(bool bOnLine MEMBER m_bOnLine NOTIFY onLineChanged)
     Q_PROPERTY(bool bPistol MEMBER m_bPistol NOTIFY pistolChanged)
     Q_PROPERTY(bool bRifle MEMBER m_bRifle NOTIFY rifleChanged)
+    Q_PROPERTY(bool bSniper MEMBER m_bSniper NOTIFY sniperChanged)
     Q_PROPERTY(int  nBaty MEMBER m_nBaty NOTIFY batyChanged)
     Q_PROPERTY(int  nHealth MEMBER m_nHealth NOTIFY healthChanged)
     Q_PROPERTY(bool bRenZhi MEMBER m_bRenZhi NOTIFY renZhiChanged)
@@ -56,6 +57,7 @@ signals:
     void onLineChanged(bool);
     void pistolChanged(bool);
     void rifleChanged(bool);
+    void sniperChanged(bool);
     void batyChanged(int);
     void healthChanged(int);
     void renZhiChanged(bool);
@@ -74,6 +76,7 @@ private:
     bool m_bOnLine=false;/// 是否在线
     bool m_bPistol=false;///手枪连接状态
     bool m_bRifle=false; ///步枪连接状态
+    bool m_bSniper =false; ///狙击枪连接状态
 
     int  m_nBaty{100};     /// 电池电量
     int  m_nHealth{100};   /// 健康状况

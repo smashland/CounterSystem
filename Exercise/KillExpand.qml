@@ -86,6 +86,17 @@ Item {
                     }
                 }
             }
+//            Connections
+//            {
+//                target: $app.settings
+//                function onReplayStatusChanged(bIsStart)
+//                {
+//                    if(bIsStart)
+//                    {
+//                        showText.text=""
+//                    }
+//                }
+//            }
 
             NumberAnimation on x {
                 id: enter
@@ -121,6 +132,10 @@ Item {
         if(killExpand.visible == false) {
             showText.text=""
         }
+    }
+    function clearShowText()
+    {
+        showText.text=""
     }
 
 }

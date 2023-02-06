@@ -1,4 +1,4 @@
-#include "PersonStatus.h"
+﻿#include "PersonStatus.h"
 #include "../ConfigInfo.h"
 #include "PersonInfo.pb.h"
 #include "DataManager.h"
@@ -216,6 +216,14 @@ void CPersonStatus::UpdateStatus(const ConnectStatus &conStatus)
             {
                 m_bPistol = (bLink || bLink1);
                 emit(pistolChanged(m_bPistol));
+            }
+            break;
+          case SUBMACHINE:
+            bLink = UNLINK != conStatus.weapons(nIndex).contype();
+            if(m_bSniper != bLink )
+            {
+                m_bSniper = (bLink);
+                emit(sniperChanged(m_bSniper));
             }
             break;
         }

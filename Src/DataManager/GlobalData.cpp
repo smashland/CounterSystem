@@ -544,6 +544,18 @@ void CGlobalData::initReplay()
     emit simTimeChanged(0);
 }
 
+void CGlobalData::endNoInitRePlay()
+{
+    CTimeServer::GetInstance()->SimuEnd();
+
+    for(auto one : m_allReplayStatus)
+    {
+        delete one;
+    }
+
+    m_allReplayStatus.clear();
+}
+
 bool CGlobalData::deleteReplayFile(const QString &sReplayame)
 {
     QString filePath = QApplication::applicationDirPath() + QString("/Data/Szy/%1.szy").arg(sReplayame);

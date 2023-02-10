@@ -151,7 +151,7 @@ QStringList CDealDataManager::GetBulletSum(quint16 unID)
     {
         QStringList listFaultBullets;
         QString strFaultBullets=QString::number(CConfigInfo::GetInstance()->GetDefaultBullets());
-        for(int i=0;i<7;++i)
+        for(int i=0;i<8;++i)
         {
             listFaultBullets.append(strFaultBullets);
         }

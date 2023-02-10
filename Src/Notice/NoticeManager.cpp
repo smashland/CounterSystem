@@ -36,6 +36,20 @@ void CNoticeManager::SetNoticInfo(const QString &sNoticeInfo)
     }
 }
 
+void CNoticeManager::SetHitInfo(const QString &SetHitInfo)
+{
+    /// 开启面板显示
+    if(m_bShowBoard)
+    {
+        m_pGLobal->updateNotic(SetHitInfo);
+    }
+}
+
+void CNoticeManager::SetClearNoticInfo()
+{
+    m_pGLobal->setClearNoticText();
+}
+
 /// 设置语音播报
 bool CNoticeManager::OpenSpeak(bool bOpen)
 {

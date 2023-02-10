@@ -28,6 +28,17 @@ public:
      */
     void SetNoticInfo(const QString& sNoticeInfo);
 
+
+    /**
+     * @brief 只设置击中信息
+     * @param SetHitInfo
+     */
+    void SetHitInfo(const QString& SetHitInfo);
+
+    /**
+     * @brief 设置清空通知信息
+     */
+    void SetClearNoticInfo();
     /**
      * @brief 打开语音播报
      * @return 返回语音播报开启状态

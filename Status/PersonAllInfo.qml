@@ -115,6 +115,8 @@ Popup
                 text: "步枪子弹数:"
                 name:outData.nRifle + "/"+outData.nRifleSum
             }
+
+
             SoldierItem {
                 id:buqiang
                 x: line2.width/2
@@ -122,6 +124,15 @@ Popup
                 text: "手枪子弹数:"
                 name: outData.nPistol +   "/" +  outData.nPistolSum
             }
+
+            SoldierItem {
+                id:juji
+                x: line2.width/2
+                y: fushangxinxi.contentHeight + line2.height + 74 *dpy
+                text: "狙击子弹数:"
+                name: outData.nSniper +   "/" +  outData.nSniperSum
+            }
+
         }
         Rectangle {
             id: colum3
@@ -238,16 +249,16 @@ Popup
         }
     }
 
-//    Connections {
-//        target: $app.allData
-//        function onMapPersonInfo(id,name,relive,dLon,dLat,bTk){
-//            shebeiId.name = id;
-//            shebeiName.name = name
-//            reliveName.name = relive;
-//            lat.name = dLat;
-//            lon.name = dLon;
-//            toukuizhuangtai.bConnected = bTk;
-//            personPopup.visible=true;
-//        }
-//    }
+    //    Connections {
+    //        target: $app.allData
+    //        function onMapPersonInfo(id,name,relive,dLon,dLat,bTk){
+    //            shebeiId.name = id;
+    //            shebeiName.name = name
+    //            reliveName.name = relive;
+    //            lat.name = dLat;
+    //            lon.name = dLon;
+    //            toukuizhuangtai.bConnected = bTk;
+    //            personPopup.visible=true;
+    //        }
+    //    }
 }

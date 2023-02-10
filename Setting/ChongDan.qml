@@ -31,19 +31,19 @@ Dialog{
             //            danwei: "支"
         }
         SoldierItem2 {
-            title: "手      枪："
-            //            danwei: "支"
-        }
-        SoldierItem2 {
             title: "机      枪："
             //            danwei: "支"
         }
         SoldierItem2 {
-            title: "狙击步枪："
+            title: "手      枪："
             //            danwei: "支"
         }
         SoldierItem2 {
             title: "手      雷："
+            //            danwei: "支"
+        }
+        SoldierItem2 {
+            title: "狙击步枪："
             //            danwei: "个"
         }
     }

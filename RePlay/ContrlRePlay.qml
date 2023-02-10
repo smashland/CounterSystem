@@ -50,7 +50,8 @@ Item
                             if(rePlayShow.bStart)
                             {
                                 console.log("测试开始回放！！！"+rePlayShow.bStart)
-                                //                                bofang.text= "\ue626"
+                                //
+                                bofang.text= "\ue626"
                                 $app.setClearNoticText();
                                 nTimeText=nTimes
                                 $app.allData.setReplayFlags(false)
@@ -81,6 +82,7 @@ Item
                     to: nTimes
                     stepSize:1
                     y:sliderBackground.implicitHeight
+                    snapMode :Slider.SnapOnRelease
                     onValueChanged:
                     {
                         if(nTimeText>0)
@@ -89,17 +91,8 @@ Item
                             if (nTimeText===0&&horizontalSlider.value == nTimes) {
                                 bofang.text= "\ue609"
                                 start.bStart=false
-//                                rePlayShow.visible=false
                                 rePlayShow.bStart = true
-//                                $app.settings.endReplay()
                                 $app.allData.endNoInitRePlay()
-//                                $app.settings.endReplay()
-//                                $app.allData.endReplay()
-//                                manoeuvre.imgSource = "qrc:/Image/Start_bg.png"
-//                                manoeuvre.height = 136*dpx
-//                                xianyin.isXianshi()
-//                                killExpand.visible = false
-//                                killSituation.visible = false
                             }
                         }
                     }
@@ -135,6 +128,8 @@ Item
 
                     onMoved:
                     {
+//                        killExpand.clearShowText();
+//                        $app.setClearNoticText();
                         $app.allData.setSimuTime(value)
                         nTimeText=nTimes-value/*nTimes*/
                     }
@@ -147,6 +142,10 @@ Item
                     function onSimTimeChanged(simTime)
                     {
                         horizontalSlider.value = simTime;
+                    }
+                    function onClearShowText()
+                    {
+                        killExpand.clearShowText();
                     }
                 }
             }

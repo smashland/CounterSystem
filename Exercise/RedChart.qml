@@ -11,10 +11,16 @@ ChartView {
     property var okData
     property var flagData
 
+
+//    property int zongshu: okData+hurtData+deathData
+//    property string percentageOk: okData/zongshu *100
+//    property string percentageHurt: hurtData/zongshu *100
+//    property string percentageDeath: deathData/zongshu *100
+
     property int zongshu: okData+hurtData+deathData
-    property string percentageOk: okData/zongshu *100
-    property string percentageHurt: hurtData/zongshu *100
-    property string percentageDeath: deathData/zongshu *100
+    property int percentageOk: okData/zongshu *100
+    property int percentageHurt: hurtData/zongshu *100
+    property int percentageDeath: deathData/zongshu *100
     width: 310*dpy
     height: 310*dpy
     anchors.fill: parent

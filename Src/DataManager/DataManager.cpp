@@ -229,7 +229,7 @@ void CDataManager::UpdateSeconds(const quint16 &unSeconds)
 /// 更新仿真时间
 void CDataManager::UpdateSimulationTime(const quint16 & simTime)
 {
-     qDebug()<<"CDataManager:-------------"<<simTime<<m_vRecordPersonInfo.size()-1;
+//     qDebug()<<"CDataManager:-------------"<<simTime<<m_vRecordPersonInfo.size()-1;
     if(simTime < ((int)(m_vRecordPersonInfo.size()-1)))
     {
         auto replayInfo = m_vRecordPersonInfo[simTime];
@@ -238,13 +238,13 @@ void CDataManager::UpdateSimulationTime(const quint16 & simTime)
             auto findPerson = m_allPersonInfo.find(one->id());
             if(m_allPersonInfo.end() == findPerson)
             {
-                qDebug()<<"CDataManager:NO-------------"<<simTime;
+//                qDebug()<<"CDataManager:NO-------------"<<simTime;
                 m_allPersonInfo[one->id()] = one;
 
             }
             else
             {
-                qDebug()<<"CDataManager:YES-------------"<<simTime;
+//                qDebug()<<"CDataManager:YES-------------"<<simTime;
                 findPerson.value()->CopyFrom(*one);
             }
         }

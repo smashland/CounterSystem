@@ -60,6 +60,8 @@ public:
     void UpdateTime(const QDateTime &dateTime);
 
     void UpdateSimulationTime(const quint16 &);
+    //更新播报信息
+    void UpdateSimulationTimeInfo(const quint16 &uSimTimes);
 
     /**
      * @brief 更新数据
@@ -203,6 +205,7 @@ signals:
     void resultChanged(const QVariantList&);
     void allResultChanged(const QVariantList&);
     void mapPersonInfo(int id,QString name,int relive,double dLon, double dLat,bool bTk);
+    void clearShowText();
 protected:
     /**
      * @brief 统计成绩
@@ -257,6 +260,8 @@ private:
     QVariantList       m_listResult;          /// 各组的简要信息
     QVariantList       m_listAllResult;       /// 分组的详情
     QMap<quint16,QString>  m_mapIdType;
+    QList<int>         m_listEventTime;       ///记录发生事件的时间
+    int                m_nTempEventTime;      ///临时存储回放时间
 };
 
 #endif // GLOBALDATA_H

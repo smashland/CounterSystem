@@ -290,48 +290,52 @@ void CGlobalSettings::chongDan(quint16 nID, const QStringList &allInfo)
         {
         case RIFLE:
             bLink1 = UNLINK != conStatus.weapons(nIndex).contype();
-            if(bLink1) nNum = conStatus.weapons(nIndex).bulletnum();
+            if(bLink1)
+                nNum = conStatus.weapons(nIndex).bulletnum();
             break;
         case PISTOL:
             bLink = UNLINK != conStatus.weapons(nIndex).contype();
-            if(bLink) nNum += conStatus.weapons(nIndex).bulletnum();
+            if(bLink)
+                nNum += conStatus.weapons(nIndex).bulletnum();
             temp=allInfo.at(0).toInt();
             temp=temp+nNum;
 //            tempInfo.append(QString::number(temp));
             tempInfo.replace(0,QString::number(temp));
-            qDebug()<<"步枪枪数："<<nNum<<temp;
-
-
+            qDebug()<<"步枪枪数："<<nNum<<temp<<allInfo;
             break;
         case GRENAD:
             bLink1 = UNLINK != conStatus.weapons(nIndex).contype();
-            if(bLink1) nNum = conStatus.weapons(nIndex).bulletnum();
-            else       nNum = 0;
+            if(bLink1)
+                nNum = conStatus.weapons(nIndex).bulletnum();
             break;
         case MORTAR:
             bLink = UNLINK != conStatus.weapons(nIndex).contype();
-            if(bLink) nNum += conStatus.weapons(nIndex).bulletnum();
+            if(bLink)
+                nNum += conStatus.weapons(nIndex).bulletnum();
             temp=allInfo.at(2).toInt();
             temp=temp+nNum;
             tempInfo.replace(2,QString::number(temp));
-//            tempInfo.append(QString::number(temp));
             qDebug()<<"shou枪枪数："<<nNum<<temp;
-
             break;
         case SUBMACHINE:
+//        case SNIPER:
             bLink = UNLINK != conStatus.weapons(nIndex).contype();
-            if(bLink) nNum += conStatus.weapons(nIndex).bulletnum();
-            temp=allInfo.at(5).toInt();
+            if(bLink)
+                nNum += conStatus.weapons(nIndex).bulletnum();
+            temp=allInfo.at(4).toInt();
             temp=temp+nNum;
-            tempInfo.replace(5,QString::number(temp));
-//            tempInfo.append(QString::number(temp));
+            tempInfo.replace(4,QString::number(temp));
             qDebug()<<"狙击枪枪数："<<nNum<<temp;
+             break;
 
         }
     }
-//    tempInfo=allInfo;
+
     CDealDataManager::GetInstance()->PersonalChongDan(nID,tempInfo/*allInfo*/);
-    CDealDataManager::GetInstance()->SetBulletSum(nID,allInfo/*allInfo*/);
+    CDealDataManager::GetInstance()->SetBulletSum(nID,allInfo);
+
+//    CDealDataManager::GetInstance()->PersonalChongDan(nID,allInfo);
+//    CDealDataManager::GetInstance()->SetBulletSum(nID,allInfo);
 }
 
 /// 配枪

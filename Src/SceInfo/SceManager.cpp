@@ -347,9 +347,10 @@ void SceManager::parseExcel(const QString &strImagePath)
         if(titles[0]=="设备ID"&&titles[1]=="姓名"&&titles[2]=="职务"&&titles[3]=="阵营"&&titles[4]=="人质")
         {
             qDebug()<<"表头正确";
+            qDebug()<<"方案内容"<<workSheet->sheetName()<<rowCount;
             CSceInfo* pSceInfo = new CSceInfo;
             pSceInfo->PraseExcelInfo(workSheet,rowCount,columnCount);
-            qDebug()<<"方案内容"<<workSheet->sheetName();
+
             pSceInfo->setSceName(fileInfo.baseName());
             m_mapName2SceInfo.insert(fileInfo.baseName(),pSceInfo);
             m_listSces.append(pSceInfo);

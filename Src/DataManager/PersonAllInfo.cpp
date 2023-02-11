@@ -167,10 +167,12 @@ void CPersonAllInfo::UpdateBaseInfo(PersonInfo *pPersonInfo)
         {
         case RIFLE:
             bLink1 = UNLINK != conStatus.weapons(nIndex).contype();
+            qDebug()<<"RIFLEgengxin1："<<bLink<<conStatus.weapons(nIndex).bulletnum()<< conStatus.weapons(nIndex).contype()<<nBaty;
             if(bLink1) nNum = conStatus.weapons(nIndex).bulletnum();
             break;
         case PISTOL:
             bLink = UNLINK != conStatus.weapons(nIndex).contype();
+            qDebug()<<"PISTOLgengxin1："<<bLink<<conStatus.weapons(nIndex).bulletnum()<< conStatus.weapons(nIndex).contype()<<nIndex;
             if(bLink) nNum += conStatus.weapons(nIndex).bulletnum();
             if(m_bRifle != (bLink || bLink1))
             {
@@ -187,11 +189,17 @@ void CPersonAllInfo::UpdateBaseInfo(PersonInfo *pPersonInfo)
             break;
         case GRENAD:
             bLink1 = UNLINK != conStatus.weapons(nIndex).contype();
+            qDebug()<<"GRENADgengxin1："<<bLink<<conStatus.weapons(nIndex).bulletnum()<< conStatus.weapons(nIndex).contype()<<nIndex;
             if(bLink1) nNum = conStatus.weapons(nIndex).bulletnum();
             else       nNum = 0;
             break;
+//        case MINES:
+//            bLink1 = UNLINK != conStatus.weapons(4).contype();
+//            qDebug()<<"MINESgengxin1："<<bLink<<conStatus.weapons(4).bulletnum()<< conStatus.weapons(4).contype()<<nIndex;
+//            break;
         case MORTAR:
             bLink = UNLINK != conStatus.weapons(nIndex).contype();
+            qDebug()<<"手枪gengxin1："<<bLink<<conStatus.weapons(nIndex).bulletnum()<< conStatus.weapons(nIndex).contype()<<nIndex;
             if(bLink) nNum += conStatus.weapons(nIndex).bulletnum();
             if(m_bPistol != (bLink || bLink1))
             {
@@ -206,7 +214,44 @@ void CPersonAllInfo::UpdateBaseInfo(PersonInfo *pPersonInfo)
                 qDebug()<<"手枪gengxin1："<<nNum;
             }
             break;
+        case SNIPER  :
+            bLink = UNLINK != conStatus.weapons(4).contype();
+            qDebug()<<"SNIPER ："<<bLink<<conStatus.weapons(4).bulletnum()<< conStatus.weapons(4).contype()<<nIndex;
+//            if(bLink) nNum += conStatus.weapons(nIndex).bulletnum();
+//            if(m_bSniper != (bLink || bLink1))
+//            {
+//                m_bSniper = (bLink || bLink1);
+//                emit(sniperChanged(m_bSniper));
+//            }
+
+//            if(m_nSniper != nNum)
+//            {
+//                m_nSniper = nNum;
+//                emit(sniperNumChanged(m_nSniper));
+//                qDebug()<<"SNIPER"<<nNum;
+//            }
+            break;
+//        case LAUNCHER :
+//            bLink1 = UNLINK != conStatus.weapons(nIndex).contype();
+//            qDebug()<<"LAUNCHER ："<<bLink<<conStatus.weapons(nIndex).bulletnum()<< conStatus.weapons(nIndex).contype()<<nIndex;
+//            break;
          case SUBMACHINE:
+            bLink = UNLINK != conStatus.weapons(nIndex).contype();
+               qDebug()<<"狙击gengxin1："<<bLink<<conStatus.weapons(5).bulletnum()<< conStatus.weapons(nIndex).contype()<<nIndex;
+            if(bLink)
+                nNum += conStatus.weapons(5).bulletnum();
+            if(m_bSniper != (bLink))
+            {
+                m_bSniper = (bLink);
+                emit(sniperChanged(m_bSniper));
+            }
+
+            if(m_nSniper != nNum)
+            {
+                m_nSniper = nNum;
+                emit(sniperNumChanged(m_nSniper));
+                qDebug()<<"SUBMACHINE"<<nNum;
+            }
             break;
         }
     }
@@ -262,7 +307,15 @@ void CPersonAllInfo::UpdateBaseInfo(PersonInfo *pPersonInfo)
     if(m_nPistolSum!=listBulletSum.at(2).toInt())
     {
         m_nPistolSum=listBulletSum.at(2).toInt();
+        qDebug() << "m_nPistolSum:" << m_nPistolSum;
         emit(pistolSumChanged(m_nPistolSum));
+    }
+
+    if(m_nSniperSum!=listBulletSum.at(4).toInt())
+    {
+        m_nSniperSum=listBulletSum.at(4).toInt();
+        qDebug() << "m_nSniperSum:" << m_nSniperSum;
+        emit(sniperSumChanged(m_nSniperSum));
     }
 
 }

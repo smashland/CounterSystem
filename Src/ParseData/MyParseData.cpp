@@ -333,6 +333,10 @@ void CMyParseData::AllPeiQiang(const QVariant &rInfo)
 void CMyParseData::Damage(const QVariant &rInfo)
 {
     m_pSet->SendCommand(g_unBroadCost,HURT_VALUE,rInfo);
+    for(auto i=0;i<5;++i)
+    {
+        m_pSet->SendCommand(g_unBroadCost,HURT_VALUE,rInfo);
+    }
 }
 
 /// 查询所有的状态

@@ -47,52 +47,71 @@ void ScePersonInfo::praseExcelPerson(QXlsx::Worksheet *workSheet,int rowCount, i
     for (int col = 1; col <= columnCount; col++)
     {
         QXlsx::Cell *cell = workSheet->cellAt(rowCount, col);
-        switch (col) {
-        case 1:
-            m_ID=cell->value().toInt();
-            break;
-        case 2:
-            m_Name=cell->value().toString();
-            break;
-        case 3:
-            if(cell->value().toString()=="士兵")
-            {
-                m_Positon=1;
-            }else if(cell->value().toString()=="军官")
-            {
-                m_Positon=2;
-            }
-            else if(cell->value().toString()=="")
-            {
-                m_Positon=0;
-            }
-            break;
-        case 4:
-            if(cell->value().toString()=="蓝")
-            {
-                m_Group=0;
-            }
-            else if(cell->value().toString()=="红")
-            {
-                m_Group=1;
-            }
-            break;
-        case 5:
-            if(cell->value().toString()=="是")
-            {
-                m_host=1;
-            }
-            else if(cell->value().toString()=="否")
-            {
-                m_host=0;
-            }
-            break;
-        default:
-            break;
-        }
+        if(cell)
+        {
+            switch (col) {
+            case 1:
+                m_ID=cell->value().toInt();
+                break;
+            case 2:
+                    m_Name=cell->value().toString();
+                break;
+            case 3:
+                if(cell->value().toString()=="士兵")
+                {
+                    m_Positon=1;
+                }else if(cell->value().toString()=="军官")
+                {
+                    m_Positon=2;
+                }
+                break;
+            case 4:
+                if(cell->value().toString()=="蓝")
+                {
+                    m_Group=0;
+                }
+                else if(cell->value().toString()=="红")
+                {
+                    m_Group=1;
+                }
 
+                break;
+            case 5:
+                if(cell->value().toString()=="是")
+                {
+                    m_host=1;
+                }
+                else if(cell->value().toString()=="否")
+                {
+                    m_host=0;
+                }
+                break;
+            default:
+                break;
+            }
+
+        }
+        else
+        {
+            switch (col) {
+            case 2:
+                    m_Name=" ";
+                break;
+            case 3:
+                    m_Positon=1;
+                break;
+            case 4:
+                    m_Group=0;
+                break;
+            case 5:
+                    m_host=0;
+                break;
+            default:
+                break;
+            }
+        }
     }
-    qDebug()<<m_ID<<m_Name<<m_Positon<<m_Group<<m_host;
+//    qDebug()<<m_ID<<m_Name<<m_Positon<<m_Group<<m_host;
 }
 
 

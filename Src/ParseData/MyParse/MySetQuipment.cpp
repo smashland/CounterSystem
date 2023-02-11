@@ -91,6 +91,7 @@ void CMySetQuipment::SendCommand(quint16 unID, SET_CMD typeCommand, const QVaria
             }
         }
 
+
         tmpByteArray[11] = static_cast<char>(types.operator int());
     }
         break;
@@ -235,7 +236,7 @@ void CMySetQuipment::DealInfo(SET_CMD typeCommand, const QVariant &allInfo)
         }
         break;
     case ADD_BULLET: /// 充弹
-    {
+    {       
         QList<QVariant> tmpList = allInfo.toList();
         if(8 == tmpList.size())
         {
@@ -244,6 +245,7 @@ void CMySetQuipment::DealInfo(SET_CMD typeCommand, const QVariant &allInfo)
                 g_nGunType = tmpList.at(i).toUInt();
                 if(g_unBroadCost != g_nGunType)
                 {
+                    qDebug()<<"DealInfo-----------------------------------------"<<"充弹"<<i;
                     m_pCurrentPerson->mutable_curtstatus()->mutable_weapons(i)->set_bulletnum(g_nGunType);
                 }
             }

@@ -1,4 +1,4 @@
-#include <QtEndian>
+﻿#include <QtEndian>
 #include "MyQueryEquipment.h"
 #include "MyParsetype.h"
 #include "../../DataManager/PersonInfo.pb.h"
@@ -106,6 +106,8 @@ void CMyQueryEquipment::Update(const unsigned char *pData, int nLength)
                 {
                     if(types.testFlag(static_cast<GunType>(g_nGunType<<i)))
                     {
+//                        qDebug()<<"解析数据333333：测试枪型："<<i<<static_cast<GunType>(g_nGunType<<i)<<qFromBigEndian<quint16>(pData);
+//                        qDebug()<<"解析数据：测试枪型："<<m_pPerson->mutable_curtstatus()->mutable_weapons(i)->bulletnum()<<types;
                         m_pPerson->mutable_curtstatus()->mutable_weapons(i)->set_contype(OK);
                         m_pPerson->mutable_curtstatus()->mutable_weapons(i)->set_bulletnum(qFromBigEndian<quint16>(pData));
                         nLength -= 2;

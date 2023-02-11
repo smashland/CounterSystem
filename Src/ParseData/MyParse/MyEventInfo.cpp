@@ -136,6 +136,7 @@ void CMyEventInfo::Update(const unsigned char *pData, int nLength)
                 if(CConfigInfo::GetInstance()->GetStart())
                 {
                     g_nGunType = 1;
+
                     for(int i=0;i<8 && nLength > 1;++i)
                     {
                         if(types.testFlag(static_cast<GunType>(g_nGunType<<i)))
@@ -145,11 +146,20 @@ void CMyEventInfo::Update(const unsigned char *pData, int nLength)
                             {
                                 CNoticeManager::GetInstance()->PlaySound(1);
                             }
-
+//                            qDebug()<<"解析数据333333：测试枪型："<<i<<static_cast<GunType>(g_nGunType<<i)<<qFromBigEndian<quint16>(pData);
+//                            qDebug()<<"解析数据：测试枪型："<<m_pPerson->mutable_curtstatus()->mutable_weapons(i)->bulletnum()<<types;
+//                            if(i==5)
+//                            {
+//                                m_pPerson->mutable_curtstatus()->mutable_weapons(7)->set_bulletnum(qFromBigEndian<quint16>(pData));
+//                            }
+//                            else {
+//                                 m_pPerson->mutable_curtstatus()->mutable_weapons(i)->set_bulletnum(qFromBigEndian<quint16>(pData));
+//                            }
                             m_pPerson->mutable_curtstatus()->mutable_weapons(i)->set_bulletnum(qFromBigEndian<quint16>(pData));
                             nLength -= 2;
                             pData += 2;
                         }
+
                     }
                 }
             }

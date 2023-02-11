@@ -163,7 +163,7 @@ void CSceInfo::PraseExcelInfo(QXlsx::Worksheet *workSheet,int rowCount,int colum
     {
         ScePersonInfo *scePersonInfo=new ScePersonInfo(this);
         scePersonInfo->praseExcelPerson(workSheet,i,columnCount);
-        qDebug()<<"测试单元格"<<workSheet->cellAt(i, 1)->value().toInt();
+        //qDebug()<<"测试单元格"<<workSheet->cellAt(i, 1)->value().toInt()<<rowCount;
         m_mapId2Person.insert(workSheet->cellAt(i, 1)->value().toInt(),scePersonInfo);
         m_listPerson.append(scePersonInfo);
     }

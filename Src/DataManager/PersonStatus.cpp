@@ -219,6 +219,7 @@ void CPersonStatus::UpdateStatus(const ConnectStatus &conStatus)
             }
             break;
           case SUBMACHINE:
+            ///狙击枪图标显示
             bLink = UNLINK != conStatus.weapons(nIndex).contype();
             if(m_bSniper != bLink )
             {

@@ -286,6 +286,9 @@ Rectangle
     EarthManager{
         id:earthManager
     }
+    NoticManger{
+        id:noticManger
+    }
 
     RemoveDialog {
         id: removeDialog_quit

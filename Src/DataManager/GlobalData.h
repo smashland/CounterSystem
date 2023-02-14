@@ -8,6 +8,7 @@
 #include "PersonStatus.h"
 #include "../TimeServer/ITimeObserver.h"
 #include "IDataManagerObserver.h"
+#include "Src/NoticManger.h"
 
 class CMyListModel;
 class CPersonAllInfo;
@@ -188,6 +189,8 @@ public:
 
     Q_INVOKABLE void setReplayFlags(bool flag);
 
+    Q_INVOKABLE void readNoticText(const QString& fileName);
+
     /**
          * @brief 获取或者创建qml显示的简要信息
          * @return
@@ -262,6 +265,8 @@ private:
     QMap<quint16,QString>  m_mapIdType;
     QList<int>         m_listEventTime;       ///记录发生事件的时间
     int                m_nTempEventTime;      ///临时存储回放时间
+    NoticManger*       m_noticManger=nullptr;
+    QStringList        m_listNoticText;
 };
 
 #endif // GLOBALDATA_H

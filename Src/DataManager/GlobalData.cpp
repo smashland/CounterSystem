@@ -18,6 +18,7 @@
 #include "../SceInfo/ScePersonInfo.h"
 #include "../SceInfo/SceInfo.h"
 #include "../Connection/ConnectionManager.h"
+#include "Src/NoticManger.h"
 
 CGlobalData::CGlobalData(QObject *parent) : QObject(parent),
     m_sCurrentFileName(QDir::homePath())
@@ -27,7 +28,6 @@ CGlobalData::CGlobalData(QObject *parent) : QObject(parent),
     qRegisterMetaType<CGroupStatus*>("CGroupStatus*");
     qRegisterMetaType<CPersonAllInfo*>("CPersonAllInfo*");
     qRegisterMetaType<SceManager*>("SceManager");
-
     m_listStatusModel = new CMyListModel;
     m_pPersonAllInfo = new CPersonAllInfo;
 }
@@ -135,7 +135,6 @@ void CGlobalData::UpdateSimulationTime(const quint16 &uSimTimes)
     qDebug()<<"CGlobalData:-------------"<<uSimTimes;
     if(abs(uSimTimes-tempSimTime)>1)
     {
-        qDebug()<<"uSimTimes-tempSimTime>1"<<uSimTimes;
         CNoticeManager::GetInstance()->SetClearNoticInfo();
         emit clearShowText();
         UpdateSimulationTimeInfo(uSimTimes);
@@ -143,7 +142,6 @@ void CGlobalData::UpdateSimulationTime(const quint16 &uSimTimes)
     }
     else
     {
-        qDebug()<<"uSimTimes-tempSimTime<1"<<uSimTimes;
         tempSimTime=uSimTimes;
     }
     emit simTimeChanged(uSimTimes);
@@ -156,29 +154,23 @@ void CGlobalData::UpdateSimulationTime(const quint16 &uSimTimes)
     }
 
     const QVector<int>& events = m_allReplayEvent[uSimTimes];
-//    qDebug() << "uSimTimes : " <<uSimTimes<<"eventsSize"<<events.size();
-    int a = 0;
 
     for(auto one : events)
     {
-        ++a;
-        qDebug() << "event : " << a<<one;
         bool evevtFlag=true;
         /// 交火线
         auto pPerson = CDataManager::GetInstance()->GetOrCreatePersonInfo(one);
         int b = 0;
         int nHurtIndex=pPerson->hurtinfo_size()-1;
-//        for(int nHurtIndex = pPerson->hurtinfo_size()-1; -1 < nHurtIndex;--nHurtIndex)
+        //        for(int nHurtIndex = pPerson->hurtinfo_size()-1; -1 < nHurtIndex;--nHurtIndex)
         if(evevtFlag==true&&-1<nHurtIndex)
         {
             ++b;
             evevtFlag=false;
-//            nHurtIndex = pPerson->hurtinfo_size()-1;
-            qDebug()<<"nHurtIndex=="<<nHurtIndex<<"hurtinfo_size"<<pPerson->hurtinfo_size();
+            //            nHurtIndex = pPerson->hurtinfo_size()-1;
+            qDebug()<<"nHurtIndex=="<<nHurtIndex<<"hurtinfo_size"<<pPerson->hurtinfo_size()<<pPerson->hurtinfo(nHurtIndex).type();
             m_pCtrMapPerson->UpdateHitLine(pPerson->hurtinfo(nHurtIndex).id(),one);
             /// 增加命中状态
-            //            QString listInfo=QString::fromUtf8("%1被%2击中").arg(pPerson->id())
-            //                    .arg(pPerson->hurtinfo(nHurtIndex).id());
 
             QString type;
             QString oper;
@@ -186,57 +178,41 @@ void CGlobalData::UpdateSimulationTime(const quint16 &uSimTimes)
 
             switch (nGunType)
             {
-            case 0:
-                type = QString::fromUtf8("没有武器");
-                break;
             case 1:
                 type = QString::fromUtf8("步枪");
-                oper = QString::fromUtf8("击中");
                 break;
             case 2:
-                type = QString::fromUtf8("步枪");
-                oper = QString::fromUtf8("击中");
+                type = QString::fromUtf8("手枪");
                 break;
             case 4:
-                type = QString::fromUtf8("手枪");
-                oper = QString::fromUtf8("击中");
+                type = QString::fromUtf8("手雷");
                 break;
             case 8:
-                type = QString::fromUtf8("手雷");
-                oper = QString::fromUtf8("炸死");
+                type = QString::fromUtf8("手雷2");
                 break;
             case 16:
-                type = QString::fromUtf8("手雷");
-                oper = QString::fromUtf8("炸死");
+                type = QString::fromUtf8("手枪2");
                 break;
             case 32:
-                type = QString::fromUtf8("手枪");
-                oper = QString::fromUtf8("击中");
+                type = QString::fromUtf8("爆炸物");
                 break;
             case 64:
-                type = QString::fromUtf8("爆炸物");
-                oper = QString::fromUtf8("炸死");
+                type = QString::fromUtf8("狙击枪");
                 break;
             case 128:
-                type = QString::fromUtf8("狙击枪");
-                oper = QString::fromUtf8("击中");
-                break;
-            default:
+                type = QString::fromUtf8("狙击枪11");
                 break;
             }
 
             auto pPerson1 = CDataManager::GetInstance()->GetOrCreatePersonInfo(pPerson->hurtinfo(nHurtIndex).id());
-            QString listInfo=QString::fromUtf8("%1%2使用%3%4%5%6的").arg(pPerson->hurtinfo(nHurtIndex).id()).arg(pPerson1->name().c_str()).arg(type)
-                    .arg(oper).arg(pPerson->id()).arg(pPerson->name().c_str());
-            if(nGunType!=0&&nGunType!=8&&nGunType!=16&&nGunType!=64)
+            QString listInfo=QString::fromUtf8("%1%2使用%3击中%4%5").arg(pPerson->hurtinfo(nHurtIndex).id()).arg(pPerson1->name().c_str())
+                    .arg(type).arg(pPerson->id()).arg(pPerson->name().c_str());
+            if(nGunType==1||nGunType==2||nGunType==64)
             {
-                listInfo += CConfigInfo::GetInstance()->GetBodyName(pPerson->hurtinfo(nHurtIndex).hurtpart());
+                listInfo +="的"+ CConfigInfo::GetInstance()->GetBodyName(pPerson->hurtinfo(nHurtIndex).hurtpart());
             }
-
-
             ///阵营颜色
-           QString group=m_mapIdType.value(pPerson->hurtinfo(nHurtIndex).id());
-//           qDebug()<<"======================"<<listInfo<<group;
+            QString group=m_mapIdType.value(pPerson->hurtinfo(nHurtIndex).id());
             CNoticeManager::GetInstance()->SetColor(pPerson->hurtinfo(nHurtIndex).id(),group);//SetGroupId(pPerson->hurtinfo(nHurtIndex).id());
             /// 发送消息
             CNoticeManager::GetInstance()->SetNoticInfo(listInfo);
@@ -256,8 +232,12 @@ void CGlobalData::UpdateSimulationTimeInfo(const quint16 &uSimTimes)
     {
         if(m_listEventTime.at(i)<uSimTimes)
         {
-            qDebug()<<"测试时间："<<m_listEventTime.at(i);
-//            m_nTempEventTime=m_listEventTime.at(i);
+            for(auto one:m_allReplayStatus)
+            {
+                one->updateTime(m_listEventTime.at(i));
+                one->Update(m_listEventTime.at(i));
+                UpdateMap(one->getId());
+            }
             const QVector<int>& events = m_allReplayEvent[m_listEventTime.at(i)];
             for(auto one : events)
             {
@@ -265,57 +245,20 @@ void CGlobalData::UpdateSimulationTimeInfo(const quint16 &uSimTimes)
                 /// 交火线
                 auto pPerson = CDataManager::GetInstance()->GetOrCreatePersonInfo(one);
                 int nHurtIndex=pPerson->hurtinfo_size()-1;
-                if(evevtFlag==true&&-1<nHurtIndex)
+                qDebug()<<"测试时间："<<m_listEventTime.at(i)<<one<<nHurtIndex<<pPerson->hurtinfo_size();
+
+                if(evevtFlag==true&&nHurtIndex>-1)
                 {
-                    evevtFlag=false;
-                    m_pCtrMapPerson->UpdateHitLine(pPerson->hurtinfo(nHurtIndex).id(),one);
-
-                    QString type;
-                    QString oper;
-                    int nGunType=pPerson->hurtinfo(nHurtIndex).type();
-
-                    switch (nGunType)
+                   evevtFlag=false;
                     {
-                    case 1:
-                    case 2:
-                        type = QString::fromUtf8("步枪");
-                        break;
-                    case 4:
-                        type = QString::fromUtf8("手枪");
-                        break;
-                    case 8:
-                        type = QString::fromUtf8("手雷");
-                        break;
-                    case 16:
-                        type = QString::fromUtf8("手雷");
-                        break;
-                    case 32:
-                        type = QString::fromUtf8("手枪");
-                        break;
-                    case 64:
-                        type = QString::fromUtf8("爆炸物");
-                        break;
-                    case 128:
-                        type = QString::fromUtf8("狙击枪");
-                        break;
+                        ///阵营颜色
+                        QString group=m_mapIdType.value(pPerson->hurtinfo(nHurtIndex).id());
+                        CNoticeManager::GetInstance()->SetColor(pPerson->hurtinfo(nHurtIndex).id(),group);
+                        /// 发送消息
                     }
-
-                    auto pPerson1 = CDataManager::GetInstance()->GetOrCreatePersonInfo(pPerson->hurtinfo(nHurtIndex).id());
-                    QString listInfo=QString::fromUtf8("%1%2使用%3%4%5的").arg(pPerson->hurtinfo(nHurtIndex).id()).arg(pPerson1->name().c_str()).arg(type)
-                            .arg(pPerson->id()).arg(pPerson->name().c_str());
-                    if(nGunType!=0&&nGunType!=8&&nGunType!=16&&nGunType!=64)
-                    {
-                        listInfo += CConfigInfo::GetInstance()->GetBodyName(pPerson->hurtinfo(nHurtIndex).hurtpart());
-                    }
-                    ///阵营颜色
-                   QString group=m_mapIdType.value(pPerson->hurtinfo(nHurtIndex).id());
-                   qDebug()<<"======================"<<listInfo<<group;
-                   CNoticeManager::GetInstance()->SetColor(pPerson->hurtinfo(nHurtIndex).id(),group);//SetGroupId(pPerson->hurtinfo(nHurtIndex).id());
-                    /// 发送消息
-                   CNoticeManager::GetInstance()->SetHitInfo(listInfo);
-                    --nHurtIndex;
                 }
             }
+             CNoticeManager::GetInstance()->SetHitInfo(m_listNoticText.at(i));
         }
     }
 }
@@ -505,13 +448,11 @@ void CGlobalData::SetSeceneGraph(ISceneGraph *pSceneGraph)
 
 int CGlobalData::openReplayFile(const QUrl &rReplayFile)
 {
-     qDebug()<<"rReplayFile:-------------"<<rReplayFile;
     m_pCtrMapPerson->ClearMap();
     m_listEventTime.clear();
     std::string sFileName =rReplayFile.toLocalFile().toLocal8Bit().data();
     std::ifstream inFile;
     inFile.open(sFileName,std::ios::binary|std::ios::in);
-    qDebug()<<"inFile.is_open():-------------"<<inFile.is_open();
     char buffer[256]="";
     int nSize,nID;
     int nIndex(0),nGroupIndex(0),nGroupSize(0);
@@ -519,7 +460,6 @@ int CGlobalData::openReplayFile(const QUrl &rReplayFile)
     quint16 unTimes(0);
     if(inFile.is_open())
     {
-        qDebug()<<"inFile.is_open():-------------";
         PushBackStatus();
         m_allReplayEvent.clear();
         m_mapIdType.clear();
@@ -572,6 +512,7 @@ int CGlobalData::openReplayFile(const QUrl &rReplayFile)
             }
 
             m_allReplayEvent[unTimes]=vEventID;
+            qDebug()<<"vEventID"<<vEventID;
 
             if(!vEventID.isEmpty())
             {
@@ -600,6 +541,13 @@ void CGlobalData::beginReplay()
 void CGlobalData::setReplayFlags(bool flag)
 {
     replayFlags=flag;
+}
+
+void CGlobalData::readNoticText(const QString& fileName)
+{
+    NoticManger* noticManger = new NoticManger;
+    noticManger->praseNoticInfo(fileName);
+    m_listNoticText=noticManger->listNoticInfo();
 }
 
 void CGlobalData::pauseReplay()
@@ -637,12 +585,12 @@ void CGlobalData::endNoInitRePlay()
 {
     CTimeServer::GetInstance()->SimuEnd();
 
-//    for(auto one : m_allReplayStatus)
-//    {
-//        delete one;
-//    }
+    //    for(auto one : m_allReplayStatus)
+    //    {
+    //        delete one;
+    //    }
 
-//    m_allReplayStatus.clear();
+    //    m_allReplayStatus.clear();
 }
 
 bool CGlobalData::deleteReplayFile(const QString &sReplayame)
@@ -785,7 +733,7 @@ void CGlobalData::clearAllInfo()
 
     for(auto one = m_mapStatusModel.begin();one != m_mapStatusModel.end();++one)
     {
-            delete one.value();
+        delete one.value();
     }
     m_mapStatusModel.clear();
 

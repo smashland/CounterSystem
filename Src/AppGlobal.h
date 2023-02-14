@@ -5,7 +5,7 @@
 #include "Settings/GlobalSettings.h"
 #include "DataManager/GlobalData.h"
 #include <QTextCodec>
-#include "NoticInfo.h"
+#include "NoticManger.h"
 
 class QQuickItem;
 
@@ -61,6 +61,12 @@ public:
 
     ///击杀情况清空
     Q_INVOKABLE void setClearNoticText();
+    ///击杀情况保存
+    Q_INVOKABLE void saveNoticText(const QUrl &sDataFileName);
+    void addNoticText(const QString &rNoticInfo);
+    ///击杀情况解析
+ //   Q_INVOKABLE void praseNoticText();
+
     void setGroupId(int typeID);
     void setGroupC(int typeID,QString group);
     void setGroupColor(QString group);
@@ -97,7 +103,7 @@ private:
     CGlobalSettings* m_pSettings; /// 设置对象
     CGlobalData*     m_pData;    /// 数据对象
     QQuickItem*      m_pOsgItem=nullptr; /// 设置绑定的osg显示
-
+    NoticManger*     m_pNoticManger;
     QString         m_sReplayName;
     QString         m_sReplayTime;
 

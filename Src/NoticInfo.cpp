@@ -1,9 +1,14 @@
 ﻿#include "NoticInfo.h"
 
+
 NoticInfo::NoticInfo(QObject *parent)
     : QObject{parent}
 {
+}
 
+void NoticInfo::setNoticNum(int NoiceNum)
+{
+    m_nNoticNum=NoiceNum;
 }
 
 void NoticInfo::setNoiceText(const QString& sNoice)
@@ -23,3 +28,20 @@ void NoticInfo::setColorNotic(const QColor &rColor)
         emit colorNoticChanged();
     }
 }
+
+void NoticInfo::writeNoiceText(QJsonObject &rObj)
+{
+    rObj["NUM"] = m_nNoticNum;
+    rObj["NoticText"] = m_sNoticText;
+}
+
+void NoticInfo::readNoiceText(const QJsonObject &rObj)
+{
+    if (rObj.contains("NUM") && rObj["NUM"].isDouble())
+        m_nNoticNum = rObj["NUM"].toInt();
+
+    if (rObj.contains("NoticText") && rObj["NoticText"].isString())
+        m_sNoticText = rObj["NoticText"].toString();
+
+}
+

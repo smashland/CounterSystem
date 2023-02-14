@@ -89,7 +89,8 @@ ManageRect{
                             $app.allData.initReplay()
                             ctrReplay.visible = true;
                             ctrReplay.bStart=true;
-                            ctrReplay.nTimeText=ctrReplay.nTimes = $app.allData.openReplayFile("file:///"+appDir+"/Data/Szy/"+modelData+".szy");
+                            ctrReplay.nTimeText=ctrReplay.nTimes = $app.allData.openReplayFile("file:///"+appDir+"/Data/Szy/"+modelData+".szy");                          
+                            $app.allData.readNoticText(modelData);
                             $app.settings.startReplay()
                             footerBar.btnPlayback.checked = false
                             manoeuvre.imgSource = "qrc:/Image/Set_up_bg.png"
@@ -106,6 +107,7 @@ ManageRect{
                         anchors.fill: parent
                         onClicked: {
                             $app.allData.deleteReplayFile(modelData);
+                            noticManger.deleteNoticInfo(modelData)
                             listView.model = $app.openPath();
                         }
                     }

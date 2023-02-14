@@ -28,6 +28,11 @@ public:
      */
     void SetNoticInfo(const QString& sNoticeInfo);
 
+    /**
+     * @brief 设置通知信息
+     * @param sNoticeInfo
+     */
+    void SetDropNoticInfo(const QString& sNoticeInfo);
 
     /**
      * @brief 只设置击中信息

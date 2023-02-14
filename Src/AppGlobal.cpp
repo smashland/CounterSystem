@@ -21,7 +21,9 @@
 #include "DataManager/DataManager.h"
 #include "Notice/NoticeManager.h"
 #include "ConfigInfo.h"
+#include "qjsondocument.h"
 #include <iomanip>
+#include "Src/NoticManger.h"
 
 QAppGlobal::QAppGlobal(QObject *parent) : QObject(parent)
 {
@@ -40,6 +42,7 @@ QAppGlobal::QAppGlobal(QObject *parent) : QObject(parent)
     m_pData = new CGlobalData(this);
     m_pSettings->SetGlobalData(m_pData);
     getOpenSpeak();
+    m_pNoticManger=new NoticManger(this);
 }
 
 /// 退出程序
@@ -157,22 +160,6 @@ QStringList QAppGlobal::openPath()
         string_list.append(fileInfoList.at(i).baseName());
     }
     return(string_list);
-    //    QDir *dir=new QDir(QString("%1/%2").arg(GetDataPath().c_str()).arg("Szy")); //文件夹
-    //    QStringList filter; //过滤
-    //    filter<<"*.szy";
-    //    dir->setNameFilters(filter);
-    //    QFileInfoList fileInfoList = dir->entryInfoList(filter);
-    //    delete dir;
-    //    QStringList string_list;
-    //     QMap<QString,QString> mapNameToTime;
-    //    QString fileName,fileTime;
-    //    for(int i=0; i < fileInfoList.count(); i++)
-    //    {
-    //        m_sReplayName=fileInfoList.at(i).baseName();
-    //        m_sReplayTime=fileInfoList.at(i).created().toString("yyyy-MM-dd HH:mm:ss");
-    //        string_list.append(m_sReplayName+m_sReplayTime);
-    //    }
-    //    return(string_list);
 }
 
 /// 设置osgItem
@@ -265,6 +252,20 @@ void QAppGlobal::setClearNoticText()
         }
     }
     emit noiceChanged();
+}
+
+void QAppGlobal::saveNoticText(const QUrl &sDataFileName)
+{
+    QDateTime current_date_time =QDateTime::currentDateTime();
+    QString current_date =current_date_time.toString("(yyyyMMdd_hhmmss)");
+    QString sFilepath=sDataFileName.toLocalFile().chopped(4)+current_date+".notic";
+    m_pNoticManger->saveNoticeFile(sFilepath);
+}
+
+void QAppGlobal::addNoticText(const QString &rNoticInfo)
+{
+    m_pNoticManger->addNoticInfo(rNoticInfo);
+
 }
 
 // typeID 设备号

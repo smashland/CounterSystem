@@ -146,15 +146,6 @@ void CMyEventInfo::Update(const unsigned char *pData, int nLength)
                             {
                                 CNoticeManager::GetInstance()->PlaySound(1);
                             }
-//                            qDebug()<<"解析数据333333：测试枪型："<<i<<static_cast<GunType>(g_nGunType<<i)<<qFromBigEndian<quint16>(pData);
-//                            qDebug()<<"解析数据：测试枪型："<<m_pPerson->mutable_curtstatus()->mutable_weapons(i)->bulletnum()<<types;
-//                            if(i==5)
-//                            {
-//                                m_pPerson->mutable_curtstatus()->mutable_weapons(7)->set_bulletnum(qFromBigEndian<quint16>(pData));
-//                            }
-//                            else {
-//                                 m_pPerson->mutable_curtstatus()->mutable_weapons(i)->set_bulletnum(qFromBigEndian<quint16>(pData));
-//                            }
                             m_pPerson->mutable_curtstatus()->mutable_weapons(i)->set_bulletnum(qFromBigEndian<quint16>(pData));
                             nLength -= 2;
                             pData += 2;
@@ -241,8 +232,10 @@ void CMyEventInfo::Update(const unsigned char *pData, int nLength)
 //                                QString listInfo=QString::fromUtf8("%1号%2使用%3击中%4号%5").arg(pShotPerson->id()).arg(pShotPerson->name().c_str()).arg(type)
 //                                        .arg(m_pPerson->id()).arg(m_pPerson->name().c_str());
 
+                                CNoticeManager::GetInstance()->SetGroupId(pShotPerson->id());
                                 /// 发送消息
                                 CNoticeManager::GetInstance()->SetNoticInfo(listInfo);
+                                CNoticeManager::GetInstance()->SetDropNoticInfo(listInfo);
                             }
                             else
                             {
@@ -277,6 +270,7 @@ void CMyEventInfo::Update(const unsigned char *pData, int nLength)
                                 CNoticeManager::GetInstance()->SetGroupId(pShotPerson->id());
                                 /// 发送消息
                                 CNoticeManager::GetInstance()->SetNoticInfo(listInfo);
+                                CNoticeManager::GetInstance()->SetDropNoticInfo(listInfo);
                             }
 
                             /// 通知有命中消息过来

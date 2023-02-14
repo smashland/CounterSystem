@@ -130,7 +130,7 @@ Popup
                 x: line2.width/2
                 y: fushangxinxi.contentHeight + line2.height + 74 *dpy
                 text: "狙击子弹数:"
-                name: outData.nSniper +   "/" +  outData.nSniperSum
+                name: outData.nSniperSum/*outData.nSniper*/ +   "/" +  outData.nSniperSum
             }
 
         }

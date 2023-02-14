@@ -36,6 +36,15 @@ void CNoticeManager::SetNoticInfo(const QString &sNoticeInfo)
     }
 }
 
+void CNoticeManager::SetDropNoticInfo(const QString &sNoticeInfo)
+{
+    /// 开启面板显示
+    if(m_bShowBoard)
+    {
+        m_pGLobal->addNoticText(sNoticeInfo);
+    }
+}
+
 void CNoticeManager::SetHitInfo(const QString &SetHitInfo)
 {
     /// 开启面板显示

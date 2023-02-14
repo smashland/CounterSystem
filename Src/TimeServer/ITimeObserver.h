@@ -1,4 +1,4 @@
-#ifndef ITIMEOBSERVER_H
+﻿#ifndef ITIMEOBSERVER_H
 #define ITIMEOBSERVER_H
 /********************************
  * 用于订阅时间

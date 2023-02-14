@@ -295,7 +295,7 @@ Item {
             }
 
             //            nameButton: "保存演习数据"
-            onClicked: {
+            onClicked: {              
                 openFile.open()
             }
 
@@ -311,6 +311,8 @@ Item {
             onAccepted:
             {
                 $app.allData.saveData(currentFile);
+                $app.saveNoticText(currentFile);
+
             }
         }
         PopupButton {

@@ -2,6 +2,7 @@
 #include "SpeakText.h"
 #include "PlayMp3.h"
 #include "NoticeManager.h"
+#include "../ConfigInfo.h"
 
 
 CNoticeManager *CNoticeManager::GetInstance()
@@ -32,7 +33,15 @@ void CNoticeManager::SetNoticInfo(const QString &sNoticeInfo)
     /// 开启面板显示
     if(m_bShowBoard)
     {
-        m_pGLobal->updateNotic(sNoticeInfo);
+        if(CConfigInfo::GetInstance()->GetStart())
+        {
+            QString sInfo = QTime::currentTime().toString("hh:mm:ss ");
+            m_pGLobal->updateNotic(sInfo+sNoticeInfo);
+        }
+        else
+        {
+            m_pGLobal->updateNotic(sNoticeInfo);
+        }
     }
 }
 

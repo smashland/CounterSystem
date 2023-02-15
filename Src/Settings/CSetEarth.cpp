@@ -70,12 +70,19 @@ void CSetEarth::readEarth(const QJsonObject &rObj)
         m_nLon = rObj["Lon"].toInt();
 }
 
+void CSetEarth::setEarthNum(int EarthNum)
+{
+    m_nEarthNum=EarthNum;
+}
+
 
 
 QString CSetEarth::copyEarthFile(const QString &sEarthName,const QString &strImagePath)
 {
     QFileInfo fileInfo(strImagePath);
-    QString newFilePath = QString("%1/Data/Earth/Map/%2").arg(QApplication::applicationDirPath()).arg(sEarthName);
+
+    qDebug()<<"测试地图数量："<<m_nEarthNum;
+    QString newFilePath = QString("%1/Data/Earth/Map/%2").arg(QApplication::applicationDirPath()).arg(m_nEarthNum);
     ///tiff
     if(fileInfo.suffix()=="tif")
     {

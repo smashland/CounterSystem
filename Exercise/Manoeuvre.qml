@@ -25,11 +25,14 @@ Item {
     }
     signal yesPutDown()
     property var objSetting;
-    property string hour:("00")
-    property string minute: ("00")
-    property string second: ("00")
+//    property string hour:("00")
+//    property string minute: ("00")
+//    property string second: ("00")
     property string startTime;
     property string endTime;
+        property int hour:0
+        property int minute: 0
+        property int second: 0
 
     Row {
         id:yanxishijianItem
@@ -68,25 +71,26 @@ Item {
         TimeText{
             //shi
             id:second_rec
-            text: manoeuvre.second
+            text:$app.allData.nCTimes /*manoeuvre.second*/
         }
     }
     CampHidden {
         id: xianyin
     }
-
     Timer{
         id:time_run
         interval: 1000
         repeat: true
         running: false
         triggeredOnStart: true
+
         onTriggered: {
+//            console.log("interval:", interval)
             manoeuvre.second++
             if(manoeuvre.second == 60){
                 manoeuvre.second= 0
                 manoeuvre.minute++
-                if(manoeuvre.minute == 60){
+                if(manoeuvre.minute === 60){
                     manoeuvre.minute = 0
                     manoeuvre.hour++
                     if(manoeuvre.hour == 24)
@@ -109,6 +113,29 @@ Item {
 
     }
 
+    //显示演习时间
+    Connections
+    {
+        target: $app.allData
+        function onUnTimesChanged(time)
+        {
+            timeTextInfo(second_rec,time%3600%60)
+            timeTextInfo(minute_rec,parseInt(time%3600/60))
+            timeTextInfo(hour_rec,parseInt(time/3600))
+        }
+    }
+    function timeTextInfo(string,time)
+    {
+        if(time<10)
+        {
+            string.text="0"+time;
+        }
+        else
+        {
+            string.text=time
+        }
+    }
+
     // 开始演习
     ControlButtons {
         id:beginButton
@@ -118,17 +145,21 @@ Item {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                time_run.start()
+                console.log("开始时间："+Qt.formatDateTime(new Date(), "yyyy-MM-dd hh:mm:ss.zzz ddd"))
+//                time_run.start()
                 killExpand.visible = true
                 if($app.settings.bIsStart)
                 {
                     showMainCircl()
                 }
                 changeStatus()
+//                console.log("开始时间："+$app.allData.getStartTime);
+//                second_rec.text=$app.allData.nCTimes
                 closebar.visible = false
                 yanxishijianItem.visible = true
                 xianyin.visible = true
                 toggleSettings.visible = false
+
             }
         }
     }
@@ -142,13 +173,16 @@ Item {
         MouseArea {
             anchors.fill: parent
             onClicked: {
+                console.log("结束演习："+Qt.formatDateTime(new Date(), "yyyy-MM-dd hh:mm:ss.zzz ddd"))
+//                time_run.stop()
                 showTest()
                 changeStatus()
                 exerciseResults.visible = true
-                time_run.stop()
-                manoeuvre.hour="00"
-                manoeuvre.minute="00"
-                manoeuvre.second="00"
+                hour_rec.text=minute_rec.text=second_rec.text="00"
+                manoeuvre.hour=manoeuvre.minute=manoeuvre.second=0
+                //                manoeuvre.hour="00"
+                //                manoeuvre.minute="00"
+                //                manoeuvre.second="00"
                 closebar.visible = true
                 killExpand.visible = false
                 yanxishijianItem.visible = false
@@ -190,8 +224,8 @@ Item {
         if($app.settings.bIsStart)
         {
             /// 演习结束
-            $app.setClearNoticText();
             $app.settings.setStop();
+            $app.setClearNoticText();
             $app.allData.calResult();
             endTime=$app.settings.getSysTime();
             $app.setAveLocation();
@@ -202,7 +236,6 @@ Item {
             showMainCircl()
             $app.allData.clearInfo();
             $app.settings.setStart();
-            $app.settings.getSysTime();
             startTime=$app.settings.getSysTime();
         }
     }

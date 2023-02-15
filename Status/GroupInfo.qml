@@ -89,7 +89,9 @@ Rectangle
                 /// 鼠标右键弹出菜单
                 if(Qt.RightButton === mouse.button)
                 {
-                    personClickd(modelData.id,mouseX,index * height + mouseY+53);
+//                    personClickd(modelData.id,mouseX,index * height + mouseY+53);
+                    console.log("(index%7) "+(index%7) * height+"mouseY "+mouseY)
+                      personClickd(modelData.id,mouseX,(index%7) * height+mouseY+53);
                 }
             }
 

@@ -58,6 +58,8 @@ public:
     QString getCurrentEarthName(){return m_sCurrentName;}
     QString getCurrentEarthLoction();
 
+    int earthNum();
+
 private:
     void ClearEarthInfo();  ///清空
 signals:

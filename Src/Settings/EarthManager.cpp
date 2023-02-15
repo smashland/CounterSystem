@@ -38,7 +38,9 @@ CSetEarth *EarthManager::addMaps(const QString &earthName)
         {
             CSetEarth* pNewOne = new CSetEarth(this);
             m_mapName2EarthInfo.insert(earthName,pNewOne);
+            pNewOne->setEarthNum(m_listEarth.size());
             m_listEarth.append(pNewOne);
+
             emit earthChanged();
             return(pNewOne);
         }
@@ -56,6 +58,8 @@ CSetEarth *EarthManager::addMaps(const QString &earthName)
 
 bool EarthManager::deleteEarth(const QString &earthName,const QString &earthInfo)
 {
+    if(m_sCurrentName!=earthName) ///正在使用的地图不能删除
+    {
     auto findOne = m_mapName2EarthInfo.find(earthName);
     if(m_mapName2EarthInfo.end() != findOne)
     {
@@ -69,6 +73,7 @@ bool EarthManager::deleteEarth(const QString &earthName,const QString &earthInfo
     else
     {
         return(false);
+    }
     }
 }
 bool EarthManager::removeEarthFile(const QString &earthInfo)
@@ -298,6 +303,11 @@ QString EarthManager::getCurrentEarthLoction()
 {
     QString location=QString("{%1,%2}").arg(m_nCurrentLat).arg(m_nCurrentLon);
     return location;
+}
+
+int EarthManager::earthNum()
+{
+    return m_listEarth.size();
 }
 
 void EarthManager::ClearEarthInfo()

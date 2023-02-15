@@ -222,8 +222,6 @@ void CGlobalSettings::setStop()
     m_bIsStart = false;
     CConfigInfo::GetInstance()->GetStart()=false;
     CDealDataManager::GetInstance()->AllStop();
-    //    /// 重置人员状态
-    //    CDataManager::GetInstance()->ResetPersonInfo();
     emit startStatusChanged(m_bIsStart);
 }
 

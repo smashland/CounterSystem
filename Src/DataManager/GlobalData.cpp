@@ -89,7 +89,10 @@ void CGlobalData::UpdateSeconds(const quint16& unSconds)
     static int nSize;
     nSize =0;
     m_unTimes = unSconds;
-
+    if(CConfigInfo::GetInstance()->GetStart())
+    {
+        emit unTimesChanged(m_unTimes);
+    }
     for(auto one=m_mapStatusModel.begin();
         one != m_mapStatusModel.end(); ++one)
     {
@@ -548,6 +551,16 @@ void CGlobalData::readNoticText(const QString& fileName)
     NoticManger* noticManger = new NoticManger;
     noticManger->praseNoticInfo(fileName);
     m_listNoticText=noticManger->listNoticInfo();
+}
+
+int CGlobalData::getStartTime()
+{
+    return m_unTimes;
+}
+
+void CGlobalData::setStopTime()
+{
+    m_unTimes=0;
 }
 
 void CGlobalData::pauseReplay()

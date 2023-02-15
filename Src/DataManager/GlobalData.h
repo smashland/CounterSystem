@@ -25,6 +25,7 @@ class CGlobalData : public QObject,public ITimeObserver,public IDataManagerObser
     Q_PROPERTY(int allDataNumber MEMBER m_nAllData NOTIFY allDataChanged)
     Q_PROPERTY(int allLiveNumber MEMBER m_nLiveNum NOTIFY liveNumChanged)
     Q_PROPERTY(quint16 simuTime NOTIFY simTimeChanged)
+    Q_PROPERTY(int nCTimes MEMBER m_unTimes NOTIFY unTimesChanged)
     Q_PROPERTY(QVariantList listResult MEMBER m_listResult NOTIFY resultChanged)
     Q_PROPERTY(QVariantList allResult MEMBER m_listAllResult NOTIFY allResultChanged)
 public:
@@ -191,6 +192,13 @@ public:
 
     Q_INVOKABLE void readNoticText(const QString& fileName);
 
+    ///设置演习时间
+    Q_INVOKABLE int getStartTime();
+    Q_INVOKABLE void setStopTime();
+
+
+
+
     /**
          * @brief 获取或者创建qml显示的简要信息
          * @return
@@ -209,6 +217,7 @@ signals:
     void allResultChanged(const QVariantList&);
     void mapPersonInfo(int id,QString name,int relive,double dLon, double dLat,bool bTk);
     void clearShowText();
+    void unTimesChanged(int);
 protected:
     /**
      * @brief 统计成绩

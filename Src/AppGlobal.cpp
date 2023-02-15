@@ -75,18 +75,29 @@ void QAppGlobal::startConnect()
 {
     CConnectionManager::GetInstance()->Connect();
 }
+#include <iostream>
 
 void QAppGlobal::changeEarth()
 {
     auto pSeneGraph = GetSceneCore()->GetSceneGraphManager()->FindSceneGraph(m_pOsgItem);
+    std:: cout << "加载路径:" << GetDataPath() << "/Earth/Geocentric.earth" << std::endl;
     pSeneGraph->GetMap()->LoadUserMap(GetDataPath()+"/Earth/Geocentric.earth",false,true);
 }
 
 /// 更新信息
 void QAppGlobal::updateNotic(const QString &rInfo)
 {
-    //    QString sInfo;
-    //    sInfo = QTime::currentTime().toString("hh:mm:ss ") + rInfo;
+//    QString sInfo;
+//    sInfo = QTime::currentTime().toString("hh:mm:ss ") + rInfo;
+//    qDebug()<<"击杀时间：-------------------"<< sInfo;
+
+//    NoticInfo* pNoticInfo=new NoticInfo;
+//    pNoticInfo->setNoiceText(sInfo);
+//    pNoticInfo->setColorNotic(m_typeColor);
+//    m_slistNoice.append(pNoticInfo);
+//    emit noiceChanged();
+//    emit(notic(sInfo));
+
     NoticInfo* pNoticInfo=new NoticInfo;
     pNoticInfo->setNoiceText(rInfo);
     pNoticInfo->setColorNotic(m_typeColor);

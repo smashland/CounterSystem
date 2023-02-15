@@ -10,7 +10,7 @@ import "../Exercise"
 Rectangle {
     id: mapAdd
     color: "transparent"
-    signal signalAddMap(string name,string path,int lat,int lon)    //添加地图
+    signal signalAddMap(string name,string path,int lat,int lon)    //        添加地图
     property var map: null
 
     MouseArea {

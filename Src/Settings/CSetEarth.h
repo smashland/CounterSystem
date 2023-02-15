@@ -58,6 +58,12 @@ public:
      */
     void readEarth(const QJsonObject& rObj);
 
+    /**
+     * @brief 地图设置编号
+     * @param num
+     */
+    void setEarthNum(int EarthNum);
+
     QString copyEarthFile(const QString &sEarthName,const QString &strImagePath);
     bool qCopyDirectory(const QDir& fromDir, const QDir& toDir, bool bCoverIfFileExists);
 signals:
@@ -71,7 +77,7 @@ private:
     QString m_sEarthPath;///地球路径
     int     m_nLat;      ///地图经度
     int     m_nLon;      ///地图纬度
-
+    int     m_nEarthNum; ///地图编号
 };
 
 #endif // CSETEARTH_H

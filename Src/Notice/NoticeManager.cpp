@@ -26,7 +26,7 @@ void CNoticeManager::SetNoticInfo(const QString &sNoticeInfo)
 {
     /// 开启播报则播放声音
     if(m_bOpenSpeak)
-    {
+    {       
         m_pSpeak->SpeakText(sNoticeInfo);
     }
 
@@ -37,11 +37,27 @@ void CNoticeManager::SetNoticInfo(const QString &sNoticeInfo)
         {
             QString sInfo = QTime::currentTime().toString("hh:mm:ss ");
             m_pGLobal->updateNotic(sInfo+sNoticeInfo);
+            SetDropNoticInfo(sInfo+sNoticeInfo);
         }
         else
         {
             m_pGLobal->updateNotic(sNoticeInfo);
         }
+    }
+}
+
+void CNoticeManager::SetReplayNoticInfo(const QString &sNoticeInfo)
+{
+    qDebug()<<"测试回放时间："<<sNoticeInfo;
+    /// 开启播报则播放声音
+    if(m_bOpenSpeak)
+    {
+        m_pSpeak->SpeakText(sNoticeInfo.right(sNoticeInfo.size() - 9));
+    }
+    /// 开启面板显示
+    if(m_bShowBoard)
+    {
+        m_pGLobal->updateNotic(sNoticeInfo);
     }
 }
 

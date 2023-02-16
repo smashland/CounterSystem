@@ -276,6 +276,7 @@ private:
     int                m_nTempEventTime;      ///临时存储回放时间
     NoticManger*       m_noticManger=nullptr;
     QStringList        m_listNoticText;
+    int                m_nEventCount=0;
 };
 
 #endif // GLOBALDATA_H

@@ -27,6 +27,11 @@ public:
      * @param sNoticeInfo
      */
     void SetNoticInfo(const QString& sNoticeInfo);
+    /**
+     * @brief 设置回放通知信息
+     * @param sNoticeInfo
+     */
+    void SetReplayNoticInfo(const QString& sNoticeInfo);
 
     /**
      * @brief 设置通知信息

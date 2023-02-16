@@ -135,7 +135,7 @@ void CGlobalData::UpdateSeconds(const quint16& unSconds)
 int tempSimTime=0;
 void CGlobalData::UpdateSimulationTime(const quint16 &uSimTimes)
 {
-    qDebug()<<"CGlobalData:-------------"<<uSimTimes;
+    int eventTime=0;
     if(abs(uSimTimes-tempSimTime)>1)
     {
         CNoticeManager::GetInstance()->SetClearNoticInfo();
@@ -155,8 +155,24 @@ void CGlobalData::UpdateSimulationTime(const quint16 &uSimTimes)
         one->Update(uSimTimes);
         UpdateMap(one->getId());
     }
-
     const QVector<int>& events = m_allReplayEvent[uSimTimes];
+    if(!events.isEmpty())
+    {
+        for(int i=0;i<m_listEventTime.size();i++)
+        {
+            if(m_listEventTime.at(i)==uSimTimes)
+            {
+                if(m_listNoticText.size()>i)
+                {
+                     qDebug()<<"m_listEventTime.size():"<<m_listEventTime.size()<<eventTime;
+                   eventTime=i;
+                }
+
+            }
+        }
+    }
+
+
 
     for(auto one : events)
     {
@@ -168,7 +184,7 @@ void CGlobalData::UpdateSimulationTime(const quint16 &uSimTimes)
         //        for(int nHurtIndex = pPerson->hurtinfo_size()-1; -1 < nHurtIndex;--nHurtIndex)
         if(evevtFlag==true&&-1<nHurtIndex)
         {
-            ++b;
+
             evevtFlag=false;
             //            nHurtIndex = pPerson->hurtinfo_size()-1;
             qDebug()<<"nHurtIndex=="<<nHurtIndex<<"hurtinfo_size"<<pPerson->hurtinfo_size()<<pPerson->hurtinfo(nHurtIndex).type();
@@ -178,7 +194,6 @@ void CGlobalData::UpdateSimulationTime(const quint16 &uSimTimes)
             QString type;
             QString oper;
             int nGunType=pPerson->hurtinfo(nHurtIndex).type();
-
             switch (nGunType)
             {
             case 1:
@@ -218,7 +233,8 @@ void CGlobalData::UpdateSimulationTime(const quint16 &uSimTimes)
             QString group=m_mapIdType.value(pPerson->hurtinfo(nHurtIndex).id());
             CNoticeManager::GetInstance()->SetColor(pPerson->hurtinfo(nHurtIndex).id(),group);//SetGroupId(pPerson->hurtinfo(nHurtIndex).id());
             /// 发送消息
-            CNoticeManager::GetInstance()->SetNoticInfo(listInfo);
+//            CNoticeManager::GetInstance()->SetNoticInfo(listInfo);
+            CNoticeManager::GetInstance()->SetReplayNoticInfo(m_listNoticText.at(eventTime));
             --nHurtIndex;
         }
     }
@@ -248,7 +264,6 @@ void CGlobalData::UpdateSimulationTimeInfo(const quint16 &uSimTimes)
                 /// 交火线
                 auto pPerson = CDataManager::GetInstance()->GetOrCreatePersonInfo(one);
                 int nHurtIndex=pPerson->hurtinfo_size()-1;
-                qDebug()<<"测试时间："<<m_listEventTime.at(i)<<one<<nHurtIndex<<pPerson->hurtinfo_size();
 
                 if(evevtFlag==true&&nHurtIndex>-1)
                 {
@@ -261,7 +276,10 @@ void CGlobalData::UpdateSimulationTimeInfo(const quint16 &uSimTimes)
                     }
                 }
             }
+            if(i<m_listNoticText.size())
+            {
              CNoticeManager::GetInstance()->SetHitInfo(m_listNoticText.at(i));
+            }
         }
     }
 }
@@ -515,8 +533,6 @@ int CGlobalData::openReplayFile(const QUrl &rReplayFile)
             }
 
             m_allReplayEvent[unTimes]=vEventID;
-            qDebug()<<"vEventID"<<vEventID;
-
             if(!vEventID.isEmpty())
             {
                 m_listEventTime.append(unTimes);

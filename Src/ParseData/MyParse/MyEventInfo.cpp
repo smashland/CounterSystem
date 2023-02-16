@@ -235,7 +235,6 @@ void CMyEventInfo::Update(const unsigned char *pData, int nLength)
                                 CNoticeManager::GetInstance()->SetGroupId(pShotPerson->id());
                                 /// 发送消息
                                 CNoticeManager::GetInstance()->SetNoticInfo(listInfo);
-                                CNoticeManager::GetInstance()->SetDropNoticInfo(listInfo);
                             }
                             else
                             {
@@ -270,7 +269,6 @@ void CMyEventInfo::Update(const unsigned char *pData, int nLength)
                                 CNoticeManager::GetInstance()->SetGroupId(pShotPerson->id());
                                 /// 发送消息
                                 CNoticeManager::GetInstance()->SetNoticInfo(listInfo);
-                                CNoticeManager::GetInstance()->SetDropNoticInfo(listInfo);
                             }
 
                             /// 通知有命中消息过来

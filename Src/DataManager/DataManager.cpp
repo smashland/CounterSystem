@@ -170,7 +170,6 @@ void CDataManager::ReadFile(const std::string &sFileName)
         while(!in.eof())
         {
             in.read(reinterpret_cast<char*>(&tmpTime),sizeof(tmpTime));
-
             if(in.eof())
             {
                 break;

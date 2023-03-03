@@ -12,6 +12,7 @@
 #include "../DataManager/PersonInfo.pb.h"
 #include "../DataManager/ini_file.h"
 #include "../Settings/EarthManager.h"
+#include "../ParseData/DealDataManager.h"
 
 static QString sHurt = QString::fromUtf8("被%1击中%2");
 static QString sHit = QString::fromUtf8("命中%1%2");
@@ -138,6 +139,7 @@ void CExportResult::CreateDocx(const QString &sFileName, const QString& sTile,co
                             {
                                 sGunInfo += QString::fromUtf8("步枪");
                                 sGunNumInfo += QString::fromUtf8("步枪剩余子弹数:%1").arg(nNumRifle);
+                                nNumBullets+=CDealDataManager::GetInstance()->GetBulletSum(pAllInto->id()).at(0).toInt();
                                 nNumBullets += CConfigInfo::GetInstance()->GetDefaultBullets();
                             }
                             break;
@@ -156,9 +158,11 @@ void CExportResult::CreateDocx(const QString &sFileName, const QString& sTile,co
                                     sGunInfo+="\n";
                                     sGunNumInfo+="\n";
                                 }
-                                nNumBullets += CConfigInfo::GetInstance()->GetDefaultBullets();
+
                                 sGunInfo += QString::fromUtf8("手枪");
                                 sGunNumInfo += QString::fromUtf8("手枪剩余子弹数:%1").arg(nNumPistol);
+                                nNumBullets+=CDealDataManager::GetInstance()->GetBulletSum(pAllInto->id()).at(2).toInt();
+                                nNumBullets += CConfigInfo::GetInstance()->GetDefaultBullets();
                             }
                             break;
                         }

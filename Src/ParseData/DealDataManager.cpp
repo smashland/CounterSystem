@@ -136,28 +136,67 @@ void CDealDataManager::PersonalChongDan(quint16 unID, const QVariant &gunInfo)
     m_pParse->PersonalChongDan(unID,gunInfo);
 }
 
-void CDealDataManager::SetBulletSum(quint16 unID, const QStringList &bulletInfo)
+void CDealDataManager::SetBulletSum(quint16 unID, QList<int> bulletInfo)
 {
-//    m_mapId2BulletSum.insert(unID,bulletInfo);
+    QList<int> nTempBulletInfo;
+    QStringList listBulletInfo;
+    if(m_mapId2BulletSum.contains(unID))
+    {
+        listBulletInfo=m_mapId2BulletSum.value(unID);
+        for(int i=0;i<listBulletInfo.size();i++)
+        {
+            nTempBulletInfo.append(listBulletInfo.at(i).toInt());
+        }
+        listBulletInfo.clear();
+        for(int i=0;i<bulletInfo.size();i++)
+        {
+            listBulletInfo.append(QString::number(nTempBulletInfo.at(i)+bulletInfo.at(i)));
+        }
+        m_mapId2BulletSum[unID]=listBulletInfo;
+
+    }
+    else
+    {
+        for(int i=0;i<bulletInfo.size();i++)
+        {
+
+            listBulletInfo.append(QString::number(bulletInfo.at(i)));
+        }
+        m_mapId2BulletSum.insert(unID,listBulletInfo);
+    }
 }
 
 QStringList CDealDataManager::GetBulletSum(quint16 unID)
 {
-//    if(m_mapId2BulletSum.contains(unID))
-//    {
-//        return m_mapId2BulletSum.value(unID);
-//    }
-//    else
+    QStringList tempSumInfo;
+    if(m_mapId2BulletSum.contains(unID))
     {
-        QStringList listFaultBullets;
-        QString strFaultBullets=QString::number(CConfigInfo::GetInstance()->GetDefaultBullets());
-        for(int i=0;i<8;++i)
-        {
-            listFaultBullets.append(strFaultBullets);
-        }
-        m_mapId2BulletSum.insert(unID,listFaultBullets);
         return m_mapId2BulletSum.value(unID);
     }
+    else
+    {
+        for(int i=0;i<5;i++)
+        {
+            tempSumInfo.append(0);
+        }
+        return tempSumInfo;
+    }
+
+    //    if(m_mapId2BulletSum.contains(unID))
+    //    {
+    //        return m_mapId2BulletSum.value(unID);
+    //    }
+    //    else
+    //    {
+    //        QStringList listFaultBullets;
+    //        QString strFaultBullets=QString::number(CConfigInfo::GetInstance()->GetDefaultBullets());
+    //        for(int i=0;i<8;++i)
+    //        {
+    //            listFaultBullets.append(strFaultBullets);
+    //        }
+    //        m_mapId2BulletSum.insert(unID,listFaultBullets);
+    //        return m_mapId2BulletSum.value(unID);
+    //    }
 
 }
 

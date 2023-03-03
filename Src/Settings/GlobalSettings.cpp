@@ -272,8 +272,8 @@ void CGlobalSettings::setFuHuo(quint16 nID)
 /// 充弹
 void CGlobalSettings::chongDan(quint16 nID, const QStringList &allInfo)
 {
-    QStringList tempInfo;
-    tempInfo=allInfo;
+    QStringList tempInfo=allInfo;
+    QList<int>  nTempInfo;
     auto pPerson = CDataManager::GetInstance()->GetOrCreatePersonInfo(nID);
     /// 判断剩余子弹数
     const ConnectStatus& conStatus = pPerson->curtstatus();
@@ -330,10 +330,12 @@ void CGlobalSettings::chongDan(quint16 nID, const QStringList &allInfo)
     }
 
     CDealDataManager::GetInstance()->PersonalChongDan(nID,tempInfo/*allInfo*/);
-    CDealDataManager::GetInstance()->SetBulletSum(nID,allInfo);
 
-//    CDealDataManager::GetInstance()->PersonalChongDan(nID,allInfo);
-//    CDealDataManager::GetInstance()->SetBulletSum(nID,allInfo);
+    for(int i=0;i<allInfo.size();i++)
+    {
+        nTempInfo.append(allInfo.at(i).toInt());
+    }
+    CDealDataManager::GetInstance()->SetBulletSum(nID,nTempInfo);
 }
 
 /// 配枪

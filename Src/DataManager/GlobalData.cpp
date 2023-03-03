@@ -171,9 +171,6 @@ void CGlobalData::UpdateSimulationTime(const quint16 &uSimTimes)
             }
         }
     }
-
-
-
     for(auto one : events)
     {
         bool evevtFlag=true;

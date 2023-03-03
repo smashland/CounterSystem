@@ -85,7 +85,8 @@ public:
      */
     void AllChongDan(const QVariant& gunInfo);
     void PersonalChongDan(quint16 unID,const QVariant& gunInfo);
-    void SetBulletSum(quint16 unID,const QStringList& bulletInfo);
+//    void SetBulletSum(quint16 unID,const QStringList& bulletInfo);
+    void SetBulletSum(quint16 unID,QList<int> bulletInfo);
     QStringList GetBulletSum(quint16 unID);
     void clearBulletSum();
 

@@ -291,31 +291,38 @@ void CPersonAllInfo::UpdateBaseInfo(PersonInfo *pPersonInfo)
         m_uRelive = repos;
         emit(reliveChanged(m_uRelive));
     }
-    QStringList listBulletSum =CDealDataManager::GetInstance()->GetBulletSum(pPersonInfo->id());
-    for(int i = 0; i< listBulletSum.size();++i)
-    {
-        if(listBulletSum.at(i)==NULL)
-        {
-            listBulletSum[i]="0";
-        }
-    }
-    if(m_nRifleSum!=listBulletSum.at(0).toInt())
-    {
-        m_nRifleSum=listBulletSum.at(0).toInt();
-        emit(rifleSumChanged(m_nRifleSum));
-    }
-    if(m_nPistolSum!=listBulletSum.at(2).toInt())
-    {
-        m_nPistolSum=listBulletSum.at(2).toInt();
-        qDebug() << "m_nPistolSum:" << m_nPistolSum;
-        emit(pistolSumChanged(m_nPistolSum));
-    }
 
-    if(m_nSniperSum!=listBulletSum.at(4).toInt())
-    {
-        m_nSniperSum=listBulletSum.at(4).toInt();
-        qDebug() << "m_nSniperSum:" << m_nSniperSum;
-        emit(sniperSumChanged(m_nSniperSum));
-    }
+    m_nRifleSum=m_nPistolSum=m_nSniperSum=CConfigInfo::GetInstance()->GetDefaultBullets();
+    emit(rifleSumChanged(m_nRifleSum));
+    emit(pistolSumChanged(m_nPistolSum));
+    emit(sniperSumChanged(m_nSniperSum));
+
+
+//    QStringList listBulletSum =CDealDataManager::GetInstance()->GetBulletSum(pPersonInfo->id());
+//    for(int i = 0; i< listBulletSum.size();++i)
+//    {
+//        if(listBulletSum.at(i)==NULL)
+//        {
+//            listBulletSum[i]="0";
+//        }
+//    }
+//    if(m_nRifleSum!=listBulletSum.at(0).toInt())
+//    {
+//        m_nRifleSum=listBulletSum.at(0).toInt();
+//        emit(rifleSumChanged(m_nRifleSum));
+//    }
+//    if(m_nPistolSum!=listBulletSum.at(2).toInt())
+//    {
+//        m_nPistolSum=listBulletSum.at(2).toInt();
+//        qDebug() << "m_nPistolSum:" << m_nPistolSum;
+//        emit(pistolSumChanged(m_nPistolSum));
+//    }
+
+//    if(m_nSniperSum!=listBulletSum.at(4).toInt())
+//    {
+//        m_nSniperSum=listBulletSum.at(4).toInt();
+//        qDebug() << "m_nSniperSum:" << m_nSniperSum;
+//        emit(sniperSumChanged(m_nSniperSum));
+//    }
 
 }

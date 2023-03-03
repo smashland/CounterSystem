@@ -1,4 +1,4 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Controls 2.15
 import "Plugins"
 
@@ -83,7 +83,7 @@ Column {
 
                 background: Rectangle
                 {
-                    implicitWidth: 120
+                    implicitWidth: 180
                     implicitHeight: 40
                     opacity:0
                     radius: 2

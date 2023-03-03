@@ -88,7 +88,15 @@ CGlobalSettings::CGlobalSettings(QObject *parent) : QObject(parent)
     tmpMap["number"]=CConfigInfo::GetInstance()->GetDroppedTimes();
     m_sysSetting.push_back(tmpMap);
 
-    tmpMap["type"]=QString::fromUtf8("默认子弹数:");
+    tmpMap["type"]=QString::fromUtf8("默认手枪子弹数:");
+    tmpMap["number"]=CConfigInfo::GetInstance()->GetDefaultBullets();
+    m_sysSetting.push_back(tmpMap);
+
+    tmpMap["type"]=QString::fromUtf8("默认步枪子弹数:");
+    tmpMap["number"]=CConfigInfo::GetInstance()->GetDefaultBullets();
+    m_sysSetting.push_back(tmpMap);
+
+    tmpMap["type"]=QString::fromUtf8("默认狙击枪子弹数:");
     tmpMap["number"]=CConfigInfo::GetInstance()->GetDefaultBullets();
     m_sysSetting.push_back(tmpMap);
 }

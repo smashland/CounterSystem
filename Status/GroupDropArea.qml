@@ -25,7 +25,6 @@ DropArea
         anchors.fill: parent
 //        source: "qrc:/Image/Grey_bg_all.png"
     }
-
     GroupInfo
     {
         id:group
@@ -44,6 +43,13 @@ DropArea
             contextMenu.y = root.y + mY
             contextMenu.userID = nId;
             contextMenu.open();
+        }
+
+        onTitleClickd:
+        {
+            contextMenu2.x = root.x + group.width/2
+            contextMenu2.y = root.y + 43*dpy
+            contextMenu2.open();
         }
 
         /// 双击显示人员信息

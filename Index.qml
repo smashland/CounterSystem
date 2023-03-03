@@ -86,6 +86,36 @@ Rectangle
         //        MenuItem { text: "同步时间";onTriggered:{sycntime.nID = contextMenu.userID;sycntime.open();}}
         MenuBackground { name: "定位";onTriggered:{$app.allData.dingWei(contextMenu.userID)}}
     }
+
+    Menu
+    {
+        id: contextMenu2
+        property int userID
+        width: 100*dpx
+        height: 150*dpy//240*dpy
+
+        MenuBackground
+        {
+            name: "充弹"
+            onTriggered:
+            {
+                if(!$app.settings.bIsReplay)
+                {
+                    chongdan.nID=contextMenu.userID;
+                    chongdan.open();
+                }
+            }
+        }
+        //        MenuItem { text: "配枪" ;onTriggered: { peiqiang.nID = contextMenu.userID;peiqiang.open();}}
+        MenuBackground { name: "闭锁" ;onTriggered:if(!$app.settings.bIsReplay){$app.settings.setBiSuo(contextMenu.userID)}}
+        MenuBackground { name: "解锁" ;onTriggered:if(!$app.settings.bIsReplay){$app.settings.setJiesuoSuo(contextMenu.userID)}}
+//        MenuBackground { name: "解除旁白";onTriggered:if(!$app.settings.bIsReplay){$app.settings.setJieChu(contextMenu.userID)} }
+        MenuBackground { name: "判死";onTriggered:if(!$app.settings.bIsReplay){$app.settings.setPanSi(contextMenu.userID)}}
+        MenuBackground { name: "复活" ;onTriggered:{if(!$app.settings.bIsReplay){$app.settings.setFuHuo(contextMenu.userID)}}}
+        //        MenuBackground { name: "关机" }
+        //        MenuItem { text: "同步时间";onTriggered:{sycntime.nID = contextMenu.userID;sycntime.open();}}
+//        MenuBackground { name: "定位";onTriggered:{$app.allData.dingWei(contextMenu.userID)}}
+    }
     /// 充弹窗口
     Settings.ChongDan
     {

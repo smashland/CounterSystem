@@ -168,7 +168,7 @@ ManageRect{
                 anchors.left: parent.left
                 anchors.leftMargin: 60*dpx
                 anchors.top: parent.top
-                anchors.topMargin: 150*dpy
+                anchors.topMargin: 210*dpy
                 name: qsTr("开启语音")
             }
         }
@@ -182,7 +182,12 @@ ManageRect{
                 width:100 ; height: 30
                 RowLayout
                 {
-                    Text { Layout.preferredWidth: 120;text:modelData.type ;font.pixelSize: 20*dpx;color: "#ffffff"}
+                    Text {
+                        Layout.preferredWidth: 170;
+                        text:modelData.type;
+                        font.pixelSize: 20*dpx;
+                        color: "#ffffff"
+                    }
 
                     //                QC14.SpinBox
                     BasicSpinBox

@@ -6,6 +6,7 @@ Rectangle
 {
     id:rootRect
     signal personClickd(var nId,var mX,var mY)
+    signal titleClickd(var mX,var mY)
     signal personDClick(var nId)
     property string groupType:""
 
@@ -25,6 +26,12 @@ Rectangle
         font.pixelSize: 22*dpx;
         color: "#ffffff";
         font.family: "MicrosoftYaHei-Bold";
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                titleClickd(mouseX,(index%7) * height+mouseY+53);
+            }
+        }
     }
     Text {
         id: zongrenshu

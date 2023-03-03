@@ -28,6 +28,7 @@ Rectangle
         font.family: "MicrosoftYaHei-Bold";
         MouseArea {
             anchors.fill: parent
+            acceptedButtons: Qt.LeftButton | Qt.RightButton
             onClicked: {
                 titleClickd(mouseX,(index%7) * height+mouseY+53);
             }

@@ -214,9 +214,9 @@ void CPersonAllInfo::UpdateBaseInfo(PersonInfo *pPersonInfo)
                 qDebug()<<"手枪gengxin1："<<nNum;
             }
             break;
-        case SNIPER  :
-            bLink = UNLINK != conStatus.weapons(4).contype();
-            qDebug()<<"SNIPER ："<<bLink<<conStatus.weapons(4).bulletnum()<< conStatus.weapons(4).contype()<<nIndex;
+//        case SNIPER  :
+//            bLink = UNLINK != conStatus.weapons(4).contype();
+//            qDebug()<<"SNIPER ："<<bLink<<conStatus.weapons(4).bulletnum()<< conStatus.weapons(4).contype()<<nIndex;
 //            if(bLink) nNum += conStatus.weapons(nIndex).bulletnum();
 //            if(m_bSniper != (bLink || bLink1))
 //            {
@@ -239,7 +239,7 @@ void CPersonAllInfo::UpdateBaseInfo(PersonInfo *pPersonInfo)
             bLink = UNLINK != conStatus.weapons(nIndex).contype();
                qDebug()<<"狙击gengxin1："<<bLink<<conStatus.weapons(5).bulletnum()<< conStatus.weapons(nIndex).contype()<<nIndex;
             if(bLink)
-                nNum += conStatus.weapons(5).bulletnum();
+                nNum += conStatus.weapons(nIndex).bulletnum();
             if(m_bSniper != (bLink))
             {
                 m_bSniper = (bLink);

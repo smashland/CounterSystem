@@ -324,13 +324,12 @@ void CGlobalSettings::chongDan(quint16 nID, const QStringList &allInfo)
             qDebug()<<"shou枪枪数："<<nNum<<temp;
             break;
         case SUBMACHINE:
-//        case SNIPER:
             bLink = UNLINK != conStatus.weapons(nIndex).contype();
             if(bLink)
                 nNum += conStatus.weapons(nIndex).bulletnum();
-            temp=allInfo.at(4).toInt();
+            temp=allInfo.at(7).toInt();
             temp=temp+nNum;
-            tempInfo.replace(4,QString::number(temp));
+            tempInfo.replace(7,QString::number(temp));
             qDebug()<<"狙击枪枪数："<<nNum<<temp;
              break;
 

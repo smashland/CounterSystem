@@ -112,7 +112,7 @@ Popup
             SoldierItem {
                 id:shouqiang
                 y: fushangxinxi.contentHeight + line2.height + 20 *dpy
-                text: outData.nRifle > 0 ? "步枪子弹数:" : "子弹数:"
+                text: outData.bRifle ?"步枪子弹数:" : "子弹数:"
                 name:outData.nRifle + "/"+outData.nRifleSum
             }
 
@@ -121,7 +121,7 @@ Popup
                 id:buqiang
                 x: line2.width/2
                 y: fushangxinxi.contentHeight + line2.height + 20 *dpy
-                text: outData.nPistol > 0 ? "手枪子弹数:" : "子弹数:"
+                text: outData.bPistol ? "手枪子弹数:" : "子弹数:"
                 name: outData.nPistol +   "/" +  outData.nPistolSum
             }
 
@@ -129,8 +129,8 @@ Popup
                 id:juji
                 x: line2.width/2
                 y: fushangxinxi.contentHeight + line2.height + 74 *dpy
-                text: outData.nSniperSum > 0 ?"狙击子弹数:" : "子弹数:"
-                name: outData.nSniperSum/*outData.nSniper*/ +   "/" +  outData.nSniperSum
+                text: outData.bSniper?"狙击子弹数:" : "子弹数:"
+                name: outData.nSniper +   "/" +  outData.nSniperSum
             }
 
         }

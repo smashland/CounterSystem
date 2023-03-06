@@ -43,6 +43,18 @@ Dialog{
             //            danwei: "支"
         }
         SoldierItem2 {
+            title: "无1："
+            visible: false
+        }
+        SoldierItem2 {
+            title: "无2："
+            visible: false
+        }
+        SoldierItem2 {
+            title: "无3："
+            visible: false
+        }
+        SoldierItem2 {
             title: "狙击步枪："
             //            danwei: "个"
         }
@@ -90,7 +102,14 @@ Dialog{
                 var allNum=[8];
                 for(var i=0; i<allInfo.children.length; i++)
                 {
-                    allNum[i]=allInfo.children[i].name
+                    if(allInfo.children[i].name==="")
+                    {
+                        allNum[i]=0
+                    }
+                    else
+                    {
+                        allNum[i]=allInfo.children[i].name
+                    }
                     console.log("枪型："+allNum[i])
                 }
                 $app.settings.chongDan(nID,allNum);

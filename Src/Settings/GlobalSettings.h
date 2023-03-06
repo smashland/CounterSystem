@@ -56,6 +56,12 @@ public:
     Q_INVOKABLE void sycTime(quint16 nID, quint16 nTime); /// 设置同步时间
     Q_INVOKABLE void changeSetting(const QString& sListType,const int& rIndex,const int& rInt);
 
+//    Q_INVOKABLE void setAllLock();   ///所有武器闭锁
+//    Q_INVOKABLE void setAllUnlock(); ///所有武器解锁
+//    Q_INVOKABLE void setAllDeath();  ///所有人员判死
+//    Q_INVOKABLE void setAllResurrection();///所有人员复活
+//    Q_INVOKABLE void setAllCharge(); /// 所有武器充弹
+
     void setConnectColor(const QColor& qConColor);
     void setDisConnColor(const QColor& qDisConColor);
 

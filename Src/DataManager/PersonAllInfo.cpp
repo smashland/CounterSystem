@@ -292,7 +292,10 @@ void CPersonAllInfo::UpdateBaseInfo(PersonInfo *pPersonInfo)
         emit(reliveChanged(m_uRelive));
     }
 
-    m_nRifleSum=m_nPistolSum=m_nSniperSum=CConfigInfo::GetInstance()->GetDefaultBullets();
+//    m_nRifleSum=m_nPistolSum=m_nSniperSum=CConfigInfo::GetInstance()->GetDefaultBullets();
+    m_nRifleSum=CConfigInfo::GetInstance()->GetChargeBullets(1);
+    m_nPistolSum=CConfigInfo::GetInstance()->GetChargeBullets(2);
+    m_nSniperSum=CConfigInfo::GetInstance()->GetChargeBullets(7);
     emit(rifleSumChanged(m_nRifleSum));
     emit(pistolSumChanged(m_nPistolSum));
     emit(sniperSumChanged(m_nSniperSum));

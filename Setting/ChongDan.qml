@@ -5,6 +5,7 @@ import "../Common"
 Dialog{
     id: dialog
     property int nID: 0
+    property string userType
     modal: true
     background:Rectangle {
         color: "transparent"

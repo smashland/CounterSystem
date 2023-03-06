@@ -98,7 +98,7 @@ Rectangle
                 if(Qt.RightButton === mouse.button)
                 {
 //                    personClickd(modelData.id,mouseX,index * height + mouseY+53);
-                    console.log("(index%7) "+(index%7) * height+"mouseY "+mouseY)
+//                    console.log("(index%7) "+(index%7) * height+"mouseY "+mouseY)
                       personClickd(modelData.id,mouseX,(index%7) * height+mouseY+53);
                 }
             }

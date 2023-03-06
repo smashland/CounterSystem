@@ -194,7 +194,21 @@ ManageRect{
                     {
                         value:modelData.number;
                         from: 1
-                        to: modelData.type === "默认子弹数:" ? 9999 : 100
+                        to: if(modelData.type === "默认步枪子弹数:")
+                            {
+                                return 9999
+                            }
+                            else if(modelData.type === "默认手枪子弹数:")
+                            {
+                                return 9999
+                            }
+                            else if(modelData.type === "默认狙击枪子弹数:")
+                            {
+                                return 9999
+                            }
+                            else{
+                                return 100
+                            }
                         editable: true
                         borderVisible: true
                     }

@@ -69,11 +69,24 @@ public:
      */
     void UpdateSeconds(const quint16&);
 
-//    /**
-//     * @brief 重写点中事件
-//     * @param nPickID
-//     */
-//    void PickID(unsigned int nPickID, unsigned int);
+    /**
+     * @brief 得到各方的id
+     * @return
+     */
+    QList<int> getRedId(){return m_listRedPerId;}
+    QList<int> getBuleId(){return m_listBulePerId;}
+    QList<int> getUnknowId(){return m_listUnknowPerId;}
+
+    /**
+     * @brief 清除类型id
+     */
+    void clearAllTypeId();
+
+    //    /**
+    //     * @brief 重写点中事件
+    //     * @param nPickID
+    //     */
+    //    void PickID(unsigned int nPickID, unsigned int);
 
 signals:
     void mapPersonInfo(int id,QString name,int relive,double dLon, double dLat,bool bTk);
@@ -91,6 +104,9 @@ private:
     QMap<quint16,CPlaceNodeInfo*> m_mapShowInfo; /// 更新显示
     QList<HitLine>  m_hitLine;
     CGlobalData*    m_pGloablData;
+    QList<int>      m_listRedPerId;          ///红方人员ID
+    QList<int>      m_listBulePerId;         ///蓝方人员ID
+    QList<int>      m_listUnknowPerId;       ///未知人员ID
 };
 
 #endif // CCONTRLMAPPERSON_H

@@ -186,8 +186,13 @@ public:
     /**
      * @brief 更改分组
      */
-    Q_INVOKABLE void changeGroup(quint16,QString);
+    Q_INVOKABLE void changeGroup(quint16,QString);     
 
+    /**
+     * @brief 设置一方设备
+     * @param 阵营方
+     */
+    Q_INVOKABLE void  setAllMune(const QString &type, int index, const QStringList &allInfo);
     Q_INVOKABLE void setReplayFlags(bool flag);
 
     Q_INVOKABLE void readNoticText(const QString& fileName);
@@ -250,6 +255,13 @@ protected:
      * @brief 更新在线人数
      */
     void UpdateLiveNum();   
+
+    /**
+     * @brief 群体充弹一方
+     * @param nID
+     * @param allInfo
+     */
+    void ChongdanAll(quint16 nID, const QStringList &allInfo);
 
 private:
     bool            m_bUpdate=false;          /// 是否更新人员状态

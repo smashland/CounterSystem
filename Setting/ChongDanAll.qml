@@ -5,6 +5,7 @@ import "../Common"
 Dialog{
     id: dialog
     property int nID: 0
+    property string userType
     modal: true
     background:Rectangle {
         color: "transparent"
@@ -14,7 +15,7 @@ Dialog{
         }
     }
     PopupTitle {
-        name: ("给"+nID+'号充弹')
+        name: ("给"+userType+'充弹')
         icon: "\ue795"
         x: 54 *dpx
         y: 44*dpy
@@ -59,35 +60,6 @@ Dialog{
             //            danwei: "个"
         }
     }
-    //    Column
-    //    {
-    //        width: 161
-    //        height: 320
-    //        Repeater
-    //        {
-    //            id:allInfo
-    //            model: 5
-    //            Row
-    //            {
-    //                Label
-    //                {
-    //                    text: index
-    //                }
-
-    //                TextField
-    //                {
-    //                    id:zdshu
-    //                    maximumLength:4
-    //                    placeholderText:'子弹数量'
-    //                    validator: IntValidator
-    //                    {
-    //                        bottom:1
-    //                        top:9999
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
     Row {
         spacing: 15 *dpx
         anchors.bottom: parent.bottom
@@ -112,7 +84,8 @@ Dialog{
                     }
                     console.log("枪型："+allNum[i])
                 }
-                $app.settings.chongDan(nID,allNum);
+//                $app.settings.chongDan(nID,allNum);
+                $app.allData.setAllMune(contextMenu2.userType,0,allNum)
                 dialog.close()
             }
         }

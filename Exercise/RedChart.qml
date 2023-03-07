@@ -39,7 +39,7 @@ ChartView {
             labelColor:"#ffffff";
             color: "#4169E1";
             borderColor: "#4169E1";
-            labelArmLengthFactor: 0.35;
+            labelArmLengthFactor: 0.35;          
         }
         PieSlice {
             label: qsTr("受伤 "/*+value*/ + parseInt(percentageHurt)+ "%");

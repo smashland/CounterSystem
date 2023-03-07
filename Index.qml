@@ -91,6 +91,7 @@ Rectangle
     {
         id: contextMenu2
         property int userID
+        property string userType
         width: 100*dpx
         height: 150*dpy//240*dpy
 
@@ -101,15 +102,23 @@ Rectangle
             {
                 if(!$app.settings.bIsReplay)
                 {
-                    chongdan.nID=contextMenu.userID;
-                    chongdan.open();
+                    chongdanAll.userType=contextMenu2.userType;
+                    chongdanAll.open();
                 }
             }
         }
-        MenuBackground { name: "闭锁" ;onTriggered:if(!$app.settings.bIsReplay){$app.settings.setBiSuo(contextMenu.userID)}}
-        MenuBackground { name: "解锁" ;onTriggered:if(!$app.settings.bIsReplay){$app.settings.setJiesuoSuo(contextMenu.userID)}}
-        MenuBackground { name: "判死";onTriggered:if(!$app.settings.bIsReplay){$app.settings.setPanSi(contextMenu.userID)}}
-        MenuBackground { name: "复活" ;onTriggered:{if(!$app.settings.bIsReplay){$app.settings.setFuHuo(contextMenu.userID)}}}
+        MenuBackground { name: "闭锁" ;onTriggered:if(!$app.settings.bIsReplay){$app.allData.setAllMune(contextMenu2.userType,1)}}
+        MenuBackground { name: "解锁" ;onTriggered:if(!$app.settings.bIsReplay){$app.allData.setAllMune(contextMenu2.userType,2)}}
+        MenuBackground { name: "判死";onTriggered:if(!$app.settings.bIsReplay) {$app.allData.setAllMune(contextMenu2.userType,3)}}
+        MenuBackground { name: "复活" ;onTriggered:{if(!$app.settings.bIsReplay){$app.allData.setAllMune(contextMenu2.userType,4)}}}
+    }
+    /// 充弹窗口
+    Settings.ChongDanAll
+    {
+        anchors.centerIn: parent
+        id:chongdanAll
+        width: 600*dpx
+        height: 470*dpy
     }
     /// 充弹窗口
     Settings.ChongDan

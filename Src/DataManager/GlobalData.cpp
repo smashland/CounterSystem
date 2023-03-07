@@ -164,8 +164,8 @@ void CGlobalData::UpdateSimulationTime(const quint16 &uSimTimes)
             {
                 if(m_listNoticText.size()>i)
                 {
-                     qDebug()<<"m_listEventTime.size():"<<m_listEventTime.size()<<eventTime;
-                   eventTime=i;
+                    qDebug()<<"m_listEventTime.size():"<<m_listEventTime.size()<<eventTime;
+                    eventTime=i;
                 }
 
             }
@@ -230,7 +230,7 @@ void CGlobalData::UpdateSimulationTime(const quint16 &uSimTimes)
             QString group=m_mapIdType.value(pPerson->hurtinfo(nHurtIndex).id());
             CNoticeManager::GetInstance()->SetColor(pPerson->hurtinfo(nHurtIndex).id(),group);//SetGroupId(pPerson->hurtinfo(nHurtIndex).id());
             /// 发送消息
-//            CNoticeManager::GetInstance()->SetNoticInfo(listInfo);
+            //            CNoticeManager::GetInstance()->SetNoticInfo(listInfo);
             CNoticeManager::GetInstance()->SetReplayNoticInfo(m_listNoticText.at(eventTime));
             --nHurtIndex;
         }
@@ -264,7 +264,7 @@ void CGlobalData::UpdateSimulationTimeInfo(const quint16 &uSimTimes)
 
                 if(evevtFlag==true&&nHurtIndex>-1)
                 {
-                   evevtFlag=false;
+                    evevtFlag=false;
                     {
                         ///阵营颜色
                         QString group=m_mapIdType.value(pPerson->hurtinfo(nHurtIndex).id());
@@ -275,7 +275,7 @@ void CGlobalData::UpdateSimulationTimeInfo(const quint16 &uSimTimes)
             }
             if(i<m_listNoticText.size())
             {
-             CNoticeManager::GetInstance()->SetHitInfo(m_listNoticText.at(i));
+                CNoticeManager::GetInstance()->SetHitInfo(m_listNoticText.at(i));
             }
         }
     }
@@ -785,6 +785,57 @@ void CGlobalData::changeGroup(quint16 unID, QString sType)
 {
     m_pCtrMapPerson->UpdateGroup(unID,sType);
 }
+void CGlobalData::setAllMune(const QString &type,int index,const QStringList &allInfo)
+{
+    QList<int> typeId,nTempInfo;
+    if(type=="蓝方")
+    {
+        typeId=m_pCtrMapPerson->getBuleId();
+    }
+    else if(type=="红方")
+    {
+        typeId=m_pCtrMapPerson->getRedId();
+    }
+    else
+    {
+        typeId=m_pCtrMapPerson->getUnknowId();
+    }
+    switch(index)
+    {
+    case 0:
+        for(int i=0;i<typeId.size();i++)
+        {
+            ChongdanAll(typeId.at(i),allInfo);
+        }
+        break;
+    case 1:
+        for(int i=0;i<typeId.size();i++)
+        {
+            CDealDataManager::GetInstance()->PersonalBiSuo(typeId.at(i));
+        }
+        break;
+    case 2:
+        for(int i=0;i<typeId.size();i++)
+        {
+            CDealDataManager::GetInstance()->PersonalJieSuo(typeId.at(i));
+        }
+        break;
+    case 3:
+        for(int i=0;i<typeId.size();i++)
+        {
+            CDealDataManager::GetInstance()->PersonalPanSi(typeId.at(i));
+        }
+        break;
+    case 4:
+        for(int i=0;i<typeId.size();i++)
+        {
+            CDealDataManager::GetInstance()->PersonalFuHuo(typeId.at(i));
+        }
+        break;
+    }
+
+}
+
 
 /// 初始化
 void CGlobalData::InitGlobalData()
@@ -909,4 +960,69 @@ void CGlobalData::UpdateLiveNum()
         m_nLiveNum = nLiveNum;
         emit(liveNumChanged(m_nLiveNum));
     }
+}
+
+void CGlobalData::ChongdanAll(quint16 nID, const QStringList &allInfo)
+{
+    QStringList tempInfo=allInfo;
+    QList<int>  nTempInfo;
+    auto pPerson = CDataManager::GetInstance()->GetOrCreatePersonInfo(nID);
+    /// 判断剩余子弹数
+    const ConnectStatus& conStatus = pPerson->curtstatus();
+    int nBaty = pPerson->curtstatus().weapons_size();
+
+    bool bLink1(false),bLink(false);
+    int nNum(0);
+    int temp=0;
+    for(int nIndex=0; nIndex < nBaty; ++nIndex)
+    {
+        switch(conStatus.weapons(nIndex).weapontype())
+        {
+        case RIFLE:
+            bLink1 = UNLINK != conStatus.weapons(nIndex).contype();
+            if(bLink1)
+                nNum = conStatus.weapons(nIndex).bulletnum();
+            break;
+        case PISTOL:
+            bLink = UNLINK != conStatus.weapons(nIndex).contype();
+            if(bLink)
+                nNum += conStatus.weapons(nIndex).bulletnum();
+            temp=allInfo.at(0).toInt();
+            temp=temp+nNum;
+//            tempInfo.append(QString::number(temp));
+            tempInfo.replace(0,QString::number(temp));
+            qDebug()<<"步枪枪数："<<nNum<<temp<<allInfo;
+            break;
+        case GRENAD:
+            bLink1 = UNLINK != conStatus.weapons(nIndex).contype();
+            if(bLink1)
+                nNum = conStatus.weapons(nIndex).bulletnum();
+            break;
+        case MORTAR:
+            bLink = UNLINK != conStatus.weapons(nIndex).contype();
+            if(bLink)
+                nNum += conStatus.weapons(nIndex).bulletnum();
+            temp=allInfo.at(2).toInt();
+            temp=temp+nNum;
+            tempInfo.replace(2,QString::number(temp));
+            qDebug()<<"shou枪枪数："<<nNum<<temp;
+            break;
+        case SUBMACHINE:
+            bLink = UNLINK != conStatus.weapons(nIndex).contype();
+            if(bLink)
+                nNum += conStatus.weapons(nIndex).bulletnum();
+            temp=allInfo.at(7).toInt();
+            temp=temp+nNum;
+            tempInfo.replace(7,QString::number(temp));
+            qDebug()<<"狙击枪枪数："<<nNum<<temp;
+             break;
+        }
+    }
+    CDealDataManager::GetInstance()->PersonalChongDan(nID,tempInfo);
+
+    for(int i=0;i<allInfo.size();i++)
+    {
+        nTempInfo.append(allInfo.at(i).toInt());
+    }
+    CDealDataManager::GetInstance()->SetBulletSum(nID,nTempInfo);
 }

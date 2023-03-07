@@ -195,7 +195,7 @@ void CGlobalSettings::setStart()
 
     /// 设置子弹数
     QList<QVariant> vList;
-    for(int i=0;i<8;++i)
+    for(int i=0;i<7;++i)
     {
         if(i==0)
         {

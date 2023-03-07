@@ -57,16 +57,26 @@ void CContrlMapPerson::UpdateGroup(quint16 unID, const QString & sGroup)
         if(sGroup == QString::fromUtf8("蓝方"))
         {
             pMapPerson->SetGroupType(BLUE_GROUP);
+            m_listBulePerId.append(unID);
         }
         else if(sGroup == QString::fromUtf8("红方"))
         {
             pMapPerson->SetGroupType(RED_GROUP);
+            m_listRedPerId.append(unID);
         }
         else
         {
             pMapPerson->SetGroupType(UN_KNOW);
+            m_listUnknowPerId.append(unID);
         }
     }
+}
+
+void CContrlMapPerson::clearAllTypeId()
+{
+    m_listRedPerId.clear();
+    m_listBulePerId.clear();
+    m_listUnknowPerId.clear();
 }
 
 /// 更新状态
@@ -166,6 +176,8 @@ void CContrlMapPerson::UpdateSeconds(const quint16 &seconds)
         }
     }
 }
+
+
 
 //void CContrlMapPerson::PickID(unsigned int nPickID, unsigned int nType)
 //{

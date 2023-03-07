@@ -332,7 +332,6 @@ void CMyParseData::AllPeiQiang(const QVariant &rInfo)
 /// 损伤比例值
 void CMyParseData::Damage(const QVariant &rInfo)
 {
-//    m_pSet->SendCommand(g_unBroadCost,HURT_VALUE,rInfo);
     for(auto i=0;i<5;++i)
     {
         m_pSet->SendCommand(g_unBroadCost,HURT_VALUE,rInfo);

@@ -159,104 +159,69 @@ void CPersonAllInfo::UpdateBaseInfo(PersonInfo *pPersonInfo)
     const ConnectStatus& conStatus = pPersonInfo->curtstatus();
     int nBaty = pPersonInfo->curtstatus().weapons_size();
 
-    bool bLink1(false),bLink(false);
-    int nNum(0);
     for(int nIndex=0; nIndex < nBaty; ++nIndex)
     {
+        bool bLink1(false),bLink(false);
+        int nNum(0);
+//        bLink1= conStatus.weapons(nIndex).weapontype();
+//        qDebug()<<conStatus.weapons(nIndex).weapontype()<<bLink1<<nIndex<< conStatus.weapons(nIndex).bulletnum();
         switch(conStatus.weapons(nIndex).weapontype())
         {
         case RIFLE:
             bLink1 = UNLINK != conStatus.weapons(nIndex).contype();
-            qDebug()<<"RIFLEgengxin1："<<bLink<<conStatus.weapons(nIndex).bulletnum()<< conStatus.weapons(nIndex).contype()<<nBaty;
-            if(bLink1) nNum = conStatus.weapons(nIndex).bulletnum();
-            break;
-        case PISTOL:
-            bLink = UNLINK != conStatus.weapons(nIndex).contype();
-            qDebug()<<"PISTOLgengxin1："<<bLink<<conStatus.weapons(nIndex).bulletnum()<< conStatus.weapons(nIndex).contype()<<nIndex;
-            if(bLink) nNum += conStatus.weapons(nIndex).bulletnum();
-            if(m_bRifle != (bLink || bLink1))
+            if(bLink1)
             {
-                m_bRifle = (bLink || bLink1);
+                nNum = conStatus.weapons(nIndex).bulletnum();
+//                qDebug()<<"测试RIFLE:"<<nNum<<bLink1<<nIndex;
+            }
+            if(m_bRifle !=bLink1)
+            {
+                m_bRifle =bLink1;
                 emit(rifleChanged(m_bRifle));
             }
-
             if(m_nRifle != nNum)
             {
                 m_nRifle = nNum;
                 emit(rifleNumChanged(m_nRifle));
-                qDebug()<<"步枪gengxin1："<<nNum;
             }
             break;
         case GRENAD:
             bLink1 = UNLINK != conStatus.weapons(nIndex).contype();
-            qDebug()<<"GRENADgengxin1："<<bLink<<conStatus.weapons(nIndex).bulletnum()<< conStatus.weapons(nIndex).contype()<<nIndex;
-            if(bLink1) nNum = conStatus.weapons(nIndex).bulletnum();
-            else       nNum = 0;
-            break;
-//        case MINES:
-//            bLink1 = UNLINK != conStatus.weapons(4).contype();
-//            qDebug()<<"MINESgengxin1："<<bLink<<conStatus.weapons(4).bulletnum()<< conStatus.weapons(4).contype()<<nIndex;
-//            break;
-        case MORTAR:
-            bLink = UNLINK != conStatus.weapons(nIndex).contype();
-            qDebug()<<"手枪gengxin1："<<bLink<<conStatus.weapons(nIndex).bulletnum()<< conStatus.weapons(nIndex).contype()<<nIndex;
-            if(bLink) nNum += conStatus.weapons(nIndex).bulletnum();
-            if(m_bPistol != (bLink || bLink1))
+            if(bLink1)
             {
-                m_bPistol = (bLink || bLink1);
+                nNum = conStatus.weapons(nIndex).bulletnum();
+            }
+            if(m_bPistol != bLink1)
+            {
+                m_bPistol = bLink1;
                 emit(pistolChanged(m_bPistol));
             }
-
             if(m_nPistol != nNum)
             {
                 m_nPistol = nNum;
                 emit(pistolNumChanged(m_nPistol));
-                qDebug()<<"手枪gengxin1："<<nNum;
             }
             break;
-//        case SNIPER  :
-//            bLink = UNLINK != conStatus.weapons(4).contype();
-//            qDebug()<<"SNIPER ："<<bLink<<conStatus.weapons(4).bulletnum()<< conStatus.weapons(4).contype()<<nIndex;
-//            if(bLink) nNum += conStatus.weapons(nIndex).bulletnum();
-//            if(m_bSniper != (bLink || bLink1))
-//            {
-//                m_bSniper = (bLink || bLink1);
-//                emit(sniperChanged(m_bSniper));
-//            }
-
-//            if(m_nSniper != nNum)
-//            {
-//                m_nSniper = nNum;
-//                emit(sniperNumChanged(m_nSniper));
-//                qDebug()<<"SNIPER"<<nNum;
-//            }
-            break;
-//        case LAUNCHER :
-//            bLink1 = UNLINK != conStatus.weapons(nIndex).contype();
-//            qDebug()<<"LAUNCHER ："<<bLink<<conStatus.weapons(nIndex).bulletnum()<< conStatus.weapons(nIndex).contype()<<nIndex;
-//            break;
-         case SUBMACHINE:
+        case SUBMACHINE:
             bLink = UNLINK != conStatus.weapons(nIndex).contype();
-               qDebug()<<"狙击gengxin1："<<bLink<<conStatus.weapons(5).bulletnum()<< conStatus.weapons(nIndex).contype()<<nIndex;
             if(bLink)
-                nNum += conStatus.weapons(nIndex).bulletnum();
+            {
+                nNum= conStatus.weapons(nIndex).bulletnum();
+            }
+
             if(m_bSniper != (bLink))
             {
                 m_bSniper = (bLink);
                 emit(sniperChanged(m_bSniper));
             }
-
             if(m_nSniper != nNum)
             {
                 m_nSniper = nNum;
                 emit(sniperNumChanged(m_nSniper));
-                qDebug()<<"SUBMACHINE"<<nNum;
             }
             break;
         }
     }
-    //    countDanFlag=false;
-
     /// 如果命中信息更新则返回
     if(m_listHitInfo != tmpList)
     {
@@ -292,7 +257,7 @@ void CPersonAllInfo::UpdateBaseInfo(PersonInfo *pPersonInfo)
         emit(reliveChanged(m_uRelive));
     }
 
-//    m_nRifleSum=m_nPistolSum=m_nSniperSum=CConfigInfo::GetInstance()->GetDefaultBullets();
+    //    m_nRifleSum=m_nPistolSum=m_nSniperSum=CConfigInfo::GetInstance()->GetDefaultBullets();
     m_nRifleSum=CConfigInfo::GetInstance()->GetChargeBullets(1);
     m_nPistolSum=CConfigInfo::GetInstance()->GetChargeBullets(2);
     m_nSniperSum=CConfigInfo::GetInstance()->GetChargeBullets(7);
@@ -301,31 +266,30 @@ void CPersonAllInfo::UpdateBaseInfo(PersonInfo *pPersonInfo)
     emit(sniperSumChanged(m_nSniperSum));
 
 
-//    QStringList listBulletSum =CDealDataManager::GetInstance()->GetBulletSum(pPersonInfo->id());
-//    for(int i = 0; i< listBulletSum.size();++i)
-//    {
-//        if(listBulletSum.at(i)==NULL)
+//        QStringList listBulletSum =CDealDataManager::GetInstance()->GetBulletSum(pPersonInfo->id());
+//        for(int i = 0; i< listBulletSum.size();++i)
 //        {
-//            listBulletSum[i]="0";
+//            if(listBulletSum.at(i)==NULL)
+//            {
+//                listBulletSum[i]="0";
+//            }
 //        }
-//    }
-//    if(m_nRifleSum!=listBulletSum.at(0).toInt())
-//    {
-//        m_nRifleSum=listBulletSum.at(0).toInt();
-//        emit(rifleSumChanged(m_nRifleSum));
-//    }
-//    if(m_nPistolSum!=listBulletSum.at(2).toInt())
-//    {
-//        m_nPistolSum=listBulletSum.at(2).toInt();
-//        qDebug() << "m_nPistolSum:" << m_nPistolSum;
-//        emit(pistolSumChanged(m_nPistolSum));
-//    }
-
-//    if(m_nSniperSum!=listBulletSum.at(4).toInt())
-//    {
-//        m_nSniperSum=listBulletSum.at(4).toInt();
-//        qDebug() << "m_nSniperSum:" << m_nSniperSum;
-//        emit(sniperSumChanged(m_nSniperSum));
-//    }
+//        if(m_nRifleSum!=listBulletSum.at(0).toInt())
+//        {
+//            m_nRifleSum=listBulletSum.at(0).toInt();
+//            emit(rifleSumChanged(m_nRifleSum));
+//        }
+//        if(m_nPistolSum!=listBulletSum.at(2).toInt())
+//        {
+//            m_nPistolSum=listBulletSum.at(2).toInt();
+//            qDebug() << "m_nPistolSum:" << m_nPistolSum;
+//            emit(pistolSumChanged(m_nPistolSum));
+//        }
+//        if(m_nSniperSum!=listBulletSum.at(4).toInt())
+//        {
+//            m_nSniperSum=listBulletSum.at(4).toInt();
+//            qDebug() << "m_nSniperSum:" << m_nSniperSum;
+//            emit(sniperSumChanged(m_nSniperSum));
+//        }
 
 }

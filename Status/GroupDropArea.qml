@@ -49,6 +49,7 @@ DropArea
         {
             contextMenu2.x = root.x + group.width/2
             contextMenu2.y = root.y + 43*dpy
+            contextMenu2.userType=groupType
             contextMenu2.open();
         }
 

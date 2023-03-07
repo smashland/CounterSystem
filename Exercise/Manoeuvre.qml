@@ -145,7 +145,6 @@ Item {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                console.log("开始时间："+Qt.formatDateTime(new Date(), "yyyy-MM-dd hh:mm:ss.zzz ddd"))
 //                time_run.start()
                 killExpand.visible = true
                 if($app.settings.bIsStart)

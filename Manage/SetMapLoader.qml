@@ -149,6 +149,7 @@ Rectangle {
         nameButton: "添加"
         onClicked: {
             mapAdd.visible = true
+//            footerBar.btnSet.checked = false
             //            openQml(earthManager.addMaps(mapName),"MapAdd.qml")
         }
     }

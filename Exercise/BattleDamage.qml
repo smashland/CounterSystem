@@ -1,4 +1,4 @@
-﻿//                                        演习结果
+//                                        演习结果
 import QtQuick 2.12
 import Qt.labs.qmlmodels 1.0
 import Qt.labs.platform 1.1
@@ -10,8 +10,9 @@ import QtGraphicalEffects 1.15
 import "../Common"
 import "../Manage/Plugins"
 
+
 Item {
-    id: exerciseResults
+    id: battleDamage
     width: 1184 *dpx
     height: 860 *dpy
 
@@ -25,103 +26,46 @@ Item {
     }
 
     PopupTitle {
-        name: "演习结果"
+        name: "实时战损"
         icon:"\ue654"
         x: 65*dpx
         y: 64*dpy
     }
 
     CloseButton {
-        anchors.right: exerciseResults.right
+        anchors.right: battleDamage.right
         anchors.rightMargin: 70 *dpx
-        anchors.top: exerciseResults.top
+        anchors.top: battleDamage.top
         anchors.topMargin: 70 *dpy
         onClicked:
         {
-            exerciseResults.visible = false
+            battleDamage.visible = false
             $app.allData.clearInfo();
         }
     }
 
     Column {
-        y: 117*dpy
+        y: 137*dpy
         x: 80*dpx
-        spacing: 13*dpy
-
+        spacing: 23*dpy
         ExerciseItem {
-            id:sceName
+            id:earthName
             width: 300*dpx
-            title:"演习名称:"
-            name:sceManager.currentSceName
+            title:"地图名称:"
+            name:earthManager.currentName
         }
-
-        Row {
-            id:xuxian1
-            width:1024*dpx
-            height: 1*dpy
-            spacing: 4*dpx
-            clip: true
-            Repeater {
-                anchors.fill: parent
-                model:128
-                delegate:Rectangle {
-                    width: 4*dpx
-                    height: 1*dpy
-                    color:"white"
-                }
-            }
-        }
-
-        Row {
-            spacing: 200*dpx
-            ExerciseItem {
-                width: 300*dpx
-                title:"演习开始时间:"
-                name: manoeuvre.startTime
-            }
-            ExerciseItem {
-                width: 300*dpx
-                title:"演习结束时间:"
-                name:manoeuvre.endTime
-            }
-        }
-        Row {
-            id:xuxian2
-            width:1024*dpx
-            height: 1*dpy
-            spacing: 4*dpx
-            clip: true
-            Repeater {
-                anchors.fill: parent
-                model:128
-                delegate:Rectangle {
-                    width: 4*dpx
-                    height: 1*dpy
-                    color:"white"
-                }
-            }
-        }
-        Row {
-            spacing: 200*dpx
-            ExerciseItem {
-                id:earthName
-                width: 300*dpx
-                title:"地图名称:"
-                name:earthManager.currentName
-            }
-            ExerciseItem {
-                id:earthLoction
-                width: 300*dpx
-                title:"位置:"
-                name:loactionStr
-            }
+        ExerciseItem {
+            id:earthLoction
+            width: 300*dpx
+            title:"位置:"
+            name:loactionStr
         }
     }
 
     QC114.TableView
     {
         id:resultTable
-        y: 256*dpy
+        y: 240*dpy
         x: 80 *dpx
         width: 1024 *dpx
         height: 142*dpy
@@ -208,18 +152,6 @@ Item {
                 height: 320*dpy
                 color: Qt.rgba(74/255,120/255,177/255,0.3)
 
-//                Text
-//                {
-//                    id: sahngwangqingkuang
-//                    x: 40 *dpx
-//                    y: 20 *dpy
-//                    text:qsTr(modelData.belong+"伤亡情况")
-//                    verticalAlignment: Text.AlignVCenter
-//                    horizontalAlignment: Text.AlignHCenter
-//                    font.pixelSize: 20*dpx
-//                    color: "#ffffff"
-//                    font.family: "Microsoft YaHei"
-//                }
                 ComboBoxItem{
                     id: chartImg
                     x: 40 *dpx
@@ -250,15 +182,6 @@ Item {
                     }
                 }
 
-                RedChart {
-                    id: redChart
-                    width :500*dpx
-                    height: 320*dpy
-                    //                     title: modelData.belong
-                    hurtData:modelData.hurt
-                    deathData:modelData.dealth
-                    okData:modelData.ok
-                }
                 LineChart {
                     id: lineChart
                     y: 35*dpy
@@ -267,6 +190,14 @@ Item {
                     visible: false
                 }
 
+                RedChart {
+                    width :500*dpx
+                    height: 320*dpy
+                    //                     title: modelData.belong
+                    hurtData:modelData.hurt
+                    deathData:modelData.dealth
+                    okData:modelData.ok
+                }
                 Rectangle {
                     id: circle
                     width: 125*dpy
@@ -279,7 +210,6 @@ Item {
                 }
 
                 Glow {
-                    id: glow
                     anchors.fill: circle
                     radius:9
                     samples: 13
@@ -306,100 +236,6 @@ Item {
                     }
                 }
 
-            }
-        }
-    }
-
-    Row {
-        spacing: 15 *dpx
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 60 *dpy
-        x: 375.5*dpx
-        PopupButton {
-            id: save
-            width: 150*dpx
-            background: Rectangle {
-                color: "#265aef"
-                Text {
-                    id: popupText
-                    height: 36 *dpy
-                    width: 150*dpx
-                    verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: Text.AlignHCenter
-                    text: "保存演习数据"
-                    font.pixelSize: 16*dpx
-                    color: "#ffffff"
-                    font.family: "Microsoft YaHei"
-                }
-            }
-
-            //            nameButton: "保存演习数据"
-            onClicked: {              
-                openFile.open()
-            }
-
-        }
-        FileDialog
-        {
-            id:openFile
-            folder:defaltFolderUrl
-            fileMode:FileDialog.SaveFile
-            title: qsTr("保存演习数据")
-            nameFilters: [qsTr("演习数据(*.szy)")]
-            options: FileDialog.DontConfirmOverwrite
-            onAccepted:
-            {
-                $app.allData.saveData(currentFile);
-                $app.saveNoticText(currentFile);
-
-            }
-        }
-        PopupButton {
-            //            id: print
-            width: 150*dpx
-            background: Rectangle {
-                color: "#265aef"
-                Text {
-                    height: 36 *dpy
-                    width: 150*dpx
-                    verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: Text.AlignHCenter
-                    text: "打印演习报告"
-                    font.pixelSize: 16*dpx
-                    color: "#ffffff"
-                    font.family: "Microsoft YaHei"
-                }
-            }
-
-            //            nameButton: "打印演习报告"
-            onClicked:
-            {
-                printWPS.open();
-            }
-
-        }
-        FileDialog
-        {
-            id:printWPS
-            folder:$app.appPath
-            fileMode:FileDialog.SaveFile
-            title: qsTr("保存演习报告")
-            nameFilters: [qsTr("演习报告(*.docx)")]
-            onAccepted:
-            {
-                $app.allData.getSceVsLoc(sceName.name,earthLoction.name);
-                $app.allData.createReport(currentFile);
-            }
-        }
-        PopupButton {
-            background: Rectangle {
-                color: "#1d4f88"
-            }
-            nameButton: "取消"
-            onClicked:
-            {
-                exerciseResults.visible = false
-                $app.allData.clearInfo();
             }
         }
     }

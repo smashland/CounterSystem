@@ -210,6 +210,13 @@ Rectangle
         x: (index.width-exerciseResults.width) / 2
         y: (index.height-exerciseResults.height) / 2
     }
+    BattleDamage {
+        id: battleDamage
+        visible: false
+        x: (index.width-battleDamage.width) / 2
+        y: (index.height-battleDamage.height) / 2
+    }
+
     SetLoader {
         id: setloader
         visible: footerBar.btnSet.checked

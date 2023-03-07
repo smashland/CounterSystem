@@ -37,6 +37,9 @@ ChartView {
             labelVisible:value?true:false;
             value:okData;
             labelColor:"#ffffff";
+            labelFont.pointSize: 13*dpy;
+            labelFont.family: "Microsoft YaHei";
+            labelFont.bold: true;
             color: "#4169E1";
             borderColor: "#4169E1";
             labelArmLengthFactor: 0.35;
@@ -49,6 +52,9 @@ ChartView {
             color: "#00A1F8";
             borderColor: "#00A1F8";
             labelArmLengthFactor: 0.35;
+            labelFont.pointSize: 13*dpy;
+            labelFont.family: "Microsoft YaHei";
+            labelFont.bold: true;
         }
         PieSlice {
             label: qsTr("死亡 "/*+value*/ + parseInt(percentageDeath)+ "%");
@@ -58,6 +64,9 @@ ChartView {
             color: "#2E85A8";
             borderColor: "#2E85A8";
             labelArmLengthFactor: 0.35;
+            labelFont.pointSize: 13*dpy;
+            labelFont.family: "Microsoft YaHei";
+            labelFont.bold: true;
         }
     }
 

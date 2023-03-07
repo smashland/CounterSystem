@@ -60,6 +60,10 @@ public:
      */
     int&  GetDefaultBullets(){return(m_nDefaultBullets);}
 
+    int&  GetDefaultRifleBullets(){return(m_nDefaultRifleBullets);}
+    int&  GetDefaultPistolBullets(){return(m_nDefaultPistolBullets);}
+    int&  GetDefaultSniperBullets(){return(m_nDefaultSniperBullets);}
+
 
     /**
      * @brief 获取是否演习开始
@@ -137,6 +141,15 @@ public:
     void AllSetHitDamae();
 
     /**
+     * @brief 设置命中得分情况
+     * @param nType
+     * @return
+     */
+    int GetChargeBullets(int nGunType);
+    int CalChargeBullets(int nGunType);
+    void SetChargeBullets(int nGunType,int nBullets);
+
+    /**
      * @brief 获取类型对应的中文名
      * @param nType
      * @return
@@ -177,6 +190,9 @@ private:
     int     m_nSynTimes;       /// 同步时间
     int     m_nResendTimes;    /// 设置重发次数
     int     m_nDefaultBullets; /// 默认子弹数
+    int     m_nDefaultRifleBullets;/// 默认步枪子弹数
+    int     m_nDefaultPistolBullets;/// 默认手枪子弹数
+    int     m_nDefaultSniperBullets;/// 默认狙击枪子弹数
     int     m_nHitLineDelSec;  /// 删除打击线的时间
     int     m_nType;           /// 类型
     int     m_nOfflineTime;    /// 掉线时间
@@ -200,6 +216,7 @@ private:
     Config*          m_pConfig;       /// 连接信息
     QVector<int>     m_vHurtMark;          /// 得分情况
     QVector<int>     m_vHitDamea;          /// 伤害值
+    QVector<int>     m_vChargeBullets;     /// 充弹数
 };
 
 #endif // CCONFIGINFO_H

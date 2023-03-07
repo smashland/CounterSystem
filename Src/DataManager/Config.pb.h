@@ -47,13 +47,16 @@ struct TableStruct_Config_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxiliaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[6]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[7]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
   static const ::PROTOBUF_NAMESPACE_ID::uint32 offsets[];
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_Config_2eproto;
+class ChargeBullet;
+class ChargeBulletDefaultTypeInternal;
+extern ChargeBulletDefaultTypeInternal _ChargeBullet_default_instance_;
 class Config;
 class ConfigDefaultTypeInternal;
 extern ConfigDefaultTypeInternal _Config_default_instance_;
@@ -73,6 +76,7 @@ class SystemInfo;
 class SystemInfoDefaultTypeInternal;
 extern SystemInfoDefaultTypeInternal _SystemInfo_default_instance_;
 PROTOBUF_NAMESPACE_OPEN
+template<> ::ChargeBullet* Arena::CreateMaybeMessage<::ChargeBullet>(Arena*);
 template<> ::Config* Arena::CreateMaybeMessage<::Config>(Arena*);
 template<> ::ConnectInfo* Arena::CreateMaybeMessage<::ConnectInfo>(Arena*);
 template<> ::HitRate* Arena::CreateMaybeMessage<::HitRate>(Arena*);
@@ -936,6 +940,153 @@ class HitRate PROTOBUF_FINAL :
 };
 // -------------------------------------------------------------------
 
+class ChargeBullet PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:ChargeBullet) */ {
+ public:
+  inline ChargeBullet() : ChargeBullet(nullptr) {}
+  virtual ~ChargeBullet();
+
+  ChargeBullet(const ChargeBullet& from);
+  ChargeBullet(ChargeBullet&& from) noexcept
+    : ChargeBullet() {
+    *this = ::std::move(from);
+  }
+
+  inline ChargeBullet& operator=(const ChargeBullet& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ChargeBullet& operator=(ChargeBullet&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const ChargeBullet& default_instance();
+
+  static inline const ChargeBullet* internal_default_instance() {
+    return reinterpret_cast<const ChargeBullet*>(
+               &_ChargeBullet_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    5;
+
+  friend void swap(ChargeBullet& a, ChargeBullet& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(ChargeBullet* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(ChargeBullet* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ChargeBullet* New() const final {
+    return CreateMaybeMessage<ChargeBullet>(nullptr);
+  }
+
+  ChargeBullet* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<ChargeBullet>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const ChargeBullet& from);
+  void MergeFrom(const ChargeBullet& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ChargeBullet* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "ChargeBullet";
+  }
+  protected:
+  explicit ChargeBullet(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_Config_2eproto);
+    return ::descriptor_table_Config_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kChargeGunFieldNumber = 1,
+    kChargebulletsFieldNumber = 2,
+  };
+  // .GunType ChargeGun = 1;
+  void clear_chargegun();
+  ::GunType chargegun() const;
+  void set_chargegun(::GunType value);
+  private:
+  ::GunType _internal_chargegun() const;
+  void _internal_set_chargegun(::GunType value);
+  public:
+
+  // int32 Chargebullets = 2;
+  void clear_chargebullets();
+  ::PROTOBUF_NAMESPACE_ID::int32 chargebullets() const;
+  void set_chargebullets(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_chargebullets() const;
+  void _internal_set_chargebullets(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:ChargeBullet)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  int chargegun_;
+  ::PROTOBUF_NAMESPACE_ID::int32 chargebullets_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_Config_2eproto;
+};
+// -------------------------------------------------------------------
+
 class SimulationInfo PROTOBUF_FINAL :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:SimulationInfo) */ {
  public:
@@ -977,7 +1128,7 @@ class SimulationInfo PROTOBUF_FINAL :
                &_SimulationInfo_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    6;
 
   friend void swap(SimulationInfo& a, SimulationInfo& b) {
     a.Swap(&b);
@@ -1050,6 +1201,7 @@ class SimulationInfo PROTOBUF_FINAL :
   enum : int {
     kScoreSetFieldNumber = 6,
     kRateSetFieldNumber = 7,
+    kBulletSetFieldNumber = 8,
     kNSycnTimeFieldNumber = 1,
     kNTime2DropFieldNumber = 2,
     kNInitbulletsFieldNumber = 3,
@@ -1091,6 +1243,24 @@ class SimulationInfo PROTOBUF_FINAL :
   ::HitRate* add_rateset();
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::HitRate >&
       rateset() const;
+
+  // repeated .ChargeBullet bulletSet = 8;
+  int bulletset_size() const;
+  private:
+  int _internal_bulletset_size() const;
+  public:
+  void clear_bulletset();
+  ::ChargeBullet* mutable_bulletset(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ChargeBullet >*
+      mutable_bulletset();
+  private:
+  const ::ChargeBullet& _internal_bulletset(int index) const;
+  ::ChargeBullet* _internal_add_bulletset();
+  public:
+  const ::ChargeBullet& bulletset(int index) const;
+  ::ChargeBullet* add_bulletset();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ChargeBullet >&
+      bulletset() const;
 
   // int32 nSycnTime = 1;
   void clear_nsycntime();
@@ -1146,6 +1316,7 @@ class SimulationInfo PROTOBUF_FINAL :
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::HitScore > scoreset_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::HitRate > rateset_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ChargeBullet > bulletset_;
   ::PROTOBUF_NAMESPACE_ID::int32 nsycntime_;
   ::PROTOBUF_NAMESPACE_ID::int32 ntime2drop_;
   ::PROTOBUF_NAMESPACE_ID::int32 ninitbullets_;
@@ -1794,6 +1965,50 @@ inline void HitRate::set_nrate(::PROTOBUF_NAMESPACE_ID::int32 value) {
 
 // -------------------------------------------------------------------
 
+// ChargeBullet
+
+// .GunType ChargeGun = 1;
+inline void ChargeBullet::clear_chargegun() {
+  chargegun_ = 0;
+}
+inline ::GunType ChargeBullet::_internal_chargegun() const {
+  return static_cast< ::GunType >(chargegun_);
+}
+inline ::GunType ChargeBullet::chargegun() const {
+  // @@protoc_insertion_point(field_get:ChargeBullet.ChargeGun)
+  return _internal_chargegun();
+}
+inline void ChargeBullet::_internal_set_chargegun(::GunType value) {
+  
+  chargegun_ = value;
+}
+inline void ChargeBullet::set_chargegun(::GunType value) {
+  _internal_set_chargegun(value);
+  // @@protoc_insertion_point(field_set:ChargeBullet.ChargeGun)
+}
+
+// int32 Chargebullets = 2;
+inline void ChargeBullet::clear_chargebullets() {
+  chargebullets_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 ChargeBullet::_internal_chargebullets() const {
+  return chargebullets_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 ChargeBullet::chargebullets() const {
+  // @@protoc_insertion_point(field_get:ChargeBullet.Chargebullets)
+  return _internal_chargebullets();
+}
+inline void ChargeBullet::_internal_set_chargebullets(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  chargebullets_ = value;
+}
+inline void ChargeBullet::set_chargebullets(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_chargebullets(value);
+  // @@protoc_insertion_point(field_set:ChargeBullet.Chargebullets)
+}
+
+// -------------------------------------------------------------------
+
 // SimulationInfo
 
 // int32 nSycnTime = 1;
@@ -1974,9 +2189,50 @@ SimulationInfo::rateset() const {
   return rateset_;
 }
 
+// repeated .ChargeBullet bulletSet = 8;
+inline int SimulationInfo::_internal_bulletset_size() const {
+  return bulletset_.size();
+}
+inline int SimulationInfo::bulletset_size() const {
+  return _internal_bulletset_size();
+}
+inline void SimulationInfo::clear_bulletset() {
+  bulletset_.Clear();
+}
+inline ::ChargeBullet* SimulationInfo::mutable_bulletset(int index) {
+  // @@protoc_insertion_point(field_mutable:SimulationInfo.bulletSet)
+  return bulletset_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ChargeBullet >*
+SimulationInfo::mutable_bulletset() {
+  // @@protoc_insertion_point(field_mutable_list:SimulationInfo.bulletSet)
+  return &bulletset_;
+}
+inline const ::ChargeBullet& SimulationInfo::_internal_bulletset(int index) const {
+  return bulletset_.Get(index);
+}
+inline const ::ChargeBullet& SimulationInfo::bulletset(int index) const {
+  // @@protoc_insertion_point(field_get:SimulationInfo.bulletSet)
+  return _internal_bulletset(index);
+}
+inline ::ChargeBullet* SimulationInfo::_internal_add_bulletset() {
+  return bulletset_.Add();
+}
+inline ::ChargeBullet* SimulationInfo::add_bulletset() {
+  // @@protoc_insertion_point(field_add:SimulationInfo.bulletSet)
+  return _internal_add_bulletset();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ChargeBullet >&
+SimulationInfo::bulletset() const {
+  // @@protoc_insertion_point(field_list:SimulationInfo.bulletSet)
+  return bulletset_;
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

@@ -88,16 +88,16 @@ CGlobalSettings::CGlobalSettings(QObject *parent) : QObject(parent)
     tmpMap["number"]=CConfigInfo::GetInstance()->GetDroppedTimes();
     m_sysSetting.push_back(tmpMap);
 
-    tmpMap["type"]=QString::fromUtf8("默认手枪子弹数:");
-    tmpMap["number"]=CConfigInfo::GetInstance()->GetDefaultBullets();
+    tmpMap["type"]=QString::fromUtf8("默认步枪子弹数:");
+    tmpMap["number"]=CConfigInfo::GetInstance()->GetChargeBullets(1);
     m_sysSetting.push_back(tmpMap);
 
-    tmpMap["type"]=QString::fromUtf8("默认步枪子弹数:");
-    tmpMap["number"]=CConfigInfo::GetInstance()->GetDefaultBullets();
+    tmpMap["type"]=QString::fromUtf8("默认手枪子弹数:");
+    tmpMap["number"]=CConfigInfo::GetInstance()->GetChargeBullets(2);
     m_sysSetting.push_back(tmpMap);
 
     tmpMap["type"]=QString::fromUtf8("默认狙击枪子弹数:");
-    tmpMap["number"]=CConfigInfo::GetInstance()->GetDefaultBullets();
+    tmpMap["number"]=CConfigInfo::GetInstance()->GetChargeBullets(7);
     m_sysSetting.push_back(tmpMap);
 }
 
@@ -195,9 +195,24 @@ void CGlobalSettings::setStart()
 
     /// 设置子弹数
     QList<QVariant> vList;
-    for(int i=0;i<7;++i)
+    for(int i=0;i<8;++i)
     {
+        if(i==0)
+        {
+            vList.push_back(CConfigInfo::GetInstance()->GetChargeBullets(1));
+        }
+        else if(i==2)
+        {
+            vList.push_back(CConfigInfo::GetInstance()->GetChargeBullets(2));
+        }
+        else if(i==7)
+        {
+            vList.push_back(CConfigInfo::GetInstance()->GetChargeBullets(7));
+        }
+        else
+        {
         vList.push_back(CConfigInfo::GetInstance()->GetDefaultBullets());
+        }
     }
 
     CDealDataManager::GetInstance()->AllChongDan(vList);
@@ -324,13 +339,12 @@ void CGlobalSettings::chongDan(quint16 nID, const QStringList &allInfo)
             qDebug()<<"shou枪枪数："<<nNum<<temp;
             break;
         case SUBMACHINE:
-//        case SNIPER:
             bLink = UNLINK != conStatus.weapons(nIndex).contype();
             if(bLink)
                 nNum += conStatus.weapons(nIndex).bulletnum();
-            temp=allInfo.at(4).toInt();
+            temp=allInfo.at(7).toInt();
             temp=temp+nNum;
-            tempInfo.replace(4,QString::number(temp));
+            tempInfo.replace(7,QString::number(temp));
             qDebug()<<"狙击枪枪数："<<nNum<<temp;
              break;
 
@@ -384,11 +398,19 @@ void CGlobalSettings::changeSetting(const QString& sListType,const int& rIndex,c
             CConfigInfo::GetInstance()->CalOfflineTime();
             break;
         case 3:
-            if(CConfigInfo::GetInstance()->GetDefaultBullets()!=rInt)
-            {
-                CDealDataManager::GetInstance()->clearBulletSum();
-            }
-            CConfigInfo::GetInstance()->GetDefaultBullets()=rInt;
+            // CConfigInfo::GetInstance()->SetHitDamae(rIndex,rInt);
+//            if(CConfigInfo::GetInstance()->GetDefaultBullets()!=rInt)
+//            {
+//                CDealDataManager::GetInstance()->clearBulletSum();
+//            }
+//            CConfigInfo::GetInstance()->GetDefaultBullets()=rInt;
+            CConfigInfo::GetInstance()->SetChargeBullets(1,rInt);
+            break;
+        case 4:
+            CConfigInfo::GetInstance()->SetChargeBullets(2,rInt);
+            break;
+        case 5:
+            CConfigInfo::GetInstance()->SetChargeBullets(7,rInt);
             break;
         }
     }

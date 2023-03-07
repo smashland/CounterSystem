@@ -358,5 +358,4 @@ void QAppGlobal::setAveLocation()
        m_dAveLon=m_sumLon/(double)personCount;
        m_sAveLon=QString::number(m_dAveLon, 'f', 4);
        emit aveLonChanged(m_sAveLon);
-       qDebug()<<"测试经纬度："<<m_sAveLat<<m_sAveLon;
 }

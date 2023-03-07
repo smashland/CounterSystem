@@ -140,7 +140,8 @@ void CExportResult::CreateDocx(const QString &sFileName, const QString& sTile,co
                                 sGunInfo += QString::fromUtf8("步枪");
                                 sGunNumInfo += QString::fromUtf8("步枪剩余子弹数:%1").arg(nNumRifle);
                                 nNumBullets+=CDealDataManager::GetInstance()->GetBulletSum(pAllInto->id()).at(0).toInt();
-                                nNumBullets += CConfigInfo::GetInstance()->GetDefaultBullets();
+                                nNumBullets +=CConfigInfo::GetInstance()->GetChargeBullets(1);
+//                                nNumBullets += CConfigInfo::GetInstance()->GetDefaultBullets();
                             }
                             break;
                         case GRENAD:
@@ -162,7 +163,8 @@ void CExportResult::CreateDocx(const QString &sFileName, const QString& sTile,co
                                 sGunInfo += QString::fromUtf8("手枪");
                                 sGunNumInfo += QString::fromUtf8("手枪剩余子弹数:%1").arg(nNumPistol);
                                 nNumBullets+=CDealDataManager::GetInstance()->GetBulletSum(pAllInto->id()).at(2).toInt();
-                                nNumBullets += CConfigInfo::GetInstance()->GetDefaultBullets();
+//                                nNumBullets += CConfigInfo::GetInstance()->GetDefaultBullets();
+                                 nNumBullets += CConfigInfo::GetInstance()->GetChargeBullets(2);
                             }
                             break;
                         }

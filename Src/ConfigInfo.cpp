@@ -67,6 +67,14 @@ void CConfigInfo::PraseIni()
         m_bCanHitDeath=m_pConfig->mutable_siminfo()->bdeakill();
         m_nDefaultBullets=m_pConfig->mutable_siminfo()->ninitbullets();
 
+
+        m_vChargeBullets.resize(m_pConfig->mutable_siminfo()->bulletset_size());
+        for(int i=0;i<m_pConfig->mutable_siminfo()->bulletset_size();++i)
+        {
+            m_vChargeBullets[i]=m_pConfig->mutable_siminfo()->bulletset(i).chargebullets();
+        }
+        m_vChargeBullets.resize(8);
+
         m_vHurtMark.resize(m_pConfig->mutable_siminfo()->scoreset_size());
 
         for(int i=0;i<m_pConfig->mutable_siminfo()->scoreset_size();++i)
@@ -100,6 +108,12 @@ void CConfigInfo::PraseIni()
         m_nDroppedTimes = 5;
         m_nSynTimes = 5;
         m_nDefaultBullets=1000;
+
+        m_vChargeBullets.resize(8);
+        m_vChargeBullets[0]=m_vChargeBullets[1]=300;
+        m_vChargeBullets[2]=m_vChargeBullets[5]=50;
+        m_vChargeBullets[7]=100;
+        m_vChargeBullets[3]=m_vChargeBullets[4]=m_vChargeBullets[6]=1000;
 
         m_vHurtMark.resize(6);
         m_vHurtMark[0]=m_vHurtMark[1]=m_vHurtMark[2]=m_vHurtMark[3]=5;
@@ -166,6 +180,36 @@ void CConfigInfo::SaveIni()
     m_pConfig->mutable_siminfo()->set_bkillself(m_bKillSelf);
     m_pConfig->mutable_siminfo()->set_bdeakill(m_bCanHitDeath);
     m_pConfig->mutable_siminfo()->set_ninitbullets(m_nDefaultBullets);
+
+    m_pConfig->mutable_siminfo()->clear_bulletset();
+    for(int i=0;i<m_vChargeBullets.size();++i)
+    {
+        auto pChargeBullet = m_pConfig->mutable_siminfo()->add_bulletset();
+
+        switch(i)
+        {
+        case 0:
+        case 1:
+            pChargeBullet->set_chargegun(RIFLE);
+            break;
+        case 5:
+        case 2:
+            pChargeBullet->set_chargegun(PISTOL);
+            break;
+//        case 4:
+//        case 3:
+//            pChargeBullet->set_chargegun(MINES);
+//            break;
+//        case 6:
+//            pChargeBullet->set_chargegun(LAUNCHER);
+//            break;
+        case 7:
+            pChargeBullet->set_chargegun(SUBMACHINE);
+            break;
+        }
+
+        pChargeBullet->set_chargebullets(m_vChargeBullets[i]);
+    }
 
     m_pConfig->mutable_siminfo()->clear_scoreset();
 
@@ -381,6 +425,31 @@ void CConfigInfo::AllSetHitDamae()
         }
     }
     CDealDataManager::GetInstance()->Damege(damegeInfo);
+}
+
+int CConfigInfo::GetChargeBullets(int nGunType)
+{
+    if(nGunType < m_vChargeBullets.size())
+    {
+        return(m_vChargeBullets[nGunType]);
+    }
+    else
+    {
+        return(0);
+    }
+}
+
+int CConfigInfo::CalChargeBullets(int nGunType)
+{
+    return 1;
+}
+
+void CConfigInfo::SetChargeBullets(int nGunType, int nBullets)
+{
+    if(nGunType < m_vChargeBullets.size())
+    {
+        m_vChargeBullets[nGunType]=nBullets;
+    }
 }
 
 /// 获取中文名

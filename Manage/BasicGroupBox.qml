@@ -1,9 +1,9 @@
-import QtQuick 2.0
+﻿import QtQuick 2.0
 import QtQuick.Window 2.15
 import QtQuick.Controls 1.3
 import QtQuick.Controls.Private 1.0
 
-GroupBox {
+ GroupBox {
     id: groupBoxId
     width:680*dpx
     height:230*dpy

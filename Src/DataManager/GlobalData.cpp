@@ -604,6 +604,7 @@ void CGlobalData::endReplay()
 ///回放演习结果初始化
 void CGlobalData::initReplay()
 {
+    m_listNoticText.clear();
     emit simTimeChanged(0);
 }
 

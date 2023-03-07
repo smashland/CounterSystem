@@ -214,9 +214,9 @@ void CPersonAllInfo::UpdateBaseInfo(PersonInfo *pPersonInfo)
                 qDebug()<<"手枪gengxin1："<<nNum;
             }
             break;
-        case SNIPER  :
-            bLink = UNLINK != conStatus.weapons(4).contype();
-            qDebug()<<"SNIPER ："<<bLink<<conStatus.weapons(4).bulletnum()<< conStatus.weapons(4).contype()<<nIndex;
+//        case SNIPER  :
+//            bLink = UNLINK != conStatus.weapons(4).contype();
+//            qDebug()<<"SNIPER ："<<bLink<<conStatus.weapons(4).bulletnum()<< conStatus.weapons(4).contype()<<nIndex;
 //            if(bLink) nNum += conStatus.weapons(nIndex).bulletnum();
 //            if(m_bSniper != (bLink || bLink1))
 //            {
@@ -239,7 +239,7 @@ void CPersonAllInfo::UpdateBaseInfo(PersonInfo *pPersonInfo)
             bLink = UNLINK != conStatus.weapons(nIndex).contype();
                qDebug()<<"狙击gengxin1："<<bLink<<conStatus.weapons(5).bulletnum()<< conStatus.weapons(nIndex).contype()<<nIndex;
             if(bLink)
-                nNum += conStatus.weapons(5).bulletnum();
+                nNum += conStatus.weapons(nIndex).bulletnum();
             if(m_bSniper != (bLink))
             {
                 m_bSniper = (bLink);
@@ -292,7 +292,10 @@ void CPersonAllInfo::UpdateBaseInfo(PersonInfo *pPersonInfo)
         emit(reliveChanged(m_uRelive));
     }
 
-    m_nRifleSum=m_nPistolSum=m_nSniperSum=CConfigInfo::GetInstance()->GetDefaultBullets();
+//    m_nRifleSum=m_nPistolSum=m_nSniperSum=CConfigInfo::GetInstance()->GetDefaultBullets();
+    m_nRifleSum=CConfigInfo::GetInstance()->GetChargeBullets(1);
+    m_nPistolSum=CConfigInfo::GetInstance()->GetChargeBullets(2);
+    m_nSniperSum=CConfigInfo::GetInstance()->GetChargeBullets(7);
     emit(rifleSumChanged(m_nRifleSum));
     emit(pistolSumChanged(m_nPistolSum));
     emit(sniperSumChanged(m_nSniperSum));

@@ -16,10 +16,11 @@
 #include <google/protobuf/port_def.inc>
 
 PROTOBUF_PRAGMA_INIT_SEG
+extern PROTOBUF_INTERNAL_EXPORT_Config_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ChargeBullet_Config_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_Config_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ConnectInfo_Config_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_Config_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_HitRate_Config_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_Config_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_HitScore_Config_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_Config_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_SimulationInfo_Config_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_Config_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<3> scc_info_SimulationInfo_Config_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_Config_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_SystemInfo_Config_2eproto;
 class ConfigDefaultTypeInternal {
  public:
@@ -41,10 +42,27 @@ class HitRateDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<HitRate> _instance;
 } _HitRate_default_instance_;
+class ChargeBulletDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ChargeBullet> _instance;
+} _ChargeBullet_default_instance_;
 class SimulationInfoDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<SimulationInfo> _instance;
 } _SimulationInfo_default_instance_;
+static void InitDefaultsscc_info_ChargeBullet_Config_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::_ChargeBullet_default_instance_;
+    new (ptr) ::ChargeBullet();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ChargeBullet_Config_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ChargeBullet_Config_2eproto}, {}};
+
 static void InitDefaultsscc_info_Config_Config_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -110,10 +128,11 @@ static void InitDefaultsscc_info_SimulationInfo_Config_2eproto() {
   }
 }
 
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_SimulationInfo_Config_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_SimulationInfo_Config_2eproto}, {
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<3> scc_info_SimulationInfo_Config_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 3, 0, InitDefaultsscc_info_SimulationInfo_Config_2eproto}, {
       &scc_info_HitScore_Config_2eproto.base,
-      &scc_info_HitRate_Config_2eproto.base,}};
+      &scc_info_HitRate_Config_2eproto.base,
+      &scc_info_ChargeBullet_Config_2eproto.base,}};
 
 static void InitDefaultsscc_info_SystemInfo_Config_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -128,7 +147,7 @@ static void InitDefaultsscc_info_SystemInfo_Config_2eproto() {
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_SystemInfo_Config_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_SystemInfo_Config_2eproto}, {}};
 
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_Config_2eproto[6];
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_Config_2eproto[7];
 static constexpr ::PROTOBUF_NAMESPACE_ID::EnumDescriptor const** file_level_enum_descriptors_Config_2eproto = nullptr;
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_Config_2eproto = nullptr;
 
@@ -176,6 +195,13 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_Config_2eproto::offsets[] PROT
   PROTOBUF_FIELD_OFFSET(::HitRate, hitpart_),
   PROTOBUF_FIELD_OFFSET(::HitRate, nrate_),
   ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::ChargeBullet, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::ChargeBullet, chargegun_),
+  PROTOBUF_FIELD_OFFSET(::ChargeBullet, chargebullets_),
+  ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::SimulationInfo, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -187,6 +213,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_Config_2eproto::offsets[] PROT
   PROTOBUF_FIELD_OFFSET(::SimulationInfo, bdeakill_),
   PROTOBUF_FIELD_OFFSET(::SimulationInfo, scoreset_),
   PROTOBUF_FIELD_OFFSET(::SimulationInfo, rateset_),
+  PROTOBUF_FIELD_OFFSET(::SimulationInfo, bulletset_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::Config)},
@@ -194,7 +221,8 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 17, -1, sizeof(::SystemInfo)},
   { 28, -1, sizeof(::HitScore)},
   { 35, -1, sizeof(::HitRate)},
-  { 42, -1, sizeof(::SimulationInfo)},
+  { 42, -1, sizeof(::ChargeBullet)},
+  { 49, -1, sizeof(::SimulationInfo)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -203,6 +231,7 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_SystemInfo_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_HitScore_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_HitRate_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_ChargeBullet_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_SimulationInfo_default_instance_),
 };
 
@@ -219,16 +248,20 @@ const char descriptor_table_protodef_Config_2eproto[] PROTOBUF_SECTION_VARIABLE(
   " \001(\005\"9\n\010HitScore\022\035\n\007hitPart\030\001 \001(\0162\014.PERS"
   "ON_PART\022\016\n\006nScore\030\002 \001(\005\"7\n\007HitRate\022\035\n\007hi"
   "tPart\030\001 \001(\0162\014.PERSON_PART\022\r\n\005nRate\030\002 \001(\005"
-  "\"\252\001\n\016SimulationInfo\022\021\n\tnSycnTime\030\001 \001(\005\022\022"
-  "\n\nnTime2Drop\030\002 \001(\005\022\024\n\014nInitbullets\030\003 \001(\005"
-  "\022\021\n\tbKillSelf\030\004 \001(\010\022\020\n\010bDeaKill\030\005 \001(\010\022\033\n"
-  "\010scoreSet\030\006 \003(\0132\t.HitScore\022\031\n\007rateSet\030\007 "
-  "\003(\0132\010.HitRateb\006proto3"
+  "\"B\n\014ChargeBullet\022\033\n\tChargeGun\030\001 \001(\0162\010.Gu"
+  "nType\022\025\n\rChargebullets\030\002 \001(\005\"\314\001\n\016Simulat"
+  "ionInfo\022\021\n\tnSycnTime\030\001 \001(\005\022\022\n\nnTime2Drop"
+  "\030\002 \001(\005\022\024\n\014nInitbullets\030\003 \001(\005\022\021\n\tbKillSel"
+  "f\030\004 \001(\010\022\020\n\010bDeaKill\030\005 \001(\010\022\033\n\010scoreSet\030\006 "
+  "\003(\0132\t.HitScore\022\031\n\007rateSet\030\007 \003(\0132\010.HitRat"
+  "e\022 \n\tbulletSet\030\010 \003(\0132\r.ChargeBulletb\006pro"
+  "to3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_Config_2eproto_deps[1] = {
   &::descriptor_table_TypeDefine_2eproto,
 };
-static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_Config_2eproto_sccs[6] = {
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_Config_2eproto_sccs[7] = {
+  &scc_info_ChargeBullet_Config_2eproto.base,
   &scc_info_Config_Config_2eproto.base,
   &scc_info_ConnectInfo_Config_2eproto.base,
   &scc_info_HitRate_Config_2eproto.base,
@@ -238,10 +271,10 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_Con
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_Config_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_Config_2eproto = {
-  false, false, descriptor_table_protodef_Config_2eproto, "Config.proto", 661,
-  &descriptor_table_Config_2eproto_once, descriptor_table_Config_2eproto_sccs, descriptor_table_Config_2eproto_deps, 6, 1,
+  false, false, descriptor_table_protodef_Config_2eproto, "Config.proto", 763,
+  &descriptor_table_Config_2eproto_once, descriptor_table_Config_2eproto_sccs, descriptor_table_Config_2eproto_deps, 7, 1,
   schemas, file_default_instances, TableStruct_Config_2eproto::offsets,
-  file_level_metadata_Config_2eproto, 6, file_level_enum_descriptors_Config_2eproto, file_level_service_descriptors_Config_2eproto,
+  file_level_metadata_Config_2eproto, 7, file_level_enum_descriptors_Config_2eproto, file_level_service_descriptors_Config_2eproto,
 };
 
 // Force running AddDescriptors() at dynamic initialization time.
@@ -1627,6 +1660,236 @@ void HitRate::InternalSwap(HitRate* other) {
 
 // ===================================================================
 
+class ChargeBullet::_Internal {
+ public:
+};
+
+ChargeBullet::ChargeBullet(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:ChargeBullet)
+}
+ChargeBullet::ChargeBullet(const ChargeBullet& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::memcpy(&chargegun_, &from.chargegun_,
+    static_cast<size_t>(reinterpret_cast<char*>(&chargebullets_) -
+    reinterpret_cast<char*>(&chargegun_)) + sizeof(chargebullets_));
+  // @@protoc_insertion_point(copy_constructor:ChargeBullet)
+}
+
+void ChargeBullet::SharedCtor() {
+  ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+      reinterpret_cast<char*>(&chargegun_) - reinterpret_cast<char*>(this)),
+      0, static_cast<size_t>(reinterpret_cast<char*>(&chargebullets_) -
+      reinterpret_cast<char*>(&chargegun_)) + sizeof(chargebullets_));
+}
+
+ChargeBullet::~ChargeBullet() {
+  // @@protoc_insertion_point(destructor:ChargeBullet)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void ChargeBullet::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+}
+
+void ChargeBullet::ArenaDtor(void* object) {
+  ChargeBullet* _this = reinterpret_cast< ChargeBullet* >(object);
+  (void)_this;
+}
+void ChargeBullet::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void ChargeBullet::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ChargeBullet& ChargeBullet::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ChargeBullet_Config_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void ChargeBullet::Clear() {
+// @@protoc_insertion_point(message_clear_start:ChargeBullet)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ::memset(&chargegun_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&chargebullets_) -
+      reinterpret_cast<char*>(&chargegun_)) + sizeof(chargebullets_));
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* ChargeBullet::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // .GunType ChargeGun = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+          _internal_set_chargegun(static_cast<::GunType>(val));
+        } else goto handle_unusual;
+        continue;
+      // int32 Chargebullets = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
+          chargebullets_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* ChargeBullet::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:ChargeBullet)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .GunType ChargeGun = 1;
+  if (this->chargegun() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      1, this->_internal_chargegun(), target);
+  }
+
+  // int32 Chargebullets = 2;
+  if (this->chargebullets() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_chargebullets(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:ChargeBullet)
+  return target;
+}
+
+size_t ChargeBullet::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:ChargeBullet)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // .GunType ChargeGun = 1;
+  if (this->chargegun() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_chargegun());
+  }
+
+  // int32 Chargebullets = 2;
+  if (this->chargebullets() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_chargebullets());
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void ChargeBullet::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:ChargeBullet)
+  GOOGLE_DCHECK_NE(&from, this);
+  const ChargeBullet* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ChargeBullet>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:ChargeBullet)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:ChargeBullet)
+    MergeFrom(*source);
+  }
+}
+
+void ChargeBullet::MergeFrom(const ChargeBullet& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:ChargeBullet)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.chargegun() != 0) {
+    _internal_set_chargegun(from._internal_chargegun());
+  }
+  if (from.chargebullets() != 0) {
+    _internal_set_chargebullets(from._internal_chargebullets());
+  }
+}
+
+void ChargeBullet::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:ChargeBullet)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ChargeBullet::CopyFrom(const ChargeBullet& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:ChargeBullet)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ChargeBullet::IsInitialized() const {
+  return true;
+}
+
+void ChargeBullet::InternalSwap(ChargeBullet* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(ChargeBullet, chargebullets_)
+      + sizeof(ChargeBullet::chargebullets_)
+      - PROTOBUF_FIELD_OFFSET(ChargeBullet, chargegun_)>(
+          reinterpret_cast<char*>(&chargegun_),
+          reinterpret_cast<char*>(&other->chargegun_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata ChargeBullet::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
 class SimulationInfo::_Internal {
  public:
 };
@@ -1634,7 +1897,8 @@ class SimulationInfo::_Internal {
 SimulationInfo::SimulationInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena),
   scoreset_(arena),
-  rateset_(arena) {
+  rateset_(arena),
+  bulletset_(arena) {
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:SimulationInfo)
@@ -1642,7 +1906,8 @@ SimulationInfo::SimulationInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena)
 SimulationInfo::SimulationInfo(const SimulationInfo& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
       scoreset_(from.scoreset_),
-      rateset_(from.rateset_) {
+      rateset_(from.rateset_),
+      bulletset_(from.bulletset_) {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::memcpy(&nsycntime_, &from.nsycntime_,
     static_cast<size_t>(reinterpret_cast<char*>(&bdeakill_) -
@@ -1691,6 +1956,7 @@ void SimulationInfo::Clear() {
 
   scoreset_.Clear();
   rateset_.Clear();
+  bulletset_.Clear();
   ::memset(&nsycntime_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&bdeakill_) -
       reinterpret_cast<char*>(&nsycntime_)) + sizeof(bdeakill_));
@@ -1761,6 +2027,18 @@ const char* SimulationInfo::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
           } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<58>(ptr));
+        } else goto handle_unusual;
+        continue;
+      // repeated .ChargeBullet bulletSet = 8;
+      case 8:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 66)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_bulletset(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<66>(ptr));
         } else goto handle_unusual;
         continue;
       default: {
@@ -1837,6 +2115,14 @@ failure:
       InternalWriteMessage(7, this->_internal_rateset(i), target, stream);
   }
 
+  // repeated .ChargeBullet bulletSet = 8;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_bulletset_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(8, this->_internal_bulletset(i), target, stream);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -1863,6 +2149,13 @@ size_t SimulationInfo::ByteSizeLong() const {
   // repeated .HitRate rateSet = 7;
   total_size += 1UL * this->_internal_rateset_size();
   for (const auto& msg : this->rateset_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  // repeated .ChargeBullet bulletSet = 8;
+  total_size += 1UL * this->_internal_bulletset_size();
+  for (const auto& msg : this->bulletset_) {
     total_size +=
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
@@ -1931,6 +2224,7 @@ void SimulationInfo::MergeFrom(const SimulationInfo& from) {
 
   scoreset_.MergeFrom(from.scoreset_);
   rateset_.MergeFrom(from.rateset_);
+  bulletset_.MergeFrom(from.bulletset_);
   if (from.nsycntime() != 0) {
     _internal_set_nsycntime(from._internal_nsycntime());
   }
@@ -1971,6 +2265,7 @@ void SimulationInfo::InternalSwap(SimulationInfo* other) {
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   scoreset_.InternalSwap(&other->scoreset_);
   rateset_.InternalSwap(&other->rateset_);
+  bulletset_.InternalSwap(&other->bulletset_);
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(SimulationInfo, bdeakill_)
       + sizeof(SimulationInfo::bdeakill_)
@@ -2000,6 +2295,9 @@ template<> PROTOBUF_NOINLINE ::HitScore* Arena::CreateMaybeMessage< ::HitScore >
 }
 template<> PROTOBUF_NOINLINE ::HitRate* Arena::CreateMaybeMessage< ::HitRate >(Arena* arena) {
   return Arena::CreateMessageInternal< ::HitRate >(arena);
+}
+template<> PROTOBUF_NOINLINE ::ChargeBullet* Arena::CreateMaybeMessage< ::ChargeBullet >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::ChargeBullet >(arena);
 }
 template<> PROTOBUF_NOINLINE ::SimulationInfo* Arena::CreateMaybeMessage< ::SimulationInfo >(Arena* arena) {
   return Arena::CreateMessageInternal< ::SimulationInfo >(arena);

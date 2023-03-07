@@ -26,7 +26,7 @@ Rectangle {
     Image {
 //        anchors.fill: parent
         width: 600*dpx
-        height: 430*dpy
+        height: 255*dpy
         source: "qrc:/Image/wuqi/08-bg.png"
     }   
     CloseButton {
@@ -49,7 +49,7 @@ Rectangle {
         id: fileDialog
         folder: shortcuts.home
         title: qsTr("请选择文件")
-        nameFilters: [qsTr("图片 (*.tif)"),qsTr("文件 (*.xml)")/*, qsTr("全部文件 (*.*)")*/]
+        nameFilters: [qsTr("图片 (*.png)"),qsTr("图片 (*.jpg)"),qsTr("图片 (*.tif)"),qsTr("文件 (*.xml)")/*, qsTr("全部文件 (*.*)")*/]
         onAccepted: {
             var earthPath=String(fileDialog.currentFile)
             earthPath=earthPath.substr(8)
@@ -92,39 +92,39 @@ Rectangle {
         }
 
 
-        Text {
-            id: tishi
-            width: tishi.contentWidth
-            height: tishi.contentHeight
-            color: "#FFA500"
-            text: "（如果是瓦片地图，请选择tms.xml文件）"
-            font.pixelSize: 13*dpx;
-            font.family: "Microsoft YaHei";
-            verticalAlignment: Text.AlignVCenter
-        }
-        SoldierItem {
-            id:mapLat
-            text: "       经度:"
-            name: map.nLat
-        }
-        SoldierItem {
-            id:mapLon
-            text: "       纬度:"
-            name: map.nLon
-        }
-        Text {
-            id: tishi2
-            width: tishi2.contentWidth
-            height: tishi2.contentHeight
-            color: "#FFA500"
-            text: "（如果没有具体经纬度，点确定保存当前视口经纬度。）"
-            font.pixelSize: 13*dpx;
-            font.family: "Microsoft YaHei";
-            verticalAlignment: Text.AlignVCenter
-        }
+//        Text {
+//            id: tishi
+//            width: tishi.contentWidth
+//            height: tishi.contentHeight
+//            color: "#FFA500"
+//            text: "（如果是瓦片地图，请选择tms.xml文件）"
+//            font.pixelSize: 13*dpx;
+//            font.family: "Microsoft YaHei";
+//            verticalAlignment: Text.AlignVCenter
+//        }
+//        SoldierItem {
+//            id:mapLat
+//            text: "       经度:"
+//            name: map.nLat
+//        }
+//        SoldierItem {
+//            id:mapLon
+//            text: "       纬度:"
+//            name: map.nLon
+//        }
+//        Text {
+//            id: tishi2
+//            width: tishi2.contentWidth
+//            height: tishi2.contentHeight
+//            color: "#FFA500"
+//            text: "（如果没有具体经纬度，点确定保存当前视口经纬度。）"
+//            font.pixelSize: 13*dpx;
+//            font.family: "Microsoft YaHei";
+//            verticalAlignment: Text.AlignVCenter
+//        }
     }
     PopupButton {
-        y: 347*dpy
+        y: 187*dpy
         x: 256*dpx
         background: Rectangle {
             color: "#265aef"
@@ -168,9 +168,9 @@ Rectangle {
     }
     function qingkong() {
         mapPath.name = ""
-        mapLon.name = ""
+//        mapLon.name = ""
         mapName.name = ""
-        mapLat.name = ""
+//        mapLat.name = ""
     }
 
 }

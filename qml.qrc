@@ -160,6 +160,8 @@
         <file>Login/Plugins/LoginTextField.qml</file>
         <file>Image/Killing_unfoldo.png</file>
         <file>Image/listImage2.png</file>
+        <file>Exercise/BattleDamage.qml</file>
+        <file>Exercise/LineChart.qml</file>
         <file>Setting/ChongDanAll.qml</file>
     </qresource>
 </RCC>

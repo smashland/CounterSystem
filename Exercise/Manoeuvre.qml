@@ -25,14 +25,14 @@ Item {
     }
     signal yesPutDown()
     property var objSetting;
-//    property string hour:("00")
-//    property string minute: ("00")
-//    property string second: ("00")
+    //    property string hour:("00")
+    //    property string minute: ("00")
+    //    property string second: ("00")
     property string startTime;
     property string endTime;
-        property int hour:0
-        property int minute: 0
-        property int second: 0
+    property int hour:0
+    property int minute: 0
+    property int second: 0
 
     Row {
         id:yanxishijianItem
@@ -85,7 +85,7 @@ Item {
         triggeredOnStart: true
 
         onTriggered: {
-//            console.log("interval:", interval)
+            //            console.log("interval:", interval)
             manoeuvre.second++
             if(manoeuvre.second == 60){
                 manoeuvre.second= 0
@@ -145,18 +145,24 @@ Item {
         MouseArea {
             anchors.fill: parent
             onClicked: {
+<<<<<<< HEAD
 //                time_run.start()
+=======
+                console.log("开始时间："+Qt.formatDateTime(new Date(), "yyyy-MM-dd hh:mm:ss.zzz ddd"))
+                //                time_run.start()
+>>>>>>> 612fb6c233c464d88d7b53a832a04eb5db7e6e87
                 killExpand.visible = true
                 if($app.settings.bIsStart)
                 {
                     showMainCircl()
                 }
                 changeStatus()
-//                console.log("开始时间："+$app.allData.getStartTime);
-//                second_rec.text=$app.allData.nCTimes
+                //                console.log("开始时间："+$app.allData.getStartTime);
+                //                second_rec.text=$app.allData.nCTimes
                 closebar.visible = false
                 yanxishijianItem.visible = true
                 xianyin.visible = true
+                zhansun.visible = true
                 toggleSettings.visible = false
 
             }
@@ -173,7 +179,7 @@ Item {
             anchors.fill: parent
             onClicked: {
                 console.log("结束演习："+Qt.formatDateTime(new Date(), "yyyy-MM-dd hh:mm:ss.zzz ddd"))
-//                time_run.stop()
+                //                time_run.stop()
                 showTest()
                 changeStatus()
                 exerciseResults.visible = true
@@ -187,6 +193,7 @@ Item {
                 yanxishijianItem.visible = false
                 xianyin.visible = false
                 xianyin.isXianshi()
+                zhansun.visible = false
                 toggleSettings.visible = true
             }
         }
@@ -273,6 +280,34 @@ Item {
         anchors.bottomMargin: -34*dpy
         anchors.right: parent.right
         anchors.rightMargin: -20 *dpx
+    }
+
+    Button {
+        id: zhansun
+        anchors.right: parent.right
+        anchors.rightMargin: 80*dpx
+        anchors.top: yanxishijianItem.top
+        anchors.topMargin: -3*dpy
+        width: zhansunext.contentWidth + 30*dpx
+        height: 33*dpy
+        visible: false
+        checked:true
+        contentItem: Text {
+            id: zhansunext
+            text: qsTr("实时战损")
+            font.pixelSize: 15*dpx
+            color: "#ffffff"
+            font.family: "Microsoft YaHei"
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+        }
+        background: Rectangle {
+            radius: 18*dpy
+            color: "#dbbb5a"
+        }
+        onClicked: {
+            battleDamage.visible = true
+        }
     }
 
 

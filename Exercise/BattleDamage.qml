@@ -1,4 +1,4 @@
-//                                        演习结果
+﻿//                                        演习结果
 import QtQuick 2.12
 import Qt.labs.qmlmodels 1.0
 import Qt.labs.platform 1.1
@@ -164,6 +164,7 @@ Item {
                         {target:modelData.belong+"伤亡情况"},
                         {target:"弹药损耗情况"}
                     ]
+                    currentText: modelData.belong+"伤亡情况"
                     onCurrentIndexChanged: {
                         var type = chartImg.currentIndex;
                         if(type === 0){

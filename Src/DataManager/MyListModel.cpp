@@ -4,7 +4,7 @@
 #include "DataManager.h"
 #include "PersonInfo.pb.h"
 #include "../ConfigInfo.h"
-
+#include "../ParseData/DealDataManager.h"
 enum
 {
     ObjectModelRole = Qt::UserRole + 1
@@ -165,13 +165,13 @@ int CMyListModel::getScore()
             int nHitSize = pPerson->hitinfo_size();
             for(int i=0; i<nHitSize; ++i)
             {
-//                 auto pPersonHurt = CDataManager::GetInstance()->FindPersonInfo(pPerson->hitinfo(i).id());
+                //                 auto pPersonHurt = CDataManager::GetInstance()->FindPersonInfo(pPerson->hitinfo(i).id());
                 bool hurtFlag=false;
                 int hurtId=pPerson->hitinfo(i).id();
-                 for(auto one : m_allData)
-                 {
+                for(auto one : m_allData)
+                {
 
-                     qDebug()<<"属方ceshi ----："<<one->getType()<<one->getId()<<hurtId<<m_allData.size();
+                    qDebug()<<"属方ceshi ----："<<one->getType()<<one->getId()<<hurtId<<m_allData.size();
                     if(one->getId()==hurtId)
                     {
                         qDebug()<<"属方："<<one->getType()<<CConfigInfo::GetInstance()->CalHurtMark(pPerson->hitinfo(i).hurtpart());
@@ -181,20 +181,213 @@ int CMyListModel::getScore()
                         break;
                     }
 
-                 }
-
-                 if(hurtFlag)
-                 {
-                     continue;
-                 }
-                qDebug()<<"测试人员id222222222:"<<pPerson->hitinfo(i).id();
-
+                }
+                if(hurtFlag)
+                {
+                    continue;
+                }
                 nTotalScore +=CConfigInfo::GetInstance()->CalHurtMark(pPerson->hitinfo(i).hurtpart());
             }
 
         }
     }
+    gethitRate();
+//    getDepleteBullets();
+//    getAllRemindBullets();
+//    getAllHit();
     return(nTotalScore);
+}
+
+///*getAllBullets*/
+int CMyListModel::getDepleteBullets()
+{
+    bool bLink1(false);
+    int nNum(0),nNumBullets(0);
+    int nHitSize(0),depleteBullets(0);
+    for(auto one : m_allData)
+    {
+        auto pPersonInfo = CDataManager::GetInstance()->FindPersonInfo(one->getId());
+
+        if(nullptr != pPersonInfo)
+        {
+            nHitSize+= pPersonInfo->hitinfo_size();
+        }
+        /// 判断剩余子弹数
+        const ConnectStatus& conStatus = pPersonInfo->curtstatus();
+        int nBaty = pPersonInfo->curtstatus().weapons_size();
+
+        for(int nIndex=0; nIndex < nBaty; ++nIndex)
+        {
+            switch(conStatus.weapons(nIndex).weapontype())
+            {
+            case RIFLE:
+                bLink1 = UNLINK != conStatus.weapons(nIndex).contype();
+                if(bLink1)
+                {
+                    nNumBullets+=CDealDataManager::GetInstance()->GetBulletSum(pPersonInfo->id()).at(0).toInt();
+                    nNumBullets+=CConfigInfo::GetInstance()->GetChargeBullets(1);
+                    nNum += conStatus.weapons(nIndex).bulletnum();
+                    qDebug()<<one->getType()<<"测试RIFLE子弹数："<<nNumBullets<<nNum;
+                }
+                break;
+            case GRENAD:
+                bLink1 = UNLINK != conStatus.weapons(nIndex).contype();
+                if(bLink1)
+                {
+                    nNumBullets+=CDealDataManager::GetInstance()->GetBulletSum(pPersonInfo->id()).at(2).toInt();
+                    nNumBullets+=CConfigInfo::GetInstance()->GetChargeBullets(2);
+                    nNum += conStatus.weapons(nIndex).bulletnum();
+                    qDebug()<<one->getType()<<"测试GRENAD子弹数："<<nNumBullets<<nNum;
+                }
+                break;
+            case SUBMACHINE:
+                bLink1 = UNLINK != conStatus.weapons(nIndex).contype();
+                if(bLink1)
+                {
+                    nNumBullets+=CDealDataManager::GetInstance()->GetBulletSum(pPersonInfo->id()).at(4).toInt();
+                    nNumBullets+=CConfigInfo::GetInstance()->GetChargeBullets(7);
+                    nNum += conStatus.weapons(nIndex).bulletnum();
+                    qDebug()<<one->getType()<<"测试SUBMACHINE子弹数："<<nNumBullets<<nNum;
+                }
+                break;
+            }
+        }
+//        if(depleteBullets==0)
+//        {
+//            return 1;
+//        }
+//        else
+//        {
+//            qDebug()<<"命中率"<<nHitSize/depleteBullets;
+//        }
+        qDebug()<<one->getType()<<"消耗的子弹数："<<nNumBullets-nNum;
+        return nNumBullets-nNum;
+    }
+    return nNumBullets-nNum;
+}
+
+int CMyListModel::getAllRemindBullets()
+{
+    bool bLink1(false),bLink(false);
+    int nNum(0);
+    for(auto one : m_allData)
+    {
+        auto pPersonInfo = CDataManager::GetInstance()->FindPersonInfo(one->getId());
+        /// 判断剩余子弹数
+        const ConnectStatus& conStatus = pPersonInfo->curtstatus();
+        int nBaty = pPersonInfo->curtstatus().weapons_size();
+
+
+        for(int nIndex=0; nIndex < nBaty; ++nIndex)
+        {
+            switch(conStatus.weapons(nIndex).weapontype())
+            {
+            case RIFLE:
+                bLink1 = UNLINK != conStatus.weapons(nIndex).contype();
+                if(bLink1)
+                {
+                    nNum += conStatus.weapons(nIndex).bulletnum();
+                }
+                break;
+            case GRENAD:
+                bLink1 = UNLINK != conStatus.weapons(nIndex).contype();
+                if(bLink1)
+                {
+                    nNum+= conStatus.weapons(nIndex).bulletnum();
+                }
+                break;
+            case SUBMACHINE:
+                bLink1 = UNLINK != conStatus.weapons(nIndex).contype();
+                if(bLink1)
+                {
+                    nNum+= conStatus.weapons(nIndex).bulletnum();
+                }
+                break;
+            }
+        }
+        return nNum;
+    }
+}
+
+int CMyListModel::getAllHit()
+{
+    int nHitSize=0;
+    for(auto one : m_allData)
+    {
+        auto pPersonInfo = CDataManager::GetInstance()->FindPersonInfo(one->getId());
+        if(nullptr != pPersonInfo)
+        {
+            nHitSize+= pPersonInfo->hitinfo_size();
+        }
+        return nHitSize;
+    }
+    return nHitSize;
+}
+
+float CMyListModel::gethitRate()
+{
+    bool bLink1(false);
+    int nNum(0),nNumBullets(0);
+    int nHitSize(0),depleteBullets(0);
+    for(auto one : m_allData)
+    {
+        auto pPersonInfo = CDataManager::GetInstance()->FindPersonInfo(one->getId());
+        /// 判断剩余子弹数
+        const ConnectStatus& conStatus = pPersonInfo->curtstatus();
+        int nBaty = pPersonInfo->curtstatus().weapons_size();
+
+        for(int nIndex=0; nIndex < nBaty; ++nIndex)
+        {
+            switch(conStatus.weapons(nIndex).weapontype())
+            {
+            case RIFLE:
+                bLink1 = UNLINK != conStatus.weapons(nIndex).contype();
+                if(bLink1)
+                {
+                    nNumBullets+=CDealDataManager::GetInstance()->GetBulletSum(pPersonInfo->id()).at(0).toInt();
+                    nNumBullets+=CConfigInfo::GetInstance()->GetChargeBullets(1);
+                    nNum += conStatus.weapons(nIndex).bulletnum();
+                    qDebug()<<one->getType()<<"测试RIFLE子弹数："<<nNumBullets<<nNum;
+                }
+                break;
+            case GRENAD:
+                bLink1 = UNLINK != conStatus.weapons(nIndex).contype();
+                if(bLink1)
+                {
+                    nNumBullets+=CDealDataManager::GetInstance()->GetBulletSum(pPersonInfo->id()).at(2).toInt();
+                    nNumBullets+=CConfigInfo::GetInstance()->GetChargeBullets(2);
+                    nNum += conStatus.weapons(nIndex).bulletnum();
+                    qDebug()<<one->getType()<<"测试GRENAD子弹数："<<nNumBullets<<nNum;
+                }
+                break;
+            case SUBMACHINE:
+                bLink1 = UNLINK != conStatus.weapons(nIndex).contype();
+                if(bLink1)
+                {
+                    nNumBullets+=CDealDataManager::GetInstance()->GetBulletSum(pPersonInfo->id()).at(4).toInt();
+                    nNumBullets+=CConfigInfo::GetInstance()->GetChargeBullets(7);
+                    nNum += conStatus.weapons(nIndex).bulletnum();
+                    qDebug()<<one->getType()<<"测试SUBMACHINE子弹数："<<nNumBullets<<nNum;
+                }
+                break;
+            }
+        }
+        if(nullptr != pPersonInfo)
+        {
+            nHitSize+= pPersonInfo->hitinfo_size();
+        }
+        depleteBullets=nNumBullets-nNum;
+         qDebug()<<" ----------------"<<depleteBullets<<nHitSize;
+        if(depleteBullets==0)
+        {
+            return 1;
+        }
+        else
+        {
+            qDebug()<<"命中率"<<(float)nHitSize/(float)depleteBullets;
+            return (float)nHitSize/(float)depleteBullets;
+        }
+    }
 }
 
 /// 更新信息
@@ -221,7 +414,7 @@ bool CMyListModel::UpdatePerson(quint16 nID, CPersonStatus *pPerson)
             m_pGroupStatus->SetLiveRatio(static_cast<double>(liveNum())/totalNum());
         }
 
-      /// 战损人数更改,通知修改
+        /// 战损人数更改,通知修改
         int nDeathNum =totalNum() - liveNum();
         if(m_nDeathNum != nDeathNum)
         {

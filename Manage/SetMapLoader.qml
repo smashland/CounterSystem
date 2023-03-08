@@ -25,15 +25,15 @@ Rectangle {
     }
 
     Connections{
-        function onSignalAddMap(name,path,lat,lon)
+        function onSignalAddMap(name,path/*,lat,lon*/)
         {
             var earth = earthManager.addMaps(name);
             if(null!==earth)
             {
                 earth.earthName = name;
                 earth.earthPath = path;
-                earth.nLat = lat;
-                earth.nLon = lon;
+//                earth.nLat = lat;
+//                earth.nLon = lon;
                 listView.model=earthManager.earthList
                 earthManager.saveFile();
                 mapAdd.visible = false;

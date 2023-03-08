@@ -35,6 +35,13 @@ public:
     int  liveNum();
     int  getScore();
 
+    int getDepleteBullets();   ///得到消耗的子弹数
+    int getAllBullets();       ///得到总弹药数
+    int getAllRemindBullets(); ///得到总的剩余弹药数
+    int getAllHit();           ///得到总的击中次数
+    float gethitRate();        ///得到总的命中率
+
+
     /**
      * @brief 更新个人信息
      * @param nIndex
@@ -78,6 +85,8 @@ protected:
     QHash<int, QByteArray>       m_mapRolesNames;        /// 返回类型的对应名字
     int                          m_nCount{};             /// 总人数
     int                          m_nDeathNum{};          /// 战损人数
+    int                          m_nDepleteBullets;      ///消耗的子弹数
+    int                          m_nhitRate;             ///命中率
 };
 
 

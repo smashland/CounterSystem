@@ -180,19 +180,20 @@ QStringList CDealDataManager::GetBulletSum(quint16 unID)
         //    m_nSniperSum=CConfigInfo::GetInstance()->GetChargeBullets(7);
         for(int i=0;i<5;i++)
         {
-            if(i==0)
+//            if(i==0)
+//            {
+//                tempSumInfo.append(QString::number(CConfigInfo::GetInstance()->GetChargeBullets(1)));
+//            }
+//            else if(i==2)
+//            {
+//              tempSumInfo.append(QString::number(CConfigInfo::GetInstance()->GetChargeBullets(2)));
+//            }
+//            else if(i==4)
+//            {
+//              tempSumInfo.append(QString::number(CConfigInfo::GetInstance()->GetChargeBullets(7)));
+//            }
+//            else
             {
-                tempSumInfo.append(QString::number(CConfigInfo::GetInstance()->GetChargeBullets(1)));
-            }
-            else if(i==2)
-            {
-              tempSumInfo.append(QString::number(CConfigInfo::GetInstance()->GetChargeBullets(2)));
-            }
-            else if(i==4)
-            {
-              tempSumInfo.append(QString::number(CConfigInfo::GetInstance()->GetChargeBullets(7)));
-            }
-            else {
                 tempSumInfo.append(0);
             }
         }

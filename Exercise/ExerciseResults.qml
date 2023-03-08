@@ -232,6 +232,7 @@ Item {
                         {target:modelData.belong+"伤亡情况"},
                         {target:"弹药损耗情况"}
                     ]
+                    currentText: modelData.belong+"伤亡情况"
                     onCurrentIndexChanged: {
                         var type = chartImg.currentIndex;
                         if(type === 0){

@@ -1,4 +1,4 @@
-import QtQuick 2.0
+﻿import QtQuick 2.0
 import QtQuick.Controls 2.15
 
 
@@ -10,7 +10,7 @@ Rectangle {
     property int listheight: 100          //listview的长度和listelement的长度
     property int listelementheight: 30
     property var items: [                //listview的代理项目
-        { target: "" }
+//        { target: "" }
     ]
     width: 180*dpx;
     height: 25*dpy;

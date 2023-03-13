@@ -28,6 +28,7 @@ class CGlobalData : public QObject,public ITimeObserver,public IDataManagerObser
     Q_PROPERTY(int nCTimes MEMBER m_unTimes NOTIFY unTimesChanged)
     Q_PROPERTY(QVariantList listResult MEMBER m_listResult NOTIFY resultChanged)
     Q_PROPERTY(QVariantList allResult MEMBER m_listAllResult NOTIFY allResultChanged)
+    Q_PROPERTY(QVariantList hitRateResult MEMBER m_listHitRateResult NOTIFY hitRateChanged)
 public:
     explicit CGlobalData(QObject *parent = nullptr);
     ~CGlobalData();
@@ -223,6 +224,7 @@ signals:
     void mapPersonInfo(int id,QString name,int relive,double dLon, double dLat,bool bTk);
     void clearShowText();
     void unTimesChanged(int);
+    void hitRateChanged(const QVariantList&);
 protected:
     /**
      * @brief 统计成绩
@@ -283,6 +285,8 @@ private:
     QList<int>         m_listEvent;           /// 将事件保存下来
     QVariantList       m_listResult;          /// 各组的简要信息
     QVariantList       m_listAllResult;       /// 分组的详情
+    QVariantList       m_listHitRateResult;   /// 分组的详情
+
     QMap<quint16,QString>  m_mapIdType;
     QList<int>         m_listEventTime;       ///记录发生事件的时间
     int                m_nTempEventTime;      ///临时存储回放时间

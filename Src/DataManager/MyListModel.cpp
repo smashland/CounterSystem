@@ -384,8 +384,11 @@ float CMyListModel::gethitRate()
         }
         else
         {
-            qDebug()<<"命中率"<<(float)nHitSize/(float)depleteBullets;
-            return (float)nHitSize/(float)depleteBullets;
+            float hitRate=(float)nHitSize/(float)depleteBullets;
+            QString strHitRate=QString::number(hitRate,'f',1);
+            hitRate=strHitRate.toFloat();
+            qDebug()<<"命中率"<<hitRate;
+            return hitRate;
         }
     }
 }

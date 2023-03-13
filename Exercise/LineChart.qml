@@ -1,4 +1,4 @@
-import QtQuick 2.14
+﻿import QtQuick 2.14
 import QtQuick.Controls 2.14
 import QtCharts 2.14
 import QtQuick.Layouts 1.14
@@ -48,12 +48,12 @@ ChartView {
         axisY: axisy
         labelsPosition: AbstractBarSeries.LabelsInsideEnd		//指条形图里面的数字值的位置
         labelsVisible: true										//指条形图里面的数字值是否显示，默认不显示
+//        BarSet {
+//            color: "#00a0fa"
+//            values: [ 0,40,0,0,0,0 ]
+//        }
         BarSet {
-            color: "#00a0fa"
-            values: [ 0,40,0,0,0,0 ]
-        }
-        BarSet {
-            color: "#eb5959"
+            color: "#eb5959"            
             values: [ 0,0,0,0,50,0]
         }
 

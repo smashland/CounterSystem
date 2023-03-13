@@ -424,6 +424,7 @@ void CGlobalData::calResult()
 {
     m_listResult.clear();
     m_listAllResult.clear();
+    m_listHitRateResult.clear();
 
     QVariantMap tmpMap;
     for(auto findOne = m_mapTypeInfo.begin(); m_mapTypeInfo.end() != findOne; ++findOne)
@@ -440,11 +441,16 @@ void CGlobalData::calResult()
         tmpMap.insert("dealth",1.0f-itorSecond->GetGroupStatus()->GetLiveRatio());
         tmpMap.insert("ok",itorSecond->GetGroupStatus()->GetLiveRatio()-itorSecond->GetGroupStatus()->GetHurtRatio());
         m_listAllResult.push_back(tmpMap);
+
+        tmpMap.insert("depleteBullets",itorSecond->getDepleteBullets());
+        tmpMap.insert("hitRate",itorSecond->gethitRate());
+        m_listHitRateResult.push_back(tmpMap);
     }
 
     /// 更新模型列表
     emit(resultChanged(m_listResult));
     emit(allResultChanged(m_listAllResult));
+    emit(hitRateChanged(m_listHitRateResult));
 }
 
 /// 定位人员

@@ -1,4 +1,4 @@
-import QtQuick 2.2
+﻿import QtQuick 2.2
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.1
 import QtQuick.Layouts 1.1
@@ -10,6 +10,7 @@ Item
     id:rootItem
     anchors.fill: parent
     property var objSetting;
+    property var cursorType: Qt.ArrowCursor
 
     /// 显示地图
     QuickOSGViewer
@@ -29,6 +30,7 @@ Item
                 mouse.accepted = false;
             }
             propagateComposedEvents: true
+            cursorShape: cursorType
         }
     }
 

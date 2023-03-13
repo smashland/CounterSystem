@@ -426,6 +426,7 @@ void CGlobalData::calResult()
     m_listAllResult.clear();
     m_listHitRateResult.clear();
 
+
     QVariantMap tmpMap;
     for(auto findOne = m_mapTypeInfo.begin(); m_mapTypeInfo.end() != findOne; ++findOne)
     {
@@ -440,11 +441,15 @@ void CGlobalData::calResult()
         tmpMap.insert("hurt",itorSecond->GetGroupStatus()->GetHurtRatio());
         tmpMap.insert("dealth",1.0f-itorSecond->GetGroupStatus()->GetLiveRatio());
         tmpMap.insert("ok",itorSecond->GetGroupStatus()->GetLiveRatio()-itorSecond->GetGroupStatus()->GetHurtRatio());
-        m_listAllResult.push_back(tmpMap);
+        //        m_listAllResult.push_back(tmpMap);
 
+        tmpMap.insert("allBullets",itorSecond->getAllBullets());
         tmpMap.insert("depleteBullets",itorSecond->getDepleteBullets());
         tmpMap.insert("hitRate",itorSecond->gethitRate());
-        m_listHitRateResult.push_back(tmpMap);
+
+        m_listAllResult.push_back(tmpMap);
+
+        m_listHitRateResult.append(itorSecond->gethitRate());
     }
 
     /// 更新模型列表
@@ -995,7 +1000,7 @@ void CGlobalData::ChongdanAll(quint16 nID, const QStringList &allInfo)
                 nNum += conStatus.weapons(nIndex).bulletnum();
             temp=allInfo.at(0).toInt();
             temp=temp+nNum;
-//            tempInfo.append(QString::number(temp));
+            //            tempInfo.append(QString::number(temp));
             tempInfo.replace(0,QString::number(temp));
             qDebug()<<"步枪枪数："<<nNum<<temp<<allInfo;
             break;
@@ -1021,7 +1026,7 @@ void CGlobalData::ChongdanAll(quint16 nID, const QStringList &allInfo)
             temp=temp+nNum;
             tempInfo.replace(7,QString::number(temp));
             qDebug()<<"狙击枪枪数："<<nNum<<temp;
-             break;
+            break;
         }
     }
     CDealDataManager::GetInstance()->PersonalChongDan(nID,tempInfo);

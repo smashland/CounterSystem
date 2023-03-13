@@ -20,20 +20,21 @@ Rectangle {
         enabled:true
         onWheel: {
             // 屏蔽滚轮事件，防止滚动方案列表时缩放地球
-//            mouse.accepted = false
+            //            mouse.accepted = false
         }
     }
 
     Connections{
         function onSignalAddMap(name,path/*,lat,lon*/)
         {
-            var earth = earthManager.addMaps(name);
+            var earth = earthManager.addMaps(name,path);
             if(null!==earth)
             {
                 earth.earthName = name;
                 earth.earthPath = path;
-//                earth.nLat = lat;
-//                earth.nLon = lon;
+                //                earth.nLat = lat;
+                //                earth.nLon = lon;
+                console.log("测试路径："+name+" "+path)
                 listView.model=earthManager.earthList
                 earthManager.saveFile();
                 mapAdd.visible = false;
@@ -45,62 +46,74 @@ Rectangle {
         }
         target: mapAdd
     }
+    Connections{
+        ignoreUnknownSignals: true;
+        target: earthManager
+        onBeginEdit:{
+            rootItem.cursorType=Qt.CrossCursor
+            footerBar.btnSet.checked = false
+        }
+        onEndEdit:{
+            rootItem.cursorType = Qt.ArrowCursor
+            footerBar.btnSet.checked = true
+        }
+    }
     MapHelpList{
-            id: listView
-            width: 710 *dpx
-            height: 510 *dpy
-            model:earthManager.earthList
-            currentIndex: -1
-            spacing:2*dpy
-            delegate: DelegateRectangle {
-                id: wrapper
-                property bool hoverd: false
-                Rectangle {
-                    id: background
-                    anchors.fill: parent
-                    color: listView.currentIndex === index ? "#2D5689" : (hoverd ? "#2D5689" : "#4671a6")
-                }
+        id: listView
+        width: 710 *dpx
+        height: 510 *dpy
+        model:earthManager.earthList
+        currentIndex: -1
+        spacing:2*dpy
+        delegate: DelegateRectangle {
+            id: wrapper
+            property bool hoverd: false
+            Rectangle {
+                id: background
+                anchors.fill: parent
+                color: listView.currentIndex === index ? "#2D5689" : (hoverd ? "#2D5689" : "#4671a6")
+            }
 
-                TextListItem {
-                    id: fileName
-                    text: modelData.earthName
-                    anchors.centerIn: parent
+            TextListItem {
+                id: fileName
+                text: modelData.earthName
+                anchors.centerIn: parent
+            }
+            MouseArea {
+                id: mouseArea
+                anchors.fill: parent
+                //                    hoverEnabled: true
+                onClicked: {
+                    earthManager.praseEarthXml(modelData.earthPath)
+                    $app.changeEarth(modelData.earthPath)
+                    earthManager.saveCurrentEarth(modelData.earthName,modelData.nLat,modelData.nLon);
+                    earthManager.praseCurrentEarth();
+                    listView.currentIndex = index
+                    mouse.accepted = false
                 }
+                //                    onEntered: {
+                //                        wrapper.hoverd = true
+                //                    }
+
+                //                    onExited: wrapper.hoverd = false
+
+            }
+            ViewButton {
+                name: qsTr("删除")
+                color: viewColor_shanchu
+                anchors.right: parent.right
+                anchors.rightMargin: 10*dpx
+                y: 10 *dpy
                 MouseArea {
-                    id: mouseArea
                     anchors.fill: parent
-//                    hoverEnabled: true
                     onClicked: {
-                        earthManager.praseEarthXml(modelData.earthPath)
-                        $app.changeEarth(modelData.earthPath)
-                        earthManager.saveCurrentEarth(modelData.earthName,modelData.nLat,modelData.nLon);
-                        earthManager.praseCurrentEarth();
-                        listView.currentIndex = index
-                        mouse.accepted = false
-                    }
-//                    onEntered: {
-//                        wrapper.hoverd = true
-//                    }
-
-//                    onExited: wrapper.hoverd = false
-
-                }
-                ViewButton {
-                    name: qsTr("删除")
-                    color: viewColor_shanchu
-                    anchors.right: parent.right
-                    anchors.rightMargin: 10*dpx
-                    y: 10 *dpy
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                             earthManager.deleteEarth(modelData.earthName,modelData.earthPath)
-                            listView.model=earthManager.earthList
-                        }
+                        earthManager.deleteEarth(modelData.earthName,modelData.earthPath)
+                        listView.model=earthManager.earthList
                     }
                 }
             }
         }
+    }
     property var mapValue:{0:0}
     property var component;
     function openQml(obj) {
@@ -149,7 +162,7 @@ Rectangle {
         nameButton: "添加"
         onClicked: {
             mapAdd.visible = true
-//            footerBar.btnSet.checked = false
+            //            footerBar.btnSet.checked = false
             //            openQml(earthManager.addMaps(mapName),"MapAdd.qml")
         }
     }

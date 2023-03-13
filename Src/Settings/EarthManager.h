@@ -23,7 +23,7 @@ public:
       * @brief 添加地图
       * @param earthName
       */
-    Q_INVOKABLE CSetEarth* addMaps(const QString &earthName);
+    Q_INVOKABLE CSetEarth* addMaps(const QString &earthName,const QString &earthPath);
 
     /**
      * @brief 删除地图
@@ -67,6 +67,8 @@ signals:
     void currentNameChanged();
     void currentLatChanged();
     void currentLonChanged();
+    void beginEdit();
+    void endEdit();
 protected:
     void ReadFile();
 private:

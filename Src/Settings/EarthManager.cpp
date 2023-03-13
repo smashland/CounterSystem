@@ -29,8 +29,9 @@ CSetEarth *EarthManager::createMap()
 }
 
 /// 增加成员
-CSetEarth *EarthManager::addMaps(const QString &earthName)
+CSetEarth *EarthManager::addMaps(const QString &earthName,const QString &earthPath)
 {
+    QFileInfo earthPathInfo(earthPath);
     auto findOne = m_mapName2EarthInfo.find(earthName);
     if(m_mapName2EarthInfo.end() == findOne)
     {
@@ -40,8 +41,15 @@ CSetEarth *EarthManager::addMaps(const QString &earthName)
             m_mapName2EarthInfo.insert(earthName,pNewOne);
             pNewOne->setEarthNum(m_listEarth.size());
             m_listEarth.append(pNewOne);
-
             emit earthChanged();
+            if(earthPathInfo.suffix()=="jpg"||earthPathInfo.suffix()=="png")
+            {
+                //开始鼠标
+                //开始的确定区域
+                emit beginEdit();
+                qDebug()<<"lujing"<<earthPath;
+            }
+
             return(pNewOne);
         }
         else

@@ -1,4 +1,4 @@
-﻿//                                        演习结果
+﻿//                                        实时战损
 import QtQuick 2.12
 import Qt.labs.qmlmodels 1.0
 import Qt.labs.platform 1.1
@@ -40,7 +40,7 @@ Item {
         onClicked:
         {
             battleDamage.visible = false
-            $app.allData.clearInfo();
+//            $app.allData.clearInfo();
         }
     }
 

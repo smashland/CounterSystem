@@ -266,6 +266,8 @@ Item {
                     width: 500*dpx
                     height: 290*dpy
                     visible: false
+                    belongColor:modelData.belong
+                    allBulltes: 1000//modelData.allBullets
                 }
 
                 Rectangle {

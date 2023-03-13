@@ -51,8 +51,8 @@ void CSetEarth::writeEarth(QJsonObject &rObj)
 {
     rObj["Name"] = m_sEarthName;
     rObj["Path"] = m_sEarthPath;
-    rObj["Lat"]  = m_nLat;
-    rObj["Lon"]  = m_nLon;
+//    rObj["Lat"]  = m_nLat;
+//    rObj["Lon"]  = m_nLon;
 }
 
 void CSetEarth::readEarth(const QJsonObject &rObj)
@@ -63,11 +63,11 @@ void CSetEarth::readEarth(const QJsonObject &rObj)
     if (rObj.contains("Path") && rObj["Path"].isString())
         m_sEarthPath = rObj["Path"].toString();
 
-    if (rObj.contains("Lat") && rObj["Lat"].isDouble())
-        m_nLat = rObj["Lat"].toInt();
+//    if (rObj.contains("Lat") && rObj["Lat"].isDouble())
+//        m_nLat = rObj["Lat"].toInt();
 
-    if (rObj.contains("Lon") && rObj["Lon"].isDouble())
-        m_nLon = rObj["Lon"].toInt();
+//    if (rObj.contains("Lon") && rObj["Lon"].isDouble())
+//        m_nLon = rObj["Lon"].toInt();
 }
 
 void CSetEarth::setEarthNum(int EarthNum)

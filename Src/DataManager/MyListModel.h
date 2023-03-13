@@ -40,6 +40,7 @@ public:
     int getAllRemindBullets(); ///得到总的剩余弹药数
     int getAllHit();           ///得到总的击中次数
     float gethitRate();        ///得到总的命中率
+    QList<int> getBulletsList();
 
 
     /**

@@ -10,7 +10,7 @@ import "../Exercise"
 Rectangle {
     id: mapAdd
     color: "transparent"
-    signal signalAddMap(string name,string path/*,int lat,int lon*/)    //        添加地图
+    signal signalAddMap(string name,string path,var lat,var lon,var rdlat,var rdlon)    //        添加地图
     property var map: null
 
     MouseArea {
@@ -24,11 +24,11 @@ Rectangle {
     }
 
     Image {
-//        anchors.fill: parent
+        //        anchors.fill: parent
         width: 600*dpx
-        height: 255*dpy
+        height: 550*dpy/*255*dpy*/
         source: "qrc:/Image/wuqi/08-bg.png"
-    }   
+    }
     CloseButton {
         x: 515*dpx
         y: 55*dpy
@@ -42,7 +42,7 @@ Rectangle {
         name: ("添加地图")
         icon: "\ue795"
         x: 60 *dpx
-        y: 50*dpy
+        y: 60*dpy/* 50*dpy*/
     }
 
     FileDialog {
@@ -58,18 +58,18 @@ Rectangle {
     }
     Column {
         x: 96 *dpx
-        y: 96*dpy
+        y: 110*dpy/*96*dpy*/
         spacing: 12*dpy
         SoldierItem {
             id:mapName
-            text: "地图名称:"
+            text: "  地图名称:"
             name: map.earthName
         }
         Row {
             spacing: 30*dpx
             SoldierItem {
                 id:mapPath
-                text: "地图路径:"
+                text: "  地图路径:"
                 name: map.earthPath
             }
             Button {
@@ -92,59 +92,92 @@ Rectangle {
         }
 
 
-//        Text {
-//            id: tishi
-//            width: tishi.contentWidth
-//            height: tishi.contentHeight
-//            color: "#FFA500"
-//            text: "（如果是瓦片地图，请选择tms.xml文件）"
-//            font.pixelSize: 13*dpx;
-//            font.family: "Microsoft YaHei";
-//            verticalAlignment: Text.AlignVCenter
-//        }
-//        SoldierItem {
-//            id:mapLat
-//            text: "       经度:"
-//            name: map.nLat
-//        }
-//        SoldierItem {
-//            id:mapLon
-//            text: "       纬度:"
-//            name: map.nLon
-//        }
-//        Text {
-//            id: tishi2
-//            width: tishi2.contentWidth
-//            height: tishi2.contentHeight
-//            color: "#FFA500"
-//            text: "（如果没有具体经纬度，点确定保存当前视口经纬度。）"
-//            font.pixelSize: 13*dpx;
-//            font.family: "Microsoft YaHei";
-//            verticalAlignment: Text.AlignVCenter
-//        }
-    }
-    PopupButton {
-        y: 187*dpy
-        x: 256*dpx
-        background: Rectangle {
-            color: "#265aef"
+        Text {
+            id: tishi
+            width: tishi.contentWidth
+            height: tishi.contentHeight
+            color: "#FFA500"
+            text: "（如果是瓦片地图，请选择tms.xml文件）"
+            font.pixelSize: 13*dpx;
+            font.family: "Microsoft YaHei";
+            verticalAlignment: Text.AlignVCenter
         }
-        nameButton: "确定"
-        onClicked: {
-            if(mapName.name===""||mapPath.name==="")
-            {
-                earthPopup.text="地图名称或路径不能为空"
-                earthPopup.visible=true
-                timer.start()
-                console.log("地图名称或者路径不能为空");
+        SoldierItem {
+            id:mapLat
+            text: " 左上角经度:"
+            name: map.nLat
+        }
+        SoldierItem {
+            id:mapLon
+            text: " 左上角纬度:"
+            name: map.nLon
+        }
+        SoldierItem {
+            id:mapRDLat
+            text: " 右下角经度:"
+            name: map.nRDLat
+        }
+        SoldierItem {
+            id:mapRDLon
+            text: " 右下角纬度:"
+            name: map.nRDLon
+        }
+        Text {
+            id: tishi2
+            width: tishi2.contentWidth
+            height: tishi2.contentHeight
+            color: "#FFA500"
+            text: "（如果没有具体经纬度，点确定保存当前视口经纬度。）"
+            font.pixelSize: 13*dpx;
+            font.family: "Microsoft YaHei";
+            verticalAlignment: Text.AlignVCenter
+        }
+        PopupButton {
+//            y: 187*dpy
+            x: 185*dpx
+
+            background: Rectangle {
+                color: "#265aef"
             }
-            else
-            {
+            nameButton: "确定"
+            onClicked: {
+                if(mapName.name===""||mapPath.name==="")
+                {
+                    earthPopup.text="地图名称或路径不能为空"
+                    earthPopup.visible=true
+                    timer.start()
+                    console.log("地图名称或者路径不能为空");
+                }
+                else
+                {
+                    signalAddMap(mapName.name,mapPath.name,mapLat.name,mapLon.name,mapRDLat.name,mapRDLon.name);
+                    //                  signalAddMap(mapName.name,mapPath.name);
+                }
+            }
+        }
+    }
+//    PopupButton {
+//        y: 187*dpy
+//        x: 256*dpx
+//        background: Rectangle {
+//            color: "#265aef"
+//        }
+//        nameButton: "确定"
+//        onClicked: {
+//            if(mapName.name===""||mapPath.name==="")
+//            {
+//                earthPopup.text="地图名称或路径不能为空"
+//                earthPopup.visible=true
+//                timer.start()
+//                console.log("地图名称或者路径不能为空");
+//            }
+//            else
+//            {
 //                signalAddMap(mapName.name,mapPath.name,mapLat.name,mapLon.name);
-                  signalAddMap(mapName.name,mapPath.name);
-            }
-        }
-    }
+//                //                  signalAddMap(mapName.name,mapPath.name);
+//            }
+//        }
+//    }
 
     ScePopup {
         id: earthPopup
@@ -169,9 +202,9 @@ Rectangle {
     }
     function qingkong() {
         mapPath.name = ""
-//        mapLon.name = ""
+        //        mapLon.name = ""
         mapName.name = ""
-//        mapLat.name = ""
+        //        mapLat.name = ""
     }
 
 }

@@ -4,6 +4,7 @@
 #include <ISceneCore.h>
 #include <SceneGraph/ISceneGraphManager.h>
 #include <Plot/Map/IMap.h>
+#include <Plot/Map/IMapCoverImage.h>
 #include <QDesktopServices>
 #include <QResource>
 #include <QUrl>
@@ -24,6 +25,10 @@
 #include "qjsondocument.h"
 #include <iomanip>
 #include "Src/NoticManger.h"
+
+#include <SceneGraph/ISceneGraph.h>
+#include <Plot/Map/IMap.h>
+#include <Plot/Map/IMapLayer.h>
 
 QAppGlobal::QAppGlobal(QObject *parent) : QObject(parent)
 {
@@ -83,6 +88,16 @@ void QAppGlobal::changeEarth()
     std:: cout << "加载路径:" << GetDataPath() << "/Earth/Geocentric.earth" << std::endl;
     pSeneGraph->GetMap()->LoadUserMap(GetDataPath()+"/Earth/Geocentric.earth",false,true);
 }
+
+//void QAppGlobal::UpdateImage(/*const ScenePos &rLeftUp, const ScenePos &rRightDown, const std::string &sImagePath*/)
+//{
+//    IMapCoverImage* pCoverImage = dynamic_cast<IMapCoverImage*>(m_pSceneGraph->GetPlot()->CreateSceneNode("IMapCoverImage"));
+//    ScenePos lu, rb;
+//    lu.dX = 114.50; lu.dY = 38.05, lu.dZ = 10;
+//    rb.dX = 114.52; rb.dY = 38.00, rb.dZ = 10;
+//    pCoverImage->SetBound(lu,rb,"D:/1.png");
+//    m_pLayer->AddSceneNode(pCoverImage);
+//}
 
 /// 更新信息
 void QAppGlobal::updateNotic(const QString &rInfo)

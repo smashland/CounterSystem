@@ -6,6 +6,7 @@
 #include <Plot/Common/ISceneLodGroup.h>
 #include <Plot/Common/ISceneScaleGroup.h>
 #include "PlaceNodeInfo.h"
+#include "Plot/Map/IMapCoverImage.h"
 #include <QDebug>
 CPlaceNodeInfo::CPlaceNodeInfo(ISceneGraph *pSceneGraph):m_pSceneGraph(pSceneGraph)
 {
@@ -94,6 +95,8 @@ void CPlaceNodeInfo::SetColor(const SceneColor &rColor)
     m_pImage->SetColor(rColor);
 }
 
+#include <SceneGraph/SceneType.h>
+
 void CPlaceNodeInfo::InitNode()
 {
     auto pScreenGroup = m_pSceneGraph->GetPlot()->CreateSceneGroup(SCREEN_GROUP)->AsSceneScreenGroup();
@@ -104,7 +107,17 @@ void CPlaceNodeInfo::InitNode()
     m_pImage->AlwasOnTop(true);
     m_pLabel->AlwasOnTop(true);
 //    m_pLocation->SetCanPick(true);
+
+//    m_pCoverImage = dynamic_cast<IMapCoverImage*>(m_pSceneGraph->GetPlot()->CreateSceneNode("IMapCoverImage"));
+//    ScenePos lu, rb;
+//    lu.dX = 114.52; lu.dY = 38.05, lu.dZ = 10;
+//    rb.dX = 100.50; rb.dY = 10.00, rb.dZ = 10;
+//    m_pCoverImage->SetBound(lu,rb,"E:/Bimgis/02CounterSystem/Bin/Data/Earth/test1.png");
+//    qDebug() << "set image";
+//    pScreenGroup->AddSceneNode(m_pCoverImage);
+
     TypeChanged();
+
     pScreenGroup->AddSceneNode(m_pImage);
     pScreenGroup->AddSceneNode(m_pLabel);
     pScreenGroup->AlwasOnTop(true);
@@ -116,6 +129,7 @@ void CPlaceNodeInfo::InitNode()
 //    spOffset.sHeight=-26;
 //    spOffset.sWidth=0;
 //    m_pLabel->SetPixelOffset(spOffset);
+
 }
 
 

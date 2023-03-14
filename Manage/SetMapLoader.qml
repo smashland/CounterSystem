@@ -25,15 +25,15 @@ Rectangle {
     }
 
     Connections{
-        function onSignalAddMap(name,path/*,lat,lon*/)
+        function onSignalAddMap(name,path,lat,lon)
         {
             var earth = earthManager.addMaps(name,path);
             if(null!==earth)
             {
                 earth.earthName = name;
                 earth.earthPath = path;
-                //                earth.nLat = lat;
-                //                earth.nLon = lon;
+                earth.nLat = lat;
+                earth.nLon = lon;
                 console.log("测试路径："+name+" "+path)
                 listView.model=earthManager.earthList
                 earthManager.saveFile();
@@ -147,8 +147,9 @@ Rectangle {
     MapAdd {
         id: mapAdd
         width: 600*dpx
-        height: 430*dpy
+        height:450*dpy /*430*dpy*/
         //        anchors.centerIn: parent
+               y:-45*dpy
         visible: false
     }
 

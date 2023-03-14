@@ -75,8 +75,10 @@ private:
 
     QString m_sEarthName;///地图名称
     QString m_sEarthPath;///地球路径
-    int     m_nLat;      ///地图经度
-    int     m_nLon;      ///地图纬度
+    float     m_nLat;      ///地图经度
+    float     m_nLon;      ///地图纬度
+    float     m_nRDLat;      ///地图右下角经度
+    float     m_nRDLon;      ///地图右下角纬度
     int     m_nEarthNum; ///地图编号
 };
 

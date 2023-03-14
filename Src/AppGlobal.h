@@ -2,6 +2,8 @@
 #define APPGLOBAL_H
 
 #include <QObject>
+#include "Plot/Map/IMap.h"
+#include "SceneGraph/SceneType.h"
 #include "Settings/GlobalSettings.h"
 #include "DataManager/GlobalData.h"
 #include <QTextCodec>
@@ -38,6 +40,11 @@ public:
     Q_INVOKABLE void initSystem();
     Q_INVOKABLE void startConnect();
     Q_INVOKABLE void changeEarth();
+
+//    /**
+//     * @brief 更新图片
+//     */
+//    void UpdateImage(/*const ScenePos &rLeftUp, const ScenePos &rRightDown, const std::string &sImagePath*/);
 
     void updateNotic(const QString & rInfo);
     void setAppPath(QString sAppPath);
@@ -117,6 +124,10 @@ private:
     double          m_dAveLon=0.0;          ///平均经度
     QString         m_sAveLat;          ///平均纬度
     QString         m_sAveLon;          ///平均经度
+
+    ISceneGraph*    m_pSceneGraph;            /// 场景图
+    IMap*           m_pMap;                   /// 地图
+    IMapLayer*     m_pLayer;                 ///标绘图层
 };
 
 Q_DECLARE_METATYPE(CGlobalSettings*)

@@ -70,6 +70,11 @@ public:
     void UpdateSeconds(const quint16&);
 
     /**
+     * @brief 更新图片
+     */
+    void UpdateImage(/*const ScenePos &rLeftUp, const ScenePos &rRightDown, const std::string &sImagePath*/);
+
+    /**
      * @brief 得到各方的id
      * @return
      */

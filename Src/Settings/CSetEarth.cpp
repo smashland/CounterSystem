@@ -51,8 +51,10 @@ void CSetEarth::writeEarth(QJsonObject &rObj)
 {
     rObj["Name"] = m_sEarthName;
     rObj["Path"] = m_sEarthPath;
-//    rObj["Lat"]  = m_nLat;
-//    rObj["Lon"]  = m_nLon;
+    rObj["Lat"]  = m_nLat;
+    rObj["Lon"]  = m_nLon;
+    rObj["RDLat"]  = m_nRDLat;
+    rObj["RDLon"]  = m_nRDLon;
 }
 
 void CSetEarth::readEarth(const QJsonObject &rObj)
@@ -63,11 +65,17 @@ void CSetEarth::readEarth(const QJsonObject &rObj)
     if (rObj.contains("Path") && rObj["Path"].isString())
         m_sEarthPath = rObj["Path"].toString();
 
-//    if (rObj.contains("Lat") && rObj["Lat"].isDouble())
-//        m_nLat = rObj["Lat"].toInt();
+    if (rObj.contains("Lat") && rObj["Lat"].isDouble())
+        m_nLat = rObj["Lat"].toDouble();
 
-//    if (rObj.contains("Lon") && rObj["Lon"].isDouble())
-//        m_nLon = rObj["Lon"].toInt();
+    if (rObj.contains("Lon") && rObj["Lon"].isDouble())
+        m_nLon = rObj["Lon"].toDouble();
+
+    if (rObj.contains("RDLat") && rObj["RDLat"].isDouble())
+        m_nRDLat = rObj["RDLat"].toDouble();
+
+    if (rObj.contains("RDLon") && rObj["RDLon"].isDouble())
+        m_nRDLon = rObj["RDLon"].toDouble();
 }
 
 void CSetEarth::setEarthNum(int EarthNum)

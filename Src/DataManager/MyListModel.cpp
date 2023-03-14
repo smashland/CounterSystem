@@ -191,7 +191,7 @@ int CMyListModel::getScore()
 
         }
     }
-    gethitRate();
+//    gethitRate();
 //    getDepleteBullets();
 //    getAllRemindBullets();
 //    getAllHit();
@@ -463,7 +463,7 @@ QList<int> CMyListModel::getBulletsList()
                     nNumBullets+=CDealDataManager::GetInstance()->GetBulletSum(pPersonInfo->id()).at(0).toInt();
                     nNumBullets+=CConfigInfo::GetInstance()->GetChargeBullets(1);
                     nNum += conStatus.weapons(nIndex).bulletnum();
-                    qDebug()<<one->getType()<<"测试RIFLE子弹数："<<nNumBullets<<nNum;
+//                    qDebug()<<one->getType()<<"测试RIFLE子弹数："<<nNumBullets<<nNum;
                 }
                 break;
             case GRENAD:
@@ -473,7 +473,7 @@ QList<int> CMyListModel::getBulletsList()
                     nNumBullets+=CDealDataManager::GetInstance()->GetBulletSum(pPersonInfo->id()).at(2).toInt();
                     nNumBullets+=CConfigInfo::GetInstance()->GetChargeBullets(2);
                     nNum += conStatus.weapons(nIndex).bulletnum();
-                    qDebug()<<one->getType()<<"测试GRENAD子弹数："<<nNumBullets<<nNum;
+//                    qDebug()<<one->getType()<<"测试GRENAD子弹数："<<nNumBullets<<nNum;
                 }
                 break;
             case SUBMACHINE:
@@ -483,7 +483,7 @@ QList<int> CMyListModel::getBulletsList()
                     nNumBullets+=CDealDataManager::GetInstance()->GetBulletSum(pPersonInfo->id()).at(4).toInt();
                     nNumBullets+=CConfigInfo::GetInstance()->GetChargeBullets(7);
                     nNum += conStatus.weapons(nIndex).bulletnum();
-                    qDebug()<<one->getType()<<"测试SUBMACHINE子弹数："<<nNumBullets<<nNum;
+//                    qDebug()<<one->getType()<<"测试SUBMACHINE子弹数："<<nNumBullets<<nNum;
                 }
                 break;
             }
@@ -504,7 +504,11 @@ QList<int> CMyListModel::getBulletsList()
             float hitRate=(float)nHitSize/(float)depleteBullets;
             QString strHitRate=QString::number(hitRate,'f',1);
             hitRate=strHitRate.toFloat();
-            if(hitRate>0&&hitRate<=0.2)
+            if(nHitSize==0)
+            {
+               hitRate=0;
+            }
+            if(hitRate>=0&&hitRate<=0.2)
             {
                 listBullet<<0<<depleteBullets<<0<<0<<0<<0;
             }
@@ -524,7 +528,7 @@ QList<int> CMyListModel::getBulletsList()
             {
                 listBullet<<0<<0<<0<<0<<0<<depleteBullets;
             }
-            qDebug()<<"命中率"<<hitRate;
+            qDebug()<<"listBullet"<<listBullet;
             return listBullet;
         }
     }

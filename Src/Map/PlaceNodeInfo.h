@@ -1,4 +1,4 @@
-#ifndef C_PLACENODEINFO_H
+﻿#ifndef C_PLACENODEINFO_H
 #define C_PLACENODEINFO_H
 
 #include <string>
@@ -8,6 +8,9 @@ class ILabel;
 class IImage;
 struct ScenePos;
 struct SceneColor;
+
+class IMapCoverImage;
+class IMapLayer;
 
 enum GroupType
 {
@@ -80,5 +83,6 @@ protected:
     IImage*       m_pImage=nullptr;
     GroupType     m_emGroupType=UN_KNOW;
     HurtType      m_emHurtType=Hurt_OK;
+    IMapCoverImage* m_pCoverImage=nullptr;
 };
 #endif // C_PLACENODEINFO_H

@@ -17,6 +17,7 @@ Item {
 
     property string defaltFolderUrl: "file:///D:/InstallSoftWare/CounterSystem/Data/Szy/"
     property string loactionStr:"{"+$app.sAveLon+","+$app.sAveLat+"}"
+    signal hitRate(var hit,int bulltes)
 
     Image {
         id: loginImage
@@ -247,6 +248,7 @@ Item {
                             glow.visible = false
                             circle.visible = false
                             lineChart.visible = true
+                            hitRate(modelData.hitRate,  modelData.depleteBullets)
                         }
                     }
                 }
@@ -267,7 +269,11 @@ Item {
                     height: 290*dpy
                     visible: false
                     belongColor:modelData.belong
-                    allBulltes: 1000//modelData.allBullets
+                    allBulltes: modelData.allBullets
+//                    hitListValue:modelData.hitRate
+                    hitRate:modelData.hitRate
+                    bulltes:modelData.depleteBullets
+
                 }
 
                 Rectangle {

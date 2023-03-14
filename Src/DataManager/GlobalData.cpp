@@ -428,6 +428,7 @@ void CGlobalData::calResult()
 
 
     QVariantMap tmpMap;
+    QList<int>  listTemp;
     for(auto findOne = m_mapTypeInfo.begin(); m_mapTypeInfo.end() != findOne; ++findOne)
     {
         tmpMap.insert("belong",findOne.key());
@@ -441,21 +442,30 @@ void CGlobalData::calResult()
         tmpMap.insert("hurt",itorSecond->GetGroupStatus()->GetHurtRatio());
         tmpMap.insert("dealth",1.0f-itorSecond->GetGroupStatus()->GetLiveRatio());
         tmpMap.insert("ok",itorSecond->GetGroupStatus()->GetLiveRatio()-itorSecond->GetGroupStatus()->GetHurtRatio());
-        //        m_listAllResult.push_back(tmpMap);
-
-        tmpMap.insert("allBullets",itorSecond->getAllBullets());
-        tmpMap.insert("depleteBullets",itorSecond->getDepleteBullets());
-        tmpMap.insert("hitRate",itorSecond->gethitRate());
-
         m_listAllResult.push_back(tmpMap);
 
-        m_listHitRateResult.append(itorSecond->gethitRate());
+//        tmpMap.insert("allBullets",itorSecond->getAllBullets());
+//        tmpMap.insert("depleteBullets",itorSecond->getDepleteBullets());
+//        tmpMap.insert("hitRate",itorSecond->gethitRate());
+
+//        m_listAllResult.push_back(tmpMap);
+
+//        listTemp=itorSecond->getBulletsList();
+
+////        m_listHitRateResult = listTemp;
+//        foreach(auto e, listTemp)
+//        {
+//            m_listHitRateResult.push_back(e);
+//        }
     }
+
+
 
     /// 更新模型列表
     emit(resultChanged(m_listResult));
     emit(allResultChanged(m_listAllResult));
-    emit(hitRateChanged(m_listHitRateResult));
+
+//    emit(hitRateChanged(m_listHitRateResult));
 }
 
 /// 定位人员

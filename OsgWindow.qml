@@ -52,5 +52,6 @@ Item
         {
             console.log(cpShowSetting.errorString())
         }
+         $app.initImage();
     }
 }

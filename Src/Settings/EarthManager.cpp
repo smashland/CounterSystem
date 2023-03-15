@@ -7,7 +7,6 @@
 #include <QMessageBox>
 #include<QDomDocument>
 
-
 static const QString cs_FileName("earth.map");
 static const QString cs_JsonKey("earth");
 
@@ -42,13 +41,13 @@ CSetEarth *EarthManager::addMaps(const QString &earthName,const QString &earthPa
             pNewOne->setEarthNum(m_listEarth.size());
             m_listEarth.append(pNewOne);
             emit earthChanged();
-            if(earthPathInfo.suffix()=="jpg"||earthPathInfo.suffix()=="png")
-            {
-                //开始鼠标
-                //开始的确定区域
-                emit beginEdit();
-                qDebug()<<"lujing"<<earthPath;
-            }
+//            if(earthPathInfo.suffix()=="jpg"||earthPathInfo.suffix()=="png")
+//            {
+//                //开始鼠标
+//                //开始的确定区域
+//                emit beginEdit();
+//                qDebug()<<"lujing"<<earthPath;
+//            }
 
             return(pNewOne);
         }
@@ -83,6 +82,9 @@ bool EarthManager::deleteEarth(const QString &earthName,const QString &earthInfo
         return(false);
     }
     }
+    else{
+        return(false);
+    }
 }
 bool EarthManager::removeEarthFile(const QString &earthInfo)
 {
@@ -91,7 +93,7 @@ bool EarthManager::removeEarthFile(const QString &earthInfo)
 
     QFileInfo earthFileInfo(earthInfo);
 
-    if(earthFileInfo.suffix()=="tif")
+    if(earthFileInfo.suffix()=="tif"||earthFileInfo.suffix()=="jpg"||earthFileInfo.suffix()=="png")
     {
         if (earthFileInfo.isFile())//如果是文件
             QFile::remove(earthInfo);
@@ -182,7 +184,8 @@ void EarthManager::praseEarthXml(QString sEarthPath)
         return;
     }
     file.close();
-
+    // 获得根节点
+    QDomElement root = doc.documentElement();
     QString tagName,itemName;
     QString tagNameM,itemNameM;
     if(fileInfo.suffix()=="tif")
@@ -199,12 +202,24 @@ void EarthManager::praseEarthXml(QString sEarthPath)
         tagNameM="GDALIMAGE";
         itemNameM="tifMap";
     }
-    else
+    else if(fileInfo.suffix()=="jpg"||fileInfo.suffix()=="png")
     {
+        sEarthPath="NULL";
+        modifyEarthXml(root,"tmsimage","xmlMap","NULL");
+        modifyEarthXml(root,"GDALIMAGE","tifMap","NULL");
+
+        if (!file.open(QFileDevice::WriteOnly | QFileDevice::Truncate)) {
+            QMessageBox::information(NULL, "提示", "文件打开失败！");
+            return;
+        }
+
+        // 输出到文件
+        QTextStream stream(&file);
+        doc.save(stream, 4);	// 缩进4格
+        file.close();
         return;
     }
-    // 获得根节点
-    QDomElement root = doc.documentElement();
+
     modifyEarthXml(root,tagNameM,itemNameM,"NULL");
     modifyEarthXml(root,tagName,itemName,sEarthPath);
 
@@ -247,7 +262,7 @@ void EarthManager::modifyEarthXml(QDomElement root,QString tagName,QString itemN
     }
 }
 
-void EarthManager::saveCurrentEarth(const QString &earthName, int lat, int lon)
+void EarthManager::saveCurrentEarth(const QString &earthName,const QString &earthPath, float lat, float lon,float rdlat, float rdlon)
 {
     QString sFilePath = QApplication::applicationDirPath() + QString("/Data/Earth/currentEarth.info");
     QFile openFile(sFilePath);
@@ -256,8 +271,11 @@ void EarthManager::saveCurrentEarth(const QString &earthName, int lat, int lon)
         QJsonDocument jsonDoc;
         QJsonObject rootObj;
         rootObj.insert("earthName",earthName);
+        rootObj.insert("earthPath",earthPath);
         rootObj.insert("earthLat",lat);
         rootObj.insert("earthLon",lon);
+        rootObj.insert("earthRDLat",rdlat);
+        rootObj.insert("earthRDLon",rdlon);
         jsonDoc.setObject(rootObj);
         openFile.write(jsonDoc.toJson());
     }
@@ -294,6 +312,11 @@ void EarthManager::praseCurrentEarth()
         m_sCurrentName=rootObj["earthName"].toString();
         emit currentNameChanged();
     }
+    if (rootObj.contains("earthPath") && rootObj["earthPath"].isString())
+    {
+        m_sCurrentPath=rootObj["earthPath"].toString();
+        emit currentPathChanged();
+    }
     if (rootObj.contains("earthLat") && rootObj["earthLat"].isDouble())
     {
         m_nCurrentLat=rootObj["earthLat"].toDouble();
@@ -303,6 +326,16 @@ void EarthManager::praseCurrentEarth()
     {
         m_nCurrentLon=rootObj["earthLon"].toDouble();
         emit currentLonChanged();
+    }
+    if (rootObj.contains("earthRDLat") && rootObj["earthRDLat"].isDouble())
+    {
+        m_nCurrentRDLat=rootObj["earthRDLat"].toDouble();
+        emit currentRDLatChanged();
+    }
+    if (rootObj.contains("earthRDLon") && rootObj["earthRDLon"].isDouble())
+    {
+        m_nCurrentRDLon=rootObj["earthRDLon"].toDouble();
+        emit currentRDLonChanged();
     }
 
 }

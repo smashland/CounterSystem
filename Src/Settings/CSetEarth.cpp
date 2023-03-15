@@ -29,7 +29,7 @@ void CSetEarth::setEarthPath(const QString &sEarthPath)
     }
 }
 
-void CSetEarth::setEarthLat(int nlat)
+void CSetEarth::setEarthLat(float nlat)
 {
     if(nlat!=m_nLat)
     {
@@ -38,12 +38,30 @@ void CSetEarth::setEarthLat(int nlat)
     }
 }
 
-void CSetEarth::setEarthLon(int nlon)
+void CSetEarth::setEarthLon(float nlon)
 {
     if(nlon!=m_nLon)
     {
         m_nLon=nlon;
         emit lonChanged(m_nLon);
+    }
+}
+
+void CSetEarth::setEarthRDLat(float nRDlat)
+{
+    if(nRDlat!=m_nRDLat)
+    {
+        m_nRDLat=nRDlat;
+        emit latRDChanged(m_nRDLat);
+    }
+}
+
+void CSetEarth::setEarthRDLon(float nRDlon)
+{
+    if(nRDlon!=m_nRDLon)
+    {
+        m_nRDLon=nRDlon;
+        emit lonChanged(m_nRDLon);
     }
 }
 
@@ -92,7 +110,7 @@ QString CSetEarth::copyEarthFile(const QString &sEarthName,const QString &strIma
     qDebug()<<"测试地图数量："<<m_nEarthNum;
     QString newFilePath = QString("%1/Data/Earth/Map/%2").arg(QApplication::applicationDirPath()).arg(m_nEarthNum);
     ///tiff
-    if(fileInfo.suffix()=="tif")
+    if(fileInfo.suffix()=="tif"||fileInfo.suffix()=="jpg"||fileInfo.suffix()=="png")
     {
         newFilePath = QString("%1.%2").arg(newFilePath).arg(fileInfo.suffix());
         QFile file(newFilePath);

@@ -25,7 +25,7 @@ Rectangle {
     }
 
     Connections{
-        function onSignalAddMap(name,path,lat,lon)
+        function onSignalAddMap(name,path,lat,lon,rdlat,rdlon)
         {
             var earth = earthManager.addMaps(name,path);
             if(null!==earth)
@@ -34,7 +34,9 @@ Rectangle {
                 earth.earthPath = path;
                 earth.nLat = lat;
                 earth.nLon = lon;
-                console.log("测试路径："+name+" "+path)
+                earth.nRDLat = rdlat;
+                earth.nRDLon = rdlon;
+                console.log("测试路径："+name+" "+path+rdlat+rdlon)
                 listView.model=earthManager.earthList
                 earthManager.saveFile();
                 mapAdd.visible = false;
@@ -84,10 +86,12 @@ Rectangle {
                 anchors.fill: parent
                 //                    hoverEnabled: true
                 onClicked: {
-                    earthManager.praseEarthXml(modelData.earthPath)
-                    $app.changeEarth(modelData.earthPath)
-                    earthManager.saveCurrentEarth(modelData.earthName,modelData.nLat,modelData.nLon);
-                    earthManager.praseCurrentEarth();
+                    $app.earthChange(modelData.earthName,modelData.earthPath,modelData.nLat,modelData.nLon,modelData.nRDLat,modelData.nRDLon);
+                    console.log("测试："+modelData.earthPath);
+//                    earthManager.praseEarthXml(modelData.earthPath)
+//                    $app.changeEarth(modelData.earthPath)
+//                    earthManager.saveCurrentEarth(modelData.earthName,modelData.nLat,modelData.nLon);
+//                    earthManager.praseCurrentEarth();
                     listView.currentIndex = index
                     mouse.accepted = false
                 }
@@ -107,8 +111,12 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        earthManager.deleteEarth(modelData.earthName,modelData.earthPath)
-                        listView.model=earthManager.earthList
+                        if(earthManager.deleteEarth(modelData.earthName,modelData.earthPath))
+                        {
+                             listView.model=earthManager.earthList
+                        }
+//                        earthManager.deleteEarth(modelData.earthName,modelData.earthPath)
+//                        listView.model=earthManager.earthList
                     }
                 }
             }

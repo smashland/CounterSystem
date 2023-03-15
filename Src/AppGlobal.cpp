@@ -29,6 +29,7 @@
 #include <SceneGraph/ISceneGraph.h>
 #include <Plot/Map/IMap.h>
 #include <Plot/Map/IMapLayer.h>
+#include "Src/Settings/EarthManager.h"
 
 QAppGlobal::QAppGlobal(QObject *parent) : QObject(parent)
 {
@@ -48,6 +49,7 @@ QAppGlobal::QAppGlobal(QObject *parent) : QObject(parent)
     m_pSettings->SetGlobalData(m_pData);
     getOpenSpeak();
     m_pNoticManger=new NoticManger(this);
+
 }
 
 /// 退出程序
@@ -87,31 +89,67 @@ void QAppGlobal::changeEarth()
     auto pSeneGraph = GetSceneCore()->GetSceneGraphManager()->FindSceneGraph(m_pOsgItem);
     std:: cout << "加载路径:" << GetDataPath() << "/Earth/Geocentric.earth" << std::endl;
     pSeneGraph->GetMap()->LoadUserMap(GetDataPath()+"/Earth/Geocentric.earth",false,true);
+
 }
 
-//void QAppGlobal::UpdateImage(/*const ScenePos &rLeftUp, const ScenePos &rRightDown, const std::string &sImagePath*/)
-//{
-//    IMapCoverImage* pCoverImage = dynamic_cast<IMapCoverImage*>(m_pSceneGraph->GetPlot()->CreateSceneNode("IMapCoverImage"));
-//    ScenePos lu, rb;
+void QAppGlobal::earthChange(const QString &earthName, const QString &earthPath, float lat, float lon, float rdlat, float rdlon)
+{
+    EarthManager* earthManager=new EarthManager;
+    QFileInfo fileInfo(earthPath);
+    QFileInfo earthInfo(earthManager->getCurrentEarthPath());
+    earthManager->praseEarthXml(earthPath);
+    changeEarth();
+    if(earthInfo.suffix()=="jpg"||earthInfo.suffix()=="png")
+    {
+         m_pLayer->RemoveSceneNode(pCoverImage);
+    }
+    if(fileInfo.suffix()=="jpg"||fileInfo.suffix()=="png")
+    {
+        UpdateImage(lat, lon, rdlat,rdlon,earthPath);
+    }
+    earthManager->saveCurrentEarth(earthName,earthPath,lat,lon, rdlat,rdlon);
+    earthManager->praseCurrentEarth();
+}
+
+void QAppGlobal::UpdateImage(float lat, float lon, float rdlat, float rdlon,const QString &earthPath)
+{
+    auto pSeneGraph = GetSceneCore()->GetSceneGraphManager()->FindSceneGraph(m_pOsgItem);
+    m_pLayer = pSeneGraph->GetMap()->CreateLayer("Test");
+    /*IMapCoverImage**/ pCoverImage = dynamic_cast<IMapCoverImage*>(pSeneGraph->GetPlot()->CreateSceneNode("IMapCoverImage"));
+    ScenePos lu, rb;
+    lu.dX = lat; lu.dY = lon, lu.dZ = 1;
+    rb.dX = rdlat; rb.dY = rdlon, rb.dZ = 1;
 //    lu.dX = 114.50; lu.dY = 38.05, lu.dZ = 10;
 //    rb.dX = 114.52; rb.dY = 38.00, rb.dZ = 10;
-//    pCoverImage->SetBound(lu,rb,"D:/1.png");
-//    m_pLayer->AddSceneNode(pCoverImage);
-//}
+    pCoverImage->SetBound(lu,rb,earthPath.toStdString());
+
+    m_pLayer->AddSceneNode(pCoverImage);
+}
+
+void QAppGlobal::initImage()
+{
+    EarthManager* earthManager=new EarthManager;
+    QFileInfo fileInfo(earthManager->getCurrentEarthPath());
+    if(fileInfo.suffix()=="jpg"||fileInfo.suffix()=="png")
+    {
+        changeEarth();
+        UpdateImage(earthManager->getCurrentlat(),earthManager->getCurrentlon(),earthManager->getCurrentRDlat(),earthManager->getCurrentRDlon(),earthManager->getCurrentEarthPath());
+    }
+}
 
 /// 更新信息
 void QAppGlobal::updateNotic(const QString &rInfo)
 {
-//    QString sInfo;
-//    sInfo = QTime::currentTime().toString("hh:mm:ss ") + rInfo;
-//    qDebug()<<"击杀时间：-------------------"<< sInfo;
+    //    QString sInfo;
+    //    sInfo = QTime::currentTime().toString("hh:mm:ss ") + rInfo;
+    //    qDebug()<<"击杀时间：-------------------"<< sInfo;
 
-//    NoticInfo* pNoticInfo=new NoticInfo;
-//    pNoticInfo->setNoiceText(sInfo);
-//    pNoticInfo->setColorNotic(m_typeColor);
-//    m_slistNoice.append(pNoticInfo);
-//    emit noiceChanged();
-//    emit(notic(sInfo));
+    //    NoticInfo* pNoticInfo=new NoticInfo;
+    //    pNoticInfo->setNoiceText(sInfo);
+    //    pNoticInfo->setColorNotic(m_typeColor);
+    //    m_slistNoice.append(pNoticInfo);
+    //    emit noiceChanged();
+    //    emit(notic(sInfo));
 
     NoticInfo* pNoticInfo=new NoticInfo;
     pNoticInfo->setNoiceText(rInfo);
@@ -298,7 +336,7 @@ void QAppGlobal::addNoticText(const QString &rNoticInfo)
 void QAppGlobal::setGroupId(int typeID)
 {
     auto type=m_pData->GetOrCreatePersonStatus(typeID);
-//    setGroupColor(type->getType());
+    //    setGroupColor(type->getType());
     if(type->getType()=="蓝方")
     {
         m_typeColor=Qt::blue;
@@ -311,13 +349,13 @@ void QAppGlobal::setGroupId(int typeID)
     {
         m_typeColor=Qt::white;
     }
-        emit typeColorChanged();
+    emit typeColorChanged();
 }
 
 void QAppGlobal::setGroupC(int typeID, QString group)
 {
-//    auto type=m_pData->GetOrCreatePersonStatus(typeID);
-//    type->setType(group);
+    //    auto type=m_pData->GetOrCreatePersonStatus(typeID);
+    //    type->setType(group);
     setGroupColor(group);
 }
 
@@ -339,38 +377,38 @@ void QAppGlobal::setGroupColor(QString group)
 }
 void QAppGlobal::setAveLocation()
 {
-       QList<int> int_listId=CDataManager::GetInstance()->AllPersonId();//CContrlMapPerson::AllMapPersonId()
-      //  QList<int> int_listId=m_pCtrMapPerson->AllMapPersonId();//CDataManager::GetInstance()->AllPersonId();
-       if(int_listId.isEmpty())
-       {
-           return;
-       }
-       int personCount=0;//=(double)int_listId.size();
-       double m_sumLat=0.0,m_sumLon=0.0;
-       QList<int>::iterator it;
-       for(/*QList<int>::iterator*/ it = int_listId.begin(); it!=int_listId.end(); ++it)
-       {
-           auto pPersonInfo = CDataManager::GetInstance()->GetOrCreatePersonInfo(*it);
-           auto &pos=pPersonInfo->curtpos();
-           if(fabs(m_sumLat-pos.dlat())>DBL_EPSILON&&fabs(m_sumLon - pos.dlon())>DBL_EPSILON)
-           {
-               if(fabs(m_sumLat-pos.dlat())>DBL_EPSILON)
-               {
-                   qDebug()<<fabs(m_sumLat-pos.dlat())<<*it;
-                   m_sumLat=m_sumLat+pos.dlat();
-               }
-               if(fabs(m_sumLon - pos.dlon())>DBL_EPSILON)
-               {
-                   qDebug()<<fabs(m_sumLon - pos.dlon())<<*it;
-                   m_sumLon=m_sumLon+pos.dlon();
-               }
-               personCount++;
-           }
-       }
-       m_dAveLat=m_sumLat/(double)personCount;
-       m_sAveLat=QString::number(m_dAveLat, 'f', 4);
-       emit aveLatChanged(m_sAveLat);
-       m_dAveLon=m_sumLon/(double)personCount;
-       m_sAveLon=QString::number(m_dAveLon, 'f', 4);
-       emit aveLonChanged(m_sAveLon);
+    QList<int> int_listId=CDataManager::GetInstance()->AllPersonId();//CContrlMapPerson::AllMapPersonId()
+    //  QList<int> int_listId=m_pCtrMapPerson->AllMapPersonId();//CDataManager::GetInstance()->AllPersonId();
+    if(int_listId.isEmpty())
+    {
+        return;
+    }
+    int personCount=0;//=(double)int_listId.size();
+    double m_sumLat=0.0,m_sumLon=0.0;
+    QList<int>::iterator it;
+    for(/*QList<int>::iterator*/ it = int_listId.begin(); it!=int_listId.end(); ++it)
+    {
+        auto pPersonInfo = CDataManager::GetInstance()->GetOrCreatePersonInfo(*it);
+        auto &pos=pPersonInfo->curtpos();
+        if(fabs(m_sumLat-pos.dlat())>DBL_EPSILON&&fabs(m_sumLon - pos.dlon())>DBL_EPSILON)
+        {
+            if(fabs(m_sumLat-pos.dlat())>DBL_EPSILON)
+            {
+                qDebug()<<fabs(m_sumLat-pos.dlat())<<*it;
+                m_sumLat=m_sumLat+pos.dlat();
+            }
+            if(fabs(m_sumLon - pos.dlon())>DBL_EPSILON)
+            {
+                qDebug()<<fabs(m_sumLon - pos.dlon())<<*it;
+                m_sumLon=m_sumLon+pos.dlon();
+            }
+            personCount++;
+        }
+    }
+    m_dAveLat=m_sumLat/(double)personCount;
+    m_sAveLat=QString::number(m_dAveLat, 'f', 4);
+    emit aveLatChanged(m_sAveLat);
+    m_dAveLon=m_sumLon/(double)personCount;
+    m_sAveLon=QString::number(m_dAveLon, 'f', 4);
+    emit aveLonChanged(m_sAveLon);
 }

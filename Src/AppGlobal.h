@@ -10,7 +10,7 @@
 #include "NoticManger.h"
 
 class QQuickItem;
-
+class IMapCoverImage;
 class QAppGlobal : public QObject
 {
     Q_OBJECT
@@ -40,11 +40,13 @@ public:
     Q_INVOKABLE void initSystem();
     Q_INVOKABLE void startConnect();
     Q_INVOKABLE void changeEarth();
+    Q_INVOKABLE void earthChange(const QString &earthName,const QString &earthPath,float lat, float lon,float rdlat, float rdlon);
+    /**
+     * @brief 更新图片
+     */
+    void UpdateImage(float lat, float lon, float rdlat, float rdlon, const QString &earthPath);
+    Q_INVOKABLE void initImage();
 
-//    /**
-//     * @brief 更新图片
-//     */
-//    void UpdateImage(/*const ScenePos &rLeftUp, const ScenePos &rRightDown, const std::string &sImagePath*/);
 
     void updateNotic(const QString & rInfo);
     void setAppPath(QString sAppPath);
@@ -128,6 +130,7 @@ private:
     ISceneGraph*    m_pSceneGraph;            /// 场景图
     IMap*           m_pMap;                   /// 地图
     IMapLayer*     m_pLayer;                 ///标绘图层
+    IMapCoverImage* pCoverImage;             ///图片
 };
 
 Q_DECLARE_METATYPE(CGlobalSettings*)

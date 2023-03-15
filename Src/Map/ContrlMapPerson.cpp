@@ -25,10 +25,6 @@ CContrlMapPerson::CContrlMapPerson(ISceneGraph *pSceneGraph, CGlobalData *pData)
     m_pMap->OpenLight(false);
     m_pLayer = m_pMap->CreateLayer("Test");
 
-//    UpdateImage();
-
-
-
 }
 
 /// 定位
@@ -204,17 +200,6 @@ void CContrlMapPerson::UpdateSeconds(const quint16 &seconds)
 //        }
 //    }
 //}
-#include <QDebug>
-void CContrlMapPerson::UpdateImage(/*const ScenePos &rLeftUp, const ScenePos &rRightDown, const std::string &sImagePath*/)
-{
-    qDebug()<<"test ditu";
-    IMapCoverImage* pCoverImage = dynamic_cast<IMapCoverImage*>(m_pSceneGraph->GetPlot()->CreateSceneNode("IMapCoverImage"));
-    ScenePos lu, rb;
-    lu.dX = 114.50; lu.dY = 38.05, lu.dZ = 10;
-    rb.dX = 114.55; rb.dY = 38.00, rb.dZ = 10;
-    pCoverImage->SetBound(lu,rb,"E:/2.png");
-    m_pLayer->AddSceneNode(pCoverImage);
-}
 
 /// 查找显示信息
 CPlaceNodeInfo *CContrlMapPerson::GetOrCreateMapPersonInfo(quint16 unID)

@@ -127,7 +127,7 @@ Rectangle {
             width: tishi2.contentWidth
             height: tishi2.contentHeight
             color: "#FFA500"
-            text: "（如果没有具体经纬度，点确定保存当前视口经纬度。）"
+            text:"（提示：jpg、png的图片格式需要填入相应的经纬度。）" /*"（如果没有具体经纬度，点确定保存当前视口经纬度。）"*/
             font.pixelSize: 13*dpx;
             font.family: "Microsoft YaHei";
             verticalAlignment: Text.AlignVCenter

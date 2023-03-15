@@ -157,8 +157,9 @@ Rectangle {
         width: 600*dpx
         height:450*dpy /*430*dpy*/
         //        anchors.centerIn: parent
-               y:-45*dpy
+        y:-20 * dpy
         visible: false
+        z: 100
     }
 
     PopupButton {

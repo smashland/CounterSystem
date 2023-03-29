@@ -29,7 +29,7 @@ ChartView {
                 {
                     console.log("onHitRate"+" "+i)
                     barSetId.remove(i,4)
-//                    barSetId.valuesAdded(i,bulltes)
+                    //                    barSetId.valuesAdded(i,bulltes)
                 }
                 barSetId.valuesAdded(i,0)
             }
@@ -52,6 +52,12 @@ ChartView {
             "0","0.1", "0.2","0.3", "0.4","0.5", "0.6","0.7", "0.8","0.9", "1"
         ]
     }
+
+//    axisTick: {//坐标轴刻度与标签对齐
+//                    alignWithLabel: true
+//                }
+
+
     ValueAxis {
         id: axisy
         min: 0

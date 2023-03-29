@@ -8,6 +8,8 @@ Rectangle {
     height: 42 *dpy
     color: "transparent"
     Image {
+        width: 1920 *dpx
+        height: 42 *dpy
         source: "qrc:/Image/Footer_line.png"
     }
     Text {

@@ -20,8 +20,8 @@ Window {
     color: "transparent"
     modality: Qt.ApplicationModal
     flags: Qt.FramelessWindowHint|Qt.Window
-    readonly property real dpx:mainWindow.width/width
-    readonly property real dpy:mainWindow.height/height
+    readonly property real dpx:mainWindow.width/1920.0
+    readonly property real dpy:mainWindow.height/1080.0
 
     property var $app: AppGlobal{}
     property var $licCheck:LicItem{}
